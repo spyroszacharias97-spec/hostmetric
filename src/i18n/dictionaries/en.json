@@ -1,0 +1,2152 @@
+{
+  "navigation": {
+    "services": "Services",
+    "howItWorks": "How It Works",
+    "pricing": "Pricing",
+    "about": "About",
+    "contact": "Contact",
+    "getStarted": "Get Started",
+    "language": "Language",
+    "selectLanguage": "Select language",
+    "homeAriaLabel": "HostMetric homepage",
+    "logoAlt": "HostMetric Property Management"
+  },
+  "hero": {
+    "eyebrow": "Short-Term Rental Performance",
+    "titleLine1": "Smarter Hosting",
+    "titleLine2": "Better Results",
+    "description": "Smarter pricing, seamless guest communication and professional booking management — all designed to maximize your property's performance.",
+    "getStarted": "Get Started",
+    "seeHowItWorks": "See How It Works",
+    "revenue": {
+      "title": "Revenue",
+      "subtitle": "Performance growth",
+      "explore": "Explore revenue intelligence"
+    },
+    "guestRating": {
+      "title": "Guest Rating",
+      "subtitle": "Exceptional experience",
+      "explore": "Explore guest intelligence"
+    },
+    "occupancy": {
+      "title": "Occupancy",
+      "subtitle": "Stronger performance",
+      "explore": "Explore occupancy strategy"
+    },
+    "aiPricing": {
+      "title": "AI Pricing",
+      "status": "Optimizing",
+      "subtitle": "Live market analysis",
+      "explore": "Explore our methodology"
+    }
+  },
+  "services": {
+    "eyebrow": "Our Services",
+    "title": "Everything your property needs to perform better",
+    "description": "We take care of the details behind successful short-term rentals, giving you more time while helping your property reach its full potential.",
+    "guestCommunication": {
+      "title": "Guest Communication",
+      "description": "Professional, fast and thoughtful communication that keeps your guests informed and satisfied."
+    },
+    "smartPricing": {
+      "title": "Smart Pricing",
+      "description": "Data-driven pricing optimization designed to maximize revenue and adapt to changing market demand."
+    },
+    "bookingManagement": {
+      "title": "Booking Management",
+      "description": "Professional management of reservations, availability and day-to-day booking operations."
+    }
+  },
+  "performance": {
+    "eyebrow": "Built for Better Performance",
+    "titleLine1": "Smarter tools. Better guest experiences.",
+    "titleLine2": "Stronger performance.",
+    "guestResponse": {
+      "label": "Guest Response Target",
+      "explore": "Discover our guest support"
+    },
+    "platformNetwork": {
+      "label": "Booking Platforms",
+      "explore": "Explore our distribution network"
+    },
+    "pricingEngine": {
+      "label": "Pricing Optimization",
+      "explore": "Understand our pricing engine"
+    }
+  },
+  "howItWorks": {
+    "eyebrow": "How It Works",
+    "titleLine1": "A complete system working",
+    "titleLine2": "behind your property",
+    "description": "Behind every reservation is a coordinated process combining market analysis, distribution, revenue management, guest experience and continuous performance optimization.",
+    "workflowLabels": [
+      "Audit",
+      "Data",
+      "Listing",
+      "Distribution",
+      "Sync",
+      "Pricing",
+      "Guests",
+      "Reviews"
+    ],
+    "systemCenter": {
+      "titleLine1": "Property",
+      "titleLine2": "Performance System"
+    },
+    "cycle": {
+      "eyebrow": "Continuous Management Cycle",
+      "title": "Every decision feeds the next one",
+      "paragraph1": "Pricing affects demand. Demand affects availability. Guest experience affects reviews. Reviews affect conversion. Conversion and booking behaviour produce new performance data.",
+      "paragraph2": "That data then feeds back into market positioning, pricing, listing strategy and future decisions — creating a continuous optimization cycle instead of a one-time setup.",
+      "dataDecisions": "Data → Decisions",
+      "continuousLoop": "Continuous Loop",
+      "humanHospitality": "Human Hospitality",
+      "revenueFocus": "Revenue Focus"
+    },
+    "stagesSection": {
+      "eyebrow": "Behind The Scenes",
+      "title": "What happens after you join HostMetric",
+      "description": "A structured commercial workflow designed to continuously improve how your property is positioned, priced, managed and experienced by guests."
+    },
+    "stages": [
+      {
+        "title": "Property & Market Audit",
+        "text": "We assess the property, location, capacity, amenities, positioning, target guest profile and existing commercial setup.",
+        "details": [
+          "Property positioning",
+          "Amenity analysis",
+          "Local demand profile",
+          "Target guest segments"
+        ]
+      },
+      {
+        "title": "Historical Performance Analysis",
+        "text": "Existing booking and performance data is examined to establish a measurable baseline before optimization begins.",
+        "details": [
+          "Past reservations",
+          "Average rates",
+          "Occupancy patterns",
+          "Booking-window behaviour"
+        ]
+      },
+      {
+        "title": "Competitive Set Modelling",
+        "text": "We build a relevant competitive set using comparable accommodation with similar location, capacity, amenities and positioning.",
+        "details": [
+          "Comparable properties",
+          "Rate positioning",
+          "Review strength",
+          "Market supply"
+        ]
+      },
+      {
+        "title": "Listing Architecture",
+        "text": "The commercial presentation of the property is structured to make its strongest selling points immediately clear to potential guests.",
+        "details": [
+          "Title strategy",
+          "Photo sequencing",
+          "Descriptions",
+          "Amenities & policies"
+        ]
+      },
+      {
+        "title": "Conversion Optimization",
+        "text": "Listings are refined around clarity, user behaviour and booking intent so traffic has a stronger opportunity to convert into reservations.",
+        "details": [
+          "Value proposition",
+          "Content hierarchy",
+          "Guest objections",
+          "Conversion improvements"
+        ]
+      },
+      {
+        "title": "Multi-Channel Distribution",
+        "text": "The property is positioned across supported booking and travel channels to expand reach while maintaining one coordinated commercial strategy.",
+        "details": [
+          "10+ channels",
+          "Channel positioning",
+          "Listing consistency",
+          "Distribution control"
+        ]
+      },
+      {
+        "title": "Calendar & Availability Sync",
+        "text": "Reservations, availability and calendar changes are coordinated across connected channels to maintain accurate inventory.",
+        "details": [
+          "Calendar synchronization",
+          "Availability controls",
+          "Reservation updates",
+          "Conflict reduction"
+        ]
+      },
+      {
+        "title": "Demand Intelligence",
+        "text": "Demand signals are continuously evaluated before pricing decisions are made.",
+        "details": [
+          "Seasonality",
+          "Booking pace",
+          "Lead time",
+          "Local demand changes"
+        ]
+      },
+      {
+        "title": "Revenue Management Engine",
+        "text": "Rate and occupancy are evaluated together using measurable hospitality performance indicators rather than static nightly pricing.",
+        "details": [
+          "ADR",
+          "Occupancy",
+          "RevPAR / RevPAN",
+          "Price elasticity"
+        ]
+      },
+      {
+        "title": "Dynamic Pricing & Inventory",
+        "text": "Pricing and inventory strategy evolves as demand, remaining availability, booking pace and time until arrival change.",
+        "details": [
+          "Dynamic rates",
+          "Length-of-stay controls",
+          "Gap-night strategy",
+          "Inventory protection"
+        ]
+      },
+      {
+        "title": "Reservation Management",
+        "text": "Bookings are monitored as part of one workflow from reservation confirmation through arrival and departure.",
+        "details": [
+          "Booking coordination",
+          "Pre-arrival workflow",
+          "Check-in guidance",
+          "Checkout process"
+        ]
+      },
+      {
+        "title": "Human Guest Communication",
+        "text": "Trained team members manage guest conversations with fast, natural and situation-specific communication instead of relying only on automated templates.",
+        "details": [
+          "Shift coverage",
+          "Guest questions",
+          "Issue resolution",
+          "Hospitality-focused replies"
+        ]
+      },
+      {
+        "title": "Review & Reputation Intelligence",
+        "text": "Guest feedback is treated as operational information that can reveal recurring strengths, weaknesses and opportunities for improvement.",
+        "details": [
+          "Review monitoring",
+          "Recurring themes",
+          "Rating strategy",
+          "Guest satisfaction"
+        ]
+      },
+      {
+        "title": "Owner Performance Reporting",
+        "text": "Property performance is translated into understandable information so owners can see what is changing and why.",
+        "details": [
+          "Revenue trends",
+          "Occupancy",
+          "Pricing changes",
+          "Commercial insights"
+        ]
+      },
+      {
+        "title": "Growth & Rebooking Strategy",
+        "text": "The commercial strategy extends beyond the first reservation by identifying opportunities to strengthen repeat demand and direct relationships.",
+        "details": [
+          "Repeat guests",
+          "Rebooking opportunities",
+          "Direct-booking growth",
+          "Revenue expansion"
+        ]
+      },
+      {
+        "title": "Continuous Optimization",
+        "text": "The process does not finish after setup. Performance, pricing, listings, reviews and market conditions continuously feed the next optimization cycle.",
+        "details": [
+          "Performance review",
+          "Market changes",
+          "Listing updates",
+          "Strategy recalibration"
+        ]
+      }
+    ],
+    "owner": {
+      "eyebrow": "Complex Behind The Scenes",
+      "titleLine1": "For the owner,",
+      "titleLine2": "it stays simple.",
+      "description": "We manage the complexity so you can understand your property's performance without spending your day inside booking platforms, pricing tools and guest inboxes.",
+      "steps": [
+        {
+          "title": "Tell us about your property",
+          "description": "Property details, existing channels and your goals."
+        },
+        {
+          "title": "Connect your listings",
+          "description": "We establish the information needed to begin management."
+        },
+        {
+          "title": "We handle the complexity",
+          "description": "You remain informed while the system works behind the scenes."
+        }
+      ]
+    }
+  },
+  "platformOrbit": {
+    "phoneAriaLabel": "Explore our multi-platform booking network",
+    "phone": {
+      "titleLine1": "Property",
+      "titleLine2": "Dashboard",
+      "smartPricing": "Smart Pricing",
+      "optimizing": "Optimizing",
+      "guestCommunication": "Guest Communication",
+      "active": "Active",
+      "reservations": "Reservations",
+      "synced": "Synced",
+      "channelsConnected": "10+ channels connected"
+    },
+    "eyebrow": "MULTI-PLATFORM DISTRIBUTION",
+    "titleLine1": "Your property everywhere",
+    "titleLine2": "your guests are looking",
+    "description": "Expand your property's visibility across 10+ leading booking platforms while keeping reservations, availability and pricing coordinated through one strategy.",
+    "benefits": {
+      "greaterVisibility": {
+        "title": "Greater Visibility",
+        "description": "Reach more travelers across multiple booking channels."
+      },
+      "centralizedManagement": {
+        "title": "Centralized Management",
+        "description": "Keep availability, reservations and pricing coordinated."
+      },
+      "smarterDistribution": {
+        "title": "Smarter Distribution",
+        "description": "Make channel decisions using performance and demand data."
+      }
+    }
+  },
+  "propertyGrowth": {
+    "engine": {
+      "titleLine1": "Performance",
+      "titleLine2": "Engine",
+      "status": "Live optimization",
+      "smartPricing": {
+        "label": "Smart Pricing",
+        "status": "Optimizing"
+      },
+      "bookings": {
+        "label": "Bookings",
+        "status": "Synced"
+      },
+      "guestCommunication": {
+        "label": "Guest Communication",
+        "status": "Active"
+      },
+      "guestExperience": {
+        "label": "Guest Experience",
+        "status": "Improving"
+      },
+      "revenue": {
+        "label": "Revenue",
+        "status": "Growing"
+      }
+    },
+    "eyebrow": "Everything Working Together",
+    "title": "Take your property's performance to the next level",
+    "description": "Pricing, booking behaviour, distribution, guest communication and performance metrics work together as one coordinated commercial strategy.",
+    "accordions": [
+      {
+        "title": "Complete Booking Management",
+        "description": "Availability, reservations and length-of-stay restrictions are assessed as a connected calendar rather than isolated bookings. Booking window, booking pace and occupancy patterns help determine whether inventory should be protected, released or repositioned as arrival dates approach."
+      },
+      {
+        "title": "Revenue Optimization",
+        "description": "Pricing decisions evaluate ADR, occupancy and RevPAN together with booking pace, lead time, seasonality, competitive positioning and price elasticity. The objective is not simply the highest nightly rate or highest occupancy, but stronger revenue capture across the available calendar."
+      },
+      {
+        "title": "Exceptional Guest Experience",
+        "description": "Guest communication is treated as measurable operational performance. Response time, recurring questions, issue resolution patterns and review outcomes can be monitored to identify friction points and continuously improve the guest journey from pre-arrival through post-stay communication."
+      }
+    ]
+  },
+  "featuredResults": {
+    "eyebrow": "Featured Client Result",
+    "titleLine1": "Real hospitality.",
+    "titleLine2": "Measurable results.",
+    "description": "Niki Breeze is one of our longest-standing client properties and a real example of the guest experience, listing optimization, pricing strategy and booking management principles behind HostMetric.",
+    "awardImageAlt": "Niki Breeze Booking.com Traveller Review Award 2026",
+    "property": {
+      "location": "Paphos, Cyprus",
+      "type": "25 m² Studio",
+      "title": "A small property with serious performance.",
+      "description": "Through guest communication, listing presentation, booking management and a more active commercial strategy, Niki Breeze has combined stronger financial performance with exceptional guest satisfaction."
+    },
+    "metrics": {
+      "bookingRating": {
+        "title": "Booking.com Rating",
+        "description": "Exceptional current guest review score."
+      },
+      "staffRating": {
+        "title": "Staff Rating",
+        "description": "Guest communication and hospitality support."
+      },
+      "guestReviews": {
+        "title": "Guest Reviews",
+        "description": "Published guest feedback on Booking.com."
+      },
+      "award": {
+        "title": "Traveller Review Award",
+        "description": "Booking.com Traveller Review Awards 2026."
+      }
+    },
+    "revenue": {
+      "eyebrow": "Revenue Growth",
+      "before": "Before",
+      "after": "After",
+      "growthBadge": "+35.8% revenue",
+      "propertyLabel": "25 m² Studio",
+      "title": "From €12,000 to €16,300 after platform commissions.",
+      "paragraph1": "Measured booking revenue increased from approximately €12,000 to €16,300 after Booking.com and Airbnb commissions — an increase of approximately €4,300, or 35.8%.",
+      "paragraph2": "The result was achieved while the property maintained an exceptional 9.6/10 Booking.com guest rating.",
+      "disclaimer": "Performance shown relates specifically to this property and measured period. Individual results vary according to market conditions, seasonality, availability, property characteristics and other factors."
+    },
+    "cta": {
+      "title": "What could your property achieve?",
+      "description": "Tell us about your property and let HostMetric evaluate its positioning, guest experience and commercial potential.",
+      "button": "Get Started"
+    },
+    "awardClarification": "The Booking.com Traveller Review Award displayed above was awarded to Niki Breeze. It is presented as a featured client property result and does not represent an award granted directly to HostMetric."
+  },
+  "footer": {
+    "brandDescription": "Smarter short-term rental management, pricing, distribution and guest experience designed to improve property performance.",
+    "getStarted": "Get Started",
+    "services": {
+      "title": "Services",
+      "propertyManagement": "Property Management",
+      "smartPricing": "Smart Pricing",
+      "guestCommunication": "Guest Communication",
+      "bookingManagement": "Booking Management"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About",
+      "howItWorks": "How It Works",
+      "pricing": "Pricing",
+      "contact": "Contact Us"
+    },
+    "contact": {
+      "title": "Contact",
+      "greece": "Greece",
+      "cyprus": "Cyprus"
+    },
+    "copyright": "All rights reserved.",
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions",
+      "cookies": "Cookie Policy"
+    }
+  },
+  "platformDetails": {
+    "greaterVisibility": {
+      "eyebrow": "Greater Visibility",
+      "title": "Be where your guests are searching",
+      "paragraph1": "We expand your property's presence across leading booking channels using a coordinated multi-platform distribution strategy.",
+      "paragraph2": "Our approach combines hospitality-grade revenue management methods with market demand, seasonality, booking behaviour and channel performance — using techniques inspired by those relied on by professional hotel and accommodation revenue teams."
+    },
+    "centralizedManagement": {
+      "eyebrow": "Centralized Management",
+      "title": "One strategy across every channel",
+      "paragraph1": "Reservations, availability, pricing and guest communication stay coordinated across every supported platform.",
+      "paragraph2": "Instead of managing each channel independently, HostMetric brings the important information together into one structured workflow, reducing errors and helping your property operate more efficiently."
+    },
+    "smarterDistribution": {
+      "eyebrow": "Smarter Distribution",
+      "title": "Smarter decisions behind every booking",
+      "paragraph1": "Distribution is not simply about appearing on more websites. It is about understanding where demand comes from and how each channel contributes to your property's performance.",
+      "paragraph2": "Pricing, seasonality, booking pace, demand signals and channel performance all contribute to a smarter strategy designed to improve occupancy and revenue."
+    }
+  },
+  "aboutPage": {
+    "hero": {
+      "eyebrow": "About HostMetric",
+      "titleLine1": "Data-driven strategy.",
+      "titleLine2": "Human hospitality.",
+      "description": "HostMetric brings together analytical thinking, revenue management and genuine human hospitality to help short-term rental properties perform at their full potential."
+    },
+    "philosophy": {
+      "eyebrow": "Our Philosophy",
+      "titleLine1": "Hospitality should feel personal.",
+      "titleLine2": "Management should be measurable.",
+      "paragraph1": "We believe successful property management requires more than simply answering messages and changing nightly prices.",
+      "paragraph2": "Every property operates inside a constantly changing market. Demand, seasonality, booking pace, competition, guest behaviour and pricing all interact with one another.",
+      "paragraph3": "Our role is to understand those signals, turn them into informed decisions and combine them with the human attention that creates memorable guest experiences."
+    },
+    "approach": {
+      "eyebrow": "The HostMetric Approach",
+      "title": "Where hospitality meets performance science.",
+      "description": "We approach each property as an individual commercial system, combining quantitative performance indicators with continuous market observation and human decision-making.",
+      "cards": {
+        "performanceMetrics": {
+          "title": "Performance Metrics",
+          "description": "Occupancy, ADR, revenue efficiency, booking pace and other performance indicators help us understand how a property is actually performing."
+        },
+        "marketIntelligence": {
+          "title": "Market Intelligence",
+          "description": "Market conditions, seasonality, comparable properties and demand signals provide context for pricing and distribution decisions."
+        },
+        "continuousOptimization": {
+          "title": "Continuous Optimization",
+          "description": "Performance is continuously reviewed so pricing, positioning and commercial strategy can evolve as market conditions change."
+        },
+        "humanCommunication": {
+          "title": "Human Communication",
+          "description": "Behind the systems are real people focused on thoughtful, natural and professional communication with every guest."
+        }
+      }
+    },
+    "familyBusiness": {
+      "eyebrow": "Family-Business Mentality",
+      "title": "Your property never becomes just another number.",
+      "paragraph1": "HostMetric is built around the mentality of a family business: responsibility, direct communication and genuine attention to the properties entrusted to us.",
+      "paragraph2": "We want owners to know who is managing their property, why decisions are being made and what we are working to improve. The relationship should feel personal even when the systems behind it are sophisticated."
+    },
+    "sharedSuccess": {
+      "eyebrow": "Shared Success",
+      "title": "Our interests are aligned with yours.",
+      "description": "Our management model is performance-based. With one simple 11% management fee and no registration fee, our growth is directly connected to the revenue generated by the properties we manage.",
+      "principle": "That creates a simple principle: when your property performs better, we perform better too."
+    },
+    "cta": {
+      "eyebrow": "Work With HostMetric",
+      "titleLine1": "Smarter management.",
+      "titleLine2": "Personal service.",
+      "description": "Let's understand your property, your market and your goals — and build the right strategy around them.",
+      "button": "Get Started"
+    }
+  },
+  "contactPage": {
+    "hero": {
+      "eyebrow": "Contact HostMetric",
+      "title": "Let's talk about your property.",
+      "description": "Tell us a little about your property and what you would like to improve. Our team will review your enquiry and contact you to discuss how HostMetric can help."
+    },
+    "contactDetails": {
+      "greece": "Greece",
+      "cyprus": "Cyprus",
+      "emailLabel": "Email"
+    },
+    "helpBox": {
+      "title": "Not sure what your property needs?",
+      "description": "That's completely fine. Send us the basic details you know and we'll help you with the rest."
+    },
+    "form": {
+      "eyebrow": "Send an enquiry",
+      "title": "Tell us about your property",
+      "requiredNote": "Fields marked with * are required.",
+      "fields": {
+        "fullName": "Full Name *",
+        "propertyCountry": "Property Country *",
+        "propertyType": "Property Type",
+        "email": "Email *",
+        "phone": "+30 / +357 Phone",
+        "propertyCityArea": "Property City / Area",
+        "message": "How can we help you? *"
+      },
+      "options": {
+        "greece": "Greece",
+        "cyprus": "Cyprus",
+        "otherEuropeanCountry": "Other European Country",
+        "apartment": "Apartment",
+        "studio": "Studio",
+        "house": "House",
+        "villa": "Villa",
+        "hotelAparthotel": "Hotel / Aparthotel",
+        "other": "Other"
+      },
+      "upload": {
+        "title": "Upload property photos",
+        "description": "Optional — you can also send them later."
+      },
+      "privacy": "I agree that HostMetric may use the information provided to respond to my enquiry. *",
+      "submit": "Send Enquiry",
+      "noObligation": "No obligation. We'll first review your property and discuss the best approach with you."
+    },
+    "success": {
+      "title": "Thank you!",
+      "description": "Your enquiry has been received. A member of the HostMetric team will contact you as soon as possible.",
+      "sendAnother": "Send another enquiry"
+    },
+    "bottom": {
+      "eyebrow": "Not ready to get started?",
+      "title": "A conversation costs nothing.",
+      "description": "Whether you manage one apartment or multiple properties, tell us what you're trying to improve and we'll help you understand the next step.",
+      "link": "Contact HostMetric"
+    }
+  },
+  "pricingPage": {
+    "hero": {
+      "eyebrow": "Simple Pricing",
+      "titleLine1": "One simple package.",
+      "titleLine2": "Everything you need.",
+      "description": "No complicated plans or unnecessary subscriptions. One complete management service designed around your property's performance, guest experience and long-term growth."
+    },
+    "pricingCard": {
+      "eyebrow": "Full Management",
+      "revenueLabel": "of booking revenue",
+      "zeroRegistrationFee": "Zero registration fee",
+      "description": "Our success grows with yours. Instead of complicated fixed plans, HostMetric works through one clear commission-based model.",
+      "button": "Get Started",
+      "summaryEyebrow": "Everything Included",
+      "summaryTitle": "One management system built around your property.",
+      "summaryDescription": "From the way your property is presented and distributed to pricing, reservations, guest communication and ongoing performance analysis, the essential parts of your booking operation work together under one coordinated strategy.",
+      "summaryItems": [
+        "Human guest communication",
+        "Smart pricing",
+        "Reservation management",
+        "Calendar synchronization",
+        "Multi-platform distribution",
+        "Listing optimization",
+        "Performance analysis",
+        "Review strategy"
+      ]
+    },
+    "includedSection": {
+      "eyebrow": "Included In Your 11%",
+      "title": "Complete booking performance management.",
+      "description": "We combine the operational and commercial elements behind a successful short-term rental into one coordinated management approach."
+    },
+    "includedServices": [
+      {
+        "title": "Listing Creation & Optimization",
+        "text": "Professional listing structure, positioning, descriptions and continuous optimization."
+      },
+      {
+        "title": "Multi-Platform Distribution",
+        "text": "Your property can be distributed across leading booking and travel platforms."
+      },
+      {
+        "title": "Calendar Synchronization",
+        "text": "Availability is coordinated across connected channels to reduce conflicts and double bookings."
+      },
+      {
+        "title": "Reservation Management",
+        "text": "We manage booking activity and keep reservations organized across your connected channels."
+      },
+      {
+        "title": "Smart Pricing & Revenue Optimization",
+        "text": "Pricing decisions are continuously informed by demand, seasonality, market conditions and property performance."
+      },
+      {
+        "title": "Human Guest Communication",
+        "text": "Professional guest communication handled by trained team members, with a focus on fast, thoughtful responses."
+      },
+      {
+        "title": "Guest Experience & Reviews",
+        "text": "Communication and property presentation are continuously refined to support stronger guest experiences and reviews."
+      },
+      {
+        "title": "Performance Monitoring",
+        "text": "Key booking and revenue indicators are monitored to identify opportunities for improvement."
+      },
+      {
+        "title": "Market & Competitor Analysis",
+        "text": "Your property's performance and positioning are evaluated against relevant market and competitive signals."
+      },
+      {
+        "title": "Continuous Optimization",
+        "text": "Pricing, listings, distribution and commercial strategy are reviewed and adjusted as performance evolves."
+      },
+      {
+        "title": "Repeat Guest Strategy",
+        "text": "We help create opportunities to strengthen guest retention and encourage future direct relationships."
+      },
+      {
+        "title": "Owner Support & Strategy",
+        "text": "You stay informed about performance, important changes and the strategy behind key decisions."
+      }
+    ],
+    "partners": {
+      "eyebrow": "Need Something More?",
+      "title": "We can help you build the team around your property too.",
+      "description": "Some services require specialized professionals outside our core management service. When needed, we can help connect you with external professionals for:",
+      "photography": {
+        "title": "Professional Property Photography",
+        "description": "We can help you find professional photographers who understand how accommodation should be presented for booking platforms."
+      },
+      "website": {
+        "title": "Your Own Direct-Booking Website",
+        "description": "We can connect you with professionals who can build your own property website and help support your long-term direct-booking strategy."
+      },
+      "disclaimer": "Photography and website development are provided by independent external professionals and are not included in the 11% management fee."
+    },
+    "cta": {
+      "eyebrow": "Start With HostMetric",
+      "titleLine1": "Your property. Our strategy.",
+      "titleLine2": "One simple 11% fee.",
+      "description": "No registration fee. No complicated packages. A complete management approach built to improve how your property performs.",
+      "button": "Optimize My Property"
+    }
+  },
+  "guestResponsePage": {
+    "back": "Back to HostMetric",
+    "eyebrow": "Human Guest Support",
+    "titleLine1": "Real people behind",
+    "titleLine2": "every guest experience",
+    "description": "Guest communication should feel natural, helpful and personal. HostMetric combines structured communication systems with trained human support, so your guests receive thoughtful answers rather than robotic responses.",
+    "cards": {
+      "continuousCoverage": {
+        "title": "Continuous Shift Coverage",
+        "description": "Trained team members work in coordinated shifts so guest conversations remain actively monitored throughout the day and night."
+      },
+      "naturalCommunication": {
+        "title": "Natural Communication",
+        "description": "Responses are adapted to the actual question, situation and guest rather than relying solely on fixed automated templates."
+      },
+      "hospitalityTraining": {
+        "title": "Hospitality Training",
+        "description": "Communication focuses on clarity, empathy, speed and practical problem-solving — helping guests feel supported throughout their stay."
+      },
+      "betterReviews": {
+        "title": "Designed for Better Reviews",
+        "description": "Recurring questions, service issues and review feedback become operational insights that help us continuously improve the guest journey."
+      }
+    },
+    "cta": "Let Us Handle Your Guests"
+  },
+  "platformNetworkPage": {
+    "back": "Back to HostMetric",
+    "center": {
+      "titleLine1": "Channel",
+      "titleLine2": "Manager",
+      "status": "Live synchronization"
+    },
+    "eyebrow": "Multi-Channel Distribution",
+    "titleLine1": "One property.",
+    "titleLine2": "Multiple booking",
+    "titleLine3": "channels.",
+    "description": "Your property can be distributed across leading travel and accommodation platforms while availability, reservations and commercial strategy remain coordinated.",
+    "calendarSync": {
+      "title": "Calendar Synchronization",
+      "description": "Reservations and availability are coordinated across supported channels to reduce conflicting inventory and provide one connected view of the property's booking calendar."
+    },
+    "widerDistribution": {
+      "title": "Wider Distribution",
+      "description": "Reach travelers across multiple accommodation and travel marketplaces."
+    },
+    "coordinatedStrategy": {
+      "title": "One Coordinated Strategy",
+      "description": "Channel activity forms part of one commercial view rather than separate platform strategies."
+    }
+  },
+  "pricingEnginePage": {
+    "back": "Back to HostMetric",
+    "eyebrow": "Pricing Intelligence Engine",
+    "titleLine1": "Thousands of signals.",
+    "titleLine2": "One smarter price.",
+    "description": "HostMetric's pricing methodology combines property-level, historical and market-level data to estimate demand conditions and support dynamic pricing decisions designed to improve revenue performance.",
+    "cards": {
+      "comparableProperties": {
+        "title": "Comparable Properties",
+        "description": "Similar accommodation type, location, capacity, amenities, positioning and market segment provide competitive pricing context."
+      },
+      "localMarketDemand": {
+        "title": "Local Market Demand",
+        "description": "Seasonal patterns, local demand conditions and differences between high- and low-demand periods influence expected willingness to book."
+      },
+      "historicalBookingData": {
+        "title": "Historical Booking Data",
+        "description": "Historical reservations, observed rates, lead time and booking patterns create a baseline for analysing future demand."
+      },
+      "bookingPace": {
+        "title": "Booking Pace",
+        "description": "Pickup velocity measures how quickly future nights are being reserved relative to previous comparable periods."
+      },
+      "revenueKpis": {
+        "title": "Revenue KPIs",
+        "description": "ADR, occupancy and revenue-per-available-inventory metrics help evaluate the balance between price and inventory utilization."
+      },
+      "priceElasticity": {
+        "title": "Price Elasticity",
+        "description": "The relationship between price changes and expected demand provides information about how aggressively a rate can be adjusted under different market conditions."
+      }
+    },
+    "objective": {
+      "eyebrow": "Optimization Objective",
+      "titleLine1": "Not maximum occupancy.",
+      "titleLine2": "Maximum economic performance.",
+      "description": "A property filled at an unnecessarily low rate may achieve strong occupancy while leaving revenue on the table. The pricing engine therefore evaluates rate and expected demand together, adjusting recommendations as booking pace, remaining inventory and market conditions change.",
+      "formula": "Optimal Price = arg max [ Price × Expected Demand(Price) ]"
+    },
+    "cta": "Optimize My Property"
+  },
+  "revenuePage": {
+    "back": "Back to HostMetric",
+    "eyebrow": "Revenue Intelligence",
+    "title": "Revenue is more than a nightly price",
+    "description": "Our revenue methodology is designed around hospitality-grade performance metrics, demand forecasting and market intelligence rather than static pricing.",
+    "cards": {
+      "adr": {
+        "label": "Average Daily Rate",
+        "title": "ADR",
+        "description": "ADR measures average rental revenue generated per occupied night.",
+        "formula": "ADR = Room Revenue ÷ Rooms Sold"
+      },
+      "revpar": {
+        "label": "Revenue Efficiency",
+        "title": "RevPAR",
+        "description": "RevPAR combines price and occupancy by measuring revenue generated across all available inventory.",
+        "formula": "RevPAR = ADR × Occupancy"
+      },
+      "bookingPace": {
+        "title": "Booking Pace",
+        "description": "We examine how quickly future dates accumulate bookings and compare that pace with historical behaviour, seasonality and current market demand."
+      },
+      "demandForecasting": {
+        "title": "Demand Forecasting",
+        "description": "Booking curves, pickup patterns, lead time and forward-looking demand signals help inform pricing and inventory decisions."
+      }
+    }
+  },
+  "guestRatingPage": {
+    "back": "Back to HostMetric",
+    "eyebrow": "Guest Experience Intelligence",
+    "titleLine1": "Better communication.",
+    "titleLine2": "Better guest experiences.",
+    "description": "Guest experience should be managed as an operational system: communication speed, issue resolution, recurring questions and review feedback can all reveal opportunities for improvement.",
+    "cards": {
+      "responseTime": {
+        "title": "Response Time",
+        "description": "Fast, clear communication reduces uncertainty before arrival and helps resolve guest questions before they become problems."
+      },
+      "issueResolution": {
+        "title": "Issue Resolution",
+        "description": "Recurring guest issues can be categorized and tracked so that operational causes are corrected rather than repeatedly handled as isolated incidents."
+      },
+      "reviewIntelligence": {
+        "title": "Review Intelligence",
+        "description": "Review themes can reveal recurring strengths and weaknesses across cleanliness, communication, accuracy, location and overall guest satisfaction."
+      },
+      "continuousImprovement": {
+        "title": "Continuous Improvement",
+        "description": "Guest feedback becomes actionable information that can feed back into communication templates, property instructions and operational decisions."
+      }
+    }
+  },
+  "occupancyPage": {
+    "back": "Back to HostMetric",
+    "eyebrow": "Occupancy Intelligence",
+    "titleLine1": "The goal is not maximum occupancy.",
+    "titleLine2": "It is optimal occupancy.",
+    "description": "Selling every available night at an unnecessarily low rate can produce high occupancy without maximizing revenue. Our strategy evaluates occupancy together with rate and revenue efficiency.",
+    "cards": {
+      "occupancyRate": {
+        "title": "Occupancy Rate",
+        "formula": "Occupancy = Rooms Sold ÷ Rooms Available",
+        "description": "Occupancy identifies how much available inventory has been sold during a given period."
+      },
+      "bookingWindow": {
+        "title": "Booking Window",
+        "description": "The number of days between booking and arrival helps indicate changes in customer behaviour and future demand conditions."
+      },
+      "lengthOfStay": {
+        "title": "Length-of-Stay Control",
+        "description": "Minimum-stay rules can protect high-demand periods while poor restrictions can unnecessarily block valuable inventory."
+      },
+      "calendarOptimization": {
+        "title": "Calendar Optimization",
+        "description": "Gap nights, arrival restrictions, seasonality and booking pace are evaluated together to improve calendar efficiency."
+      }
+    }
+  },
+  "aiPricingPage": {
+    "back": "Back to HostMetric",
+    "eyebrow": "Study-Informed Dynamic Pricing",
+    "title": "Pricing that responds to demand",
+    "description": "Our pricing methodology is designed around research-backed revenue management principles combining demand forecasting, booking pace, market conditions and price responsiveness.",
+    "cards": {
+      "priceElasticity": {
+        "title": "Price Elasticity",
+        "description": "Demand does not respond equally to every price change. Price-elasticity modelling examines how expected booking demand changes as price changes."
+      },
+      "demandCurves": {
+        "title": "Demand Curves",
+        "description": "Historical demand, time until arrival and booking patterns can be modelled to estimate future demand across different commercial conditions."
+      },
+      "marketPositioning": {
+        "title": "Market Positioning",
+        "description": "Comparable properties, local supply, demand, seasonality and event-driven conditions provide context for rate decisions."
+      },
+      "continuousRecalculation": {
+        "title": "Continuous Recalculation",
+        "description": "Instead of relying on one fixed rate, pricing inputs can be recalculated as market conditions, booking pace and remaining inventory change."
+      }
+    }
+  },
+  "smartPricingPage": {
+    "back": "Back to HostMetric",
+    "eyebrow": "Smart Pricing",
+    "titleLine1": "Pricing driven by demand,",
+    "titleLine2": "not guesswork",
+    "description": "HostMetric applies study-informed revenue-management principles built around demand forecasting, booking behaviour, seasonality, market positioning and measurable performance indicators.",
+    "cards": {
+      "adr": {
+        "label": "Average Daily Rate",
+        "title": "ADR",
+        "description": "Measures the average revenue generated for each occupied night.",
+        "formula": "ADR = Rental Revenue ÷ Occupied Nights"
+      },
+      "revpar": {
+        "label": "Revenue Efficiency",
+        "title": "RevPAR",
+        "description": "Combines rate and occupancy into one revenue-performance measure.",
+        "formula": "RevPAR = ADR × Occupancy"
+      },
+      "bookingPace": {
+        "title": "Booking Pace & Pick-Up",
+        "description": "The rate at which future dates accumulate reservations can be compared with historical booking curves to identify periods where demand is developing faster or slower than expected."
+      },
+      "leadTime": {
+        "title": "Lead Time",
+        "description": "The number of days between reservation and arrival provides another demand signal. Booking behaviour often changes as the arrival date approaches."
+      },
+      "priceElasticity": {
+        "title": "Price Elasticity",
+        "description": "Pricing models can examine how expected demand responds to changes in price. This relationship helps distinguish between periods where stronger rates can be supported and periods where pricing needs to stimulate demand."
+      },
+      "competitivePositioning": {
+        "title": "Competitive Positioning",
+        "description": "Comparable accommodation, local supply, day-of-week patterns, seasonality and major demand periods provide market context around each pricing decision."
+      }
+    },
+    "dynamicRevenueManagement": {
+      "eyebrow": "Dynamic Revenue Management",
+      "title": "The optimal price changes with the market",
+      "description": "Hotel revenue-management training uses forecasting, booking curves, pick-up, demand segmentation, pricing and length-of-stay controls rather than relying on one fixed nightly rate. HostMetric's pricing philosophy follows these core professional revenue-management principles."
+    },
+    "cta": "Optimize My Pricing"
+  },
+  "guestCommunicationPage": {
+    "back": "Back to HostMetric",
+    "eyebrow": "Guest Communication",
+    "titleLine1": "Every guest interaction",
+    "titleLine2": "shapes the experience",
+    "description": "Professional guest communication is managed as a complete journey — from the first question before booking to arrival, the stay, checkout and post-stay follow-up.",
+    "cards": {
+      "fastResponseStrategy": {
+        "title": "Fast Response Strategy",
+        "description": "Guest enquiries are handled quickly, clearly and professionally, reducing uncertainty and helping potential guests receive the information they need before making a decision."
+      },
+      "preArrivalCommunication": {
+        "title": "Pre-Arrival Communication",
+        "description": "Arrival instructions, access information, directions and important property details are communicated proactively to create a smoother check-in experience."
+      },
+      "inStaySupport": {
+        "title": "In-Stay Support",
+        "description": "Questions and issues during the stay are handled through a structured communication workflow focused on fast resolution and minimal disruption to the guest experience."
+      },
+      "reviewIntelligence": {
+        "title": "Review Intelligence",
+        "description": "Guest feedback can be grouped into recurring themes such as communication, accuracy, comfort and arrival experience, allowing operational improvements to be based on patterns rather than isolated comments."
+      }
+    },
+    "continuousImprovement": {
+      "eyebrow": "Continuous Improvement",
+      "title": "Communication becomes operational data",
+      "description": "Response times, repeated guest questions, issue categories and review themes can reveal friction points across the guest journey. These insights can then improve instructions, communication templates and property operations over time."
+    },
+    "cta": "Improve Your Guest Experience"
+  },
+  "bookingManagementPage": {
+    "back": "Back to HostMetric",
+    "eyebrow": "Booking Management",
+    "titleLine1": "Every booking.",
+    "titleLine2": "One coordinated calendar.",
+    "description": "Reservations, availability, calendars and booking restrictions are managed as one connected system across supported distribution channels.",
+    "cards": {
+      "calendarSynchronization": {
+        "title": "Calendar Synchronization",
+        "description": "Availability is coordinated across connected booking channels so that reservation changes can be reflected across the distribution strategy."
+      },
+      "availabilityManagement": {
+        "title": "Availability Management",
+        "description": "Available nights are monitored as perishable inventory: once an unsold night passes, its revenue opportunity cannot be recovered."
+      },
+      "lengthOfStayControls": {
+        "title": "Length-of-Stay Controls",
+        "description": "Minimum-stay rules can be adjusted strategically around high-demand periods while avoiding unnecessary restrictions that create unusable gaps in the calendar."
+      },
+      "gapNightManagement": {
+        "title": "Gap-Night Management",
+        "description": "Orphan nights and short availability gaps can be identified and managed so that booking rules do not unnecessarily prevent otherwise valuable reservations."
+      },
+      "bookingPace": {
+        "title": "Booking Pace",
+        "description": "Pickup patterns indicate how quickly future inventory is being consumed. Comparing booking pace across equivalent periods provides useful information for pricing and availability decisions."
+      },
+      "multiChannelCoordination": {
+        "title": "Multi-Channel Coordination",
+        "description": "Reservations from supported channels form part of a single commercial view of the property rather than being treated as unrelated platform activity."
+      }
+    },
+    "connectedStrategy": {
+      "eyebrow": "One Connected Strategy",
+      "title": "Calendar decisions affect revenue decisions",
+      "description": "Pricing and availability cannot be optimized independently. Booking pace, remaining inventory, length-of-stay restrictions and time until arrival all influence how valuable each remaining night may be."
+    },
+    "cta": "Simplify My Bookings"
+  },
+  "greaterVisibilityPage": {
+    "back": "Back to HostMetric",
+    "eyebrow": "Greater Visibility",
+    "title": "Visibility driven by distribution intelligence",
+    "description": "Strong distribution is not simply about appearing on more platforms. It is about understanding where demand originates, how each channel converts and what each booking contributes to commercial performance.",
+    "cards": {
+      "channelPerformance": {
+        "title": "Channel Performance",
+        "description": "We evaluate channel contribution using booking volume, booking value, acquisition cost, commission exposure and net revenue rather than relying on gross booking totals alone."
+      },
+      "netRevenueAnalysis": {
+        "title": "Net Revenue Analysis",
+        "description": "Net Revenue = Gross Rental Revenue − Channel Costs. Comparing channels on a net basis gives a more meaningful picture of their economic value."
+      },
+      "demandPositioning": {
+        "title": "Demand Positioning",
+        "description": "Search visibility, market demand, seasonality, local events and competitive positioning all influence where inventory should be exposed and at what price."
+      },
+      "professionalRevenueLogic": {
+        "title": "Professional Revenue Logic",
+        "description": "Our methodology follows hospitality-grade revenue management principles built around the same core demand signals and commercial KPIs used across professional accommodation revenue teams."
+      }
+    }
+  },
+  "centralizedManagementPage": {
+    "back": "Back to HostMetric",
+    "eyebrow": "Centralized Management",
+    "title": "One coordinated commercial view of your property",
+    "description": "Pricing, availability, reservations and guest activity are most valuable when they are analysed together instead of as isolated pieces of information.",
+    "cards": {
+      "occupancyRate": {
+        "title": "Occupancy Rate",
+        "description": "Occupancy Rate = Booked Nights ÷ Available Nights × 100. We evaluate occupancy alongside rate performance rather than treating maximum occupancy as the objective."
+      },
+      "bookingWindow": {
+        "title": "Booking Window",
+        "description": "Lead time measures the number of days between reservation and arrival. Changes in booking window can provide useful signals about demand behaviour and pricing conditions."
+      },
+      "bookingPace": {
+        "title": "Booking Pace",
+        "description": "Booking pace measures how quickly future inventory is being reserved relative to a historical baseline or commercial target, helping identify whether demand is building ahead of or behind expectations."
+      },
+      "calendarEfficiency": {
+        "title": "Calendar Efficiency",
+        "description": "Minimum-stay rules, orphan nights and availability gaps are reviewed as part of the calendar strategy so that valuable inventory is not unnecessarily constrained."
+      }
+    }
+  },
+  "smarterDistributionPage": {
+    "back": "Back to HostMetric",
+    "eyebrow": "Smarter Distribution",
+    "title": "Revenue decisions built around measurable demand",
+    "description": "Our pricing approach analyses the relationship between rate, occupancy, booking pace, seasonality and market positioning rather than optimizing a single metric in isolation.",
+    "cards": {
+      "adr": {
+        "title": "ADR",
+        "description": "Average Daily Rate measures the average revenue generated by each occupied night: ADR = Rental Revenue ÷ Occupied Nights."
+      },
+      "revpan": {
+        "title": "RevPAN",
+        "description": "Revenue Per Available Night combines pricing and occupancy: RevPAN = Rental Revenue ÷ Available Nights. This makes it especially useful for short-term rentals."
+      },
+      "priceElasticity": {
+        "title": "Price Elasticity",
+        "description": "Price elasticity describes how strongly booking demand responds to changes in price. Understanding that relationship helps avoid both unnecessary discounting and unrealistic pricing."
+      },
+      "competitivePositioning": {
+        "title": "Competitive Positioning",
+        "description": "Comparable properties, demand conditions, booking pace, events and seasonal patterns provide context for rate decisions instead of relying on a fixed nightly price."
+      }
+    }
+  },
+  "privacyPolicyPage": {
+    "hero": {
+      "eyebrow": "Legal & Privacy",
+      "title": "Privacy Policy",
+      "description": "This Privacy Policy explains how HostMetric collects, uses, protects and manages personal information when you visit our website, contact us, submit a property or use our services.",
+      "lastUpdated": "Last updated: August 2026"
+    },
+    "sections": {
+      "whoWeAre": {
+        "title": "1. Who We Are",
+        "description": "HostMetric provides services relating to short-term rental management, booking management, guest communication, distribution, listing optimization, pricing and property performance.",
+        "brand": "HostMetric",
+        "email": "Email: info@hostmetric.gr",
+        "greece": "Greece: +30 694 340 4641",
+        "cyprus": "Cyprus: +357 99 80 78 70"
+      },
+      "informationCollected": {
+        "title": "2. Information We May Collect",
+        "description": "The information collected depends on how you interact with HostMetric and which services you request.",
+        "items": [
+          "Full name and contact details.",
+          "Email address and telephone number.",
+          "Country, postal address and business address.",
+          "Owner, authorized representative or business information.",
+          "Tax, registration or licensing information where required for property onboarding.",
+          "Property address, type, capacity, facilities and amenities.",
+          "Accommodation unit, room and bed configuration.",
+          "Existing Booking.com, Airbnb or other platform information.",
+          "Listing URLs, property IDs and channel-management details.",
+          "Pricing, occupancy, booking and performance information.",
+          "Guest policies, check-in information and operating details.",
+          "Messages and enquiries sent to HostMetric.",
+          "Technical information such as device, browser, IP and website usage information where applicable."
+        ]
+      },
+      "propertyPhotos": {
+        "title": "3. Property Photos and Files",
+        "paragraph1": "During property onboarding you may provide photographs, floor plans, documents and other material relating to your accommodation.",
+        "paragraph2": "These files may be used to review the property, organize galleries, prepare listing content and, where agreed with you, configure or improve listings on accommodation platforms.",
+        "paragraph3": "You should only upload files that you own or are legally authorized to provide and use."
+      },
+      "collection": {
+        "title": "4. How Information Is Collected",
+        "description": "Information may be collected when you:",
+        "items": [
+          "Complete our Get Started onboarding form.",
+          "Submit a contact form.",
+          "Contact us by email or telephone.",
+          "Enter into discussions or an agreement with HostMetric.",
+          "Provide property information or files directly to us.",
+          "Use our website, where technical information may be collected through essential technologies or permitted cookies."
+        ]
+      },
+      "processing": {
+        "title": "5. Why We Process Information",
+        "description": "Information may be processed for purposes including:",
+        "items": [
+          "Responding to enquiries.",
+          "Reviewing prospective properties.",
+          "Creating and maintaining onboarding records.",
+          "Preparing listing, pricing and distribution strategies.",
+          "Configuring accommodation on booking platforms where agreed.",
+          "Managing reservations and guest communication.",
+          "Providing contracted HostMetric services.",
+          "Measuring and improving property and listing performance.",
+          "Maintaining accounting, administrative and business records.",
+          "Protecting the security of our services.",
+          "Meeting applicable legal obligations."
+        ]
+      },
+      "legalBases": {
+        "title": "6. Legal Bases for Processing",
+        "paragraph1": "Depending on the circumstances, processing may be necessary to take steps at your request before entering into an agreement, to perform an agreement, to comply with legal obligations, to pursue legitimate business interests or, where required, on the basis of your consent.",
+        "paragraph2": "Where processing relies on consent, you may withdraw that consent subject to applicable law."
+      },
+      "platforms": {
+        "title": "7. Booking Platforms and Service Providers",
+        "paragraph1": "Where necessary to provide agreed services, information may be processed through third-party accommodation, technology, hosting, storage, email, analytics, payment or communication services.",
+        "paragraph2": "Accommodation platforms such as Booking.com, Airbnb, Vrbo, Expedia and similar services operate under their own terms and privacy policies.",
+        "noSale": "HostMetric does not sell personal information."
+      },
+      "transfers": {
+        "title": "8. International Data Transfers",
+        "paragraph1": "Some technology providers may process data in countries outside your country of residence or outside the European Economic Area.",
+        "paragraph2": "Where required by applicable data-protection law, appropriate transfer mechanisms or safeguards will be used."
+      },
+      "retention": {
+        "title": "9. Data Retention",
+        "paragraph1": "Personal information is retained only for as long as reasonably necessary for the purposes for which it was collected, the management of our relationship with you, applicable accounting requirements and other legal or contractual obligations.",
+        "paragraph2": "When information is no longer required, it may be securely deleted or anonymized."
+      },
+      "security": {
+        "title": "10. Data Security",
+        "paragraph1": "HostMetric uses reasonable technical and organizational measures designed to protect information against unauthorized access, disclosure, alteration, loss or destruction.",
+        "paragraph2": "Access to information should be limited to persons and service providers who require it for legitimate business purposes."
+      },
+      "rights": {
+        "title": "11. Your Data Protection Rights",
+        "description": "Subject to applicable law, you may have rights including:",
+        "items": [
+          "Access to your personal information.",
+          "Correction of inaccurate information.",
+          "Erasure in appropriate circumstances.",
+          "Restriction of processing.",
+          "Data portability where applicable.",
+          "Objection to certain processing.",
+          "Withdrawal of consent where processing relies on consent.",
+          "The right to complain to the relevant data protection supervisory authority."
+        ]
+      },
+      "cookies": {
+        "title": "12. Cookies",
+        "paragraph1": "Our website may use cookies and similar technologies for essential functionality, preferences, security and, where permitted, analytics or other optional purposes.",
+        "paragraph2BeforeLink": "For more information, please read our",
+        "link": "Cookie Policy"
+      },
+      "externalWebsites": {
+        "title": "13. External Websites",
+        "description": "Our website may include links to external websites and booking platforms. HostMetric does not control the privacy practices, security or content of independent third-party websites."
+      },
+      "changes": {
+        "title": "14. Changes to this Privacy Policy",
+        "description": "HostMetric may update this Privacy Policy when our services, technology, processing activities or legal obligations change. The current version will always be available on this page."
+      },
+      "contact": {
+        "title": "15. Contact",
+        "description": "For privacy questions or requests concerning your personal information, contact:",
+        "email": "info@hostmetric.gr"
+      }
+    }
+  },
+  "termsPage": {
+    "hero": {
+      "eyebrow": "Legal",
+      "title": "Terms & Conditions",
+      "description": "These terms govern access to the HostMetric website, use of its online features and information submitted through our contact and property onboarding systems.",
+      "lastUpdated": "Last updated: August 2026"
+    },
+    "sections": {
+      "acceptance": {
+        "title": "1. Acceptance of These Terms",
+        "paragraph1": "By accessing or using the HostMetric website, you agree to these Terms & Conditions. If you do not agree with them, you should discontinue use of the website."
+      },
+      "about": {
+        "title": "2. About HostMetric",
+        "paragraph1": "HostMetric provides services relating to short-term rental management, booking management, guest communication, distribution, listing optimization, pricing and performance improvement.",
+        "paragraph2": "The exact scope, fees, responsibilities and commercial terms for services provided to an individual client may be governed by a separate written agreement."
+      },
+      "websiteInformation": {
+        "title": "3. Website Information",
+        "paragraph1": "We aim to keep the content of this website clear, accurate and useful. However, hospitality markets, booking platforms, regulations, technology and commercial conditions may change.",
+        "paragraph2": "Website content is provided for general informational and commercial purposes and should not be considered a guarantee of a particular result."
+      },
+      "caseStudies": {
+        "title": "4. Property Performance and Case Studies",
+        "paragraph1": "Revenue, occupancy, ratings, reviews, awards and other performance information displayed on the website relate to the individual property and measured period identified.",
+        "paragraph2": "Past performance does not guarantee future results. Performance may vary because of location, property type, market demand, competition, seasonality, availability, pricing, platform algorithms, reviews and other factors."
+      },
+      "pricingRevenue": {
+        "title": "5. Pricing and Revenue Management",
+        "paragraph1": "Pricing strategies may take into account historical booking information, comparable properties, market conditions, booking pace, availability, seasonality and other commercial indicators.",
+        "paragraph2": "Pricing recommendations or changes cannot guarantee a particular level of revenue, profitability or occupancy."
+      },
+      "onboarding": {
+        "title": "6. Property Onboarding",
+        "paragraph1": "Completing a HostMetric Get Started or property onboarding form allows us to review information relating to a property.",
+        "paragraph2": "Submitting a form does not automatically create a management agreement, guarantee acceptance of the property or cause a listing to be published.",
+        "paragraph3": "HostMetric may contact the owner or authorized representative to verify or obtain additional information before services begin."
+      },
+      "userInformation": {
+        "title": "7. Information Provided by Users",
+        "paragraph1": "You are responsible for ensuring that information provided through our website is accurate to the best of your knowledge.",
+        "paragraph2": "You must not knowingly submit false, misleading, unlawful or unauthorized information."
+      },
+      "materials": {
+        "title": "8. Photographs, Documents and Other Material",
+        "paragraph1": "By submitting photographs, floor plans, documents or other material, you confirm that you own the material or have sufficient permission to provide and use it for the purposes requested.",
+        "paragraph2": "Where agreed as part of our services, such materials may be prepared, organized or used in accommodation listings."
+      },
+      "thirdPartyPlatforms": {
+        "title": "9. Third-Party Platforms",
+        "paragraph1": "Booking.com, Airbnb, Vrbo, Expedia and other accommodation or technology providers are independent third parties.",
+        "paragraph2": "Their fees, policies, terms, systems, rankings, algorithms and availability may change independently of HostMetric."
+      },
+      "intellectualProperty": {
+        "title": "10. Intellectual Property",
+        "paragraph1": "Unless otherwise stated, original HostMetric branding, website copy, designs, graphics, software and other HostMetric-created materials are protected by applicable intellectual-property laws.",
+        "paragraph2": "They may not be reproduced, republished, distributed, commercially exploited or materially modified without permission.",
+        "paragraph3": "Third-party names, logos and trademarks remain the property of their respective owners."
+      },
+      "acceptableUse": {
+        "title": "11. Acceptable Use",
+        "description": "You must not use the website to:",
+        "items": [
+          "Attempt unauthorized access to systems or data.",
+          "Upload malware or malicious material.",
+          "Interfere with normal website operation.",
+          "Submit fraudulent or misleading information.",
+          "Violate applicable law or third-party rights."
+        ]
+      },
+      "availabilityLiability": {
+        "title": "12. Website Availability and Liability",
+        "paragraph1": "We take reasonable steps to maintain the website and the accuracy of its content, but we cannot guarantee uninterrupted or error-free operation at all times.",
+        "paragraph2": "To the extent permitted by applicable law, HostMetric will not be responsible for indirect or consequential loss caused solely by reliance on general website information or by circumstances outside our reasonable control.",
+        "paragraph3": "Nothing in these Terms excludes or limits liability where exclusion or limitation would be unlawful."
+      },
+      "externalLinks": {
+        "title": "13. External Links",
+        "paragraph1": "Links to third-party websites are provided for convenience or functionality. HostMetric is not responsible for the content, availability, security or practices of independent third-party websites."
+      },
+      "privacy": {
+        "title": "14. Privacy and Personal Information",
+        "paragraphBeforeLink": "Personal information is handled in accordance with our",
+        "link": "Privacy Policy"
+      },
+      "changes": {
+        "title": "15. Changes to These Terms",
+        "paragraph1": "HostMetric may update these Terms & Conditions to reflect changes in services, technology, business practices or applicable requirements.",
+        "paragraph2": "The latest version will be available on this page."
+      },
+      "contact": {
+        "title": "16. Contact",
+        "description": "Questions regarding these Terms may be sent to:",
+        "email": "info@hostmetric.gr"
+      }
+    }
+  },
+  "cookiePolicyPage": {
+    "hero": {
+      "eyebrow": "Privacy & Preferences",
+      "title": "Cookie Policy",
+      "description": "This policy explains how HostMetric may use cookies and similar technologies and how you can control optional technologies when using our website.",
+      "lastUpdated": "Last updated: August 2026"
+    },
+    "sections": {
+      "whatAreCookies": {
+        "title": "1. What Are Cookies?",
+        "paragraph1": "Cookies are small data files that may be stored on your computer, phone or other device when you visit a website.",
+        "paragraph2": "They can help websites operate correctly, remember settings, maintain sessions, improve security and, where permitted, understand how visitors use a website."
+      },
+      "similarTechnologies": {
+        "title": "2. Similar Technologies",
+        "paragraph1": "Websites may also use related technologies such as local storage, pixels, tags or similar technical tools. References to cookies in this policy may include these technologies where appropriate."
+      },
+      "necessaryCookies": {
+        "title": "3. Strictly Necessary Cookies",
+        "paragraph1": "These technologies are required for essential website functionality or for a service specifically requested by the user.",
+        "paragraph2": "They may support functions such as security, navigation, form operation, session management and other essential technical features.",
+        "notice": "Essential cookies cannot always be disabled through a website preference tool because the website may require them to provide the requested functionality."
+      },
+      "preferenceCookies": {
+        "title": "4. Preference Cookies",
+        "paragraph1": "Preference cookies may remember choices you make, such as language, display settings or other website preferences."
+      },
+      "analyticsCookies": {
+        "title": "5. Analytics Cookies",
+        "paragraph1": "Analytics technologies may be used to understand how visitors interact with the website, which pages are used most often and how website performance can be improved.",
+        "paragraph2": "Where consent is legally required, these technologies will only be activated after the relevant permission has been obtained."
+      },
+      "marketingCookies": {
+        "title": "6. Marketing and Advertising Cookies",
+        "paragraph1": "Marketing technologies may be used to measure advertising campaigns, understand marketing effectiveness or provide more relevant advertising.",
+        "paragraph2": "They are treated as optional and will not be activated before consent where consent is required by applicable law."
+      },
+      "sessionPersistentCookies": {
+        "title": "7. Session and Persistent Cookies",
+        "paragraph1": "Cookies may also be classified according to how long they remain on your device.",
+        "sessionTitle": "Session cookies",
+        "sessionText": "generally expire when the browser session ends.",
+        "persistentTitle": "Persistent cookies",
+        "persistentText": "remain for a defined period or until removed."
+      },
+      "thirdPartyServices": {
+        "title": "8. Third-Party Services",
+        "paragraph1": "Certain functions may be provided by third-party services, such as analytics, maps, embedded content, social-media features or other technology providers.",
+        "paragraph2": "These providers may use their own cookies or similar technologies in accordance with their own privacy and cookie policies."
+      },
+      "cookieChoices": {
+        "title": "9. Your Cookie Choices",
+        "paragraph1": "Where optional cookies are used, visitors will be provided with a mechanism to make appropriate choices before those optional technologies are enabled when legally required.",
+        "paragraph2": "You may also control or remove cookies through your browser settings. Blocking certain technologies may affect some website functionality."
+      },
+      "consent": {
+        "title": "10. Changing or Withdrawing Consent",
+        "paragraph1": "Where processing relies on cookie consent, you may change or withdraw your preferences through the available cookie settings mechanism.",
+        "paragraph2": "Withdrawal of consent will not affect processing that was lawful before withdrawal."
+      },
+      "updates": {
+        "title": "11. Updates to This Policy",
+        "paragraph1": "This Cookie Policy may be updated when technologies, providers, website features or applicable requirements change.",
+        "paragraph2": "The current version will always be published on this page."
+      },
+      "privacy": {
+        "title": "12. Privacy",
+        "paragraphBeforeLink": "More information about how HostMetric processes personal information is available in our",
+        "link": "Privacy Policy"
+      },
+      "contact": {
+        "title": "13. Contact",
+        "description": "Questions about this Cookie Policy may be sent to:",
+        "email": "info@hostmetric.gr"
+      }
+    }
+  },
+  "getStartedPage": {
+    "hero": {
+      "eyebrow": "Get Started",
+      "title": "Let's understand your property.",
+      "description": "Complete the onboarding form below so we can understand your property, current setup and goals before building the right HostMetric strategy for you."
+    }
+  },
+  "onboardingForm": {
+    "texts": {
+      "Onboarding Complete": "Onboarding Complete",
+      "Your property information is ready for review": "Your property information is ready for review",
+      "The seven-step front-end onboarding has been completed successfully. Once we connect the database and secure file storage, this final submission will be saved automatically for the HostMetric team.": "The seven-step front-end onboarding has been completed successfully. Once we connect the database and secure file storage, this final submission will be saved automatically for the HostMetric team.",
+      "Need to speak with us?": "Need to speak with us?",
+      "You can contact our team for help, corrections or questions about your property.": "You can contact our team for help, corrections or questions about your property.",
+      "Contact Us →": "Contact Us →",
+      "Property Onboarding": "Property Onboarding",
+      "Step": "Step",
+      "of 7": "of 7",
+      "Only fields marked with * are required.": "Only fields marked with * are required.",
+      "If you do not know an answer, leave the optional field blank. We can help you complete missing information later.": "If you do not know an answer, leave the optional field blank. We can help you complete missing information later.",
+      "Having trouble with any question?": "Having trouble with any question?",
+      "Leave optional fields blank or contact us and we&apos;ll help you complete the onboarding.": "Leave optional fields blank or contact us and we'll help you complete the onboarding.",
+      "Step 01": "Step 01",
+      "Owner & Business Details": "Owner & Business Details",
+      "Tell us who owns or operates the property. Your answers help us determine which legal and property questions apply later.": "Tell us who owns or operates the property. Your answers help us determine which legal and property questions apply later.",
+      "Property Country *": "Property Country *",
+      "Select property country": "Select property country",
+      "Owner Type *": "Owner Type *",
+      "Individual": "Individual",
+      "The accommodation is owned or operated by a private individual.": "The accommodation is owned or operated by a private individual.",
+      "Business": "Business",
+      "The accommodation is operated through a company or legal entity.": "The accommodation is operated through a company or legal entity.",
+      "Legal First Name *": "Legal First Name *",
+      "Legal Last Name *": "Legal Last Name *",
+      "Email *": "Email *",
+      "Phone / WhatsApp *": "Phone / WhatsApp *",
+      "Phone country code": "Phone country code",
+      "Phone number": "Phone number",
+      "Select your country flag and international calling code, then enter your phone or WhatsApp number.": "Select your country flag and international calling code, then enter your phone or WhatsApp number.",
+      "Country of Residence *": "Country of Residence *",
+      "Select country": "Select country",
+      "Date of Birth": "Date of Birth",
+      "Residential Address": "Residential Address",
+      "Street Address": "Street Address",
+      "Street and number": "Street and number",
+      "City": "City",
+      "Postal Code": "Postal Code",
+      "Business Information": "Business Information",
+      "Legal Business Name *": "Legal Business Name *",
+      "Business Registration Number": "Business Registration Number",
+      "VAT Number": "VAT Number",
+      "Tax Identification Number": "Tax Identification Number",
+      "Registered Business Address": "Registered Business Address",
+      "Business City": "Business City",
+      "Business Postal Code": "Business Postal Code",
+      "Continue to Property Details →": "Continue to Property Details →",
+      "Step 02": "Step 02",
+      "Property & Accommodation Setup": "Property & Accommodation Setup",
+      "Property Name *": "Property Name *",
+      "Property Address *": "Property Address *",
+      "City / Locality *": "City / Locality *",
+      "Region / District": "Region / District",
+      "Postal Code *": "Postal Code *",
+      "General Property Category *": "General Property Category *",
+      "Select category": "Select category",
+      "Apartments / Apartment Building": "Apartments / Apartment Building",
+      "Hotel / Aparthotel": "Hotel / Aparthotel",
+      "Villas / Villa Complex": "Villas / Villa Complex",
+      "Houses / Holiday Homes": "Houses / Holiday Homes",
+      "Guesthouse": "Guesthouse",
+      "Mixed Accommodation": "Mixed Accommodation",
+      "Other": "Other",
+      "Your Relationship to the Property *": "Your Relationship to the Property *",
+      "Select option": "Select option",
+      "Owner": "Owner",
+      "Co-owner": "Co-owner",
+      "Authorized Manager": "Authorized Manager",
+      "Operated by my company": "Operated by my company",
+      "Accommodation Structure": "Accommodation Structure",
+      "How is your accommodation sold? *": "How is your accommodation sold? *",
+      "One entire property / one unit": "One entire property / one unit",
+      "Multiple identical units": "Multiple identical units",
+      "Multiple room or unit types": "Multiple room or unit types",
+      "Rooms & Units": "Rooms & Units",
+      "Accommodation Unit Types": "Accommodation Unit Types",
+      "Unit Type": "Unit Type",
+      "Room / Unit Type Name *": "Room / Unit Type Name *",
+      "Example: Deluxe Sea View Apartment": "Example: Deluxe Sea View Apartment",
+      "Unit Type *": "Unit Type *",
+      "Select type": "Select type",
+      "Double Room": "Double Room",
+      "Twin Room": "Twin Room",
+      "Triple Room": "Triple Room",
+      "Family Room": "Family Room",
+      "Studio": "Studio",
+      "Apartment": "Apartment",
+      "Suite": "Suite",
+      "Villa": "Villa",
+      "Holiday Home": "Holiday Home",
+      "Bungalow": "Bungalow",
+      "Chalet": "Chalet",
+      "Number of Identical Units *": "Number of Identical Units *",
+      "Bedrooms": "Bedrooms",
+      "Bathrooms": "Bathrooms",
+      "Approximate Size (m²)": "Approximate Size (m²)",
+      "Maximum Guests *": "Maximum Guests *",
+      "Maximum Adults": "Maximum Adults",
+      "Maximum Children": "Maximum Children",
+      "Bed Configuration": "Bed Configuration",
+      "Kitchen / Kitchenette": "Kitchen / Kitchenette",
+      "Select": "Select",
+      "Full Kitchen": "Full Kitchen",
+      "Kitchenette": "Kitchenette",
+      "None": "None",
+      "Smoking Policy": "Smoking Policy",
+      "Non-Smoking": "Non-Smoking",
+      "Smoking Allowed": "Smoking Allowed",
+      "Mixed / Depends on Unit": "Mixed / Depends on Unit",
+      "Add Another Unit Type": "Add Another Unit Type",
+      "Registration & Legal Information": "Registration & Legal Information",
+      "Do you already have the required accommodation registration?": "Do you already have the required accommodation registration?",
+      "Yes": "Yes",
+      "Not yet": "Not yet",
+      "I&apos;m not sure": "I'm not sure",
+      "Land Registration / Cadastral Reference": "Land Registration / Cadastral Reference",
+      "If known": "If known",
+      "Optional. This is the official land-registry or cadastral reference used to identify the property in public land records. Leave it blank if you do not know it.": "Optional. This is the official land-registry or cadastral reference used to identify the property in public land records. Leave it blank if you do not know it.",
+      "Other Tourism / Accommodation Licence": "Other Tourism / Accommodation Licence",
+      "← Back": "← Back",
+      "Continue to Online Presence →": "Continue to Online Presence →",
+      "Step 03": "Step 03",
+      "Existing Online Presence & Systems": "Existing Online Presence & Systems",
+      "Tell us where the property is currently listed and which booking systems you already use. If you are unsure about a technical system, simply select &quot;I&apos;m not sure&quot;.": "Tell us where the property is currently listed and which booking systems you already use. If you are unsure about a technical system, simply select \"I'm not sure\".",
+      "Is the property currently listed online? *": "Is the property currently listed online? *",
+      "Booking Platforms": "Booking Platforms",
+      "Where is the property currently listed?": "Where is the property currently listed?",
+      "Select every platform currently used. You can leave listing links and IDs blank if you do not know them.": "Select every platform currently used. You can leave listing links and IDs blank if you do not know them.",
+      "Other Platform": "Other Platform",
+      "Which other platform?": "Which other platform?",
+      "Example: Hotels.com, Hostelworld, regional booking site...": "Example: Hotels.com, Hostelworld, regional booking site...",
+      "Write the platform name here. You can add the listing link below if you have it.": "Write the platform name here. You can add the listing link below if you have it.",
+      "Existing Listings": "Existing Listings",
+      "Add your current listing details": "Add your current listing details",
+      "These fields are optional, but listing links help us review your current setup before we contact you.": "These fields are optional, but listing links help us review your current setup before we contact you.",
+      "Booking.com": "Booking.com",
+      "Booking.com listing URL": "Booking.com listing URL",
+      "Property / Hotel ID (optional)": "Property / Hotel ID (optional)",
+      "Airbnb": "Airbnb",
+      "Airbnb listing URL": "Airbnb listing URL",
+      "Listing ID (optional)": "Listing ID (optional)",
+      "Vrbo": "Vrbo",
+      "Vrbo listing URL": "Vrbo listing URL",
+      "Expedia": "Expedia",
+      "Expedia listing URL": "Expedia listing URL",
+      "Property ID (optional)": "Property ID (optional)",
+      "Agoda": "Agoda",
+      "Agoda listing URL": "Agoda listing URL",
+      "Trip.com": "Trip.com",
+      "Trip.com listing URL": "Trip.com listing URL",
+      "Listing URL (optional)": "Listing URL (optional)",
+      "Existing Systems": "Existing Systems",
+      "How are reservations currently managed?": "How are reservations currently managed?",
+      "Do you use a Channel Manager? *": "Do you use a Channel Manager? *",
+      "No": "No",
+      "Channel Manager Name": "Channel Manager Name",
+      "Example: SiteMinder, Cloudbeds...": "Example: SiteMinder, Cloudbeds...",
+      "Do you use a Property Management System (PMS)? *": "Do you use a Property Management System (PMS)? *",
+      "PMS Name": "PMS Name",
+      "PMS name": "PMS name",
+      "Do you have your own website? *": "Do you have your own website? *",
+      "Website URL": "Website URL",
+      "https://...": "https://...",
+      "Do you currently accept direct bookings? *": "Do you currently accept direct bookings? *",
+      "Sometimes": "Sometimes",
+      "Continue to Property Setup →": "Continue to Property Setup →",
+      "Step 04": "Step 04",
+      "Facilities, Guest Policies & Operations": "Facilities, Guest Policies & Operations",
+      "Tell us how the property operates day to day and which facilities guests can expect. These details are used across booking platforms, filters, house rules and the guest journey.": "Tell us how the property operates day to day and which facilities guests can expect. These details are used across booking platforms, filters, house rules and the guest journey.",
+      "Arrival & Departure": "Arrival & Departure",
+      "Check-in and check-out setup": "Check-in and check-out setup",
+      "Check-in From *": "Check-in From *",
+      "Check-in Until": "Check-in Until",
+      "Check-out From": "Check-out From",
+      "Check-out Until *": "Check-out Until *",
+      "Main Check-in Method *": "Main Check-in Method *",
+      "Host / Staff Meets Guest": "Host / Staff Meets Guest",
+      "Reception / Front Desk": "Reception / Front Desk",
+      "Lockbox": "Lockbox",
+      "Smart Lock / Keypad": "Smart Lock / Keypad",
+      "Key Collection at Another Location": "Key Collection at Another Location",
+      "24 Hours": "24 Hours",
+      "Limited Hours": "Limited Hours",
+      "No Reception": "No Reception",
+      "Guest Communication Languages *": "Guest Communication Languages *",
+      "Example: English, Greek, German": "Example: English, Greek, German",
+      "Property Facilities": "Property Facilities",
+      "What does the property offer?": "What does the property offer?",
+      "Select every facility that applies to the property as a whole. Room-specific amenities are listed separately below.": "Select every facility that applies to the property as a whole. Room-specific amenities are listed separately below.",
+      "Room & Unit Amenities": "Room & Unit Amenities",
+      "Amenities by accommodation type": "Amenities by accommodation type",
+      "Different room or unit types may have different amenities. Select the features that apply to each accommodation type.": "Different room or unit types may have different amenities. Select the features that apply to each accommodation type.",
+      "identical unit": "identical unit",
+      "Guest Policies": "Guest Policies",
+      "Rules guests should know": "Rules guests should know",
+      "Children Policy *": "Children Policy *",
+      "Children of All Ages Welcome": "Children of All Ages Welcome",
+      "Age Restrictions Apply": "Age Restrictions Apply",
+      "Adults Only": "Adults Only",
+      "Minimum Guest Age": "Minimum Guest Age",
+      "Leave blank if none": "Leave blank if none",
+      "Pets Policy *": "Pets Policy *",
+      "Pets Allowed": "Pets Allowed",
+      "Pets Allowed on Request": "Pets Allowed on Request",
+      "Pets Not Allowed": "Pets Not Allowed",
+      "Parties / Events *": "Parties / Events *",
+      "Not Allowed": "Not Allowed",
+      "Allowed": "Allowed",
+      "On Request": "On Request",
+      "Smoking Policy *": "Smoking Policy *",
+      "No Smoking": "No Smoking",
+      "Designated Areas Only": "Designated Areas Only",
+      "Quiet Hours": "Quiet Hours",
+      "Example: 23:00 - 08:00": "Example: 23:00 - 08:00",
+      "Additional Details": "Additional Details",
+      "Helpful listing information": "Helpful listing information",
+      "Parking Details": "Parking Details",
+      "Example: Free private parking, street parking, reservation required...": "Example: Free private parking, street parking, reservation required...",
+      "Internet / Wi-Fi Details": "Internet / Wi-Fi Details",
+      "Example: Free Wi-Fi throughout the property...": "Example: Free Wi-Fi throughout the property...",
+      "Breakfast Details": "Breakfast Details",
+      "If applicable: included, optional, price, type...": "If applicable: included, optional, price, type...",
+      "Other Operational Notes": "Other Operational Notes",
+      "Anything else we should know about access, facilities or operations...": "Anything else we should know about access, facilities or operations...",
+      "Accessibility": "Accessibility",
+      "Accessibility features": "Accessibility features",
+      "Select only features that genuinely apply. We can request supporting accessibility photographs later in the photo step.": "Select only features that genuinely apply. We can request supporting accessibility photographs later in the photo step.",
+      "Continue to Pricing & Availability →": "Continue to Pricing & Availability →",
+      "Step 05": "Step 05",
+      "Pricing, Availability & Booking Rules": "Pricing, Availability & Booking Rules",
+      "This step is only an estimation of the property's current commercial setup. You may leave any field blank if you do not know the answer. HostMetric will analyse the market, booking history, competition and property performance before deciding the final pricing and booking strategy.": "This step is only an estimation of the property's current commercial setup. You may leave any field blank if you do not know the answer. HostMetric will analyse the market, booking history, competition and property performance before deciding the final pricing and booking strategy.",
+      "Everything in Step 5 is optional.": "Everything in Step 5 is optional.",
+      "Estimates are enough. If you do not know your current rates, occupancy, discounts, taxes or booking rules, leave them blank. HostMetric will review the property and build the final commercial strategy for you.": "Estimates are enough. If you do not know your current rates, occupancy, discounts, taxes or booking rules, leave them blank. HostMetric will review the property and build the final commercial strategy for you.",
+      "Commercial Setup": "Commercial Setup",
+      "How should pricing be managed?": "How should pricing be managed?",
+      "Currency": "Currency",
+      "Select currency": "Select currency",
+      "EUR — Euro": "EUR — Euro",
+      "GBP — British Pound": "GBP — British Pound",
+      "USD — US Dollar": "USD — US Dollar",
+      "Pricing Management Preference": "Pricing Management Preference",
+      "HostMetric manages and optimizes pricing": "HostMetric manages and optimizes pricing",
+      "HostMetric recommends — owner approves": "HostMetric recommends — owner approves",
+      "Keep my existing pricing strategy": "Keep my existing pricing strategy",
+      "I&apos;m not sure — recommend the best setup": "I'm not sure — recommend the best setup",
+      "Current Rates by Unit Type": "Current Rates by Unit Type",
+      "Current pricing information": "Current pricing information",
+      "These figures are optional. They help us understand your current commercial position before optimization begins.": "These figures are optional. They help us understand your current commercial position before optimization begins.",
+      "Current / Typical Base Nightly Rate": "Current / Typical Base Nightly Rate",
+      "Example: 120": "Example: 120",
+      "Typical Weekend Rate": "Typical Weekend Rate",
+      "Optional": "Optional",
+      "Unit-Specific Minimum Stay": "Unit-Specific Minimum Stay",
+      "Extra Guest Fee": "Extra Guest Fee",
+      "Child Fee": "Child Fee",
+      "Fees & Taxes": "Fees & Taxes",
+      "Additional charges": "Additional charges",
+      "Cleaning Fee": "Cleaning Fee",
+      "Leave blank if included in the nightly rate": "Leave blank if included in the nightly rate",
+      "Cleaning Fee Charged": "Cleaning Fee Charged",
+      "Select if applicable": "Select if applicable",
+      "Per Stay": "Per Stay",
+      "Per Night": "Per Night",
+      "Included in Rate": "Included in Rate",
+      "Security / Damage Deposit": "Security / Damage Deposit",
+      "Do you know the applicable local / tourist taxes?": "Do you know the applicable local / tourist taxes?",
+      "No / I&apos;m not sure": "No / I'm not sure",
+      "Local / Tourist Tax Details": "Local / Tourist Tax Details",
+      "Example: amount or percentage, per person / per night / per stay, whether included in the listed price...": "Example: amount or percentage, per person / per night / per stay, whether included in the listed price...",
+      "Availability Rules": "Availability Rules",
+      "How should guests be allowed to book?": "How should guests be allowed to book?",
+      "Normal Minimum Stay": "Normal Minimum Stay",
+      "Example: 2 nights": "Example: 2 nights",
+      "Maximum Stay": "Maximum Stay",
+      "Advance Notice": "Advance Notice",
+      "Same-Day Booking Allowed": "Same-Day Booking Allowed",
+      "At Least 1 Day": "At Least 1 Day",
+      "At Least 2 Days": "At Least 2 Days",
+      "At Least 3 Days": "At Least 3 Days",
+      "At Least 7 Days": "At Least 7 Days",
+      "Booking Window": "Booking Window",
+      "Up to 3 Months Ahead": "Up to 3 Months Ahead",
+      "Up to 6 Months Ahead": "Up to 6 Months Ahead",
+      "Up to 12 Months Ahead": "Up to 12 Months Ahead",
+      "Up to 18 Months Ahead": "Up to 18 Months Ahead",
+      "Up to 24 Months Ahead": "Up to 24 Months Ahead",
+      "No Specific Limit": "No Specific Limit",
+      "Same-Day Booking Notes": "Same-Day Booking Notes",
+      "Example: accepted until 18:00 local time": "Example: accepted until 18:00 local time",
+      "Booking Policies": "Booking Policies",
+      "Cancellation and booking confirmation": "Cancellation and booking confirmation",
+      "Cancellation Preference": "Cancellation Preference",
+      "Flexible": "Flexible",
+      "Moderate": "Moderate",
+      "Strict": "Strict",
+      "Flexible + Non-Refundable Rate Options": "Flexible + Non-Refundable Rate Options",
+      "Let HostMetric Recommend the Best Structure": "Let HostMetric Recommend the Best Structure",
+      "Prepayment Preference": "Prepayment Preference",
+      "Select if known": "Select if known",
+      "No Prepayment": "No Prepayment",
+      "Partial Prepayment": "Partial Prepayment",
+      "Full Prepayment": "Full Prepayment",
+      "Managed by Booking Platform": "Managed by Booking Platform",
+      "I&apos;m Not Sure": "I'm Not Sure",
+      "No-Show Policy": "No-Show Policy",
+      "Charge First Night": "Charge First Night",
+      "Charge Full Reservation": "Charge Full Reservation",
+      "No Charge": "No Charge",
+      "Follow Platform Policy": "Follow Platform Policy",
+      "Booking Confirmation": "Booking Confirmation",
+      "Instant Booking": "Instant Booking",
+      "Request / Owner Approval": "Request / Owner Approval",
+      "Let HostMetric Recommend": "Let HostMetric Recommend",
+      "Meals": "Meals",
+      "Breakfast pricing": "Breakfast pricing",
+      "Breakfast Pricing": "Breakfast Pricing",
+      "Included in Room Rate": "Included in Room Rate",
+      "Optional — Extra Charge": "Optional — Extra Charge",
+      "Not Offered": "Not Offered",
+      "Breakfast Price per Person": "Breakfast Price per Person",
+      "Promotions & Discounts": "Promotions & Discounts",
+      "Existing or preferred discounts": "Existing or preferred discounts",
+      "Optional. Enter percentages only if you already use or strongly prefer these promotions. HostMetric can recommend the final commercial structure later.": "Optional. Enter percentages only if you already use or strongly prefer these promotions. HostMetric can recommend the final commercial structure later.",
+      "Current Performance": "Current Performance",
+      "Existing performance information": "Existing performance information",
+      "Optional. Estimates are fine. If the property is new, leave these fields blank.": "Optional. Estimates are fine. If the property is new, leave these fields blank.",
+      "Approximate Average Occupancy (%)": "Approximate Average Occupancy (%)",
+      "Approximate Average Daily Rate": "Approximate Average Daily Rate",
+      "Approximate Annual Accommodation Revenue": "Approximate Annual Accommodation Revenue",
+      "Revenue / Performance Target": "Revenue / Performance Target",
+      "Example: +20% revenue, higher ADR, better low-season occupancy...": "Example: +20% revenue, higher ADR, better low-season occupancy...",
+      "Owner Restrictions & Notes": "Owner Restrictions & Notes",
+      "Anything that affects availability or pricing?": "Anything that affects availability or pricing?",
+      "Owner Use / Dates That Must Stay Blocked": "Owner Use / Dates That Must Stay Blocked",
+      "Optional. Example: family uses the property every August 10–20...": "Optional. Example: family uses the property every August 10–20...",
+      "Other Pricing or Booking Notes": "Other Pricing or Booking Notes",
+      "Anything else we should know about rates, seasonality, minimum stays, promotions or booking rules...": "Anything else we should know about rates, seasonality, minimum stays, promotions or booking rules...",
+      "Continue to Photos & Listing Content →": "Continue to Photos & Listing Content →",
+      "Step 06": "Step 06",
+      "Photos & Listing Content": "Photos & Listing Content",
+      "Upload any photos you already have and tell us what makes the property special. Everything in this step is optional unless you upload files. HostMetric can reorganize the photo gallery, improve the listing copy and tell you which additional photographs are still needed.": "Upload any photos you already have and tell us what makes the property special. Everything in this step is optional unless you upload files. HostMetric can reorganize the photo gallery, improve the listing copy and tell you which additional photographs are still needed.",
+      "You do not need professional photos to complete this form.": "You do not need professional photos to complete this form.",
+      "Upload whatever you currently have. Photos are separated into property-level, room/unit-level and accessibility groups so we can later prepare the galleries correctly for each booking platform.": "Upload whatever you currently have. Photos are separated into property-level, room/unit-level and accessibility groups so we can later prepare the galleries correctly for each booking platform.",
+      "Property-Level Photos": "Property-Level Photos",
+      "Property & common-area gallery": "Property & common-area gallery",
+      "Useful examples include the exterior, entrance, reception, parking, pool, garden, terrace, common areas, restaurant, gym, spa and views — only where they actually exist.": "Useful examples include the exterior, entrance, reception, parking, pool, garden, terrace, common areas, restaurant, gym, spa and views — only where they actually exist.",
+      "Property / Common Area Photos": "Property / Common Area Photos",
+      "JPG or PNG recommended. Multiple files allowed.": "JPG or PNG recommended. Multiple files allowed.",
+      "Choose Photos": "Choose Photos",
+      "Room & Unit Galleries": "Room & Unit Galleries",
+      "Photos for each sellable unit type": "Photos for each sellable unit type",
+      "Upload photos that belong specifically to each room or unit type: bedroom, bathroom, kitchen, living area, balcony or terrace, private pool, view and any other space included in that unit.": "Upload photos that belong specifically to each room or unit type: bedroom, bathroom, kitchen, living area, balcony or terrace, private pool, view and any other space included in that unit.",
+      "Upload photographs representative of this unit type.": "Upload photographs representative of this unit type.",
+      "Add Unit Photos": "Add Unit Photos",
+      "Accessibility Evidence": "Accessibility Evidence",
+      "Accessibility feature photos": "Accessibility feature photos",
+      "You selected accessibility features in Step 4. Upload clear photographs that show those features if you already have them.": "You selected accessibility features in Step 4. Upload clear photographs that show those features if you already have them.",
+      "Selected accessibility features": "Selected accessibility features",
+      "Add Photos": "Add Photos",
+      "accessibility photo": "accessibility photo",
+      "selected.": "selected.",
+      "Optional Supporting Files": "Optional Supporting Files",
+      "Floor plans": "Floor plans",
+      "If you have a floor plan, upload it here. This can help us understand room configuration and prepare accurate listing content.": "If you have a floor plan, upload it here. This can help us understand room configuration and prepare accurate listing content.",
+      "Add Floor Plan": "Add Floor Plan",
+      "file": "file",
+      "Listing Content": "Listing Content",
+      "Tell us the story of the property": "Tell us the story of the property",
+      "Do not worry about perfect wording. Short notes are enough — HostMetric can rewrite and optimize the final listing content.": "Do not worry about perfect wording. Short notes are enough — HostMetric can rewrite and optimize the final listing content.",
+      "Existing Property / Listing Title": "Existing Property / Listing Title",
+      "Leave blank if this is a new property": "Leave blank if this is a new property",
+      "Property Summary": "Property Summary",
+      "In your own words, briefly describe the accommodation.": "In your own words, briefly describe the accommodation.",
+      "Unique Selling Points": "Unique Selling Points",
+      "Example: newly renovated, beach nearby, private pool, panoramic view, quiet location...": "Example: newly renovated, beach nearby, private pool, panoramic view, quiet location...",
+      "Neighbourhood / Area": "Neighbourhood / Area",
+      "Tell us what guests can find around the property.": "Tell us what guests can find around the property.",
+      "Getting Around / Transport": "Getting Around / Transport",
+      "Parking, buses, airport access, walking distances, car recommendations...": "Parking, buses, airport access, walking distances, car recommendations...",
+      "Nearby Attractions / Places": "Nearby Attractions / Places",
+      "Beach, city centre, restaurants, landmarks, convention centre, ski lifts...": "Beach, city centre, restaurants, landmarks, convention centre, ski lifts...",
+      "Guest Arrival Notes": "Guest Arrival Notes",
+      "Anything useful about finding or entering the property.": "Anything useful about finding or entering the property.",
+      "Other Listing Notes": "Other Listing Notes",
+      "Anything else HostMetric should know when preparing the listings.": "Anything else HostMetric should know when preparing the listings.",
+      "Photo / File Usage Confirmation *": "Photo / File Usage Confirmation *",
+      "I own these files or have permission to use them": "I own these files or have permission to use them",
+      "I do not currently have permission": "I do not currently have permission",
+      "Continue to Final Review →": "Continue to Final Review →",
+      "Step 07": "Step 07",
+      "Final Review & Property Goals": "Final Review & Property Goals",
+      "Review the key information below, tell us what you want to achieve and confirm that we may use the information you provided to prepare your HostMetric onboarding and listing strategy.": "Review the key information below, tell us what you want to achieve and confirm that we may use the information you provided to prepare your HostMetric onboarding and listing strategy.",
+      "Quick Review": "Quick Review",
+      "Your onboarding summary": "Your onboarding summary",
+      "Owner / Contact": "Owner / Contact",
+      "Property": "Property",
+      "Accommodation Inventory": "Accommodation Inventory",
+      "Total sellable unit": "Total sellable unit",
+      "across": "across",
+      "unit type": "unit type",
+      "Existing Online Presence": "Existing Online Presence",
+      "Facilities Selected": "Facilities Selected",
+      "Property-level facilities currently selected.": "Property-level facilities currently selected.",
+      "Files Selected": "Files Selected",
+      "Photos and supporting files ready for secure upload.": "Photos and supporting files ready for secure upload.",
+      "Your Goals": "Your Goals",
+      "What would you like HostMetric to improve?": "What would you like HostMetric to improve?",
+      "Main Goal *": "Main Goal *",
+      "Select your main goal": "Select your main goal",
+      "Full Professional Property Management": "Full Professional Property Management",
+      "Increase Revenue": "Increase Revenue",
+      "Improve Occupancy": "Improve Occupancy",
+      "Improve Guest Experience & Reviews": "Improve Guest Experience & Reviews",
+      "Expand to More Booking Platforms": "Expand to More Booking Platforms",
+      "Reduce My Day-to-Day Workload": "Reduce My Day-to-Day Workload",
+      "Launch a New Property Professionally": "Launch a New Property Professionally",
+      "I&apos;m Not Sure — Recommend the Best Strategy": "I'm Not Sure — Recommend the Best Strategy",
+      "Preferred Start Timeline": "Preferred Start Timeline",
+      "As Soon as Possible": "As Soon as Possible",
+      "Within 2 Weeks": "Within 2 Weeks",
+      "Within 1 Month": "Within 1 Month",
+      "Within 1–3 Months": "Within 1–3 Months",
+      "Later / Just Exploring": "Later / Just Exploring",
+      "Preferred Contact Method *": "Preferred Contact Method *",
+      "Phone Call": "Phone Call",
+      "WhatsApp": "WhatsApp",
+      "Email": "Email",
+      "Any Method": "Any Method",
+      "Best Time to Contact You": "Best Time to Contact You",
+      "Example: Weekdays after 17:00, mornings, anytime...": "Example: Weekdays after 17:00, mornings, anytime...",
+      "Final Notes": "Final Notes",
+      "Anything else you would like our team to know before we review the property?": "Anything else you would like our team to know before we review the property?",
+      "Final Confirmations": "Final Confirmations",
+      "Before sending your property": "Before sending your property",
+      "These confirmations allow us to review the onboarding properly. Completing this form does not by itself activate a management service or publish a listing.": "These confirmations allow us to review the onboarding properly. Completing this form does not by itself activate a management service or publish a listing.",
+      "Information Accuracy *": "Information Accuracy *",
+      "I confirm the information is accurate to the best of my knowledge": "I confirm the information is accurate to the best of my knowledge",
+      "Property Authorization *": "Property Authorization *",
+      "I confirm I am the owner or am authorized to provide information for this property": "I confirm I am the owner or am authorized to provide information for this property",
+      "HostMetric Review Authorization *": "HostMetric Review Authorization *",
+      "I authorize HostMetric to review this information for onboarding and listing preparation": "I authorize HostMetric to review this information for onboarding and listing preparation",
+      "What Happens Next?": "What Happens Next?",
+      "We review the property before anything goes live.": "We review the property before anything goes live.",
+      "Our team will review the property information, current listings, room or unit structure, facilities, photos and commercial setup. We can then contact you for anything missing and prepare the recommended listing, distribution and pricing strategy.": "Our team will review the property information, current listings, room or unit structure, facilities, photos and commercial setup. We can then contact you for anything missing and prepare the recommended listing, distribution and pricing strategy.",
+      "Property Review": "Property Review",
+      "Strategy & Missing Details": "Strategy & Missing Details",
+      "Onboarding & Listing Setup": "Onboarding & Listing Setup",
+      "Submit Property Onboarding →": "Submit Property Onboarding →",
+      "Please select the country where the property is located.": "Please select the country where the property is located.",
+      "Please enter your legal first name.": "Please enter your legal first name.",
+      "Please enter your legal last name.": "Please enter your legal last name.",
+      "Please enter your email address.": "Please enter your email address.",
+      "Please enter a valid email address.": "Please enter a valid email address.",
+      "Please enter your phone or WhatsApp number.": "Please enter your phone or WhatsApp number.",
+      "Please select your country of residence.": "Please select your country of residence.",
+      "Please enter the legal business name.": "Please enter the legal business name.",
+      "Please enter the property name.": "Please enter the property name.",
+      "Please enter the property address.": "Please enter the property address.",
+      "Please enter the city or locality.": "Please enter the city or locality.",
+      "Please enter the property postal code.": "Please enter the property postal code.",
+      "Please select the general property category.": "Please select the general property category.",
+      "Please tell us your relationship to the property.": "Please tell us your relationship to the property.",
+      "Please tell us how the accommodation is sold.": "Please tell us how the accommodation is sold.",
+      "Please enter a name for this room or unit type.": "Please enter a name for this room or unit type.",
+      "Please select the room or unit type.": "Please select the room or unit type.",
+      "Please enter how many identical units exist.": "Please enter how many identical units exist.",
+      "Please enter the maximum guests for this unit type.": "Please enter the maximum guests for this unit type.",
+      "Please tell us whether the property is currently listed online.": "Please tell us whether the property is currently listed online.",
+      "Please select at least one platform where the property is currently listed.": "Please select at least one platform where the property is currently listed.",
+      "Please select an option.": "Please select an option.",
+      "Please enter the earliest check-in time.": "Please enter the earliest check-in time.",
+      "Please enter the latest check-out time.": "Please enter the latest check-out time.",
+      "Please select the main check-in method.": "Please select the main check-in method.",
+      "Please enter at least one language used for guest communication.": "Please enter at least one language used for guest communication.",
+      "Please select the children policy.": "Please select the children policy.",
+      "Please select the pets policy.": "Please select the pets policy.",
+      "Please select the parties / events policy.": "Please select the parties / events policy.",
+      "Please select the smoking policy.": "Please select the smoking policy.",
+      "Please confirm that you own or have permission to use the uploaded files.": "Please confirm that you own or have permission to use the uploaded files.",
+      "Please select the main goal for your property.": "Please select the main goal for your property.",
+      "Please select how you would prefer us to contact you.": "Please select how you would prefer us to contact you.",
+      "Please confirm that the information is accurate to the best of your knowledge.": "Please confirm that the information is accurate to the best of your knowledge.",
+      "Please confirm that you are authorized to provide information for this property.": "Please confirm that you are authorized to provide information for this property.",
+      "Please confirm that HostMetric may review this information for onboarding and listing setup.": "Please confirm that HostMetric may review this information for onboarding and listing setup.",
+      "Unnamed Room / Unit Type": "Unnamed Room / Unit Type",
+      "No email entered": "No email entered",
+      "No phone entered": "No phone entered",
+      "Unnamed Property": "Unnamed Property",
+      "Property category not specified": "Property category not specified",
+      "New / Not Currently Listed": "New / Not Currently Listed",
+      "Not Specified": "Not Specified",
+      "King Beds": "King Beds",
+      "Queen Beds": "Queen Beds",
+      "Double Beds": "Double Beds",
+      "Single Beds": "Single Beds",
+      "Sofa Beds": "Sofa Beds",
+      "Bunk Beds": "Bunk Beds",
+      "Partially / Some Units": "Partially / Some Units",
+      "Weekly Stay Discount": "Weekly Stay Discount",
+      "Monthly Stay Discount": "Monthly Stay Discount",
+      "Non-Refundable Discount": "Non-Refundable Discount",
+      "Mobile Rate Discount": "Mobile Rate Discount",
+      "Last-Minute Discount": "Last-Minute Discount",
+      "Early Booker Discount": "Early Booker Discount",
+      "Free WiFi": "Free WiFi",
+      "Free Parking": "Free Parking",
+      "Paid Parking": "Paid Parking",
+      "Swimming Pool": "Swimming Pool",
+      "Garden": "Garden",
+      "Terrace": "Terrace",
+      "Balcony": "Balcony",
+      "Lift / Elevator": "Lift / Elevator",
+      "Air Conditioning": "Air Conditioning",
+      "Heating": "Heating",
+      "Restaurant": "Restaurant",
+      "Bar": "Bar",
+      "24-Hour Front Desk": "24-Hour Front Desk",
+      "Luggage Storage": "Luggage Storage",
+      "Airport Shuttle": "Airport Shuttle",
+      "Laundry Service": "Laundry Service",
+      "EV Charging": "EV Charging",
+      "Gym / Fitness Centre": "Gym / Fitness Centre",
+      "Spa / Sauna": "Spa / Sauna",
+      "Hot Tub / Jacuzzi": "Hot Tub / Jacuzzi",
+      "BBQ Facilities": "BBQ Facilities",
+      "Beach Access": "Beach Access",
+      "Private Beach Area": "Private Beach Area",
+      "Security Cameras Outside": "Security Cameras Outside",
+      "Smoke Alarms": "Smoke Alarms",
+      "Fire Extinguishers": "Fire Extinguishers",
+      "Step-Free Guest Entrance": "Step-Free Guest Entrance",
+      "Accessible Parking Space": "Accessible Parking Space",
+      "Wide Entrance Doorway": "Wide Entrance Doorway",
+      "Lift / Elevator Access": "Lift / Elevator Access",
+      "Step-Free Bedroom Access": "Step-Free Bedroom Access",
+      "Step-Free Bathroom Access": "Step-Free Bathroom Access",
+      "Grab Rails in Bathroom": "Grab Rails in Bathroom",
+      "Roll-In / Step-Free Shower": "Roll-In / Step-Free Shower",
+      "TV": "TV",
+      "Streaming Services": "Streaming Services",
+      "WiFi": "WiFi",
+      "Refrigerator": "Refrigerator",
+      "Microwave": "Microwave",
+      "Oven": "Oven",
+      "Stovetop": "Stovetop",
+      "Dishwasher": "Dishwasher",
+      "Washing Machine": "Washing Machine",
+      "Dryer": "Dryer",
+      "Coffee Machine": "Coffee Machine",
+      "Kettle": "Kettle",
+      "Toaster": "Toaster",
+      "Dining Area": "Dining Area",
+      "Desk / Workspace": "Desk / Workspace",
+      "Safe": "Safe",
+      "Hair Dryer": "Hair Dryer",
+      "Iron": "Iron",
+      "Free Toiletries": "Free Toiletries",
+      "Private Bathroom": "Private Bathroom",
+      "Bathtub": "Bathtub",
+      "Shower": "Shower",
+      "Terrace / Patio": "Terrace / Patio",
+      "Private Entrance": "Private Entrance",
+      "Soundproofing": "Soundproofing",
+      "Sea View": "Sea View",
+      "Pool View": "Pool View",
+      "Garden View": "Garden View",
+      "City View": "City View",
+      "identical units": "identical units"
+    },
+    "countries": {
+      "Afghanistan": "Afghanistan",
+      "Albania": "Albania",
+      "Algeria": "Algeria",
+      "Andorra": "Andorra",
+      "Angola": "Angola",
+      "Argentina": "Argentina",
+      "Armenia": "Armenia",
+      "Australia": "Australia",
+      "Austria": "Austria",
+      "Azerbaijan": "Azerbaijan",
+      "Bahamas": "Bahamas",
+      "Bahrain": "Bahrain",
+      "Bangladesh": "Bangladesh",
+      "Barbados": "Barbados",
+      "Belarus": "Belarus",
+      "Belgium": "Belgium",
+      "Belize": "Belize",
+      "Benin": "Benin",
+      "Bhutan": "Bhutan",
+      "Bolivia": "Bolivia",
+      "Bosnia and Herzegovina": "Bosnia and Herzegovina",
+      "Botswana": "Botswana",
+      "Brazil": "Brazil",
+      "Brunei": "Brunei",
+      "Bulgaria": "Bulgaria",
+      "Burkina Faso": "Burkina Faso",
+      "Burundi": "Burundi",
+      "Cambodia": "Cambodia",
+      "Cameroon": "Cameroon",
+      "Canada": "Canada",
+      "Cape Verde": "Cape Verde",
+      "Central African Republic": "Central African Republic",
+      "Chad": "Chad",
+      "Chile": "Chile",
+      "China": "China",
+      "Colombia": "Colombia",
+      "Comoros": "Comoros",
+      "Congo": "Congo",
+      "Costa Rica": "Costa Rica",
+      "Croatia": "Croatia",
+      "Cuba": "Cuba",
+      "Cyprus": "Cyprus",
+      "Czechia": "Czechia",
+      "Democratic Republic of the Congo": "Democratic Republic of the Congo",
+      "Denmark": "Denmark",
+      "Djibouti": "Djibouti",
+      "Dominica": "Dominica",
+      "Dominican Republic": "Dominican Republic",
+      "Ecuador": "Ecuador",
+      "Egypt": "Egypt",
+      "El Salvador": "El Salvador",
+      "Equatorial Guinea": "Equatorial Guinea",
+      "Eritrea": "Eritrea",
+      "Estonia": "Estonia",
+      "Eswatini": "Eswatini",
+      "Ethiopia": "Ethiopia",
+      "Fiji": "Fiji",
+      "Finland": "Finland",
+      "France": "France",
+      "Gabon": "Gabon",
+      "Gambia": "Gambia",
+      "Georgia": "Georgia",
+      "Germany": "Germany",
+      "Ghana": "Ghana",
+      "Greece": "Greece",
+      "Grenada": "Grenada",
+      "Guatemala": "Guatemala",
+      "Guinea": "Guinea",
+      "Guinea-Bissau": "Guinea-Bissau",
+      "Guyana": "Guyana",
+      "Haiti": "Haiti",
+      "Honduras": "Honduras",
+      "Hong Kong": "Hong Kong",
+      "Hungary": "Hungary",
+      "Iceland": "Iceland",
+      "India": "India",
+      "Indonesia": "Indonesia",
+      "Iran": "Iran",
+      "Iraq": "Iraq",
+      "Ireland": "Ireland",
+      "Israel": "Israel",
+      "Italy": "Italy",
+      "Ivory Coast": "Ivory Coast",
+      "Jamaica": "Jamaica",
+      "Japan": "Japan",
+      "Jordan": "Jordan",
+      "Kazakhstan": "Kazakhstan",
+      "Kenya": "Kenya",
+      "Kiribati": "Kiribati",
+      "Kosovo": "Kosovo",
+      "Kuwait": "Kuwait",
+      "Kyrgyzstan": "Kyrgyzstan",
+      "Laos": "Laos",
+      "Latvia": "Latvia",
+      "Lebanon": "Lebanon",
+      "Lesotho": "Lesotho",
+      "Liberia": "Liberia",
+      "Libya": "Libya",
+      "Liechtenstein": "Liechtenstein",
+      "Lithuania": "Lithuania",
+      "Luxembourg": "Luxembourg",
+      "Macao": "Macao",
+      "Madagascar": "Madagascar",
+      "Malawi": "Malawi",
+      "Malaysia": "Malaysia",
+      "Maldives": "Maldives",
+      "Mali": "Mali",
+      "Malta": "Malta",
+      "Marshall Islands": "Marshall Islands",
+      "Mauritania": "Mauritania",
+      "Mauritius": "Mauritius",
+      "Mexico": "Mexico",
+      "Micronesia": "Micronesia",
+      "Moldova": "Moldova",
+      "Monaco": "Monaco",
+      "Mongolia": "Mongolia",
+      "Montenegro": "Montenegro",
+      "Morocco": "Morocco",
+      "Mozambique": "Mozambique",
+      "Myanmar": "Myanmar",
+      "Namibia": "Namibia",
+      "Nauru": "Nauru",
+      "Nepal": "Nepal",
+      "Netherlands": "Netherlands",
+      "New Zealand": "New Zealand",
+      "Nicaragua": "Nicaragua",
+      "Niger": "Niger",
+      "Nigeria": "Nigeria",
+      "North Korea": "North Korea",
+      "North Macedonia": "North Macedonia",
+      "Norway": "Norway",
+      "Oman": "Oman",
+      "Pakistan": "Pakistan",
+      "Palau": "Palau",
+      "Palestine": "Palestine",
+      "Panama": "Panama",
+      "Papua New Guinea": "Papua New Guinea",
+      "Paraguay": "Paraguay",
+      "Peru": "Peru",
+      "Philippines": "Philippines",
+      "Poland": "Poland",
+      "Portugal": "Portugal",
+      "Qatar": "Qatar",
+      "Romania": "Romania",
+      "Russia": "Russia",
+      "Rwanda": "Rwanda",
+      "Saint Kitts and Nevis": "Saint Kitts and Nevis",
+      "Saint Lucia": "Saint Lucia",
+      "Saint Vincent and the Grenadines": "Saint Vincent and the Grenadines",
+      "Samoa": "Samoa",
+      "San Marino": "San Marino",
+      "Sao Tome and Principe": "Sao Tome and Principe",
+      "Saudi Arabia": "Saudi Arabia",
+      "Senegal": "Senegal",
+      "Serbia": "Serbia",
+      "Seychelles": "Seychelles",
+      "Sierra Leone": "Sierra Leone",
+      "Singapore": "Singapore",
+      "Slovakia": "Slovakia",
+      "Slovenia": "Slovenia",
+      "Solomon Islands": "Solomon Islands",
+      "Somalia": "Somalia",
+      "South Africa": "South Africa",
+      "South Korea": "South Korea",
+      "South Sudan": "South Sudan",
+      "Spain": "Spain",
+      "Sri Lanka": "Sri Lanka",
+      "Sudan": "Sudan",
+      "Suriname": "Suriname",
+      "Sweden": "Sweden",
+      "Switzerland": "Switzerland",
+      "Syria": "Syria",
+      "Taiwan": "Taiwan",
+      "Tajikistan": "Tajikistan",
+      "Tanzania": "Tanzania",
+      "Thailand": "Thailand",
+      "Timor-Leste": "Timor-Leste",
+      "Togo": "Togo",
+      "Tonga": "Tonga",
+      "Trinidad and Tobago": "Trinidad and Tobago",
+      "Tunisia": "Tunisia",
+      "Turkey": "Turkey",
+      "Turkmenistan": "Turkmenistan",
+      "Tuvalu": "Tuvalu",
+      "Uganda": "Uganda",
+      "Ukraine": "Ukraine",
+      "United Arab Emirates": "United Arab Emirates",
+      "United Kingdom": "United Kingdom",
+      "United States": "United States",
+      "Uruguay": "Uruguay",
+      "Uzbekistan": "Uzbekistan",
+      "Vanuatu": "Vanuatu",
+      "Vatican City": "Vatican City",
+      "Venezuela": "Venezuela",
+      "Vietnam": "Vietnam",
+      "Yemen": "Yemen",
+      "Zambia": "Zambia",
+      "Zimbabwe": "Zimbabwe"
+    }
+  }
+}
