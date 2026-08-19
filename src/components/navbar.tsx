@@ -4,6 +4,19 @@ import Image from "next/image";
 import Link from "next/link";
 
 import {
+  GR,
+  GB,
+  DE,
+  FR,
+  IT,
+  ES,
+  PT,
+  BG,
+  RS,
+  TR,
+} from "country-flag-icons/react/3x2";
+
+import {
   useEffect,
   useRef,
   useState,
@@ -79,24 +92,24 @@ const localeCountryCodes: Record<Locale, string> = {
 
 
 /* ==========================================
-   FLAG EMOJIS SHOWN TO THE USER
+   SVG FLAG COMPONENTS SHOWN TO THE USER
 
-   We keep this separate from the locale config
-   so the UI always shows a real flag emoji.
+   These are real SVG flags, so rendering does not
+   depend on the operating system's emoji support.
 ========================================== */
 
-const localeFlagEmojis: Record<Locale, string> = {
-  el: "🇬🇷",
-  en: "🇬🇧",
-  de: "🇩🇪",
-  fr: "🇫🇷",
-  it: "🇮🇹",
-  es: "🇪🇸",
-  pt: "🇵🇹",
-  bg: "🇧🇬",
-  sr: "🇷🇸",
-  tr: "🇹🇷",
-};
+const localeFlagComponents = {
+  el: GR,
+  en: GB,
+  de: DE,
+  fr: FR,
+  it: IT,
+  es: ES,
+  pt: PT,
+  bg: BG,
+  sr: RS,
+  tr: TR,
+} satisfies Record<Locale, typeof GR>;
 
 
 export default function Navbar() {
@@ -113,6 +126,9 @@ export default function Navbar() {
 
   const languageMenuRef =
     useRef<HTMLDivElement>(null);
+
+  const CurrentFlag =
+    localeFlagComponents[currentLocale];
 
 
   /* ==========================================
@@ -424,12 +440,11 @@ export default function Navbar() {
 
               {/* FLAG */}
 
-              <span className="flex items-center text-[21px] leading-none">
-                {
-                  localeFlagEmojis[
-                    currentLocale
-                  ]
-                }
+              <span className="flex h-[18px] w-[27px] shrink-0 items-center justify-center overflow-hidden rounded-[3px] shadow-sm">
+                <CurrentFlag
+                  title={localeNames[currentLocale]}
+                  className="block h-full w-full"
+                />
               </span>
 
 
@@ -481,6 +496,9 @@ export default function Navbar() {
                         locale ===
                         currentLocale;
 
+                      const Flag =
+                        localeFlagComponents[locale];
+
 
                       return (
                         <button
@@ -511,12 +529,11 @@ export default function Navbar() {
 
                           {/* FLAG */}
 
-                          <span className="flex items-center justify-center text-[21px] leading-none">
-                            {
-                              localeFlagEmojis[
-                                locale
-                              ]
-                            }
+                          <span className="flex h-[18px] w-[27px] items-center justify-center overflow-hidden rounded-[3px] shadow-sm">
+                            <Flag
+                              title={localeNames[locale]}
+                              className="block h-full w-full"
+                            />
                           </span>
 
 
