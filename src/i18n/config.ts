@@ -9,6 +9,7 @@ export const locales = [
   "bg",
   "sr",
   "tr",
+  "pl"
 ] as const;
 
 export type Locale = (typeof locales)[number];
@@ -26,6 +27,7 @@ export const localeNames: Record<Locale, string> = {
   bg: "Български",
   sr: "Српски",
   tr: "Türkçe",
+  pl: "Polski",
 };
 
 export const localeFlags: Record<Locale, string> = {
@@ -39,6 +41,7 @@ export const localeFlags: Record<Locale, string> = {
   bg: "🇧🇬",
   sr: "🇷🇸",
   tr: "🇹🇷",
+  pl: "PL",
 };
 
 export function isSupportedLocale(

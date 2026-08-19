@@ -41,6 +41,11 @@ const dictionaries = {
       (module) => module.default
     ),
 
+  pl: () =>
+    import("./dictionaries/pl.json").then(
+      (module) => module.default
+    ),
+
   sr: () =>
     import("./dictionaries/sr.json").then(
       (module) => module.default

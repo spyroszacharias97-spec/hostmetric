@@ -364,7 +364,7 @@ type FormData = {
 
   // STEP 5
   currency: string;
-  pricingManagementPreference: string;
+  minimumNightlyRate: string;
   cleaningFee: string;
   cleaningFeeType: string;
   securityDeposit: string;
@@ -557,7 +557,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
     // STEP 5
     currency: "EUR",
-    pricingManagementPreference: "",
+    minimumNightlyRate: "",
     cleaningFee: "",
     cleaningFeeType: "",
     securityDeposit: "",
@@ -4785,12 +4785,16 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           <div className="mt-12">
 
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">
-              {t("Commercial Setup")}
+              {t("Smart Pricing Setup")}
             </p>
 
             <h2 className="mt-3 text-3xl font-bold">
-              {t("How should pricing be managed?")}
+              {t("Set your minimum nightly price")}
             </h2>
+
+            <p className="mt-3 max-w-4xl leading-7 text-slate-600">
+              {t("HostMetric manages and continuously optimizes pricing using AI, pricing algorithms, market demand, seasonality, booking behaviour and property performance. You only need to tell us the minimum nightly price you are comfortable accepting.")}
+            </p>
 
             <div className="mt-8 grid gap-6 md:grid-cols-2">
 
@@ -4836,47 +4840,31 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
               <div>
 
                 <label className="mb-2 block text-sm font-bold text-slate-700">
-                  {t("Pricing Management Preference")}
+                  {t("Minimum Nightly Price")}
                 </label>
 
-                <select
-                  value={
-                    formData.pricingManagementPreference
-                  }
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={formData.minimumNightlyRate}
                   onChange={(event) =>
                     updateField(
-                      "pricingManagementPreference",
+                      "minimumNightlyRate",
                       event.target.value
                     )
                   }
+                  placeholder={t("Example: 80")}
                   className={inputClass(
-                    "pricingManagementPreference"
+                    "minimumNightlyRate"
                   )}
-                >
-                  <option value="">
-                    {t("Select")}
-                  </option>
-
-                  <option value="hostmetric-full">
-                    {t("HostMetric manages and optimizes pricing")}
-                  </option>
-
-                  <option value="owner-approval">
-                    {t("HostMetric recommends — owner approves")}
-                  </option>
-
-                  <option value="existing-strategy">
-                    {t("Keep my existing pricing strategy")}
-                  </option>
-
-                  <option value="not-sure">
-                    {t("I&apos;m not sure — recommend the best setup")}
-                  </option>
-                </select>
-
-                <ErrorMessage
-                  field="pricingManagementPreference"
                 />
+
+                <p className="mt-2 text-sm leading-6 text-slate-500">
+                  {t("This is your minimum acceptable nightly price, not your standard selling price. HostMetric may price above this amount whenever market conditions and demand support a higher rate.")}
+                </p>
+
+                <ErrorMessage field="minimumNightlyRate" />
 
               </div>
 

@@ -12,6 +12,7 @@ import {
   ES,
   PT,
   BG,
+  PL,
   RS,
   TR,
 } from "country-flag-icons/react/3x2";
@@ -86,6 +87,7 @@ const localeCountryCodes: Record<Locale, string> = {
   es: "ES",
   pt: "PT",
   bg: "BG",
+  pl: "PL",
   sr: "RS",
   tr: "TR",
 };
@@ -107,6 +109,7 @@ const localeFlagComponents = {
   es: ES,
   pt: PT,
   bg: BG,
+  pl: PL,
   sr: RS,
   tr: TR,
 } satisfies Record<Locale, typeof GR>;
