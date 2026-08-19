@@ -20,7 +20,6 @@ import { getDictionary } from "@/i18n/get-dictionary";
 import {
   defaultLocale,
   isSupportedLocale,
-  localeFlags,
   localeNames,
   locales,
   type Locale,
@@ -76,6 +75,27 @@ const localeCountryCodes: Record<Locale, string> = {
   bg: "BG",
   sr: "RS",
   tr: "TR",
+};
+
+
+/* ==========================================
+   FLAG EMOJIS SHOWN TO THE USER
+
+   We keep this separate from the locale config
+   so the UI always shows a real flag emoji.
+========================================== */
+
+const localeFlagEmojis: Record<Locale, string> = {
+  el: "🇬🇷",
+  en: "🇬🇧",
+  de: "🇩🇪",
+  fr: "🇫🇷",
+  it: "🇮🇹",
+  es: "🇪🇸",
+  pt: "🇵🇹",
+  bg: "🇧🇬",
+  sr: "🇷🇸",
+  tr: "🇹🇷",
 };
 
 
@@ -406,7 +426,7 @@ export default function Navbar() {
 
               <span className="flex items-center text-[21px] leading-none">
                 {
-                  localeFlags[
+                  localeFlagEmojis[
                     currentLocale
                   ]
                 }
@@ -493,7 +513,7 @@ export default function Navbar() {
 
                           <span className="flex items-center justify-center text-[21px] leading-none">
                             {
-                              localeFlags[
+                              localeFlagEmojis[
                                 locale
                               ]
                             }
