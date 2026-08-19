@@ -55,6 +55,30 @@ const fallbackNavigation: NavigationDictionary = {
 };
 
 
+/* ==========================================
+   COUNTRY CODE SHOWN TO THE USER
+
+   IMPORTANT:
+   These are only visual country codes.
+
+   The real locale codes remain:
+   el, en, de, fr, it, es, pt, bg, pl, sr, tr
+========================================== */
+
+const localeCountryCodes: Record<Locale, string> = {
+  el: "GR",
+  en: "GB",
+  de: "DE",
+  fr: "FR",
+  it: "IT",
+  es: "ES",
+  pt: "PT",
+  bg: "BG",
+  sr: "RS",
+  tr: "TR",
+};
+
+
 export default function Navbar() {
   const [languageOpen, setLanguageOpen] =
     useState(false);
@@ -225,6 +249,7 @@ export default function Navbar() {
 
 
       /* RELOAD PAGE SO ALL SERVER COMPONENTS USE THE NEW LOCALE */
+
       window.location.reload();
 
 
@@ -348,6 +373,8 @@ export default function Navbar() {
             className="relative"
           >
 
+            {/* SELECTED LANGUAGE BUTTON */}
+
             <button
               type="button"
               onClick={() =>
@@ -355,7 +382,7 @@ export default function Navbar() {
                   (open) => !open
                 )
               }
-              className="flex h-[56px] cursor-pointer items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 font-semibold text-slate-800 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-blue-300 hover:text-blue-600 hover:shadow-md"
+              className="flex h-[56px] cursor-pointer items-center gap-2.5 rounded-2xl border border-slate-200 bg-white px-4 font-semibold text-slate-800 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-blue-300 hover:text-blue-600 hover:shadow-md"
               aria-label={
                 navigation.selectLanguage
               }
@@ -364,7 +391,20 @@ export default function Navbar() {
               }
             >
 
-              <span className="text-xl">
+              {/* COUNTRY CODE */}
+
+              <span className="text-[15px] font-bold leading-none">
+                {
+                  localeCountryCodes[
+                    currentLocale
+                  ]
+                }
+              </span>
+
+
+              {/* FLAG */}
+
+              <span className="flex items-center text-[21px] leading-none">
                 {
                   localeFlags[
                     currentLocale
@@ -373,14 +413,11 @@ export default function Navbar() {
               </span>
 
 
-              <span className="hidden xl:inline">
-                {currentLocale.toUpperCase()}
-              </span>
-
+              {/* ARROW */}
 
               <ChevronDown
                 size={17}
-                className={`transition duration-300 ${
+                className={`ml-0.5 transition duration-300 ${
                   languageOpen
                     ? "rotate-180"
                     : ""
@@ -390,10 +427,14 @@ export default function Navbar() {
             </button>
 
 
-            {/* DROPDOWN */}
+            {/* ========================================
+                DROPDOWN
+            ======================================== */}
 
             {languageOpen && (
-              <div className="absolute right-0 top-[68px] z-[200] w-[260px] overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-2xl">
+              <div className="absolute right-0 top-[68px] z-[200] w-[300px] overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-2xl">
+
+                {/* DROPDOWN TITLE */}
 
                 <div className="flex items-center gap-2 border-b border-slate-100 px-3 py-3">
 
@@ -409,6 +450,8 @@ export default function Navbar() {
 
                 </div>
 
+
+                {/* LANGUAGE LIST */}
 
                 <div className="mt-2 max-h-[420px] overflow-y-auto">
 
@@ -428,50 +471,58 @@ export default function Navbar() {
                               locale
                             )
                           }
-                          className={`flex w-full cursor-pointer items-center justify-between rounded-xl px-3 py-3 text-left transition ${
+                          className={`grid w-full cursor-pointer grid-cols-[34px_34px_1fr_22px] items-center gap-2 rounded-xl px-3 py-3 text-left transition ${
                             active
                               ? "bg-blue-50 text-blue-700"
                               : "text-slate-700 hover:bg-slate-50 hover:text-blue-600"
                           }`}
                         >
 
-                          <div className="flex items-center gap-3">
+                          {/* COUNTRY CODE */}
 
-                            <span className="text-xl">
-                              {
-                                localeFlags[
-                                  locale
-                                ]
-                              }
-                            </span>
-
-
-                            <div>
-
-                              <p className="text-sm font-semibold">
-                                {
-                                  localeNames[
-                                    locale
-                                  ]
-                                }
-                              </p>
+                          <span className="text-sm font-semibold leading-none">
+                            {
+                              localeCountryCodes[
+                                locale
+                              ]
+                            }
+                          </span>
 
 
-                              <p className="mt-0.5 text-xs uppercase text-slate-400">
-                                {locale}
-                              </p>
+                          {/* FLAG */}
 
-                            </div>
+                          <span className="flex items-center justify-center text-[21px] leading-none">
+                            {
+                              localeFlags[
+                                locale
+                              ]
+                            }
+                          </span>
 
-                          </div>
+
+                          {/* LANGUAGE NAME */}
+
+                          <span className="text-sm font-semibold leading-none">
+                            {
+                              localeNames[
+                                locale
+                              ]
+                            }
+                          </span>
 
 
-                          {active && (
-                            <Check
-                              size={17}
-                              className="text-blue-600"
-                            />
-                          )}
+                          {/* ACTIVE CHECK */}
+
+                          <span className="flex items-center justify-end">
+
+                            {active && (
+                              <Check
+                                size={17}
+                                className="text-blue-600"
+                              />
+                            )}
+
+                          </span>
 
                         </button>
                       );

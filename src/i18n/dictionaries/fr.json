@@ -1,396 +1,396 @@
 {
   "navigation": {
     "services": "Services",
-    "howItWorks": "How It Works",
-    "pricing": "Pricing",
-    "about": "About",
+    "howItWorks": "Comment ça marche",
+    "pricing": "Tarifs",
+    "about": "À propos",
     "contact": "Contact",
-    "getStarted": "Get Started",
-    "language": "Language",
-    "selectLanguage": "Select language",
-    "homeAriaLabel": "HostMetric homepage",
-    "logoAlt": "HostMetric Property Management"
+    "getStarted": "Commencer",
+    "language": "Langue",
+    "selectLanguage": "Choisir la langue",
+    "homeAriaLabel": "Page d’accueil HostMetric",
+    "logoAlt": "Gestion immobilière HostMetric"
   },
   "hero": {
-    "eyebrow": "Short-Term Rental Performance",
-    "titleLine1": "Smarter Hosting",
-    "titleLine2": "Better Results",
-    "description": "Smarter pricing, seamless guest communication and professional booking management — all designed to maximize your property's performance.",
-    "getStarted": "Get Started",
-    "seeHowItWorks": "See How It Works",
+    "eyebrow": "Performance des locations courte durée",
+    "titleLine1": "Une gestion plus intelligente",
+    "titleLine2": "De meilleurs résultats",
+    "description": "Tarification intelligente, communication fluide avec les voyageurs et gestion professionnelle des réservations — tout est conçu pour maximiser la performance de votre bien.",
+    "getStarted": "Commencer",
+    "seeHowItWorks": "Voir comment ça marche",
     "revenue": {
-      "title": "Revenue",
-      "subtitle": "Performance growth",
-      "explore": "Explore revenue intelligence"
+      "title": "Revenus",
+      "subtitle": "Croissance de la performance",
+      "explore": "Explorer l’analyse des revenus"
     },
     "guestRating": {
-      "title": "Guest Rating",
-      "subtitle": "Exceptional experience",
-      "explore": "Explore guest intelligence"
+      "title": "Note des voyageurs",
+      "subtitle": "Expérience exceptionnelle",
+      "explore": "Explorer l’analyse voyageurs"
     },
     "occupancy": {
-      "title": "Occupancy",
-      "subtitle": "Stronger performance",
-      "explore": "Explore occupancy strategy"
+      "title": "Taux d’occupation",
+      "subtitle": "Performance renforcée",
+      "explore": "Explorer la stratégie d’occupation"
     },
     "aiPricing": {
-      "title": "AI Pricing",
-      "status": "Optimizing",
-      "subtitle": "Live market analysis",
-      "explore": "Explore our methodology"
+      "title": "Tarification IA",
+      "status": "Optimisation en cours",
+      "subtitle": "Analyse du marché en temps réel",
+      "explore": "Explorer notre méthodologie"
     }
   },
   "services": {
-    "eyebrow": "Our Services",
-    "title": "Everything your property needs to perform better",
-    "description": "We take care of the details behind successful short-term rentals, giving you more time while helping your property reach its full potential.",
+    "eyebrow": "Nos services",
+    "title": "Tout ce dont votre bien a besoin pour mieux performer",
+    "description": "Nous prenons en charge les détails qui font le succès d’une location courte durée, afin de vous faire gagner du temps tout en aidant votre bien à atteindre son plein potentiel.",
     "guestCommunication": {
-      "title": "Guest Communication",
-      "description": "Professional, fast and thoughtful communication that keeps your guests informed and satisfied."
+      "title": "Communication voyageurs",
+      "description": "Une communication professionnelle, rapide et attentionnée pour garder vos voyageurs informés et satisfaits."
     },
     "smartPricing": {
-      "title": "Smart Pricing",
-      "description": "Data-driven pricing optimization designed to maximize revenue and adapt to changing market demand."
+      "title": "Tarification intelligente",
+      "description": "Une optimisation tarifaire fondée sur les données, conçue pour maximiser les revenus et s’adapter à l’évolution de la demande."
     },
     "bookingManagement": {
-      "title": "Booking Management",
-      "description": "Professional management of reservations, availability and day-to-day booking operations."
+      "title": "Gestion des réservations",
+      "description": "Gestion professionnelle des réservations, des disponibilités et des opérations quotidiennes liées aux bookings."
     }
   },
   "performance": {
-    "eyebrow": "Built for Better Performance",
-    "titleLine1": "Smarter tools. Better guest experiences.",
-    "titleLine2": "Stronger performance.",
+    "eyebrow": "Conçu pour de meilleures performances",
+    "titleLine1": "Des outils plus intelligents. De meilleures expériences voyageurs.",
+    "titleLine2": "De meilleures performances.",
     "guestResponse": {
-      "label": "Guest Response Target",
-      "explore": "Discover our guest support"
+      "label": "Objectif de réponse voyageurs",
+      "explore": "Découvrir notre assistance voyageurs"
     },
     "platformNetwork": {
-      "label": "Booking Platforms",
-      "explore": "Explore our distribution network"
+      "label": "Plateformes de réservation",
+      "explore": "Explorer notre réseau de distribution"
     },
     "pricingEngine": {
-      "label": "Pricing Optimization",
-      "explore": "Understand our pricing engine"
+      "label": "Optimisation tarifaire",
+      "explore": "Comprendre notre moteur de tarification"
     }
   },
   "howItWorks": {
-    "eyebrow": "How It Works",
-    "titleLine1": "A complete system working",
-    "titleLine2": "behind your property",
-    "description": "Behind every reservation is a coordinated process combining market analysis, distribution, revenue management, guest experience and continuous performance optimization.",
+    "eyebrow": "Comment ça marche",
+    "titleLine1": "Un système complet qui travaille",
+    "titleLine2": "en arrière-plan de votre bien",
+    "description": "Derrière chaque réservation se trouve un processus coordonné combinant analyse de marché, distribution, revenue management, expérience voyageur et optimisation continue des performances.",
     "workflowLabels": [
       "Audit",
-      "Data",
-      "Listing",
+      "Données",
+      "Annonce",
       "Distribution",
-      "Sync",
-      "Pricing",
-      "Guests",
-      "Reviews"
+      "Synchronisation",
+      "Tarifs",
+      "Voyageurs",
+      "Avis"
     ],
     "systemCenter": {
-      "titleLine1": "Property",
-      "titleLine2": "Performance System"
+      "titleLine1": "Bien",
+      "titleLine2": "Système de performance"
     },
     "cycle": {
-      "eyebrow": "Continuous Management Cycle",
-      "title": "Every decision feeds the next one",
-      "paragraph1": "Pricing affects demand. Demand affects availability. Guest experience affects reviews. Reviews affect conversion. Conversion and booking behaviour produce new performance data.",
-      "paragraph2": "That data then feeds back into market positioning, pricing, listing strategy and future decisions — creating a continuous optimization cycle instead of a one-time setup.",
-      "dataDecisions": "Data → Decisions",
-      "continuousLoop": "Continuous Loop",
-      "humanHospitality": "Human Hospitality",
-      "revenueFocus": "Revenue Focus"
+      "eyebrow": "Cycle de gestion continue",
+      "title": "Chaque décision alimente la suivante",
+      "paragraph1": "Les prix influencent la demande. La demande influence la disponibilité. L’expérience voyageur influence les avis. Les avis influencent la conversion. La conversion et le comportement de réservation génèrent de nouvelles données de performance.",
+      "paragraph2": "Ces données alimentent ensuite le positionnement, la tarification, la stratégie d’annonce et les décisions futures — créant un cycle d’optimisation continu plutôt qu’une configuration ponctuelle.",
+      "dataDecisions": "Données → Décisions",
+      "continuousLoop": "Boucle continue",
+      "humanHospitality": "Hospitalité humaine",
+      "revenueFocus": "Priorité aux revenus"
     },
     "stagesSection": {
-      "eyebrow": "Behind The Scenes",
-      "title": "What happens after you join HostMetric",
-      "description": "A structured commercial workflow designed to continuously improve how your property is positioned, priced, managed and experienced by guests."
+      "eyebrow": "En coulisses",
+      "title": "Ce qui se passe après votre arrivée chez HostMetric",
+      "description": "Un processus commercial structuré conçu pour améliorer en continu le positionnement, la tarification, la gestion et l’expérience offerte par votre bien."
     },
     "stages": [
       {
-        "title": "Property & Market Audit",
-        "text": "We assess the property, location, capacity, amenities, positioning, target guest profile and existing commercial setup.",
+        "title": "Audit du bien et du marché",
+        "text": "Nous évaluons le bien, sa localisation, sa capacité, ses équipements, son positionnement, le profil des voyageurs ciblés et sa configuration commerciale actuelle.",
         "details": [
-          "Property positioning",
-          "Amenity analysis",
-          "Local demand profile",
-          "Target guest segments"
+          "Positionnement du bien",
+          "Analyse des équipements",
+          "Profil de la demande locale",
+          "Segments de voyageurs ciblés"
         ]
       },
       {
-        "title": "Historical Performance Analysis",
-        "text": "Existing booking and performance data is examined to establish a measurable baseline before optimization begins.",
+        "title": "Analyse des performances historiques",
+        "text": "Les données existantes de réservation et de performance sont analysées afin d’établir une base mesurable avant le début de l’optimisation.",
         "details": [
-          "Past reservations",
-          "Average rates",
-          "Occupancy patterns",
-          "Booking-window behaviour"
+          "Réservations passées",
+          "Tarifs moyens",
+          "Tendances d’occupation",
+          "Comportement de la fenêtre de réservation"
         ]
       },
       {
-        "title": "Competitive Set Modelling",
-        "text": "We build a relevant competitive set using comparable accommodation with similar location, capacity, amenities and positioning.",
+        "title": "Modélisation du panel concurrentiel",
+        "text": "Nous constituons un panel concurrentiel pertinent à partir d’hébergements comparables en matière de localisation, capacité, équipements et positionnement.",
         "details": [
-          "Comparable properties",
-          "Rate positioning",
-          "Review strength",
-          "Market supply"
+          "Biens comparables",
+          "Positionnement tarifaire",
+          "Force des avis",
+          "Offre du marché"
         ]
       },
       {
-        "title": "Listing Architecture",
-        "text": "The commercial presentation of the property is structured to make its strongest selling points immediately clear to potential guests.",
+        "title": "Architecture de l’annonce",
+        "text": "La présentation commerciale du bien est structurée afin de rendre ses principaux atouts immédiatement clairs pour les voyageurs potentiels.",
         "details": [
-          "Title strategy",
-          "Photo sequencing",
+          "Stratégie de titre",
+          "Ordre des photos",
           "Descriptions",
-          "Amenities & policies"
+          "Équipements et règles"
         ]
       },
       {
-        "title": "Conversion Optimization",
-        "text": "Listings are refined around clarity, user behaviour and booking intent so traffic has a stronger opportunity to convert into reservations.",
+        "title": "Optimisation de la conversion",
+        "text": "Les annonces sont optimisées autour de la clarté, du comportement utilisateur et de l’intention de réservation afin d’augmenter les chances de convertir les visites en réservations.",
         "details": [
-          "Value proposition",
-          "Content hierarchy",
-          "Guest objections",
-          "Conversion improvements"
+          "Proposition de valeur",
+          "Hiérarchie du contenu",
+          "Freins des voyageurs",
+          "Améliorations de conversion"
         ]
       },
       {
-        "title": "Multi-Channel Distribution",
-        "text": "The property is positioned across supported booking and travel channels to expand reach while maintaining one coordinated commercial strategy.",
+        "title": "Distribution multicanale",
+        "text": "Le bien est positionné sur différents canaux de réservation et de voyage afin d’élargir sa portée tout en conservant une stratégie commerciale coordonnée.",
         "details": [
-          "10+ channels",
-          "Channel positioning",
-          "Listing consistency",
-          "Distribution control"
+          "Plus de 10 canaux",
+          "Positionnement par canal",
+          "Cohérence des annonces",
+          "Contrôle de la distribution"
         ]
       },
       {
-        "title": "Calendar & Availability Sync",
-        "text": "Reservations, availability and calendar changes are coordinated across connected channels to maintain accurate inventory.",
+        "title": "Synchronisation du calendrier et des disponibilités",
+        "text": "Les réservations, les disponibilités et les modifications de calendrier sont coordonnées sur les canaux connectés afin de maintenir un inventaire exact.",
         "details": [
-          "Calendar synchronization",
-          "Availability controls",
-          "Reservation updates",
-          "Conflict reduction"
+          "Synchronisation du calendrier",
+          "Contrôle des disponibilités",
+          "Mises à jour des réservations",
+          "Réduction des conflits"
         ]
       },
       {
-        "title": "Demand Intelligence",
-        "text": "Demand signals are continuously evaluated before pricing decisions are made.",
+        "title": "Intelligence de la demande",
+        "text": "Les signaux de demande sont évalués en continu avant toute décision tarifaire.",
         "details": [
-          "Seasonality",
-          "Booking pace",
-          "Lead time",
-          "Local demand changes"
+          "Saisonnalité",
+          "Rythme des réservations",
+          "Délai de réservation",
+          "Évolution de la demande locale"
         ]
       },
       {
-        "title": "Revenue Management Engine",
-        "text": "Rate and occupancy are evaluated together using measurable hospitality performance indicators rather than static nightly pricing.",
+        "title": "Moteur de revenue management",
+        "text": "Le tarif et l’occupation sont évalués ensemble à l’aide d’indicateurs mesurables du secteur de l’hébergement plutôt qu’avec un prix fixe par nuit.",
         "details": [
           "ADR",
-          "Occupancy",
+          "Taux d’occupation",
           "RevPAR / RevPAN",
-          "Price elasticity"
+          "Élasticité-prix"
         ]
       },
       {
-        "title": "Dynamic Pricing & Inventory",
-        "text": "Pricing and inventory strategy evolves as demand, remaining availability, booking pace and time until arrival change.",
+        "title": "Tarification dynamique et inventaire",
+        "text": "La stratégie de prix et d’inventaire évolue avec la demande, les disponibilités restantes, le rythme des réservations et le temps avant l’arrivée.",
         "details": [
-          "Dynamic rates",
-          "Length-of-stay controls",
-          "Gap-night strategy",
-          "Inventory protection"
+          "Tarifs dynamiques",
+          "Contrôle de durée de séjour",
+          "Stratégie des nuits isolées",
+          "Protection de l’inventaire"
         ]
       },
       {
-        "title": "Reservation Management",
-        "text": "Bookings are monitored as part of one workflow from reservation confirmation through arrival and departure.",
+        "title": "Gestion des réservations",
+        "text": "Les réservations sont suivies dans un même flux de travail, de la confirmation jusqu’à l’arrivée et au départ.",
         "details": [
-          "Booking coordination",
-          "Pre-arrival workflow",
-          "Check-in guidance",
-          "Checkout process"
+          "Coordination des réservations",
+          "Processus avant arrivée",
+          "Instructions d’arrivée",
+          "Processus de départ"
         ]
       },
       {
-        "title": "Human Guest Communication",
-        "text": "Trained team members manage guest conversations with fast, natural and situation-specific communication instead of relying only on automated templates.",
+        "title": "Communication humaine avec les voyageurs",
+        "text": "Des membres formés de l’équipe gèrent les échanges avec les voyageurs de manière rapide, naturelle et adaptée à chaque situation, plutôt que de s’appuyer uniquement sur des modèles automatisés.",
         "details": [
-          "Shift coverage",
-          "Guest questions",
-          "Issue resolution",
-          "Hospitality-focused replies"
+          "Couverture par équipes",
+          "Questions des voyageurs",
+          "Résolution des problèmes",
+          "Réponses orientées hospitalité"
         ]
       },
       {
-        "title": "Review & Reputation Intelligence",
-        "text": "Guest feedback is treated as operational information that can reveal recurring strengths, weaknesses and opportunities for improvement.",
+        "title": "Analyse des avis et de la réputation",
+        "text": "Les retours voyageurs sont traités comme des informations opérationnelles pouvant révéler des forces, faiblesses et opportunités d’amélioration récurrentes.",
         "details": [
-          "Review monitoring",
-          "Recurring themes",
-          "Rating strategy",
-          "Guest satisfaction"
+          "Suivi des avis",
+          "Thèmes récurrents",
+          "Stratégie de notation",
+          "Satisfaction voyageurs"
         ]
       },
       {
-        "title": "Owner Performance Reporting",
-        "text": "Property performance is translated into understandable information so owners can see what is changing and why.",
+        "title": "Rapports de performance propriétaire",
+        "text": "La performance du bien est traduite en informations compréhensibles afin que les propriétaires voient ce qui change et pourquoi.",
         "details": [
-          "Revenue trends",
-          "Occupancy",
-          "Pricing changes",
-          "Commercial insights"
+          "Tendances de revenus",
+          "Taux d’occupation",
+          "Évolutions tarifaires",
+          "Analyses commerciales"
         ]
       },
       {
-        "title": "Growth & Rebooking Strategy",
-        "text": "The commercial strategy extends beyond the first reservation by identifying opportunities to strengthen repeat demand and direct relationships.",
+        "title": "Stratégie de croissance et de nouvelle réservation",
+        "text": "La stratégie commerciale va au-delà de la première réservation en identifiant les opportunités de renforcer la demande récurrente et les relations directes.",
         "details": [
-          "Repeat guests",
-          "Rebooking opportunities",
-          "Direct-booking growth",
-          "Revenue expansion"
+          "Voyageurs récurrents",
+          "Opportunités de nouvelle réservation",
+          "Croissance des réservations directes",
+          "Développement des revenus"
         ]
       },
       {
-        "title": "Continuous Optimization",
-        "text": "The process does not finish after setup. Performance, pricing, listings, reviews and market conditions continuously feed the next optimization cycle.",
+        "title": "Optimisation continue",
+        "text": "Le processus ne s’arrête pas après la configuration. Performance, tarification, annonces, avis et conditions de marché alimentent continuellement le cycle d’optimisation suivant.",
         "details": [
-          "Performance review",
-          "Market changes",
-          "Listing updates",
-          "Strategy recalibration"
+          "Analyse de performance",
+          "Évolutions du marché",
+          "Mises à jour des annonces",
+          "Réajustement de la stratégie"
         ]
       }
     ],
     "owner": {
-      "eyebrow": "Complex Behind The Scenes",
-      "titleLine1": "For the owner,",
-      "titleLine2": "it stays simple.",
-      "description": "We manage the complexity so you can understand your property's performance without spending your day inside booking platforms, pricing tools and guest inboxes.",
+      "eyebrow": "Complexe en coulisses",
+      "titleLine1": "Pour le propriétaire,",
+      "titleLine2": "tout reste simple.",
+      "description": "Nous gérons la complexité pour que vous puissiez comprendre la performance de votre bien sans passer vos journées dans les plateformes de réservation, outils tarifaires et messageries voyageurs.",
       "steps": [
         {
-          "title": "Tell us about your property",
-          "description": "Property details, existing channels and your goals."
+          "title": "Parlez-nous de votre bien",
+          "description": "Informations sur le bien, canaux existants et vos objectifs."
         },
         {
-          "title": "Connect your listings",
-          "description": "We establish the information needed to begin management."
+          "title": "Connectez vos annonces",
+          "description": "Nous réunissons les informations nécessaires pour démarrer la gestion."
         },
         {
-          "title": "We handle the complexity",
-          "description": "You remain informed while the system works behind the scenes."
+          "title": "Nous gérons la complexité",
+          "description": "Vous restez informé pendant que le système travaille en arrière-plan."
         }
       ]
     }
   },
   "platformOrbit": {
-    "phoneAriaLabel": "Explore our multi-platform booking network",
+    "phoneAriaLabel": "Explorer notre réseau de réservation multiplateforme",
     "phone": {
-      "titleLine1": "Property",
-      "titleLine2": "Dashboard",
-      "smartPricing": "Smart Pricing",
-      "optimizing": "Optimizing",
-      "guestCommunication": "Guest Communication",
-      "active": "Active",
-      "reservations": "Reservations",
-      "synced": "Synced",
-      "channelsConnected": "10+ channels connected"
+      "titleLine1": "Bien",
+      "titleLine2": "Tableau de bord",
+      "smartPricing": "Tarification intelligente",
+      "optimizing": "Optimisation en cours",
+      "guestCommunication": "Communication voyageurs",
+      "active": "Actif",
+      "reservations": "Réservations",
+      "synced": "Synchronisé",
+      "channelsConnected": "Plus de 10 canaux connectés"
     },
-    "eyebrow": "MULTI-PLATFORM DISTRIBUTION",
-    "titleLine1": "Your property everywhere",
-    "titleLine2": "your guests are looking",
-    "description": "Expand your property's visibility across 10+ leading booking platforms while keeping reservations, availability and pricing coordinated through one strategy.",
+    "eyebrow": "DISTRIBUTION MULTIPLATEFORME",
+    "titleLine1": "Votre bien partout",
+    "titleLine2": "où vos voyageurs recherchent",
+    "description": "Développez la visibilité de votre bien sur plus de 10 grandes plateformes de réservation tout en coordonnant réservations, disponibilités et tarifs au sein d’une même stratégie.",
     "benefits": {
       "greaterVisibility": {
-        "title": "Greater Visibility",
-        "description": "Reach more travelers across multiple booking channels."
+        "title": "Plus de visibilité",
+        "description": "Touchez davantage de voyageurs sur plusieurs canaux de réservation."
       },
       "centralizedManagement": {
-        "title": "Centralized Management",
-        "description": "Keep availability, reservations and pricing coordinated."
+        "title": "Gestion centralisée",
+        "description": "Gardez disponibilités, réservations et tarifs coordonnés."
       },
       "smarterDistribution": {
-        "title": "Smarter Distribution",
-        "description": "Make channel decisions using performance and demand data."
+        "title": "Distribution plus intelligente",
+        "description": "Prenez des décisions par canal à partir des données de performance et de demande."
       }
     }
   },
   "propertyGrowth": {
     "engine": {
       "titleLine1": "Performance",
-      "titleLine2": "Engine",
-      "status": "Live optimization",
+      "titleLine2": "Moteur",
+      "status": "Optimisation en temps réel",
       "smartPricing": {
-        "label": "Smart Pricing",
-        "status": "Optimizing"
+        "label": "Tarification intelligente",
+        "status": "Optimisation en cours"
       },
       "bookings": {
-        "label": "Bookings",
-        "status": "Synced"
+        "label": "Réservations",
+        "status": "Synchronisé"
       },
       "guestCommunication": {
-        "label": "Guest Communication",
-        "status": "Active"
+        "label": "Communication voyageurs",
+        "status": "Actif"
       },
       "guestExperience": {
-        "label": "Guest Experience",
-        "status": "Improving"
+        "label": "Expérience voyageur",
+        "status": "En amélioration"
       },
       "revenue": {
-        "label": "Revenue",
-        "status": "Growing"
+        "label": "Revenus",
+        "status": "En croissance"
       }
     },
-    "eyebrow": "Everything Working Together",
-    "title": "Take your property's performance to the next level",
-    "description": "Pricing, booking behaviour, distribution, guest communication and performance metrics work together as one coordinated commercial strategy.",
+    "eyebrow": "Tout fonctionne ensemble",
+    "title": "Faites passer la performance de votre bien au niveau supérieur",
+    "description": "Tarification, comportement de réservation, distribution, communication voyageurs et indicateurs de performance fonctionnent ensemble dans une stratégie commerciale coordonnée.",
     "accordions": [
       {
-        "title": "Complete Booking Management",
+        "title": "Gestion complète des réservations",
         "description": "Availability, reservations and length-of-stay restrictions are assessed as a connected calendar rather than isolated bookings. Booking window, booking pace and occupancy patterns help determine whether inventory should be protected, released or repositioned as arrival dates approach."
       },
       {
-        "title": "Revenue Optimization",
+        "title": "Optimisation des revenus",
         "description": "Pricing decisions evaluate ADR, occupancy and RevPAN together with booking pace, lead time, seasonality, competitive positioning and price elasticity. The objective is not simply the highest nightly rate or highest occupancy, but stronger revenue capture across the available calendar."
       },
       {
-        "title": "Exceptional Guest Experience",
+        "title": "Expérience voyageur exceptionnelle",
         "description": "Guest communication is treated as measurable operational performance. Response time, recurring questions, issue resolution patterns and review outcomes can be monitored to identify friction points and continuously improve the guest journey from pre-arrival through post-stay communication."
       }
     ]
   },
   "featuredResults": {
-    "eyebrow": "Featured Client Result",
-    "titleLine1": "Real hospitality.",
-    "titleLine2": "Measurable results.",
-    "description": "Niki Breeze is one of our longest-standing client properties and a real example of the guest experience, listing optimization, pricing strategy and booking management principles behind HostMetric.",
+    "eyebrow": "Résultat client à la une",
+    "titleLine1": "Une vraie hospitalité.",
+    "titleLine2": "Des résultats mesurables.",
+    "description": "Niki Breeze est l’un de nos biens clients historiques et un exemple concret des principes HostMetric en matière d’expérience voyageur, d’optimisation d’annonce, de stratégie tarifaire et de gestion des réservations.",
     "awardImageAlt": "Niki Breeze Booking.com Traveller Review Award 2026",
     "property": {
-      "location": "Paphos, Cyprus",
-      "type": "25 m² Studio",
-      "title": "A small property with serious performance.",
-      "description": "Through guest communication, listing presentation, booking management and a more active commercial strategy, Niki Breeze has combined stronger financial performance with exceptional guest satisfaction."
+      "location": "Paphos, Chypre",
+      "type": "Studio de 25 m²",
+      "title": "Un petit bien aux performances solides.",
+      "description": "Grâce à la communication voyageurs, à la présentation de l’annonce, à la gestion des réservations et à une stratégie commerciale plus active, Niki Breeze combine meilleures performances financières et satisfaction exceptionnelle des voyageurs."
     },
     "metrics": {
       "bookingRating": {
-        "title": "Booking.com Rating",
-        "description": "Exceptional current guest review score."
+        "title": "Note Booking.com",
+        "description": "Excellente note actuelle des voyageurs."
       },
       "staffRating": {
-        "title": "Staff Rating",
-        "description": "Guest communication and hospitality support."
+        "title": "Note du personnel",
+        "description": "Communication voyageurs et assistance hôtelière."
       },
       "guestReviews": {
-        "title": "Guest Reviews",
-        "description": "Published guest feedback on Booking.com."
+        "title": "Avis voyageurs",
+        "description": "Avis voyageurs publiés sur Booking.com."
       },
       "award": {
         "title": "Traveller Review Award",
@@ -398,361 +398,361 @@
       }
     },
     "revenue": {
-      "eyebrow": "Revenue Growth",
-      "before": "Before",
-      "after": "After",
-      "growthBadge": "+35.8% revenue",
-      "propertyLabel": "25 m² Studio",
-      "title": "From €12,000 to €16,300 after platform commissions.",
-      "paragraph1": "Measured booking revenue increased from approximately €12,000 to €16,300 after Booking.com and Airbnb commissions — an increase of approximately €4,300, or 35.8%.",
-      "paragraph2": "The result was achieved while the property maintained an exceptional 9.6/10 Booking.com guest rating.",
-      "disclaimer": "Performance shown relates specifically to this property and measured period. Individual results vary according to market conditions, seasonality, availability, property characteristics and other factors."
+      "eyebrow": "Croissance des revenus",
+      "before": "Avant",
+      "after": "Après",
+      "growthBadge": "+35,8 % de revenus",
+      "propertyLabel": "Studio de 25 m²",
+      "title": "De 12 000 € à 16 300 € après commissions des plateformes.",
+      "paragraph1": "Les revenus mesurés issus des réservations sont passés d’environ 12 000 € à 16 300 € après les commissions de Booking.com et Airbnb, soit une hausse d’environ 4 300 € ou 35,8 %.",
+      "paragraph2": "Ce résultat a été obtenu tout en maintenant une note exceptionnelle de 9,6/10 sur Booking.com.",
+      "disclaimer": "Les performances présentées concernent spécifiquement ce bien et la période mesurée. Les résultats individuels varient selon les conditions du marché, la saisonnalité, les disponibilités, les caractéristiques du bien et d’autres facteurs."
     },
     "cta": {
-      "title": "What could your property achieve?",
-      "description": "Tell us about your property and let HostMetric evaluate its positioning, guest experience and commercial potential.",
-      "button": "Get Started"
+      "title": "Que pourrait accomplir votre bien ?",
+      "description": "Parlez-nous de votre bien et laissez HostMetric évaluer son positionnement, son expérience voyageur et son potentiel commercial.",
+      "button": "Commencer"
     },
-    "awardClarification": "The Booking.com Traveller Review Award displayed above was awarded to Niki Breeze. It is presented as a featured client property result and does not represent an award granted directly to HostMetric."
+    "awardClarification": "Le Traveller Review Award de Booking.com présenté ci-dessus a été attribué à Niki Breeze. Il est présenté comme résultat d’un bien client et ne constitue pas une distinction attribuée directement à HostMetric."
   },
   "footer": {
-    "brandDescription": "Smarter short-term rental management, pricing, distribution and guest experience designed to improve property performance.",
-    "getStarted": "Get Started",
+    "brandDescription": "Gestion plus intelligente des locations courte durée, tarification, distribution et expérience voyageur conçues pour améliorer la performance du bien.",
+    "getStarted": "Commencer",
     "services": {
       "title": "Services",
-      "propertyManagement": "Property Management",
-      "smartPricing": "Smart Pricing",
-      "guestCommunication": "Guest Communication",
-      "bookingManagement": "Booking Management"
+      "propertyManagement": "Gestion immobilière",
+      "smartPricing": "Tarification intelligente",
+      "guestCommunication": "Communication voyageurs",
+      "bookingManagement": "Gestion des réservations"
     },
     "company": {
-      "title": "Company",
-      "about": "About",
-      "howItWorks": "How It Works",
-      "pricing": "Pricing",
-      "contact": "Contact Us"
+      "title": "Entreprise",
+      "about": "À propos",
+      "howItWorks": "Comment ça marche",
+      "pricing": "Tarifs",
+      "contact": "Nous contacter"
     },
     "contact": {
       "title": "Contact",
-      "greece": "Greece",
-      "cyprus": "Cyprus"
+      "greece": "Grèce",
+      "cyprus": "Chypre"
     },
-    "copyright": "All rights reserved.",
+    "copyright": "Tous droits réservés.",
     "legal": {
-      "privacy": "Privacy Policy",
-      "terms": "Terms & Conditions",
-      "cookies": "Cookie Policy"
+      "privacy": "Politique de confidentialité",
+      "terms": "Conditions générales",
+      "cookies": "Politique relative aux cookies"
     }
   },
   "platformDetails": {
     "greaterVisibility": {
-      "eyebrow": "Greater Visibility",
-      "title": "Be where your guests are searching",
-      "paragraph1": "We expand your property's presence across leading booking channels using a coordinated multi-platform distribution strategy.",
-      "paragraph2": "Our approach combines hospitality-grade revenue management methods with market demand, seasonality, booking behaviour and channel performance — using techniques inspired by those relied on by professional hotel and accommodation revenue teams."
+      "eyebrow": "Plus de visibilité",
+      "title": "Soyez présent là où vos voyageurs recherchent",
+      "paragraph1": "Nous renforçons la présence de votre bien sur les principaux canaux de réservation grâce à une stratégie coordonnée de distribution multiplateforme.",
+      "paragraph2": "Notre approche combine des méthodes professionnelles de revenue management avec la demande du marché, la saisonnalité, le comportement de réservation et la performance des canaux, en s’inspirant de techniques utilisées par les équipes revenue des hôtels et hébergements professionnels."
     },
     "centralizedManagement": {
-      "eyebrow": "Centralized Management",
-      "title": "One strategy across every channel",
-      "paragraph1": "Reservations, availability, pricing and guest communication stay coordinated across every supported platform.",
-      "paragraph2": "Instead of managing each channel independently, HostMetric brings the important information together into one structured workflow, reducing errors and helping your property operate more efficiently."
+      "eyebrow": "Gestion centralisée",
+      "title": "Une stratégie sur tous les canaux",
+      "paragraph1": "Réservations, disponibilités, tarifs et communication voyageurs restent coordonnés sur toutes les plateformes prises en charge.",
+      "paragraph2": "Au lieu de gérer chaque canal séparément, HostMetric centralise les informations importantes dans un flux structuré, réduisant les erreurs et aidant votre bien à fonctionner plus efficacement."
     },
     "smarterDistribution": {
-      "eyebrow": "Smarter Distribution",
-      "title": "Smarter decisions behind every booking",
-      "paragraph1": "Distribution is not simply about appearing on more websites. It is about understanding where demand comes from and how each channel contributes to your property's performance.",
-      "paragraph2": "Pricing, seasonality, booking pace, demand signals and channel performance all contribute to a smarter strategy designed to improve occupancy and revenue."
+      "eyebrow": "Distribution plus intelligente",
+      "title": "Des décisions plus intelligentes derrière chaque réservation",
+      "paragraph1": "La distribution ne consiste pas simplement à apparaître sur davantage de sites. Il s’agit de comprendre d’où vient la demande et comment chaque canal contribue à la performance de votre bien.",
+      "paragraph2": "Tarification, saisonnalité, rythme des réservations, signaux de demande et performance des canaux contribuent à une stratégie plus intelligente visant à améliorer l’occupation et les revenus."
     }
   },
   "aboutPage": {
     "hero": {
-      "eyebrow": "About HostMetric",
-      "titleLine1": "Data-driven strategy.",
-      "titleLine2": "Human hospitality.",
-      "description": "HostMetric brings together analytical thinking, revenue management and genuine human hospitality to help short-term rental properties perform at their full potential."
+      "eyebrow": "À propos de HostMetric",
+      "titleLine1": "Stratégie fondée sur les données.",
+      "titleLine2": "Hospitalité humaine.",
+      "description": "HostMetric réunit analyse, revenue management et véritable hospitalité humaine afin d’aider les locations courte durée à atteindre leur plein potentiel."
     },
     "philosophy": {
-      "eyebrow": "Our Philosophy",
-      "titleLine1": "Hospitality should feel personal.",
-      "titleLine2": "Management should be measurable.",
-      "paragraph1": "We believe successful property management requires more than simply answering messages and changing nightly prices.",
-      "paragraph2": "Every property operates inside a constantly changing market. Demand, seasonality, booking pace, competition, guest behaviour and pricing all interact with one another.",
-      "paragraph3": "Our role is to understand those signals, turn them into informed decisions and combine them with the human attention that creates memorable guest experiences."
+      "eyebrow": "Notre philosophie",
+      "titleLine1": "L’hospitalité doit rester personnelle.",
+      "titleLine2": "La gestion doit être mesurable.",
+      "paragraph1": "Nous pensons qu’une gestion immobilière performante demande bien plus que répondre aux messages et modifier les prix par nuit.",
+      "paragraph2": "Chaque bien évolue dans un marché en constante évolution. Demande, saisonnalité, rythme des réservations, concurrence, comportement des voyageurs et tarifs interagissent en permanence.",
+      "paragraph3": "Notre rôle est de comprendre ces signaux, de les transformer en décisions éclairées et de les associer à l’attention humaine qui crée des expériences mémorables."
     },
     "approach": {
-      "eyebrow": "The HostMetric Approach",
-      "title": "Where hospitality meets performance science.",
-      "description": "We approach each property as an individual commercial system, combining quantitative performance indicators with continuous market observation and human decision-making.",
+      "eyebrow": "L’approche HostMetric",
+      "title": "Là où l’hospitalité rencontre la science de la performance.",
+      "description": "Nous abordons chaque bien comme un système commercial individuel, en combinant des indicateurs quantitatifs de performance, une observation continue du marché et une prise de décision humaine.",
       "cards": {
         "performanceMetrics": {
-          "title": "Performance Metrics",
-          "description": "Occupancy, ADR, revenue efficiency, booking pace and other performance indicators help us understand how a property is actually performing."
+          "title": "Indicateurs de performance",
+          "description": "Taux d’occupation, ADR, efficacité des revenus, rythme de réservation et autres indicateurs nous aident à comprendre la performance réelle du bien."
         },
         "marketIntelligence": {
-          "title": "Market Intelligence",
-          "description": "Market conditions, seasonality, comparable properties and demand signals provide context for pricing and distribution decisions."
+          "title": "Intelligence de marché",
+          "description": "Les conditions du marché, la saisonnalité, les biens comparables et les signaux de demande apportent le contexte nécessaire aux décisions tarifaires et de distribution."
         },
         "continuousOptimization": {
-          "title": "Continuous Optimization",
-          "description": "Performance is continuously reviewed so pricing, positioning and commercial strategy can evolve as market conditions change."
+          "title": "Optimisation continue",
+          "description": "La performance est analysée en continu afin que la tarification, le positionnement et la stratégie commerciale évoluent avec le marché."
         },
         "humanCommunication": {
-          "title": "Human Communication",
-          "description": "Behind the systems are real people focused on thoughtful, natural and professional communication with every guest."
+          "title": "Communication humaine",
+          "description": "Derrière les systèmes se trouvent de vraies personnes, concentrées sur une communication naturelle, professionnelle et attentionnée avec chaque voyageur."
         }
       }
     },
     "familyBusiness": {
-      "eyebrow": "Family-Business Mentality",
-      "title": "Your property never becomes just another number.",
-      "paragraph1": "HostMetric is built around the mentality of a family business: responsibility, direct communication and genuine attention to the properties entrusted to us.",
-      "paragraph2": "We want owners to know who is managing their property, why decisions are being made and what we are working to improve. The relationship should feel personal even when the systems behind it are sophisticated."
+      "eyebrow": "Esprit d’entreprise familiale",
+      "title": "Votre bien ne devient jamais un simple numéro.",
+      "paragraph1": "HostMetric est construit autour de l’esprit d’une entreprise familiale : responsabilité, communication directe et véritable attention portée aux biens qui nous sont confiés.",
+      "paragraph2": "Nous voulons que les propriétaires sachent qui gère leur bien, pourquoi certaines décisions sont prises et ce que nous cherchons à améliorer. La relation doit rester personnelle même lorsque les systèmes sont sophistiqués."
     },
     "sharedSuccess": {
-      "eyebrow": "Shared Success",
-      "title": "Our interests are aligned with yours.",
-      "description": "Our management model is performance-based. With one simple 11% management fee and no registration fee, our growth is directly connected to the revenue generated by the properties we manage.",
-      "principle": "That creates a simple principle: when your property performs better, we perform better too."
+      "eyebrow": "Réussite partagée",
+      "title": "Nos intérêts sont alignés sur les vôtres.",
+      "description": "Notre modèle de gestion repose sur la performance. Avec une commission de gestion simple de 11 % et aucun frais d’inscription, notre croissance est directement liée aux revenus générés par les biens que nous gérons.",
+      "principle": "Cela crée un principe simple : lorsque votre bien performe mieux, nous aussi."
     },
     "cta": {
-      "eyebrow": "Work With HostMetric",
-      "titleLine1": "Smarter management.",
-      "titleLine2": "Personal service.",
-      "description": "Let's understand your property, your market and your goals — and build the right strategy around them.",
-      "button": "Get Started"
+      "eyebrow": "Travailler avec HostMetric",
+      "titleLine1": "Une gestion plus intelligente.",
+      "titleLine2": "Un service personnalisé.",
+      "description": "Comprenons votre bien, votre marché et vos objectifs — puis construisons la stratégie adaptée autour d’eux.",
+      "button": "Commencer"
     }
   },
   "contactPage": {
     "hero": {
-      "eyebrow": "Contact HostMetric",
-      "title": "Let's talk about your property.",
-      "description": "Tell us a little about your property and what you would like to improve. Our team will review your enquiry and contact you to discuss how HostMetric can help."
+      "eyebrow": "Contacter HostMetric",
+      "title": "Parlons de votre bien.",
+      "description": "Parlez-nous brièvement de votre bien et de ce que vous souhaitez améliorer. Notre équipe examinera votre demande et vous contactera pour discuter de la manière dont HostMetric peut vous aider."
     },
     "contactDetails": {
-      "greece": "Greece",
-      "cyprus": "Cyprus",
-      "emailLabel": "Email"
+      "greece": "Grèce",
+      "cyprus": "Chypre",
+      "emailLabel": "E-mail"
     },
     "helpBox": {
-      "title": "Not sure what your property needs?",
-      "description": "That's completely fine. Send us the basic details you know and we'll help you with the rest."
+      "title": "Vous ne savez pas exactement ce dont votre bien a besoin ?",
+      "description": "Aucun problème. Envoyez-nous les informations de base que vous connaissez et nous vous aiderons pour le reste."
     },
     "form": {
-      "eyebrow": "Send an enquiry",
-      "title": "Tell us about your property",
-      "requiredNote": "Fields marked with * are required.",
+      "eyebrow": "Envoyer une demande",
+      "title": "Parlez-nous de votre bien",
+      "requiredNote": "Les champs marqués d’un * sont obligatoires.",
       "fields": {
-        "fullName": "Full Name *",
-        "propertyCountry": "Property Country *",
-        "propertyType": "Property Type",
-        "email": "Email *",
-        "phone": "+30 / +357 Phone",
-        "propertyCityArea": "Property City / Area",
-        "message": "How can we help you? *"
+        "fullName": "Nom complet *",
+        "propertyCountry": "Pays du bien *",
+        "propertyType": "Type de bien",
+        "email": "E-mail *",
+        "phone": "+30 / +357 Téléphone",
+        "propertyCityArea": "Ville / zone du bien",
+        "message": "Comment pouvons-nous vous aider ? *"
       },
       "options": {
-        "greece": "Greece",
-        "cyprus": "Cyprus",
-        "otherEuropeanCountry": "Other European Country",
-        "apartment": "Apartment",
+        "greece": "Grèce",
+        "cyprus": "Chypre",
+        "otherEuropeanCountry": "Autre pays européen",
+        "apartment": "Appartement",
         "studio": "Studio",
-        "house": "House",
+        "house": "Maison",
         "villa": "Villa",
-        "hotelAparthotel": "Hotel / Aparthotel",
-        "other": "Other"
+        "hotelAparthotel": "Hôtel / Appart’hôtel",
+        "other": "Autre"
       },
       "upload": {
-        "title": "Upload property photos",
-        "description": "Optional — you can also send them later."
+        "title": "Télécharger des photos du bien",
+        "description": "Facultatif — vous pourrez aussi les envoyer plus tard."
       },
-      "privacy": "I agree that HostMetric may use the information provided to respond to my enquiry. *",
-      "submit": "Send Enquiry",
-      "noObligation": "No obligation. We'll first review your property and discuss the best approach with you."
+      "privacy": "J’accepte que HostMetric utilise les informations fournies afin de répondre à ma demande. *",
+      "submit": "Envoyer la demande",
+      "noObligation": "Sans engagement. Nous examinerons d’abord votre bien puis discuterons avec vous de la meilleure approche."
     },
     "success": {
-      "title": "Thank you!",
-      "description": "Your enquiry has been received. A member of the HostMetric team will contact you as soon as possible.",
-      "sendAnother": "Send another enquiry"
+      "title": "Merci !",
+      "description": "Votre demande a bien été reçue. Un membre de l’équipe HostMetric vous contactera dès que possible.",
+      "sendAnother": "Envoyer une autre demande"
     },
     "bottom": {
-      "eyebrow": "Not ready to get started?",
-      "title": "A conversation costs nothing.",
-      "description": "Whether you manage one apartment or multiple properties, tell us what you're trying to improve and we'll help you understand the next step.",
-      "link": "Contact HostMetric"
+      "eyebrow": "Pas encore prêt à commencer ?",
+      "title": "Une discussion ne coûte rien.",
+      "description": "Que vous gériez un appartement ou plusieurs biens, dites-nous ce que vous souhaitez améliorer et nous vous aiderons à identifier la prochaine étape.",
+      "link": "Contacter HostMetric"
     }
   },
   "pricingPage": {
     "hero": {
-      "eyebrow": "Simple Pricing",
-      "titleLine1": "One simple package.",
-      "titleLine2": "Everything you need.",
-      "description": "No complicated plans or unnecessary subscriptions. One complete management service designed around your property's performance, guest experience and long-term growth."
+      "eyebrow": "Tarification simple",
+      "titleLine1": "Une formule simple.",
+      "titleLine2": "Tout ce dont vous avez besoin.",
+      "description": "Pas de formules compliquées ni d’abonnements inutiles. Un service de gestion complet conçu autour de la performance de votre bien, de l’expérience voyageur et de sa croissance à long terme."
     },
     "pricingCard": {
-      "eyebrow": "Full Management",
-      "revenueLabel": "of booking revenue",
-      "zeroRegistrationFee": "Zero registration fee",
-      "description": "Our success grows with yours. Instead of complicated fixed plans, HostMetric works through one clear commission-based model.",
-      "button": "Get Started",
-      "summaryEyebrow": "Everything Included",
-      "summaryTitle": "One management system built around your property.",
-      "summaryDescription": "From the way your property is presented and distributed to pricing, reservations, guest communication and ongoing performance analysis, the essential parts of your booking operation work together under one coordinated strategy.",
+      "eyebrow": "Gestion complète",
+      "revenueLabel": "des revenus de réservation",
+      "zeroRegistrationFee": "Aucun frais d’inscription",
+      "description": "Notre réussite grandit avec la vôtre. Plutôt que des forfaits fixes complexes, HostMetric fonctionne avec un modèle clair basé sur une commission.",
+      "button": "Commencer",
+      "summaryEyebrow": "Tout est inclus",
+      "summaryTitle": "Un système de gestion construit autour de votre bien.",
+      "summaryDescription": "De la présentation et distribution de votre bien à la tarification, aux réservations, à la communication voyageurs et à l’analyse continue des performances, les éléments essentiels de votre activité fonctionnent ensemble dans une stratégie coordonnée.",
       "summaryItems": [
-        "Human guest communication",
-        "Smart pricing",
-        "Reservation management",
-        "Calendar synchronization",
-        "Multi-platform distribution",
-        "Listing optimization",
-        "Performance analysis",
-        "Review strategy"
+        "Communication humaine avec les voyageurs",
+        "Tarification intelligente",
+        "Gestion des réservations",
+        "Synchronisation du calendrier",
+        "Distribution multiplateforme",
+        "Optimisation des annonces",
+        "Analyse des performances",
+        "Stratégie d’avis"
       ]
     },
     "includedSection": {
-      "eyebrow": "Included In Your 11%",
-      "title": "Complete booking performance management.",
-      "description": "We combine the operational and commercial elements behind a successful short-term rental into one coordinated management approach."
+      "eyebrow": "Inclus dans vos 11 %",
+      "title": "Gestion complète de la performance des réservations.",
+      "description": "Nous réunissons les éléments opérationnels et commerciaux d’une location courte durée performante dans une approche de gestion coordonnée."
     },
     "includedServices": [
       {
-        "title": "Listing Creation & Optimization",
-        "text": "Professional listing structure, positioning, descriptions and continuous optimization."
+        "title": "Création et optimisation des annonces",
+        "text": "Structure professionnelle de l’annonce, positionnement, descriptions et optimisation continue."
       },
       {
-        "title": "Multi-Platform Distribution",
-        "text": "Your property can be distributed across leading booking and travel platforms."
+        "title": "Distribution multiplateforme",
+        "text": "Votre bien peut être distribué sur les principales plateformes de réservation et de voyage."
       },
       {
-        "title": "Calendar Synchronization",
-        "text": "Availability is coordinated across connected channels to reduce conflicts and double bookings."
+        "title": "Synchronisation du calendrier",
+        "text": "Les disponibilités sont coordonnées sur les canaux connectés afin de réduire les conflits et doubles réservations."
       },
       {
-        "title": "Reservation Management",
-        "text": "We manage booking activity and keep reservations organized across your connected channels."
+        "title": "Gestion des réservations",
+        "text": "Nous gérons l’activité de réservation et organisons les réservations sur vos canaux connectés."
       },
       {
-        "title": "Smart Pricing & Revenue Optimization",
-        "text": "Pricing decisions are continuously informed by demand, seasonality, market conditions and property performance."
+        "title": "Tarification intelligente et optimisation des revenus",
+        "text": "Les décisions tarifaires sont continuellement guidées par la demande, la saisonnalité, les conditions du marché et la performance du bien."
       },
       {
-        "title": "Human Guest Communication",
-        "text": "Professional guest communication handled by trained team members, with a focus on fast, thoughtful responses."
+        "title": "Communication humaine avec les voyageurs",
+        "text": "Communication professionnelle avec les voyageurs assurée par des membres formés de l’équipe, avec des réponses rapides et attentionnées."
       },
       {
-        "title": "Guest Experience & Reviews",
-        "text": "Communication and property presentation are continuously refined to support stronger guest experiences and reviews."
+        "title": "Expérience voyageur et avis",
+        "text": "La communication et la présentation du bien sont continuellement améliorées afin de favoriser de meilleures expériences et de meilleurs avis."
       },
       {
-        "title": "Performance Monitoring",
-        "text": "Key booking and revenue indicators are monitored to identify opportunities for improvement."
+        "title": "Suivi des performances",
+        "text": "Les principaux indicateurs de réservation et de revenus sont suivis afin d’identifier les opportunités d’amélioration."
       },
       {
-        "title": "Market & Competitor Analysis",
-        "text": "Your property's performance and positioning are evaluated against relevant market and competitive signals."
+        "title": "Analyse du marché et de la concurrence",
+        "text": "La performance et le positionnement de votre bien sont évalués par rapport aux signaux pertinents du marché et de la concurrence."
       },
       {
-        "title": "Continuous Optimization",
-        "text": "Pricing, listings, distribution and commercial strategy are reviewed and adjusted as performance evolves."
+        "title": "Optimisation continue",
+        "text": "Tarification, annonces, distribution et stratégie commerciale sont révisées et ajustées à mesure que la performance évolue."
       },
       {
-        "title": "Repeat Guest Strategy",
-        "text": "We help create opportunities to strengthen guest retention and encourage future direct relationships."
+        "title": "Stratégie de fidélisation",
+        "text": "Nous aidons à créer des opportunités pour renforcer la fidélisation et encourager de futures relations directes."
       },
       {
-        "title": "Owner Support & Strategy",
-        "text": "You stay informed about performance, important changes and the strategy behind key decisions."
+        "title": "Accompagnement et stratégie propriétaire",
+        "text": "Vous restez informé de la performance, des changements importants et de la stratégie qui guide les décisions clés."
       }
     ],
     "partners": {
-      "eyebrow": "Need Something More?",
-      "title": "We can help you build the team around your property too.",
-      "description": "Some services require specialized professionals outside our core management service. When needed, we can help connect you with external professionals for:",
+      "eyebrow": "Besoin de quelque chose en plus ?",
+      "title": "Nous pouvons également vous aider à constituer l’équipe autour de votre bien.",
+      "description": "Certains services nécessitent des professionnels spécialisés en dehors de notre gestion principale. Si besoin, nous pouvons vous mettre en relation avec des prestataires externes pour :",
       "photography": {
-        "title": "Professional Property Photography",
-        "description": "We can help you find professional photographers who understand how accommodation should be presented for booking platforms."
+        "title": "Photographie professionnelle du bien",
+        "description": "Nous pouvons vous aider à trouver des photographes professionnels qui savent comment présenter un hébergement sur les plateformes de réservation."
       },
       "website": {
-        "title": "Your Own Direct-Booking Website",
-        "description": "We can connect you with professionals who can build your own property website and help support your long-term direct-booking strategy."
+        "title": "Votre propre site de réservation directe",
+        "description": "Nous pouvons vous mettre en relation avec des professionnels capables de créer le site de votre bien et de soutenir votre stratégie de réservation directe à long terme."
       },
-      "disclaimer": "Photography and website development are provided by independent external professionals and are not included in the 11% management fee."
+      "disclaimer": "La photographie et le développement de site web sont assurés par des professionnels externes indépendants et ne sont pas inclus dans la commission de gestion de 11 %."
     },
     "cta": {
-      "eyebrow": "Start With HostMetric",
-      "titleLine1": "Your property. Our strategy.",
-      "titleLine2": "One simple 11% fee.",
-      "description": "No registration fee. No complicated packages. A complete management approach built to improve how your property performs.",
-      "button": "Optimize My Property"
+      "eyebrow": "Commencer avec HostMetric",
+      "titleLine1": "Votre bien. Notre stratégie.",
+      "titleLine2": "Une commission simple de 11 %.",
+      "description": "Aucun frais d’inscription. Pas de formules compliquées. Une approche de gestion complète conçue pour améliorer la performance de votre bien.",
+      "button": "Optimiser mon bien"
     }
   },
   "guestResponsePage": {
-    "back": "Back to HostMetric",
-    "eyebrow": "Human Guest Support",
-    "titleLine1": "Real people behind",
-    "titleLine2": "every guest experience",
+    "back": "Retour à HostMetric",
+    "eyebrow": "Assistance humaine aux voyageurs",
+    "titleLine1": "De vraies personnes derrière",
+    "titleLine2": "chaque expérience voyageur",
     "description": "Guest communication should feel natural, helpful and personal. HostMetric combines structured communication systems with trained human support, so your guests receive thoughtful answers rather than robotic responses.",
     "cards": {
       "continuousCoverage": {
-        "title": "Continuous Shift Coverage",
+        "title": "Couverture continue par équipes",
         "description": "Trained team members work in coordinated shifts so guest conversations remain actively monitored throughout the day and night."
       },
       "naturalCommunication": {
-        "title": "Natural Communication",
+        "title": "Communication naturelle",
         "description": "Responses are adapted to the actual question, situation and guest rather than relying solely on fixed automated templates."
       },
       "hospitalityTraining": {
-        "title": "Hospitality Training",
+        "title": "Formation en hospitalité",
         "description": "Communication focuses on clarity, empathy, speed and practical problem-solving — helping guests feel supported throughout their stay."
       },
       "betterReviews": {
-        "title": "Designed for Better Reviews",
+        "title": "Conçu pour de meilleurs avis",
         "description": "Recurring questions, service issues and review feedback become operational insights that help us continuously improve the guest journey."
       }
     },
-    "cta": "Let Us Handle Your Guests"
+    "cta": "Confiez-nous vos voyageurs"
   },
   "platformNetworkPage": {
-    "back": "Back to HostMetric",
+    "back": "Retour à HostMetric",
     "center": {
-      "titleLine1": "Channel",
-      "titleLine2": "Manager",
-      "status": "Live synchronization"
+      "titleLine1": "Canal",
+      "titleLine2": "Gestionnaire",
+      "status": "Synchronisation en temps réel"
     },
-    "eyebrow": "Multi-Channel Distribution",
-    "titleLine1": "One property.",
-    "titleLine2": "Multiple booking",
-    "titleLine3": "channels.",
+    "eyebrow": "Distribution multicanale",
+    "titleLine1": "Un bien.",
+    "titleLine2": "Plusieurs canaux",
+    "titleLine3": "de réservation.",
     "description": "Your property can be distributed across leading travel and accommodation platforms while availability, reservations and commercial strategy remain coordinated.",
     "calendarSync": {
-      "title": "Calendar Synchronization",
+      "title": "Synchronisation du calendrier",
       "description": "Reservations and availability are coordinated across supported channels to reduce conflicting inventory and provide one connected view of the property's booking calendar."
     },
     "widerDistribution": {
-      "title": "Wider Distribution",
+      "title": "Distribution élargie",
       "description": "Reach travelers across multiple accommodation and travel marketplaces."
     },
     "coordinatedStrategy": {
-      "title": "One Coordinated Strategy",
+      "title": "Une stratégie coordonnée",
       "description": "Channel activity forms part of one commercial view rather than separate platform strategies."
     }
   },
   "pricingEnginePage": {
-    "back": "Back to HostMetric",
-    "eyebrow": "Pricing Intelligence Engine",
-    "titleLine1": "Thousands of signals.",
-    "titleLine2": "One smarter price.",
+    "back": "Retour à HostMetric",
+    "eyebrow": "Moteur d’intelligence tarifaire",
+    "titleLine1": "Des milliers de signaux.",
+    "titleLine2": "Un prix plus intelligent.",
     "description": "HostMetric's pricing methodology combines property-level, historical and market-level data to estimate demand conditions and support dynamic pricing decisions designed to improve revenue performance.",
     "cards": {
       "comparableProperties": {
-        "title": "Comparable Properties",
+        "title": "Biens comparables",
         "description": "Similar accommodation type, location, capacity, amenities, positioning and market segment provide competitive pricing context."
       },
       "localMarketDemand": {
-        "title": "Local Market Demand",
+        "title": "Demande du marché local",
         "description": "Seasonal patterns, local demand conditions and differences between high- and low-demand periods influence expected willingness to book."
       },
       "historicalBookingData": {
-        "title": "Historical Booking Data",
+        "title": "Données historiques de réservation",
         "description": "Historical reservations, observed rates, lead time and booking patterns create a baseline for analysing future demand."
       },
       "bookingPace": {
@@ -760,7 +760,7 @@
         "description": "Pickup velocity measures how quickly future nights are being reserved relative to previous comparable periods."
       },
       "revenueKpis": {
-        "title": "Revenue KPIs",
+        "title": "KPI de revenus",
         "description": "ADR, occupancy and revenue-per-available-inventory metrics help evaluate the balance between price and inventory utilization."
       },
       "priceElasticity": {
@@ -769,28 +769,28 @@
       }
     },
     "objective": {
-      "eyebrow": "Optimization Objective",
-      "titleLine1": "Not maximum occupancy.",
-      "titleLine2": "Maximum economic performance.",
+      "eyebrow": "Objectif d’optimisation",
+      "titleLine1": "Pas l’occupation maximale.",
+      "titleLine2": "La performance économique maximale.",
       "description": "A property filled at an unnecessarily low rate may achieve strong occupancy while leaving revenue on the table. The pricing engine therefore evaluates rate and expected demand together, adjusting recommendations as booking pace, remaining inventory and market conditions change.",
-      "formula": "Optimal Price = arg max [ Price × Expected Demand(Price) ]"
+      "formula": "Prix optimal = arg max [ Prix × Demande attendue(Prix) ]"
     },
-    "cta": "Optimize My Property"
+    "cta": "Optimiser mon bien"
   },
   "revenuePage": {
-    "back": "Back to HostMetric",
-    "eyebrow": "Revenue Intelligence",
-    "title": "Revenue is more than a nightly price",
+    "back": "Retour à HostMetric",
+    "eyebrow": "Intelligence des revenus",
+    "title": "Les revenus ne se résument pas à un prix par nuit",
     "description": "Our revenue methodology is designed around hospitality-grade performance metrics, demand forecasting and market intelligence rather than static pricing.",
     "cards": {
       "adr": {
-        "label": "Average Daily Rate",
+        "label": "Tarif journalier moyen",
         "title": "ADR",
         "description": "ADR measures average rental revenue generated per occupied night.",
         "formula": "ADR = Room Revenue ÷ Rooms Sold"
       },
       "revpar": {
-        "label": "Revenue Efficiency",
+        "label": "Efficacité des revenus",
         "title": "RevPAR",
         "description": "RevPAR combines price and occupancy by measuring revenue generated across all available inventory.",
         "formula": "RevPAR = ADR × Occupancy"
@@ -800,66 +800,66 @@
         "description": "We examine how quickly future dates accumulate bookings and compare that pace with historical behaviour, seasonality and current market demand."
       },
       "demandForecasting": {
-        "title": "Demand Forecasting",
+        "title": "Prévision de la demande",
         "description": "Booking curves, pickup patterns, lead time and forward-looking demand signals help inform pricing and inventory decisions."
       }
     }
   },
   "guestRatingPage": {
-    "back": "Back to HostMetric",
-    "eyebrow": "Guest Experience Intelligence",
-    "titleLine1": "Better communication.",
-    "titleLine2": "Better guest experiences.",
+    "back": "Retour à HostMetric",
+    "eyebrow": "Intelligence de l’expérience voyageur",
+    "titleLine1": "Une meilleure communication.",
+    "titleLine2": "De meilleures expériences voyageurs.",
     "description": "Guest experience should be managed as an operational system: communication speed, issue resolution, recurring questions and review feedback can all reveal opportunities for improvement.",
     "cards": {
       "responseTime": {
-        "title": "Response Time",
+        "title": "Temps de réponse",
         "description": "Fast, clear communication reduces uncertainty before arrival and helps resolve guest questions before they become problems."
       },
       "issueResolution": {
-        "title": "Issue Resolution",
+        "title": "Résolution des problèmes",
         "description": "Recurring guest issues can be categorized and tracked so that operational causes are corrected rather than repeatedly handled as isolated incidents."
       },
       "reviewIntelligence": {
-        "title": "Review Intelligence",
+        "title": "Analyse des avis",
         "description": "Review themes can reveal recurring strengths and weaknesses across cleanliness, communication, accuracy, location and overall guest satisfaction."
       },
       "continuousImprovement": {
-        "title": "Continuous Improvement",
+        "title": "Amélioration continue",
         "description": "Guest feedback becomes actionable information that can feed back into communication templates, property instructions and operational decisions."
       }
     }
   },
   "occupancyPage": {
-    "back": "Back to HostMetric",
-    "eyebrow": "Occupancy Intelligence",
-    "titleLine1": "The goal is not maximum occupancy.",
-    "titleLine2": "It is optimal occupancy.",
+    "back": "Retour à HostMetric",
+    "eyebrow": "Intelligence de l’occupation",
+    "titleLine1": "L’objectif n’est pas l’occupation maximale.",
+    "titleLine2": "C’est l’occupation optimale.",
     "description": "Selling every available night at an unnecessarily low rate can produce high occupancy without maximizing revenue. Our strategy evaluates occupancy together with rate and revenue efficiency.",
     "cards": {
       "occupancyRate": {
-        "title": "Occupancy Rate",
-        "formula": "Occupancy = Rooms Sold ÷ Rooms Available",
+        "title": "Taux d’occupation",
+        "formula": "Occupation = chambres vendues ÷ chambres disponibles",
         "description": "Occupancy identifies how much available inventory has been sold during a given period."
       },
       "bookingWindow": {
-        "title": "Booking Window",
+        "title": "Fenêtre de réservation",
         "description": "The number of days between booking and arrival helps indicate changes in customer behaviour and future demand conditions."
       },
       "lengthOfStay": {
-        "title": "Length-of-Stay Control",
+        "title": "Contrôle de durée de séjour",
         "description": "Minimum-stay rules can protect high-demand periods while poor restrictions can unnecessarily block valuable inventory."
       },
       "calendarOptimization": {
-        "title": "Calendar Optimization",
+        "title": "Optimisation du calendrier",
         "description": "Gap nights, arrival restrictions, seasonality and booking pace are evaluated together to improve calendar efficiency."
       }
     }
   },
   "aiPricingPage": {
-    "back": "Back to HostMetric",
-    "eyebrow": "Study-Informed Dynamic Pricing",
-    "title": "Pricing that responds to demand",
+    "back": "Retour à HostMetric",
+    "eyebrow": "Tarification dynamique fondée sur les études",
+    "title": "Des prix qui répondent à la demande",
     "description": "Our pricing methodology is designed around research-backed revenue management principles combining demand forecasting, booking pace, market conditions and price responsiveness.",
     "cards": {
       "priceElasticity": {
@@ -867,40 +867,40 @@
         "description": "Demand does not respond equally to every price change. Price-elasticity modelling examines how expected booking demand changes as price changes."
       },
       "demandCurves": {
-        "title": "Demand Curves",
+        "title": "Courbes de demande",
         "description": "Historical demand, time until arrival and booking patterns can be modelled to estimate future demand across different commercial conditions."
       },
       "marketPositioning": {
-        "title": "Market Positioning",
+        "title": "Positionnement marché",
         "description": "Comparable properties, local supply, demand, seasonality and event-driven conditions provide context for rate decisions."
       },
       "continuousRecalculation": {
-        "title": "Continuous Recalculation",
+        "title": "Recalcul continu",
         "description": "Instead of relying on one fixed rate, pricing inputs can be recalculated as market conditions, booking pace and remaining inventory change."
       }
     }
   },
   "smartPricingPage": {
-    "back": "Back to HostMetric",
-    "eyebrow": "Smart Pricing",
-    "titleLine1": "Pricing driven by demand,",
-    "titleLine2": "not guesswork",
+    "back": "Retour à HostMetric",
+    "eyebrow": "Tarification intelligente",
+    "titleLine1": "Des prix guidés par la demande,",
+    "titleLine2": "pas par l’intuition",
     "description": "HostMetric applies study-informed revenue-management principles built around demand forecasting, booking behaviour, seasonality, market positioning and measurable performance indicators.",
     "cards": {
       "adr": {
-        "label": "Average Daily Rate",
+        "label": "Tarif journalier moyen",
         "title": "ADR",
-        "description": "Measures the average revenue generated for each occupied night.",
-        "formula": "ADR = Rental Revenue ÷ Occupied Nights"
+        "description": "Mesure le revenu moyen généré par chaque nuit occupée.",
+        "formula": "ADR = revenus locatifs ÷ nuits occupées"
       },
       "revpar": {
-        "label": "Revenue Efficiency",
+        "label": "Efficacité des revenus",
         "title": "RevPAR",
-        "description": "Combines rate and occupancy into one revenue-performance measure.",
+        "description": "Combine tarif et occupation en une seule mesure de performance des revenus.",
         "formula": "RevPAR = ADR × Occupancy"
       },
       "bookingPace": {
-        "title": "Booking Pace & Pick-Up",
+        "title": "Rythme de réservation et pickup",
         "description": "The rate at which future dates accumulate reservations can be compared with historical booking curves to identify periods where demand is developing faster or slower than expected."
       },
       "leadTime": {
@@ -912,69 +912,69 @@
         "description": "Pricing models can examine how expected demand responds to changes in price. This relationship helps distinguish between periods where stronger rates can be supported and periods where pricing needs to stimulate demand."
       },
       "competitivePositioning": {
-        "title": "Competitive Positioning",
+        "title": "Positionnement concurrentiel",
         "description": "Comparable accommodation, local supply, day-of-week patterns, seasonality and major demand periods provide market context around each pricing decision."
       }
     },
     "dynamicRevenueManagement": {
-      "eyebrow": "Dynamic Revenue Management",
-      "title": "The optimal price changes with the market",
+      "eyebrow": "Revenue management dynamique",
+      "title": "Le prix optimal évolue avec le marché",
       "description": "Hotel revenue-management training uses forecasting, booking curves, pick-up, demand segmentation, pricing and length-of-stay controls rather than relying on one fixed nightly rate. HostMetric's pricing philosophy follows these core professional revenue-management principles."
     },
-    "cta": "Optimize My Pricing"
+    "cta": "Optimiser mes tarifs"
   },
   "guestCommunicationPage": {
-    "back": "Back to HostMetric",
-    "eyebrow": "Guest Communication",
-    "titleLine1": "Every guest interaction",
-    "titleLine2": "shapes the experience",
+    "back": "Retour à HostMetric",
+    "eyebrow": "Communication voyageurs",
+    "titleLine1": "Chaque interaction avec un voyageur",
+    "titleLine2": "façonne l’expérience",
     "description": "Professional guest communication is managed as a complete journey — from the first question before booking to arrival, the stay, checkout and post-stay follow-up.",
     "cards": {
       "fastResponseStrategy": {
-        "title": "Fast Response Strategy",
+        "title": "Stratégie de réponse rapide",
         "description": "Guest enquiries are handled quickly, clearly and professionally, reducing uncertainty and helping potential guests receive the information they need before making a decision."
       },
       "preArrivalCommunication": {
-        "title": "Pre-Arrival Communication",
+        "title": "Communication avant arrivée",
         "description": "Arrival instructions, access information, directions and important property details are communicated proactively to create a smoother check-in experience."
       },
       "inStaySupport": {
-        "title": "In-Stay Support",
+        "title": "Assistance pendant le séjour",
         "description": "Questions and issues during the stay are handled through a structured communication workflow focused on fast resolution and minimal disruption to the guest experience."
       },
       "reviewIntelligence": {
-        "title": "Review Intelligence",
+        "title": "Analyse des avis",
         "description": "Guest feedback can be grouped into recurring themes such as communication, accuracy, comfort and arrival experience, allowing operational improvements to be based on patterns rather than isolated comments."
       }
     },
     "continuousImprovement": {
-      "eyebrow": "Continuous Improvement",
-      "title": "Communication becomes operational data",
+      "eyebrow": "Amélioration continue",
+      "title": "La communication devient une donnée opérationnelle",
       "description": "Response times, repeated guest questions, issue categories and review themes can reveal friction points across the guest journey. These insights can then improve instructions, communication templates and property operations over time."
     },
-    "cta": "Improve Your Guest Experience"
+    "cta": "Améliorer l’expérience de vos voyageurs"
   },
   "bookingManagementPage": {
-    "back": "Back to HostMetric",
-    "eyebrow": "Booking Management",
-    "titleLine1": "Every booking.",
-    "titleLine2": "One coordinated calendar.",
+    "back": "Retour à HostMetric",
+    "eyebrow": "Gestion des réservations",
+    "titleLine1": "Chaque réservation.",
+    "titleLine2": "Un calendrier coordonné.",
     "description": "Reservations, availability, calendars and booking restrictions are managed as one connected system across supported distribution channels.",
     "cards": {
       "calendarSynchronization": {
-        "title": "Calendar Synchronization",
+        "title": "Synchronisation du calendrier",
         "description": "Availability is coordinated across connected booking channels so that reservation changes can be reflected across the distribution strategy."
       },
       "availabilityManagement": {
-        "title": "Availability Management",
+        "title": "Gestion des disponibilités",
         "description": "Available nights are monitored as perishable inventory: once an unsold night passes, its revenue opportunity cannot be recovered."
       },
       "lengthOfStayControls": {
-        "title": "Length-of-Stay Controls",
+        "title": "Contrôles de durée de séjour",
         "description": "Minimum-stay rules can be adjusted strategically around high-demand periods while avoiding unnecessary restrictions that create unusable gaps in the calendar."
       },
       "gapNightManagement": {
-        "title": "Gap-Night Management",
+        "title": "Gestion des nuits isolées",
         "description": "Orphan nights and short availability gaps can be identified and managed so that booking rules do not unnecessarily prevent otherwise valuable reservations."
       },
       "bookingPace": {
@@ -982,53 +982,53 @@
         "description": "Pickup patterns indicate how quickly future inventory is being consumed. Comparing booking pace across equivalent periods provides useful information for pricing and availability decisions."
       },
       "multiChannelCoordination": {
-        "title": "Multi-Channel Coordination",
+        "title": "Coordination multicanale",
         "description": "Reservations from supported channels form part of a single commercial view of the property rather than being treated as unrelated platform activity."
       }
     },
     "connectedStrategy": {
-      "eyebrow": "One Connected Strategy",
-      "title": "Calendar decisions affect revenue decisions",
+      "eyebrow": "Une stratégie connectée",
+      "title": "Les décisions de calendrier influencent les revenus",
       "description": "Pricing and availability cannot be optimized independently. Booking pace, remaining inventory, length-of-stay restrictions and time until arrival all influence how valuable each remaining night may be."
     },
-    "cta": "Simplify My Bookings"
+    "cta": "Simplifier mes réservations"
   },
   "greaterVisibilityPage": {
-    "back": "Back to HostMetric",
-    "eyebrow": "Greater Visibility",
-    "title": "Visibility driven by distribution intelligence",
+    "back": "Retour à HostMetric",
+    "eyebrow": "Plus de visibilité",
+    "title": "Une visibilité guidée par l’intelligence de distribution",
     "description": "Strong distribution is not simply about appearing on more platforms. It is about understanding where demand originates, how each channel converts and what each booking contributes to commercial performance.",
     "cards": {
       "channelPerformance": {
-        "title": "Channel Performance",
+        "title": "Performance des canaux",
         "description": "We evaluate channel contribution using booking volume, booking value, acquisition cost, commission exposure and net revenue rather than relying on gross booking totals alone."
       },
       "netRevenueAnalysis": {
-        "title": "Net Revenue Analysis",
+        "title": "Analyse des revenus nets",
         "description": "Net Revenue = Gross Rental Revenue − Channel Costs. Comparing channels on a net basis gives a more meaningful picture of their economic value."
       },
       "demandPositioning": {
-        "title": "Demand Positioning",
+        "title": "Positionnement de la demande",
         "description": "Search visibility, market demand, seasonality, local events and competitive positioning all influence where inventory should be exposed and at what price."
       },
       "professionalRevenueLogic": {
-        "title": "Professional Revenue Logic",
+        "title": "Logique professionnelle de revenus",
         "description": "Our methodology follows hospitality-grade revenue management principles built around the same core demand signals and commercial KPIs used across professional accommodation revenue teams."
       }
     }
   },
   "centralizedManagementPage": {
-    "back": "Back to HostMetric",
-    "eyebrow": "Centralized Management",
-    "title": "One coordinated commercial view of your property",
+    "back": "Retour à HostMetric",
+    "eyebrow": "Gestion centralisée",
+    "title": "Une vision commerciale coordonnée de votre bien",
     "description": "Pricing, availability, reservations and guest activity are most valuable when they are analysed together instead of as isolated pieces of information.",
     "cards": {
       "occupancyRate": {
-        "title": "Occupancy Rate",
+        "title": "Taux d’occupation",
         "description": "Occupancy Rate = Booked Nights ÷ Available Nights × 100. We evaluate occupancy alongside rate performance rather than treating maximum occupancy as the objective."
       },
       "bookingWindow": {
-        "title": "Booking Window",
+        "title": "Fenêtre de réservation",
         "description": "Lead time measures the number of days between reservation and arrival. Changes in booking window can provide useful signals about demand behaviour and pricing conditions."
       },
       "bookingPace": {
@@ -1036,15 +1036,15 @@
         "description": "Booking pace measures how quickly future inventory is being reserved relative to a historical baseline or commercial target, helping identify whether demand is building ahead of or behind expectations."
       },
       "calendarEfficiency": {
-        "title": "Calendar Efficiency",
+        "title": "Efficacité du calendrier",
         "description": "Minimum-stay rules, orphan nights and availability gaps are reviewed as part of the calendar strategy so that valuable inventory is not unnecessarily constrained."
       }
     }
   },
   "smarterDistributionPage": {
-    "back": "Back to HostMetric",
-    "eyebrow": "Smarter Distribution",
-    "title": "Revenue decisions built around measurable demand",
+    "back": "Retour à HostMetric",
+    "eyebrow": "Distribution plus intelligente",
+    "title": "Des décisions de revenus fondées sur une demande mesurable",
     "description": "Our pricing approach analyses the relationship between rate, occupancy, booking pace, seasonality and market positioning rather than optimizing a single metric in isolation.",
     "cards": {
       "adr": {
@@ -1060,21 +1060,21 @@
         "description": "Price elasticity describes how strongly booking demand responds to changes in price. Understanding that relationship helps avoid both unnecessary discounting and unrealistic pricing."
       },
       "competitivePositioning": {
-        "title": "Competitive Positioning",
+        "title": "Positionnement concurrentiel",
         "description": "Comparable properties, demand conditions, booking pace, events and seasonal patterns provide context for rate decisions instead of relying on a fixed nightly price."
       }
     }
   },
   "privacyPolicyPage": {
     "hero": {
-      "eyebrow": "Legal & Privacy",
-      "title": "Privacy Policy",
+      "eyebrow": "Mentions légales et confidentialité",
+      "title": "Politique de confidentialité",
       "description": "This Privacy Policy explains how HostMetric collects, uses, protects and manages personal information when you visit our website, contact us, submit a property or use our services.",
-      "lastUpdated": "Last updated: August 2026"
+      "lastUpdated": "Dernière mise à jour : août 2026"
     },
     "sections": {
       "whoWeAre": {
-        "title": "1. Who We Are",
+        "title": "1. Qui sommes-nous",
         "description": "HostMetric provides services relating to short-term rental management, booking management, guest communication, distribution, listing optimization, pricing and property performance.",
         "brand": "HostMetric",
         "email": "Email: info@hostmetric.gr",
@@ -1082,7 +1082,7 @@
         "cyprus": "Cyprus: +357 99 80 78 70"
       },
       "informationCollected": {
-        "title": "2. Information We May Collect",
+        "title": "2. Informations que nous pouvons collecter",
         "description": "The information collected depends on how you interact with HostMetric and which services you request.",
         "items": [
           "Full name and contact details.",
@@ -1101,13 +1101,13 @@
         ]
       },
       "propertyPhotos": {
-        "title": "3. Property Photos and Files",
+        "title": "3. Photos et fichiers du bien",
         "paragraph1": "During property onboarding you may provide photographs, floor plans, documents and other material relating to your accommodation.",
         "paragraph2": "These files may be used to review the property, organize galleries, prepare listing content and, where agreed with you, configure or improve listings on accommodation platforms.",
         "paragraph3": "You should only upload files that you own or are legally authorized to provide and use."
       },
       "collection": {
-        "title": "4. How Information Is Collected",
+        "title": "4. Comment les informations sont collectées",
         "description": "Information may be collected when you:",
         "items": [
           "Complete our Get Started onboarding form.",
@@ -1119,7 +1119,7 @@
         ]
       },
       "processing": {
-        "title": "5. Why We Process Information",
+        "title": "5. Pourquoi nous traitons les informations",
         "description": "Information may be processed for purposes including:",
         "items": [
           "Responding to enquiries.",
@@ -1136,33 +1136,33 @@
         ]
       },
       "legalBases": {
-        "title": "6. Legal Bases for Processing",
+        "title": "6. Bases légales du traitement",
         "paragraph1": "Depending on the circumstances, processing may be necessary to take steps at your request before entering into an agreement, to perform an agreement, to comply with legal obligations, to pursue legitimate business interests or, where required, on the basis of your consent.",
         "paragraph2": "Where processing relies on consent, you may withdraw that consent subject to applicable law."
       },
       "platforms": {
-        "title": "7. Booking Platforms and Service Providers",
+        "title": "7. Plateformes de réservation et prestataires",
         "paragraph1": "Where necessary to provide agreed services, information may be processed through third-party accommodation, technology, hosting, storage, email, analytics, payment or communication services.",
         "paragraph2": "Accommodation platforms such as Booking.com, Airbnb, Vrbo, Expedia and similar services operate under their own terms and privacy policies.",
         "noSale": "HostMetric does not sell personal information."
       },
       "transfers": {
-        "title": "8. International Data Transfers",
+        "title": "8. Transferts internationaux de données",
         "paragraph1": "Some technology providers may process data in countries outside your country of residence or outside the European Economic Area.",
         "paragraph2": "Where required by applicable data-protection law, appropriate transfer mechanisms or safeguards will be used."
       },
       "retention": {
-        "title": "9. Data Retention",
+        "title": "9. Conservation des données",
         "paragraph1": "Personal information is retained only for as long as reasonably necessary for the purposes for which it was collected, the management of our relationship with you, applicable accounting requirements and other legal or contractual obligations.",
         "paragraph2": "When information is no longer required, it may be securely deleted or anonymized."
       },
       "security": {
-        "title": "10. Data Security",
+        "title": "10. Sécurité des données",
         "paragraph1": "HostMetric uses reasonable technical and organizational measures designed to protect information against unauthorized access, disclosure, alteration, loss or destruction.",
         "paragraph2": "Access to information should be limited to persons and service providers who require it for legitimate business purposes."
       },
       "rights": {
-        "title": "11. Your Data Protection Rights",
+        "title": "11. Vos droits en matière de protection des données",
         "description": "Subject to applicable law, you may have rights including:",
         "items": [
           "Access to your personal information.",
@@ -1179,14 +1179,14 @@
         "title": "12. Cookies",
         "paragraph1": "Our website may use cookies and similar technologies for essential functionality, preferences, security and, where permitted, analytics or other optional purposes.",
         "paragraph2BeforeLink": "For more information, please read our",
-        "link": "Cookie Policy"
+        "link": "Politique relative aux cookies"
       },
       "externalWebsites": {
-        "title": "13. External Websites",
+        "title": "13. Sites web externes",
         "description": "Our website may include links to external websites and booking platforms. HostMetric does not control the privacy practices, security or content of independent third-party websites."
       },
       "changes": {
-        "title": "14. Changes to this Privacy Policy",
+        "title": "14. Modifications de cette politique de confidentialité",
         "description": "HostMetric may update this Privacy Policy when our services, technology, processing activities or legal obligations change. The current version will always be available on this page."
       },
       "contact": {
@@ -1198,65 +1198,65 @@
   },
   "termsPage": {
     "hero": {
-      "eyebrow": "Legal",
-      "title": "Terms & Conditions",
+      "eyebrow": "Mentions légales",
+      "title": "Conditions générales",
       "description": "These terms govern access to the HostMetric website, use of its online features and information submitted through our contact and property onboarding systems.",
-      "lastUpdated": "Last updated: August 2026"
+      "lastUpdated": "Dernière mise à jour : août 2026"
     },
     "sections": {
       "acceptance": {
-        "title": "1. Acceptance of These Terms",
+        "title": "1. Acceptation de ces conditions",
         "paragraph1": "By accessing or using the HostMetric website, you agree to these Terms & Conditions. If you do not agree with them, you should discontinue use of the website."
       },
       "about": {
-        "title": "2. About HostMetric",
+        "title": "2. À propos de HostMetric",
         "paragraph1": "HostMetric provides services relating to short-term rental management, booking management, guest communication, distribution, listing optimization, pricing and performance improvement.",
         "paragraph2": "The exact scope, fees, responsibilities and commercial terms for services provided to an individual client may be governed by a separate written agreement."
       },
       "websiteInformation": {
-        "title": "3. Website Information",
+        "title": "3. Informations du site",
         "paragraph1": "We aim to keep the content of this website clear, accurate and useful. However, hospitality markets, booking platforms, regulations, technology and commercial conditions may change.",
         "paragraph2": "Website content is provided for general informational and commercial purposes and should not be considered a guarantee of a particular result."
       },
       "caseStudies": {
-        "title": "4. Property Performance and Case Studies",
+        "title": "4. Performance des biens et études de cas",
         "paragraph1": "Revenue, occupancy, ratings, reviews, awards and other performance information displayed on the website relate to the individual property and measured period identified.",
         "paragraph2": "Past performance does not guarantee future results. Performance may vary because of location, property type, market demand, competition, seasonality, availability, pricing, platform algorithms, reviews and other factors."
       },
       "pricingRevenue": {
-        "title": "5. Pricing and Revenue Management",
+        "title": "5. Tarification et revenue management",
         "paragraph1": "Pricing strategies may take into account historical booking information, comparable properties, market conditions, booking pace, availability, seasonality and other commercial indicators.",
         "paragraph2": "Pricing recommendations or changes cannot guarantee a particular level of revenue, profitability or occupancy."
       },
       "onboarding": {
-        "title": "6. Property Onboarding",
+        "title": "6. Onboarding du bien",
         "paragraph1": "Completing a HostMetric Get Started or property onboarding form allows us to review information relating to a property.",
         "paragraph2": "Submitting a form does not automatically create a management agreement, guarantee acceptance of the property or cause a listing to be published.",
         "paragraph3": "HostMetric may contact the owner or authorized representative to verify or obtain additional information before services begin."
       },
       "userInformation": {
-        "title": "7. Information Provided by Users",
+        "title": "7. Informations fournies par les utilisateurs",
         "paragraph1": "You are responsible for ensuring that information provided through our website is accurate to the best of your knowledge.",
         "paragraph2": "You must not knowingly submit false, misleading, unlawful or unauthorized information."
       },
       "materials": {
-        "title": "8. Photographs, Documents and Other Material",
+        "title": "8. Photos, documents et autres contenus",
         "paragraph1": "By submitting photographs, floor plans, documents or other material, you confirm that you own the material or have sufficient permission to provide and use it for the purposes requested.",
         "paragraph2": "Where agreed as part of our services, such materials may be prepared, organized or used in accommodation listings."
       },
       "thirdPartyPlatforms": {
-        "title": "9. Third-Party Platforms",
+        "title": "9. Plateformes tierces",
         "paragraph1": "Booking.com, Airbnb, Vrbo, Expedia and other accommodation or technology providers are independent third parties.",
         "paragraph2": "Their fees, policies, terms, systems, rankings, algorithms and availability may change independently of HostMetric."
       },
       "intellectualProperty": {
-        "title": "10. Intellectual Property",
+        "title": "10. Propriété intellectuelle",
         "paragraph1": "Unless otherwise stated, original HostMetric branding, website copy, designs, graphics, software and other HostMetric-created materials are protected by applicable intellectual-property laws.",
         "paragraph2": "They may not be reproduced, republished, distributed, commercially exploited or materially modified without permission.",
         "paragraph3": "Third-party names, logos and trademarks remain the property of their respective owners."
       },
       "acceptableUse": {
-        "title": "11. Acceptable Use",
+        "title": "11. Utilisation acceptable",
         "description": "You must not use the website to:",
         "items": [
           "Attempt unauthorized access to systems or data.",
@@ -1267,22 +1267,22 @@
         ]
       },
       "availabilityLiability": {
-        "title": "12. Website Availability and Liability",
+        "title": "12. Disponibilité du site et responsabilité",
         "paragraph1": "We take reasonable steps to maintain the website and the accuracy of its content, but we cannot guarantee uninterrupted or error-free operation at all times.",
         "paragraph2": "To the extent permitted by applicable law, HostMetric will not be responsible for indirect or consequential loss caused solely by reliance on general website information or by circumstances outside our reasonable control.",
         "paragraph3": "Nothing in these Terms excludes or limits liability where exclusion or limitation would be unlawful."
       },
       "externalLinks": {
-        "title": "13. External Links",
+        "title": "13. Liens externes",
         "paragraph1": "Links to third-party websites are provided for convenience or functionality. HostMetric is not responsible for the content, availability, security or practices of independent third-party websites."
       },
       "privacy": {
-        "title": "14. Privacy and Personal Information",
+        "title": "14. Confidentialité et données personnelles",
         "paragraphBeforeLink": "Personal information is handled in accordance with our",
-        "link": "Privacy Policy"
+        "link": "Politique de confidentialité"
       },
       "changes": {
-        "title": "15. Changes to These Terms",
+        "title": "15. Modifications de ces conditions",
         "paragraph1": "HostMetric may update these Terms & Conditions to reflect changes in services, technology, business practices or applicable requirements.",
         "paragraph2": "The latest version will be available on this page."
       },
@@ -1295,43 +1295,43 @@
   },
   "cookiePolicyPage": {
     "hero": {
-      "eyebrow": "Privacy & Preferences",
-      "title": "Cookie Policy",
+      "eyebrow": "Confidentialité et préférences",
+      "title": "Politique relative aux cookies",
       "description": "This policy explains how HostMetric may use cookies and similar technologies and how you can control optional technologies when using our website.",
-      "lastUpdated": "Last updated: August 2026"
+      "lastUpdated": "Dernière mise à jour : août 2026"
     },
     "sections": {
       "whatAreCookies": {
-        "title": "1. What Are Cookies?",
+        "title": "1. Que sont les cookies ?",
         "paragraph1": "Cookies are small data files that may be stored on your computer, phone or other device when you visit a website.",
         "paragraph2": "They can help websites operate correctly, remember settings, maintain sessions, improve security and, where permitted, understand how visitors use a website."
       },
       "similarTechnologies": {
-        "title": "2. Similar Technologies",
+        "title": "2. Technologies similaires",
         "paragraph1": "Websites may also use related technologies such as local storage, pixels, tags or similar technical tools. References to cookies in this policy may include these technologies where appropriate."
       },
       "necessaryCookies": {
-        "title": "3. Strictly Necessary Cookies",
+        "title": "3. Cookies strictement nécessaires",
         "paragraph1": "These technologies are required for essential website functionality or for a service specifically requested by the user.",
         "paragraph2": "They may support functions such as security, navigation, form operation, session management and other essential technical features.",
         "notice": "Essential cookies cannot always be disabled through a website preference tool because the website may require them to provide the requested functionality."
       },
       "preferenceCookies": {
-        "title": "4. Preference Cookies",
+        "title": "4. Cookies de préférence",
         "paragraph1": "Preference cookies may remember choices you make, such as language, display settings or other website preferences."
       },
       "analyticsCookies": {
-        "title": "5. Analytics Cookies",
+        "title": "5. Cookies analytiques",
         "paragraph1": "Analytics technologies may be used to understand how visitors interact with the website, which pages are used most often and how website performance can be improved.",
         "paragraph2": "Where consent is legally required, these technologies will only be activated after the relevant permission has been obtained."
       },
       "marketingCookies": {
-        "title": "6. Marketing and Advertising Cookies",
+        "title": "6. Cookies marketing et publicitaires",
         "paragraph1": "Marketing technologies may be used to measure advertising campaigns, understand marketing effectiveness or provide more relevant advertising.",
         "paragraph2": "They are treated as optional and will not be activated before consent where consent is required by applicable law."
       },
       "sessionPersistentCookies": {
-        "title": "7. Session and Persistent Cookies",
+        "title": "7. Cookies de session et persistants",
         "paragraph1": "Cookies may also be classified according to how long they remain on your device.",
         "sessionTitle": "Session cookies",
         "sessionText": "generally expire when the browser session ends.",
@@ -1339,29 +1339,29 @@
         "persistentText": "remain for a defined period or until removed."
       },
       "thirdPartyServices": {
-        "title": "8. Third-Party Services",
+        "title": "8. Services tiers",
         "paragraph1": "Certain functions may be provided by third-party services, such as analytics, maps, embedded content, social-media features or other technology providers.",
         "paragraph2": "These providers may use their own cookies or similar technologies in accordance with their own privacy and cookie policies."
       },
       "cookieChoices": {
-        "title": "9. Your Cookie Choices",
+        "title": "9. Vos choix concernant les cookies",
         "paragraph1": "Where optional cookies are used, visitors will be provided with a mechanism to make appropriate choices before those optional technologies are enabled when legally required.",
         "paragraph2": "You may also control or remove cookies through your browser settings. Blocking certain technologies may affect some website functionality."
       },
       "consent": {
-        "title": "10. Changing or Withdrawing Consent",
+        "title": "10. Modifier ou retirer le consentement",
         "paragraph1": "Where processing relies on cookie consent, you may change or withdraw your preferences through the available cookie settings mechanism.",
         "paragraph2": "Withdrawal of consent will not affect processing that was lawful before withdrawal."
       },
       "updates": {
-        "title": "11. Updates to This Policy",
+        "title": "11. Mises à jour de cette politique",
         "paragraph1": "This Cookie Policy may be updated when technologies, providers, website features or applicable requirements change.",
         "paragraph2": "The current version will always be published on this page."
       },
       "privacy": {
-        "title": "12. Privacy",
+        "title": "12. Confidentialité",
         "paragraphBeforeLink": "More information about how HostMetric processes personal information is available in our",
-        "link": "Privacy Policy"
+        "link": "Politique de confidentialité"
       },
       "contact": {
         "title": "13. Contact",
@@ -1372,466 +1372,466 @@
   },
   "getStartedPage": {
     "hero": {
-      "eyebrow": "Get Started",
-      "title": "Let's understand your property.",
-      "description": "Complete the onboarding form below so we can understand your property, current setup and goals before building the right HostMetric strategy for you."
+      "eyebrow": "Commencer",
+      "title": "Découvrons votre bien.",
+      "description": "Remplissez le formulaire d’onboarding ci-dessous afin que nous puissions comprendre votre bien, sa configuration actuelle et vos objectifs avant de construire la stratégie HostMetric adaptée."
     }
   },
   "onboardingForm": {
     "texts": {
-      "Onboarding Complete": "Onboarding Complete",
-      "Your property information is ready for review": "Your property information is ready for review",
+      "Onboarding Complete": "Onboarding terminé",
+      "Your property information is ready for review": "Les informations de votre bien sont prêtes à être examinées",
       "The seven-step front-end onboarding has been completed successfully. Once we connect the database and secure file storage, this final submission will be saved automatically for the HostMetric team.": "The seven-step front-end onboarding has been completed successfully. Once we connect the database and secure file storage, this final submission will be saved automatically for the HostMetric team.",
-      "Need to speak with us?": "Need to speak with us?",
-      "You can contact our team for help, corrections or questions about your property.": "You can contact our team for help, corrections or questions about your property.",
-      "Contact Us →": "Contact Us →",
-      "Property Onboarding": "Property Onboarding",
-      "Step": "Step",
-      "of 7": "of 7",
-      "Only fields marked with * are required.": "Only fields marked with * are required.",
-      "If you do not know an answer, leave the optional field blank. We can help you complete missing information later.": "If you do not know an answer, leave the optional field blank. We can help you complete missing information later.",
-      "Having trouble with any question?": "Having trouble with any question?",
-      "Leave optional fields blank or contact us and we&apos;ll help you complete the onboarding.": "Leave optional fields blank or contact us and we'll help you complete the onboarding.",
-      "Step 01": "Step 01",
-      "Owner & Business Details": "Owner & Business Details",
+      "Need to speak with us?": "Besoin de nous parler ?",
+      "You can contact our team for help, corrections or questions about your property.": "Vous pouvez contacter notre équipe pour obtenir de l’aide, demander une correction ou poser une question sur votre bien.",
+      "Contact Us →": "Nous contacter →",
+      "Property Onboarding": "Onboarding du bien",
+      "Step": "Étape",
+      "of 7": "sur 7",
+      "Only fields marked with * are required.": "Seuls les champs marqués d’un * sont obligatoires.",
+      "If you do not know an answer, leave the optional field blank. We can help you complete missing information later.": "Si vous ne connaissez pas une réponse, laissez le champ facultatif vide. Nous pourrons compléter les informations manquantes plus tard.",
+      "Having trouble with any question?": "Une question vous pose problème ?",
+      "Leave optional fields blank or contact us and we&apos;ll help you complete the onboarding.": "Laissez les champs facultatifs vides ou contactez-nous et nous vous aiderons à terminer l’onboarding.",
+      "Step 01": "Étape 01",
+      "Owner & Business Details": "Informations propriétaire et entreprise",
       "Tell us who owns or operates the property. Your answers help us determine which legal and property questions apply later.": "Tell us who owns or operates the property. Your answers help us determine which legal and property questions apply later.",
-      "Property Country *": "Property Country *",
-      "Select property country": "Select property country",
-      "Owner Type *": "Owner Type *",
-      "Individual": "Individual",
+      "Property Country *": "Pays du bien *",
+      "Select property country": "Choisir le pays du bien",
+      "Owner Type *": "Type de propriétaire *",
+      "Individual": "Particulier",
       "The accommodation is owned or operated by a private individual.": "The accommodation is owned or operated by a private individual.",
-      "Business": "Business",
+      "Business": "Entreprise",
       "The accommodation is operated through a company or legal entity.": "The accommodation is operated through a company or legal entity.",
-      "Legal First Name *": "Legal First Name *",
-      "Legal Last Name *": "Legal Last Name *",
-      "Email *": "Email *",
-      "Phone / WhatsApp *": "Phone / WhatsApp *",
-      "Phone country code": "Phone country code",
-      "Phone number": "Phone number",
+      "Legal First Name *": "Prénom légal *",
+      "Legal Last Name *": "Nom légal *",
+      "Email *": "E-mail *",
+      "Phone / WhatsApp *": "Téléphone / WhatsApp *",
+      "Phone country code": "Indicatif pays",
+      "Phone number": "Numéro de téléphone",
       "Select your country flag and international calling code, then enter your phone or WhatsApp number.": "Select your country flag and international calling code, then enter your phone or WhatsApp number.",
-      "Country of Residence *": "Country of Residence *",
-      "Select country": "Select country",
-      "Date of Birth": "Date of Birth",
-      "Residential Address": "Residential Address",
-      "Street Address": "Street Address",
-      "Street and number": "Street and number",
-      "City": "City",
-      "Postal Code": "Postal Code",
-      "Business Information": "Business Information",
-      "Legal Business Name *": "Legal Business Name *",
-      "Business Registration Number": "Business Registration Number",
-      "VAT Number": "VAT Number",
-      "Tax Identification Number": "Tax Identification Number",
-      "Registered Business Address": "Registered Business Address",
-      "Business City": "Business City",
-      "Business Postal Code": "Business Postal Code",
-      "Continue to Property Details →": "Continue to Property Details →",
-      "Step 02": "Step 02",
-      "Property & Accommodation Setup": "Property & Accommodation Setup",
-      "Property Name *": "Property Name *",
-      "Property Address *": "Property Address *",
-      "City / Locality *": "City / Locality *",
-      "Region / District": "Region / District",
-      "Postal Code *": "Postal Code *",
-      "General Property Category *": "General Property Category *",
-      "Select category": "Select category",
-      "Apartments / Apartment Building": "Apartments / Apartment Building",
-      "Hotel / Aparthotel": "Hotel / Aparthotel",
-      "Villas / Villa Complex": "Villas / Villa Complex",
-      "Houses / Holiday Homes": "Houses / Holiday Homes",
-      "Guesthouse": "Guesthouse",
-      "Mixed Accommodation": "Mixed Accommodation",
-      "Other": "Other",
-      "Your Relationship to the Property *": "Your Relationship to the Property *",
-      "Select option": "Select option",
-      "Owner": "Owner",
-      "Co-owner": "Co-owner",
-      "Authorized Manager": "Authorized Manager",
-      "Operated by my company": "Operated by my company",
-      "Accommodation Structure": "Accommodation Structure",
-      "How is your accommodation sold? *": "How is your accommodation sold? *",
-      "One entire property / one unit": "One entire property / one unit",
-      "Multiple identical units": "Multiple identical units",
-      "Multiple room or unit types": "Multiple room or unit types",
-      "Rooms & Units": "Rooms & Units",
-      "Accommodation Unit Types": "Accommodation Unit Types",
-      "Unit Type": "Unit Type",
-      "Room / Unit Type Name *": "Room / Unit Type Name *",
+      "Country of Residence *": "Pays de résidence *",
+      "Select country": "Choisir un pays",
+      "Date of Birth": "Date de naissance",
+      "Residential Address": "Adresse de résidence",
+      "Street Address": "Adresse",
+      "Street and number": "Rue et numéro",
+      "City": "Ville",
+      "Postal Code": "Code postal",
+      "Business Information": "Informations de l’entreprise",
+      "Legal Business Name *": "Raison sociale *",
+      "Business Registration Number": "Numéro d’enregistrement de l’entreprise",
+      "VAT Number": "Numéro de TVA",
+      "Tax Identification Number": "Numéro d’identification fiscale",
+      "Registered Business Address": "Adresse officielle de l’entreprise",
+      "Business City": "Ville de l’entreprise",
+      "Business Postal Code": "Code postal de l’entreprise",
+      "Continue to Property Details →": "Continuer vers les informations du bien →",
+      "Step 02": "Étape 02",
+      "Property & Accommodation Setup": "Configuration du bien et de l’hébergement",
+      "Property Name *": "Nom du bien *",
+      "Property Address *": "Adresse du bien *",
+      "City / Locality *": "Ville / localité *",
+      "Region / District": "Région / district",
+      "Postal Code *": "Code postal *",
+      "General Property Category *": "Catégorie générale du bien *",
+      "Select category": "Choisir une catégorie",
+      "Apartments / Apartment Building": "Appartements / immeuble d’appartements",
+      "Hotel / Aparthotel": "Hôtel / Appart’hôtel",
+      "Villas / Villa Complex": "Villas / complexe de villas",
+      "Houses / Holiday Homes": "Maisons / maisons de vacances",
+      "Guesthouse": "Maison d’hôtes",
+      "Mixed Accommodation": "Hébergement mixte",
+      "Other": "Autre",
+      "Your Relationship to the Property *": "Votre relation avec le bien *",
+      "Select option": "Choisir une option",
+      "Owner": "Propriétaire",
+      "Co-owner": "Copropriétaire",
+      "Authorized Manager": "Gestionnaire autorisé",
+      "Operated by my company": "Exploité par mon entreprise",
+      "Accommodation Structure": "Structure de l’hébergement",
+      "How is your accommodation sold? *": "Comment votre hébergement est-il commercialisé ? *",
+      "One entire property / one unit": "Un bien entier / une unité",
+      "Multiple identical units": "Plusieurs unités identiques",
+      "Multiple room or unit types": "Plusieurs types de chambres ou d’unités",
+      "Rooms & Units": "Chambres et unités",
+      "Accommodation Unit Types": "Types d’unités d’hébergement",
+      "Unit Type": "Type d’unité",
+      "Room / Unit Type Name *": "Nom du type de chambre / unité *",
       "Example: Deluxe Sea View Apartment": "Example: Deluxe Sea View Apartment",
-      "Unit Type *": "Unit Type *",
-      "Select type": "Select type",
-      "Double Room": "Double Room",
-      "Twin Room": "Twin Room",
-      "Triple Room": "Triple Room",
-      "Family Room": "Family Room",
+      "Unit Type *": "Type d’unité *",
+      "Select type": "Choisir un type",
+      "Double Room": "Chambre double",
+      "Twin Room": "Chambre lits jumeaux",
+      "Triple Room": "Chambre triple",
+      "Family Room": "Chambre familiale",
       "Studio": "Studio",
-      "Apartment": "Apartment",
+      "Apartment": "Appartement",
       "Suite": "Suite",
       "Villa": "Villa",
-      "Holiday Home": "Holiday Home",
+      "Holiday Home": "Maison de vacances",
       "Bungalow": "Bungalow",
       "Chalet": "Chalet",
-      "Number of Identical Units *": "Number of Identical Units *",
-      "Bedrooms": "Bedrooms",
-      "Bathrooms": "Bathrooms",
-      "Approximate Size (m²)": "Approximate Size (m²)",
-      "Maximum Guests *": "Maximum Guests *",
-      "Maximum Adults": "Maximum Adults",
-      "Maximum Children": "Maximum Children",
-      "Bed Configuration": "Bed Configuration",
-      "Kitchen / Kitchenette": "Kitchen / Kitchenette",
-      "Select": "Select",
-      "Full Kitchen": "Full Kitchen",
+      "Number of Identical Units *": "Nombre d’unités identiques *",
+      "Bedrooms": "Chambres",
+      "Bathrooms": "Salles de bain",
+      "Approximate Size (m²)": "Surface approximative (m²)",
+      "Maximum Guests *": "Nombre maximum de voyageurs *",
+      "Maximum Adults": "Nombre maximum d’adultes",
+      "Maximum Children": "Nombre maximum d’enfants",
+      "Bed Configuration": "Configuration des lits",
+      "Kitchen / Kitchenette": "Cuisine / kitchenette",
+      "Select": "Choisir",
+      "Full Kitchen": "Cuisine complète",
       "Kitchenette": "Kitchenette",
-      "None": "None",
-      "Smoking Policy": "Smoking Policy",
-      "Non-Smoking": "Non-Smoking",
-      "Smoking Allowed": "Smoking Allowed",
-      "Mixed / Depends on Unit": "Mixed / Depends on Unit",
-      "Add Another Unit Type": "Add Another Unit Type",
-      "Registration & Legal Information": "Registration & Legal Information",
-      "Do you already have the required accommodation registration?": "Do you already have the required accommodation registration?",
-      "Yes": "Yes",
-      "Not yet": "Not yet",
-      "I&apos;m not sure": "I'm not sure",
-      "Land Registration / Cadastral Reference": "Land Registration / Cadastral Reference",
-      "If known": "If known",
+      "None": "Aucune",
+      "Smoking Policy": "Politique fumeurs",
+      "Non-Smoking": "Non-fumeur",
+      "Smoking Allowed": "Fumer autorisé",
+      "Mixed / Depends on Unit": "Mixte / dépend de l’unité",
+      "Add Another Unit Type": "Ajouter un autre type d’unité",
+      "Registration & Legal Information": "Informations légales et d’enregistrement",
+      "Do you already have the required accommodation registration?": "Disposez-vous déjà de l’enregistrement d’hébergement requis ?",
+      "Yes": "Oui",
+      "Not yet": "Pas encore",
+      "I&apos;m not sure": "Je ne sais pas",
+      "Land Registration / Cadastral Reference": "Référence foncière / cadastrale",
+      "If known": "Si connue",
       "Optional. This is the official land-registry or cadastral reference used to identify the property in public land records. Leave it blank if you do not know it.": "Optional. This is the official land-registry or cadastral reference used to identify the property in public land records. Leave it blank if you do not know it.",
-      "Other Tourism / Accommodation Licence": "Other Tourism / Accommodation Licence",
-      "← Back": "← Back",
-      "Continue to Online Presence →": "Continue to Online Presence →",
-      "Step 03": "Step 03",
-      "Existing Online Presence & Systems": "Existing Online Presence & Systems",
+      "Other Tourism / Accommodation Licence": "Autre licence touristique / d’hébergement",
+      "← Back": "← Retour",
+      "Continue to Online Presence →": "Continuer vers la présence en ligne →",
+      "Step 03": "Étape 03",
+      "Existing Online Presence & Systems": "Présence en ligne et systèmes existants",
       "Tell us where the property is currently listed and which booking systems you already use. If you are unsure about a technical system, simply select &quot;I&apos;m not sure&quot;.": "Tell us where the property is currently listed and which booking systems you already use. If you are unsure about a technical system, simply select \"I'm not sure\".",
-      "Is the property currently listed online? *": "Is the property currently listed online? *",
-      "Booking Platforms": "Booking Platforms",
-      "Where is the property currently listed?": "Where is the property currently listed?",
+      "Is the property currently listed online? *": "Le bien est-il actuellement publié en ligne ? *",
+      "Booking Platforms": "Plateformes de réservation",
+      "Where is the property currently listed?": "Où le bien est-il actuellement publié ?",
       "Select every platform currently used. You can leave listing links and IDs blank if you do not know them.": "Select every platform currently used. You can leave listing links and IDs blank if you do not know them.",
-      "Other Platform": "Other Platform",
-      "Which other platform?": "Which other platform?",
+      "Other Platform": "Autre plateforme",
+      "Which other platform?": "Quelle autre plateforme ?",
       "Example: Hotels.com, Hostelworld, regional booking site...": "Example: Hotels.com, Hostelworld, regional booking site...",
       "Write the platform name here. You can add the listing link below if you have it.": "Write the platform name here. You can add the listing link below if you have it.",
-      "Existing Listings": "Existing Listings",
-      "Add your current listing details": "Add your current listing details",
+      "Existing Listings": "Annonces existantes",
+      "Add your current listing details": "Ajoutez les informations de vos annonces actuelles",
       "These fields are optional, but listing links help us review your current setup before we contact you.": "These fields are optional, but listing links help us review your current setup before we contact you.",
       "Booking.com": "Booking.com",
-      "Booking.com listing URL": "Booking.com listing URL",
-      "Property / Hotel ID (optional)": "Property / Hotel ID (optional)",
+      "Booking.com listing URL": "URL de l’annonce Booking.com",
+      "Property / Hotel ID (optional)": "ID du bien / hôtel (facultatif)",
       "Airbnb": "Airbnb",
-      "Airbnb listing URL": "Airbnb listing URL",
-      "Listing ID (optional)": "Listing ID (optional)",
+      "Airbnb listing URL": "URL de l’annonce Airbnb",
+      "Listing ID (optional)": "ID de l’annonce (facultatif)",
       "Vrbo": "Vrbo",
-      "Vrbo listing URL": "Vrbo listing URL",
+      "Vrbo listing URL": "URL de l’annonce Vrbo",
       "Expedia": "Expedia",
-      "Expedia listing URL": "Expedia listing URL",
-      "Property ID (optional)": "Property ID (optional)",
+      "Expedia listing URL": "URL de l’annonce Expedia",
+      "Property ID (optional)": "ID du bien (facultatif)",
       "Agoda": "Agoda",
-      "Agoda listing URL": "Agoda listing URL",
+      "Agoda listing URL": "URL de l’annonce Agoda",
       "Trip.com": "Trip.com",
-      "Trip.com listing URL": "Trip.com listing URL",
-      "Listing URL (optional)": "Listing URL (optional)",
-      "Existing Systems": "Existing Systems",
-      "How are reservations currently managed?": "How are reservations currently managed?",
-      "Do you use a Channel Manager? *": "Do you use a Channel Manager? *",
-      "No": "No",
-      "Channel Manager Name": "Channel Manager Name",
+      "Trip.com listing URL": "URL de l’annonce Trip.com",
+      "Listing URL (optional)": "URL de l’annonce (facultatif)",
+      "Existing Systems": "Systèmes existants",
+      "How are reservations currently managed?": "Comment les réservations sont-elles actuellement gérées ?",
+      "Do you use a Channel Manager? *": "Utilisez-vous un Channel Manager ? *",
+      "No": "Non",
+      "Channel Manager Name": "Nom du Channel Manager",
       "Example: SiteMinder, Cloudbeds...": "Example: SiteMinder, Cloudbeds...",
-      "Do you use a Property Management System (PMS)? *": "Do you use a Property Management System (PMS)? *",
-      "PMS Name": "PMS Name",
-      "PMS name": "PMS name",
-      "Do you have your own website? *": "Do you have your own website? *",
-      "Website URL": "Website URL",
+      "Do you use a Property Management System (PMS)? *": "Utilisez-vous un système de gestion de propriété (PMS) ? *",
+      "PMS Name": "Nom du PMS",
+      "PMS name": "Nom du PMS",
+      "Do you have your own website? *": "Avez-vous votre propre site web ? *",
+      "Website URL": "URL du site web",
       "https://...": "https://...",
-      "Do you currently accept direct bookings? *": "Do you currently accept direct bookings? *",
-      "Sometimes": "Sometimes",
-      "Continue to Property Setup →": "Continue to Property Setup →",
-      "Step 04": "Step 04",
-      "Facilities, Guest Policies & Operations": "Facilities, Guest Policies & Operations",
+      "Do you currently accept direct bookings? *": "Acceptez-vous actuellement les réservations directes ? *",
+      "Sometimes": "Parfois",
+      "Continue to Property Setup →": "Continuer vers la configuration du bien →",
+      "Step 04": "Étape 04",
+      "Facilities, Guest Policies & Operations": "Équipements, règles voyageurs et opérations",
       "Tell us how the property operates day to day and which facilities guests can expect. These details are used across booking platforms, filters, house rules and the guest journey.": "Tell us how the property operates day to day and which facilities guests can expect. These details are used across booking platforms, filters, house rules and the guest journey.",
-      "Arrival & Departure": "Arrival & Departure",
-      "Check-in and check-out setup": "Check-in and check-out setup",
-      "Check-in From *": "Check-in From *",
-      "Check-in Until": "Check-in Until",
-      "Check-out From": "Check-out From",
-      "Check-out Until *": "Check-out Until *",
-      "Main Check-in Method *": "Main Check-in Method *",
-      "Host / Staff Meets Guest": "Host / Staff Meets Guest",
-      "Reception / Front Desk": "Reception / Front Desk",
-      "Lockbox": "Lockbox",
-      "Smart Lock / Keypad": "Smart Lock / Keypad",
-      "Key Collection at Another Location": "Key Collection at Another Location",
-      "24 Hours": "24 Hours",
-      "Limited Hours": "Limited Hours",
-      "No Reception": "No Reception",
-      "Guest Communication Languages *": "Guest Communication Languages *",
-      "Example: English, Greek, German": "Example: English, Greek, German",
-      "Property Facilities": "Property Facilities",
-      "What does the property offer?": "What does the property offer?",
+      "Arrival & Departure": "Arrivée et départ",
+      "Check-in and check-out setup": "Configuration de l’arrivée et du départ",
+      "Check-in From *": "Arrivée à partir de *",
+      "Check-in Until": "Arrivée jusqu’à",
+      "Check-out From": "Départ à partir de",
+      "Check-out Until *": "Départ jusqu’à *",
+      "Main Check-in Method *": "Méthode principale d’arrivée *",
+      "Host / Staff Meets Guest": "Hôte / personnel accueille le voyageur",
+      "Reception / Front Desk": "Réception",
+      "Lockbox": "Boîte à clés",
+      "Smart Lock / Keypad": "Serrure intelligente / clavier",
+      "Key Collection at Another Location": "Récupération des clés à un autre endroit",
+      "24 Hours": "24 heures",
+      "Limited Hours": "Horaires limités",
+      "No Reception": "Pas de réception",
+      "Guest Communication Languages *": "Langues de communication voyageurs *",
+      "Example: English, Greek, German": "Exemple : anglais, grec, allemand",
+      "Property Facilities": "Équipements du bien",
+      "What does the property offer?": "Que propose le bien ?",
       "Select every facility that applies to the property as a whole. Room-specific amenities are listed separately below.": "Select every facility that applies to the property as a whole. Room-specific amenities are listed separately below.",
-      "Room & Unit Amenities": "Room & Unit Amenities",
-      "Amenities by accommodation type": "Amenities by accommodation type",
+      "Room & Unit Amenities": "Équipements des chambres et unités",
+      "Amenities by accommodation type": "Équipements par type d’hébergement",
       "Different room or unit types may have different amenities. Select the features that apply to each accommodation type.": "Different room or unit types may have different amenities. Select the features that apply to each accommodation type.",
-      "identical unit": "identical unit",
-      "Guest Policies": "Guest Policies",
-      "Rules guests should know": "Rules guests should know",
-      "Children Policy *": "Children Policy *",
-      "Children of All Ages Welcome": "Children of All Ages Welcome",
-      "Age Restrictions Apply": "Age Restrictions Apply",
-      "Adults Only": "Adults Only",
-      "Minimum Guest Age": "Minimum Guest Age",
-      "Leave blank if none": "Leave blank if none",
-      "Pets Policy *": "Pets Policy *",
-      "Pets Allowed": "Pets Allowed",
-      "Pets Allowed on Request": "Pets Allowed on Request",
-      "Pets Not Allowed": "Pets Not Allowed",
-      "Parties / Events *": "Parties / Events *",
-      "Not Allowed": "Not Allowed",
-      "Allowed": "Allowed",
-      "On Request": "On Request",
+      "identical unit": "unité identique",
+      "Guest Policies": "Règles voyageurs",
+      "Rules guests should know": "Règles à connaître",
+      "Children Policy *": "Politique enfants *",
+      "Children of All Ages Welcome": "Enfants de tous âges acceptés",
+      "Age Restrictions Apply": "Restrictions d’âge applicables",
+      "Adults Only": "Adultes uniquement",
+      "Minimum Guest Age": "Âge minimum des voyageurs",
+      "Leave blank if none": "Laisser vide si aucun",
+      "Pets Policy *": "Politique animaux *",
+      "Pets Allowed": "Animaux acceptés",
+      "Pets Allowed on Request": "Animaux acceptés sur demande",
+      "Pets Not Allowed": "Animaux non acceptés",
+      "Parties / Events *": "Fêtes / événements *",
+      "Not Allowed": "Non autorisé",
+      "Allowed": "Autorisé",
+      "On Request": "Sur demande",
       "Smoking Policy *": "Smoking Policy *",
-      "No Smoking": "No Smoking",
-      "Designated Areas Only": "Designated Areas Only",
-      "Quiet Hours": "Quiet Hours",
+      "No Smoking": "Interdiction de fumer",
+      "Designated Areas Only": "Zones désignées uniquement",
+      "Quiet Hours": "Heures de calme",
       "Example: 23:00 - 08:00": "Example: 23:00 - 08:00",
-      "Additional Details": "Additional Details",
+      "Additional Details": "Informations supplémentaires",
       "Helpful listing information": "Helpful listing information",
-      "Parking Details": "Parking Details",
+      "Parking Details": "Informations de stationnement",
       "Example: Free private parking, street parking, reservation required...": "Example: Free private parking, street parking, reservation required...",
-      "Internet / Wi-Fi Details": "Internet / Wi-Fi Details",
+      "Internet / Wi-Fi Details": "Informations Internet / Wi-Fi",
       "Example: Free Wi-Fi throughout the property...": "Example: Free Wi-Fi throughout the property...",
-      "Breakfast Details": "Breakfast Details",
+      "Breakfast Details": "Informations petit-déjeuner",
       "If applicable: included, optional, price, type...": "If applicable: included, optional, price, type...",
-      "Other Operational Notes": "Other Operational Notes",
+      "Other Operational Notes": "Autres notes opérationnelles",
       "Anything else we should know about access, facilities or operations...": "Anything else we should know about access, facilities or operations...",
-      "Accessibility": "Accessibility",
-      "Accessibility features": "Accessibility features",
+      "Accessibility": "Accessibilité",
+      "Accessibility features": "Équipements d’accessibilité",
       "Select only features that genuinely apply. We can request supporting accessibility photographs later in the photo step.": "Select only features that genuinely apply. We can request supporting accessibility photographs later in the photo step.",
-      "Continue to Pricing & Availability →": "Continue to Pricing & Availability →",
-      "Step 05": "Step 05",
-      "Pricing, Availability & Booking Rules": "Pricing, Availability & Booking Rules",
+      "Continue to Pricing & Availability →": "Continuer vers tarifs et disponibilités →",
+      "Step 05": "Étape 05",
+      "Pricing, Availability & Booking Rules": "Tarifs, disponibilités et règles de réservation",
       "This step is only an estimation of the property's current commercial setup. You may leave any field blank if you do not know the answer. HostMetric will analyse the market, booking history, competition and property performance before deciding the final pricing and booking strategy.": "This step is only an estimation of the property's current commercial setup. You may leave any field blank if you do not know the answer. HostMetric will analyse the market, booking history, competition and property performance before deciding the final pricing and booking strategy.",
-      "Everything in Step 5 is optional.": "Everything in Step 5 is optional.",
+      "Everything in Step 5 is optional.": "Tout ce qui figure à l’étape 5 est facultatif.",
       "Estimates are enough. If you do not know your current rates, occupancy, discounts, taxes or booking rules, leave them blank. HostMetric will review the property and build the final commercial strategy for you.": "Estimates are enough. If you do not know your current rates, occupancy, discounts, taxes or booking rules, leave them blank. HostMetric will review the property and build the final commercial strategy for you.",
-      "Commercial Setup": "Commercial Setup",
-      "How should pricing be managed?": "How should pricing be managed?",
-      "Currency": "Currency",
-      "Select currency": "Select currency",
+      "Commercial Setup": "Configuration commerciale",
+      "How should pricing be managed?": "Comment les tarifs doivent-ils être gérés ?",
+      "Currency": "Devise",
+      "Select currency": "Choisir une devise",
       "EUR — Euro": "EUR — Euro",
-      "GBP — British Pound": "GBP — British Pound",
-      "USD — US Dollar": "USD — US Dollar",
-      "Pricing Management Preference": "Pricing Management Preference",
-      "HostMetric manages and optimizes pricing": "HostMetric manages and optimizes pricing",
-      "HostMetric recommends — owner approves": "HostMetric recommends — owner approves",
-      "Keep my existing pricing strategy": "Keep my existing pricing strategy",
-      "I&apos;m not sure — recommend the best setup": "I'm not sure — recommend the best setup",
-      "Current Rates by Unit Type": "Current Rates by Unit Type",
-      "Current pricing information": "Current pricing information",
+      "GBP — British Pound": "GBP — Livre sterling",
+      "USD — US Dollar": "USD — Dollar américain",
+      "Pricing Management Preference": "Préférence de gestion tarifaire",
+      "HostMetric manages and optimizes pricing": "HostMetric gère et optimise les tarifs",
+      "HostMetric recommends — owner approves": "HostMetric recommande — le propriétaire valide",
+      "Keep my existing pricing strategy": "Conserver ma stratégie tarifaire actuelle",
+      "I&apos;m not sure — recommend the best setup": "Je ne sais pas — recommandez la meilleure configuration",
+      "Current Rates by Unit Type": "Tarifs actuels par type d’unité",
+      "Current pricing information": "Informations tarifaires actuelles",
       "These figures are optional. They help us understand your current commercial position before optimization begins.": "These figures are optional. They help us understand your current commercial position before optimization begins.",
-      "Current / Typical Base Nightly Rate": "Current / Typical Base Nightly Rate",
+      "Current / Typical Base Nightly Rate": "Tarif de base actuel / habituel par nuit",
       "Example: 120": "Example: 120",
-      "Typical Weekend Rate": "Typical Weekend Rate",
-      "Optional": "Optional",
-      "Unit-Specific Minimum Stay": "Unit-Specific Minimum Stay",
-      "Extra Guest Fee": "Extra Guest Fee",
-      "Child Fee": "Child Fee",
-      "Fees & Taxes": "Fees & Taxes",
-      "Additional charges": "Additional charges",
-      "Cleaning Fee": "Cleaning Fee",
+      "Typical Weekend Rate": "Tarif habituel du week-end",
+      "Optional": "Facultatif",
+      "Unit-Specific Minimum Stay": "Séjour minimum par unité",
+      "Extra Guest Fee": "Supplément voyageur",
+      "Child Fee": "Supplément enfant",
+      "Fees & Taxes": "Frais et taxes",
+      "Additional charges": "Frais supplémentaires",
+      "Cleaning Fee": "Frais de ménage",
       "Leave blank if included in the nightly rate": "Leave blank if included in the nightly rate",
-      "Cleaning Fee Charged": "Cleaning Fee Charged",
+      "Cleaning Fee Charged": "Mode de facturation du ménage",
       "Select if applicable": "Select if applicable",
-      "Per Stay": "Per Stay",
-      "Per Night": "Per Night",
-      "Included in Rate": "Included in Rate",
-      "Security / Damage Deposit": "Security / Damage Deposit",
-      "Do you know the applicable local / tourist taxes?": "Do you know the applicable local / tourist taxes?",
-      "No / I&apos;m not sure": "No / I'm not sure",
-      "Local / Tourist Tax Details": "Local / Tourist Tax Details",
+      "Per Stay": "Par séjour",
+      "Per Night": "Par nuit",
+      "Included in Rate": "Inclus dans le tarif",
+      "Security / Damage Deposit": "Dépôt de garantie / dommages",
+      "Do you know the applicable local / tourist taxes?": "Connaissez-vous les taxes locales / touristiques applicables ?",
+      "No / I&apos;m not sure": "Non / Je ne sais pas",
+      "Local / Tourist Tax Details": "Détails des taxes locales / touristiques",
       "Example: amount or percentage, per person / per night / per stay, whether included in the listed price...": "Example: amount or percentage, per person / per night / per stay, whether included in the listed price...",
-      "Availability Rules": "Availability Rules",
-      "How should guests be allowed to book?": "How should guests be allowed to book?",
-      "Normal Minimum Stay": "Normal Minimum Stay",
-      "Example: 2 nights": "Example: 2 nights",
-      "Maximum Stay": "Maximum Stay",
-      "Advance Notice": "Advance Notice",
-      "Same-Day Booking Allowed": "Same-Day Booking Allowed",
-      "At Least 1 Day": "At Least 1 Day",
-      "At Least 2 Days": "At Least 2 Days",
-      "At Least 3 Days": "At Least 3 Days",
-      "At Least 7 Days": "At Least 7 Days",
-      "Booking Window": "Booking Window",
-      "Up to 3 Months Ahead": "Up to 3 Months Ahead",
-      "Up to 6 Months Ahead": "Up to 6 Months Ahead",
-      "Up to 12 Months Ahead": "Up to 12 Months Ahead",
-      "Up to 18 Months Ahead": "Up to 18 Months Ahead",
-      "Up to 24 Months Ahead": "Up to 24 Months Ahead",
-      "No Specific Limit": "No Specific Limit",
-      "Same-Day Booking Notes": "Same-Day Booking Notes",
+      "Availability Rules": "Règles de disponibilité",
+      "How should guests be allowed to book?": "Comment les voyageurs doivent-ils pouvoir réserver ?",
+      "Normal Minimum Stay": "Séjour minimum habituel",
+      "Example: 2 nights": "Exemple : 2 nuits",
+      "Maximum Stay": "Séjour maximum",
+      "Advance Notice": "Préavis",
+      "Same-Day Booking Allowed": "Réservation le jour même autorisée",
+      "At Least 1 Day": "Au moins 1 jour",
+      "At Least 2 Days": "Au moins 2 jours",
+      "At Least 3 Days": "Au moins 3 jours",
+      "At Least 7 Days": "Au moins 7 jours",
+      "Booking Window": "Fenêtre de réservation",
+      "Up to 3 Months Ahead": "Jusqu’à 3 mois à l’avance",
+      "Up to 6 Months Ahead": "Jusqu’à 6 mois à l’avance",
+      "Up to 12 Months Ahead": "Jusqu’à 12 mois à l’avance",
+      "Up to 18 Months Ahead": "Jusqu’à 18 mois à l’avance",
+      "Up to 24 Months Ahead": "Jusqu’à 24 mois à l’avance",
+      "No Specific Limit": "Aucune limite spécifique",
+      "Same-Day Booking Notes": "Notes sur les réservations le jour même",
       "Example: accepted until 18:00 local time": "Example: accepted until 18:00 local time",
-      "Booking Policies": "Booking Policies",
-      "Cancellation and booking confirmation": "Cancellation and booking confirmation",
-      "Cancellation Preference": "Cancellation Preference",
+      "Booking Policies": "Politiques de réservation",
+      "Cancellation and booking confirmation": "Annulation et confirmation de réservation",
+      "Cancellation Preference": "Préférence d’annulation",
       "Flexible": "Flexible",
-      "Moderate": "Moderate",
-      "Strict": "Strict",
-      "Flexible + Non-Refundable Rate Options": "Flexible + Non-Refundable Rate Options",
-      "Let HostMetric Recommend the Best Structure": "Let HostMetric Recommend the Best Structure",
-      "Prepayment Preference": "Prepayment Preference",
+      "Moderate": "Modérée",
+      "Strict": "Stricte",
+      "Flexible + Non-Refundable Rate Options": "Flexible + options non remboursables",
+      "Let HostMetric Recommend the Best Structure": "Laisser HostMetric recommander la meilleure structure",
+      "Prepayment Preference": "Préférence de prépaiement",
       "Select if known": "Select if known",
-      "No Prepayment": "No Prepayment",
-      "Partial Prepayment": "Partial Prepayment",
-      "Full Prepayment": "Full Prepayment",
-      "Managed by Booking Platform": "Managed by Booking Platform",
-      "I&apos;m Not Sure": "I'm Not Sure",
-      "No-Show Policy": "No-Show Policy",
-      "Charge First Night": "Charge First Night",
-      "Charge Full Reservation": "Charge Full Reservation",
-      "No Charge": "No Charge",
-      "Follow Platform Policy": "Follow Platform Policy",
-      "Booking Confirmation": "Booking Confirmation",
-      "Instant Booking": "Instant Booking",
-      "Request / Owner Approval": "Request / Owner Approval",
-      "Let HostMetric Recommend": "Let HostMetric Recommend",
-      "Meals": "Meals",
-      "Breakfast pricing": "Breakfast pricing",
-      "Breakfast Pricing": "Breakfast Pricing",
-      "Included in Room Rate": "Included in Room Rate",
-      "Optional — Extra Charge": "Optional — Extra Charge",
-      "Not Offered": "Not Offered",
-      "Breakfast Price per Person": "Breakfast Price per Person",
-      "Promotions & Discounts": "Promotions & Discounts",
-      "Existing or preferred discounts": "Existing or preferred discounts",
+      "No Prepayment": "Aucun prépaiement",
+      "Partial Prepayment": "Prépaiement partiel",
+      "Full Prepayment": "Prépaiement complet",
+      "Managed by Booking Platform": "Géré par la plateforme de réservation",
+      "I&apos;m Not Sure": "Je ne sais pas",
+      "No-Show Policy": "Politique de non-présentation",
+      "Charge First Night": "Facturer la première nuit",
+      "Charge Full Reservation": "Facturer la totalité de la réservation",
+      "No Charge": "Aucun frais",
+      "Follow Platform Policy": "Suivre la politique de la plateforme",
+      "Booking Confirmation": "Confirmation de réservation",
+      "Instant Booking": "Réservation instantanée",
+      "Request / Owner Approval": "Demande / validation du propriétaire",
+      "Let HostMetric Recommend": "Laisser HostMetric recommander",
+      "Meals": "Repas",
+      "Breakfast pricing": "Tarification du petit-déjeuner",
+      "Breakfast Pricing": "Tarification du petit-déjeuner",
+      "Included in Room Rate": "Inclus dans le tarif",
+      "Optional — Extra Charge": "Facultatif — supplément",
+      "Not Offered": "Non proposé",
+      "Breakfast Price per Person": "Prix du petit-déjeuner par personne",
+      "Promotions & Discounts": "Promotions et remises",
+      "Existing or preferred discounts": "Remises existantes ou souhaitées",
       "Optional. Enter percentages only if you already use or strongly prefer these promotions. HostMetric can recommend the final commercial structure later.": "Optional. Enter percentages only if you already use or strongly prefer these promotions. HostMetric can recommend the final commercial structure later.",
-      "Current Performance": "Current Performance",
-      "Existing performance information": "Existing performance information",
+      "Current Performance": "Performance actuelle",
+      "Existing performance information": "Informations de performance existantes",
       "Optional. Estimates are fine. If the property is new, leave these fields blank.": "Optional. Estimates are fine. If the property is new, leave these fields blank.",
-      "Approximate Average Occupancy (%)": "Approximate Average Occupancy (%)",
-      "Approximate Average Daily Rate": "Approximate Average Daily Rate",
-      "Approximate Annual Accommodation Revenue": "Approximate Annual Accommodation Revenue",
-      "Revenue / Performance Target": "Revenue / Performance Target",
+      "Approximate Average Occupancy (%)": "Occupation moyenne approximative (%)",
+      "Approximate Average Daily Rate": "Tarif journalier moyen approximatif",
+      "Approximate Annual Accommodation Revenue": "Revenu annuel approximatif de l’hébergement",
+      "Revenue / Performance Target": "Objectif de revenus / performance",
       "Example: +20% revenue, higher ADR, better low-season occupancy...": "Example: +20% revenue, higher ADR, better low-season occupancy...",
-      "Owner Restrictions & Notes": "Owner Restrictions & Notes",
-      "Anything that affects availability or pricing?": "Anything that affects availability or pricing?",
-      "Owner Use / Dates That Must Stay Blocked": "Owner Use / Dates That Must Stay Blocked",
+      "Owner Restrictions & Notes": "Restrictions et notes du propriétaire",
+      "Anything that affects availability or pricing?": "Quelque chose influence-t-il la disponibilité ou les tarifs ?",
+      "Owner Use / Dates That Must Stay Blocked": "Utilisation propriétaire / dates à garder bloquées",
       "Optional. Example: family uses the property every August 10–20...": "Optional. Example: family uses the property every August 10–20...",
-      "Other Pricing or Booking Notes": "Other Pricing or Booking Notes",
+      "Other Pricing or Booking Notes": "Autres notes tarifaires ou de réservation",
       "Anything else we should know about rates, seasonality, minimum stays, promotions or booking rules...": "Anything else we should know about rates, seasonality, minimum stays, promotions or booking rules...",
-      "Continue to Photos & Listing Content →": "Continue to Photos & Listing Content →",
-      "Step 06": "Step 06",
-      "Photos & Listing Content": "Photos & Listing Content",
+      "Continue to Photos & Listing Content →": "Continuer vers les photos et le contenu de l’annonce →",
+      "Step 06": "Étape 06",
+      "Photos & Listing Content": "Photos et contenu de l’annonce",
       "Upload any photos you already have and tell us what makes the property special. Everything in this step is optional unless you upload files. HostMetric can reorganize the photo gallery, improve the listing copy and tell you which additional photographs are still needed.": "Upload any photos you already have and tell us what makes the property special. Everything in this step is optional unless you upload files. HostMetric can reorganize the photo gallery, improve the listing copy and tell you which additional photographs are still needed.",
-      "You do not need professional photos to complete this form.": "You do not need professional photos to complete this form.",
+      "You do not need professional photos to complete this form.": "Vous n’avez pas besoin de photos professionnelles pour remplir ce formulaire.",
       "Upload whatever you currently have. Photos are separated into property-level, room/unit-level and accessibility groups so we can later prepare the galleries correctly for each booking platform.": "Upload whatever you currently have. Photos are separated into property-level, room/unit-level and accessibility groups so we can later prepare the galleries correctly for each booking platform.",
-      "Property-Level Photos": "Property-Level Photos",
-      "Property & common-area gallery": "Property & common-area gallery",
+      "Property-Level Photos": "Photos du bien",
+      "Property & common-area gallery": "Galerie du bien et des espaces communs",
       "Useful examples include the exterior, entrance, reception, parking, pool, garden, terrace, common areas, restaurant, gym, spa and views — only where they actually exist.": "Useful examples include the exterior, entrance, reception, parking, pool, garden, terrace, common areas, restaurant, gym, spa and views — only where they actually exist.",
-      "Property / Common Area Photos": "Property / Common Area Photos",
-      "JPG or PNG recommended. Multiple files allowed.": "JPG or PNG recommended. Multiple files allowed.",
-      "Choose Photos": "Choose Photos",
-      "Room & Unit Galleries": "Room & Unit Galleries",
-      "Photos for each sellable unit type": "Photos for each sellable unit type",
+      "Property / Common Area Photos": "Photos du bien / espaces communs",
+      "JPG or PNG recommended. Multiple files allowed.": "JPG ou PNG recommandé. Plusieurs fichiers autorisés.",
+      "Choose Photos": "Choisir des photos",
+      "Room & Unit Galleries": "Galeries des chambres et unités",
+      "Photos for each sellable unit type": "Photos pour chaque type d’unité commercialisable",
       "Upload photos that belong specifically to each room or unit type: bedroom, bathroom, kitchen, living area, balcony or terrace, private pool, view and any other space included in that unit.": "Upload photos that belong specifically to each room or unit type: bedroom, bathroom, kitchen, living area, balcony or terrace, private pool, view and any other space included in that unit.",
       "Upload photographs representative of this unit type.": "Upload photographs representative of this unit type.",
-      "Add Unit Photos": "Add Unit Photos",
-      "Accessibility Evidence": "Accessibility Evidence",
-      "Accessibility feature photos": "Accessibility feature photos",
+      "Add Unit Photos": "Ajouter des photos de l’unité",
+      "Accessibility Evidence": "Éléments d’accessibilité",
+      "Accessibility feature photos": "Photos des équipements d’accessibilité",
       "You selected accessibility features in Step 4. Upload clear photographs that show those features if you already have them.": "You selected accessibility features in Step 4. Upload clear photographs that show those features if you already have them.",
-      "Selected accessibility features": "Selected accessibility features",
-      "Add Photos": "Add Photos",
-      "accessibility photo": "accessibility photo",
-      "selected.": "selected.",
-      "Optional Supporting Files": "Optional Supporting Files",
-      "Floor plans": "Floor plans",
+      "Selected accessibility features": "Équipements d’accessibilité sélectionnés",
+      "Add Photos": "Ajouter des photos",
+      "accessibility photo": "photo d’accessibilité",
+      "selected.": "sélectionné.",
+      "Optional Supporting Files": "Fichiers complémentaires facultatifs",
+      "Floor plans": "Plans",
       "If you have a floor plan, upload it here. This can help us understand room configuration and prepare accurate listing content.": "If you have a floor plan, upload it here. This can help us understand room configuration and prepare accurate listing content.",
-      "Add Floor Plan": "Add Floor Plan",
-      "file": "file",
-      "Listing Content": "Listing Content",
-      "Tell us the story of the property": "Tell us the story of the property",
+      "Add Floor Plan": "Ajouter un plan",
+      "file": "fichier",
+      "Listing Content": "Contenu de l’annonce",
+      "Tell us the story of the property": "Racontez-nous l’histoire du bien",
       "Do not worry about perfect wording. Short notes are enough — HostMetric can rewrite and optimize the final listing content.": "Do not worry about perfect wording. Short notes are enough — HostMetric can rewrite and optimize the final listing content.",
-      "Existing Property / Listing Title": "Existing Property / Listing Title",
-      "Leave blank if this is a new property": "Leave blank if this is a new property",
-      "Property Summary": "Property Summary",
+      "Existing Property / Listing Title": "Titre actuel du bien / de l’annonce",
+      "Leave blank if this is a new property": "Laisser vide s’il s’agit d’un nouveau bien",
+      "Property Summary": "Résumé du bien",
       "In your own words, briefly describe the accommodation.": "In your own words, briefly describe the accommodation.",
-      "Unique Selling Points": "Unique Selling Points",
+      "Unique Selling Points": "Points forts uniques",
       "Example: newly renovated, beach nearby, private pool, panoramic view, quiet location...": "Example: newly renovated, beach nearby, private pool, panoramic view, quiet location...",
-      "Neighbourhood / Area": "Neighbourhood / Area",
+      "Neighbourhood / Area": "Quartier / zone",
       "Tell us what guests can find around the property.": "Tell us what guests can find around the property.",
-      "Getting Around / Transport": "Getting Around / Transport",
+      "Getting Around / Transport": "Déplacements / transports",
       "Parking, buses, airport access, walking distances, car recommendations...": "Parking, buses, airport access, walking distances, car recommendations...",
-      "Nearby Attractions / Places": "Nearby Attractions / Places",
+      "Nearby Attractions / Places": "Lieux / attractions à proximité",
       "Beach, city centre, restaurants, landmarks, convention centre, ski lifts...": "Beach, city centre, restaurants, landmarks, convention centre, ski lifts...",
-      "Guest Arrival Notes": "Guest Arrival Notes",
+      "Guest Arrival Notes": "Notes d’arrivée voyageurs",
       "Anything useful about finding or entering the property.": "Anything useful about finding or entering the property.",
-      "Other Listing Notes": "Other Listing Notes",
+      "Other Listing Notes": "Autres notes pour l’annonce",
       "Anything else HostMetric should know when preparing the listings.": "Anything else HostMetric should know when preparing the listings.",
-      "Photo / File Usage Confirmation *": "Photo / File Usage Confirmation *",
-      "I own these files or have permission to use them": "I own these files or have permission to use them",
-      "I do not currently have permission": "I do not currently have permission",
-      "Continue to Final Review →": "Continue to Final Review →",
-      "Step 07": "Step 07",
-      "Final Review & Property Goals": "Final Review & Property Goals",
+      "Photo / File Usage Confirmation *": "Confirmation d’utilisation des photos / fichiers *",
+      "I own these files or have permission to use them": "Je possède ces fichiers ou j’ai l’autorisation de les utiliser",
+      "I do not currently have permission": "Je n’ai actuellement pas l’autorisation",
+      "Continue to Final Review →": "Continuer vers la vérification finale →",
+      "Step 07": "Étape 07",
+      "Final Review & Property Goals": "Vérification finale et objectifs du bien",
       "Review the key information below, tell us what you want to achieve and confirm that we may use the information you provided to prepare your HostMetric onboarding and listing strategy.": "Review the key information below, tell us what you want to achieve and confirm that we may use the information you provided to prepare your HostMetric onboarding and listing strategy.",
-      "Quick Review": "Quick Review",
-      "Your onboarding summary": "Your onboarding summary",
-      "Owner / Contact": "Owner / Contact",
-      "Property": "Property",
-      "Accommodation Inventory": "Accommodation Inventory",
-      "Total sellable unit": "Total sellable unit",
-      "across": "across",
-      "unit type": "unit type",
-      "Existing Online Presence": "Existing Online Presence",
-      "Facilities Selected": "Facilities Selected",
+      "Quick Review": "Vérification rapide",
+      "Your onboarding summary": "Résumé de votre onboarding",
+      "Owner / Contact": "Propriétaire / contact",
+      "Property": "Bien",
+      "Accommodation Inventory": "Inventaire de l’hébergement",
+      "Total sellable unit": "Nombre total d’unités commercialisables",
+      "across": "sur",
+      "unit type": "type d’unité",
+      "Existing Online Presence": "Présence en ligne existante",
+      "Facilities Selected": "Équipements sélectionnés",
       "Property-level facilities currently selected.": "Property-level facilities currently selected.",
-      "Files Selected": "Files Selected",
+      "Files Selected": "Fichiers sélectionnés",
       "Photos and supporting files ready for secure upload.": "Photos and supporting files ready for secure upload.",
-      "Your Goals": "Your Goals",
-      "What would you like HostMetric to improve?": "What would you like HostMetric to improve?",
-      "Main Goal *": "Main Goal *",
-      "Select your main goal": "Select your main goal",
-      "Full Professional Property Management": "Full Professional Property Management",
-      "Increase Revenue": "Increase Revenue",
-      "Improve Occupancy": "Improve Occupancy",
-      "Improve Guest Experience & Reviews": "Improve Guest Experience & Reviews",
-      "Expand to More Booking Platforms": "Expand to More Booking Platforms",
-      "Reduce My Day-to-Day Workload": "Reduce My Day-to-Day Workload",
-      "Launch a New Property Professionally": "Launch a New Property Professionally",
-      "I&apos;m Not Sure — Recommend the Best Strategy": "I'm Not Sure — Recommend the Best Strategy",
-      "Preferred Start Timeline": "Preferred Start Timeline",
-      "As Soon as Possible": "As Soon as Possible",
-      "Within 2 Weeks": "Within 2 Weeks",
-      "Within 1 Month": "Within 1 Month",
-      "Within 1–3 Months": "Within 1–3 Months",
-      "Later / Just Exploring": "Later / Just Exploring",
-      "Preferred Contact Method *": "Preferred Contact Method *",
-      "Phone Call": "Phone Call",
+      "Your Goals": "Vos objectifs",
+      "What would you like HostMetric to improve?": "Que souhaitez-vous que HostMetric améliore ?",
+      "Main Goal *": "Objectif principal *",
+      "Select your main goal": "Choisissez votre objectif principal",
+      "Full Professional Property Management": "Gestion professionnelle complète du bien",
+      "Increase Revenue": "Augmenter les revenus",
+      "Improve Occupancy": "Améliorer l’occupation",
+      "Improve Guest Experience & Reviews": "Améliorer l’expérience voyageur et les avis",
+      "Expand to More Booking Platforms": "Être présent sur davantage de plateformes",
+      "Reduce My Day-to-Day Workload": "Réduire ma charge de travail quotidienne",
+      "Launch a New Property Professionally": "Lancer un nouveau bien de manière professionnelle",
+      "I&apos;m Not Sure — Recommend the Best Strategy": "Je ne sais pas — recommandez la meilleure stratégie",
+      "Preferred Start Timeline": "Délai de démarrage souhaité",
+      "As Soon as Possible": "Dès que possible",
+      "Within 2 Weeks": "Sous 2 semaines",
+      "Within 1 Month": "Sous 1 mois",
+      "Within 1–3 Months": "Sous 1 à 3 mois",
+      "Later / Just Exploring": "Plus tard / je me renseigne seulement",
+      "Preferred Contact Method *": "Méthode de contact préférée *",
+      "Phone Call": "Appel téléphonique",
       "WhatsApp": "WhatsApp",
-      "Email": "Email",
-      "Any Method": "Any Method",
-      "Best Time to Contact You": "Best Time to Contact You",
+      "Email": "E-mail",
+      "Any Method": "N’importe quelle méthode",
+      "Best Time to Contact You": "Meilleur moment pour vous contacter",
       "Example: Weekdays after 17:00, mornings, anytime...": "Example: Weekdays after 17:00, mornings, anytime...",
-      "Final Notes": "Final Notes",
+      "Final Notes": "Notes finales",
       "Anything else you would like our team to know before we review the property?": "Anything else you would like our team to know before we review the property?",
-      "Final Confirmations": "Final Confirmations",
-      "Before sending your property": "Before sending your property",
+      "Final Confirmations": "Confirmations finales",
+      "Before sending your property": "Avant d’envoyer votre bien",
       "These confirmations allow us to review the onboarding properly. Completing this form does not by itself activate a management service or publish a listing.": "These confirmations allow us to review the onboarding properly. Completing this form does not by itself activate a management service or publish a listing.",
-      "Information Accuracy *": "Information Accuracy *",
+      "Information Accuracy *": "Exactitude des informations *",
       "I confirm the information is accurate to the best of my knowledge": "I confirm the information is accurate to the best of my knowledge",
-      "Property Authorization *": "Property Authorization *",
+      "Property Authorization *": "Autorisation concernant le bien *",
       "I confirm I am the owner or am authorized to provide information for this property": "I confirm I am the owner or am authorized to provide information for this property",
-      "HostMetric Review Authorization *": "HostMetric Review Authorization *",
+      "HostMetric Review Authorization *": "Autorisation d’examen par HostMetric *",
       "I authorize HostMetric to review this information for onboarding and listing preparation": "I authorize HostMetric to review this information for onboarding and listing preparation",
-      "What Happens Next?": "What Happens Next?",
-      "We review the property before anything goes live.": "We review the property before anything goes live.",
+      "What Happens Next?": "Que se passe-t-il ensuite ?",
+      "We review the property before anything goes live.": "Nous examinons le bien avant toute mise en ligne.",
       "Our team will review the property information, current listings, room or unit structure, facilities, photos and commercial setup. We can then contact you for anything missing and prepare the recommended listing, distribution and pricing strategy.": "Our team will review the property information, current listings, room or unit structure, facilities, photos and commercial setup. We can then contact you for anything missing and prepare the recommended listing, distribution and pricing strategy.",
-      "Property Review": "Property Review",
-      "Strategy & Missing Details": "Strategy & Missing Details",
-      "Onboarding & Listing Setup": "Onboarding & Listing Setup",
-      "Submit Property Onboarding →": "Submit Property Onboarding →",
+      "Property Review": "Examen du bien",
+      "Strategy & Missing Details": "Stratégie et informations manquantes",
+      "Onboarding & Listing Setup": "Onboarding et configuration des annonces",
+      "Submit Property Onboarding →": "Envoyer l’onboarding du bien →",
       "Please select the country where the property is located.": "Please select the country where the property is located.",
       "Please enter your legal first name.": "Please enter your legal first name.",
       "Please enter your legal last name.": "Please enter your legal last name.",
-      "Please enter your email address.": "Please enter your email address.",
-      "Please enter a valid email address.": "Please enter a valid email address.",
+      "Please enter your email address.": "Veuillez saisir votre adresse e-mail.",
+      "Please enter a valid email address.": "Veuillez saisir une adresse e-mail valide.",
       "Please enter your phone or WhatsApp number.": "Please enter your phone or WhatsApp number.",
       "Please select your country of residence.": "Please select your country of residence.",
       "Please enter the legal business name.": "Please enter the legal business name.",
@@ -1848,7 +1848,7 @@
       "Please enter the maximum guests for this unit type.": "Please enter the maximum guests for this unit type.",
       "Please tell us whether the property is currently listed online.": "Please tell us whether the property is currently listed online.",
       "Please select at least one platform where the property is currently listed.": "Please select at least one platform where the property is currently listed.",
-      "Please select an option.": "Please select an option.",
+      "Please select an option.": "Veuillez sélectionner une option.",
       "Please enter the earliest check-in time.": "Please enter the earliest check-in time.",
       "Please enter the latest check-out time.": "Please enter the latest check-out time.",
       "Please select the main check-in method.": "Please select the main check-in method.",
@@ -1858,294 +1858,294 @@
       "Please select the parties / events policy.": "Please select the parties / events policy.",
       "Please select the smoking policy.": "Please select the smoking policy.",
       "Please confirm that you own or have permission to use the uploaded files.": "Please confirm that you own or have permission to use the uploaded files.",
-      "Please select the main goal for your property.": "Please select the main goal for your property.",
-      "Please select how you would prefer us to contact you.": "Please select how you would prefer us to contact you.",
+      "Please select the main goal for your property.": "Veuillez sélectionner l’objectif principal de votre bien.",
+      "Please select how you would prefer us to contact you.": "Veuillez indiquer comment vous préférez être contacté.",
       "Please confirm that the information is accurate to the best of your knowledge.": "Please confirm that the information is accurate to the best of your knowledge.",
       "Please confirm that you are authorized to provide information for this property.": "Please confirm that you are authorized to provide information for this property.",
       "Please confirm that HostMetric may review this information for onboarding and listing setup.": "Please confirm that HostMetric may review this information for onboarding and listing setup.",
-      "Unnamed Room / Unit Type": "Unnamed Room / Unit Type",
-      "No email entered": "No email entered",
-      "No phone entered": "No phone entered",
-      "Unnamed Property": "Unnamed Property",
-      "Property category not specified": "Property category not specified",
-      "New / Not Currently Listed": "New / Not Currently Listed",
-      "Not Specified": "Not Specified",
-      "King Beds": "King Beds",
-      "Queen Beds": "Queen Beds",
-      "Double Beds": "Double Beds",
-      "Single Beds": "Single Beds",
-      "Sofa Beds": "Sofa Beds",
-      "Bunk Beds": "Bunk Beds",
-      "Partially / Some Units": "Partially / Some Units",
-      "Weekly Stay Discount": "Weekly Stay Discount",
-      "Monthly Stay Discount": "Monthly Stay Discount",
-      "Non-Refundable Discount": "Non-Refundable Discount",
-      "Mobile Rate Discount": "Mobile Rate Discount",
-      "Last-Minute Discount": "Last-Minute Discount",
-      "Early Booker Discount": "Early Booker Discount",
-      "Free WiFi": "Free WiFi",
-      "Free Parking": "Free Parking",
-      "Paid Parking": "Paid Parking",
-      "Swimming Pool": "Swimming Pool",
-      "Garden": "Garden",
-      "Terrace": "Terrace",
-      "Balcony": "Balcony",
-      "Lift / Elevator": "Lift / Elevator",
-      "Air Conditioning": "Air Conditioning",
-      "Heating": "Heating",
+      "Unnamed Room / Unit Type": "Chambre / unité sans nom",
+      "No email entered": "Aucun e-mail saisi",
+      "No phone entered": "Aucun téléphone saisi",
+      "Unnamed Property": "Bien sans nom",
+      "Property category not specified": "Catégorie du bien non précisée",
+      "New / Not Currently Listed": "Nouveau / non publié actuellement",
+      "Not Specified": "Non précisé",
+      "King Beds": "Lits king size",
+      "Queen Beds": "Lits queen size",
+      "Double Beds": "Lits doubles",
+      "Single Beds": "Lits simples",
+      "Sofa Beds": "Canapés-lits",
+      "Bunk Beds": "Lits superposés",
+      "Partially / Some Units": "Partiellement / certaines unités",
+      "Weekly Stay Discount": "Remise hebdomadaire",
+      "Monthly Stay Discount": "Remise mensuelle",
+      "Non-Refundable Discount": "Remise non remboursable",
+      "Mobile Rate Discount": "Remise mobile",
+      "Last-Minute Discount": "Remise de dernière minute",
+      "Early Booker Discount": "Remise réservation anticipée",
+      "Free WiFi": "Wi-Fi gratuit",
+      "Free Parking": "Parking gratuit",
+      "Paid Parking": "Parking payant",
+      "Swimming Pool": "Piscine",
+      "Garden": "Jardin",
+      "Terrace": "Terrasse",
+      "Balcony": "Balcon",
+      "Lift / Elevator": "Ascenseur",
+      "Air Conditioning": "Climatisation",
+      "Heating": "Chauffage",
       "Restaurant": "Restaurant",
       "Bar": "Bar",
-      "24-Hour Front Desk": "24-Hour Front Desk",
-      "Luggage Storage": "Luggage Storage",
-      "Airport Shuttle": "Airport Shuttle",
-      "Laundry Service": "Laundry Service",
-      "EV Charging": "EV Charging",
-      "Gym / Fitness Centre": "Gym / Fitness Centre",
-      "Spa / Sauna": "Spa / Sauna",
-      "Hot Tub / Jacuzzi": "Hot Tub / Jacuzzi",
-      "BBQ Facilities": "BBQ Facilities",
-      "Beach Access": "Beach Access",
-      "Private Beach Area": "Private Beach Area",
-      "Security Cameras Outside": "Security Cameras Outside",
-      "Smoke Alarms": "Smoke Alarms",
-      "Fire Extinguishers": "Fire Extinguishers",
-      "Step-Free Guest Entrance": "Step-Free Guest Entrance",
-      "Accessible Parking Space": "Accessible Parking Space",
-      "Wide Entrance Doorway": "Wide Entrance Doorway",
-      "Lift / Elevator Access": "Lift / Elevator Access",
-      "Step-Free Bedroom Access": "Step-Free Bedroom Access",
-      "Step-Free Bathroom Access": "Step-Free Bathroom Access",
-      "Grab Rails in Bathroom": "Grab Rails in Bathroom",
-      "Roll-In / Step-Free Shower": "Roll-In / Step-Free Shower",
+      "24-Hour Front Desk": "Réception 24h/24",
+      "Luggage Storage": "Bagagerie",
+      "Airport Shuttle": "Navette aéroport",
+      "Laundry Service": "Service de blanchisserie",
+      "EV Charging": "Recharge pour véhicule électrique",
+      "Gym / Fitness Centre": "Salle de sport / centre de fitness",
+      "Spa / Sauna": "Spa / sauna",
+      "Hot Tub / Jacuzzi": "Jacuzzi",
+      "BBQ Facilities": "Équipements barbecue",
+      "Beach Access": "Accès à la plage",
+      "Private Beach Area": "Plage privée",
+      "Security Cameras Outside": "Caméras de sécurité extérieures",
+      "Smoke Alarms": "Détecteurs de fumée",
+      "Fire Extinguishers": "Extincteurs",
+      "Step-Free Guest Entrance": "Entrée voyageurs sans marche",
+      "Accessible Parking Space": "Place de parking accessible",
+      "Wide Entrance Doorway": "Large porte d’entrée",
+      "Lift / Elevator Access": "Accès par ascenseur",
+      "Step-Free Bedroom Access": "Accès à la chambre sans marche",
+      "Step-Free Bathroom Access": "Accès à la salle de bain sans marche",
+      "Grab Rails in Bathroom": "Barres d’appui dans la salle de bain",
+      "Roll-In / Step-Free Shower": "Douche de plain-pied / sans marche",
       "TV": "TV",
-      "Streaming Services": "Streaming Services",
-      "WiFi": "WiFi",
-      "Refrigerator": "Refrigerator",
-      "Microwave": "Microwave",
-      "Oven": "Oven",
-      "Stovetop": "Stovetop",
-      "Dishwasher": "Dishwasher",
-      "Washing Machine": "Washing Machine",
-      "Dryer": "Dryer",
-      "Coffee Machine": "Coffee Machine",
-      "Kettle": "Kettle",
-      "Toaster": "Toaster",
-      "Dining Area": "Dining Area",
-      "Desk / Workspace": "Desk / Workspace",
-      "Safe": "Safe",
-      "Hair Dryer": "Hair Dryer",
-      "Iron": "Iron",
-      "Free Toiletries": "Free Toiletries",
-      "Private Bathroom": "Private Bathroom",
-      "Bathtub": "Bathtub",
-      "Shower": "Shower",
-      "Terrace / Patio": "Terrace / Patio",
-      "Private Entrance": "Private Entrance",
-      "Soundproofing": "Soundproofing",
-      "Sea View": "Sea View",
-      "Pool View": "Pool View",
-      "Garden View": "Garden View",
-      "City View": "City View",
-      "identical units": "identical units"
+      "Streaming Services": "Services de streaming",
+      "WiFi": "Wi-Fi",
+      "Refrigerator": "Réfrigérateur",
+      "Microwave": "Micro-ondes",
+      "Oven": "Four",
+      "Stovetop": "Plaques de cuisson",
+      "Dishwasher": "Lave-vaisselle",
+      "Washing Machine": "Lave-linge",
+      "Dryer": "Sèche-linge",
+      "Coffee Machine": "Machine à café",
+      "Kettle": "Bouilloire",
+      "Toaster": "Grille-pain",
+      "Dining Area": "Coin repas",
+      "Desk / Workspace": "Bureau / espace de travail",
+      "Safe": "Coffre-fort",
+      "Hair Dryer": "Sèche-cheveux",
+      "Iron": "Fer à repasser",
+      "Free Toiletries": "Articles de toilette gratuits",
+      "Private Bathroom": "Salle de bain privée",
+      "Bathtub": "Baignoire",
+      "Shower": "Douche",
+      "Terrace / Patio": "Terrasse / patio",
+      "Private Entrance": "Entrée privée",
+      "Soundproofing": "Insonorisation",
+      "Sea View": "Vue sur la mer",
+      "Pool View": "Vue sur la piscine",
+      "Garden View": "Vue sur le jardin",
+      "City View": "Vue sur la ville",
+      "identical units": "unités identiques"
     },
     "countries": {
       "Afghanistan": "Afghanistan",
-      "Albania": "Albania",
-      "Algeria": "Algeria",
-      "Andorra": "Andorra",
+      "Albania": "Albanie",
+      "Algeria": "Algérie",
+      "Andorra": "Andorre",
       "Angola": "Angola",
-      "Argentina": "Argentina",
-      "Armenia": "Armenia",
-      "Australia": "Australia",
-      "Austria": "Austria",
-      "Azerbaijan": "Azerbaijan",
+      "Argentina": "Argentine",
+      "Armenia": "Arménie",
+      "Australia": "Australie",
+      "Austria": "Autriche",
+      "Azerbaijan": "Azerbaïdjan",
       "Bahamas": "Bahamas",
-      "Bahrain": "Bahrain",
+      "Bahrain": "Bahreïn",
       "Bangladesh": "Bangladesh",
-      "Barbados": "Barbados",
-      "Belarus": "Belarus",
-      "Belgium": "Belgium",
+      "Barbados": "Barbade",
+      "Belarus": "Biélorussie",
+      "Belgium": "Belgique",
       "Belize": "Belize",
-      "Benin": "Benin",
-      "Bhutan": "Bhutan",
-      "Bolivia": "Bolivia",
-      "Bosnia and Herzegovina": "Bosnia and Herzegovina",
+      "Benin": "Bénin",
+      "Bhutan": "Bhoutan",
+      "Bolivia": "Bolivie",
+      "Bosnia and Herzegovina": "Bosnie-Herzégovine",
       "Botswana": "Botswana",
-      "Brazil": "Brazil",
+      "Brazil": "Brésil",
       "Brunei": "Brunei",
-      "Bulgaria": "Bulgaria",
+      "Bulgaria": "Bulgarie",
       "Burkina Faso": "Burkina Faso",
       "Burundi": "Burundi",
-      "Cambodia": "Cambodia",
-      "Cameroon": "Cameroon",
+      "Cambodia": "Cambodge",
+      "Cameroon": "Cameroun",
       "Canada": "Canada",
-      "Cape Verde": "Cape Verde",
-      "Central African Republic": "Central African Republic",
-      "Chad": "Chad",
-      "Chile": "Chile",
-      "China": "China",
-      "Colombia": "Colombia",
-      "Comoros": "Comoros",
+      "Cape Verde": "Cap-Vert",
+      "Central African Republic": "République centrafricaine",
+      "Chad": "Tchad",
+      "Chile": "Chili",
+      "China": "Chine",
+      "Colombia": "Colombie",
+      "Comoros": "Comores",
       "Congo": "Congo",
       "Costa Rica": "Costa Rica",
-      "Croatia": "Croatia",
+      "Croatia": "Croatie",
       "Cuba": "Cuba",
-      "Cyprus": "Cyprus",
-      "Czechia": "Czechia",
+      "Cyprus": "Chypre",
+      "Czechia": "Tchéquie",
       "Democratic Republic of the Congo": "Democratic Republic of the Congo",
-      "Denmark": "Denmark",
+      "Denmark": "Danemark",
       "Djibouti": "Djibouti",
-      "Dominica": "Dominica",
-      "Dominican Republic": "Dominican Republic",
-      "Ecuador": "Ecuador",
-      "Egypt": "Egypt",
-      "El Salvador": "El Salvador",
-      "Equatorial Guinea": "Equatorial Guinea",
-      "Eritrea": "Eritrea",
-      "Estonia": "Estonia",
+      "Dominica": "Dominique",
+      "Dominican Republic": "République dominicaine",
+      "Ecuador": "Équateur",
+      "Egypt": "Égypte",
+      "El Salvador": "Salvador",
+      "Equatorial Guinea": "Guinée équatoriale",
+      "Eritrea": "Érythrée",
+      "Estonia": "Estonie",
       "Eswatini": "Eswatini",
-      "Ethiopia": "Ethiopia",
-      "Fiji": "Fiji",
-      "Finland": "Finland",
+      "Ethiopia": "Éthiopie",
+      "Fiji": "Fidji",
+      "Finland": "Finlande",
       "France": "France",
       "Gabon": "Gabon",
-      "Gambia": "Gambia",
-      "Georgia": "Georgia",
-      "Germany": "Germany",
+      "Gambia": "Gambie",
+      "Georgia": "Géorgie",
+      "Germany": "Allemagne",
       "Ghana": "Ghana",
-      "Greece": "Greece",
-      "Grenada": "Grenada",
+      "Greece": "Grèce",
+      "Grenada": "Grenade",
       "Guatemala": "Guatemala",
-      "Guinea": "Guinea",
-      "Guinea-Bissau": "Guinea-Bissau",
+      "Guinea": "Guinée",
+      "Guinea-Bissau": "Guinée-Bissau",
       "Guyana": "Guyana",
-      "Haiti": "Haiti",
+      "Haiti": "Haïti",
       "Honduras": "Honduras",
       "Hong Kong": "Hong Kong",
-      "Hungary": "Hungary",
-      "Iceland": "Iceland",
-      "India": "India",
-      "Indonesia": "Indonesia",
+      "Hungary": "Hongrie",
+      "Iceland": "Islande",
+      "India": "Inde",
+      "Indonesia": "Indonésie",
       "Iran": "Iran",
-      "Iraq": "Iraq",
-      "Ireland": "Ireland",
-      "Israel": "Israel",
-      "Italy": "Italy",
-      "Ivory Coast": "Ivory Coast",
-      "Jamaica": "Jamaica",
-      "Japan": "Japan",
-      "Jordan": "Jordan",
+      "Iraq": "Irak",
+      "Ireland": "Irlande",
+      "Israel": "Israël",
+      "Italy": "Italie",
+      "Ivory Coast": "Côte d’Ivoire",
+      "Jamaica": "Jamaïque",
+      "Japan": "Japon",
+      "Jordan": "Jordanie",
       "Kazakhstan": "Kazakhstan",
       "Kenya": "Kenya",
       "Kiribati": "Kiribati",
       "Kosovo": "Kosovo",
-      "Kuwait": "Kuwait",
-      "Kyrgyzstan": "Kyrgyzstan",
+      "Kuwait": "Koweït",
+      "Kyrgyzstan": "Kirghizstan",
       "Laos": "Laos",
-      "Latvia": "Latvia",
-      "Lebanon": "Lebanon",
+      "Latvia": "Lettonie",
+      "Lebanon": "Liban",
       "Lesotho": "Lesotho",
       "Liberia": "Liberia",
-      "Libya": "Libya",
+      "Libya": "Libye",
       "Liechtenstein": "Liechtenstein",
-      "Lithuania": "Lithuania",
+      "Lithuania": "Lituanie",
       "Luxembourg": "Luxembourg",
       "Macao": "Macao",
       "Madagascar": "Madagascar",
       "Malawi": "Malawi",
-      "Malaysia": "Malaysia",
+      "Malaysia": "Malaisie",
       "Maldives": "Maldives",
       "Mali": "Mali",
-      "Malta": "Malta",
-      "Marshall Islands": "Marshall Islands",
-      "Mauritania": "Mauritania",
-      "Mauritius": "Mauritius",
-      "Mexico": "Mexico",
-      "Micronesia": "Micronesia",
-      "Moldova": "Moldova",
+      "Malta": "Malte",
+      "Marshall Islands": "Îles Marshall",
+      "Mauritania": "Mauritanie",
+      "Mauritius": "Maurice",
+      "Mexico": "Mexique",
+      "Micronesia": "Micronésie",
+      "Moldova": "Moldavie",
       "Monaco": "Monaco",
-      "Mongolia": "Mongolia",
-      "Montenegro": "Montenegro",
-      "Morocco": "Morocco",
+      "Mongolia": "Mongolie",
+      "Montenegro": "Monténégro",
+      "Morocco": "Maroc",
       "Mozambique": "Mozambique",
       "Myanmar": "Myanmar",
-      "Namibia": "Namibia",
+      "Namibia": "Namibie",
       "Nauru": "Nauru",
-      "Nepal": "Nepal",
-      "Netherlands": "Netherlands",
-      "New Zealand": "New Zealand",
+      "Nepal": "Népal",
+      "Netherlands": "Pays-Bas",
+      "New Zealand": "Nouvelle-Zélande",
       "Nicaragua": "Nicaragua",
       "Niger": "Niger",
       "Nigeria": "Nigeria",
-      "North Korea": "North Korea",
-      "North Macedonia": "North Macedonia",
-      "Norway": "Norway",
+      "North Korea": "Corée du Nord",
+      "North Macedonia": "Macédoine du Nord",
+      "Norway": "Norvège",
       "Oman": "Oman",
       "Pakistan": "Pakistan",
-      "Palau": "Palau",
+      "Palau": "Palaos",
       "Palestine": "Palestine",
       "Panama": "Panama",
-      "Papua New Guinea": "Papua New Guinea",
+      "Papua New Guinea": "Papouasie-Nouvelle-Guinée",
       "Paraguay": "Paraguay",
-      "Peru": "Peru",
+      "Peru": "Pérou",
       "Philippines": "Philippines",
-      "Poland": "Poland",
+      "Poland": "Pologne",
       "Portugal": "Portugal",
       "Qatar": "Qatar",
-      "Romania": "Romania",
-      "Russia": "Russia",
+      "Romania": "Roumanie",
+      "Russia": "Russie",
       "Rwanda": "Rwanda",
       "Saint Kitts and Nevis": "Saint Kitts and Nevis",
       "Saint Lucia": "Saint Lucia",
       "Saint Vincent and the Grenadines": "Saint Vincent and the Grenadines",
       "Samoa": "Samoa",
-      "San Marino": "San Marino",
+      "San Marino": "Saint-Marin",
       "Sao Tome and Principe": "Sao Tome and Principe",
-      "Saudi Arabia": "Saudi Arabia",
-      "Senegal": "Senegal",
-      "Serbia": "Serbia",
+      "Saudi Arabia": "Arabie saoudite",
+      "Senegal": "Sénégal",
+      "Serbia": "Serbie",
       "Seychelles": "Seychelles",
       "Sierra Leone": "Sierra Leone",
-      "Singapore": "Singapore",
-      "Slovakia": "Slovakia",
-      "Slovenia": "Slovenia",
-      "Solomon Islands": "Solomon Islands",
-      "Somalia": "Somalia",
-      "South Africa": "South Africa",
-      "South Korea": "South Korea",
-      "South Sudan": "South Sudan",
-      "Spain": "Spain",
+      "Singapore": "Singapour",
+      "Slovakia": "Slovaquie",
+      "Slovenia": "Slovénie",
+      "Solomon Islands": "Îles Salomon",
+      "Somalia": "Somalie",
+      "South Africa": "Afrique du Sud",
+      "South Korea": "Corée du Sud",
+      "South Sudan": "Soudan du Sud",
+      "Spain": "Espagne",
       "Sri Lanka": "Sri Lanka",
-      "Sudan": "Sudan",
+      "Sudan": "Soudan",
       "Suriname": "Suriname",
-      "Sweden": "Sweden",
-      "Switzerland": "Switzerland",
-      "Syria": "Syria",
-      "Taiwan": "Taiwan",
-      "Tajikistan": "Tajikistan",
-      "Tanzania": "Tanzania",
-      "Thailand": "Thailand",
-      "Timor-Leste": "Timor-Leste",
+      "Sweden": "Suède",
+      "Switzerland": "Suisse",
+      "Syria": "Syrie",
+      "Taiwan": "Taïwan",
+      "Tajikistan": "Tadjikistan",
+      "Tanzania": "Tanzanie",
+      "Thailand": "Thaïlande",
+      "Timor-Leste": "Timor oriental",
       "Togo": "Togo",
       "Tonga": "Tonga",
       "Trinidad and Tobago": "Trinidad and Tobago",
-      "Tunisia": "Tunisia",
-      "Turkey": "Turkey",
-      "Turkmenistan": "Turkmenistan",
+      "Tunisia": "Tunisie",
+      "Turkey": "Turquie",
+      "Turkmenistan": "Turkménistan",
       "Tuvalu": "Tuvalu",
-      "Uganda": "Uganda",
+      "Uganda": "Ouganda",
       "Ukraine": "Ukraine",
-      "United Arab Emirates": "United Arab Emirates",
-      "United Kingdom": "United Kingdom",
-      "United States": "United States",
+      "United Arab Emirates": "Émirats arabes unis",
+      "United Kingdom": "Royaume-Uni",
+      "United States": "États-Unis",
       "Uruguay": "Uruguay",
-      "Uzbekistan": "Uzbekistan",
+      "Uzbekistan": "Ouzbékistan",
       "Vanuatu": "Vanuatu",
-      "Vatican City": "Vatican City",
+      "Vatican City": "État de la Cité du Vatican",
       "Venezuela": "Venezuela",
-      "Vietnam": "Vietnam",
-      "Yemen": "Yemen",
-      "Zambia": "Zambia",
+      "Vietnam": "Viêt Nam",
+      "Yemen": "Yémen",
+      "Zambia": "Zambie",
       "Zimbabwe": "Zimbabwe"
     }
   }
