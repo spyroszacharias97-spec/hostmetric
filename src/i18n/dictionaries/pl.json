@@ -2,7 +2,7 @@
   "navigation": {
     "services": "Usługi",
     "howItWorks": "Jak to działa",
-    "pricing": "Cennik",
+    "pricing": "FAQ",
     "about": "O nas",
     "contact": "Kontakt",
     "getStarted": "Zacznij",
@@ -429,7 +429,7 @@
       "title": "Firma",
       "about": "O nas",
       "howItWorks": "Jak to działa",
-      "pricing": "Cennik",
+      "pricing": "FAQ",
       "contact": "Skontaktuj się z nami"
     },
     "contact": {
@@ -581,108 +581,113 @@
       "link": "Skontaktuj się z HostMetric"
     }
   },
-  "pricingPage": {
+  "faqPage": {
     "hero": {
-      "eyebrow": "Prosty cennik",
-      "titleLine1": "Jeden prosty pakiet.",
-      "titleLine2": "Wszystko, czego potrzebujesz.",
-      "description": "Bez skomplikowanych planów i zbędnych subskrypcji. Jedna kompletna usługa zarządzania zbudowana wokół wyników Twojej nieruchomości, doświadczenia gości i długoterminowego wzrostu."
+      "eyebrow": "FAQ HOSTMETRIC",
+      "titleLine1": "Wszystko, co musisz",
+      "titleLine2": "wiedzieć.",
+      "description": "Jasne odpowiedzi dotyczące zarządzania nieruchomością, rezerwacji, cen, komunikacji z gośćmi i współpracy z HostMetric."
     },
-    "pricingCard": {
-      "eyebrow": "Pełne zarządzanie",
-      "revenueLabel": "przychodów z rezerwacji",
-      "zeroRegistrationFee": "Brak opłaty rejestracyjnej",
-      "description": "Nasz sukces rośnie razem z Twoim. Zamiast skomplikowanych stałych planów HostMetric działa w oparciu o jeden przejrzysty model prowizyjny.",
-      "button": "Zacznij",
-      "summaryEyebrow": "Wszystko w cenie",
-      "summaryTitle": "Jeden system zarządzania zbudowany wokół Twojej nieruchomości.",
-      "summaryDescription": "Od sposobu prezentacji i dystrybucji nieruchomości po ceny, rezerwacje, komunikację z gośćmi i ciągłą analizę wyników — kluczowe elementy obsługi rezerwacji działają wspólnie w ramach jednej skoordynowanej strategii.",
-      "summaryItems": [
-        "Ludzka komunikacja z gośćmi",
-        "Inteligentne ceny",
-        "Zarządzanie rezerwacjami",
-        "Synchronizacja kalendarza",
-        "Dystrybucja wieloplatformowa",
-        "Optymalizacja ofert",
-        "Analiza wyników",
-        "Strategia opinii"
+    "propertySection": {
+      "eyebrow": "TWOJA NIERUCHOMOŚĆ",
+      "title": "Zarządzanie i rozwój Twojej nieruchomości",
+      "description": "Jak HostMetric zarządza dystrybucją, rezerwacjami, cenami, komunikacją z gośćmi i ciągłą poprawą wyników Twojej nieruchomości.",
+      "questions": [
+        {
+          "question": "Co muszę zrobić, aby rozpocząć współpracę z HostMetric?",
+          "answer": "Rozpoczęcie współpracy jest proste. Opowiedz nam o swojej nieruchomości i obecnej konfiguracji, a nasz zespół przeanalizuje jej pozycjonowanie, ceny, dostępność i dystrybucję. Następnie przygotujemy nieruchomość do profesjonalnego zarządzania i zbudujemy strategię dopasowaną do jej indywidualnych cech i celów."
+        },
+        {
+          "question": "Jak HostMetric pomaga zwiększyć liczbę moich rezerwacji?",
+          "answer": "HostMetric łączy zoptymalizowaną prezentację nieruchomości, strategiczną dystrybucję, inteligentne ceny i ciągłe monitorowanie wyników. Zamiast traktować ofertę jako coś statycznego, stale analizujemy jej wyniki i dostosowujemy strategię, gdy pojawiają się możliwości poprawy."
+        },
+        {
+          "question": "Czy mogę nadal przyjmować własne rezerwacje bezpośrednie?",
+          "answer": "Tak. Możesz nadal przyjmować własne rezerwacje. Najważniejsze jest utrzymanie synchronizacji dostępności, aby każdy potwierdzony pobyt był prawidłowo odzwierciedlony w kalendarzu nieruchomości i aby uniknąć nakładających się rezerwacji."
+        },
+        {
+          "question": "Jak poprawiacie widoczność mojej nieruchomości na platformach rezerwacyjnych?",
+          "answer": "Koncentrujemy się na elementach, które wpływają na skuteczność konkurowania nieruchomości online, takich jak jakość oferty, ceny, dostępność, warunki rezerwacji, informacje o nieruchomości i ogólne wyniki. Elementy te są stale analizowane, a nie ustawiane tylko raz i pozostawiane bez zmian."
+        },
+        {
+          "question": "Na jakich platformach rezerwacyjnych może być dostępna moja nieruchomość?",
+          "answer": "Strategia dystrybucji zależy od nieruchomości i jej docelowych gości. HostMetric może zarządzać i koordynować oferty na odpowiednich głównych kanałach rezerwacyjnych, utrzymując spójność dostępności i strategii komercyjnej nieruchomości."
+        },
+        {
+          "question": "Jak zarządzane są moje rezerwacje i kalendarze?",
+          "answer": "HostMetric koordynuje rezerwacje i dostępność poprzez scentralizowany proces zarządzania. Zmiany w kalendarzu są synchronizowane między połączonymi kanałami, aby dostępność pozostawała dokładna, a ryzyko konfliktujących rezerwacji było mniejsze."
+        },
+        {
+          "question": "Kto komunikuje się z moimi gośćmi?",
+          "answer": "HostMetric może zarządzać komunikacją z gośćmi przez cały proces rezerwacji, pomagając im otrzymywać jasne i terminowe informacje przed przyjazdem, podczas pobytu i w związku z wyjazdem, przy jednoczesnym zachowaniu profesjonalnego i spójnego doświadczenia."
+        },
+        {
+          "question": "Kto ustala cenę za noc mojej nieruchomości?",
+          "answer": "HostMetric zarządza i stale optymalizuje cenę sprzedaży nieruchomości. Ty określasz minimalną cenę za noc, którą jesteś gotowy zaakceptować, a nasza strategia cenowa może ustalać wyższe stawki, gdy popyt, warunki rynkowe i wyniki nieruchomości to uzasadniają."
+        },
+        {
+          "question": "Jak działa dynamiczne ustalanie cen w HostMetric?",
+          "answer": "Ceny są stale oceniane na podstawie wielu sygnałów, zamiast opierać się na jednej stałej stawce za noc. Uwzględniamy takie czynniki jak popyt, sezonowość, zachowania rezerwacyjne, dostępność, warunki rynkowe i wyniki samej nieruchomości, aby ustalić bardziej konkurencyjną cenę sprzedaży."
+        },
+        {
+          "question": "Czy mogę ustawić minimalną cenę za noc?",
+          "answer": "Tak. Możesz ustawić minimalną cenę za noc, którą jesteś gotowy zaakceptować. Jest to dolna granica naszej strategii cenowej, a nie standardowa cena sprzedaży nieruchomości. HostMetric może stosować wyższe stawki, gdy warunki rynkowe na to pozwalają."
+        },
+        {
+          "question": "Jak wykorzystujecie AI i dane do optymalizacji wyników mojej nieruchomości?",
+          "answer": "HostMetric wykorzystuje AI, algorytmy cenowe i dane o wynikach nieruchomości, aby wspierać trafniejsze decyzje komercyjne. Stale analizujemy popyt, zachowania rezerwacyjne, sezonowość, warunki rynkowe i wyniki samej nieruchomości, aby identyfikować możliwości i z czasem optymalizować jej strategię."
+        }
       ]
     },
-    "includedSection": {
-      "eyebrow": "Wliczone w 11%",
-      "title": "Kompleksowe zarządzanie wynikami rezerwacji.",
-      "description": "Łączymy operacyjne i komercyjne elementy skutecznego najmu krótkoterminowego w jedno skoordynowane podejście do zarządzania."
-    },
-    "includedServices": [
-      {
-        "title": "Tworzenie i optymalizacja ofert",
-        "text": "Profesjonalna struktura oferty, pozycjonowanie, opisy i ciągła optymalizacja."
-      },
-      {
-        "title": "Dystrybucja wieloplatformowa",
-        "text": "Twoja nieruchomość może być dystrybuowana na wiodących platformach rezerwacyjnych i turystycznych."
-      },
-      {
-        "title": "Synchronizacja kalendarza",
-        "text": "Dostępność jest koordynowana pomiędzy połączonymi kanałami, aby ograniczać konflikty i podwójne rezerwacje."
-      },
-      {
-        "title": "Zarządzanie rezerwacjami",
-        "text": "Zarządzamy aktywnością rezerwacyjną i utrzymujemy porządek w rezerwacjach we wszystkich połączonych kanałach."
-      },
-      {
-        "title": "Inteligentne ceny i optymalizacja przychodów",
-        "text": "Decyzje cenowe są stale oparte na popycie, sezonowości, warunkach rynkowych i wynikach nieruchomości."
-      },
-      {
-        "title": "Ludzka komunikacja z gośćmi",
-        "text": "Profesjonalna komunikacja z gośćmi prowadzona przez przeszkolonych członków zespołu, ze szczególnym naciskiem na szybkie i przemyślane odpowiedzi."
-      },
-      {
-        "title": "Doświadczenie gości i opinie",
-        "text": "Komunikacja i prezentacja nieruchomości są stale ulepszane, aby wspierać lepsze doświadczenia gości i wyższe oceny."
-      },
-      {
-        "title": "Monitorowanie wyników",
-        "text": "Kluczowe wskaźniki rezerwacji i przychodów są monitorowane w celu identyfikacji możliwości poprawy."
-      },
-      {
-        "title": "Analiza rynku i konkurencji",
-        "text": "Wyniki i pozycjonowanie Twojej nieruchomości są oceniane na tle istotnych sygnałów rynkowych i konkurencyjnych."
-      },
-      {
-        "title": "Ciągła optymalizacja",
-        "text": "Ceny, oferty, dystrybucja i strategia komercyjna są analizowane i dostosowywane wraz ze zmianą wyników."
-      },
-      {
-        "title": "Strategia powracających gości",
-        "text": "Pomagamy tworzyć możliwości wzmacniania lojalności gości i rozwijania przyszłych relacji bezpośrednich."
-      },
-      {
-        "title": "Wsparcie właściciela i strategia",
-        "text": "Pozostajesz na bieżąco z wynikami, ważnymi zmianami i strategią stojącą za kluczowymi decyzjami."
-      }
-    ],
-    "partners": {
-      "eyebrow": "Potrzebujesz czegoś więcej?",
-      "title": "Możemy także pomóc Ci zbudować zespół wokół Twojej nieruchomości.",
-      "description": "Niektóre usługi wymagają wyspecjalizowanych profesjonalistów spoza naszego podstawowego zakresu zarządzania. W razie potrzeby możemy pomóc znaleźć zewnętrznych specjalistów do:",
-      "photography": {
-        "title": "Profesjonalna fotografia nieruchomości",
-        "description": "Możemy pomóc Ci znaleźć profesjonalnych fotografów, którzy wiedzą, jak prezentować obiekty noclegowe na platformach rezerwacyjnych."
-      },
-      "website": {
-        "title": "Własna strona do rezerwacji bezpośrednich",
-        "description": "Możemy skontaktować Cię ze specjalistami, którzy stworzą stronę internetową Twojej nieruchomości i wesprą długoterminową strategię rezerwacji bezpośrednich."
-      },
-      "disclaimer": "Fotografia i tworzenie stron internetowych są świadczone przez niezależnych zewnętrznych specjalistów i nie są wliczone w 11% opłatę za zarządzanie."
+    "partnershipSection": {
+      "eyebrow": "WSPÓŁPRACA",
+      "title": "Współpraca z HostMetric",
+      "description": "Wszystko, co musisz wiedzieć o płatnościach, kontroli, opłatach za zarządzanie i relacji między Tobą a HostMetric.",
+      "questions": [
+        {
+          "question": "Co się stanie, jeśli mam już przyszłe rezerwacje?",
+          "answer": "Istniejące potwierdzone rezerwacje mogą zostać uwzględnione podczas onboardingu. Analizujemy bieżący kalendarz i dostępność nieruchomości, aby przejście do zarządzania przez HostMetric mogło zostać zorganizowane z uwzględnieniem już dokonanych rezerwacji."
+        },
+        {
+          "question": "Jak otrzymuję pieniądze z moich rezerwacji?",
+          "answer": "Płatności za rezerwacje nadal przebiegają zgodnie z procesem odpowiedniego kanału rezerwacyjnego lub uzgodnioną konfiguracją. Rolą HostMetric jest zarządzanie i optymalizacja nieruchomości; Twoje przychody z rezerwacji nie muszą przechodzić przez HostMetric tylko dlatego, że zarządzamy Twoją nieruchomością."
+        },
+        {
+          "question": "Jak pomagacie poprawiać opinie i oceny gości?",
+          "answer": "Dobre opinie zazwyczaj wynikają z konsekwentnie wysokiej jakości doświadczenia gości. Koncentrujemy się na dokładnych informacjach w ofercie, jasnej komunikacji, uporządkowanym zarządzaniu rezerwacjami i sprawnym wsparciu gości, a jednocześnie monitorujemy opinie pod kątem powtarzających się problemów i możliwości poprawy."
+        },
+        {
+          "question": "Jakie nieruchomości i lokalizacje może obsługiwać HostMetric?",
+          "answer": "Każda nieruchomość jest oceniana indywidualnie. Bierzemy pod uwagę lokalizację, typ, stan, potencjał najmu krótkoterminowego i wymagania operacyjne, zanim zdecydujemy, czy HostMetric jest odpowiednim partnerem do zarządzania."
+        },
+        {
+          "question": "Czy są opłaty początkowe lub miesięczne abonamenty?",
+          "answer": "HostMetric nie pobiera stałego miesięcznego abonamentu za usługę Pełnego Zarządzania. Nasz model jest oparty na wynikach nieruchomości, a nie na cyklicznej subskrypcji oprogramowania."
+        },
+        {
+          "question": "Ile kosztuje usługa zarządzania HostMetric?",
+          "answer": "Usługa Pełnego Zarządzania HostMetric jest rozliczana jako procentowa opłata za zarządzanie naliczana od przychodów z rezerwacji. Nasza standardowa opłata za zarządzanie wynosi 11%, a ewentualny należny VAT jest rozliczany oddzielnie. Dzięki temu nasze interesy pozostają ściśle powiązane z wynikami Twojej nieruchomości."
+        },
+        {
+          "question": "Czy zachowuję kontrolę nad moją nieruchomością i jej dostępnością?",
+          "answer": "Tak. Nieruchomość nadal należy do Ciebie. Możesz poinformować nas, gdy określone daty mają być niedostępne z powodu prywatnego użytkowania lub z innych powodów, a ograniczenia te mogą zostać uwzględnione w dostępności, podczas gdy HostMetric zarządza strategią komercyjną dla pozostałych terminów."
+        },
+        {
+          "question": "Jak długo trwa współpraca?",
+          "answer": "Warunki każdej współpracy są jasno uzgadniane przed rozpoczęciem zarządzania. Naszym celem jest budowanie długoterminowych relacji poprzez stałe dostarczanie wartości dzięki profesjonalnemu zarządzaniu, komunikacji i wynikom nieruchomości."
+        },
+        {
+          "question": "Co się stanie, jeśli zdecyduję się zakończyć współpracę z HostMetric?",
+          "answer": "Jeśli zdecydujesz się zakończyć współpracę, przejście jest zarządzane zgodnie z uzgodnionymi warunkami, z uwzględnieniem istniejących rezerwacji i zobowiązań wobec gości. Celem jest utrzymanie uporządkowanego procesu zarówno dla właściciela, jak i dla gości z potwierdzonymi pobytami."
+        }
+      ]
     },
     "cta": {
-      "eyebrow": "Zacznij z HostMetric",
-      "titleLine1": "Twoja nieruchomość. Nasza strategia.",
-      "titleLine2": "Jedna prosta opłata 11%.",
-      "description": "Bez opłaty rejestracyjnej. Bez skomplikowanych pakietów. Kompleksowe podejście do zarządzania stworzone po to, aby poprawiać wyniki Twojej nieruchomości.",
-      "button": "Zoptymalizuj moją nieruchomość"
+      "eyebrow": "GOTOWY, ABY ZACZĄĆ?",
+      "titleLine1": "Sprawdźmy, co może",
+      "titleLine2": "osiągnąć Twoja nieruchomość.",
+      "description": "Opowiedz nam o swojej nieruchomości, a ocenimy, jak HostMetric może pomóc poprawić jej zarządzanie i wyniki.",
+      "button": "Zacznij"
     }
   },
   "guestResponsePage": {
@@ -1538,7 +1543,6 @@
       "Example: SiteMinder, Cloudbeds...": "Przykład: SiteMinder, Cloudbeds...",
       "Do you use a Property Management System (PMS)? *": "Czy korzystasz z systemu zarządzania nieruchomością (PMS)? *",
       "PMS Name": "Nazwa PMS",
-      "PMS name": "Nazwa PMS",
       "Do you have your own website? *": "Czy masz własną stronę internetową? *",
       "Website URL": "URL strony internetowej",
       "https://...": "https://...",

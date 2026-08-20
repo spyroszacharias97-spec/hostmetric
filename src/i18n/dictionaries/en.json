@@ -2,7 +2,7 @@
   "navigation": {
     "services": "Services",
     "howItWorks": "How It Works",
-    "pricing": "Pricing",
+    "pricing": "FAQ",
     "about": "About",
     "contact": "Contact",
     "getStarted": "Get Started",
@@ -429,7 +429,7 @@
       "title": "Company",
       "about": "About",
       "howItWorks": "How It Works",
-      "pricing": "Pricing",
+      "pricing": "FAQ",
       "contact": "Contact Us"
     },
     "contact": {
@@ -581,108 +581,113 @@
       "link": "Contact HostMetric"
     }
   },
-  "pricingPage": {
+  "faqPage": {
     "hero": {
-      "eyebrow": "Simple Pricing",
-      "titleLine1": "One simple package.",
-      "titleLine2": "Everything you need.",
-      "description": "No complicated plans or unnecessary subscriptions. One complete management service designed around your property's performance, guest experience and long-term growth."
+      "eyebrow": "HOSTMETRIC FAQ",
+      "titleLine1": "Everything you need",
+      "titleLine2": "to know.",
+      "description": "Clear answers about property management, bookings, pricing, guest communication and working with HostMetric."
     },
-    "pricingCard": {
-      "eyebrow": "Full Management",
-      "revenueLabel": "of booking revenue",
-      "zeroRegistrationFee": "Zero registration fee",
-      "description": "Our success grows with yours. Instead of complicated fixed plans, HostMetric works through one clear commission-based model.",
-      "button": "Get Started",
-      "summaryEyebrow": "Everything Included",
-      "summaryTitle": "One management system built around your property.",
-      "summaryDescription": "From the way your property is presented and distributed to pricing, reservations, guest communication and ongoing performance analysis, the essential parts of your booking operation work together under one coordinated strategy.",
-      "summaryItems": [
-        "Human guest communication",
-        "Smart pricing",
-        "Reservation management",
-        "Calendar synchronization",
-        "Multi-platform distribution",
-        "Listing optimization",
-        "Performance analysis",
-        "Review strategy"
+    "propertySection": {
+      "eyebrow": "YOUR PROPERTY",
+      "title": "Managing & growing your property",
+      "description": "How HostMetric manages distribution, reservations, pricing, guest communication and the ongoing performance of your property.",
+      "questions": [
+        {
+          "question": "What do I need to do to get started with HostMetric?",
+          "answer": "Getting started is simple. Tell us about your property and your current setup, and our team will review its positioning, pricing, availability and distribution. We then prepare the property for professional management and build a strategy around its individual characteristics and goals."
+        },
+        {
+          "question": "How does HostMetric help increase my bookings?",
+          "answer": "HostMetric combines optimized property presentation, strategic distribution, intelligent pricing and continuous performance monitoring. Instead of treating your listing as something static, we continuously evaluate how it performs and adjust the strategy when opportunities for improvement appear."
+        },
+        {
+          "question": "Can I continue accepting my own direct bookings?",
+          "answer": "Yes. You remain free to accept your own reservations. The important part is keeping availability synchronized so that every confirmed stay is reflected correctly across the property's booking calendar and overlapping reservations are avoided."
+        },
+        {
+          "question": "How do you improve my property's visibility across booking platforms?",
+          "answer": "We focus on the elements that influence how effectively a property competes online, including listing quality, pricing, availability, booking conditions, property information and overall performance. These elements are reviewed continuously rather than being configured once and forgotten."
+        },
+        {
+          "question": "Which booking platforms can my property be listed on?",
+          "answer": "The distribution strategy depends on the property and its target guests. HostMetric can manage and coordinate listings across suitable major booking channels while keeping the property's availability and commercial strategy aligned."
+        },
+        {
+          "question": "How are my reservations and calendars managed?",
+          "answer": "HostMetric coordinates reservations and availability through a centralized management process. Calendar changes are synchronized across connected channels so that availability remains accurate and the risk of conflicting reservations is reduced."
+        },
+        {
+          "question": "Who communicates with my guests?",
+          "answer": "HostMetric can manage guest communication throughout the reservation journey, helping guests receive clear and timely information before arrival, during their stay and around departure while maintaining a professional and consistent guest experience."
+        },
+        {
+          "question": "Who decides the nightly price of my property?",
+          "answer": "HostMetric manages and continuously optimizes the selling price of the property. You provide the minimum nightly price you are comfortable accepting, while our pricing strategy can move above that level whenever demand, market conditions and property performance support a higher rate."
+        },
+        {
+          "question": "How does HostMetric's dynamic pricing work?",
+          "answer": "Pricing is continuously evaluated using multiple signals rather than relying on one fixed nightly rate. We consider factors such as demand, seasonality, booking behaviour, availability, market conditions and the property's own performance to determine a more competitive selling price."
+        },
+        {
+          "question": "Can I set a minimum nightly price?",
+          "answer": "Yes. You can define the minimum nightly price you are comfortable accepting. This acts as the lower pricing boundary for our strategy, not as the property's standard selling price. HostMetric may price above it whenever market conditions support a stronger rate."
+        },
+        {
+          "question": "How do you use AI and data to optimize my property's performance?",
+          "answer": "HostMetric uses AI, pricing algorithms and property performance data to support smarter commercial decisions. We continuously analyze demand, booking behaviour, seasonality, market conditions and the property's own performance to identify opportunities and optimize its strategy over time."
+        }
       ]
     },
-    "includedSection": {
-      "eyebrow": "Included In Your 11%",
-      "title": "Complete booking performance management.",
-      "description": "We combine the operational and commercial elements behind a successful short-term rental into one coordinated management approach."
-    },
-    "includedServices": [
-      {
-        "title": "Listing Creation & Optimization",
-        "text": "Professional listing structure, positioning, descriptions and continuous optimization."
-      },
-      {
-        "title": "Multi-Platform Distribution",
-        "text": "Your property can be distributed across leading booking and travel platforms."
-      },
-      {
-        "title": "Calendar Synchronization",
-        "text": "Availability is coordinated across connected channels to reduce conflicts and double bookings."
-      },
-      {
-        "title": "Reservation Management",
-        "text": "We manage booking activity and keep reservations organized across your connected channels."
-      },
-      {
-        "title": "Smart Pricing & Revenue Optimization",
-        "text": "Pricing decisions are continuously informed by demand, seasonality, market conditions and property performance."
-      },
-      {
-        "title": "Human Guest Communication",
-        "text": "Professional guest communication handled by trained team members, with a focus on fast, thoughtful responses."
-      },
-      {
-        "title": "Guest Experience & Reviews",
-        "text": "Communication and property presentation are continuously refined to support stronger guest experiences and reviews."
-      },
-      {
-        "title": "Performance Monitoring",
-        "text": "Key booking and revenue indicators are monitored to identify opportunities for improvement."
-      },
-      {
-        "title": "Market & Competitor Analysis",
-        "text": "Your property's performance and positioning are evaluated against relevant market and competitive signals."
-      },
-      {
-        "title": "Continuous Optimization",
-        "text": "Pricing, listings, distribution and commercial strategy are reviewed and adjusted as performance evolves."
-      },
-      {
-        "title": "Repeat Guest Strategy",
-        "text": "We help create opportunities to strengthen guest retention and encourage future direct relationships."
-      },
-      {
-        "title": "Owner Support & Strategy",
-        "text": "You stay informed about performance, important changes and the strategy behind key decisions."
-      }
-    ],
-    "partners": {
-      "eyebrow": "Need Something More?",
-      "title": "We can help you build the team around your property too.",
-      "description": "Some services require specialized professionals outside our core management service. When needed, we can help connect you with external professionals for:",
-      "photography": {
-        "title": "Professional Property Photography",
-        "description": "We can help you find professional photographers who understand how accommodation should be presented for booking platforms."
-      },
-      "website": {
-        "title": "Your Own Direct-Booking Website",
-        "description": "We can connect you with professionals who can build your own property website and help support your long-term direct-booking strategy."
-      },
-      "disclaimer": "Photography and website development are provided by independent external professionals and are not included in the 11% management fee."
+    "partnershipSection": {
+      "eyebrow": "THE PARTNERSHIP",
+      "title": "Working with HostMetric",
+      "description": "Everything you need to know about payments, control, management fees and the relationship between you and HostMetric.",
+      "questions": [
+        {
+          "question": "What happens if I already have future reservations?",
+          "answer": "Existing confirmed reservations can be taken into account during onboarding. We review the property's current calendar and availability so that the transition to HostMetric management can be organized around reservations that have already been made."
+        },
+        {
+          "question": "How do I receive the money from my bookings?",
+          "answer": "Booking payments continue to follow the payment process of the relevant booking channel or agreed setup. HostMetric's role is to manage and optimize the property; your booking revenue does not need to pass through HostMetric simply for us to manage your property."
+        },
+        {
+          "question": "How do you help improve guest reviews and ratings?",
+          "answer": "Strong reviews usually come from a consistently strong guest experience. We focus on accurate listing information, clear communication, organized reservation management and responsive guest support, while also monitoring feedback for recurring issues and opportunities to improve."
+        },
+        {
+          "question": "Which properties and locations can HostMetric manage?",
+          "answer": "Every property is assessed individually. We consider its location, type, condition, short-term rental potential and operational requirements before deciding whether HostMetric is the right management partner for it."
+        },
+        {
+          "question": "Are there any setup fees or monthly subscriptions?",
+          "answer": "HostMetric does not charge a fixed monthly subscription for its Full Management service. Our model is designed around the performance of the property rather than a recurring software-style subscription."
+        },
+        {
+          "question": "What does HostMetric's management service cost?",
+          "answer": "HostMetric's Full Management service is offered through a percentage-based management fee calculated on booking revenue. Our standard management fee is 11%, with any applicable VAT treated separately. This means our interests remain closely aligned with the performance of your property."
+        },
+        {
+          "question": "Do I remain in control of my property and availability?",
+          "answer": "Yes. It remains your property. You can inform us when dates need to be unavailable for personal use or other reasons, and these restrictions can be incorporated into the property's availability while HostMetric manages the commercial strategy around the remaining dates."
+        },
+        {
+          "question": "How long does the partnership last?",
+          "answer": "The terms of each partnership are agreed clearly before management begins. Our aim is to build a long-term relationship by continuously demonstrating value through professional management, communication and property performance."
+        },
+        {
+          "question": "What happens if I decide to stop working with HostMetric?",
+          "answer": "If you decide to end the partnership, the transition is handled according to the agreed terms while taking existing reservations and guest commitments into account. The objective is to keep the process organized for both the property owner and guests with confirmed stays."
+        }
+      ]
     },
     "cta": {
-      "eyebrow": "Start With HostMetric",
-      "titleLine1": "Your property. Our strategy.",
-      "titleLine2": "One simple 11% fee.",
-      "description": "No registration fee. No complicated packages. A complete management approach built to improve how your property performs.",
-      "button": "Optimize My Property"
+      "eyebrow": "READY TO GET STARTED?",
+      "titleLine1": "Let's see what your property",
+      "titleLine2": "can achieve.",
+      "description": "Tell us about your property and we'll evaluate how HostMetric can help improve its management and performance.",
+      "button": "Get Started"
     }
   },
   "guestResponsePage": {
@@ -1538,7 +1543,6 @@
       "Example: SiteMinder, Cloudbeds...": "Example: SiteMinder, Cloudbeds...",
       "Do you use a Property Management System (PMS)? *": "Do you use a Property Management System (PMS)? *",
       "PMS Name": "PMS Name",
-      "PMS name": "PMS name",
       "Do you have your own website? *": "Do you have your own website? *",
       "Website URL": "Website URL",
       "https://...": "https://...",

@@ -372,7 +372,7 @@ export default function Navbar() {
 
 
           <Link
-            href="/pricing"
+            href="/faq"
             className="cursor-pointer text-[17px] font-semibold text-slate-800 transition duration-300 hover:-translate-y-0.5 hover:text-blue-600"
           >
             {navigation.pricing}

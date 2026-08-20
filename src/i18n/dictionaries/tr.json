@@ -2,7 +2,7 @@
   "navigation": {
     "services": "Hizmetler",
     "howItWorks": "Nasıl Çalışır",
-    "pricing": "Fiyatlandırma",
+    "pricing": "SSS",
     "about": "Hakkımızda",
     "contact": "İletişim",
     "getStarted": "Başlayın",
@@ -429,7 +429,7 @@
       "title": "Şirket",
       "about": "Hakkımızda",
       "howItWorks": "Nasıl Çalışır",
-      "pricing": "Fiyatlandırma",
+      "pricing": "SSS",
       "contact": "Bize Ulaşın"
     },
     "contact": {
@@ -581,108 +581,113 @@
       "link": "HostMetric ile İletişime Geçin"
     }
   },
-  "pricingPage": {
+  "faqPage": {
     "hero": {
-      "eyebrow": "Basit Fiyatlandırma",
-      "titleLine1": "Tek bir basit paket.",
-      "titleLine2": "İhtiyacınız olan her şey.",
-      "description": "Karmaşık planlar veya gereksiz abonelikler yok. Mülkünüzün performansı, misafir deneyimi ve uzun vadeli büyümesi etrafında tasarlanmış tek ve eksiksiz bir yönetim hizmeti."
+      "eyebrow": "HOSTMETRIC SSS",
+      "titleLine1": "Bilmeniz gereken",
+      "titleLine2": "her şey.",
+      "description": "Mülk yönetimi, rezervasyonlar, fiyatlandırma, misafir iletişimi ve HostMetric ile iş ortaklığınız hakkında net yanıtlar."
     },
-    "pricingCard": {
-      "eyebrow": "Tam Yönetim",
-      "revenueLabel": "rezervasyon gelirinin",
-      "zeroRegistrationFee": "Kayıt ücreti yok",
-      "description": "Bizim başarımız sizin başarınızla birlikte büyür. Karmaşık sabit planlar yerine HostMetric, tek ve anlaşılır bir komisyon modeliyle çalışır.",
-      "button": "Başlayın",
-      "summaryEyebrow": "Her Şey Dahil",
-      "summaryTitle": "Mülkünüz etrafında kurulmuş tek bir yönetim sistemi.",
-      "summaryDescription": "Mülkünüzün sunum ve dağıtım biçiminden fiyatlandırmaya, rezervasyonlara, misafir iletişimine ve sürekli performans analizine kadar rezervasyon operasyonunuzun temel parçaları tek bir koordineli strateji altında birlikte çalışır.",
-      "summaryItems": [
-        "İnsani misafir iletişimi",
-        "Akıllı fiyatlandırma",
-        "Rezervasyon yönetimi",
-        "Takvim senkronizasyonu",
-        "Çok platformlu dağıtım",
-        "İlan optimizasyonu",
-        "Performans analizi",
-        "Yorum stratejisi"
+    "propertySection": {
+      "eyebrow": "MÜLKÜNÜZ",
+      "title": "Mülkünüzü yönetmek ve büyütmek",
+      "description": "HostMetric'in dağıtımı, rezervasyonları, fiyatlandırmayı, misafir iletişimini ve mülkünüzün performansının sürekli iyileştirilmesini nasıl yönettiği.",
+      "questions": [
+        {
+          "question": "HostMetric ile çalışmaya başlamak için ne yapmam gerekiyor?",
+          "answer": "Başlamak oldukça kolaydır. Bize mülkünüz ve mevcut yönetim şekliniz hakkında biraz bilgi verin; ekibimiz konumlandırmayı, fiyatlandırmayı, müsaitliği ve dağıtımı inceleyecektir. Ardından mülkü profesyonel yönetime hazırlar ve özelliklerine ve hedeflerinize uygun bir strateji oluştururuz."
+        },
+        {
+          "question": "HostMetric daha fazla rezervasyon almama nasıl yardımcı olur?",
+          "answer": "HostMetric; optimize edilmiş mülk sunumunu, stratejik dağıtımı, akıllı fiyatlandırmayı ve sürekli performans takibini bir araya getirir. İlanınızı sabit bir yapı olarak görmek yerine sonuçları sürekli analiz eder ve iyileştirme fırsatları gördüğümüzde stratejiyi güncelleriz."
+        },
+        {
+          "question": "Kendi doğrudan rezervasyonlarımı almaya devam edebilir miyim?",
+          "answer": "Evet. Kendi rezervasyonlarınızı almaya devam edebilirsiniz. Önemli olan, her onaylanmış konaklamanın mülk takvimine doğru şekilde yansıması ve çakışan rezervasyonların önlenmesi için müsaitliğin senkronize kalmasıdır."
+        },
+        {
+          "question": "Mülkümün rezervasyon platformlarındaki görünürlüğünü nasıl artırıyorsunuz?",
+          "answer": "İlan kalitesi, fiyatlandırma, müsaitlik, rezervasyon koşulları, mülk bilgileri ve genel performans dahil olmak üzere mülkün çevrim içi rekabet gücünü etkileyen unsurlara odaklanıyoruz. Bu unsurlar yalnızca bir kez ayarlanıp bırakılmak yerine sürekli olarak analiz edilir."
+        },
+        {
+          "question": "Mülküm hangi rezervasyon platformlarında yer alabilir?",
+          "answer": "Dağıtım stratejisi mülke ve çekmek istediğiniz misafir profiline bağlıdır. HostMetric, müsaitliği ve mülkün ticari stratejisini tutarlı tutarken önde gelen ve ilgili rezervasyon kanallarındaki ilanları yönetebilir ve koordine edebilir."
+        },
+        {
+          "question": "Rezervasyonlarım ve takvimlerim nasıl yönetiliyor?",
+          "answer": "HostMetric rezervasyonları ve müsaitliği merkezi bir yönetim süreci üzerinden koordine eder. Takvim değişiklikleri bağlı kanallar arasında senkronize edilir; bu da müsaitliğin doğru kalmasına yardımcı olur ve çakışan rezervasyon riskini azaltır."
+        },
+        {
+          "question": "Misafirlerimle kim iletişim kuruyor?",
+          "answer": "HostMetric, rezervasyon süreci boyunca misafir iletişimini yönetebilir; böylece misafirler varış öncesinde, konaklama sırasında ve ayrılışta açık ve zamanında bilgi alır ve profesyonel, tutarlı bir deneyim yaşar."
+        },
+        {
+          "question": "Mülkümün gecelik fiyatını kim belirliyor?",
+          "answer": "HostMetric mülkün satış fiyatını yönetir ve sürekli optimize eder. Mülk sahibi kabul etmeye hazır olduğu minimum gecelik fiyatı belirler; fiyatlandırma stratejimiz ise talep, piyasa koşulları ve mülk performansı desteklediğinde daha yüksek fiyatlar uygulayabilir."
+        },
+        {
+          "question": "HostMetric'te dinamik fiyatlandırma nasıl çalışır?",
+          "answer": "Tek bir sabit gecelik fiyata dayanmak yerine fiyatlandırma sürekli olarak birden fazla göstergeye göre değerlendirilir. Daha rekabetçi bir satış fiyatı belirlemek için talep, sezonluk değişimler, rezervasyon davranışı, müsaitlik, piyasa koşulları ve mülkün kendi performansı gibi faktörleri dikkate alırız."
+        },
+        {
+          "question": "Minimum gecelik fiyat belirleyebilir miyim?",
+          "answer": "Evet. Kabul etmeye hazır olduğunuz minimum gecelik fiyatı belirleyebilirsiniz. Bu tutar, mülkün standart satış fiyatı değil, fiyatlandırma stratejimizin alt sınırıdır. Piyasa koşulları desteklediğinde HostMetric daha yüksek fiyatlar uygulayabilir."
+        },
+        {
+          "question": "Mülkümün performansını optimize etmek için yapay zekâ ve verileri nasıl kullanıyorsunuz?",
+          "answer": "HostMetric, daha iyi ticari kararları desteklemek için yapay zekâdan, fiyatlandırma algoritmalarından ve mülk performans verilerinden yararlanır. Fırsatları belirlemek ve stratejiyi zaman içinde optimize etmek için talebi, rezervasyon davranışını, sezonluk değişimleri, piyasa koşullarını ve mülkün kendi performansını sürekli analiz ederiz."
+        }
       ]
     },
-    "includedSection": {
-      "eyebrow": "%11 Ücretinize Dahil",
-      "title": "Eksiksiz rezervasyon performansı yönetimi.",
-      "description": "Başarılı bir kısa dönem kiralamanın arkasındaki operasyonel ve ticari unsurları tek bir koordineli yönetim yaklaşımında birleştiriyoruz."
-    },
-    "includedServices": [
-      {
-        "title": "İlan Oluşturma ve Optimizasyonu",
-        "text": "Profesyonel ilan yapısı, konumlandırma, açıklamalar ve sürekli optimizasyon."
-      },
-      {
-        "title": "Çok Platformlu Dağıtım",
-        "text": "Mülkünüz önde gelen rezervasyon ve seyahat platformlarında dağıtılabilir."
-      },
-      {
-        "title": "Takvim Senkronizasyonu",
-        "text": "Çakışmaları ve çift rezervasyonları azaltmak için müsaitlik bağlı kanallar arasında koordine edilir."
-      },
-      {
-        "title": "Rezervasyon Yönetimi",
-        "text": "Rezervasyon faaliyetlerini yönetir ve bağlı kanallarınızdaki rezervasyonları düzenli tutarız."
-      },
-      {
-        "title": "Akıllı Fiyatlandırma ve Gelir Optimizasyonu",
-        "text": "Fiyatlandırma kararları sürekli olarak talep, sezonluk değişimler, piyasa koşulları ve mülk performansına göre şekillenir."
-      },
-      {
-        "title": "İnsani Misafir İletişimi",
-        "text": "Hızlı ve özenli yanıtlara odaklanan eğitimli ekip üyeleri tarafından yürütülen profesyonel misafir iletişimi."
-      },
-      {
-        "title": "Misafir Deneyimi ve Yorumlar",
-        "text": "Daha güçlü misafir deneyimleri ve yorumları desteklemek için iletişim ve mülk sunumu sürekli geliştirilir."
-      },
-      {
-        "title": "Performans Takibi",
-        "text": "Gelişim fırsatlarını belirlemek için temel rezervasyon ve gelir göstergeleri izlenir."
-      },
-      {
-        "title": "Piyasa ve Rakip Analizi",
-        "text": "Mülkünüzün performansı ve konumlandırması ilgili piyasa ve rekabet sinyallerine göre değerlendirilir."
-      },
-      {
-        "title": "Sürekli Optimizasyon",
-        "text": "Performans geliştikçe fiyatlandırma, ilanlar, dağıtım ve ticari strateji gözden geçirilir ve ayarlanır."
-      },
-      {
-        "title": "Tekrar Gelen Misafir Stratejisi",
-        "text": "Misafir sadakatini güçlendirmek ve gelecekte doğrudan ilişkileri teşvik etmek için fırsatlar yaratmaya yardımcı oluruz."
-      },
-      {
-        "title": "Mülk Sahibi Desteği ve Stratejisi",
-        "text": "Performans, önemli değişiklikler ve temel kararların arkasındaki strateji hakkında bilgilendirilmeye devam edersiniz."
-      }
-    ],
-    "partners": {
-      "eyebrow": "Daha Fazlasına mı İhtiyacınız Var?",
-      "title": "Mülkünüzün etrafındaki ekibi oluşturmanıza da yardımcı olabiliriz.",
-      "description": "Bazı hizmetler, temel yönetim hizmetimizin dışında uzman profesyoneller gerektirir. Gerektiğinde sizi şu alanlardaki harici uzmanlarla buluşturabiliriz:",
-      "photography": {
-        "title": "Profesyonel Mülk Fotoğrafçılığı",
-        "description": "Konaklama birimlerinin rezervasyon platformlarında nasıl sunulması gerektiğini bilen profesyonel fotoğrafçılar bulmanıza yardımcı olabiliriz."
-      },
-      "website": {
-        "title": "Kendi Doğrudan Rezervasyon Siteniz",
-        "description": "Kendi mülk web sitenizi oluşturabilecek ve uzun vadeli doğrudan rezervasyon stratejinizi destekleyebilecek profesyonellerle sizi buluşturabiliriz."
-      },
-      "disclaimer": "Fotoğrafçılık ve web sitesi geliştirme hizmetleri bağımsız harici profesyoneller tarafından sağlanır ve %11 yönetim ücretine dahil değildir."
+    "partnershipSection": {
+      "eyebrow": "İŞ ORTAKLIĞI",
+      "title": "HostMetric ile çalışmak",
+      "description": "Ödemeler, kontrol, yönetim ücretleri ve sizinle HostMetric arasındaki ilişki hakkında bilmeniz gereken her şey.",
+      "questions": [
+        {
+          "question": "Halihazırda gelecekteki tarihler için rezervasyonlarım varsa ne olur?",
+          "answer": "Mevcut onaylanmış rezervasyonlar başlangıç sürecinde dikkate alınabilir. Önceden yapılmış rezervasyonlara saygı göstererek HostMetric yönetimine geçişi düzenlemek için mevcut takvimi ve mülkün müsaitliğini inceleriz."
+        },
+        {
+          "question": "Rezervasyonlarımdan elde ettiğim parayı nasıl alırım?",
+          "answer": "Rezervasyon ödemeleri ilgili rezervasyon kanalının sürecini veya üzerinde anlaşılmış ödeme düzenini izlemeye devam eder. HostMetric'in rolü mülkü yönetmek ve optimize etmektir; yalnızca mülkünüzü yönettiğimiz için rezervasyon gelirinin HostMetric üzerinden geçmesi gerekmez."
+        },
+        {
+          "question": "Misafir yorumlarını ve puanlarını iyileştirmeye nasıl yardımcı oluyorsunuz?",
+          "answer": "Güçlü yorumlar genellikle sürekli olarak iyi bir misafir deneyiminin sonucudur. Doğru ilan bilgilerine, açık iletişime, düzenli rezervasyon yönetimine ve etkili misafir desteğine odaklanırken, tekrar eden sorunları ve iyileştirme fırsatlarını belirlemek için geri bildirimleri de takip ederiz."
+        },
+        {
+          "question": "HostMetric hangi tür mülkleri ve hangi bölgeleri yönetebilir?",
+          "answer": "Her mülk ayrı ayrı değerlendirilir. HostMetric'in uygun bir yönetim ortağı olup olmadığını belirlemeden önce konumu, mülk türünü, durumunu, kısa dönem kiralama potansiyelini ve operasyonel gereksinimleri değerlendiririz."
+        },
+        {
+          "question": "Başlangıç ücreti veya aylık abonelik var mı?",
+          "answer": "HostMetric, Tam Yönetim hizmeti için sabit bir aylık abonelik ücreti talep etmez. Modelimiz düzenli bir yazılım aboneliğine değil, mülkün performansına dayanır."
+        },
+        {
+          "question": "HostMetric yönetim hizmetinin ücreti ne kadar?",
+          "answer": "HostMetric Tam Yönetim hizmeti, rezervasyon gelirinin yüzdesi olarak hesaplanan bir yönetim ücretiyle sunulur. Standart yönetim ücretimiz %11'dir ve geçerli KDV ayrıca uygulanır. Bu yapı, çıkarlarımızı doğrudan mülkünüzün performansıyla aynı doğrultuda tutar."
+        },
+        {
+          "question": "Mülküm ve müsaitlik üzerinde kontrolüm devam eder mi?",
+          "answer": "Evet. Mülk sizin mülkünüz olarak kalır. Kişisel kullanım veya başka nedenlerle belirli tarihlerin kapalı olması gerektiğinde bize bildirebilirsiniz; HostMetric kalan tarihler için ticari stratejiyi yönetirken bu kısıtlamalar müsaitliğe uygulanabilir."
+        },
+        {
+          "question": "İş ortaklığı ne kadar sürer?",
+          "answer": "Her iş ortaklığının koşulları yönetim başlamadan önce açıkça kararlaştırılır. Amacımız profesyonel yönetim, iletişim ve mülk performansı yoluyla sürekli değer sağlayarak uzun vadeli ilişkiler kurmaktır."
+        },
+        {
+          "question": "HostMetric ile iş ortaklığımı sonlandırmaya karar verirsem ne olur?",
+          "answer": "İş ortaklığını sonlandırmaya karar verirseniz geçiş, mevcut rezervasyonlar ve misafirlere karşı yükümlülükler dikkate alınarak üzerinde anlaşılmış koşullara göre yönetilir. Amaç, sürecin hem mülk sahibi hem de onaylanmış konaklaması bulunan misafirler için düzenli kalmasını sağlamaktır."
+        }
+      ]
     },
     "cta": {
-      "eyebrow": "HostMetric ile Başlayın",
-      "titleLine1": "Sizin mülkünüz. Bizim stratejimiz.",
-      "titleLine2": "Tek ve basit %11 ücret.",
-      "description": "Kayıt ücreti yok. Karmaşık paketler yok. Mülkünüzün performansını geliştirmek için oluşturulmuş eksiksiz bir yönetim yaklaşımı.",
-      "button": "Mülkümü Optimize Et"
+      "eyebrow": "BAŞLAMAYA HAZIR MISINIZ?",
+      "titleLine1": "Mülkünüzün neler",
+      "titleLine2": "başarabileceğini keşfedelim.",
+      "description": "Bize mülkünüz hakkında biraz bilgi verin; HostMetric'in yönetimini ve performansını nasıl geliştirebileceğini değerlendirelim.",
+      "button": "Başlayın"
     }
   },
   "guestResponsePage": {
@@ -1538,7 +1543,6 @@
       "Example: SiteMinder, Cloudbeds...": "Örnek: SiteMinder, Cloudbeds...",
       "Do you use a Property Management System (PMS)? *": "Property Management System (PMS) kullanıyor musunuz? *",
       "PMS Name": "PMS Adı",
-      "PMS name": "PMS adı",
       "Do you have your own website? *": "Kendi web siteniz var mı? *",
       "Website URL": "Web Sitesi URL'si",
       "https://...": "https://...",

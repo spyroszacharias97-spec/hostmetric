@@ -2,7 +2,7 @@
   "navigation": {
     "services": "Leistungen",
     "howItWorks": "So funktioniert es",
-    "pricing": "Preise",
+    "pricing": "FAQ",
     "about": "Über uns",
     "contact": "Kontakt",
     "getStarted": "Jetzt starten",
@@ -429,7 +429,7 @@
       "title": "Unternehmen",
       "about": "Über uns",
       "howItWorks": "So funktioniert es",
-      "pricing": "Preise",
+      "pricing": "FAQ",
       "contact": "Kontaktieren Sie uns"
     },
     "contact": {
@@ -581,108 +581,113 @@
       "link": "HostMetric kontaktieren"
     }
   },
-  "pricingPage": {
+  "faqPage": {
     "hero": {
-      "eyebrow": "Einfache Preisstruktur",
-      "titleLine1": "Ein einfaches Paket.",
-      "titleLine2": "Alles, was Sie brauchen.",
-      "description": "Keine komplizierten Pläne oder unnötigen Abonnements. Eine vollständige Managementleistung, ausgerichtet auf die Performance Ihrer Unterkunft, das Gästeerlebnis und langfristiges Wachstum."
+      "eyebrow": "HOSTMETRIC FAQ",
+      "titleLine1": "Alles, was Sie",
+      "titleLine2": "wissen müssen.",
+      "description": "Klare Antworten zu Immobilienmanagement, Buchungen, Preisgestaltung, Gästekommunikation und der Zusammenarbeit mit HostMetric."
     },
-    "pricingCard": {
-      "eyebrow": "Komplettes Management",
-      "revenueLabel": "des Buchungsumsatzes",
-      "zeroRegistrationFee": "Keine Registrierungsgebühr",
-      "description": "Unser Erfolg wächst mit Ihrem. Statt komplizierter Fixpakete arbeitet HostMetric mit einem klaren provisionsbasierten Modell.",
-      "button": "Jetzt starten",
-      "summaryEyebrow": "Alles inklusive",
-      "summaryTitle": "Ein Managementsystem rund um Ihre Unterkunft.",
-      "summaryDescription": "Von Präsentation und Distribution Ihrer Unterkunft über Preise, Reservierungen und Gästekommunikation bis zur laufenden Performance-Analyse arbeiten die wesentlichen Bereiche Ihres Buchungsbetriebs in einer koordinierten Strategie zusammen.",
-      "summaryItems": [
-        "Persönliche Gästekommunikation",
-        "Intelligente Preisgestaltung",
-        "Reservierungsmanagement",
-        "Kalendersynchronisierung",
-        "Multi-Plattform-Distribution",
-        "Inseratsoptimierung",
-        "Performance-Analyse",
-        "Bewertungsstrategie"
+    "propertySection": {
+      "eyebrow": "IHRE UNTERKUNFT",
+      "title": "Ihre Unterkunft verwalten & weiterentwickeln",
+      "description": "Wie HostMetric Distribution, Reservierungen, Preisgestaltung, Gästekommunikation und die laufende Performance Ihrer Unterkunft steuert.",
+      "questions": [
+        {
+          "question": "Was muss ich tun, um mit HostMetric zu starten?",
+          "answer": "Der Einstieg ist einfach. Sie geben uns Informationen zu Ihrer Unterkunft und Ihrer aktuellen Situation, und unser Team prüft Positionierung, Preisgestaltung, Verfügbarkeit und Distribution. Anschließend bereiten wir die Unterkunft auf ein professionelles Management vor und entwickeln eine Strategie, die auf ihre individuellen Eigenschaften und Ziele abgestimmt ist."
+        },
+        {
+          "question": "Wie hilft HostMetric dabei, meine Buchungen zu steigern?",
+          "answer": "HostMetric verbindet eine optimierte Darstellung der Unterkunft, strategische Distribution, intelligente Preisgestaltung und kontinuierliches Performance-Monitoring. Statt Ihr Inserat als etwas Statisches zu behandeln, bewerten wir seine Performance laufend und passen die Strategie an, sobald sich Verbesserungspotenziale ergeben."
+        },
+        {
+          "question": "Kann ich weiterhin eigene Direktbuchungen annehmen?",
+          "answer": "Ja. Sie können weiterhin eigene Reservierungen annehmen. Entscheidend ist, dass die Verfügbarkeit synchronisiert bleibt, damit jeder bestätigte Aufenthalt korrekt im Buchungskalender der Unterkunft abgebildet wird und sich überschneidende Reservierungen vermieden werden."
+        },
+        {
+          "question": "Wie verbessern Sie die Sichtbarkeit meiner Unterkunft auf Buchungsplattformen?",
+          "answer": "Wir konzentrieren uns auf die Faktoren, die beeinflussen, wie erfolgreich eine Unterkunft online konkurriert, darunter Inseratsqualität, Preisgestaltung, Verfügbarkeit, Buchungsbedingungen, Unterkunftsinformationen und die allgemeine Performance. Diese Elemente werden kontinuierlich überprüft und nicht nur einmal eingerichtet und danach unverändert gelassen."
+        },
+        {
+          "question": "Auf welchen Buchungsplattformen kann meine Unterkunft gelistet werden?",
+          "answer": "Die Distributionsstrategie hängt von der Unterkunft und ihren Zielgästen ab. HostMetric kann Inserate auf geeigneten großen Buchungskanälen verwalten und koordinieren und dabei Verfügbarkeit und kommerzielle Strategie der Unterkunft aufeinander abstimmen."
+        },
+        {
+          "question": "Wie werden meine Reservierungen und Kalender verwaltet?",
+          "answer": "HostMetric koordiniert Reservierungen und Verfügbarkeit über einen zentralisierten Managementprozess. Kalenderänderungen werden über verbundene Kanäle hinweg synchronisiert, damit die Verfügbarkeit korrekt bleibt und das Risiko widersprüchlicher Reservierungen reduziert wird."
+        },
+        {
+          "question": "Wer kommuniziert mit meinen Gästen?",
+          "answer": "HostMetric kann die Gästekommunikation während des gesamten Reservierungsprozesses übernehmen und dafür sorgen, dass Gäste vor der Anreise, während des Aufenthalts und rund um die Abreise klare und rechtzeitige Informationen erhalten, während gleichzeitig ein professionelles und einheitliches Gästeerlebnis gewährleistet bleibt."
+        },
+        {
+          "question": "Wer entscheidet über den Übernachtungspreis meiner Unterkunft?",
+          "answer": "HostMetric verwaltet und optimiert den Verkaufspreis der Unterkunft kontinuierlich. Sie legen den Mindestpreis pro Nacht fest, den Sie akzeptieren möchten. Unsere Preisstrategie kann darüber hinausgehen, wenn Nachfrage, Marktbedingungen und die Performance der Unterkunft einen höheren Preis unterstützen."
+        },
+        {
+          "question": "Wie funktioniert die dynamische Preisgestaltung von HostMetric?",
+          "answer": "Die Preisgestaltung wird kontinuierlich anhand mehrerer Signale bewertet, statt sich auf einen festen Übernachtungspreis zu verlassen. Wir berücksichtigen Faktoren wie Nachfrage, Saisonalität, Buchungsverhalten, Verfügbarkeit, Marktbedingungen und die eigene Performance der Unterkunft, um einen wettbewerbsfähigeren Verkaufspreis zu bestimmen."
+        },
+        {
+          "question": "Kann ich einen Mindestpreis pro Nacht festlegen?",
+          "answer": "Ja. Sie können den Mindestpreis pro Nacht festlegen, den Sie akzeptieren möchten. Dieser dient als untere Preisgrenze unserer Strategie und nicht als regulärer Verkaufspreis der Unterkunft. HostMetric kann höhere Preise ansetzen, wenn die Marktbedingungen dies unterstützen."
+        },
+        {
+          "question": "Wie nutzen Sie KI und Daten, um die Performance meiner Unterkunft zu optimieren?",
+          "answer": "HostMetric nutzt KI, Preisalgorithmen und Performance-Daten der Unterkunft, um fundiertere kommerzielle Entscheidungen zu unterstützen. Wir analysieren kontinuierlich Nachfrage, Buchungsverhalten, Saisonalität, Marktbedingungen und die eigene Performance der Unterkunft, um Chancen zu erkennen und die Strategie im Laufe der Zeit zu optimieren."
+        }
       ]
     },
-    "includedSection": {
-      "eyebrow": "In Ihren 11 % enthalten",
-      "title": "Vollständiges Buchungs-Performance-Management.",
-      "description": "Wir verbinden die operativen und kommerziellen Elemente einer erfolgreichen Kurzzeitvermietung in einem koordinierten Managementansatz."
-    },
-    "includedServices": [
-      {
-        "title": "Erstellung & Optimierung von Inseraten",
-        "text": "Professionelle Inseratsstruktur, Positionierung, Beschreibungen und kontinuierliche Optimierung."
-      },
-      {
-        "title": "Multi-Plattform-Distribution",
-        "text": "Ihre Unterkunft kann auf führenden Buchungs- und Reiseplattformen vertrieben werden."
-      },
-      {
-        "title": "Kalendersynchronisierung",
-        "text": "Verfügbarkeit wird über verbundene Kanäle koordiniert, um Konflikte und Doppelbuchungen zu reduzieren."
-      },
-      {
-        "title": "Reservierungsmanagement",
-        "text": "Wir verwalten die Buchungsaktivität und halten Reservierungen über Ihre verbundenen Kanäle hinweg organisiert."
-      },
-      {
-        "title": "Intelligente Preisgestaltung & Umsatzoptimierung",
-        "text": "Preisentscheidungen werden kontinuierlich durch Nachfrage, Saisonalität, Marktbedingungen und Unterkunftsperformance informiert."
-      },
-      {
-        "title": "Persönliche Gästekommunikation",
-        "text": "Professionelle Gästekommunikation durch geschulte Teammitglieder mit Fokus auf schnelle und aufmerksame Antworten."
-      },
-      {
-        "title": "Gästeerlebnis & Bewertungen",
-        "text": "Kommunikation und Darstellung der Unterkunft werden kontinuierlich optimiert, um bessere Gästeerlebnisse und Bewertungen zu fördern."
-      },
-      {
-        "title": "Performance-Monitoring",
-        "text": "Wichtige Buchungs- und Umsatzkennzahlen werden überwacht, um Verbesserungschancen zu erkennen."
-      },
-      {
-        "title": "Markt- & Wettbewerbsanalyse",
-        "text": "Performance und Positionierung Ihrer Unterkunft werden anhand relevanter Markt- und Wettbewerbssignale bewertet."
-      },
-      {
-        "title": "Kontinuierliche Optimierung",
-        "text": "Preise, Inserate, Distribution und kommerzielle Strategie werden überprüft und an die Entwicklung der Performance angepasst."
-      },
-      {
-        "title": "Strategie für wiederkehrende Gäste",
-        "text": "Wir schaffen Möglichkeiten, die Gästebindung zu stärken und zukünftige direkte Beziehungen zu fördern."
-      },
-      {
-        "title": "Eigentümer-Support & Strategie",
-        "text": "Sie bleiben über Performance, wichtige Änderungen und die Strategie hinter zentralen Entscheidungen informiert."
-      }
-    ],
-    "partners": {
-      "eyebrow": "Brauchen Sie noch etwas?",
-      "title": "Wir können Ihnen auch dabei helfen, das passende Team rund um Ihre Unterkunft aufzubauen.",
-      "description": "Einige Leistungen erfordern spezialisierte Fachleute außerhalb unseres Kernmanagements. Bei Bedarf können wir Sie mit externen Profis verbinden für:",
-      "photography": {
-        "title": "Professionelle Immobilienfotografie",
-        "description": "Wir helfen Ihnen, professionelle Fotografen zu finden, die wissen, wie Unterkünfte auf Buchungsplattformen optimal präsentiert werden."
-      },
-      "website": {
-        "title": "Ihre eigene Website für Direktbuchungen",
-        "description": "Wir können Sie mit Fachleuten verbinden, die eine eigene Website für Ihre Unterkunft erstellen und Ihre langfristige Direktbuchungsstrategie unterstützen."
-      },
-      "disclaimer": "Fotografie und Website-Entwicklung werden von unabhängigen externen Fachleuten angeboten und sind nicht in der Managementgebühr von 11 % enthalten."
+    "partnershipSection": {
+      "eyebrow": "DIE ZUSAMMENARBEIT",
+      "title": "Zusammenarbeit mit HostMetric",
+      "description": "Alles, was Sie über Zahlungen, Kontrolle, Managementgebühren und die Zusammenarbeit zwischen Ihnen und HostMetric wissen müssen.",
+      "questions": [
+        {
+          "question": "Was passiert, wenn ich bereits zukünftige Reservierungen habe?",
+          "answer": "Bereits bestätigte Reservierungen können beim Onboarding berücksichtigt werden. Wir prüfen den aktuellen Kalender und die Verfügbarkeit der Unterkunft, damit der Übergang zum HostMetric-Management um bereits bestehende Buchungen herum organisiert werden kann."
+        },
+        {
+          "question": "Wie erhalte ich das Geld aus meinen Buchungen?",
+          "answer": "Buchungszahlungen folgen weiterhin dem Zahlungsprozess des jeweiligen Buchungskanals oder der vereinbarten Einrichtung. Die Aufgabe von HostMetric besteht darin, die Unterkunft zu verwalten und zu optimieren; Ihre Buchungseinnahmen müssen nicht über HostMetric laufen, nur weil wir Ihre Unterkunft verwalten."
+        },
+        {
+          "question": "Wie helfen Sie dabei, Gästebewertungen und Ratings zu verbessern?",
+          "answer": "Starke Bewertungen entstehen in der Regel durch ein konstant gutes Gästeerlebnis. Wir konzentrieren uns auf korrekte Inseratsinformationen, klare Kommunikation, organisiertes Reservierungsmanagement und schnelle Gästebetreuung und beobachten Feedback gleichzeitig auf wiederkehrende Probleme und Verbesserungschancen."
+        },
+        {
+          "question": "Welche Unterkünfte und Standorte kann HostMetric verwalten?",
+          "answer": "Jede Unterkunft wird individuell bewertet. Wir berücksichtigen Lage, Typ, Zustand, Potenzial für Kurzzeitvermietung und operative Anforderungen, bevor wir entscheiden, ob HostMetric der passende Managementpartner ist."
+        },
+        {
+          "question": "Gibt es Einrichtungsgebühren oder monatliche Abonnements?",
+          "answer": "HostMetric erhebt für den Full-Management-Service keine feste monatliche Abonnementgebühr. Unser Modell ist an die Performance der Unterkunft gekoppelt und nicht als wiederkehrendes Software-Abonnement aufgebaut."
+        },
+        {
+          "question": "Was kostet der Managementservice von HostMetric?",
+          "answer": "Der Full-Management-Service von HostMetric wird über eine prozentuale Managementgebühr auf den Buchungsumsatz abgerechnet. Unsere Standard-Managementgebühr beträgt 11 %, wobei gegebenenfalls anfallende Mehrwertsteuer separat berechnet wird. Dadurch bleiben unsere Interessen eng mit der Performance Ihrer Unterkunft verbunden."
+        },
+        {
+          "question": "Behalte ich die Kontrolle über meine Unterkunft und ihre Verfügbarkeit?",
+          "answer": "Ja. Es bleibt Ihre Unterkunft. Sie können uns mitteilen, wenn bestimmte Daten für die private Nutzung oder aus anderen Gründen gesperrt werden sollen. Diese Einschränkungen können in die Verfügbarkeit integriert werden, während HostMetric die kommerzielle Strategie für die übrigen Daten verwaltet."
+        },
+        {
+          "question": "Wie lange dauert die Zusammenarbeit?",
+          "answer": "Die Bedingungen jeder Zusammenarbeit werden vor Beginn des Managements klar vereinbart. Unser Ziel ist es, langfristige Partnerschaften aufzubauen, indem wir kontinuierlich durch professionelles Management, Kommunikation und Unterkunftsperformance Mehrwert schaffen."
+        },
+        {
+          "question": "Was passiert, wenn ich die Zusammenarbeit mit HostMetric beenden möchte?",
+          "answer": "Wenn Sie die Zusammenarbeit beenden möchten, wird der Übergang entsprechend den vereinbarten Bedingungen organisiert und bestehende Reservierungen sowie Verpflichtungen gegenüber Gästen werden berücksichtigt. Ziel ist ein geordneter Ablauf für den Eigentümer und für Gäste mit bestätigten Aufenthalten."
+        }
+      ]
     },
     "cta": {
-      "eyebrow": "Mit HostMetric starten",
-      "titleLine1": "Ihre Unterkunft. Unsere Strategie.",
-      "titleLine2": "Eine einfache Gebühr von 11 %.",
-      "description": "Keine Registrierungsgebühr. Keine komplizierten Pakete. Ein vollständiger Managementansatz zur Verbesserung der Performance Ihrer Unterkunft.",
-      "button": "Meine Unterkunft optimieren"
+      "eyebrow": "BEREIT ZU STARTEN?",
+      "titleLine1": "Sehen wir uns an, was",
+      "titleLine2": "Ihre Unterkunft erreichen kann.",
+      "description": "Erzählen Sie uns von Ihrer Unterkunft und wir prüfen, wie HostMetric ihr Management und ihre Performance verbessern kann.",
+      "button": "Jetzt starten"
     }
   },
   "guestResponsePage": {
@@ -1538,7 +1543,6 @@
       "Example: SiteMinder, Cloudbeds...": "Beispiel: SiteMinder, Cloudbeds ...",
       "Do you use a Property Management System (PMS)? *": "Verwenden Sie ein Property Management System (PMS)? *",
       "PMS Name": "PMS-Name",
-      "PMS name": "PMS-Name",
       "Do you have your own website? *": "Haben Sie eine eigene Website? *",
       "Website URL": "Website-URL",
       "https://...": "https://...",

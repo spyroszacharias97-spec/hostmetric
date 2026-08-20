@@ -2,7 +2,7 @@
   "navigation": {
     "services": "Usluge",
     "howItWorks": "Kako funkcioniše",
-    "pricing": "Cene",
+    "pricing": "FAQ",
     "about": "O nama",
     "contact": "Kontakt",
     "getStarted": "Započnite",
@@ -429,7 +429,7 @@
       "title": "Kompanija",
       "about": "O nama",
       "howItWorks": "Kako funkcioniše",
-      "pricing": "Cene",
+      "pricing": "FAQ",
       "contact": "Kontaktirajte nas"
     },
     "contact": {
@@ -581,108 +581,113 @@
       "link": "Contact HostMetric"
     }
   },
-  "pricingPage": {
+  "faqPage": {
     "hero": {
-      "eyebrow": "Jednostavne cene",
-      "titleLine1": "One simple package.",
-      "titleLine2": "Everything you need.",
-      "description": "No complicated plans or unnecessary subscriptions. One complete management service designed around your property's performance, guest experience and long-term growth."
+      "eyebrow": "HOSTMETRIC FAQ",
+      "titleLine1": "Sve što treba",
+      "titleLine2": "da znate.",
+      "description": "Jasni odgovori o upravljanju nekretninama, rezervacijama, cenama, komunikaciji sa gostima i vašem partnerstvu sa HostMetric-om."
     },
-    "pricingCard": {
-      "eyebrow": "Kompletno upravljanje",
-      "revenueLabel": "of booking revenue",
-      "zeroRegistrationFee": "Bez naknade za registraciju",
-      "description": "Our success grows with yours. Instead of complicated fixed plans, HostMetric works through one clear commission-based model.",
-      "button": "Započnite",
-      "summaryEyebrow": "Everything Included",
-      "summaryTitle": "One management system built around your property.",
-      "summaryDescription": "From the way your property is presented and distributed to pricing, reservations, guest communication and ongoing performance analysis, the essential parts of your booking operation work together under one coordinated strategy.",
-      "summaryItems": [
-        "Human guest communication",
-        "Smart pricing",
-        "Upravljanje rezervacijama",
-        "Calendar synchronization",
-        "Multi-platform distribution",
-        "Optimizacija oglasa",
-        "Analiza performansi",
-        "Strategija recenzija"
+    "propertySection": {
+      "eyebrow": "VAŠA NEKRETNINA",
+      "title": "Upravljanje i razvoj vaše nekretnine",
+      "description": "Kako HostMetric upravlja distribucijom, rezervacijama, cenama, komunikacijom sa gostima i kontinuiranim unapređenjem performansi vaše nekretnine.",
+      "questions": [
+        {
+          "question": "Šta treba da uradim da bih počeo da sarađujem sa HostMetric-om?",
+          "answer": "Početak je jednostavan. Recite nam nešto o svojoj nekretnini i trenutnom načinu upravljanja, a naš tim će pregledati pozicioniranje, cene, dostupnost i distribuciju. Zatim ćemo pripremiti nekretninu za profesionalno upravljanje i napraviti strategiju prilagođenu njenim karakteristikama i vašim ciljevima."
+        },
+        {
+          "question": "Kako HostMetric pomaže da povećam broj rezervacija?",
+          "answer": "HostMetric kombinuje optimizovanu prezentaciju nekretnine, stratešku distribuciju, pametno određivanje cena i kontinuirano praćenje performansi. Umesto da oglas posmatramo kao nešto statično, stalno analiziramo rezultate i prilagođavamo strategiju kada uočimo mogućnosti za poboljšanje."
+        },
+        {
+          "question": "Mogu li i dalje da prihvatam sopstvene direktne rezervacije?",
+          "answer": "Da. Možete nastaviti da prihvatate sopstvene rezervacije. Najvažnije je da dostupnost ostane sinhronizovana, kako bi svaki potvrđeni boravak bio pravilno prikazan u kalendaru nekretnine i kako bi se izbegle preklapajuće rezervacije."
+        },
+        {
+          "question": "Kako poboljšavate vidljivost moje nekretnine na platformama za rezervacije?",
+          "answer": "Fokusiramo se na elemente koji utiču na sposobnost nekretnine da bude konkurentna na internetu, uključujući kvalitet oglasa, cene, dostupnost, uslove rezervacije, informacije o nekretnini i ukupne performanse. Ovi elementi se kontinuirano analiziraju, umesto da se podese samo jednom i zatim ostave nepromenjeni."
+        },
+        {
+          "question": "Na kojim platformama za rezervacije moja nekretnina može biti dostupna?",
+          "answer": "Strategija distribucije zavisi od nekretnine i profila gostiju koje želite da privučete. HostMetric može da upravlja i koordinira oglasima na vodećim relevantnim kanalima za rezervacije, uz održavanje dosledne dostupnosti i komercijalne strategije nekretnine."
+        },
+        {
+          "question": "Kako se upravlja mojim rezervacijama i kalendarima?",
+          "answer": "HostMetric koordinira rezervacije i dostupnost kroz centralizovan proces upravljanja. Promene u kalendaru se sinhronizuju između povezanih kanala, što pomaže da dostupnost ostane tačna i smanjuje rizik od konfliktnih rezervacija."
+        },
+        {
+          "question": "Ko komunicira sa mojim gostima?",
+          "answer": "HostMetric može da upravlja komunikacijom sa gostima tokom celog procesa rezervacije, pomažući da gosti dobiju jasne i pravovremene informacije pre dolaska, tokom boravka i prilikom odlaska, uz profesionalno i dosledno iskustvo."
+        },
+        {
+          "question": "Ko određuje cenu noćenja moje nekretnine?",
+          "answer": "HostMetric upravlja prodajnom cenom nekretnine i kontinuirano je optimizuje. Vlasnik određuje minimalnu cenu noćenja koju je spreman da prihvati, dok naša strategija određivanja cena može primeniti više cene kada potražnja, tržišni uslovi i performanse nekretnine to opravdavaju."
+        },
+        {
+          "question": "Kako funkcioniše dinamičko određivanje cena u HostMetric-u?",
+          "answer": "Cene se kontinuirano procenjuju na osnovu više pokazatelja, umesto da se oslanjamo na jednu fiksnu cenu noćenja. Uzimamo u obzir faktore kao što su potražnja, sezonalnost, ponašanje pri rezervisanju, dostupnost, tržišni uslovi i performanse same nekretnine kako bismo odredili konkurentniju prodajnu cenu."
+        },
+        {
+          "question": "Mogu li da postavim minimalnu cenu noćenja?",
+          "answer": "Da. Možete odrediti minimalnu cenu noćenja koju ste spremni da prihvatite. Ovaj iznos predstavlja donju granicu naše strategije određivanja cena, a ne standardnu prodajnu cenu nekretnine. HostMetric može primeniti više cene kad god tržišni uslovi to podržavaju."
+        },
+        {
+          "question": "Kako koristite AI i podatke za optimizaciju performansi moje nekretnine?",
+          "answer": "HostMetric koristi AI, algoritme za određivanje cena i podatke o performansama nekretnine kako bi podržao bolje komercijalne odluke. Kontinuirano analiziramo potražnju, ponašanje pri rezervisanju, sezonalnost, tržišne uslove i performanse same nekretnine kako bismo prepoznali prilike i vremenom optimizovali strategiju."
+        }
       ]
     },
-    "includedSection": {
-      "eyebrow": "Included In Your 11%",
-      "title": "Complete booking performance management.",
-      "description": "We combine the operational and commercial elements behind a successful short-term rental into one coordinated management approach."
-    },
-    "includedServices": [
-      {
-        "title": "Listing Creation & Optimization",
-        "text": "Professional listing structure, positioning, descriptions and continuous optimization."
-      },
-      {
-        "title": "Multi-Platform Distribution",
-        "text": "Your property can be distributed across leading booking and travel platforms."
-      },
-      {
-        "title": "Calendar Synchronization",
-        "text": "Availability is coordinated across connected channels to reduce conflicts and double bookings."
-      },
-      {
-        "title": "Reservation Management",
-        "text": "We manage booking activity and keep reservations organized across your connected channels."
-      },
-      {
-        "title": "Smart Pricing & Revenue Optimization",
-        "text": "Pricing decisions are continuously informed by demand, seasonality, market conditions and property performance."
-      },
-      {
-        "title": "Human Guest Communication",
-        "text": "Professional guest communication handled by trained team members, with a focus on fast, thoughtful responses."
-      },
-      {
-        "title": "Guest Experience & Reviews",
-        "text": "Communication and property presentation are continuously refined to support stronger guest experiences and reviews."
-      },
-      {
-        "title": "Performance Monitoring",
-        "text": "Key booking and revenue indicators are monitored to identify opportunities for improvement."
-      },
-      {
-        "title": "Market & Competitor Analysis",
-        "text": "Your property's performance and positioning are evaluated against relevant market and competitive signals."
-      },
-      {
-        "title": "Kontinuirana optimizacija",
-        "text": "Pricing, listings, distribution and commercial strategy are reviewed and adjusted as performance evolves."
-      },
-      {
-        "title": "Repeat Guest Strategy",
-        "text": "We help create opportunities to strengthen guest retention and encourage future direct relationships."
-      },
-      {
-        "title": "Owner Support & Strategy",
-        "text": "You stay informed about performance, important changes and the strategy behind key decisions."
-      }
-    ],
-    "partners": {
-      "eyebrow": "Need Something More?",
-      "title": "We can help you build the team around your property too.",
-      "description": "Some services require specialized professionals outside our core management service. When needed, we can help connect you with external professionals for:",
-      "photography": {
-        "title": "Professional Property Photography",
-        "description": "We can help you find professional photographers who understand how accommodation should be presented for booking platforms."
-      },
-      "website": {
-        "title": "Your Own Direct-Booking Website",
-        "description": "We can connect you with professionals who can build your own property website and help support your long-term direct-booking strategy."
-      },
-      "disclaimer": "Photography and website development are provided by independent external professionals and are not included in the 11% management fee."
+    "partnershipSection": {
+      "eyebrow": "PARTNERSTVO",
+      "title": "Saradnja sa HostMetric-om",
+      "description": "Sve što treba da znate o isplatama, kontroli, naknadama za upravljanje i odnosu između vas i HostMetric-a.",
+      "questions": [
+        {
+          "question": "Šta se dešava ako već imam buduće rezervacije?",
+          "answer": "Postojeće potvrđene rezervacije mogu se uzeti u obzir tokom procesa uključivanja. Pregledaćemo trenutni kalendar i dostupnost nekretnine kako bismo organizovali prelazak na HostMetric upravljanje uz poštovanje rezervacija koje su već napravljene."
+        },
+        {
+          "question": "Kako dobijam novac od svojih rezervacija?",
+          "answer": "Isplate rezervacija nastavljaju da prate proces odgovarajućeg kanala za rezervacije ili dogovorenu postavku. Uloga HostMetric-a je da upravlja nekretninom i optimizuje je; prihod od rezervacija ne mora da prolazi kroz HostMetric samo zato što upravljamo vašom nekretninom."
+        },
+        {
+          "question": "Kako pomažete da se poboljšaju recenzije i ocene gostiju?",
+          "answer": "Dobre recenzije najčešće proizlaze iz dosledno pozitivnog iskustva gostiju. Fokusiramo se na tačne informacije u oglasu, jasnu komunikaciju, organizovano upravljanje rezervacijama i efikasnu podršku gostima, dok istovremeno pratimo povratne informacije kako bismo prepoznali ponavljajuće probleme i mogućnosti za poboljšanje."
+        },
+        {
+          "question": "Kojim vrstama nekretnina i na kojim lokacijama HostMetric može da upravlja?",
+          "answer": "Svaka nekretnina se procenjuje pojedinačno. Razmatramo lokaciju, tip nekretnine, stanje, potencijal za kratkoročno izdavanje i operativne zahteve pre nego što utvrdimo da li je HostMetric odgovarajući partner za upravljanje."
+        },
+        {
+          "question": "Postoje li početni troškovi ili mesečne pretplate?",
+          "answer": "HostMetric ne naplaćuje fiksnu mesečnu pretplatu za uslugu Kompletnog upravljanja. Naš model je zasnovan na performansama nekretnine, a ne na redovnoj softverskoj pretplati."
+        },
+        {
+          "question": "Koliko košta HostMetric usluga upravljanja?",
+          "answer": "HostMetric usluga Kompletnog upravljanja naplaćuje se kroz procentualnu naknadu za upravljanje koja se obračunava na prihod od rezervacija. Naša standardna naknada za upravljanje iznosi 11%, dok se eventualno primenjivi PDV obračunava odvojeno. Na taj način naši interesi ostaju direktno usklađeni sa performansama vaše nekretnine."
+        },
+        {
+          "question": "Da li i dalje imam kontrolu nad svojom nekretninom i dostupnošću?",
+          "answer": "Da. Nekretnina ostaje vaša. Možete nas obavestiti kada određeni datumi treba da budu nedostupni zbog lične upotrebe ili drugih razloga, a ta ograničenja mogu biti uneta u dostupnost dok HostMetric upravlja komercijalnom strategijom za preostale datume."
+        },
+        {
+          "question": "Koliko traje partnerstvo?",
+          "answer": "Uslovi svakog partnerstva jasno se dogovaraju pre početka upravljanja. Naš cilj je da gradimo dugoročne odnose pružanjem kontinuirane vrednosti kroz profesionalno upravljanje, komunikaciju i performanse nekretnine."
+        },
+        {
+          "question": "Šta se dešava ako odlučim da prekinem partnerstvo sa HostMetric-om?",
+          "answer": "Ako odlučite da prekinete partnerstvo, tranzicija se vodi u skladu sa dogovorenim uslovima, uzimajući u obzir postojeće rezervacije i obaveze prema gostima. Cilj je da proces ostane organizovan i za vlasnika i za goste sa potvrđenim boravcima."
+        }
+      ]
     },
     "cta": {
-      "eyebrow": "Start With HostMetric",
-      "titleLine1": "Your property. Our strategy.",
-      "titleLine2": "One simple 11% fee.",
-      "description": "No registration fee. No complicated packages. A complete management approach built to improve how your property performs.",
-      "button": "Optimize My Property"
+      "eyebrow": "SPREMNI DA POČNETE?",
+      "titleLine1": "Hajde da otkrijemo šta",
+      "titleLine2": "vaša nekretnina može da postigne.",
+      "description": "Recite nam nešto o svojoj nekretnini i procenićemo kako HostMetric može pomoći da poboljšate njeno upravljanje i performanse.",
+      "button": "Započnite"
     }
   },
   "guestResponsePage": {
@@ -1538,7 +1543,6 @@
       "Example: SiteMinder, Cloudbeds...": "Example: SiteMinder, Cloudbeds...",
       "Do you use a Property Management System (PMS)? *": "Do you use a Property Management System (PMS)? *",
       "PMS Name": "PMS Name",
-      "PMS name": "PMS name",
       "Do you have your own website? *": "Do you have your own website? *",
       "Website URL": "Website URL",
       "https://...": "https://...",

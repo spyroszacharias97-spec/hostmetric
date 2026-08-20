@@ -107,7 +107,7 @@ export default async function Hero() {
           {/* REVENUE */}
           <Link
             href="/insights/revenue"
-            className="group cursor-pointer rounded-2xl border border-gray-200 bg-white/90 p-6 shadow-sm backdrop-blur-md transition duration-300 hover:-translate-y-2 hover:scale-105 hover:shadow-xl"
+            className="group cursor-pointer rounded-2xl border border-blue-100 bg-[#f5fbff]/95 p-6 shadow-sm backdrop-blur-md transition duration-300 hover:-translate-y-2 hover:scale-105 hover:shadow-xl"
           >
 
             <p className="text-sm text-gray-500">
@@ -132,7 +132,7 @@ export default async function Hero() {
           {/* GUEST RATING */}
           <Link
             href="/insights/guest-rating"
-            className="group cursor-pointer rounded-2xl border border-gray-200 bg-white/90 p-6 shadow-sm backdrop-blur-md transition duration-300 hover:-translate-y-2 hover:scale-105 hover:shadow-xl"
+            className="group cursor-pointer rounded-2xl border border-blue-100 bg-[#f5fbff]/95 p-6 shadow-sm backdrop-blur-md transition duration-300 hover:-translate-y-2 hover:scale-105 hover:shadow-xl"
           >
 
             <p className="text-sm text-gray-500">
@@ -157,7 +157,7 @@ export default async function Hero() {
           {/* OCCUPANCY */}
           <Link
             href="/insights/occupancy"
-            className="group cursor-pointer rounded-2xl border border-gray-200 bg-white/90 p-6 shadow-sm backdrop-blur-md transition duration-300 hover:-translate-y-2 hover:scale-105 hover:shadow-xl"
+            className="group cursor-pointer rounded-2xl border border-blue-100 bg-[#f5fbff]/95 p-6 shadow-sm backdrop-blur-md transition duration-300 hover:-translate-y-2 hover:scale-105 hover:shadow-xl"
           >
 
             <p className="text-sm text-gray-500">
@@ -165,7 +165,7 @@ export default async function Hero() {
             </p>
 
             <p className="mt-3 text-4xl font-bold">
-              87%
+              94%
             </p>
 
             <p className="mt-2 text-sm text-gray-500">
@@ -182,7 +182,7 @@ export default async function Hero() {
           {/* AI PRICING */}
           <Link
             href="/insights/ai-pricing"
-            className="group cursor-pointer rounded-2xl border border-gray-200 bg-white/90 p-6 shadow-sm backdrop-blur-md transition duration-300 hover:-translate-y-2 hover:scale-105 hover:shadow-xl"
+            className="group cursor-pointer rounded-2xl border border-emerald-100 bg-[#f4fbf7]/95 p-6 shadow-sm backdrop-blur-md transition duration-300 hover:-translate-y-2 hover:scale-105 hover:shadow-xl"
           >
 
             <p className="text-sm text-gray-500">
