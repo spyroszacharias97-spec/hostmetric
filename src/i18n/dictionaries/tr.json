@@ -588,6 +588,11 @@
       "titleLine2": "her şey.",
       "description": "Mülk yönetimi, rezervasyonlar, fiyatlandırma, misafir iletişimi ve HostMetric ile iş ortaklığınız hakkında net yanıtlar."
     },
+    "platformIntro": {
+      "eyebrow": "KÜRESEL GÖRÜNÜRLÜK",
+      "title": "Dünyanın önde gelen rezervasyon platformlarıyla bağlantılı",
+      "description": "HostMetric, mülkünüzü önde gelen uluslararası rezervasyon platformlarına bağlar ve yönetir; görünürlüğü artırmak, daha fazla rezervasyon elde etmek ve genel performansı iyileştirmek için stratejik dağıtım, akıllı fiyatlandırma ve profesyonel yönetimi bir araya getirir."
+    },
     "propertySection": {
       "eyebrow": "MÜLKÜNÜZ",
       "title": "Mülkünüzü yönetmek ve büyütmek",
@@ -650,7 +655,7 @@
         },
         {
           "question": "Rezervasyonlarımdan elde ettiğim parayı nasıl alırım?",
-          "answer": "Rezervasyon ödemeleri ilgili rezervasyon kanalının sürecini veya üzerinde anlaşılmış ödeme düzenini izlemeye devam eder. HostMetric'in rolü mülkü yönetmek ve optimize etmektir; yalnızca mülkünüzü yönettiğimiz için rezervasyon gelirinin HostMetric üzerinden geçmesi gerekmez."
+          "answer": "Rezervasyon ödemeleri, üzerinde anlaşmaya varılan ödeme düzenine göre HostMetric aracılığıyla tahsil edilir ve yönetilir. Gelirler daha sonra üzerinde anlaşmaya varılan şartlara ve ödeme planına göre mülk sahibine ödenir. Bu sayede rezervasyonlar, ödemeler ve finansal takip merkezi ve profesyonel bir şekilde yönetilir."
         },
         {
           "question": "Misafir yorumlarını ve puanlarını iyileştirmeye nasıl yardımcı oluyorsunuz?",

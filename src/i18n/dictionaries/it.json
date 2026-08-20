@@ -588,6 +588,11 @@
       "titleLine2": "sapere.",
       "description": "Risposte chiare sulla gestione della proprietà, le prenotazioni, i prezzi, la comunicazione con gli ospiti e la collaborazione con HostMetric."
     },
+    "platformIntro": {
+      "eyebrow": "VISIBILITÀ GLOBALE",
+      "title": "Collegati alle principali piattaforme di prenotazione del mondo",
+      "description": "HostMetric collega e gestisce la tua proprietà sulle principali piattaforme di prenotazione internazionali, combinando distribuzione strategica, prezzi intelligenti e gestione professionale per aumentare la visibilità, generare più prenotazioni e migliorare le prestazioni complessive."
+},
     "propertySection": {
       "eyebrow": "LA TUA PROPRIETÀ",
       "title": "Gestire e far crescere la tua proprietà",
@@ -650,7 +655,7 @@
         },
         {
           "question": "Come ricevo il denaro delle mie prenotazioni?",
-          "answer": "I pagamenti delle prenotazioni continuano a seguire il processo del relativo canale di prenotazione o la configurazione concordata. Il ruolo di HostMetric è gestire e ottimizzare la proprietà; i tuoi ricavi dalle prenotazioni non devono transitare attraverso HostMetric semplicemente perché gestiamo la tua proprietà."
+          "answer": "I pagamenti delle prenotazioni vengono riscossi e gestiti tramite HostMetric utilizzando il sistema di pagamento concordato. I ricavi vengono successivamente versati al proprietario della struttura secondo i termini concordati e il calendario dei pagamenti. In questo modo, le prenotazioni, i pagamenti e il monitoraggio finanziario rimangono centralizzati e gestiti in modo professionale."
         },
         {
           "question": "Come aiutate a migliorare le recensioni e le valutazioni degli ospiti?",

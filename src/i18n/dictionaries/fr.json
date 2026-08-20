@@ -588,6 +588,11 @@
       "titleLine2": "savoir.",
       "description": "Des réponses claires sur la gestion immobilière, les réservations, la tarification, la communication avec les voyageurs et la collaboration avec HostMetric."
     },
+    "platformIntro": {
+      "eyebrow": "VISIBILITÉ INTERNATIONALE",
+      "title": "Connectés aux principales plateformes de réservation mondiales",
+      "description": "HostMetric connecte et gère votre propriété sur les principales plateformes de réservation internationales, en combinant distribution stratégique, tarification intelligente et gestion professionnelle afin d'accroître sa visibilité, de générer davantage de réservations et d'améliorer ses performances globales."
+    },
     "propertySection": {
       "eyebrow": "VOTRE BIEN",
       "title": "Gérer et développer votre bien",
@@ -654,7 +659,7 @@
         },
         {
           "question": "Comment aidez-vous à améliorer les avis et les notes des voyageurs ?",
-          "answer": "De bons avis proviennent généralement d’une expérience voyageur solide et régulière. Nous nous concentrons sur des informations d’annonce précises, une communication claire, une gestion organisée des réservations et une assistance réactive, tout en surveillant les retours afin d’identifier les problèmes récurrents et les opportunités d’amélioration."
+          "answer": "Les paiements des réservations sont encaissés et gérés par HostMetric selon le système de paiement convenu. Les revenus sont ensuite versés au propriétaire conformément aux conditions convenues et au calendrier de paiement établi. Cela permet de centraliser et de gérer de manière professionnelle les réservations, les paiements et le suivi financier."
         },
         {
           "question": "Quels types de biens et quelles zones HostMetric peut-il gérer ?",

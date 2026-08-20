@@ -588,6 +588,11 @@
       "titleLine2": "to know.",
       "description": "Clear answers about property management, bookings, pricing, guest communication and working with HostMetric."
     },
+    "platformIntro": {
+      "eyebrow": "GLOBAL DISTRIBUTION",
+      "title": "Connected with the world's leading booking platforms",
+      "description": "HostMetric connects and manages your property across leading international booking platforms, combining strategic distribution, intelligent pricing and professional management to increase visibility, generate more bookings and improve overall performance."
+    },
     "propertySection": {
       "eyebrow": "YOUR PROPERTY",
       "title": "Managing & growing your property",
@@ -650,7 +655,7 @@
         },
         {
           "question": "How do I receive the money from my bookings?",
-          "answer": "Booking payments continue to follow the payment process of the relevant booking channel or agreed setup. HostMetric's role is to manage and optimize the property; your booking revenue does not need to pass through HostMetric simply for us to manage your property."
+          "answer": "Booking payments are collected and managed through HostMetric using the agreed payment setup. The revenue is then paid to the property owner according to the agreed terms and payment schedule. This keeps bookings, payments and financial tracking centralized and professionally managed."
         },
         {
           "question": "How do you help improve guest reviews and ratings?",

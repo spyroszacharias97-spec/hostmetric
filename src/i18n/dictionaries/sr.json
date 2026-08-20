@@ -588,6 +588,11 @@
       "titleLine2": "da znate.",
       "description": "Jasni odgovori o upravljanju nekretninama, rezervacijama, cenama, komunikaciji sa gostima i vašem partnerstvu sa HostMetric-om."
     },
+    "platformIntro": {
+      "eyebrow": "GLOBALNA VIDLJIVOST",
+      "title": "Povezani sa vodećim svetskim platformama za rezervacije",
+      "description": "HostMetric povezuje i upravlja vašom nekretninom na vodećim međunarodnim platformama za rezervacije, kombinujući stratešku distribuciju, inteligentno formiranje cena i profesionalno upravljanje kako bi se povećala vidljivost, ostvarilo više rezervacija i poboljšali ukupni rezultati."
+    },
     "propertySection": {
       "eyebrow": "VAŠA NEKRETNINA",
       "title": "Upravljanje i razvoj vaše nekretnine",
@@ -650,7 +655,7 @@
         },
         {
           "question": "Kako dobijam novac od svojih rezervacija?",
-          "answer": "Isplate rezervacija nastavljaju da prate proces odgovarajućeg kanala za rezervacije ili dogovorenu postavku. Uloga HostMetric-a je da upravlja nekretninom i optimizuje je; prihod od rezervacija ne mora da prolazi kroz HostMetric samo zato što upravljamo vašom nekretninom."
+          "answer": "Plaćanja za rezervacije se primaju i njima se upravlja putem HostMetric-a, koristeći dogovoreni sistem plaćanja. Prihodi se zatim isplaćuju vlasniku nekretnine u skladu sa dogovorenim uslovima i rasporedom plaćanja. Na ovaj način rezervacije, plaćanja i finansijsko praćenje ostaju centralizovani i profesionalno vođeni."
         },
         {
           "question": "Kako pomažete da se poboljšaju recenzije i ocene gostiju?",

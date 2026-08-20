@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { cookies } from "next/headers";
 
@@ -21,6 +22,12 @@ type FAQPageDictionary = {
     eyebrow: string;
     titleLine1: string;
     titleLine2: string;
+    description: string;
+  };
+
+  platformIntro: {
+    eyebrow: string;
+    title: string;
     description: string;
   };
 
@@ -90,10 +97,6 @@ export default async function FAQPage() {
 
   /* ==========================================
      FALLBACK TO DEFAULT LANGUAGE
-
-     If the selected language temporarily does
-     not contain faqPage, use the default
-     dictionary instead of crashing the page.
   ========================================== */
 
   if (!faq) {
@@ -122,10 +125,6 @@ export default async function FAQPage() {
     );
   }
 
-
-  /* ==========================================
-     PAGE
-  ========================================== */
 
   return (
     <main className="min-h-screen bg-[#f5fbff] text-[#111827]">
@@ -167,42 +166,69 @@ export default async function FAQPage() {
 
 
       {/* ========================================
+          PLATFORM INTRO
+      ======================================== */}
+
+      <section className="px-6 pb-20 md:px-10 md:pb-28">
+
+        <div className="mx-auto max-w-7xl">
+
+          <div className="max-w-4xl">
+
+            <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#2166f3]">
+              {faq.platformIntro.eyebrow}
+            </p>
+
+
+            <h2 className="mt-4 text-4xl font-bold tracking-tight md:text-6xl">
+              {faq.platformIntro.title}
+            </h2>
+
+
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600 md:text-xl">
+              {faq.platformIntro.description}
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* ========================================
           FAQ CONTENT
       ======================================== */}
 
       <section className="px-6 pb-28 md:px-10 md:pb-36">
 
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
 
 
           {/* ======================================
-              SECTION 1 — YOUR PROPERTY
+              LEFT — STICKY VISUAL
           ====================================== */}
 
-          <div>
+          <div className="relative">
 
-            <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#2166f3]">
-              {faq.propertySection.eyebrow}
-            </p>
+            <div className="lg:sticky lg:top-32">
 
+              <div className="overflow-hidden rounded-[36px] border border-emerald-100 bg-[#eef9f3] p-4 shadow-[0_24px_70px_rgba(15,61,50,0.10)] md:p-6">
 
-            <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
-              {faq.propertySection.title}
-            </h2>
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-white">
 
+                  <Image
+                    src="/faq-dashboard.png"
+                    alt="HostMetric property management dashboard"
+                    fill
+                    priority
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 42vw"
+                  />
 
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-              {faq.propertySection.description}
-            </p>
+                </div>
 
-
-            <div className="mt-10">
-
-              <FAQAccordion
-                items={
-                  faq.propertySection.questions
-                }
-              />
+              </div>
 
             </div>
 
@@ -210,33 +236,76 @@ export default async function FAQPage() {
 
 
           {/* ======================================
-              SECTION 2 — THE PARTNERSHIP
+              RIGHT — ALL QUESTIONS
           ====================================== */}
 
-          <div className="mt-24 md:mt-32">
-
-            <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#2166f3]">
-              {faq.partnershipSection.eyebrow}
-            </p>
+          <div>
 
 
-            <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
-              {faq.partnershipSection.title}
-            </h2>
+            {/* ====================================
+                SECTION 1 — YOUR PROPERTY
+            ==================================== */}
+
+            <div>
+
+              <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#2166f3]">
+                {faq.propertySection.eyebrow}
+              </p>
 
 
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-              {faq.partnershipSection.description}
-            </p>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+                {faq.propertySection.title}
+              </h2>
 
 
-            <div className="mt-10">
+              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
+                {faq.propertySection.description}
+              </p>
 
-              <FAQAccordion
-                items={
-                  faq.partnershipSection.questions
-                }
-              />
+
+              <div className="mt-10">
+
+                <FAQAccordion
+                  items={
+                    faq.propertySection.questions
+                  }
+                />
+
+              </div>
+
+            </div>
+
+
+            {/* ====================================
+                SECTION 2 — THE PARTNERSHIP
+            ==================================== */}
+
+            <div className="mt-24 md:mt-32">
+
+              <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#2166f3]">
+                {faq.partnershipSection.eyebrow}
+              </p>
+
+
+              <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+                {faq.partnershipSection.title}
+              </h2>
+
+
+              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
+                {faq.partnershipSection.description}
+              </p>
+
+
+              <div className="mt-10">
+
+                <FAQAccordion
+                  items={
+                    faq.partnershipSection.questions
+                  }
+                />
+
+              </div>
 
             </div>
 

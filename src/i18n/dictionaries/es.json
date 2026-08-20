@@ -588,6 +588,11 @@
       "titleLine2": "saber.",
       "description": "Respuestas claras sobre gestión de propiedades, reservas, precios, comunicación con huéspedes y cómo es trabajar con HostMetric."
     },
+    "platformIntro": {
+     "eyebrow": "DISTRIBUCIÓN GLOBAL",
+     "title": "Conectados con las principales plataformas de reservas del mundo",
+     "description": "HostMetric conecta y gestiona tu propiedad en las principales plataformas internacionales de reservas, combinando distribución estratégica, precios inteligentes y gestión profesional para aumentar la visibilidad, generar más reservas y mejorar el rendimiento general."
+    },
     "propertySection": {
       "eyebrow": "TU PROPIEDAD",
       "title": "Gestionar y hacer crecer tu propiedad",
@@ -650,7 +655,7 @@
         },
         {
           "question": "¿Cómo recibo el dinero de mis reservas?",
-          "answer": "Los pagos de las reservas siguen el proceso de pago del canal correspondiente o la configuración acordada. El papel de HostMetric es gestionar y optimizar la propiedad; tus ingresos por reservas no tienen que pasar por HostMetric simplemente porque gestionemos tu propiedad."
+          "answer": "Los pagos de las reservas se cobran y gestionan a través de HostMetric utilizando el sistema de pago acordado. Posteriormente, los ingresos se abonan al propietario de la propiedad de acuerdo con los términos acordados y el calendario de pagos. De este modo, las reservas, los pagos y el seguimiento financiero permanecen centralizados y gestionados de forma profesional."
         },
         {
           "question": "¿Cómo ayudáis a mejorar las reseñas y valoraciones de los huéspedes?",

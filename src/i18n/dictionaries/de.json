@@ -588,6 +588,11 @@
       "titleLine2": "wissen müssen.",
       "description": "Klare Antworten zu Immobilienmanagement, Buchungen, Preisgestaltung, Gästekommunikation und der Zusammenarbeit mit HostMetric."
     },
+    "platformIntro": {
+      "eyebrow": "GLOBALE REICHWEITE",
+      "title": "Vernetzt mit den weltweit führenden Buchungsplattformen",
+      "description": "HostMetric verbindet und verwaltet Ihre Immobilie auf führenden internationalen Buchungsplattformen und kombiniert strategische Distribution, intelligente Preisgestaltung und professionelles Management, um die Sichtbarkeit zu erhöhen, mehr Buchungen zu generieren und die Gesamtleistung zu verbessern."
+    },
     "propertySection": {
       "eyebrow": "IHRE UNTERKUNFT",
       "title": "Ihre Unterkunft verwalten & weiterentwickeln",
@@ -650,7 +655,7 @@
         },
         {
           "question": "Wie erhalte ich das Geld aus meinen Buchungen?",
-          "answer": "Buchungszahlungen folgen weiterhin dem Zahlungsprozess des jeweiligen Buchungskanals oder der vereinbarten Einrichtung. Die Aufgabe von HostMetric besteht darin, die Unterkunft zu verwalten und zu optimieren; Ihre Buchungseinnahmen müssen nicht über HostMetric laufen, nur weil wir Ihre Unterkunft verwalten."
+          "answer": "Buchungszahlungen werden über HostMetric gemäß der vereinbarten Zahlungsabwicklung eingezogen und verwaltet. Die Einnahmen werden anschließend entsprechend den vereinbarten Bedingungen und dem Zahlungsplan an den Eigentümer der Immobilie ausgezahlt. Dadurch werden Buchungen, Zahlungen und die finanzielle Nachverfolgung zentralisiert und professionell verwaltet."
         },
         {
           "question": "Wie helfen Sie dabei, Gästebewertungen und Ratings zu verbessern?",

@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { getDictionary } from "@/i18n/get-dictionary";
+
 import {
   defaultLocale,
   isSupportedLocale,
   type Locale,
 } from "@/i18n/config";
+
 import {
   ArrowRight,
   Building2,
@@ -19,55 +21,216 @@ import {
   UserRound,
 } from "lucide-react";
 
+
 export default function ContactPage() {
+
+  /* ==========================================
+     STATES
+  ========================================== */
+
   const [submitted, setSubmitted] = useState(false);
-  const [contactPage, setContactPage] = useState<any | null>(null);
+
+  const [isSubmitting, setIsSubmitting] =
+    useState(false);
+
+  const [submitError, setSubmitError] =
+    useState<string | null>(null);
+
+  const [contactPage, setContactPage] =
+    useState<any | null>(null);
+
+
+  /* ==========================================
+     LOAD TRANSLATIONS
+  ========================================== */
 
   useEffect(() => {
+
     async function loadTranslations() {
+
       const cookieLocale = document.cookie
         .split("; ")
-        .find((item) => item.startsWith("hostmetric_locale="))
+        .find((item) =>
+          item.startsWith("hostmetric_locale=")
+        )
         ?.split("=")[1];
 
-      let currentLocale: Locale = defaultLocale;
 
-      if (cookieLocale && isSupportedLocale(cookieLocale)) {
+      let currentLocale: Locale =
+        defaultLocale;
+
+
+      if (
+        cookieLocale &&
+        isSupportedLocale(cookieLocale)
+      ) {
         currentLocale = cookieLocale;
       }
 
-      const dictionary = await getDictionary(currentLocale);
+
+      const dictionary =
+        await getDictionary(currentLocale);
+
 
       setContactPage(
         (dictionary as any).contactPage ?? null
       );
     }
 
+
     loadTranslations();
+
   }, []);
 
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  /* ==========================================
+     SUBMIT CONTACT FORM
+  ========================================== */
+
+  async function handleSubmit(
+    e: React.FormEvent<HTMLFormElement>
+  ) {
+
     e.preventDefault();
 
-    // Temporary front-end behaviour.
-    // Later we will connect this to our database/email system.
-    setSubmitted(true);
+    setSubmitError(null);
+    setIsSubmitting(true);
+
+
+    try {
+
+      const form =
+        e.currentTarget;
+
+      const formData =
+        new FormData(form);
+
+
+      const payload = {
+
+        fullName:
+          String(
+            formData.get("fullName") ?? ""
+          ).trim(),
+
+        country:
+          String(
+            formData.get("country") ?? ""
+          ).trim(),
+
+        propertyType:
+          String(
+            formData.get("propertyType") ?? ""
+          ).trim(),
+
+        email:
+          String(
+            formData.get("email") ?? ""
+          ).trim(),
+
+        phone:
+          String(
+            formData.get("phone") ?? ""
+          ).trim(),
+
+        cityArea:
+          String(
+            formData.get("cityArea") ?? ""
+          ).trim(),
+
+        message:
+          String(
+            formData.get("message") ?? ""
+          ).trim(),
+
+        consent:
+          formData.get("consent") === "on",
+
+      };
+
+
+      const response =
+        await fetch("/api/contact", {
+
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+
+          body:
+            JSON.stringify(payload),
+
+        });
+
+
+      const result =
+        await response.json();
+
+
+      if (!response.ok || !result.success) {
+
+        throw new Error(
+          result.error ||
+          "The request could not be submitted."
+        );
+
+      }
+
+
+      form.reset();
+
+      setSubmitted(true);
+
+    } catch (error) {
+
+      console.error(
+        "Contact form submission error:",
+        error
+      );
+
+
+      setSubmitError(
+        "Η αποστολή δεν ολοκληρώθηκε. Παρακαλώ δοκιμάστε ξανά."
+      );
+
+    } finally {
+
+      setIsSubmitting(false);
+
+    }
+
   }
+
+
+  /* ==========================================
+     WAIT FOR TRANSLATIONS
+  ========================================== */
 
   if (!contactPage) {
     return null;
   }
 
+
+  /* ==========================================
+     PAGE
+  ========================================== */
+
   return (
+
     <main className="min-h-screen bg-white">
+
 
       {/* =====================================================
           CONTACT HERO
       ====================================================== */}
+
       <section className="relative overflow-hidden bg-[#129fe3] text-white">
 
+
         {/* TOP CURVE */}
+
         <div
           className="
             absolute
@@ -80,7 +243,9 @@ export default function ContactPage() {
           "
         />
 
+
         {/* DECORATIVE BACKGROUND */}
+
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
 
           <div
@@ -96,6 +261,7 @@ export default function ContactPage() {
             "
           />
 
+
           <div
             className="
               absolute
@@ -108,6 +274,7 @@ export default function ContactPage() {
               border-blue-300/30
             "
           />
+
 
           <div
             className="
@@ -143,10 +310,13 @@ export default function ContactPage() {
           "
         >
 
+
           {/* =================================================
               LEFT SIDE
           ================================================== */}
+
           <div className="flex flex-col justify-center">
+
 
             <p
               className="
@@ -161,6 +331,7 @@ export default function ContactPage() {
               {contactPage.hero.eyebrow}
             </p>
 
+
             <h1
               className="
                 max-w-xl
@@ -173,6 +344,7 @@ export default function ContactPage() {
             >
               {contactPage.hero.title}
             </h1>
+
 
             <p
               className="
@@ -188,9 +360,12 @@ export default function ContactPage() {
 
 
             {/* CONTACT DETAILS */}
+
             <div className="mt-12 space-y-8">
 
+
               {/* GREECE */}
+
               <div className="flex items-start gap-4">
 
                 <div
@@ -209,11 +384,15 @@ export default function ContactPage() {
                   <Phone size={21} />
                 </div>
 
+
                 <div>
+
                   <div className="flex items-center gap-2 text-sm text-blue-100">
                     <MapPin size={15} />
+
                     {contactPage.contactDetails.greece}
                   </div>
+
 
                   <a
                     href="tel:+306943404641"
@@ -228,12 +407,14 @@ export default function ContactPage() {
                   >
                     +30 694 340 4641
                   </a>
+
                 </div>
 
               </div>
 
 
               {/* CYPRUS */}
+
               <div className="flex items-start gap-4">
 
                 <div
@@ -252,11 +433,15 @@ export default function ContactPage() {
                   <Phone size={21} />
                 </div>
 
+
                 <div>
+
                   <div className="flex items-center gap-2 text-sm text-blue-100">
                     <MapPin size={15} />
+
                     {contactPage.contactDetails.cyprus}
                   </div>
+
 
                   <a
                     href="tel:+35799807870"
@@ -271,12 +456,14 @@ export default function ContactPage() {
                   >
                     +357 99 80 78 70
                   </a>
+
                 </div>
 
               </div>
 
 
               {/* EMAIL */}
+
               <div className="flex items-start gap-4">
 
                 <div
@@ -295,10 +482,13 @@ export default function ContactPage() {
                   <Mail size={21} />
                 </div>
 
+
                 <div>
+
                   <p className="text-sm text-blue-100">
                     {contactPage.contactDetails.emailLabel}
                   </p>
+
 
                   <a
                     href="mailto:info@hostmetric.gr"
@@ -313,6 +503,7 @@ export default function ContactPage() {
                   >
                     info@hostmetric.gr
                   </a>
+
                 </div>
 
               </div>
@@ -321,6 +512,7 @@ export default function ContactPage() {
 
 
             {/* SMALL MESSAGE */}
+
             <div
               className="
                 mt-12
@@ -333,13 +525,16 @@ export default function ContactPage() {
                 backdrop-blur-sm
               "
             >
+
               <p className="font-bold">
                 {contactPage.helpBox.title}
               </p>
 
+
               <p className="mt-2 text-sm leading-6 text-blue-50/85">
                 {contactPage.helpBox.description}
               </p>
+
             </div>
 
           </div>
@@ -348,6 +543,7 @@ export default function ContactPage() {
           {/* =================================================
               CONTACT FORM
           ================================================== */}
+
           <div
             className="
               rounded-[36px]
@@ -361,6 +557,7 @@ export default function ContactPage() {
               lg:p-10
             "
           >
+
 
             <div className="mb-8">
 
@@ -376,9 +573,11 @@ export default function ContactPage() {
                 {contactPage.form.eyebrow}
               </p>
 
+
               <h2 className="mt-3 text-3xl font-black">
                 {contactPage.form.title}
               </h2>
+
 
               <p className="mt-3 text-blue-50/85">
                 {contactPage.form.requiredNote}
@@ -389,9 +588,11 @@ export default function ContactPage() {
 
             {submitted ? (
 
+
               /* =============================================
                   SUCCESS MESSAGE
               ============================================== */
+
               <div
                 className="
                   flex
@@ -422,9 +623,11 @@ export default function ContactPage() {
                   <CheckCircle2 size={40} />
                 </div>
 
+
                 <h3 className="mt-7 text-3xl font-black">
                   {contactPage.success.title}
                 </h3>
+
 
                 <p
                   className="
@@ -438,9 +641,15 @@ export default function ContactPage() {
                   {contactPage.success.description}
                 </p>
 
+
                 <button
                   type="button"
-                  onClick={() => setSubmitted(false)}
+                  onClick={() => {
+
+                    setSubmitted(false);
+                    setSubmitError(null);
+
+                  }}
                   className="
                     mt-8
                     rounded-2xl
@@ -458,14 +667,18 @@ export default function ContactPage() {
 
               </div>
 
+
             ) : (
+
 
               <form
                 onSubmit={handleSubmit}
                 className="space-y-5"
               >
 
+
                 {/* FULL NAME */}
+
                 <div className="relative">
 
                   <UserRound
@@ -479,10 +692,14 @@ export default function ContactPage() {
                     "
                   />
 
+
                   <input
                     type="text"
+                    name="fullName"
                     required
-                    placeholder={contactPage.form.fields.fullName}
+                    placeholder={
+                      contactPage.form.fields.fullName
+                    }
                     className="
                       h-16
                       w-full
@@ -507,7 +724,9 @@ export default function ContactPage() {
 
 
                 {/* COUNTRY / PROPERTY TYPE */}
+
                 <div className="grid gap-5 sm:grid-cols-2">
+
 
                   <div className="relative">
 
@@ -523,7 +742,9 @@ export default function ContactPage() {
                       "
                     />
 
+
                     <select
+                      name="country"
                       required
                       defaultValue=""
                       className="
@@ -545,21 +766,41 @@ export default function ContactPage() {
                         focus:ring-blue-600/10
                       "
                     >
-                      <option value="" disabled>
-                        {contactPage.form.fields.propertyCountry}
+
+                      <option
+                        value=""
+                        disabled
+                      >
+                        {
+                          contactPage.form.fields
+                            .propertyCountry
+                        }
                       </option>
+
 
                       <option value="greece">
-                        {contactPage.form.options.greece}
+                        {
+                          contactPage.form.options
+                            .greece
+                        }
                       </option>
+
 
                       <option value="cyprus">
-                        {contactPage.form.options.cyprus}
+                        {
+                          contactPage.form.options
+                            .cyprus
+                        }
                       </option>
 
+
                       <option value="other">
-                        {contactPage.form.options.otherEuropeanCountry}
+                        {
+                          contactPage.form.options
+                            .otherEuropeanCountry
+                        }
                       </option>
+
                     </select>
 
                   </div>
@@ -579,7 +820,9 @@ export default function ContactPage() {
                       "
                     />
 
+
                     <select
+                      name="propertyType"
                       defaultValue=""
                       className="
                         h-16
@@ -600,33 +843,65 @@ export default function ContactPage() {
                         focus:ring-blue-600/10
                       "
                     >
-                      <option value="" disabled>
-                        {contactPage.form.fields.propertyType}
+
+                      <option
+                        value=""
+                        disabled
+                      >
+                        {
+                          contactPage.form.fields
+                            .propertyType
+                        }
                       </option>
+
 
                       <option value="apartment">
-                        {contactPage.form.options.apartment}
+                        {
+                          contactPage.form.options
+                            .apartment
+                        }
                       </option>
+
 
                       <option value="studio">
-                        {contactPage.form.options.studio}
+                        {
+                          contactPage.form.options
+                            .studio
+                        }
                       </option>
+
 
                       <option value="house">
-                        {contactPage.form.options.house}
+                        {
+                          contactPage.form.options
+                            .house
+                        }
                       </option>
+
 
                       <option value="villa">
-                        {contactPage.form.options.villa}
+                        {
+                          contactPage.form.options
+                            .villa
+                        }
                       </option>
+
 
                       <option value="hotel">
-                        {contactPage.form.options.hotelAparthotel}
+                        {
+                          contactPage.form.options
+                            .hotelAparthotel
+                        }
                       </option>
 
+
                       <option value="other">
-                        {contactPage.form.options.other}
+                        {
+                          contactPage.form.options
+                            .other
+                        }
                       </option>
+
                     </select>
 
                   </div>
@@ -635,7 +910,9 @@ export default function ContactPage() {
 
 
                 {/* EMAIL / PHONE */}
+
                 <div className="grid gap-5 sm:grid-cols-2">
+
 
                   <div className="relative">
 
@@ -650,10 +927,14 @@ export default function ContactPage() {
                       "
                     />
 
+
                     <input
                       type="email"
+                      name="email"
                       required
-                      placeholder={contactPage.form.fields.email}
+                      placeholder={
+                        contactPage.form.fields.email
+                      }
                       className="
                         h-16
                         w-full
@@ -690,9 +971,13 @@ export default function ContactPage() {
                       "
                     />
 
+
                     <input
                       type="tel"
-                      placeholder={contactPage.form.fields.phone}
+                      name="phone"
+                      placeholder={
+                        contactPage.form.fields.phone
+                      }
                       className="
                         h-16
                         w-full
@@ -719,9 +1004,14 @@ export default function ContactPage() {
 
 
                 {/* LOCATION */}
+
                 <input
                   type="text"
-                  placeholder={contactPage.form.fields.propertyCityArea}
+                  name="cityArea"
+                  placeholder={
+                    contactPage.form.fields
+                      .propertyCityArea
+                  }
                   className="
                     h-16
                     w-full
@@ -743,10 +1033,14 @@ export default function ContactPage() {
 
 
                 {/* MESSAGE */}
+
                 <textarea
+                  name="message"
                   rows={6}
                   required
-                  placeholder={contactPage.form.fields.message}
+                  placeholder={
+                    contactPage.form.fields.message
+                  }
                   className="
                     w-full
                     resize-none
@@ -768,7 +1062,12 @@ export default function ContactPage() {
                 />
 
 
-                {/* FILE UPLOAD */}
+                {/* FILE UPLOAD
+                    ------------------------------------------------
+                    VISUAL ONLY FOR NOW.
+                    We will connect this to object storage later.
+                ------------------------------------------------- */}
+
                 <label
                   className="
                     flex
@@ -791,19 +1090,28 @@ export default function ContactPage() {
                   <div>
 
                     <p className="font-bold">
-                      {contactPage.form.upload.title}
+                      {
+                        contactPage.form.upload
+                          .title
+                      }
                     </p>
 
+
                     <p className="mt-1 text-sm text-blue-100">
-                      {contactPage.form.upload.description}
+                      {
+                        contactPage.form.upload
+                          .description
+                      }
                     </p>
 
                   </div>
+
 
                   <Upload
                     size={23}
                     className="shrink-0"
                   />
+
 
                   <input
                     type="file"
@@ -816,6 +1124,7 @@ export default function ContactPage() {
 
 
                 {/* PRIVACY */}
+
                 <label
                   className="
                     flex
@@ -830,6 +1139,7 @@ export default function ContactPage() {
 
                   <input
                     type="checkbox"
+                    name="consent"
                     required
                     className="
                       mt-1
@@ -840,6 +1150,7 @@ export default function ContactPage() {
                     "
                   />
 
+
                   <span>
                     {contactPage.form.privacy}
                   </span>
@@ -847,9 +1158,34 @@ export default function ContactPage() {
                 </label>
 
 
+                {/* ERROR MESSAGE */}
+
+                {submitError && (
+
+                  <div
+                    className="
+                      rounded-2xl
+                      border
+                      border-red-200
+                      bg-red-50
+                      px-5
+                      py-4
+                      text-sm
+                      font-semibold
+                      text-red-700
+                    "
+                  >
+                    {submitError}
+                  </div>
+
+                )}
+
+
                 {/* SUBMIT */}
+
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="
                     group
                     flex
@@ -869,24 +1205,40 @@ export default function ContactPage() {
                     duration-300
                     hover:-translate-y-1
                     hover:bg-blue-700
+                    disabled:cursor-not-allowed
+                    disabled:opacity-60
+                    disabled:hover:translate-y-0
+                    disabled:hover:bg-slate-950
                   "
                 >
-                  {contactPage.form.submit}
+
+                  {isSubmitting
+                    ? "Αποστολή..."
+                    : contactPage.form.submit
+                  }
+
 
                   <Send
                     size={19}
-                    className="
+                    className={`
                       transition
                       duration-300
-                      group-hover:translate-x-1
-                    "
+                      ${
+                        isSubmitting
+                          ? ""
+                          : "group-hover:translate-x-1"
+                      }
+                    `}
                   />
 
                 </button>
 
 
                 <p className="text-center text-xs text-blue-100">
-                  {contactPage.form.noObligation}
+                  {
+                    contactPage.form
+                      .noObligation
+                  }
                 </p>
 
               </form>
@@ -899,6 +1251,7 @@ export default function ContactPage() {
 
 
         {/* BOTTOM CURVE */}
+
         <div
           className="
             absolute
@@ -917,9 +1270,11 @@ export default function ContactPage() {
       {/* =====================================================
           SECOND SMALL SECTION
       ====================================================== */}
+
       <section className="bg-white px-6 py-24">
 
         <div className="mx-auto max-w-5xl text-center">
+
 
           <p
             className="
@@ -932,6 +1287,7 @@ export default function ContactPage() {
           >
             {contactPage.bottom.eyebrow}
           </p>
+
 
           <h2
             className="
@@ -948,6 +1304,7 @@ export default function ContactPage() {
             {contactPage.bottom.title}
           </h2>
 
+
           <p
             className="
               mx-auto
@@ -960,6 +1317,7 @@ export default function ContactPage() {
           >
             {contactPage.bottom.description}
           </p>
+
 
           <a
             href="mailto:info@hostmetric.gr"
@@ -975,7 +1333,10 @@ export default function ContactPage() {
               hover:text-blue-800
             "
           >
+
             {contactPage.bottom.link}
+
+
             <ArrowRight
               size={18}
               className="
@@ -983,6 +1344,7 @@ export default function ContactPage() {
                 group-hover:translate-x-1
               "
             />
+
           </a>
 
         </div>

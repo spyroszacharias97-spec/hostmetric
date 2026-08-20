@@ -588,6 +588,11 @@
       "titleLine2": "wiedzieć.",
       "description": "Jasne odpowiedzi dotyczące zarządzania nieruchomością, rezerwacji, cen, komunikacji z gośćmi i współpracy z HostMetric."
     },
+    "platformIntro": {
+      "eyebrow": "GLOBALNY ZASIĘG",
+      "title": "Połączeni z wiodącymi platformami rezerwacyjnymi na świecie",
+      "description": "HostMetric łączy i zarządza Twoją nieruchomością na wiodących międzynarodowych platformach rezerwacyjnych, łącząc strategiczną dystrybucję, inteligentne ustalanie cen i profesjonalne zarządzanie w celu zwiększenia widoczności, generowania większej liczby rezerwacji i poprawy ogólnych wyników."
+    },
     "propertySection": {
       "eyebrow": "TWOJA NIERUCHOMOŚĆ",
       "title": "Zarządzanie i rozwój Twojej nieruchomości",
@@ -650,7 +655,7 @@
         },
         {
           "question": "Jak otrzymuję pieniądze z moich rezerwacji?",
-          "answer": "Płatności za rezerwacje nadal przebiegają zgodnie z procesem odpowiedniego kanału rezerwacyjnego lub uzgodnioną konfiguracją. Rolą HostMetric jest zarządzanie i optymalizacja nieruchomości; Twoje przychody z rezerwacji nie muszą przechodzić przez HostMetric tylko dlatego, że zarządzamy Twoją nieruchomością."
+          "answer": "Płatności za rezerwacje są pobierane i zarządzane przez HostMetric zgodnie z uzgodnionym sposobem płatności. Następnie przychody są wypłacane właścicielowi nieruchomości zgodnie z uzgodnionymi warunkami i harmonogramem płatności. Dzięki temu rezerwacje, płatności i monitorowanie finansów pozostają scentralizowane i profesjonalnie zarządzane."
         },
         {
           "question": "Jak pomagacie poprawiać opinie i oceny gości?",
