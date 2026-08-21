@@ -263,7 +263,25 @@ export default async function FAQPage() {
               </p>
 
 
-              <div className="mt-10 [&_button]:!bg-[#2166f3] [&_button]:!text-white [&_button_*]:!text-white">
+              <div
+                className="
+                  mt-10
+                  [&_button]:!bg-[#2166f3]
+                  [&_button]:!text-white
+                  [&_button_*]:!text-white
+                  [&_button]:!font-semibold
+                  [&_button]:!tracking-[0.01em]
+                  [&_button]:![font-family:'Trebuchet_MS',Arial,sans-serif]
+                  [&_button+div]:!bg-[#2166f3]
+                  [&_button+div]:!text-white
+                  [&_button+div_*]:!text-white
+                  [&_button+div]:![font-family:'Trebuchet_MS',Arial,sans-serif]
+                  [&_button~div]:!bg-[#2166f3]
+                  [&_button~div]:!text-white
+                  [&_button~div_*]:!text-white
+                  [&_button~div]:![font-family:'Trebuchet_MS',Arial,sans-serif]
+                "
+              >
 
                 <FAQAccordion
                   items={
@@ -297,7 +315,25 @@ export default async function FAQPage() {
               </p>
 
 
-              <div className="mt-10 [&_button]:!bg-[#2166f3] [&_button]:!text-white [&_button_*]:!text-white">
+              <div
+                className="
+                  mt-10
+                  [&_button]:!bg-[#2166f3]
+                  [&_button]:!text-white
+                  [&_button_*]:!text-white
+                  [&_button]:!font-semibold
+                  [&_button]:!tracking-[0.01em]
+                  [&_button]:![font-family:'Trebuchet_MS',Arial,sans-serif]
+                  [&_button+div]:!bg-[#2166f3]
+                  [&_button+div]:!text-white
+                  [&_button+div_*]:!text-white
+                  [&_button+div]:![font-family:'Trebuchet_MS',Arial,sans-serif]
+                  [&_button~div]:!bg-[#2166f3]
+                  [&_button~div]:!text-white
+                  [&_button~div_*]:!text-white
+                  [&_button~div]:![font-family:'Trebuchet_MS',Arial,sans-serif]
+                "
+              >
 
                 <FAQAccordion
                   items={

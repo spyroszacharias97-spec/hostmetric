@@ -90,117 +90,43 @@ export default function ContactPage() {
   async function handleSubmit(
     e: React.FormEvent<HTMLFormElement>
   ) {
-
     e.preventDefault();
 
     setSubmitError(null);
     setIsSubmitting(true);
 
-
     try {
+      const form = e.currentTarget;
+      const formData = new FormData(form);
 
-      const form =
-        e.currentTarget;
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        body: formData,
+      });
 
-      const formData =
-        new FormData(form);
-
-
-      const payload = {
-
-        fullName:
-          String(
-            formData.get("fullName") ?? ""
-          ).trim(),
-
-        country:
-          String(
-            formData.get("country") ?? ""
-          ).trim(),
-
-        propertyType:
-          String(
-            formData.get("propertyType") ?? ""
-          ).trim(),
-
-        email:
-          String(
-            formData.get("email") ?? ""
-          ).trim(),
-
-        phone:
-          String(
-            formData.get("phone") ?? ""
-          ).trim(),
-
-        cityArea:
-          String(
-            formData.get("cityArea") ?? ""
-          ).trim(),
-
-        message:
-          String(
-            formData.get("message") ?? ""
-          ).trim(),
-
-        consent:
-          formData.get("consent") === "on",
-
-      };
-
-
-      const response =
-        await fetch("/api/contact", {
-
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json",
-          },
-
-          body:
-            JSON.stringify(payload),
-
-        });
-
-
-      const result =
-        await response.json();
-
+      const result = await response.json();
 
       if (!response.ok || !result.success) {
-
         throw new Error(
           result.error ||
-          "The request could not be submitted."
+            "The request could not be submitted."
         );
-
       }
 
-
       form.reset();
-
       setSubmitted(true);
-
     } catch (error) {
-
       console.error(
         "Contact form submission error:",
         error
       );
 
-
       setSubmitError(
         "Η αποστολή δεν ολοκληρώθηκε. Παρακαλώ δοκιμάστε ξανά."
       );
-
     } finally {
-
       setIsSubmitting(false);
-
     }
-
   }
 
 
@@ -1115,7 +1041,8 @@ export default function ContactPage() {
 
                   <input
                     type="file"
-                    accept="image/*"
+                    name="photos"
+                    accept="image/jpeg,image/png,image/webp"
                     multiple
                     className="hidden"
                   />
