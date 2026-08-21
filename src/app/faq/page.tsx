@@ -263,7 +263,7 @@ export default async function FAQPage() {
               </p>
 
 
-              <div className="mt-10">
+              <div className="mt-10 [&_button]:!bg-[#2166f3] [&_button]:!text-white [&_button_*]:!text-white">
 
                 <FAQAccordion
                   items={
@@ -297,7 +297,7 @@ export default async function FAQPage() {
               </p>
 
 
-              <div className="mt-10">
+              <div className="mt-10 [&_button]:!bg-[#2166f3] [&_button]:!text-white [&_button_*]:!text-white">
 
                 <FAQAccordion
                   items={
