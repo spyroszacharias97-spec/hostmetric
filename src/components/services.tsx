@@ -51,7 +51,7 @@ export default async function Services() {
       id="services"
       className="
         relative
-        scroll-mt-28
+        scroll-mt-10
         overflow-hidden
         bg-gradient-to-b
         from-[#f7fbff]
@@ -60,7 +60,7 @@ export default async function Services() {
         px-6
         py-28
         md:px-8
-        md:py-22
+        md:py-32
       "
     >
 

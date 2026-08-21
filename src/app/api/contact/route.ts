@@ -5,8 +5,25 @@ import { google } from "googleapis";
 
 export const runtime = "nodejs";
 
-const sql = neon(process.env.DATABASE_URL!);
-const resend = new Resend(process.env.RESEND_API_KEY!);
+function getSql() {
+  const databaseUrl = process.env.DATABASE_URL;
+
+  if (!databaseUrl) {
+    throw new Error("DATABASE_URL is missing.");
+  }
+
+  return neon(databaseUrl);
+}
+
+function getResendClient() {
+  const apiKey = process.env.RESEND_API_KEY;
+
+  if (!apiKey) {
+    throw new Error("RESEND_API_KEY is missing.");
+  }
+
+  return new Resend(apiKey);
+}
 
 const MAX_FILES = 50;
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
@@ -560,6 +577,8 @@ async function submitContact(
    * Save the final submission in Neon.
    * photo_urls is a PostgreSQL text[] column.
    */
+  const sql = getSql();
+
   const result = await sql`
     INSERT INTO contact_submissions (
       full_name,
@@ -683,6 +702,8 @@ async function submitContact(
           Δεν επισυνάφθηκαν
         </p>
       `;
+
+  const resend = getResendClient();
 
   const {
     error: emailError,
