@@ -19,7 +19,27 @@ import {
   Send,
   Upload,
   UserRound,
+  X,
 } from "lucide-react";
+
+const MAX_PHOTOS = 50;
+const MAX_PHOTO_SIZE = 10 * 1024 * 1024;
+
+const ALLOWED_PHOTO_TYPES = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+]);
+
+type SelectedPhoto = {
+  file: File;
+  previewUrl: string;
+};
+
+type UploadProgress = {
+  completed: number;
+  total: number;
+};
 
 
 export default function ContactPage() {
@@ -38,6 +58,110 @@ export default function ContactPage() {
 
   const [contactPage, setContactPage] =
     useState<any | null>(null);
+
+  const [selectedPhotos, setSelectedPhotos] =
+    useState<SelectedPhoto[]>([]);
+
+  const [uploadProgress, setUploadProgress] =
+    useState<UploadProgress | null>(null);
+
+
+  /* ==========================================
+     PHOTO SELECTION
+  ========================================== */
+
+  function clearSelectedPhotos() {
+    setSelectedPhotos((current) => {
+      current.forEach((item) => {
+        URL.revokeObjectURL(item.previewUrl);
+      });
+
+      return [];
+    });
+
+    setUploadProgress(null);
+  }
+
+  function removeSelectedPhoto(indexToRemove: number) {
+    setSelectedPhotos((current) => {
+      const removed = current[indexToRemove];
+
+      if (removed) {
+        URL.revokeObjectURL(removed.previewUrl);
+      }
+
+      return current.filter(
+        (_, index) => index !== indexToRemove
+      );
+    });
+  }
+
+  function handlePhotoSelection(
+    event: React.ChangeEvent<HTMLInputElement>
+  ) {
+    const files = Array.from(
+      event.target.files ?? []
+    );
+
+    event.target.value = "";
+
+    if (files.length === 0) {
+      return;
+    }
+
+    const remainingSlots =
+      MAX_PHOTOS - selectedPhotos.length;
+
+    if (remainingSlots <= 0) {
+      setSubmitError(
+        `Μπορείτε να ανεβάσετε μέχρι ${MAX_PHOTOS} φωτογραφίες.`
+      );
+      return;
+    }
+
+    const filesToAdd = files.slice(
+      0,
+      remainingSlots
+    );
+
+    for (const file of filesToAdd) {
+      if (!ALLOWED_PHOTO_TYPES.has(file.type)) {
+        setSubmitError(
+          "Επιτρέπονται μόνο φωτογραφίες JPG, PNG και WEBP."
+        );
+        return;
+      }
+
+      if (file.size > MAX_PHOTO_SIZE) {
+        setSubmitError(
+          `Κάθε φωτογραφία πρέπει να είναι μικρότερη από ${
+            MAX_PHOTO_SIZE / 1024 / 1024
+          } MB.`
+        );
+        return;
+      }
+    }
+
+    const newPhotos = filesToAdd.map(
+      (file) => ({
+        file,
+        previewUrl: URL.createObjectURL(file),
+      })
+    );
+
+    setSelectedPhotos((current) => [
+      ...current,
+      ...newPhotos,
+    ]);
+
+    setSubmitError(null);
+
+    if (files.length > remainingSlots) {
+      setSubmitError(
+        `Επιλέχθηκαν μόνο οι πρώτες ${remainingSlots} φωτογραφίες, επειδή το όριο είναι ${MAX_PHOTOS}.`
+      );
+    }
+  }
 
 
   /* ==========================================
@@ -94,15 +218,202 @@ export default function ContactPage() {
 
     setSubmitError(null);
     setIsSubmitting(true);
+    setUploadProgress(null);
+
+    let uploadFolderId: string | null = null;
+    let directUploadsCompleted = false;
 
     try {
       const form = e.currentTarget;
       const formData = new FormData(form);
 
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        body: formData,
-      });
+      const payload = {
+        fullName: String(
+          formData.get("fullName") ?? ""
+        ).trim(),
+
+        country: String(
+          formData.get("country") ?? ""
+        ).trim(),
+
+        propertyType: String(
+          formData.get("propertyType") ?? ""
+        ).trim(),
+
+        email: String(
+          formData.get("email") ?? ""
+        ).trim(),
+
+        phone: String(
+          formData.get("phone") ?? ""
+        ).trim(),
+
+        cityArea: String(
+          formData.get("cityArea") ?? ""
+        ).trim(),
+
+        message: String(
+          formData.get("message") ?? ""
+        ).trim(),
+
+        consent:
+          formData.get("consent") === "on",
+      };
+
+      if (
+        !payload.fullName ||
+        !payload.country ||
+        !payload.email ||
+        !payload.message ||
+        payload.consent !== true
+      ) {
+        throw new Error(
+          "Παρακαλώ συμπληρώστε όλα τα υποχρεωτικά πεδία."
+        );
+      }
+
+      if (selectedPhotos.length > MAX_PHOTOS) {
+        throw new Error(
+          `Μπορείτε να ανεβάσετε μέχρι ${MAX_PHOTOS} φωτογραφίες.`
+        );
+      }
+
+      /*
+       * STEP 1:
+       * Ask our server for Google resumable upload URLs.
+       *
+       * Only metadata reaches Vercel here.
+       * The actual image bytes will go directly
+       * from the visitor's browser to Google Drive.
+       */
+      if (selectedPhotos.length > 0) {
+        const sessionResponse = await fetch(
+          "/api/contact",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              action: "create-upload-batch",
+              fullName: payload.fullName,
+              files: selectedPhotos.map(
+                ({ file }) => ({
+                  name: file.name,
+                  type: file.type,
+                  size: file.size,
+                })
+              ),
+            }),
+          }
+        );
+
+        const sessionResult =
+          await sessionResponse.json();
+
+        if (
+          !sessionResponse.ok ||
+          !sessionResult.success
+        ) {
+          throw new Error(
+            sessionResult.error ||
+              "Δεν ήταν δυνατή η προετοιμασία των φωτογραφιών."
+          );
+        }
+
+        uploadFolderId =
+          sessionResult.folderId;
+
+        const uploads = sessionResult.uploads as Array<{
+          index: number;
+          uploadUrl: string;
+        }>;
+
+        setUploadProgress({
+          completed: 0,
+          total: selectedPhotos.length,
+        });
+
+        let completed = 0;
+        const concurrency = 4;
+
+        /*
+         * Upload four photos at a time directly
+         * to the Google resumable session URLs.
+         */
+        for (
+          let startIndex = 0;
+          startIndex < uploads.length;
+          startIndex += concurrency
+        ) {
+          const batch = uploads.slice(
+            startIndex,
+            startIndex + concurrency
+          );
+
+          await Promise.all(
+            batch.map(async (upload) => {
+              const selected =
+                selectedPhotos[upload.index];
+
+              if (!selected) {
+                throw new Error(
+                  "Δεν βρέθηκε μία από τις επιλεγμένες φωτογραφίες."
+                );
+              }
+
+              const uploadResponse = await fetch(
+                upload.uploadUrl,
+                {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type":
+                      selected.file.type,
+                  },
+                  body: selected.file,
+                }
+              );
+
+              if (!uploadResponse.ok) {
+                throw new Error(
+                  `Απέτυχε το ανέβασμα της φωτογραφίας "${selected.file.name}".`
+                );
+              }
+
+              completed += 1;
+
+              setUploadProgress({
+                completed,
+                total: selectedPhotos.length,
+              });
+            })
+          );
+        }
+
+        directUploadsCompleted = true;
+      }
+
+      /*
+       * STEP 2:
+       * Submit only normal form data + the Drive folder ID.
+       *
+       * The server reads the uploaded files from Google Drive,
+       * saves their URLs to Neon and sends the Resend email.
+       */
+      const response = await fetch(
+        "/api/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            action: "submit-contact",
+            ...payload,
+            driveFolderId: uploadFolderId,
+          }),
+        }
+      );
 
       const result = await response.json();
 
@@ -114,18 +425,58 @@ export default function ContactPage() {
       }
 
       form.reset();
+      clearSelectedPhotos();
       setSubmitted(true);
+
     } catch (error) {
       console.error(
         "Contact form submission error:",
         error
       );
 
+      /*
+       * If the direct upload itself failed,
+       * ask the server to clean up the temporary folder.
+       *
+       * If all photos uploaded but final submission failed,
+       * we keep the Drive folder so the uploaded photos are
+       * not destroyed because of a temporary database/email issue.
+       */
+      if (
+        uploadFolderId &&
+        !directUploadsCompleted
+      ) {
+        try {
+          await fetch("/api/contact", {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+            body: JSON.stringify({
+              action:
+                "cleanup-upload-batch",
+              folderId:
+                uploadFolderId,
+            }),
+          });
+        } catch (cleanupError) {
+          console.error(
+            "Could not clean up failed upload folder:",
+            cleanupError
+          );
+        }
+      }
+
       setSubmitError(
-        "Η αποστολή δεν ολοκληρώθηκε. Παρακαλώ δοκιμάστε ξανά."
+        error instanceof Error
+          ? error.message
+          : "Η αποστολή δεν ολοκληρώθηκε. Παρακαλώ δοκιμάστε ξανά."
       );
+
     } finally {
       setIsSubmitting(false);
+      setUploadProgress(null);
     }
   }
 
@@ -571,10 +922,9 @@ export default function ContactPage() {
                 <button
                   type="button"
                   onClick={() => {
-
                     setSubmitted(false);
                     setSubmitError(null);
-
+                    clearSelectedPhotos();
                   }}
                   className="
                     mt-8
@@ -988,66 +1338,181 @@ export default function ContactPage() {
                 />
 
 
-                {/* FILE UPLOAD
-                    ------------------------------------------------
-                    VISUAL ONLY FOR NOW.
-                    We will connect this to object storage later.
-                ------------------------------------------------- */}
+                {/* FILE UPLOAD */}
 
-                <label
-                  className="
-                    flex
-                    cursor-pointer
-                    items-center
-                    justify-between
-                    gap-4
-                    rounded-2xl
-                    border
-                    border-dashed
-                    border-white/50
-                    bg-white/10
-                    px-5
-                    py-5
-                    transition
-                    hover:bg-white/20
-                  "
-                >
+                <div className="space-y-3">
 
-                  <div>
+                  <label
+                    className="
+                      flex
+                      cursor-pointer
+                      items-center
+                      justify-between
+                      gap-4
+                      rounded-2xl
+                      border
+                      border-dashed
+                      border-white/50
+                      bg-white/10
+                      px-5
+                      py-5
+                      transition
+                      hover:bg-white/20
+                    "
+                  >
 
-                    <p className="font-bold">
-                      {
-                        contactPage.form.upload
-                          .title
+                    <div>
+
+                      <p className="font-bold">
+                        {
+                          contactPage.form.upload
+                            .title
+                        }
+                      </p>
+
+                      <p className="mt-1 text-sm text-blue-100">
+                        {
+                          contactPage.form.upload
+                            .description
+                        }
+                      </p>
+
+                      <p className="mt-2 text-xs font-semibold text-white/90">
+                        {selectedPhotos.length} / {MAX_PHOTOS}
+                      </p>
+
+                    </div>
+
+                    <Upload
+                      size={23}
+                      className="shrink-0"
+                    />
+
+                    <input
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp"
+                      multiple
+                      disabled={
+                        isSubmitting ||
+                        selectedPhotos.length >= MAX_PHOTOS
                       }
-                    </p>
+                      onChange={handlePhotoSelection}
+                      className="hidden"
+                    />
+
+                  </label>
 
 
-                    <p className="mt-1 text-sm text-blue-100">
-                      {
-                        contactPage.form.upload
-                          .description
-                      }
-                    </p>
+                  {selectedPhotos.length > 0 && (
 
-                  </div>
+                    <div
+                      className="
+                        rounded-2xl
+                        border
+                        border-white/20
+                        bg-white/10
+                        p-4
+                        backdrop-blur-sm
+                      "
+                    >
+
+                      <div className="flex items-center justify-between gap-4">
+
+                        <p className="text-sm font-bold text-white">
+                          {selectedPhotos.length} φωτογραφίες
+                        </p>
+
+                        {uploadProgress && (
+
+                          <p className="text-xs font-semibold text-blue-100">
+                            Ανέβασμα{" "}
+                            {uploadProgress.completed}/
+                            {uploadProgress.total}
+                          </p>
+
+                        )}
+
+                      </div>
 
 
-                  <Upload
-                    size={23}
-                    className="shrink-0"
-                  />
+                      <div className="mt-3 flex max-h-56 flex-wrap gap-2 overflow-y-auto pr-1">
+
+                        {selectedPhotos
+                          .map(
+                            (
+                              photo,
+                              index
+                            ) => (
+
+                              <div
+                                key={`${photo.file.name}-${photo.file.lastModified}-${index}`}
+                                className="
+                                  group/photo
+                                  relative
+                                  h-16
+                                  w-16
+                                  overflow-hidden
+                                  rounded-xl
+                                  border
+                                  border-white/30
+                                  bg-white/15
+                                  shadow-sm
+                                "
+                              >
+
+                                <img
+                                  src={photo.previewUrl}
+                                  alt={`Selected photo ${index + 1}`}
+                                  className="h-full w-full object-cover"
+                                />
+
+                                {!isSubmitting && (
+
+                                  <button
+                                    type="button"
+                                    onClick={() =>
+                                      removeSelectedPhoto(
+                                        index
+                                      )
+                                    }
+                                    aria-label="Remove photo"
+                                    className="
+                                      absolute
+                                      right-1
+                                      top-1
+                                      flex
+                                      h-6
+                                      w-6
+                                      items-center
+                                      justify-center
+                                      rounded-full
+                                      bg-slate-950/80
+                                      text-white
+                                      opacity-0
+                                      shadow
+                                      transition
+                                      hover:bg-red-600
+                                      group-hover/photo:opacity-100
+                                    "
+                                  >
+                                    <X size={14} />
+                                  </button>
+
+                                )}
+
+                              </div>
+
+                            )
+                          )}
 
 
-                  <input
-                    type="file"
-                    name="photos"
-                    accept="image/jpeg,image/png,image/webp"
-                    multiple
-                    className="hidden"
-                  />
+                      </div>
 
-                </label>
+                    </div>
+
+                  )}
+
+                </div>
 
 
                 {/* PRIVACY */}
