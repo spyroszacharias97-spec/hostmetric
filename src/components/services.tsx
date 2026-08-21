@@ -60,7 +60,7 @@ export default async function Services() {
         px-6
         py-28
         md:px-8
-        md:py-32
+        md:py-22
       "
     >
 
