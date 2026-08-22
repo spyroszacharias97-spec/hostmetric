@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Plus, Trash2, Upload, Camera, FileImage } from "lucide-react";
+import { useState, type Dispatch, type SetStateAction } from "react";
+import { Plus, Trash2, Upload, FileImage } from "lucide-react";
 
 const euCountries = [
   "Austria",
@@ -644,20 +644,30 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     >
   >({});
 
-  const [propertyPhotos, setPropertyPhotos] =
-    useState<File[]>([]);
+  const [propertyPhotoGroups, setPropertyPhotoGroups] =
+    useState<Record<string, File[]>>({});
 
-  const [unitPhotos, setUnitPhotos] =
-    useState<Record<number, File[]>>({});
+  const [unitPhotoGroups, setUnitPhotoGroups] =
+    useState<Record<number, Record<string, File[]>>>({});
 
-  const [accessibilityPhotos, setAccessibilityPhotos] =
-    useState<File[]>([]);
+  const [accessibilityPhotoGroups, setAccessibilityPhotoGroups] =
+    useState<Record<string, File[]>>({});
+
+  const [checkInPhotoGroups, setCheckInPhotoGroups] =
+    useState<Record<string, File[]>>({});
 
   const [floorPlanFiles, setFloorPlanFiles] =
     useState<File[]>([]);
 
   const [frontEndSubmissionComplete, setFrontEndSubmissionComplete] =
     useState(false);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState("");
+  const [uploadProgress, setUploadProgress] = useState<{
+    completed: number;
+    total: number;
+  } | null>(null);
 
   const appendFiles = (
     current: File[],
@@ -680,6 +690,169 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
       (_, fileIndex) => fileIndex !== index
     );
   };
+
+
+  const propertyUploadCategories = [
+    { key: "property_exterior", label: "Exterior", description: "Building exterior and street-facing views." },
+    { key: "property_entrance", label: "Entrance", description: "Main property entrance and arrival area." },
+    { key: "property_parking", label: "Parking", description: "Parking areas, access and EV charging where available." },
+    { key: "property_reception", label: "Reception / Lobby", description: "Reception, lobby or welcome area where available." },
+    { key: "property_common_areas", label: "Common Areas", description: "Shared lounges, corridors and common guest spaces." },
+    { key: "property_pool", label: "Pool", description: "Shared pool and poolside areas where available." },
+    { key: "property_garden_terrace", label: "Garden / Terrace / Outdoor Areas", description: "Garden, terrace, patios and other outdoor guest spaces." },
+    { key: "property_restaurant_bar", label: "Restaurant / Bar", description: "Breakfast, restaurant and bar areas where available." },
+    { key: "property_gym_spa", label: "Gym / Spa / Wellness", description: "Gym, spa, sauna, hot tub or wellness areas where available." },
+    { key: "property_views", label: "Property Views", description: "Sea, mountain, city, garden or other important views." },
+  ];
+
+  const unitUploadCategories = [
+    { key: "unit_bedroom_sleeping", label: "Bedroom / Sleeping Area", description: "Beds and the complete sleeping area." },
+    { key: "unit_bathroom", label: "Bathroom", description: "Bathroom, shower, bathtub and toilet area." },
+    { key: "unit_kitchen", label: "Kitchen / Kitchenette", description: "Kitchen, kitchenette and important appliances." },
+    { key: "unit_living_dining", label: "Living / Dining Area", description: "Living room, seating and dining area." },
+    { key: "unit_balcony_terrace", label: "Balcony / Terrace / Patio", description: "Private balcony, terrace or patio belonging to this unit." },
+    { key: "unit_private_pool", label: "Private Pool / Hot Tub", description: "Private pool, hot tub or other private outdoor feature." },
+    { key: "unit_views", label: "Unit Views", description: "Views visible from this room or unit." },
+  ];
+
+  const accessibilityUploadCategories = [
+    { key: "accessibility_step_free_entrance", feature: "Step-Free Guest Entrance", label: "Step-Free Guest Entrance", description: "Show the complete step-free route to the guest entrance." },
+    { key: "accessibility_parking", feature: "Accessible Parking Space", label: "Accessible Parking", description: "Show the accessible parking space and route from parking." },
+    { key: "accessibility_entrance_door_width", feature: "Wide Entrance Doorway", label: "Entrance Door Width", description: "Include clear doorway-width evidence; measurement photos are especially useful." },
+    { key: "accessibility_lit_path", feature: "Well-Lit Path to Guest Entrance", label: "Lit Path to Entrance", description: "Show the lighting along the route to the guest entrance, ideally after dark." },
+    { key: "accessibility_lift", feature: "Lift / Elevator Access", label: "Lift / Elevator Access", description: "Show the lift, doors and route to the accommodation." },
+    { key: "accessibility_bedroom_step_free", feature: "Step-Free Bedroom Access", label: "Step-Free Bedroom Access", description: "Show the route and entrance into the bedroom/sleeping area." },
+    { key: "accessibility_bathroom_step_free", feature: "Step-Free Bathroom Access", label: "Step-Free Bathroom Access", description: "Show the route and entrance into the bathroom." },
+    { key: "accessibility_room_door_width", feature: "Wide Bedroom / Room Doorway", label: "Bedroom / Room Door Width", description: "Show doorway-width evidence for the accessible room or bedroom." },
+    { key: "accessibility_bathroom_door_width", feature: "Wide Bathroom Doorway", label: "Bathroom Door Width", description: "Show doorway-width evidence for the accessible bathroom." },
+    { key: "accessibility_grab_rails", feature: "Grab Rails in Bathroom", label: "Bathroom Grab Rails", description: "Show the position and type of grab rails clearly." },
+    { key: "accessibility_roll_in_shower", feature: "Roll-In / Step-Free Shower", label: "Roll-In / Step-Free Shower", description: "Show the shower entrance, floor level and usable shower space." },
+  ];
+
+  const checkInUploadCategories = [
+    { key: "checkin_building_entrance", label: "Building / Property Entrance", description: "Useful for arrival and check-in instructions." },
+    { key: "checkin_lockbox_keypad", label: "Lockbox / Keypad / Key Collection", description: "Show the lockbox, keypad or key-collection point without exposing private codes." },
+    { key: "checkin_route_to_unit", label: "Route from Entrance to Unit", description: "Show turns, stairs, lifts, corridors or landmarks a guest needs after entering." },
+  ];
+
+  const addFilesToGroup = (
+    setter: Dispatch<SetStateAction<Record<string, File[]>>>,
+    groupKey: string,
+    incoming: FileList | null
+  ) => {
+    setter((previous) => ({
+      ...previous,
+      [groupKey]: appendFiles(previous[groupKey] || [], incoming).slice(0, 50),
+    }));
+  };
+
+  const removeFileFromGroup = (
+    setter: Dispatch<SetStateAction<Record<string, File[]>>>,
+    groupKey: string,
+    index: number
+  ) => {
+    setter((previous) => ({
+      ...previous,
+      [groupKey]: removeFileAtIndex(previous[groupKey] || [], index),
+    }));
+  };
+
+  const renderUploadGroup = ({
+    label,
+    description,
+    files,
+    accept = "image/jpeg,image/png,image/webp",
+    onAdd,
+    onRemove,
+  }: {
+    label: string;
+    description: string;
+    files: File[];
+    accept?: string;
+    onAdd: (files: FileList | null) => void;
+    onRemove: (index: number) => void;
+  }) => (
+    <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="font-bold text-slate-900">{t(label)}</p>
+          <p className="mt-1 text-sm leading-6 text-slate-600">{t(description)}</p>
+          {files.length > 0 && (
+            <p className="mt-2 text-sm font-bold text-blue-600">
+              {files.length} / 50 {t("files selected")}
+            </p>
+          )}
+        </div>
+
+        <label className="inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-xl border border-blue-200 bg-white px-4 py-3 font-bold text-blue-600 transition hover:border-blue-500 hover:shadow-sm">
+          <Upload size={17} />
+          {t("Add Files")}
+          <input
+            type="file"
+            multiple
+            accept={accept}
+            className="hidden"
+            onChange={(event) => {
+              onAdd(event.target.files);
+              event.target.value = "";
+            }}
+          />
+        </label>
+      </div>
+
+      {files.length > 0 && (
+        <div className="mt-4 grid gap-2 md:grid-cols-2">
+          {files.map((file, index) => (
+            <div
+              key={`${file.name}-${file.size}-${index}`}
+              className="flex items-center justify-between rounded-xl bg-white px-3 py-2 shadow-sm"
+            >
+              <div className="flex min-w-0 items-center gap-2">
+                <FileImage size={17} className="shrink-0 text-blue-600" />
+                <span className="truncate text-xs font-semibold text-slate-700">
+                  {file.name}
+                </span>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => onRemove(index)}
+                className="cursor-pointer rounded-lg p-2 text-red-500 transition hover:bg-red-50"
+                aria-label={t("Remove file")}
+              >
+                <Trash2 size={16} />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
+  const totalSelectedUploadFiles =
+    Object.values(propertyPhotoGroups).reduce(
+      (total, files) => total + files.length,
+      0
+    ) +
+    Object.values(accessibilityPhotoGroups).reduce(
+      (total, files) => total + files.length,
+      0
+    ) +
+    Object.values(checkInPhotoGroups).reduce(
+      (total, files) => total + files.length,
+      0
+    ) +
+    floorPlanFiles.length +
+    Object.values(unitPhotoGroups).reduce(
+      (grandTotal, groups) =>
+        grandTotal +
+        Object.values(groups).reduce(
+          (total, files) => total + files.length,
+          0
+        ),
+      0
+    );
+
 
   const updateUnitPricing = (
     unitId: number,
@@ -742,9 +915,12 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     "Step-Free Guest Entrance",
     "Accessible Parking Space",
     "Wide Entrance Doorway",
+    "Well-Lit Path to Guest Entrance",
     "Lift / Elevator Access",
     "Step-Free Bedroom Access",
     "Step-Free Bathroom Access",
+    "Wide Bedroom / Room Doorway",
+    "Wide Bathroom Doorway",
     "Grab Rails in Bathroom",
     "Roll-In / Step-Free Shower",
   ];
@@ -1266,17 +1442,8 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
   const validateStepSix = () => {
     const newErrors: Errors = {};
 
-    const totalUploadedFiles =
-      propertyPhotos.length +
-      accessibilityPhotos.length +
-      floorPlanFiles.length +
-      Object.values(unitPhotos).reduce(
-        (total, files) => total + files.length,
-        0
-      );
-
     if (
-      totalUploadedFiles > 0 &&
+      totalSelectedUploadFiles > 0 &&
       formData.photoRightsConfirmed !== "yes"
     ) {
       newErrors.photoRightsConfirmed =
@@ -1344,23 +1511,249 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const submitOnboarding = () => {
+  const submitOnboarding = async () => {
     if (!validateStepSeven()) {
       window.scrollTo({
         top: 0,
         behavior: "smooth",
       });
+      return;
+    }
 
+    if (isSubmitting) {
       return;
     }
 
     setErrors({});
-    setFrontEndSubmissionComplete(true);
+    setSubmissionError("");
+    setIsSubmitting(true);
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    let driveFolderId: string | null = null;
+
+    type PendingUpload = {
+      file: File;
+      fileGroup: string;
+      unitClientId: number | null;
+      unitName: string | null;
+    };
+
+    try {
+      const pendingUploads: PendingUpload[] = [];
+
+      Object.entries(propertyPhotoGroups).forEach(([fileGroup, files]) => {
+        files.forEach((file) => {
+          pendingUploads.push({
+            file,
+            fileGroup,
+            unitClientId: null,
+            unitName: null,
+          });
+        });
+      });
+
+      Object.entries(unitPhotoGroups).forEach(([unitIdText, groups]) => {
+        const unitClientId = Number(unitIdText);
+        const unit = units.find((item) => item.id === unitClientId);
+
+        Object.entries(groups).forEach(([fileGroup, files]) => {
+          files.forEach((file) => {
+            pendingUploads.push({
+              file,
+              fileGroup,
+              unitClientId,
+              unitName: unit?.name || `Unit ${unitClientId}`,
+            });
+          });
+        });
+      });
+
+      Object.entries(accessibilityPhotoGroups).forEach(([fileGroup, files]) => {
+        files.forEach((file) => {
+          pendingUploads.push({
+            file,
+            fileGroup,
+            unitClientId: null,
+            unitName: null,
+          });
+        });
+      });
+
+      Object.entries(checkInPhotoGroups).forEach(([fileGroup, files]) => {
+        files.forEach((file) => {
+          pendingUploads.push({
+            file,
+            fileGroup,
+            unitClientId: null,
+            unitName: null,
+          });
+        });
+      });
+
+      floorPlanFiles.forEach((file) => {
+        pendingUploads.push({
+          file,
+          fileGroup: "floor_plan",
+          unitClientId: null,
+          unitName: null,
+        });
+      });
+
+      let uploadManifest: Array<{
+        folderId: string;
+        fileGroup: string;
+        unitClientId: number | null;
+        storedName: string;
+        originalName: string;
+        type: string;
+        size: number;
+      }> = [];
+
+      if (pendingUploads.length > 0) {
+        setUploadProgress({ completed: 0, total: pendingUploads.length });
+
+        const sessionResponse = await fetch("/api/onboarding", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            action: "create-upload-batch",
+            fullName: `${formData.firstName} ${formData.lastName}`.trim(),
+            email: formData.email,
+            propertyName: formData.propertyName,
+            files: pendingUploads.map((item) => ({
+              name: item.file.name,
+              type: item.file.type,
+              size: item.file.size,
+              fileGroup: item.fileGroup,
+              unitClientId: item.unitClientId,
+              unitName: item.unitName,
+            })),
+          }),
+        });
+
+        const sessionResult = await sessionResponse.json();
+
+        if (!sessionResponse.ok || !sessionResult.success) {
+          throw new Error(sessionResult.error || "Could not prepare Google Drive uploads.");
+        }
+
+        driveFolderId = String(sessionResult.folderId || "");
+
+        const uploads = sessionResult.uploads as Array<{
+          index: number;
+          uploadUrl: string;
+          folderId: string;
+          fileGroup: string;
+          unitClientId: number | null;
+          storedName: string;
+          originalName: string;
+          type: string;
+          size: number;
+        }>;
+
+        uploadManifest = uploads.map((upload) => ({
+          folderId: upload.folderId,
+          fileGroup: upload.fileGroup,
+          unitClientId: upload.unitClientId,
+          storedName: upload.storedName,
+          originalName: upload.originalName,
+          type: upload.type,
+          size: upload.size,
+        }));
+
+        let completed = 0;
+        const concurrency = 3;
+
+        for (let startIndex = 0; startIndex < uploads.length; startIndex += concurrency) {
+          const batch = uploads.slice(startIndex, startIndex + concurrency);
+
+          await Promise.all(
+            batch.map(async (upload) => {
+              const file = pendingUploads[upload.index]?.file;
+
+              if (!file) {
+                throw new Error("Could not match a selected file to its upload session.");
+              }
+
+              try {
+                const uploadResponse = await fetch(upload.uploadUrl, {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": file.type || "application/octet-stream",
+                  },
+                  body: file,
+                });
+
+                if (!uploadResponse.ok) {
+                  throw new Error(`Google Drive upload failed with status ${uploadResponse.status}.`);
+                }
+              } catch (uploadError) {
+                // Google Drive may successfully accept a resumable PUT while the
+                // browser cannot read the response because of CORS. The server
+                // verifies every expected file before the database is written.
+                console.warn(
+                  "Drive upload response could not be read; server verification will confirm it:",
+                  uploadError
+                );
+              }
+
+              completed += 1;
+              setUploadProgress({ completed, total: uploads.length });
+            })
+          );
+        }
+      }
+
+      const response = await fetch("/api/onboarding", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action: "submit-onboarding",
+          formData,
+          units,
+          selectedPlatforms,
+          selectedPropertyFacilities,
+          selectedAccessibility,
+          unitAmenities,
+          unitPricing,
+          driveFolderId,
+          expectedFileCount: pendingUploads.length,
+          uploadManifest,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || "The onboarding submission could not be completed.");
+      }
+
+      setUploadProgress(null);
+      setFrontEndSubmissionComplete(true);
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    } catch (error) {
+      console.error("Onboarding submission error:", error);
+      setUploadProgress(null);
+      setSubmissionError(
+        error instanceof Error
+          ? error.message
+          : t("Something went wrong while submitting the onboarding form. Please try again.")
+      );
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const goBack = () => {
@@ -1395,7 +1788,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-            {t("The seven-step front-end onboarding has been completed successfully. Once we connect the database and secure file storage, this final submission will be saved automatically for the HostMetric team.")}
+            {t("Your onboarding information has been saved securely and sent to the HostMetric team for review. We will contact you if we need any clarification or additional material.")}
           
 
 </p>
@@ -6075,7 +6468,6 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           ================================================= */}
 
           <div className="mt-14">
-
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">
               {t("Property-Level Photos")}
             </p>
@@ -6085,112 +6477,22 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
             </h2>
 
             <p className="mt-3 max-w-4xl leading-7 text-slate-600">
-              {t("Useful examples include the exterior, entrance, reception, parking, pool, garden, terrace, common areas, restaurant, gym, spa and views — only where they actually exist.")}
-            
+              {t("Keep different areas separated so HostMetric can prepare cleaner Airbnb and Booking.com galleries and immediately see which photo types are still missing.")}
+            </p>
 
-</p>
-
-
-            <div className="mt-8 rounded-[28px] border-2 border-dashed border-blue-200 bg-blue-50/70 p-8">
-
-              <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
-
-                <div className="flex items-center gap-4">
-
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-blue-600 shadow-sm">
-                    <Camera size={28} />
-                  </div>
-
-                  <div>
-
-                    <h3 className="text-xl font-bold text-slate-900">
-                      {t("Property / Common Area Photos")}
-                    </h3>
-
-                    <p className="mt-1 text-sm text-slate-600">
-                      {t("JPG or PNG recommended. Multiple files allowed.")}
-                    </p>
-
-                  </div>
-
-                </div>
-
-
-                <label className="inline-flex cursor-pointer items-center gap-2 rounded-2xl bg-blue-600 px-6 py-4 font-bold text-white transition hover:-translate-y-1 hover:shadow-lg">
-
-                  <Upload size={19} />
-
-                  {t("Choose Photos")}
-
-                  <input
-                    type="file"
-                    multiple
-                    accept="image/jpeg,image/png"
-                    className="hidden"
-                    onChange={(event) => {
-                      setPropertyPhotos((previous) =>
-                        appendFiles(
-                          previous,
-                          event.target.files
-                        )
-                      );
-
-                      event.target.value = "";
-                    }}
-                  />
-
-                </label>
-
-              </div>
-
-
-              {propertyPhotos.length > 0 && (
-                <div className="mt-7 grid gap-3">
-
-                  {propertyPhotos.map((file, index) => (
-                    <div
-                      key={`${file.name}-${index}`}
-                      className="flex items-center justify-between rounded-xl bg-white px-4 py-3 shadow-sm"
-                    >
-
-                      <div className="flex min-w-0 items-center gap-3">
-
-                        <FileImage
-                          size={20}
-                          className="shrink-0 text-blue-600"
-                        />
-
-                        <span className="truncate text-sm font-semibold text-slate-700">
-                          {file.name}
-                        </span>
-
-                      </div>
-
-
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setPropertyPhotos(
-                            (previous) =>
-                              removeFileAtIndex(
-                                previous,
-                                index
-                              )
-                          )
-                        }
-                        className="cursor-pointer rounded-lg p-2 text-red-500 transition hover:bg-red-50"
-                      >
-                        <Trash2 size={18} />
-                      </button>
-
-                    </div>
-                  ))}
-
-                </div>
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              {propertyUploadCategories.map((category) =>
+                renderUploadGroup({
+                  label: category.label,
+                  description: category.description,
+                  files: propertyPhotoGroups[category.key] || [],
+                  onAdd: (files) =>
+                    addFilesToGroup(setPropertyPhotoGroups, category.key, files),
+                  onRemove: (index) =>
+                    removeFileFromGroup(setPropertyPhotoGroups, category.key, index),
+                })
               )}
-
             </div>
-
           </div>
 
 
@@ -6199,7 +6501,6 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           ================================================= */}
 
           <div className="mt-14 border-t border-slate-200 pt-10">
-
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">
               {t("Room & Unit Galleries")}
             </p>
@@ -6209,224 +6510,130 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
             </h2>
 
             <p className="mt-3 max-w-4xl leading-7 text-slate-600">
-              {t("Upload photos that belong specifically to each room or unit type: bedroom, bathroom, kitchen, living area, balcony or terrace, private pool, view and any other space included in that unit.")}
-            
+              {t("Each unit keeps its own gallery, so bedroom, bathroom, kitchen, living area, balcony, private pool and view photos stay attached to the correct room or unit type.")}
+            </p>
 
-</p>
+            <div className="mt-8 space-y-8">
+              {units.map((unit, index) => (
+                <div
+                  key={unit.id}
+                  className="rounded-[28px] border border-slate-200 bg-slate-50 p-7 md:p-9"
+                >
+                  <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-600">
+                    {t("Unit Type")} {index + 1}
+                  </p>
 
+                  <h3 className="mt-2 text-2xl font-bold">
+                    {unit.name || t("Unnamed Room / Unit Type")}
+                  </h3>
 
-            <div className="mt-8 space-y-7">
-
-              {units.map((unit, index) => {
-
-                const files =
-                  unitPhotos[unit.id] || [];
-
-                return (
-                  <div
-                    key={unit.id}
-                    className="rounded-[28px] border border-slate-200 bg-slate-50 p-7 md:p-9"
-                  >
-
-                    <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-
-                      <div>
-
-                        <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-600">
-                          {t("Unit Type")} {index + 1}
-                        </p>
-
-                        <h3 className="mt-2 text-2xl font-bold">
-                          {unit.name ||
-                            t("Unnamed Room / Unit Type")}
-                        </h3>
-
-                        <p className="mt-2 text-sm text-slate-500">
-                          {t("Upload photographs representative of this unit type.")}
-                        </p>
-
-                      </div>
-
-
-                      <label className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-blue-200 bg-white px-5 py-3 font-bold text-blue-600 transition hover:border-blue-500 hover:shadow-sm">
-
-                        <Upload size={18} />
-
-                        {t("Add Unit Photos")}
-
-                        <input
-                          type="file"
-                          multiple
-                          accept="image/jpeg,image/png"
-                          className="hidden"
-                          onChange={(event) => {
-                            const incoming =
-                              event.target.files;
-
-                            setUnitPhotos(
-                              (previous) => ({
-                                ...previous,
-                                [unit.id]:
-                                  appendFiles(
-                                    previous[
-                                      unit.id
-                                    ] || [],
-                                    incoming
-                                  ),
-                              })
-                            );
-
-                            event.target.value = "";
-                          }}
-                        />
-
-                      </label>
-
-                    </div>
-
-
-                    {files.length > 0 && (
-                      <div className="mt-6 grid gap-3 md:grid-cols-2">
-
-                        {files.map((file, fileIndex) => (
-                          <div
-                            key={`${file.name}-${fileIndex}`}
-                            className="flex items-center justify-between rounded-xl bg-white px-4 py-3 shadow-sm"
-                          >
-
-                            <div className="flex min-w-0 items-center gap-3">
-
-                              <FileImage
-                                size={19}
-                                className="shrink-0 text-blue-600"
-                              />
-
-                              <span className="truncate text-sm font-semibold text-slate-700">
-                                {file.name}
-                              </span>
-
-                            </div>
-
-
-                            <button
-                              type="button"
-                              onClick={() =>
-                                setUnitPhotos(
-                                  (previous) => ({
-                                    ...previous,
-                                    [unit.id]:
-                                      removeFileAtIndex(
-                                        previous[
-                                          unit.id
-                                        ] || [],
-                                        fileIndex
-                                      ),
-                                  })
-                                )
-                              }
-                              className="cursor-pointer rounded-lg p-2 text-red-500 transition hover:bg-red-50"
-                            >
-                              <Trash2 size={17} />
-                            </button>
-
-                          </div>
-                        ))}
-
-                      </div>
+                  <div className="mt-6 grid gap-4 md:grid-cols-2">
+                    {unitUploadCategories.map((category) =>
+                      renderUploadGroup({
+                        label: category.label,
+                        description: category.description,
+                        files: unitPhotoGroups[unit.id]?.[category.key] || [],
+                        onAdd: (files) => {
+                          setUnitPhotoGroups((previous) => ({
+                            ...previous,
+                            [unit.id]: {
+                              ...(previous[unit.id] || {}),
+                              [category.key]: appendFiles(
+                                previous[unit.id]?.[category.key] || [],
+                                files
+                              ).slice(0, 50),
+                            },
+                          }));
+                        },
+                        onRemove: (fileIndex) => {
+                          setUnitPhotoGroups((previous) => ({
+                            ...previous,
+                            [unit.id]: {
+                              ...(previous[unit.id] || {}),
+                              [category.key]: removeFileAtIndex(
+                                previous[unit.id]?.[category.key] || [],
+                                fileIndex
+                              ),
+                            },
+                          }));
+                        },
+                      })
                     )}
-
                   </div>
-                );
-              })}
-
+                </div>
+              ))}
             </div>
-
           </div>
 
 
           {/* =================================================
-              ACCESSIBILITY PHOTOS
+              ACCESSIBILITY EVIDENCE
           ================================================= */}
 
           {selectedAccessibility.length > 0 && (
             <div className="mt-14 border-t border-slate-200 pt-10">
-
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-violet-600">
                 {t("Accessibility Evidence")}
               </p>
 
               <h2 className="mt-3 text-3xl font-bold">
-                {t("Accessibility feature photos")}
+                {t("Evidence for the accessibility features you selected")}
               </h2>
 
               <p className="mt-3 max-w-4xl leading-7 text-slate-600">
-                {t("You selected accessibility features in Step 4. Upload clear photographs that show those features if you already have them.")}
-              
-</p>
+                {t("Upload evidence separately for each selected feature. Door-width categories are intended for clear measurement photos; the lit-path category is intended to show lighting along the route to the guest entrance.")}
+              </p>
 
-
-              <div className="mt-6 rounded-[28px] border-2 border-dashed border-violet-200 bg-violet-50/60 p-8">
-
-                <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-
-                  <div>
-
-                    <p className="font-bold text-slate-900">
-                      {t("Selected accessibility features")}
-                    </p>
-
-                    <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
-                      {selectedAccessibility.join(
-                        " • "
-                      )}
-                    </p>
-
-                  </div>
-
-
-                  <label className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-violet-600 px-5 py-3 font-bold text-white">
-
-                    <Upload size={18} />
-
-                    {t("Add Photos")}
-
-                    <input
-                      type="file"
-                      multiple
-                      accept="image/jpeg,image/png"
-                      className="hidden"
-                      onChange={(event) => {
-                        setAccessibilityPhotos(
-                          (previous) =>
-                            appendFiles(
-                              previous,
-                              event.target.files
-                            )
-                        );
-
-                        event.target.value = "";
-                      }}
-                    />
-
-                  </label>
-
-                </div>
-
-
-                {accessibilityPhotos.length > 0 && (
-                  <p className="mt-5 text-sm font-semibold text-violet-700">
-                    {accessibilityPhotos.length} {t("accessibility photo")}
-                    {accessibilityPhotos.length === 1
-                      ? ""
-                      : "s"}{" "}
-                    {t("selected.")}
-                  </p>
-                )}
-
+              <div className="mt-8 grid gap-4 md:grid-cols-2">
+                {accessibilityUploadCategories
+                  .filter((category) => selectedAccessibility.includes(category.feature))
+                  .map((category) =>
+                    renderUploadGroup({
+                      label: category.label,
+                      description: category.description,
+                      files: accessibilityPhotoGroups[category.key] || [],
+                      onAdd: (files) =>
+                        addFilesToGroup(setAccessibilityPhotoGroups, category.key, files),
+                      onRemove: (index) =>
+                        removeFileFromGroup(setAccessibilityPhotoGroups, category.key, index),
+                    })
+                  )}
               </div>
-
             </div>
           )}
+
+
+          {/* =================================================
+              CHECK-IN & ACCESS PHOTOS
+          ================================================= */}
+
+          <div className="mt-14 border-t border-slate-200 pt-10">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-emerald-600">
+              {t("Check-in & Access")}
+            </p>
+
+            <h2 className="mt-3 text-3xl font-bold">
+              {t("Arrival and access photos")}
+            </h2>
+
+            <p className="mt-3 max-w-4xl leading-7 text-slate-600">
+              {t("Optional photos that help us prepare check-in instructions: the building entrance, lockbox or keypad location, and the route from the entrance to the accommodation. Never upload a photo showing an active private access code.")}
+            </p>
+
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              {checkInUploadCategories.map((category) =>
+                renderUploadGroup({
+                  label: category.label,
+                  description: category.description,
+                  files: checkInPhotoGroups[category.key] || [],
+                  onAdd: (files) =>
+                    addFilesToGroup(setCheckInPhotoGroups, category.key, files),
+                  onRemove: (index) =>
+                    removeFileFromGroup(setCheckInPhotoGroups, category.key, index),
+                })
+              )}
+            </div>
+          </div>
 
 
           {/* =================================================
@@ -6434,7 +6641,6 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           ================================================= */}
 
           <div className="mt-14 border-t border-slate-200 pt-10">
-
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">
               {t("Optional Supporting Files")}
             </p>
@@ -6443,48 +6649,22 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
               {t("Floor plans")}
             </h2>
 
-            <p className="mt-3 max-w-4xl leading-7 text-slate-600">
-              {t("If you have a floor plan, upload it here. This can help us understand room configuration and prepare accurate listing content.")}
-            
-
-</p>
-
-
-            <label className="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-2xl border border-slate-300 bg-white px-6 py-4 font-bold text-slate-700 transition hover:border-blue-400 hover:text-blue-600">
-
-              <Upload size={19} />
-
-              {t("Add Floor Plan")}
-
-              <input
-                type="file"
-                multiple
-                accept="image/jpeg,image/png,application/pdf"
-                className="hidden"
-                onChange={(event) => {
+            <div className="mt-6">
+              {renderUploadGroup({
+                label: "Floor Plans",
+                description: "Upload floor plans as JPG, PNG, WEBP or PDF files.",
+                files: floorPlanFiles,
+                accept: "image/jpeg,image/png,image/webp,application/pdf",
+                onAdd: (files) =>
                   setFloorPlanFiles((previous) =>
-                    appendFiles(
-                      previous,
-                      event.target.files
-                    )
-                  );
-
-                  event.target.value = "";
-                }}
-              />
-
-            </label>
-
-            {floorPlanFiles.length > 0 && (
-              <p className="mt-4 text-sm font-semibold text-slate-600">
-                {floorPlanFiles.length} {t("file")}
-                {floorPlanFiles.length === 1
-                  ? ""
-                  : "s"}{" "}
-                {t("selected.")}
-              </p>
-            )}
-
+                    appendFiles(previous, files).slice(0, 50)
+                  ),
+                onRemove: (index) =>
+                  setFloorPlanFiles((previous) =>
+                    removeFileAtIndex(previous, index)
+                  ),
+              })}
+            </div>
           </div>
 
 
@@ -6711,12 +6891,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
               PHOTO RIGHTS
           ================================================= */}
 
-          {(propertyPhotos.length > 0 ||
-            accessibilityPhotos.length > 0 ||
-            floorPlanFiles.length > 0 ||
-            Object.values(unitPhotos).some(
-              (files) => files.length > 0
-            )) && (
+          {totalSelectedUploadFiles > 0 && (
             <div className="mt-14 border-t border-slate-200 pt-10">
 
               <label className="mb-2 block text-sm font-bold">
@@ -6968,14 +7143,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                 </p>
 
                 <p className="mt-4 text-3xl font-bold text-slate-900">
-                  {propertyPhotos.length +
-                    accessibilityPhotos.length +
-                    floorPlanFiles.length +
-                    Object.values(unitPhotos).reduce(
-                      (total, files) =>
-                        total + files.length,
-                      0
-                    )}
+{totalSelectedUploadFiles}
                 </p>
 
                 <p className="mt-2 text-slate-600">
@@ -7418,6 +7586,22 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           </div>
 
 
+          {submissionError && (
+            <div className="mt-8 rounded-2xl border border-red-200 bg-red-50 px-5 py-4 font-semibold text-red-700">
+              {submissionError}
+            </div>
+          )}
+
+          {uploadProgress && (
+            <div className="mt-8 rounded-2xl border border-blue-200 bg-blue-50 px-5 py-4 text-blue-900">
+              <p className="font-bold">{t("Uploading files...")}</p>
+              <p className="mt-1 text-sm font-semibold">
+                {uploadProgress.completed} / {uploadProgress.total}
+              </p>
+            </div>
+          )}
+
+
           {/* NAVIGATION */}
 
           <div className="mt-12 flex flex-col-reverse gap-4 sm:flex-row sm:justify-between">
@@ -7434,9 +7618,10 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
             <button
               type="button"
               onClick={submitOnboarding}
-              className="cursor-pointer rounded-2xl bg-blue-600 px-8 py-4 text-lg font-bold text-white transition hover:-translate-y-1 hover:shadow-xl"
+              disabled={isSubmitting}
+              className="cursor-pointer rounded-2xl bg-blue-600 px-8 py-4 text-lg font-bold text-white transition hover:-translate-y-1 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {t("Submit Property Onboarding →")}
+              {isSubmitting ? t("Submitting...") : t("Submit Property Onboarding →")}
             </button>
 
           </div>
