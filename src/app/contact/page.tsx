@@ -263,7 +263,10 @@ export default function ContactPage() {
       if (
         !payload.fullName ||
         !payload.country ||
+        !payload.propertyType ||
         !payload.email ||
+        !payload.phone ||
+        !payload.cityArea ||
         !payload.message ||
         payload.consent !== true
       ) {
@@ -362,21 +365,34 @@ export default function ContactPage() {
                 );
               }
 
-              const uploadResponse = await fetch(
-                upload.uploadUrl,
-                {
-                  method: "PUT",
-                  headers: {
-                    "Content-Type":
-                      selected.file.type,
-                  },
-                  body: selected.file,
-                }
-              );
+              try {
+                const uploadResponse = await fetch(
+                  upload.uploadUrl,
+                  {
+                    method: "PUT",
+                    headers: {
+                      "Content-Type": selected.file.type,
+                    },
+                    body: selected.file,
+                  }
+                );
 
-              if (!uploadResponse.ok) {
-                throw new Error(
-                  `Απέτυχε το ανέβασμα της φωτογραφίας "${selected.file.name}".`
+                if (!uploadResponse.ok) {
+                  throw new Error(
+                    `Απέτυχε το ανέβασμα της φωτογραφίας "${selected.file.name}".`
+                  );
+                }
+              } catch (uploadError) {
+                /*
+                 * Google Drive can finish a resumable PUT successfully but
+                 * the browser may still reject access to the response because
+                 * the upload endpoint does not return a CORS header.
+                 * We therefore continue and let our own API verify the files
+                 * inside the Drive folder before saving the submission.
+                 */
+                console.warn(
+                  "Drive upload response could not be read; server verification will confirm it:",
+                  uploadError
                 );
               }
 
@@ -411,6 +427,7 @@ export default function ContactPage() {
             action: "submit-contact",
             ...payload,
             driveFolderId: uploadFolderId,
+            expectedPhotoCount: selectedPhotos.length,
           }),
         }
       );
@@ -1099,6 +1116,7 @@ export default function ContactPage() {
 
                     <select
                       name="propertyType"
+                      required
                       defaultValue=""
                       className="
                         h-16
@@ -1251,6 +1269,7 @@ export default function ContactPage() {
                     <input
                       type="tel"
                       name="phone"
+                      required
                       placeholder={
                         contactPage.form.fields.phone
                       }
@@ -1284,6 +1303,7 @@ export default function ContactPage() {
                 <input
                   type="text"
                   name="cityArea"
+                  required
                   placeholder={
                     contactPage.form.fields
                       .propertyCityArea

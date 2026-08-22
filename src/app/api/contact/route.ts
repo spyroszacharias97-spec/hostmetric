@@ -532,10 +532,20 @@ async function submitContact(
       ? body.driveFolderId
       : null;
 
+  const expectedPhotoCount =
+    typeof body.expectedPhotoCount === "number" &&
+    Number.isInteger(body.expectedPhotoCount) &&
+    body.expectedPhotoCount >= 0
+      ? Math.min(body.expectedPhotoCount, MAX_FILES)
+      : 0;
+
   if (
     !fullName ||
     !country ||
+    !propertyType ||
     !email ||
+    !phone ||
+    !cityArea ||
     !message ||
     consent !== true
   ) {
@@ -555,10 +565,31 @@ async function submitContact(
     | null = null;
 
   if (driveFolderId) {
-    uploadedPhotos =
-      await getUploadedPhotos(
-        driveFolderId
+    // Google may need a brief moment before newly uploaded files appear
+    // in Drive's list response. Retry a few times before finalizing.
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      uploadedPhotos =
+        await getUploadedPhotos(
+          driveFolderId
+        );
+
+      if (
+        uploadedPhotos.length >= expectedPhotoCount ||
+        expectedPhotoCount === 0
+      ) {
+        break;
+      }
+
+      await new Promise((resolve) =>
+        setTimeout(resolve, 700)
       );
+    }
+
+    if (uploadedPhotos.length < expectedPhotoCount) {
+      throw new Error(
+        `Ανέβηκαν ${uploadedPhotos.length} από ${expectedPhotoCount} φωτογραφίες. Παρακαλώ δοκιμάστε ξανά.`
+      );
+    }
 
     driveFolderLink =
       `https://drive.google.com/drive/folders/${driveFolderId}`;
