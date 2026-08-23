@@ -469,6 +469,15 @@ const createEmptyUnit = (id: number): UnitType => ({
 
 export default function OnboardingForm({ dictionary }: { dictionary: any }) {
   const t = (key: string) => dictionary?.texts?.[key] ?? key;
+  const tf = (
+    key: string,
+    variables: Record<string, string | number>
+  ) =>
+    Object.entries(variables).reduce(
+      (message, [name, value]) =>
+        message.replaceAll(`{{${name}}}`, String(value)),
+      t(key)
+    );
   const tCountry = (country: string) => dictionary?.countries?.[country] ?? country;
 
   const today = new Date();
@@ -847,8 +856,12 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
               if (availableSlots <= 0) {
                 setSubmissionError(
                   totalSelectedUploadFiles >= MAX_TOTAL_FILES
-                    ? `You can upload up to ${MAX_TOTAL_FILES} files in total.`
-                    : `You can upload up to ${MAX_FILES_PER_GROUP} files in this section.`
+                    ? tf("You can upload up to {{count}} files in total.", {
+                        count: MAX_TOTAL_FILES,
+                      })
+                    : tf("You can upload up to {{count}} files in this section.", {
+                        count: MAX_FILES_PER_GROUP,
+                      })
                 );
                 event.currentTarget.value = "";
                 return;
@@ -860,8 +873,8 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                 if (!allowedTypes.has(file.type)) {
                   setSubmissionError(
                     allowPdf
-                      ? "Only JPG, PNG, WEBP and PDF files are allowed in this section."
-                      : "Only JPG, PNG and WEBP images are allowed."
+                      ? t("Only JPG, PNG, WEBP and PDF files are allowed in this section.")
+                      : t("Only JPG, PNG and WEBP images are allowed.")
                   );
                   event.currentTarget.value = "";
                   return;
@@ -869,7 +882,9 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
                 if (file.size <= 0 || file.size > MAX_PHOTO_SIZE) {
                   setSubmissionError(
-                    `Each file must be smaller than ${MAX_PHOTO_SIZE / 1024 / 1024} MB.`
+                    tf("Each file must be smaller than {{size}} MB.", {
+                      size: MAX_PHOTO_SIZE / 1024 / 1024,
+                    })
                   );
                   event.currentTarget.value = "";
                   return;
@@ -887,9 +902,13 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
               if (incomingFiles.length > availableSlots) {
                 setSubmissionError(
-                  `Only the first ${availableSlots} file${
-                    availableSlots === 1 ? "" : "s"
-                  } were added because the upload limit was reached.`
+                  availableSlots === 1
+                    ? tf("Only the first {{count}} file was added because the upload limit was reached.", {
+                        count: availableSlots,
+                      })
+                    : tf("Only the first {{count}} files were added because the upload limit was reached.", {
+                        count: availableSlots,
+                      })
                 );
               } else {
                 setSubmissionError("");
@@ -1688,6 +1707,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
     let driveFolderId: string | null = null;
     let directUploadsCompleted = false;
+    let uploadProgressTimer: number | null = null;
 
     type PendingUpload = {
       file: File;
@@ -1786,6 +1806,29 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
       if (pendingUploads.length > 0) {
         setUploadProgress({ completed: 0, total: pendingUploads.length });
 
+        // Google resumable uploads can finish correctly even when the browser
+        // cannot read every PUT response because of CORS. Keep the customer
+        // informed with a smooth visual counter, but never show 100% until
+        // the direct upload loop has actually completed.
+        if (pendingUploads.length > 1) {
+          uploadProgressTimer = window.setInterval(() => {
+            setUploadProgress((current) => {
+              if (
+                !current ||
+                current.total <= 1 ||
+                current.completed >= current.total - 1
+              ) {
+                return current;
+              }
+
+              return {
+                ...current,
+                completed: current.completed + 1,
+              };
+            });
+          }, 900);
+        }
+
         const sessionResponse = await fetch("/api/onboarding", {
           method: "POST",
           headers: {
@@ -1810,7 +1853,9 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
         const sessionResult = await sessionResponse.json();
 
         if (!sessionResponse.ok || !sessionResult.success) {
-          throw new Error(sessionResult.error || "Could not prepare Google Drive uploads.");
+          throw new Error(
+            sessionResult.error || t("Could not prepare Google Drive uploads.")
+          );
         }
 
         driveFolderId = String(sessionResult.folderId || "");
@@ -1848,7 +1893,9 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
               const file = pendingUploads[upload.index]?.file;
 
               if (!file) {
-                throw new Error("Could not match a selected file to its upload session.");
+                throw new Error(
+                  t("Could not match a selected file to its upload session.")
+                );
               }
 
               try {
@@ -1861,7 +1908,11 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                 });
 
                 if (!uploadResponse.ok) {
-                  throw new Error(`Google Drive upload failed with status ${uploadResponse.status}.`);
+                  throw new Error(
+                    tf("Google Drive upload failed with status {{status}}.", {
+                      status: uploadResponse.status,
+                    })
+                  );
                 }
               } catch (uploadError) {
                 // Google Drive may successfully accept a resumable PUT while the
@@ -1874,12 +1925,25 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
               }
 
               completed += 1;
-              setUploadProgress({ completed, total: uploads.length });
+              setUploadProgress((current) => ({
+                completed: Math.max(current?.completed ?? 0, completed),
+                total: uploads.length,
+              }));
             })
           );
         }
 
         directUploadsCompleted = true;
+
+        if (uploadProgressTimer) {
+          window.clearInterval(uploadProgressTimer);
+          uploadProgressTimer = null;
+        }
+
+        setUploadProgress({
+          completed: uploads.length,
+          total: uploads.length,
+        });
       }
 
       const response = await fetch("/api/onboarding", {
@@ -1907,7 +1971,9 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
       const result = await response.json();
 
       if (!response.ok || !result.success) {
-        throw new Error(result.error || "The onboarding submission could not be completed.");
+        throw new Error(
+          result.error || t("The onboarding submission could not be completed.")
+        );
       }
 
       setUploadProgress(null);
@@ -1918,6 +1984,11 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
         behavior: "smooth",
       });
     } catch (error) {
+      if (uploadProgressTimer) {
+        window.clearInterval(uploadProgressTimer);
+        uploadProgressTimer = null;
+      }
+
       console.error("Onboarding submission error:", error);
       setUploadProgress(null);
 
@@ -1956,6 +2027,10 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
         behavior: "smooth",
       });
     } finally {
+      if (uploadProgressTimer) {
+        window.clearInterval(uploadProgressTimer);
+      }
+
       setIsSubmitting(false);
     }
   };
@@ -2419,9 +2494,9 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
               <input
                 type="date"
-                value={formData.dateOfBirth}
                 min="1900-01-01"
                 max={maxBirthDate}
+                value={formData.dateOfBirth}
                 onChange={(event) =>
                   updateField(
                     "dateOfBirth",

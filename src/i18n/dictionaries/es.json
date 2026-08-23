@@ -567,7 +567,8 @@
       },
       "privacy": "Acepto que HostMetric utilice la información proporcionada para responder a mi consulta. *",
       "submit": "Enviar consulta",
-      "noObligation": "Sin compromiso. Primero revisaremos tu propiedad y hablaremos contigo sobre el mejor enfoque."
+      "noObligation": "Sin compromiso. Primero revisaremos tu propiedad y hablaremos contigo sobre el mejor enfoque.",
+      "submitting": "Enviando..."
     },
     "success": {
       "title": "¡Gracias!",
@@ -589,9 +590,9 @@
       "description": "Respuestas claras sobre gestión de propiedades, reservas, precios, comunicación con huéspedes y cómo es trabajar con HostMetric."
     },
     "platformIntro": {
-     "eyebrow": "DISTRIBUCIÓN GLOBAL",
-     "title": "Conectados con las principales plataformas de reservas del mundo",
-     "description": "HostMetric conecta y gestiona tu propiedad en las principales plataformas internacionales de reservas, combinando distribución estratégica, precios inteligentes y gestión profesional para aumentar la visibilidad, generar más reservas y mejorar el rendimiento general."
+      "eyebrow": "DISTRIBUCIÓN GLOBAL",
+      "title": "Conectados con las principales plataformas de reservas del mundo",
+      "description": "HostMetric conecta y gestiona tu propiedad en las principales plataformas internacionales de reservas, combinando distribución estratégica, precios inteligentes y gestión profesional para aumentar la visibilidad, generar más reservas y mejorar el rendimiento general."
     },
     "propertySection": {
       "eyebrow": "TU PROPIEDAD",
@@ -2163,5 +2164,34 @@
       "Zambia": "Zambia",
       "Zimbabwe": "Zimbabue"
     }
+  },
+  "texts": {
+    "Submitting...": "Enviando...",
+    "Uploading files...": "Subiendo archivos...",
+    "Upload preview": "Vista previa de archivos",
+    "files selected": "archivos seleccionados",
+    "Add Files": "Añadir archivos",
+    "Remove file": "Eliminar archivo",
+    "Baby Cot / Crib": "Cuna para bebé",
+    "Minimum Acceptable Nightly Rate": "Tarifa mínima aceptable por noche",
+    "The lowest nightly rate you would normally be comfortable accepting for this unit type.": "La tarifa más baja por noche que normalmente estarías dispuesto a aceptar para este tipo de unidad.",
+    "You can upload up to {{count}} files in total.": "Puedes subir hasta {{count}} archivos en total.",
+    "You can upload up to {{count}} files in this section.": "Puedes subir hasta {{count}} archivos en esta sección.",
+    "Only JPG, PNG, WEBP and PDF files are allowed in this section.": "En esta sección solo se permiten archivos JPG, PNG, WEBP y PDF.",
+    "Only JPG, PNG and WEBP images are allowed.": "Solo se permiten imágenes JPG, PNG y WEBP.",
+    "Each file must be smaller than {{size}} MB.": "Cada archivo debe tener un tamaño inferior a {{size}} MB.",
+    "Only the first {{count}} file was added because the upload limit was reached.": "Solo se añadió el primer archivo porque se alcanzó el límite de carga.",
+    "Only the first {{count}} files were added because the upload limit was reached.": "Solo se añadieron los primeros {{count}} archivos porque se alcanzó el límite de carga.",
+    "Could not prepare Google Drive uploads.": "No se pudieron preparar las cargas a Google Drive.",
+    "Could not match a selected file to its upload session.": "No se pudo asociar un archivo seleccionado con su sesión de carga.",
+    "Google Drive upload failed with status {{status}}.": "La carga a Google Drive falló con el estado {{status}}.",
+    "The onboarding submission could not be completed.": "No se pudo completar el envío del formulario de incorporación.",
+    "Something went wrong while submitting the onboarding form. Please try again.": "Se produjo un error al enviar el formulario de incorporación. Inténtalo de nuevo.",
+    "Onboarding Complete": "Incorporación completada",
+    "Your property information is ready for review": "La información de tu propiedad está lista para su revisión",
+    "Your onboarding information has been saved securely and sent to the HostMetric team for review. We will contact you if we need any clarification or additional material.": "La información de incorporación se ha guardado de forma segura y se ha enviado al equipo de HostMetric para su revisión. Nos pondremos en contacto contigo si necesitamos alguna aclaración o material adicional.",
+    "Need to speak with us?": "¿Necesitas hablar con nosotros?",
+    "You can contact our team for help, corrections or questions about your property.": "Puedes contactar con nuestro equipo para obtener ayuda, realizar correcciones o resolver cualquier duda sobre tu propiedad.",
+    "Contact Us →": "Contáctanos →"
   }
 }

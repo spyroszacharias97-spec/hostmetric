@@ -567,7 +567,8 @@
       },
       "privacy": "Ich stimme zu, dass HostMetric die angegebenen Informationen verwenden darf, um auf meine Anfrage zu antworten. *",
       "submit": "Anfrage senden",
-      "noObligation": "Unverbindlich. Wir prüfen zunächst Ihre Unterkunft und besprechen anschließend den besten Ansatz mit Ihnen."
+      "noObligation": "Unverbindlich. Wir prüfen zunächst Ihre Unterkunft und besprechen anschließend den besten Ansatz mit Ihnen.",
+      "submitting": "Wird gesendet..."
     },
     "success": {
       "title": "Vielen Dank!",
@@ -2163,5 +2164,34 @@
       "Zambia": "Sambia",
       "Zimbabwe": "Simbabwe"
     }
+  },
+  "texts": {
+    "Submitting...": "Wird gesendet...",
+    "Uploading files...": "Dateien werden hochgeladen...",
+    "Upload preview": "Dateivorschau",
+    "files selected": "Dateien ausgewählt",
+    "Add Files": "Dateien hinzufügen",
+    "Remove file": "Datei entfernen",
+    "Baby Cot / Crib": "Babybett / Kinderbett",
+    "Minimum Acceptable Nightly Rate": "Akzeptierter Mindestpreis pro Nacht",
+    "The lowest nightly rate you would normally be comfortable accepting for this unit type.": "Der niedrigste Übernachtungspreis, den Sie für diesen Unterkunftstyp normalerweise akzeptieren würden.",
+    "You can upload up to {{count}} files in total.": "Sie können insgesamt bis zu {{count}} Dateien hochladen.",
+    "You can upload up to {{count}} files in this section.": "Sie können in diesem Abschnitt bis zu {{count}} Dateien hochladen.",
+    "Only JPG, PNG, WEBP and PDF files are allowed in this section.": "In diesem Abschnitt sind nur JPG-, PNG-, WEBP- und PDF-Dateien zulässig.",
+    "Only JPG, PNG and WEBP images are allowed.": "Es sind nur Bilder im JPG-, PNG- und WEBP-Format zulässig.",
+    "Each file must be smaller than {{size}} MB.": "Jede Datei muss kleiner als {{size}} MB sein.",
+    "Only the first {{count}} file was added because the upload limit was reached.": "Da das Upload-Limit erreicht wurde, wurde nur die erste {{count}} Datei hinzugefügt.",
+    "Only the first {{count}} files were added because the upload limit was reached.": "Da das Upload-Limit erreicht wurde, wurden nur die ersten {{count}} Dateien hinzugefügt.",
+    "Could not prepare Google Drive uploads.": "Die Uploads für Google Drive konnten nicht vorbereitet werden.",
+    "Could not match a selected file to its upload session.": "Eine ausgewählte Datei konnte der zugehörigen Upload-Sitzung nicht zugeordnet werden.",
+    "Google Drive upload failed with status {{status}}.": "Der Upload zu Google Drive ist mit dem Status {{status}} fehlgeschlagen.",
+    "The onboarding submission could not be completed.": "Die Übermittlung der Unterkunftsdaten konnte nicht abgeschlossen werden.",
+    "Something went wrong while submitting the onboarding form. Please try again.": "Beim Übermitteln des Formulars ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+    "Onboarding Complete": "Einrichtung abgeschlossen",
+    "Your property information is ready for review": "Ihre Unterkunftsdaten sind bereit zur Prüfung",
+    "Your onboarding information has been saved securely and sent to the HostMetric team for review. We will contact you if we need any clarification or additional material.": "Ihre Angaben wurden sicher gespeichert und zur Prüfung an das HostMetric-Team übermittelt. Falls wir Rückfragen haben oder weitere Unterlagen benötigen, werden wir uns bei Ihnen melden.",
+    "Need to speak with us?": "Möchten Sie mit uns sprechen?",
+    "You can contact our team for help, corrections or questions about your property.": "Bei Fragen, Korrekturen oder wenn Sie Unterstützung zu Ihrer Unterkunft benötigen, können Sie sich jederzeit an unser Team wenden.",
+    "Contact Us →": "Kontaktieren Sie uns →"
   }
 }

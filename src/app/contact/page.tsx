@@ -1625,7 +1625,7 @@ export default function ContactPage() {
                 >
 
                   {isSubmitting
-                    ? "Αποστολή..."
+                    ? (contactPage.form.submitting ?? "Submitting...")
                     : contactPage.form.submit
                   }
 

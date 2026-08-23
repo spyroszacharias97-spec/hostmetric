@@ -567,7 +567,8 @@
       },
       "privacy": "Wyrażam zgodę na wykorzystanie przez HostMetric podanych informacji w celu odpowiedzi na moje zapytanie. *",
       "submit": "Wyślij zapytanie",
-      "noObligation": "Bez zobowiązań. Najpierw przeanalizujemy Twoją nieruchomość i omówimy z Tobą najlepsze podejście."
+      "noObligation": "Bez zobowiązań. Najpierw przeanalizujemy Twoją nieruchomość i omówimy z Tobą najlepsze podejście.",
+      "submitting": "A enviar..."
     },
     "success": {
       "title": "Dziękujemy!",
@@ -587,11 +588,6 @@
       "titleLine1": "Tudo o que precisa",
       "titleLine2": "de saber.",
       "description": "Respostas claras sobre gestão de propriedades, reservas, preços, comunicação com hóspedes e a sua parceria com a HostMetric."
-    },
-    "platformIntro": {
-      "eyebrow": "ALCANCE GLOBAL",
-      "title": "Ligados às principais plataformas de reservas do mundo",
-      "description": "A HostMetric conecta e gere a sua propriedade nas principais plataformas internacionais de reservas, combinando distribuição estratégica, preços inteligentes e gestão profissional para aumentar a visibilidade, gerar mais reservas e melhorar o desempenho global."
     },
     "propertySection": {
       "eyebrow": "A SUA PROPRIEDADE",
@@ -655,7 +651,7 @@
         },
         {
           "question": "Como recebo o dinheiro das minhas reservas?",
-          "answer": "Os pagamentos das reservas são recebidos e geridos através da HostMetric, utilizando o sistema de pagamento acordado. As receitas são posteriormente pagas ao proprietário do imóvel de acordo com os termos acordados e o calendário de pagamentos. Desta forma, as reservas, os pagamentos e o acompanhamento financeiro permanecem centralizados e geridos profissionalmente."
+          "answer": "Os pagamentos das reservas continuam a seguir o processo do respetivo canal de reservas ou a configuração acordada. A função da HostMetric é gerir e otimizar a propriedade; as suas receitas de reservas não precisam de passar pela HostMetric apenas porque gerimos a sua propriedade."
         },
         {
           "question": "Como ajudam a melhorar as avaliações e classificações dos hóspedes?",
@@ -693,6 +689,11 @@
       "titleLine2": "a sua propriedade pode alcançar.",
       "description": "Fale-nos sobre a sua propriedade e avaliaremos como a HostMetric pode ajudar a melhorar a sua gestão e desempenho.",
       "button": "Começar"
+    },
+    "platformIntro": {
+      "eyebrow": "ALCANCE GLOBAL",
+      "title": "Ligados às principais plataformas de reservas do mundo",
+      "description": "A HostMetric conecta e gere a sua propriedade nas principais plataformas internacionais de reservas, combinando distribuição estratégica, preços inteligentes e gestão profissional para aumentar a visibilidade, gerar mais reservas e melhorar o desempenho global."
     }
   },
   "guestResponsePage": {
@@ -1548,6 +1549,7 @@
       "Example: SiteMinder, Cloudbeds...": "Przykład: SiteMinder, Cloudbeds...",
       "Do you use a Property Management System (PMS)? *": "Czy korzystasz z systemu zarządzania nieruchomością (PMS)? *",
       "PMS Name": "Nazwa PMS",
+      "PMS name": "Nazwa PMS",
       "Do you have your own website? *": "Czy masz własną stronę internetową? *",
       "Website URL": "URL strony internetowej",
       "https://...": "https://...",
@@ -2163,5 +2165,34 @@
       "Zambia": "Zambia",
       "Zimbabwe": "Zimbabwe"
     }
+  },
+  "texts": {
+    "Submitting...": "A enviar...",
+    "Uploading files...": "A carregar ficheiros...",
+    "Upload preview": "Pré-visualização dos ficheiros",
+    "files selected": "ficheiros selecionados",
+    "Add Files": "Adicionar ficheiros",
+    "Remove file": "Remover ficheiro",
+    "Baby Cot / Crib": "Berço para bebé",
+    "Minimum Acceptable Nightly Rate": "Preço mínimo aceitável por noite",
+    "The lowest nightly rate you would normally be comfortable accepting for this unit type.": "O preço mais baixo por noite que normalmente estaria disposto a aceitar para este tipo de unidade.",
+    "You can upload up to {{count}} files in total.": "Pode carregar até {{count}} ficheiros no total.",
+    "You can upload up to {{count}} files in this section.": "Pode carregar até {{count}} ficheiros nesta secção.",
+    "Only JPG, PNG, WEBP and PDF files are allowed in this section.": "Nesta secção, são permitidos apenas ficheiros JPG, PNG, WEBP e PDF.",
+    "Only JPG, PNG and WEBP images are allowed.": "São permitidas apenas imagens JPG, PNG e WEBP.",
+    "Each file must be smaller than {{size}} MB.": "Cada ficheiro deve ter menos de {{size}} MB.",
+    "Only the first {{count}} file was added because the upload limit was reached.": "Foi adicionado apenas o primeiro ficheiro porque foi atingido o limite de carregamento.",
+    "Only the first {{count}} files were added because the upload limit was reached.": "Foram adicionados apenas os primeiros {{count}} ficheiros porque foi atingido o limite de carregamento.",
+    "Could not prepare Google Drive uploads.": "Não foi possível preparar os ficheiros para carregamento no Google Drive.",
+    "Could not match a selected file to its upload session.": "Não foi possível associar um ficheiro selecionado à respetiva sessão de carregamento.",
+    "Google Drive upload failed with status {{status}}.": "O carregamento para o Google Drive falhou com o estado {{status}}.",
+    "The onboarding submission could not be completed.": "Não foi possível concluir o envio dos dados da propriedade.",
+    "Something went wrong while submitting the onboarding form. Please try again.": "Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.",
+    "Onboarding Complete": "Integração concluída",
+    "Your property information is ready for review": "As informações da sua propriedade estão prontas para revisão",
+    "Your onboarding information has been saved securely and sent to the HostMetric team for review. We will contact you if we need any clarification or additional material.": "As informações da sua propriedade foram guardadas em segurança e enviadas à equipa da HostMetric para revisão. Entraremos em contacto consigo caso seja necessário algum esclarecimento ou material adicional.",
+    "Need to speak with us?": "Precisa de falar connosco?",
+    "You can contact our team for help, corrections or questions about your property.": "Pode contactar a nossa equipa para obter ajuda, solicitar correções ou esclarecer dúvidas sobre a sua propriedade.",
+    "Contact Us →": "Contacte-nos →"
   }
 }

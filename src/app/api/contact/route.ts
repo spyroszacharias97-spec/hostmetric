@@ -750,7 +750,7 @@ async function submitContact(
       replyTo: email,
 
       subject:
-        `Νέο αίτημα από ${fullName}`,
+        `Νέο αίτημα #${submission.id} από ${fullName}`,
 
       html: `
         <div

@@ -567,7 +567,8 @@
       },
       "privacy": "Accetto che HostMetric utilizzi le informazioni fornite per rispondere alla mia richiesta. *",
       "submit": "Invia richiesta",
-      "noObligation": "Senza impegno. Esamineremo prima la tua proprietà e discuteremo con te l'approccio migliore."
+      "noObligation": "Senza impegno. Esamineremo prima la tua proprietà e discuteremo con te l'approccio migliore.",
+      "submitting": "Invio in corso..."
     },
     "success": {
       "title": "Grazie!",
@@ -592,7 +593,7 @@
       "eyebrow": "VISIBILITÀ GLOBALE",
       "title": "Collegati alle principali piattaforme di prenotazione del mondo",
       "description": "HostMetric collega e gestisce la tua proprietà sulle principali piattaforme di prenotazione internazionali, combinando distribuzione strategica, prezzi intelligenti e gestione professionale per aumentare la visibilità, generare più prenotazioni e migliorare le prestazioni complessive."
-},
+    },
     "propertySection": {
       "eyebrow": "LA TUA PROPRIETÀ",
       "title": "Gestire e far crescere la tua proprietà",
@@ -2163,5 +2164,34 @@
       "Zambia": "Zambia",
       "Zimbabwe": "Zimbabwe"
     }
+  },
+  "texts": {
+    "Submitting...": "Invio in corso...",
+    "Uploading files...": "Caricamento dei file...",
+    "Upload preview": "Anteprima dei file",
+    "files selected": "file selezionati",
+    "Add Files": "Aggiungi file",
+    "Remove file": "Rimuovi file",
+    "Baby Cot / Crib": "Culla / Lettino per bambini",
+    "Minimum Acceptable Nightly Rate": "Tariffa minima accettabile per notte",
+    "The lowest nightly rate you would normally be comfortable accepting for this unit type.": "La tariffa minima per notte che normalmente saresti disposto ad accettare per questo tipo di unità.",
+    "You can upload up to {{count}} files in total.": "Puoi caricare fino a {{count}} file in totale.",
+    "You can upload up to {{count}} files in this section.": "Puoi caricare fino a {{count}} file in questa sezione.",
+    "Only JPG, PNG, WEBP and PDF files are allowed in this section.": "In questa sezione sono consentiti solo file JPG, PNG, WEBP e PDF.",
+    "Only JPG, PNG and WEBP images are allowed.": "Sono consentite solo immagini JPG, PNG e WEBP.",
+    "Each file must be smaller than {{size}} MB.": "Ogni file deve avere una dimensione inferiore a {{size}} MB.",
+    "Only the first {{count}} file was added because the upload limit was reached.": "È stato aggiunto solo il primo file perché è stato raggiunto il limite di caricamento.",
+    "Only the first {{count}} files were added because the upload limit was reached.": "Sono stati aggiunti solo i primi {{count}} file perché è stato raggiunto il limite di caricamento.",
+    "Could not prepare Google Drive uploads.": "Impossibile preparare i caricamenti su Google Drive.",
+    "Could not match a selected file to its upload session.": "Impossibile associare un file selezionato alla relativa sessione di caricamento.",
+    "Google Drive upload failed with status {{status}}.": "Il caricamento su Google Drive non è riuscito con stato {{status}}.",
+    "The onboarding submission could not be completed.": "Non è stato possibile completare l'invio del modulo di onboarding.",
+    "Something went wrong while submitting the onboarding form. Please try again.": "Si è verificato un errore durante l'invio del modulo di onboarding. Riprova.",
+    "Onboarding Complete": "Onboarding completato",
+    "Your property information is ready for review": "Le informazioni sulla tua proprietà sono pronte per la revisione",
+    "Your onboarding information has been saved securely and sent to the HostMetric team for review. We will contact you if we need any clarification or additional material.": "Le informazioni di onboarding sono state salvate in modo sicuro e inviate al team HostMetric per la revisione. Ti contatteremo se avremo bisogno di chiarimenti o materiale aggiuntivo.",
+    "Need to speak with us?": "Hai bisogno di parlare con noi?",
+    "You can contact our team for help, corrections or questions about your property.": "Puoi contattare il nostro team per assistenza, correzioni o domande sulla tua proprietà.",
+    "Contact Us →": "Contattaci →"
   }
 }
