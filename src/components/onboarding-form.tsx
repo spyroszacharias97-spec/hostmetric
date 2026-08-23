@@ -470,6 +470,19 @@ const createEmptyUnit = (id: number): UnitType => ({
 export default function OnboardingForm({ dictionary }: { dictionary: any }) {
   const t = (key: string) => dictionary?.texts?.[key] ?? key;
   const tCountry = (country: string) => dictionary?.countries?.[country] ?? country;
+
+  const today = new Date();
+  const adultCutoff = new Date(
+    today.getFullYear() - 18,
+    today.getMonth(),
+    today.getDate()
+  );
+  const maxBirthDate = [
+    adultCutoff.getFullYear(),
+    String(adultCutoff.getMonth() + 1).padStart(2, "0"),
+    String(adultCutoff.getDate()).padStart(2, "0"),
+  ].join("-");
+
   const [step, setStep] = useState(1);
 
   const [formData, setFormData] = useState<FormData>({
@@ -684,81 +697,6 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     total: number;
   } | null>(null);
 
-  const appendFiles = (
-    current: SelectedPhoto[],
-    incomingFiles: File[],
-    allowPdf = false
-  ) => {
-    if (incomingFiles.length === 0) {
-      return current;
-    }
-    const allowedTypes = allowPdf
-      ? ALLOWED_SUPPORTING_FILE_TYPES
-      : ALLOWED_PHOTO_TYPES;
-
-    const remainingGroupSlots =
-      MAX_FILES_PER_GROUP - current.length;
-
-    const remainingTotalSlots =
-      MAX_TOTAL_FILES - totalSelectedUploadFiles;
-
-    const availableSlots = Math.max(
-      0,
-      Math.min(remainingGroupSlots, remainingTotalSlots)
-    );
-
-    if (availableSlots <= 0) {
-      setSubmissionError(
-        totalSelectedUploadFiles >= MAX_TOTAL_FILES
-          ? `You can upload up to ${MAX_TOTAL_FILES} files in total.`
-          : `You can upload up to ${MAX_FILES_PER_GROUP} files in this section.`
-      );
-
-      return current;
-    }
-
-    const filesToAdd = incomingFiles.slice(0, availableSlots);
-
-    for (const file of filesToAdd) {
-      if (!allowedTypes.has(file.type)) {
-        setSubmissionError(
-          allowPdf
-            ? "Only JPG, PNG, WEBP and PDF files are allowed in this section."
-            : "Only JPG, PNG and WEBP images are allowed."
-        );
-        return current;
-      }
-
-      if (file.size > MAX_PHOTO_SIZE) {
-        setSubmissionError(
-          `Each file must be smaller than ${
-            MAX_PHOTO_SIZE / 1024 / 1024
-          } MB.`
-        );
-        return current;
-      }
-    }
-
-    const selected = filesToAdd.map((file) => ({
-      file,
-      previewUrl: file.type.startsWith("image/")
-        ? URL.createObjectURL(file)
-        : "",
-    }));
-
-    if (incomingFiles.length > availableSlots) {
-      setSubmissionError(
-        `Only the first ${availableSlots} file${
-          availableSlots === 1 ? "" : "s"
-        } were added because the upload limit was reached.`
-      );
-    } else {
-      setSubmissionError("");
-    }
-
-    return [...current, ...selected];
-  };
-
   const removeFileAtIndex = (
     files: SelectedPhoto[],
     index: number
@@ -826,11 +764,14 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
   const addFilesToGroup = (
     setter: Dispatch<SetStateAction<Record<string, SelectedPhoto[]>>>,
     groupKey: string,
-    incoming: File[]
+    incoming: SelectedPhoto[]
   ) => {
     setter((previous) => ({
       ...previous,
-      [groupKey]: appendFiles(previous[groupKey] || [], incoming).slice(0, MAX_FILES_PER_GROUP),
+      [groupKey]: [
+        ...(previous[groupKey] || []),
+        ...incoming,
+      ].slice(0, MAX_FILES_PER_GROUP),
     }));
   };
 
@@ -857,7 +798,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     description: string;
     files: SelectedPhoto[];
     accept?: string;
-    onAdd: (files: File[]) => void;
+    onAdd: (files: SelectedPhoto[]) => void;
     onRemove: (index: number) => void;
   }) => (
     <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
@@ -881,12 +822,80 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
             accept={accept}
             className="hidden"
             onChange={(event) => {
-              // Copy the browser FileList BEFORE clearing the input.
-              // FileList is live; clearing the input first can otherwise leave
-              // React state with zero files, which also prevents Drive uploads.
-              const selectedFiles = Array.from(event.target.files ?? []);
-              onAdd(selectedFiles);
-              event.target.value = "";
+              const incomingFiles = Array.from(event.currentTarget.files ?? []);
+
+              // Copy real File objects immediately, before the input is reset.
+              // We also create the preview URLs here, before any React state update,
+              // so the selected files cannot disappear with the live FileList.
+              if (incomingFiles.length === 0) {
+                event.currentTarget.value = "";
+                return;
+              }
+
+              const allowPdf = accept.includes("application/pdf");
+              const allowedTypes = allowPdf
+                ? ALLOWED_SUPPORTING_FILE_TYPES
+                : ALLOWED_PHOTO_TYPES;
+
+              const remainingGroupSlots = MAX_FILES_PER_GROUP - files.length;
+              const remainingTotalSlots = MAX_TOTAL_FILES - totalSelectedUploadFiles;
+              const availableSlots = Math.max(
+                0,
+                Math.min(remainingGroupSlots, remainingTotalSlots)
+              );
+
+              if (availableSlots <= 0) {
+                setSubmissionError(
+                  totalSelectedUploadFiles >= MAX_TOTAL_FILES
+                    ? `You can upload up to ${MAX_TOTAL_FILES} files in total.`
+                    : `You can upload up to ${MAX_FILES_PER_GROUP} files in this section.`
+                );
+                event.currentTarget.value = "";
+                return;
+              }
+
+              const filesToAdd = incomingFiles.slice(0, availableSlots);
+
+              for (const file of filesToAdd) {
+                if (!allowedTypes.has(file.type)) {
+                  setSubmissionError(
+                    allowPdf
+                      ? "Only JPG, PNG, WEBP and PDF files are allowed in this section."
+                      : "Only JPG, PNG and WEBP images are allowed."
+                  );
+                  event.currentTarget.value = "";
+                  return;
+                }
+
+                if (file.size <= 0 || file.size > MAX_PHOTO_SIZE) {
+                  setSubmissionError(
+                    `Each file must be smaller than ${MAX_PHOTO_SIZE / 1024 / 1024} MB.`
+                  );
+                  event.currentTarget.value = "";
+                  return;
+                }
+              }
+
+              const preparedFiles: SelectedPhoto[] = filesToAdd.map((file) => ({
+                file,
+                previewUrl: file.type.startsWith("image/")
+                  ? URL.createObjectURL(file)
+                  : "",
+              }));
+
+              onAdd(preparedFiles);
+
+              if (incomingFiles.length > availableSlots) {
+                setSubmissionError(
+                  `Only the first ${availableSlots} file${
+                    availableSlots === 1 ? "" : "s"
+                  } were added because the upload limit was reached.`
+                );
+              } else {
+                setSubmissionError("");
+              }
+
+              event.currentTarget.value = "";
             }}
           />
         </label>
@@ -1281,6 +1290,14 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     if (!formData.residenceCountry) {
       newErrors.residenceCountry =
         t("Please select your country of residence.");
+    }
+
+    if (
+      formData.dateOfBirth &&
+      formData.dateOfBirth > maxBirthDate
+    ) {
+      newErrors.dateOfBirth =
+        t("You must be at least 18 years old.");
     }
 
     if (
@@ -2403,6 +2420,8 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
               <input
                 type="date"
                 value={formData.dateOfBirth}
+                min="1900-01-01"
+                max={maxBirthDate}
                 onChange={(event) =>
                   updateField(
                     "dateOfBirth",
@@ -2413,6 +2432,8 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                   "dateOfBirth"
                 )}
               />
+
+              <ErrorMessage field="dateOfBirth" />
 
             </div>
 
@@ -6595,10 +6616,10 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                             ...previous,
                             [unit.id]: {
                               ...(previous[unit.id] || {}),
-                              [category.key]: appendFiles(
-                                previous[unit.id]?.[category.key] || [],
-                                files
-                              ).slice(0, MAX_FILES_PER_GROUP),
+                              [category.key]: [
+                                ...(previous[unit.id]?.[category.key] || []),
+                                ...files,
+                              ].slice(0, MAX_FILES_PER_GROUP),
                             },
                           }));
                         },
@@ -6698,10 +6719,10 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                                   ...previous,
                                   [unit.id]: {
                                     ...(previous[unit.id] || {}),
-                                    [category.key]: appendFiles(
-                                      previous[unit.id]?.[category.key] || [],
-                                      files
-                                    ).slice(0, MAX_FILES_PER_GROUP),
+                                    [category.key]: [
+                                      ...(previous[unit.id]?.[category.key] || []),
+                                      ...files,
+                                    ].slice(0, MAX_FILES_PER_GROUP),
                                   },
                                 }));
                               },
@@ -6781,7 +6802,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                 accept: "image/jpeg,image/png,image/webp,application/pdf",
                 onAdd: (files) =>
                   setFloorPlanFiles((previous) =>
-                    appendFiles(previous, files, true).slice(0, MAX_FILES_PER_GROUP)
+                    [...previous, ...files].slice(0, MAX_FILES_PER_GROUP)
                   ),
                 onRemove: (index) =>
                   setFloorPlanFiles((previous) =>
