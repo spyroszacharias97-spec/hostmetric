@@ -172,6 +172,23 @@ function getDriveClient() {
   });
 }
 
+function getOnboardingParentFolderId() {
+  // Prefer a dedicated onboarding folder. If it is not configured yet,
+  // fall back to the same Drive parent already used by the working
+  // contact form so uploads do not fail only because of an env-name mismatch.
+  const parentFolderId =
+    process.env.GOOGLE_ONBOARDING_DRIVE_FOLDER_ID ||
+    process.env.GOOGLE_DRIVE_FOLDER_ID;
+
+  if (!parentFolderId) {
+    throw new Error(
+      "GOOGLE_ONBOARDING_DRIVE_FOLDER_ID (or GOOGLE_DRIVE_FOLDER_ID) is missing."
+    );
+  }
+
+  return parentFolderId;
+}
+
 function escapeHtml(value: string) {
   return value
     .replace(/&/g, "&amp;")
@@ -373,11 +390,7 @@ async function createUploadBatch(
 
   validateUploadMetadata(files);
 
-  const parentFolderId = process.env.GOOGLE_ONBOARDING_DRIVE_FOLDER_ID;
-
-  if (!parentFolderId) {
-    throw new Error("GOOGLE_ONBOARDING_DRIVE_FOLDER_ID is missing.");
-  }
+  const parentFolderId = getOnboardingParentFolderId();
 
   const auth = getGoogleAuth();
   const drive = google.drive({ version: "v3", auth });
@@ -508,11 +521,7 @@ async function createUploadBatch(
 }
 
 async function verifyRootFolder(rootFolderId: string) {
-  const expectedParentId = process.env.GOOGLE_ONBOARDING_DRIVE_FOLDER_ID;
-
-  if (!expectedParentId) {
-    throw new Error("GOOGLE_ONBOARDING_DRIVE_FOLDER_ID is missing.");
-  }
+  const expectedParentId = getOnboardingParentFolderId();
 
   if (!isValidDriveId(rootFolderId)) {
     throw new Error("Invalid onboarding Google Drive folder ID.");
@@ -713,6 +722,15 @@ async function verifyUploadedFiles(
   throw new Error(
     `Ανέβηκαν ${lastVerified.length} από ${expectedFileCount} αρχεία. Παρακαλώ δοκιμάστε ξανά.`
   );
+}
+
+async function cleanupUploadBatch(rootFolderId: string) {
+  const drive = await verifyRootFolder(rootFolderId);
+
+  await drive.files.delete({
+    fileId: rootFolderId,
+    supportsAllDrives: true,
+  });
 }
 
 function validateOnboardingPayload(
@@ -1133,6 +1151,21 @@ export async function POST(request: Request) {
         },
         { status: 201 }
       );
+    }
+
+    if (action === "cleanup-upload-batch") {
+      const folderId = String(body.folderId ?? "").trim();
+
+      if (!folderId) {
+        return NextResponse.json(
+          { success: false, error: "Missing onboarding upload folder ID." },
+          { status: 400 }
+        );
+      }
+
+      await cleanupUploadBatch(folderId);
+
+      return NextResponse.json({ success: true });
     }
 
     if (action === "submit-onboarding") {

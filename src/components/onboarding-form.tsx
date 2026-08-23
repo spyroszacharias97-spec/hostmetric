@@ -1,40 +1,28 @@
 "use client";
 
-import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import { Plus, Trash2, Upload, FileImage } from "lucide-react";
 
 
-function SelectedFilePreview({ file }: { file: File }) {
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+type SelectedPhoto = {
+  file: File;
+  previewUrl: string;
+};
 
-  useEffect(() => {
-    if (!file.type.startsWith("image/")) {
-      setPreviewUrl(null);
-      return;
-    }
-
-    const objectUrl = URL.createObjectURL(file);
-    setPreviewUrl(objectUrl);
-
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [file]);
-
-  if (!previewUrl) {
-    return (
-      <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-100">
-        <FileImage size={24} className="text-blue-600" />
-      </div>
-    );
-  }
-
-  return (
-    <img
-      src={previewUrl}
-      alt={file.name}
-      className="h-20 w-20 shrink-0 rounded-xl border border-slate-200 object-cover"
-    />
-  );
-}
+const MAX_FILES_PER_GROUP = 50;
+const MAX_TOTAL_FILES = 300;
+const MAX_PHOTO_SIZE = 10 * 1024 * 1024;
+const ALLOWED_PHOTO_TYPES = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+]);
+const ALLOWED_SUPPORTING_FILE_TYPES = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "application/pdf",
+]);
 
 const euCountries = [
   "Austria",
@@ -397,7 +385,6 @@ type FormData = {
 
   // STEP 5
   currency: string;
-  minimumNightlyRate: string;
   cleaningFee: string;
   cleaningFeeType: string;
   securityDeposit: string;
@@ -411,10 +398,7 @@ type FormData = {
   sameDayBooking: string;
 
   cancellationPreference: string;
-  prepaymentPreference: string;
   noShowPolicy: string;
-  instantBookingPreference: string;
-
   breakfastPricing: string;
   breakfastPrice: string;
 
@@ -590,7 +574,6 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
     // STEP 5
     currency: "EUR",
-    minimumNightlyRate: "",
     cleaningFee: "",
     cleaningFeeType: "",
     securityDeposit: "",
@@ -604,10 +587,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     sameDayBooking: "",
 
     cancellationPreference: "",
-    prepaymentPreference: "",
     noShowPolicy: "",
-    instantBookingPreference: "",
-
     breakfastPricing: "",
     breakfastPrice: "",
 
@@ -680,22 +660,22 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
   >({});
 
   const [propertyPhotoGroups, setPropertyPhotoGroups] =
-    useState<Record<string, File[]>>({});
+    useState<Record<string, SelectedPhoto[]>>({});
 
   const [unitPhotoGroups, setUnitPhotoGroups] =
-    useState<Record<number, Record<string, File[]>>>({});
+    useState<Record<number, Record<string, SelectedPhoto[]>>>({});
 
   const [accessibilityPhotoGroups, setAccessibilityPhotoGroups] =
-    useState<Record<string, File[]>>({});
+    useState<Record<string, SelectedPhoto[]>>({});
 
   const [unitAccessibilityPhotoGroups, setUnitAccessibilityPhotoGroups] =
-    useState<Record<number, Record<string, File[]>>>({});
+    useState<Record<number, Record<string, SelectedPhoto[]>>>({});
 
   const [checkInPhotoGroups, setCheckInPhotoGroups] =
-    useState<Record<string, File[]>>({});
+    useState<Record<string, SelectedPhoto[]>>({});
 
   const [floorPlanFiles, setFloorPlanFiles] =
-    useState<File[]>([]);
+    useState<SelectedPhoto[]>([]);
 
   const [frontEndSubmissionComplete, setFrontEndSubmissionComplete] =
     useState(false);
@@ -708,27 +688,96 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
   } | null>(null);
 
   const appendFiles = (
-    current: File[],
-    incoming: FileList | null
+    current: SelectedPhoto[],
+    incoming: FileList | null,
+    allowPdf = false
   ) => {
     if (!incoming) {
       return current;
     }
 
-    const newFiles = Array.from(incoming);
+    const incomingFiles = Array.from(incoming);
+    const allowedTypes = allowPdf
+      ? ALLOWED_SUPPORTING_FILE_TYPES
+      : ALLOWED_PHOTO_TYPES;
 
-    return [...current, ...newFiles];
+    const remainingGroupSlots =
+      MAX_FILES_PER_GROUP - current.length;
+
+    const remainingTotalSlots =
+      MAX_TOTAL_FILES - totalSelectedUploadFiles;
+
+    const availableSlots = Math.max(
+      0,
+      Math.min(remainingGroupSlots, remainingTotalSlots)
+    );
+
+    if (availableSlots <= 0) {
+      setSubmissionError(
+        totalSelectedUploadFiles >= MAX_TOTAL_FILES
+          ? `You can upload up to ${MAX_TOTAL_FILES} files in total.`
+          : `You can upload up to ${MAX_FILES_PER_GROUP} files in this section.`
+      );
+
+      return current;
+    }
+
+    const filesToAdd = incomingFiles.slice(0, availableSlots);
+
+    for (const file of filesToAdd) {
+      if (!allowedTypes.has(file.type)) {
+        setSubmissionError(
+          allowPdf
+            ? "Only JPG, PNG, WEBP and PDF files are allowed in this section."
+            : "Only JPG, PNG and WEBP images are allowed."
+        );
+        return current;
+      }
+
+      if (file.size > MAX_PHOTO_SIZE) {
+        setSubmissionError(
+          `Each file must be smaller than ${
+            MAX_PHOTO_SIZE / 1024 / 1024
+          } MB.`
+        );
+        return current;
+      }
+    }
+
+    const selected = filesToAdd.map((file) => ({
+      file,
+      previewUrl: file.type.startsWith("image/")
+        ? URL.createObjectURL(file)
+        : "",
+    }));
+
+    if (incomingFiles.length > availableSlots) {
+      setSubmissionError(
+        `Only the first ${availableSlots} file${
+          availableSlots === 1 ? "" : "s"
+        } were added because the upload limit was reached.`
+      );
+    } else {
+      setSubmissionError("");
+    }
+
+    return [...current, ...selected];
   };
 
   const removeFileAtIndex = (
-    files: File[],
+    files: SelectedPhoto[],
     index: number
   ) => {
+    const removed = files[index];
+
+    if (removed?.previewUrl) {
+      URL.revokeObjectURL(removed.previewUrl);
+    }
+
     return files.filter(
       (_, fileIndex) => fileIndex !== index
     );
   };
-
 
   const propertyUploadCategories = [
     { key: "property_exterior", label: "Exterior", description: "Building exterior and street-facing views." },
@@ -780,18 +829,18 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
   ];
 
   const addFilesToGroup = (
-    setter: Dispatch<SetStateAction<Record<string, File[]>>>,
+    setter: Dispatch<SetStateAction<Record<string, SelectedPhoto[]>>>,
     groupKey: string,
     incoming: FileList | null
   ) => {
     setter((previous) => ({
       ...previous,
-      [groupKey]: appendFiles(previous[groupKey] || [], incoming).slice(0, 50),
+      [groupKey]: appendFiles(previous[groupKey] || [], incoming).slice(0, MAX_FILES_PER_GROUP),
     }));
   };
 
   const removeFileFromGroup = (
-    setter: Dispatch<SetStateAction<Record<string, File[]>>>,
+    setter: Dispatch<SetStateAction<Record<string, SelectedPhoto[]>>>,
     groupKey: string,
     index: number
   ) => {
@@ -811,7 +860,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
   }: {
     label: string;
     description: string;
-    files: File[];
+    files: SelectedPhoto[];
     accept?: string;
     onAdd: (files: FileList | null) => void;
     onRemove: (index: number) => void;
@@ -823,7 +872,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           <p className="mt-1 text-sm leading-6 text-slate-600">{t(description)}</p>
           {files.length > 0 && (
             <p className="mt-2 text-sm font-bold text-blue-600">
-              {files.length} / 50 {t("files selected")}
+              {files.length} / {MAX_FILES_PER_GROUP} {t("files selected")}
             </p>
           )}
         </div>
@@ -848,17 +897,27 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
         <div className="mt-4 grid gap-2 md:grid-cols-2">
           {files.map((file, index) => (
             <div
-              key={`${file.name}-${file.size}-${file.lastModified}-${index}`}
+              key={`${file.file.name}-${file.file.size}-${file.file.lastModified}-${index}`}
               className="flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm"
             >
-              <SelectedFilePreview file={file} />
+              {file.previewUrl ? (
+                <img
+                  src={file.previewUrl}
+                  alt={file.file.name}
+                  className="h-20 w-20 shrink-0 rounded-xl border border-slate-200 object-cover"
+                />
+              ) : (
+                <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-100">
+                  <FileImage size={24} className="text-blue-600" />
+                </div>
+              )}
 
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-bold text-slate-800">
-                  {file.name}
+                  {file.file.name}
                 </p>
                 <p className="mt-1 text-xs text-slate-500">
-                  {(file.size / 1024 / 1024).toFixed(2)} MB
+                  {(file.file.size / 1024 / 1024).toFixed(2)} MB
                 </p>
               </div>
 
@@ -1620,9 +1679,9 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
       const pendingUploads: PendingUpload[] = [];
 
       Object.entries(propertyPhotoGroups).forEach(([fileGroup, files]) => {
-        files.forEach((file) => {
+        files.forEach((selected) => {
           pendingUploads.push({
-            file,
+            file: selected.file,
             fileGroup,
             unitClientId: null,
             unitName: null,
@@ -1635,9 +1694,9 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
         const unit = units.find((item) => item.id === unitClientId);
 
         Object.entries(groups).forEach(([fileGroup, files]) => {
-          files.forEach((file) => {
+          files.forEach((selected) => {
             pendingUploads.push({
-              file,
+              file: selected.file,
               fileGroup,
               unitClientId,
               unitName: unit?.name || `Unit ${unitClientId}`,
@@ -1647,9 +1706,9 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
       });
 
       Object.entries(accessibilityPhotoGroups).forEach(([fileGroup, files]) => {
-        files.forEach((file) => {
+        files.forEach((selected) => {
           pendingUploads.push({
-            file,
+            file: selected.file,
             fileGroup,
             unitClientId: null,
             unitName: null,
@@ -1662,9 +1721,9 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
         const unit = units.find((item) => item.id === unitClientId);
 
         Object.entries(groups).forEach(([fileGroup, files]) => {
-          files.forEach((file) => {
+          files.forEach((selected) => {
             pendingUploads.push({
-              file,
+              file: selected.file,
               fileGroup,
               unitClientId,
               unitName: unit?.name || `Unit ${unitClientId}`,
@@ -1674,9 +1733,9 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
       });
 
       Object.entries(checkInPhotoGroups).forEach(([fileGroup, files]) => {
-        files.forEach((file) => {
+        files.forEach((selected) => {
           pendingUploads.push({
-            file,
+            file: selected.file,
             fileGroup,
             unitClientId: null,
             unitName: null,
@@ -1684,9 +1743,9 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
         });
       });
 
-      floorPlanFiles.forEach((file) => {
+      floorPlanFiles.forEach((selected) => {
         pendingUploads.push({
-          file,
+          file: selected.file,
           fileGroup: "floor_plan",
           unitClientId: null,
           unitName: null,
@@ -5958,7 +6017,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
             </p>
 
             <h2 className="mt-3 text-3xl font-bold">
-              {t("Cancellation and booking confirmation")}
+              {t("Cancellation & No-Show Policy")}
             </h2>
 
 
@@ -6016,52 +6075,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
               </div>
 
 
-              <div>
-
-                <label className="mb-2 block text-sm font-bold">
-                  {t("Prepayment Preference")}
-                </label>
-
-                <select
-                  value={
-                    formData.prepaymentPreference
-                  }
-                  onChange={(event) =>
-                    updateField(
-                      "prepaymentPreference",
-                      event.target.value
-                    )
-                  }
-                  className={inputClass(
-                    "prepaymentPreference"
-                  )}
-                >
-                  <option value="">
-                    {t("Select if known")}
-                  </option>
-
-                  <option value="none">
-                    {t("No Prepayment")}
-                  </option>
-
-                  <option value="partial">
-                    {t("Partial Prepayment")}
-                  </option>
-
-                  <option value="full">
-                    {t("Full Prepayment")}
-                  </option>
-
-                  <option value="platform-managed">
-                    {t("Managed by Booking Platform")}
-                  </option>
-
-                  <option value="not-sure">
-                    {t("I&apos;m Not Sure")}
-                  </option>
-                </select>
-
-              </div>
+              
 
 
               <div>
@@ -6104,48 +6118,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
               </div>
 
 
-              <div>
-
-                <label className="mb-2 block text-sm font-bold">
-                  {t("Booking Confirmation")}
-                </label>
-
-                <select
-                  value={
-                    formData.instantBookingPreference
-                  }
-                  onChange={(event) =>
-                    updateField(
-                      "instantBookingPreference",
-                      event.target.value
-                    )
-                  }
-                  className={inputClass(
-                    "instantBookingPreference"
-                  )}
-                >
-                  <option value="">
-                    {t("Select")}
-                  </option>
-
-                  <option value="instant">
-                    {t("Instant Booking")}
-                  </option>
-
-                  <option value="request">
-                    {t("Request / Owner Approval")}
-                  </option>
-
-                  <option value="recommend">
-                    {t("Let HostMetric Recommend")}
-                  </option>
-                </select>
-
-                <ErrorMessage
-                  field="instantBookingPreference"
-                />
-
-              </div>
+              
 
             </div>
 
@@ -6652,7 +6625,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                               [category.key]: appendFiles(
                                 previous[unit.id]?.[category.key] || [],
                                 files
-                              ).slice(0, 50),
+                              ).slice(0, MAX_FILES_PER_GROUP),
                             },
                           }));
                         },
@@ -6755,7 +6728,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                                     [category.key]: appendFiles(
                                       previous[unit.id]?.[category.key] || [],
                                       files
-                                    ).slice(0, 50),
+                                    ).slice(0, MAX_FILES_PER_GROUP),
                                   },
                                 }));
                               },
@@ -6835,7 +6808,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                 accept: "image/jpeg,image/png,image/webp,application/pdf",
                 onAdd: (files) =>
                   setFloorPlanFiles((previous) =>
-                    appendFiles(previous, files).slice(0, 50)
+                    appendFiles(previous, files, true).slice(0, MAX_FILES_PER_GROUP)
                   ),
                 onRemove: (index) =>
                   setFloorPlanFiles((previous) =>
