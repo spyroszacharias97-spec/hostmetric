@@ -1,7 +1,40 @@
 "use client";
 
-import { useState, type Dispatch, type SetStateAction } from "react";
+import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 import { Plus, Trash2, Upload, FileImage } from "lucide-react";
+
+
+function SelectedFilePreview({ file }: { file: File }) {
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!file.type.startsWith("image/")) {
+      setPreviewUrl(null);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(file);
+    setPreviewUrl(objectUrl);
+
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [file]);
+
+  if (!previewUrl) {
+    return (
+      <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-100">
+        <FileImage size={24} className="text-blue-600" />
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={previewUrl}
+      alt={file.name}
+      className="h-20 w-20 shrink-0 rounded-xl border border-slate-200 object-cover"
+    />
+  );
+}
 
 const euCountries = [
   "Austria",
@@ -628,7 +661,8 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
 
   const [selectedPropertyFacilities, setSelectedPropertyFacilities] = useState<string[]>([]);
-  const [selectedAccessibility, setSelectedAccessibility] = useState<string[]>([]);
+  const [selectedPropertyAccessibility, setSelectedPropertyAccessibility] = useState<string[]>([]);
+  const [unitAccessibility, setUnitAccessibility] = useState<Record<number, string[]>>({});
   const [unitAmenities, setUnitAmenities] = useState<Record<number, string[]>>({});
 
   const [unitPricing, setUnitPricing] = useState<
@@ -637,6 +671,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
       {
         currentBaseRate: string;
         weekendRate: string;
+        minimumNightlyRate: string;
         minimumStay: string;
         extraGuestFee: string;
         childFee: string;
@@ -652,6 +687,9 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
   const [accessibilityPhotoGroups, setAccessibilityPhotoGroups] =
     useState<Record<string, File[]>>({});
+
+  const [unitAccessibilityPhotoGroups, setUnitAccessibilityPhotoGroups] =
+    useState<Record<number, Record<string, File[]>>>({});
 
   const [checkInPhotoGroups, setCheckInPhotoGroups] =
     useState<Record<string, File[]>>({});
@@ -715,18 +753,24 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     { key: "unit_views", label: "Unit Views", description: "Views visible from this room or unit." },
   ];
 
-  const accessibilityUploadCategories = [
-    { key: "accessibility_step_free_entrance", feature: "Step-Free Guest Entrance", label: "Step-Free Guest Entrance", description: "Show the complete step-free route to the guest entrance." },
-    { key: "accessibility_parking", feature: "Accessible Parking Space", label: "Accessible Parking", description: "Show the accessible parking space and route from parking." },
-    { key: "accessibility_entrance_door_width", feature: "Wide Entrance Doorway", label: "Entrance Door Width", description: "Include clear doorway-width evidence; measurement photos are especially useful." },
-    { key: "accessibility_lit_path", feature: "Well-Lit Path to Guest Entrance", label: "Lit Path to Entrance", description: "Show the lighting along the route to the guest entrance, ideally after dark." },
-    { key: "accessibility_lift", feature: "Lift / Elevator Access", label: "Lift / Elevator Access", description: "Show the lift, doors and route to the accommodation." },
-    { key: "accessibility_bedroom_step_free", feature: "Step-Free Bedroom Access", label: "Step-Free Bedroom Access", description: "Show the route and entrance into the bedroom/sleeping area." },
-    { key: "accessibility_bathroom_step_free", feature: "Step-Free Bathroom Access", label: "Step-Free Bathroom Access", description: "Show the route and entrance into the bathroom." },
-    { key: "accessibility_room_door_width", feature: "Wide Bedroom / Room Doorway", label: "Bedroom / Room Door Width", description: "Show doorway-width evidence for the accessible room or bedroom." },
-    { key: "accessibility_bathroom_door_width", feature: "Wide Bathroom Doorway", label: "Bathroom Door Width", description: "Show doorway-width evidence for the accessible bathroom." },
-    { key: "accessibility_grab_rails", feature: "Grab Rails in Bathroom", label: "Bathroom Grab Rails", description: "Show the position and type of grab rails clearly." },
-    { key: "accessibility_roll_in_shower", feature: "Roll-In / Step-Free Shower", label: "Roll-In / Step-Free Shower", description: "Show the shower entrance, floor level and usable shower space." },
+  const propertyAccessibilityUploadCategories = [
+    { key: "accessibility_parking", feature: "Accessible Parking Space", label: "Accessible Parking", description: "Show the accessible parking space and the common route from parking." },
+    { key: "accessibility_lit_path", feature: "Well-Lit Path to Guest Entrance", label: "Lit Common / Arrival Path", description: "Show lighting along the shared arrival route, ideally after dark." },
+    { key: "accessibility_lift", feature: "Lift / Elevator Access", label: "Shared Lift / Elevator Access", description: "Show the shared lift, its doors and the common access route." },
+  ];
+
+  const unitAccessibilityUploadCategories = [
+    { key: "accessibility_step_free_entrance", feature: "Step-Free Guest Entrance", label: "Step-Free Unit Entrance", description: "Show the complete step-free route to this specific unit entrance." },
+    { key: "accessibility_parking", feature: "Accessible Parking Space", label: "Accessible Parking for This Unit", description: "Use this when parking/access differs for this specific unit or house." },
+    { key: "accessibility_entrance_door_width", feature: "Wide Entrance Doorway", label: "Unit Entrance Door Width", description: "Include clear measurement photos of this unit's entrance doorway." },
+    { key: "accessibility_lit_path", feature: "Well-Lit Path to Guest Entrance", label: "Lit Path to This Unit", description: "Show lighting along the actual route to this specific unit, ideally after dark." },
+    { key: "accessibility_lift", feature: "Lift / Elevator Access", label: "Lift / Elevator Access to This Unit", description: "Show the lift and the route from it to this unit." },
+    { key: "accessibility_bedroom_step_free", feature: "Step-Free Bedroom Access", label: "Step-Free Bedroom Access", description: "Show the route and entrance into the bedroom/sleeping area of this unit." },
+    { key: "accessibility_bathroom_step_free", feature: "Step-Free Bathroom Access", label: "Step-Free Bathroom Access", description: "Show the route and entrance into the bathroom of this unit." },
+    { key: "accessibility_room_door_width", feature: "Wide Bedroom / Room Doorway", label: "Bedroom / Room Door Width", description: "Show doorway-width measurements for the relevant room in this unit." },
+    { key: "accessibility_bathroom_door_width", feature: "Wide Bathroom Doorway", label: "Bathroom Door Width", description: "Show doorway-width measurements for this unit's bathroom." },
+    { key: "accessibility_grab_rails", feature: "Grab Rails in Bathroom", label: "Bathroom Grab Rails", description: "Show the position and type of grab rails in this unit clearly." },
+    { key: "accessibility_roll_in_shower", feature: "Roll-In / Step-Free Shower", label: "Roll-In / Step-Free Shower", description: "Show the shower entrance, floor level and usable shower space in this unit." },
   ];
 
   const checkInUploadCategories = [
@@ -804,14 +848,18 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
         <div className="mt-4 grid gap-2 md:grid-cols-2">
           {files.map((file, index) => (
             <div
-              key={`${file.name}-${file.size}-${index}`}
-              className="flex items-center justify-between rounded-xl bg-white px-3 py-2 shadow-sm"
+              key={`${file.name}-${file.size}-${file.lastModified}-${index}`}
+              className="flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm"
             >
-              <div className="flex min-w-0 items-center gap-2">
-                <FileImage size={17} className="shrink-0 text-blue-600" />
-                <span className="truncate text-xs font-semibold text-slate-700">
+              <SelectedFilePreview file={file} />
+
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-bold text-slate-800">
                   {file.name}
-                </span>
+                </p>
+                <p className="mt-1 text-xs text-slate-500">
+                  {(file.size / 1024 / 1024).toFixed(2)} MB
+                </p>
               </div>
 
               <button
@@ -820,7 +868,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                 className="cursor-pointer rounded-lg p-2 text-red-500 transition hover:bg-red-50"
                 aria-label={t("Remove file")}
               >
-                <Trash2 size={16} />
+                <Trash2 size={17} />
               </button>
             </div>
           ))}
@@ -836,6 +884,15 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     ) +
     Object.values(accessibilityPhotoGroups).reduce(
       (total, files) => total + files.length,
+      0
+    ) +
+    Object.values(unitAccessibilityPhotoGroups).reduce(
+      (grandTotal, groups) =>
+        grandTotal +
+        Object.values(groups).reduce(
+          (total, files) => total + files.length,
+          0
+        ),
       0
     ) +
     Object.values(checkInPhotoGroups).reduce(
@@ -859,6 +916,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     field:
       | "currentBaseRate"
       | "weekendRate"
+      | "minimumNightlyRate"
       | "minimumStay"
       | "extraGuestFee"
       | "childFee",
@@ -871,6 +929,8 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           previous[unitId]?.currentBaseRate || "",
         weekendRate:
           previous[unitId]?.weekendRate || "",
+        minimumNightlyRate:
+          previous[unitId]?.minimumNightlyRate || "",
         minimumStay:
           previous[unitId]?.minimumStay || "",
         extraGuestFee:
@@ -911,7 +971,13 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     "Fire Extinguishers",
   ];
 
-  const accessibilityFeatures = [
+  const propertyAccessibilityFeatures = [
+    "Accessible Parking Space",
+    "Well-Lit Path to Guest Entrance",
+    "Lift / Elevator Access",
+  ];
+
+  const unitAccessibilityFeatures = [
     "Step-Free Guest Entrance",
     "Accessible Parking Space",
     "Wide Entrance Doorway",
@@ -968,12 +1034,25 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     );
   };
 
-  const toggleAccessibility = (feature: string) => {
-    setSelectedAccessibility((previous) =>
+  const togglePropertyAccessibility = (feature: string) => {
+    setSelectedPropertyAccessibility((previous) =>
       previous.includes(feature)
         ? previous.filter((item) => item !== feature)
         : [...previous, feature]
     );
+  };
+
+  const toggleUnitAccessibility = (unitId: number, feature: string) => {
+    setUnitAccessibility((previous) => {
+      const current = previous[unitId] || [];
+
+      return {
+        ...previous,
+        [unitId]: current.includes(feature)
+          ? current.filter((item) => item !== feature)
+          : [...current, feature],
+      };
+    });
   };
 
   const toggleUnitAmenity = (
@@ -1578,6 +1657,22 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
         });
       });
 
+      Object.entries(unitAccessibilityPhotoGroups).forEach(([unitIdText, groups]) => {
+        const unitClientId = Number(unitIdText);
+        const unit = units.find((item) => item.id === unitClientId);
+
+        Object.entries(groups).forEach(([fileGroup, files]) => {
+          files.forEach((file) => {
+            pendingUploads.push({
+              file,
+              fileGroup,
+              unitClientId,
+              unitName: unit?.name || `Unit ${unitClientId}`,
+            });
+          });
+        });
+      });
+
       Object.entries(checkInPhotoGroups).forEach(([fileGroup, files]) => {
         files.forEach((file) => {
           pendingUploads.push({
@@ -1716,7 +1811,9 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           units,
           selectedPlatforms,
           selectedPropertyFacilities,
-          selectedAccessibility,
+          selectedAccessibility: selectedPropertyAccessibility,
+          selectedPropertyAccessibility,
+          unitAccessibility,
           unitAmenities,
           unitPricing,
           driveFolderId,
@@ -5054,59 +5151,101 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
 
           {/* =================================================
-              ACCESSIBILITY
+              ACCESSIBILITY — PROPERTY + UNIT LEVEL
           ================================================= */}
 
           <div className="mt-14 border-t border-slate-200 pt-10">
-
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">
               {t("Accessibility")}
             </p>
 
             <h2 className="mt-3 text-3xl font-bold">
-              {t("Accessibility features")}
+              {t("Accessibility by property and accommodation type")}
             </h2>
 
-            <p className="mt-3 max-w-3xl leading-7 text-slate-600">
-              {t("Select only features that genuinely apply. We can request supporting accessibility photographs later in the photo step.")}
-            
-</p>
+            <p className="mt-3 max-w-4xl leading-7 text-slate-600">
+              {t("Shared access features and unit-specific accessibility are recorded separately. This matters when different houses, apartments or room types have different entrances, bathrooms, door widths or accessibility features.")}
+            </p>
 
+            <div className="mt-8 rounded-[28px] border border-slate-200 bg-slate-50 p-7 md:p-9">
+              <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-600">
+                {t("Property / Shared Access")}
+              </p>
+              <h3 className="mt-2 text-2xl font-bold">
+                {t("Features that apply to the property or shared arrival areas")}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                {t("Select these only when they genuinely apply to shared areas or to the property as a whole. You can specify different accessibility features for every unit below.")}
+              </p>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {propertyAccessibilityFeatures.map((feature) => {
+                  const selected = selectedPropertyAccessibility.includes(feature);
 
-              {accessibilityFeatures.map((feature) => {
-                const selected =
-                  selectedAccessibility.includes(
-                    feature
+                  return (
+                    <button
+                      key={feature}
+                      type="button"
+                      onClick={() => togglePropertyAccessibility(feature)}
+                      className={`cursor-pointer rounded-2xl border px-5 py-4 text-left font-semibold transition ${
+                        selected
+                          ? "border-blue-600 bg-white text-blue-700 shadow-sm"
+                          : "border-slate-200 bg-white text-slate-700 hover:border-blue-300"
+                      }`}
+                    >
+                      <span className="mr-2">{selected ? "✓" : "+"}</span>
+                      {t(feature)}
+                    </button>
                   );
-
-                return (
-                  <button
-                    key={feature}
-                    type="button"
-                    onClick={() =>
-                      toggleAccessibility(feature)
-                    }
-                    className={`cursor-pointer rounded-2xl border px-5 py-4 text-left font-semibold transition ${
-                      selected
-                        ? "border-blue-600 bg-blue-50 text-blue-700 shadow-sm"
-                        : "border-slate-200 bg-white text-slate-700 hover:border-blue-300"
-                    }`}
-                  >
-                    <span className="mr-2">
-                      {selected ? "✓" : "+"}
-                    </span>
-
-                    {t(feature)}
-                  </button>
-                );
-              })}
-
+                })}
+              </div>
             </div>
 
-          </div>
+            <div className="mt-8 space-y-8">
+              {units.map((unit, index) => {
+                const selectedFeatures = unitAccessibility[unit.id] || [];
 
+                return (
+                  <div
+                    key={unit.id}
+                    className="rounded-[28px] border border-slate-200 bg-slate-50 p-7 md:p-9"
+                  >
+                    <p className="text-sm font-bold uppercase tracking-[0.16em] text-violet-600">
+                      {t("Unit Type")} {index + 1}
+                    </p>
+                    <h3 className="mt-2 text-2xl font-bold">
+                      {unit.name || t("Unnamed Room / Unit Type")}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">
+                      {t("Select accessibility features for this accommodation type only. For example, one house may have a step-free entrance or grab rails while another does not.")}
+                    </p>
+
+                    <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                      {unitAccessibilityFeatures.map((feature) => {
+                        const selected = selectedFeatures.includes(feature);
+
+                        return (
+                          <button
+                            key={feature}
+                            type="button"
+                            onClick={() => toggleUnitAccessibility(unit.id, feature)}
+                            className={`cursor-pointer rounded-2xl border px-5 py-4 text-left font-semibold transition ${
+                              selected
+                                ? "border-violet-600 bg-white text-violet-700 shadow-sm"
+                                : "border-slate-200 bg-white text-slate-700 hover:border-violet-300"
+                            }`}
+                          >
+                            <span className="mr-2">{selected ? "✓" : "+"}</span>
+                            {t(feature)}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
           {/* NAVIGATION */}
 
@@ -5172,99 +5311,39 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
 
           {/* =================================================
-              PRICING APPROACH
+              PRICING CURRENCY
           ================================================= */}
 
           <div className="mt-12">
-
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">
-              {t("Smart Pricing Setup")}
+              {t("Pricing Currency")}
             </p>
 
             <h2 className="mt-3 text-3xl font-bold">
-              {t("Set your minimum nightly price")}
+              {t("Currency used for the rates below")}
             </h2>
 
             <p className="mt-3 max-w-4xl leading-7 text-slate-600">
-              {t("HostMetric manages and continuously optimizes pricing using AI, pricing algorithms, market demand, seasonality, booking behaviour and property performance. You only need to tell us the minimum nightly price you are comfortable accepting.")}
+              {t("Nightly prices can differ between accommodation types, so minimum and maximum prices are entered separately for each unit below.")}
             </p>
 
-            <div className="mt-8 grid gap-6 md:grid-cols-2">
-
-              <div>
-
-                <label className="mb-2 block text-sm font-bold text-slate-700">
-                  {t("Currency")}
-                </label>
-
-                <select
-                  value={formData.currency}
-                  onChange={(event) =>
-                    updateField(
-                      "currency",
-                      event.target.value
-                    )
-                  }
-                  className={inputClass("currency")}
-                >
-                  <option value="">
-                    {t("Select currency")}
-                  </option>
-
-                  <option value="EUR">
-                    {t("EUR — Euro")}
-                  </option>
-
-                  <option value="GBP">
-                    {t("GBP — British Pound")}
-                  </option>
-
-                  <option value="USD">
-                    {t("USD — US Dollar")}
-                  </option>
-
-                </select>
-
-                <ErrorMessage field="currency" />
-
-              </div>
-
-
-              <div>
-
-                <label className="mb-2 block text-sm font-bold text-slate-700">
-                  {t("Minimum Nightly Price")}
-                </label>
-
-                <input
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  value={formData.minimumNightlyRate}
-                  onChange={(event) =>
-                    updateField(
-                      "minimumNightlyRate",
-                      event.target.value
-                    )
-                  }
-                  placeholder={t("Example: 80")}
-                  className={inputClass(
-                    "minimumNightlyRate"
-                  )}
-                />
-
-                <p className="mt-2 text-sm leading-6 text-slate-500">
-                  {t("This is your minimum acceptable nightly price, not your standard selling price. HostMetric may price above this amount whenever market conditions and demand support a higher rate.")}
-                </p>
-
-                <ErrorMessage field="minimumNightlyRate" />
-
-              </div>
-
+            <div className="mt-7 max-w-sm">
+              <label className="mb-2 block text-sm font-bold text-slate-700">
+                {t("Currency")}
+              </label>
+              <select
+                value={formData.currency}
+                onChange={(event) => updateField("currency", event.target.value)}
+                className={inputClass("currency")}
+              >
+                <option value="">{t("Select currency")}</option>
+                <option value="EUR">{t("EUR — Euro")}</option>
+                <option value="GBP">{t("GBP — British Pound")}</option>
+                <option value="USD">{t("USD — US Dollar")}</option>
+              </select>
+              <ErrorMessage field="currency" />
             </div>
-
           </div>
-
 
           {/* =================================================
               UNIT PRICING
@@ -5294,6 +5373,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                   unitPricing[unit.id] || {
                     currentBaseRate: "",
                     weekendRate: "",
+                    minimumNightlyRate: "",
                     minimumStay: "",
                     extraGuestFee: "",
                     childFee: "",
@@ -5381,6 +5461,37 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
                       </div>
 
+
+                      <div>
+
+                        <label className="mb-2 block text-sm font-bold">
+                          {t("Minimum Acceptable Nightly Rate")}
+                        </label>
+
+                        <input
+                          type="number"
+                          min="0"
+                          step="0.01"
+                          value={pricing.minimumNightlyRate}
+                          onChange={(event) =>
+                            updateUnitPricing(
+                              unit.id,
+                              "minimumNightlyRate",
+                              event.target.value
+                            )
+                          }
+                          placeholder={t("Optional")}
+                          className={inputClass(`pricing-${unit.id}-minimum-rate`)}
+                        />
+
+                        <p className="mt-2 text-xs leading-5 text-slate-500">
+                          {t("The lowest nightly rate you would normally be comfortable accepting for this unit type.")}
+                        </p>
+
+                      </div>
+
+
+                      
 
                       <div>
 
@@ -6567,10 +6678,11 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
 
           {/* =================================================
-              ACCESSIBILITY EVIDENCE
+              ACCESSIBILITY EVIDENCE — PROPERTY + UNIT LEVEL
           ================================================= */}
 
-          {selectedAccessibility.length > 0 && (
+          {(selectedPropertyAccessibility.length > 0 ||
+            Object.values(unitAccessibility).some((features) => features.length > 0)) && (
             <div className="mt-14 border-t border-slate-200 pt-10">
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-violet-600">
                 {t("Accessibility Evidence")}
@@ -6581,27 +6693,93 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
               </h2>
 
               <p className="mt-3 max-w-4xl leading-7 text-slate-600">
-                {t("Upload evidence separately for each selected feature. Door-width categories are intended for clear measurement photos; the lit-path category is intended to show lighting along the route to the guest entrance.")}
+                {t("Property-level evidence and unit-specific evidence are kept separate so photographs are attached to the correct house, apartment, room or shared access area.")}
               </p>
 
-              <div className="mt-8 grid gap-4 md:grid-cols-2">
-                {accessibilityUploadCategories
-                  .filter((category) => selectedAccessibility.includes(category.feature))
-                  .map((category) =>
-                    renderUploadGroup({
-                      label: category.label,
-                      description: category.description,
-                      files: accessibilityPhotoGroups[category.key] || [],
-                      onAdd: (files) =>
-                        addFilesToGroup(setAccessibilityPhotoGroups, category.key, files),
-                      onRemove: (index) =>
-                        removeFileFromGroup(setAccessibilityPhotoGroups, category.key, index),
-                    })
-                  )}
+              {selectedPropertyAccessibility.length > 0 && (
+                <div className="mt-8 rounded-[28px] border border-slate-200 bg-slate-50 p-7 md:p-9">
+                  <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-600">
+                    {t("Property / Shared Accessibility")}
+                  </p>
+                  <div className="mt-6 grid gap-4 md:grid-cols-2">
+                    {propertyAccessibilityUploadCategories
+                      .filter((category) => selectedPropertyAccessibility.includes(category.feature))
+                      .map((category) =>
+                        renderUploadGroup({
+                          label: category.label,
+                          description: category.description,
+                          files: accessibilityPhotoGroups[category.key] || [],
+                          onAdd: (files) =>
+                            addFilesToGroup(setAccessibilityPhotoGroups, category.key, files),
+                          onRemove: (index) =>
+                            removeFileFromGroup(setAccessibilityPhotoGroups, category.key, index),
+                        })
+                      )}
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-8 space-y-8">
+                {units.map((unit, index) => {
+                  const selectedFeatures = unitAccessibility[unit.id] || [];
+
+                  if (selectedFeatures.length === 0) {
+                    return null;
+                  }
+
+                  return (
+                    <div
+                      key={unit.id}
+                      className="rounded-[28px] border border-violet-100 bg-violet-50/40 p-7 md:p-9"
+                    >
+                      <p className="text-sm font-bold uppercase tracking-[0.16em] text-violet-600">
+                        {t("Accessibility — Unit Type")} {index + 1}
+                      </p>
+                      <h3 className="mt-2 text-2xl font-bold">
+                        {unit.name || t("Unnamed Room / Unit Type")}
+                      </h3>
+
+                      <div className="mt-6 grid gap-4 md:grid-cols-2">
+                        {unitAccessibilityUploadCategories
+                          .filter((category) => selectedFeatures.includes(category.feature))
+                          .map((category) =>
+                            renderUploadGroup({
+                              label: category.label,
+                              description: category.description,
+                              files: unitAccessibilityPhotoGroups[unit.id]?.[category.key] || [],
+                              onAdd: (files) => {
+                                setUnitAccessibilityPhotoGroups((previous) => ({
+                                  ...previous,
+                                  [unit.id]: {
+                                    ...(previous[unit.id] || {}),
+                                    [category.key]: appendFiles(
+                                      previous[unit.id]?.[category.key] || [],
+                                      files
+                                    ).slice(0, 50),
+                                  },
+                                }));
+                              },
+                              onRemove: (fileIndex) => {
+                                setUnitAccessibilityPhotoGroups((previous) => ({
+                                  ...previous,
+                                  [unit.id]: {
+                                    ...(previous[unit.id] || {}),
+                                    [category.key]: removeFileAtIndex(
+                                      previous[unit.id]?.[category.key] || [],
+                                      fileIndex
+                                    ),
+                                  },
+                                }));
+                              },
+                            })
+                          )}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
-
 
           {/* =================================================
               CHECK-IN & ACCESS PHOTOS

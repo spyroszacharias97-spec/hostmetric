@@ -255,8 +255,21 @@ function getGroupFolderPath(file: UploadFileMetadata) {
   }
 
   if (ACCESSIBILITY_GROUPS[file.fileGroup]) {
+    if (Number.isInteger(file.unitClientId) && file.unitClientId) {
+      const unitLabel = `Unit-${file.unitClientId} - ${safeFolderName(
+        file.unitName || `Unit ${file.unitClientId}`
+      )}`;
+
+      return [
+        "03 Accessibility Evidence",
+        unitLabel,
+        ACCESSIBILITY_GROUPS[file.fileGroup],
+      ];
+    }
+
     return [
       "03 Accessibility Evidence",
+      "Property - Shared Access",
       ACCESSIBILITY_GROUPS[file.fileGroup],
     ];
   }
@@ -795,9 +808,18 @@ async function submitOnboarding(body: Record<string, unknown>) {
   const selectedPropertyFacilities = Array.isArray(body.selectedPropertyFacilities)
     ? body.selectedPropertyFacilities.map(String)
     : [];
-  const selectedAccessibility = Array.isArray(body.selectedAccessibility)
-    ? body.selectedAccessibility.map(String)
-    : [];
+  const selectedPropertyAccessibility = Array.isArray(
+    body.selectedPropertyAccessibility
+  )
+    ? body.selectedPropertyAccessibility.map(String)
+    : Array.isArray(body.selectedAccessibility)
+      ? body.selectedAccessibility.map(String)
+      : [];
+
+  const unitAccessibility =
+    body.unitAccessibility && typeof body.unitAccessibility === "object"
+      ? (body.unitAccessibility as Record<string, string[]>)
+      : {};
 
   const unitAmenities =
     body.unitAmenities && typeof body.unitAmenities === "object"
@@ -853,7 +875,8 @@ async function submitOnboarding(body: Record<string, unknown>) {
     ...formData,
     selectedPlatforms,
     selectedPropertyFacilities,
-    selectedAccessibility,
+    selectedPropertyAccessibility,
+    unitAccessibility,
     unitAmenities,
     unitPricing,
   };
@@ -933,6 +956,7 @@ async function submitOnboarding(body: Record<string, unknown>) {
     const unitSnapshot = {
       ...unit,
       amenities: unitAmenities[String(clientUnitId)] ?? [],
+      accessibility: unitAccessibility[String(clientUnitId)] ?? [],
       pricing: unitPricing[String(clientUnitId)] ?? {},
     };
 
@@ -1008,9 +1032,18 @@ async function submitOnboarding(body: Record<string, unknown>) {
   if (selectedPropertyFacilities.length > 0) {
     filledFields.push("Property facilities");
   }
-  if (selectedAccessibility.length > 0) {
-    filledFields.push("Accessibility features");
+  if (selectedPropertyAccessibility.length > 0) {
+    filledFields.push("Property / shared accessibility");
   }
+
+  const unitsWithAccessibility = Object.values(unitAccessibility).filter(
+    (features) => Array.isArray(features) && features.length > 0
+  ).length;
+
+  if (unitsWithAccessibility > 0) {
+    filledFields.push(`Unit accessibility (${unitsWithAccessibility} unit type${unitsWithAccessibility === 1 ? "" : "s"})`);
+  }
+
   if (units.length > 0) {
     filledFields.push("Room / unit details");
   }
@@ -1072,6 +1105,8 @@ export async function POST(request: Request) {
     const action = String(body.action ?? "");
 
     if (action === "create-upload-batch") {
+      console.log("[onboarding] create-upload-batch started");
+
       const fullName = String(body.fullName ?? "").trim();
       const email = String(body.email ?? "").trim();
       const propertyName = String(body.propertyName ?? "").trim();
@@ -1086,6 +1121,11 @@ export async function POST(request: Request) {
         files
       );
 
+      console.log("[onboarding] upload batch prepared", {
+        folderId: result.folderId,
+        uploadCount: result.uploads.length,
+      });
+
       return NextResponse.json(
         {
           success: true,
@@ -1096,7 +1136,15 @@ export async function POST(request: Request) {
     }
 
     if (action === "submit-onboarding") {
+      console.log("[onboarding] submit-onboarding started");
+
       const result = await submitOnboarding(body);
+
+      console.log("[onboarding] submit-onboarding completed", {
+        submissionId: result.submissionId,
+        uploadedFiles: result.uploadedFiles,
+        emailNotificationSent: result.emailNotificationSent,
+      });
 
       return NextResponse.json(
         {
