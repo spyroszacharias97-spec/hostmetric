@@ -391,7 +391,6 @@ type FormData = {
   localTaxKnown: string;
   localTaxDetails: string;
 
-  minimumStayDefault: string;
   maximumStay: string;
   advanceNotice: string;
   bookingWindow: string;
@@ -580,7 +579,6 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     localTaxKnown: "",
     localTaxDetails: "",
 
-    minimumStayDefault: "",
     maximumStay: "",
     advanceNotice: "",
     bookingWindow: "",
@@ -652,7 +650,6 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
         currentBaseRate: string;
         weekendRate: string;
         minimumNightlyRate: string;
-        minimumStay: string;
         extraGuestFee: string;
         childFee: string;
       }
@@ -689,14 +686,12 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
   const appendFiles = (
     current: SelectedPhoto[],
-    incoming: FileList | null,
+    incomingFiles: File[],
     allowPdf = false
   ) => {
-    if (!incoming) {
+    if (incomingFiles.length === 0) {
       return current;
     }
-
-    const incomingFiles = Array.from(incoming);
     const allowedTypes = allowPdf
       ? ALLOWED_SUPPORTING_FILE_TYPES
       : ALLOWED_PHOTO_TYPES;
@@ -831,7 +826,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
   const addFilesToGroup = (
     setter: Dispatch<SetStateAction<Record<string, SelectedPhoto[]>>>,
     groupKey: string,
-    incoming: FileList | null
+    incoming: File[]
   ) => {
     setter((previous) => ({
       ...previous,
@@ -862,7 +857,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     description: string;
     files: SelectedPhoto[];
     accept?: string;
-    onAdd: (files: FileList | null) => void;
+    onAdd: (files: File[]) => void;
     onRemove: (index: number) => void;
   }) => (
     <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
@@ -886,7 +881,11 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
             accept={accept}
             className="hidden"
             onChange={(event) => {
-              onAdd(event.target.files);
+              // Copy the browser FileList BEFORE clearing the input.
+              // FileList is live; clearing the input first can otherwise leave
+              // React state with zero files, which also prevents Drive uploads.
+              const selectedFiles = Array.from(event.target.files ?? []);
+              onAdd(selectedFiles);
               event.target.value = "";
             }}
           />
@@ -894,7 +893,12 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
       </div>
 
       {files.length > 0 && (
-        <div className="mt-4 grid gap-2 md:grid-cols-2">
+        <div className="mt-5">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-emerald-700">
+            {t("Upload preview")}
+          </p>
+
+          <div className="grid gap-3 md:grid-cols-2">
           {files.map((file, index) => (
             <div
               key={`${file.file.name}-${file.file.size}-${file.file.lastModified}-${index}`}
@@ -931,6 +935,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
               </button>
             </div>
           ))}
+          </div>
         </div>
       )}
     </div>
@@ -976,7 +981,6 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
       | "currentBaseRate"
       | "weekendRate"
       | "minimumNightlyRate"
-      | "minimumStay"
       | "extraGuestFee"
       | "childFee",
     value: string
@@ -990,8 +994,6 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           previous[unitId]?.weekendRate || "",
         minimumNightlyRate:
           previous[unitId]?.minimumNightlyRate || "",
-        minimumStay:
-          previous[unitId]?.minimumStay || "",
         extraGuestFee:
           previous[unitId]?.extraGuestFee || "",
         childFee:
@@ -1072,6 +1074,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     "Hair Dryer",
     "Iron",
     "Free Toiletries",
+    "Baby Cot / Crib",
     "Private Bathroom",
     "Bathtub",
     "Shower",
@@ -1667,6 +1670,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     setIsSubmitting(true);
 
     let driveFolderId: string | null = null;
+    let directUploadsCompleted = false;
 
     type PendingUpload = {
       file: File;
@@ -1857,6 +1861,8 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
             })
           );
         }
+
+        directUploadsCompleted = true;
       }
 
       const response = await fetch("/api/onboarding", {
@@ -1897,6 +1903,31 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     } catch (error) {
       console.error("Onboarding submission error:", error);
       setUploadProgress(null);
+
+      // Same cleanup pattern as the working contact form:
+      // if the direct upload did not finish, remove the temporary Drive folder.
+      // If uploads finished and a later database/email step failed, keep it so
+      // uploaded customer files are not destroyed.
+      if (driveFolderId && !directUploadsCompleted) {
+        try {
+          await fetch("/api/onboarding", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              action: "cleanup-upload-batch",
+              folderId: driveFolderId,
+            }),
+          });
+        } catch (cleanupError) {
+          console.error(
+            "Could not clean up failed onboarding upload folder:",
+            cleanupError
+          );
+        }
+      }
+
       setSubmissionError(
         error instanceof Error
           ? error.message
@@ -5433,7 +5464,6 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                     currentBaseRate: "",
                     weekendRate: "",
                     minimumNightlyRate: "",
-                    minimumStay: "",
                     extraGuestFee: "",
                     childFee: "",
                   };
@@ -5551,34 +5581,6 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
 
                       
-
-                      <div>
-
-                        <label className="mb-2 block text-sm font-bold">
-                          {t("Unit-Specific Minimum Stay")}
-                        </label>
-
-                        <input
-                          type="number"
-                          min="1"
-                          value={
-                            pricing.minimumStay
-                          }
-                          onChange={(event) =>
-                            updateUnitPricing(
-                              unit.id,
-                              "minimumStay",
-                              event.target.value
-                            )
-                          }
-                          placeholder={t("Optional")}
-                          className={inputClass(
-                            `pricing-${unit.id}-minimum-stay`
-                          )}
-                        />
-
-                      </div>
-
 
                       <div>
 
@@ -5830,35 +5832,6 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
 
             <div className="mt-8 grid gap-6 md:grid-cols-2">
-
-              <div>
-
-                <label className="mb-2 block text-sm font-bold">
-                  {t("Normal Minimum Stay")}
-                </label>
-
-                <input
-                  type="number"
-                  min="1"
-                  value={formData.minimumStayDefault}
-                  onChange={(event) =>
-                    updateField(
-                      "minimumStayDefault",
-                      event.target.value
-                    )
-                  }
-                  placeholder={t("Example: 2 nights")}
-                  className={inputClass(
-                    "minimumStayDefault"
-                  )}
-                />
-
-                <ErrorMessage
-                  field="minimumStayDefault"
-                />
-
-              </div>
-
 
               <div>
 
