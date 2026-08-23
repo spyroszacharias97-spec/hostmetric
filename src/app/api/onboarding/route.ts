@@ -173,16 +173,12 @@ function getDriveClient() {
 }
 
 function getOnboardingParentFolderId() {
-  // Prefer a dedicated onboarding folder. If it is not configured yet,
-  // fall back to the same Drive parent already used by the working
-  // contact form so uploads do not fail only because of an env-name mismatch.
   const parentFolderId =
-    process.env.GOOGLE_ONBOARDING_DRIVE_FOLDER_ID ||
-    process.env.GOOGLE_DRIVE_FOLDER_ID;
+    process.env.GOOGLE_ONBOARDING_DRIVE_FOLDER_ID;
 
   if (!parentFolderId) {
     throw new Error(
-      "GOOGLE_ONBOARDING_DRIVE_FOLDER_ID (or GOOGLE_DRIVE_FOLDER_ID) is missing."
+      "GOOGLE_ONBOARDING_DRIVE_FOLDER_ID is missing."
     );
   }
 
@@ -378,6 +374,93 @@ async function createFolder(
   return response.data.id;
 }
 
+function escapeDriveQueryValue(value: string) {
+  return value
+    .replace(/\\/g, "\\\\")
+    .replace(/'/g, "\\'");
+}
+
+async function verifyOnboardingParentFolder() {
+  const parentFolderId = getOnboardingParentFolderId();
+
+  if (!isValidDriveId(parentFolderId)) {
+    throw new Error(
+      "GOOGLE_ONBOARDING_DRIVE_FOLDER_ID is not a valid Google Drive folder ID."
+    );
+  }
+
+  const drive = getDriveClient();
+
+  try {
+    const response = await drive.files.get({
+      fileId: parentFolderId,
+      fields: "id,name,mimeType,trashed",
+      supportsAllDrives: true,
+    });
+
+    if (
+      response.data.mimeType !== "application/vnd.google-apps.folder" ||
+      response.data.trashed
+    ) {
+      throw new Error(
+        "GOOGLE_ONBOARDING_DRIVE_FOLDER_ID does not point to an active Google Drive folder."
+      );
+    }
+  } catch (error) {
+    console.error(
+      "[onboarding] Could not access configured Get Started parent folder:",
+      parentFolderId,
+      error
+    );
+
+    throw new Error(
+      `The HostMetric Get Started uploads folder cannot be accessed (${parentFolderId}). Check GOOGLE_ONBOARDING_DRIVE_FOLDER_ID and make sure the Google service account has access to that exact folder.`
+    );
+  }
+
+  return {
+    drive,
+    parentFolderId,
+  };
+}
+
+async function findOrCreateOwnerFolder(
+  drive: ReturnType<typeof getDriveClient>,
+  parentFolderId: string,
+  email: string
+) {
+  const normalizedEmail = email.trim().toLowerCase();
+
+  if (!normalizedEmail) {
+    throw new Error("Owner email is required before uploading files.");
+  }
+
+  const folderName = safeFolderName(normalizedEmail);
+  const escapedName = escapeDriveQueryValue(folderName);
+
+  const existing = await drive.files.list({
+    q: `'${parentFolderId}' in parents and name = '${escapedName}' and mimeType = 'application/vnd.google-apps.folder' and trashed = false`,
+    pageSize: 10,
+    fields: "files(id,name,webViewLink,parents)",
+    includeItemsFromAllDrives: true,
+    supportsAllDrives: true,
+  });
+
+  const existingFolder = existing.data.files?.find(
+    (item) => item.id && item.name === folderName
+  );
+
+  if (existingFolder?.id) {
+    return existingFolder.id;
+  }
+
+  return createFolder(
+    drive,
+    parentFolderId,
+    folderName
+  );
+}
+
 async function createUploadBatch(
   fullName: string,
   email: string,
@@ -385,52 +468,54 @@ async function createUploadBatch(
   files: UploadFileMetadata[]
 ) {
   if (!fullName.trim() || !email.trim() || !propertyName.trim()) {
-    throw new Error("Name, email and property name are required before uploading files.");
+    throw new Error(
+      "Name, email and property name are required before uploading files."
+    );
   }
 
   validateUploadMetadata(files);
 
-  const parentFolderId = getOnboardingParentFolderId();
+  const { drive, parentFolderId } =
+    await verifyOnboardingParentFolder();
+
+  const ownerFolderId =
+    await findOrCreateOwnerFolder(
+      drive,
+      parentFolderId,
+      email
+    );
 
   const auth = getGoogleAuth();
-  const drive = google.drive({ version: "v3", auth });
 
-  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-  const rootName = `${timestamp} - ${safeFolderName(fullName)} - ${safeFolderName(
-    propertyName
-  )} - ${safeFolderName(email)}`;
+  const accessTokenResponse =
+    await auth.getAccessToken();
 
-  const rootFolderId = await createFolder(drive, parentFolderId, rootName);
-  const folderCache = new Map<string, string>();
-  folderCache.set("", rootFolderId);
-
-  const ensurePath = async (path: string[]) => {
-    let parentId = rootFolderId;
-    let accumulated = "";
-
-    for (const segment of path) {
-      accumulated = accumulated ? `${accumulated}/${segment}` : segment;
-
-      const existing = folderCache.get(accumulated);
-      if (existing) {
-        parentId = existing;
-        continue;
-      }
-
-      const folderId = await createFolder(drive, parentId, segment);
-      folderCache.set(accumulated, folderId);
-      parentId = folderId;
-    }
-
-    return parentId;
-  };
-
-  const accessTokenResponse = await auth.getAccessToken();
-  const accessToken = accessTokenResponse.token;
+  const accessToken =
+    accessTokenResponse.token;
 
   if (!accessToken) {
-    throw new Error("Could not obtain a Google access token.");
+    throw new Error(
+      "Could not obtain a Google access token."
+    );
   }
+
+  /*
+   * Every onboarding photo/file goes directly inside:
+   *
+   * Get Started Uploads
+   *   └── owner@email.com
+   *       ├── <batch>-001-photo.jpg
+   *       ├── <batch>-002-photo.jpg
+   *       └── ...
+   *
+   * The exact meaning of every file is kept in Neon through
+   * file_group + unit_id + the Drive file URL/ID.
+   */
+  const batchPrefix =
+    new Date()
+      .toISOString()
+      .replace(/[-:.TZ]/g, "")
+      .slice(0, 14);
 
   const uploads: Array<{
     index: number;
@@ -444,155 +529,159 @@ async function createUploadBatch(
     size: number;
   }> = [];
 
-  try {
-    for (let index = 0; index < files.length; index += 1) {
-      const file = files[index];
-      const folderId = await ensurePath(getGroupFolderPath(file));
-      const originalName = safeFileName(file.name) || `file-${index + 1}`;
-      const storedName = `${String(index + 1).padStart(3, "0")}-${originalName}`;
+  for (
+    let index = 0;
+    index < files.length;
+    index += 1
+  ) {
+    const file = files[index];
 
-      const initiationUrl = new URL(
+    const originalName =
+      safeFileName(file.name) ||
+      `file-${index + 1}`;
+
+    const storedName =
+      `${batchPrefix}-${String(
+        index + 1
+      ).padStart(3, "0")}-${originalName}`;
+
+    const initiationUrl =
+      new URL(
         "https://www.googleapis.com/upload/drive/v3/files"
       );
-      initiationUrl.searchParams.set("uploadType", "resumable");
-      initiationUrl.searchParams.set("supportsAllDrives", "true");
-      initiationUrl.searchParams.set(
-        "fields",
-        "id,name,mimeType,webViewLink,parents,size"
+
+    initiationUrl.searchParams.set(
+      "uploadType",
+      "resumable"
+    );
+
+    initiationUrl.searchParams.set(
+      "supportsAllDrives",
+      "true"
+    );
+
+    initiationUrl.searchParams.set(
+      "fields",
+      "id,name,mimeType,webViewLink,parents,size"
+    );
+
+    const initiationResponse =
+      await fetch(
+        initiationUrl.toString(),
+        {
+          method: "POST",
+          headers: {
+            Authorization:
+              `Bearer ${accessToken}`,
+            "Content-Type":
+              "application/json; charset=UTF-8",
+            "X-Upload-Content-Type":
+              file.type,
+            "X-Upload-Content-Length":
+              String(file.size),
+          },
+          body: JSON.stringify({
+            name: storedName,
+            parents: [
+              ownerFolderId,
+            ],
+          }),
+        }
       );
 
-      const initiationResponse = await fetch(initiationUrl.toString(), {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json; charset=UTF-8",
-          "X-Upload-Content-Type": file.type,
-          "X-Upload-Content-Length": String(file.size),
-        },
-        body: JSON.stringify({
-          name: storedName,
-          parents: [folderId],
-        }),
-      });
+    if (!initiationResponse.ok) {
+      const details =
+        await initiationResponse.text();
 
-      if (!initiationResponse.ok) {
-        const details = await initiationResponse.text();
-        throw new Error(
-          `Google Drive could not create an upload session (${initiationResponse.status}): ${details}`
-        );
-      }
-
-      const uploadUrl = initiationResponse.headers.get("location");
-
-      if (!uploadUrl) {
-        throw new Error("Google Drive did not return a resumable upload URL.");
-      }
-
-      uploads.push({
-        index,
-        uploadUrl,
-        folderId,
-        fileGroup: file.fileGroup,
-        unitClientId: file.unitClientId ?? null,
-        storedName,
-        originalName: file.name,
-        type: file.type,
-        size: file.size,
-      });
-    }
-  } catch (error) {
-    try {
-      await drive.files.delete({
-        fileId: rootFolderId,
-        supportsAllDrives: true,
-      });
-    } catch (cleanupError) {
-      console.error("Could not clean up failed onboarding folder:", cleanupError);
+      throw new Error(
+        `Google Drive could not create an upload session (${initiationResponse.status}): ${details}`
+      );
     }
 
-    throw error;
+    const uploadUrl =
+      initiationResponse.headers.get(
+        "location"
+      );
+
+    if (!uploadUrl) {
+      throw new Error(
+        "Google Drive did not return a resumable upload URL."
+      );
+    }
+
+    uploads.push({
+      index,
+      uploadUrl,
+      folderId: ownerFolderId,
+      fileGroup: file.fileGroup,
+      unitClientId:
+        file.unitClientId ?? null,
+      storedName,
+      originalName: file.name,
+      type: file.type,
+      size: file.size,
+    });
   }
 
   return {
-    folderId: rootFolderId,
-    driveFolderLink: `https://drive.google.com/drive/folders/${rootFolderId}`,
+    folderId: ownerFolderId,
+    driveFolderLink:
+      `https://drive.google.com/drive/folders/${ownerFolderId}`,
     uploads,
   };
 }
 
-async function verifyRootFolder(rootFolderId: string) {
-  const expectedParentId = getOnboardingParentFolderId();
+async function verifyOwnerFolder(
+  ownerFolderId: string
+) {
+  const expectedParentId =
+    getOnboardingParentFolderId();
 
-  if (!isValidDriveId(rootFolderId)) {
-    throw new Error("Invalid onboarding Google Drive folder ID.");
+  if (!isValidDriveId(ownerFolderId)) {
+    throw new Error(
+      "Invalid onboarding Google Drive owner folder ID."
+    );
   }
 
-  const drive = getDriveClient();
-  const response = await drive.files.get({
-    fileId: rootFolderId,
-    fields: "id,name,mimeType,parents,trashed",
-    supportsAllDrives: true,
-  });
+  const drive =
+    getDriveClient();
+
+  const response =
+    await drive.files.get({
+      fileId: ownerFolderId,
+      fields:
+        "id,name,mimeType,parents,trashed",
+      supportsAllDrives: true,
+    });
 
   if (
-    response.data.mimeType !== "application/vnd.google-apps.folder" ||
+    response.data.mimeType !==
+      "application/vnd.google-apps.folder" ||
     response.data.trashed ||
-    !response.data.parents?.includes(expectedParentId)
+    !response.data.parents?.includes(
+      expectedParentId
+    )
   ) {
-    throw new Error("The upload folder is not a valid HostMetric onboarding folder.");
+    throw new Error(
+      "The upload folder is not a valid HostMetric onboarding owner folder."
+    );
   }
 
   return drive;
 }
 
-async function folderIsDescendantOf(
-  drive: ReturnType<typeof getDriveClient>,
-  folderId: string,
-  rootFolderId: string
-) {
-  if (folderId === rootFolderId) {
-    return true;
-  }
-
-  let currentId = folderId;
-
-  for (let depth = 0; depth < 6; depth += 1) {
-    const response = await drive.files.get({
-      fileId: currentId,
-      fields: "id,mimeType,parents,trashed",
-      supportsAllDrives: true,
-    });
-
-    if (
-      response.data.mimeType !== "application/vnd.google-apps.folder" ||
-      response.data.trashed
-    ) {
-      return false;
-    }
-
-    const parents = response.data.parents ?? [];
-
-    if (parents.includes(rootFolderId)) {
-      return true;
-    }
-
-    if (parents.length === 0) {
-      return false;
-    }
-
-    currentId = parents[0];
-  }
-
-  return false;
-}
-
 async function verifyUploadedFiles(
-  rootFolderId: string,
+  ownerFolderId: string,
   manifest: UploadManifestItem[],
   expectedFileCount: number
 ) {
-  if (manifest.length !== expectedFileCount) {
-    throw new Error("The upload manifest does not match the expected number of files.");
+  if (
+    manifest.length !==
+    expectedFileCount
+  ) {
+    throw new Error(
+      "The upload manifest does not match the expected number of files."
+    );
   }
 
   if (expectedFileCount === 0) {
@@ -610,17 +699,19 @@ async function verifyUploadedFiles(
     }>;
   }
 
-  const drive = await verifyRootFolder(rootFolderId);
-  const folderIds = [...new Set(manifest.map((item) => item.folderId))];
+  const drive =
+    await verifyOwnerFolder(
+      ownerFolderId
+    );
 
-  for (const folderId of folderIds) {
-    if (!isValidDriveId(folderId)) {
-      throw new Error("Invalid upload category folder ID.");
-    }
-
-    const valid = await folderIsDescendantOf(drive, folderId, rootFolderId);
-    if (!valid) {
-      throw new Error("An upload category folder does not belong to this onboarding request.");
+  for (const item of manifest) {
+    if (
+      item.folderId !==
+      ownerFolderId
+    ) {
+      throw new Error(
+        "An uploaded file points to the wrong onboarding owner folder."
+      );
     }
   }
 
@@ -637,32 +728,29 @@ async function verifyUploadedFiles(
     sortOrder: number;
   }> = [];
 
-  for (let attempt = 0; attempt < 6; attempt += 1) {
-    const filesByFolder = new Map<
-      string,
-      Map<
-        string,
-        {
-          id: string;
-          name: string;
-          mimeType: string;
-          webViewLink: string;
-          size: number;
-        }
-      >
-    >();
-
-    for (const folderId of folderIds) {
-      const response = await drive.files.list({
-        q: `'${folderId}' in parents and trashed = false`,
+  /*
+   * Drive may need a short moment before newly uploaded files appear
+   * in a list query, so verify a few times before failing.
+   */
+  for (
+    let attempt = 0;
+    attempt < 6;
+    attempt += 1
+  ) {
+    const response =
+      await drive.files.list({
+        q: `'${ownerFolderId}' in parents and trashed = false`,
         pageSize: 1000,
         orderBy: "name",
-        fields: "files(id,name,mimeType,webViewLink,size,parents)",
-        includeItemsFromAllDrives: true,
+        fields:
+          "files(id,name,mimeType,webViewLink,size,parents)",
+        includeItemsFromAllDrives:
+          true,
         supportsAllDrives: true,
       });
 
-      const folderMap = new Map<
+    const filesByName =
+      new Map<
         string,
         {
           id: string;
@@ -673,50 +761,91 @@ async function verifyUploadedFiles(
         }
       >();
 
-      for (const file of response.data.files ?? []) {
-        if (!file.id || !file.name || !file.mimeType) {
-          continue;
-        }
+    for (
+      const file of
+      response.data.files ?? []
+    ) {
+      if (
+        !file.id ||
+        !file.name ||
+        !file.mimeType
+      ) {
+        continue;
+      }
 
-        folderMap.set(file.name, {
+      filesByName.set(
+        file.name,
+        {
           id: file.id,
           name: file.name,
           mimeType: file.mimeType,
           webViewLink:
             file.webViewLink ??
             `https://drive.google.com/file/d/${file.id}/view`,
-          size: Number(file.size ?? 0),
-        });
-      }
-
-      filesByFolder.set(folderId, folderMap);
+          size:
+            Number(
+              file.size ?? 0
+            ),
+        }
+      );
     }
 
-    lastVerified = manifest
-      .map((item, sortOrder) => {
-        const found = filesByFolder.get(item.folderId)?.get(item.storedName);
+    lastVerified =
+      manifest
+        .map(
+          (
+            item,
+            sortOrder
+          ) => {
+            const found =
+              filesByName.get(
+                item.storedName
+              );
 
-        if (!found) {
-          return null;
-        }
+            if (!found) {
+              return null;
+            }
 
-        return {
-          ...found,
-          folderId: item.folderId,
-          fileGroup: item.fileGroup,
-          unitClientId: item.unitClientId,
-          originalName: item.originalName,
-          size: found.size || item.size,
-          sortOrder,
-        };
-      })
-      .filter((item): item is NonNullable<typeof item> => item !== null);
+            return {
+              ...found,
+              folderId:
+                ownerFolderId,
+              fileGroup:
+                item.fileGroup,
+              unitClientId:
+                item.unitClientId,
+              originalName:
+                item.originalName,
+              size:
+                found.size ||
+                item.size,
+              sortOrder,
+            };
+          }
+        )
+        .filter(
+          (
+            item
+          ): item is NonNullable<
+            typeof item
+          > =>
+            item !== null
+        );
 
-    if (lastVerified.length === expectedFileCount) {
+    if (
+      lastVerified.length ===
+      expectedFileCount
+    ) {
       return lastVerified;
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 800));
+    await new Promise(
+      (resolve) =>
+        setTimeout(
+          resolve,
+          800
+        )
+    );
   }
 
   throw new Error(
@@ -724,15 +853,24 @@ async function verifyUploadedFiles(
   );
 }
 
-async function cleanupUploadBatch(rootFolderId: string) {
-  const drive = await verifyRootFolder(rootFolderId);
+/*
+ * IMPORTANT:
+ * The email folder is persistent and may already contain successful files
+ * from older submissions. Never delete the whole owner folder when one
+ * upload attempt fails.
+ */
+async function cleanupUploadBatch(
+  ownerFolderId: string
+) {
+  await verifyOwnerFolder(
+    ownerFolderId
+  );
 
-  await drive.files.delete({
-    fileId: rootFolderId,
-    supportsAllDrives: true,
-  });
+  console.warn(
+    "[onboarding] cleanup-upload-batch requested. Owner folder preserved:",
+    ownerFolderId
+  );
 }
-
 function validateOnboardingPayload(
   formData: Record<string, unknown>,
   units: UnitInput[],
@@ -1075,7 +1213,7 @@ async function submitOnboarding(body: Record<string, unknown>) {
     from: "HostMetric Website <notifications@hostmetric.gr>",
     to: ["info@hostmetric.gr"],
     replyTo: email,
-    subject: `Νέο Get Started από ${fullName}`,
+    subject: `Νέο Get Started #${submissionId} από ${fullName}`,
     html: `
       <div style="font-family:Arial,sans-serif;max-width:700px;margin:0 auto;line-height:1.55;">
         <h2>Νέο Get Started αίτημα</h2>
