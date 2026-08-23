@@ -250,6 +250,32 @@ function humanizeKey(key: string) {
     .replace(/^./, (character) => character.toUpperCase());
 }
 
+function getFileGroupLabel(fileGroup: string) {
+  if (PROPERTY_GROUPS[fileGroup]) return PROPERTY_GROUPS[fileGroup];
+  if (UNIT_GROUPS[fileGroup]) return UNIT_GROUPS[fileGroup];
+  if (ACCESSIBILITY_GROUPS[fileGroup]) return ACCESSIBILITY_GROUPS[fileGroup];
+  if (CHECKIN_GROUPS[fileGroup]) return CHECKIN_GROUPS[fileGroup];
+  if (fileGroup === "floor_plan") return "Floor Plan";
+  return humanizeKey(fileGroup);
+}
+
+function getFileScope(
+  fileGroup: string,
+  unitClientId: number | null
+) {
+  if (fileGroup === "floor_plan") return "floor_plan";
+  if (PROPERTY_GROUPS[fileGroup]) return "property";
+  if (UNIT_GROUPS[fileGroup]) return "unit";
+  if (CHECKIN_GROUPS[fileGroup]) return "check_in";
+  if (ACCESSIBILITY_GROUPS[fileGroup]) {
+    return unitClientId
+      ? "unit_accessibility"
+      : "property_accessibility";
+  }
+
+  return "other";
+}
+
 function getGroupFolderPath(file: UploadFileMetadata) {
   if (PROPERTY_GROUPS[file.fileGroup]) {
     return ["01 Property Overview", PROPERTY_GROUPS[file.fileGroup]];
@@ -1046,25 +1072,132 @@ async function submitOnboarding(body: Record<string, unknown>) {
       last_name,
       email,
       phone,
+      phone_country_code,
+      phone_number,
       country_of_residence,
       birth_date,
+
       business_name,
       business_registration_number,
+      vat_number,
+      tax_id,
+      business_address,
+      business_city,
+      business_postal_code,
+
       home_address,
       home_city,
       home_postal_code,
+
       property_name,
       property_type,
       property_country,
       property_city,
+      property_region,
       property_address,
       property_postal_code,
-      website_url,
+      ownership_status,
+      accommodation_structure,
+      registration_status,
+      registration_number,
+      land_registration_number,
+      additional_legal_number,
+
+      listing_status,
       booking_url,
+      booking_id,
       airbnb_url,
+      airbnb_id,
       vrbo_url,
+      vrbo_id,
       expedia_url,
-      tripadvisor_url,
+      expedia_id,
+      agoda_url,
+      agoda_id,
+      tripcom_url,
+      tripcom_id,
+      other_platform_name,
+      other_platform_url,
+      selected_platforms,
+
+      channel_manager_status,
+      channel_manager_name,
+      pms_status,
+      pms_name,
+      website_status,
+      website_url,
+      direct_bookings_status,
+
+      check_in_from,
+      check_in_until,
+      check_out_from,
+      check_out_until,
+      check_in_method,
+      reception_status,
+      guest_languages,
+      children_policy,
+      minimum_guest_age,
+      pets_policy,
+      parties_policy,
+      smoking_property_policy,
+      quiet_hours,
+      parking_details,
+      breakfast_details,
+      internet_details,
+      accessibility_notes,
+
+      property_facilities,
+      property_accessibility,
+
+      currency,
+      cleaning_fee,
+      cleaning_fee_type,
+      security_deposit,
+      local_tax_known,
+      local_tax_details,
+      maximum_stay,
+      advance_notice,
+      booking_window,
+      same_day_booking,
+      cancellation_preference,
+      no_show_policy,
+      breakfast_pricing,
+      breakfast_price,
+      current_average_occupancy,
+      current_average_daily_rate,
+      annual_revenue_estimate,
+      revenue_target,
+      weekly_discount,
+      monthly_discount,
+      non_refundable_rate,
+      mobile_rate,
+      last_minute_discount,
+      early_booker_discount,
+      owner_blocked_dates,
+      pricing_notes,
+
+      existing_listing_title,
+      property_summary,
+      unique_selling_points,
+      neighbourhood_description,
+      getting_around,
+      nearby_attractions,
+      guest_arrival_notes,
+      other_listing_notes,
+      photo_rights_confirmed,
+
+      primary_goal,
+      preferred_start_timeline,
+      preferred_contact_method,
+      best_contact_time,
+      final_notes,
+      information_accuracy_confirmed,
+      authorization_confirmed,
+      listing_setup_authorization,
+
+      drive_folder_id,
+      drive_folder_url,
+
       currently_operating,
       existing_listings,
       form_data,
@@ -1076,25 +1209,132 @@ async function submitOnboarding(body: Record<string, unknown>) {
       ${String(formData.lastName ?? "") || null},
       ${email},
       ${phone || null},
+      ${String(formData.phoneCountryCode ?? "") || null},
+      ${String(formData.phone ?? "") || null},
       ${String(formData.residenceCountry ?? "") || null},
       ${String(formData.dateOfBirth ?? "") || null},
+
       ${String(formData.businessName ?? "") || null},
       ${String(formData.businessRegistrationNumber ?? "") || null},
+      ${String(formData.vatNumber ?? "") || null},
+      ${String(formData.taxId ?? "") || null},
+      ${String(formData.businessAddress ?? "") || null},
+      ${String(formData.businessCity ?? "") || null},
+      ${String(formData.businessPostalCode ?? "") || null},
+
       ${String(formData.residentialAddress ?? "") || null},
       ${String(formData.residentialCity ?? "") || null},
       ${String(formData.residentialPostalCode ?? "") || null},
+
       ${String(formData.propertyName ?? "") || null},
       ${String(formData.propertyCategory ?? "") || null},
       ${String(formData.propertyCountry ?? "") || null},
       ${String(formData.propertyCity ?? "") || null},
+      ${String(formData.propertyRegion ?? "") || null},
       ${String(formData.propertyAddress ?? "") || null},
       ${String(formData.propertyPostalCode ?? "") || null},
-      ${String(formData.websiteUrl ?? "") || null},
+      ${String(formData.ownershipStatus ?? "") || null},
+      ${String(formData.accommodationStructure ?? "") || null},
+      ${String(formData.registrationStatus ?? "") || null},
+      ${String(formData.registrationNumber ?? "") || null},
+      ${String(formData.landRegistrationNumber ?? "") || null},
+      ${String(formData.additionalLegalNumber ?? "") || null},
+
+      ${String(formData.listingStatus ?? "") || null},
       ${String(formData.bookingUrl ?? "") || null},
+      ${String(formData.bookingId ?? "") || null},
       ${String(formData.airbnbUrl ?? "") || null},
+      ${String(formData.airbnbId ?? "") || null},
       ${String(formData.vrboUrl ?? "") || null},
+      ${String(formData.vrboId ?? "") || null},
       ${String(formData.expediaUrl ?? "") || null},
-      ${null},
+      ${String(formData.expediaId ?? "") || null},
+      ${String(formData.agodaUrl ?? "") || null},
+      ${String(formData.agodaId ?? "") || null},
+      ${String(formData.tripcomUrl ?? "") || null},
+      ${String(formData.tripcomId ?? "") || null},
+      ${String(formData.otherPlatformName ?? "") || null},
+      ${String(formData.otherPlatformUrl ?? "") || null},
+      ${JSON.stringify(selectedPlatforms)}::jsonb,
+
+      ${String(formData.channelManagerStatus ?? "") || null},
+      ${String(formData.channelManagerName ?? "") || null},
+      ${String(formData.pmsStatus ?? "") || null},
+      ${String(formData.pmsName ?? "") || null},
+      ${String(formData.websiteStatus ?? "") || null},
+      ${String(formData.websiteUrl ?? "") || null},
+      ${String(formData.directBookingsStatus ?? "") || null},
+
+      ${String(formData.checkInFrom ?? "") || null},
+      ${String(formData.checkInUntil ?? "") || null},
+      ${String(formData.checkOutFrom ?? "") || null},
+      ${String(formData.checkOutUntil ?? "") || null},
+      ${String(formData.checkInMethod ?? "") || null},
+      ${String(formData.receptionStatus ?? "") || null},
+      ${String(formData.guestLanguages ?? "") || null},
+      ${String(formData.childrenPolicy ?? "") || null},
+      ${parseInteger(formData.minimumGuestAge)},
+      ${String(formData.petsPolicy ?? "") || null},
+      ${String(formData.partiesPolicy ?? "") || null},
+      ${String(formData.smokingPropertyPolicy ?? "") || null},
+      ${String(formData.quietHours ?? "") || null},
+      ${String(formData.parkingDetails ?? "") || null},
+      ${String(formData.breakfastDetails ?? "") || null},
+      ${String(formData.internetDetails ?? "") || null},
+      ${String(formData.accessibilityNotes ?? "") || null},
+
+      ${JSON.stringify(selectedPropertyFacilities)}::jsonb,
+      ${JSON.stringify(selectedPropertyAccessibility)}::jsonb,
+
+      ${String(formData.currency ?? "") || null},
+      ${parseDecimal(formData.cleaningFee)},
+      ${String(formData.cleaningFeeType ?? "") || null},
+      ${parseDecimal(formData.securityDeposit)},
+      ${String(formData.localTaxKnown ?? "") || null},
+      ${String(formData.localTaxDetails ?? "") || null},
+      ${parseInteger(formData.maximumStay)},
+      ${String(formData.advanceNotice ?? "") || null},
+      ${String(formData.bookingWindow ?? "") || null},
+      ${String(formData.sameDayBooking ?? "") || null},
+      ${String(formData.cancellationPreference ?? "") || null},
+      ${String(formData.noShowPolicy ?? "") || null},
+      ${String(formData.breakfastPricing ?? "") || null},
+      ${parseDecimal(formData.breakfastPrice)},
+      ${parseDecimal(formData.currentAverageOccupancy)},
+      ${parseDecimal(formData.currentAverageDailyRate)},
+      ${parseDecimal(formData.annualRevenueEstimate)},
+      ${parseDecimal(formData.revenueTarget)},
+      ${parseDecimal(formData.weeklyDiscount)},
+      ${parseDecimal(formData.monthlyDiscount)},
+      ${parseDecimal(formData.nonRefundableRate)},
+      ${parseDecimal(formData.mobileRate)},
+      ${parseDecimal(formData.lastMinuteDiscount)},
+      ${parseDecimal(formData.earlyBookerDiscount)},
+      ${String(formData.ownerBlockedDates ?? "") || null},
+      ${String(formData.pricingNotes ?? "") || null},
+
+      ${String(formData.existingListingTitle ?? "") || null},
+      ${String(formData.propertySummary ?? "") || null},
+      ${String(formData.uniqueSellingPoints ?? "") || null},
+      ${String(formData.neighbourhoodDescription ?? "") || null},
+      ${String(formData.gettingAround ?? "") || null},
+      ${String(formData.nearbyAttractions ?? "") || null},
+      ${String(formData.guestArrivalNotes ?? "") || null},
+      ${String(formData.otherListingNotes ?? "") || null},
+      ${String(formData.photoRightsConfirmed ?? "") || null},
+
+      ${String(formData.primaryGoal ?? "") || null},
+      ${String(formData.preferredStartTimeline ?? "") || null},
+      ${String(formData.preferredContactMethod ?? "") || null},
+      ${String(formData.bestContactTime ?? "") || null},
+      ${String(formData.finalNotes ?? "") || null},
+      ${String(formData.informationAccuracyConfirmed ?? "") || null},
+      ${String(formData.authorizationConfirmed ?? "") || null},
+      ${String(formData.listingSetupAuthorization ?? "") || null},
+
+      ${driveFolderId},
+      ${driveFolderId ? `https://drive.google.com/drive/folders/${driveFolderId}` : null},
+
       ${hasExistingListings},
       ${hasExistingListings},
       ${JSON.stringify(completeFormSnapshot)}::jsonb,
@@ -1116,16 +1356,38 @@ async function submitOnboarding(body: Record<string, unknown>) {
       pricing: unitPricing[String(clientUnitId)] ?? {},
     };
 
+    const unitPricingValues =
+      unitPricing[String(clientUnitId)] ?? {};
+
     const unitRows = await sql`
       INSERT INTO onboarding_units (
         submission_id,
         unit_index,
         unit_name,
         unit_type,
+        quantity,
         bedrooms,
         bathrooms,
-        max_guests,
         size_sqm,
+        max_guests,
+        max_adults,
+        max_children,
+        king_beds,
+        queen_beds,
+        double_beds,
+        single_beds,
+        sofa_beds,
+        bunk_beds,
+        kitchen,
+        smoking_policy,
+        amenities,
+        accessibility,
+        current_base_rate,
+        weekend_rate,
+        minimum_nightly_rate,
+        extra_guest_fee,
+        child_fee,
+        pricing,
         unit_data
       )
       VALUES (
@@ -1133,10 +1395,29 @@ async function submitOnboarding(body: Record<string, unknown>) {
         ${clientUnitId},
         ${unit.name || null},
         ${unit.type || null},
+        ${parseInteger(unit.quantity) ?? 1},
         ${parseInteger(unit.bedrooms)},
         ${parseInteger(unit.bathrooms)},
-        ${parseInteger(unit.maxGuests)},
         ${parseDecimal(unit.size)},
+        ${parseInteger(unit.maxGuests)},
+        ${parseInteger(unit.maxAdults)},
+        ${parseInteger(unit.maxChildren)},
+        ${parseInteger(unit.kingBeds)},
+        ${parseInteger(unit.queenBeds)},
+        ${parseInteger(unit.doubleBeds)},
+        ${parseInteger(unit.singleBeds)},
+        ${parseInteger(unit.sofaBeds)},
+        ${parseInteger(unit.bunkBeds)},
+        ${unit.kitchen || null},
+        ${unit.smokingPolicy || null},
+        ${JSON.stringify(unitAmenities[String(clientUnitId)] ?? [])}::jsonb,
+        ${JSON.stringify(unitAccessibility[String(clientUnitId)] ?? [])}::jsonb,
+        ${parseDecimal(unitPricingValues.currentBaseRate)},
+        ${parseDecimal(unitPricingValues.weekendRate)},
+        ${parseDecimal(unitPricingValues.minimumNightlyRate)},
+        ${parseDecimal(unitPricingValues.extraGuestFee)},
+        ${parseDecimal(unitPricingValues.childFee)},
+        ${JSON.stringify(unitPricingValues)}::jsonb,
         ${JSON.stringify(unitSnapshot)}::jsonb
       )
       RETURNING id;
@@ -1145,19 +1426,38 @@ async function submitOnboarding(body: Record<string, unknown>) {
     databaseUnitIds.set(clientUnitId, Number(unitRows[0].id));
   }
 
+  const unitNamesByClientId = new Map<number, string>(
+    units.map((unit) => [Number(unit.id), String(unit.name ?? "")])
+  );
+
   for (const file of uploadedFiles) {
     const databaseUnitId = file.unitClientId
       ? databaseUnitIds.get(file.unitClientId) ?? null
+      : null;
+
+    const fileGroupLabel = getFileGroupLabel(file.fileGroup);
+    const fileScope = getFileScope(
+      file.fileGroup,
+      file.unitClientId
+    );
+    const fileUnitName = file.unitClientId
+      ? unitNamesByClientId.get(file.unitClientId) || null
       : null;
 
     await sql`
       INSERT INTO onboarding_files (
         submission_id,
         unit_id,
+        unit_client_id,
+        unit_name,
+        file_scope,
         file_group,
+        file_group_label,
         original_name,
+        stored_name,
         drive_file_id,
         drive_folder_id,
+        drive_folder_url,
         drive_url,
         mime_type,
         file_size,
@@ -1166,10 +1466,16 @@ async function submitOnboarding(body: Record<string, unknown>) {
       VALUES (
         ${submissionId},
         ${databaseUnitId},
+        ${file.unitClientId},
+        ${fileUnitName},
+        ${fileScope},
         ${file.fileGroup},
+        ${fileGroupLabel},
         ${file.originalName},
+        ${file.name},
         ${file.id},
         ${file.folderId},
+        ${`https://drive.google.com/drive/folders/${file.folderId}`},
         ${file.webViewLink},
         ${file.mimeType},
         ${file.size},
