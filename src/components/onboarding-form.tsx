@@ -391,6 +391,7 @@ type FormData = {
   localTaxKnown: string;
   localTaxDetails: string;
 
+  minimumStay: string;
   maximumStay: string;
   advanceNotice: string;
   bookingWindow: string;
@@ -601,6 +602,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     localTaxKnown: "",
     localTaxDetails: "",
 
+    minimumStay: "",
     maximumStay: "",
     advanceNotice: "",
     bookingWindow: "",
@@ -3333,7 +3335,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                       <input
                         type="number"
                         min="0"
-                        step="0.5"
+                        step="1"
                         value={unit.bathrooms}
                         onChange={(event) =>
                           updateUnit(
@@ -5928,6 +5930,30 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
 
             <div className="mt-8 grid gap-6 md:grid-cols-2">
+
+              <div>
+
+                <label className="mb-2 block text-sm font-bold">
+                  {t("Normal Minimum Stay")}
+                </label>
+
+                <input
+                  type="number"
+                  min="1"
+                  step="1"
+                  value={formData.minimumStay}
+                  onChange={(event) =>
+                    updateField(
+                      "minimumStay",
+                      event.target.value
+                    )
+                  }
+                  placeholder={t("Example: 2 nights")}
+                  className={inputClass("minimumStay")}
+                />
+
+              </div>
+
 
               <div>
 
