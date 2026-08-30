@@ -13,7 +13,13 @@ export const {
   signOut,
 } = NextAuth({
   providers: [
-    Google,
+    Google({
+      authorization: {
+        params: {
+          prompt: "select_account",
+        },
+      },
+    }),
   ],
 
   session: {
