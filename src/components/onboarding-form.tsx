@@ -468,7 +468,82 @@ const createEmptyUnit = (id: number): UnitType => ({
   smokingPolicy: "",
 });
 
-export default function OnboardingForm({ dictionary }: { dictionary: any }) {
+type InitialContact = {
+  contactId: number;
+  fullName: string | null;
+  email: string;
+  phone: string | null;
+};
+
+type InitialProperty = {
+  country?: string | null;
+  city?: string | null;
+  category?: string | null;
+};
+
+type OnboardingFormProps = {
+  dictionary: any;
+  adminMode?: boolean;
+  adminContactId?: number | null;
+  initialContact?: InitialContact | null;
+  initialProperty?: InitialProperty | null;
+  returnTo?: string;
+};
+
+function splitFullName(fullName: string | null | undefined) {
+  const parts = String(fullName ?? "")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+
+  return {
+    firstName: parts[0] ?? "",
+    lastName: parts.slice(1).join(" "),
+  };
+}
+
+function splitStoredPhone(phone: string | null | undefined) {
+  const value = String(phone ?? "").trim();
+
+  if (!value) {
+    return {
+      phoneCountryCode: "+30",
+      phone: "",
+    };
+  }
+
+  const sortedCodes = [...phoneCountryCodes]
+    .map((item) => item.code)
+    .sort((a, b) => b.length - a.length);
+
+  const matchedCode = sortedCodes.find(
+    (code) =>
+      value === code ||
+      value.startsWith(`${code} `) ||
+      value.startsWith(code)
+  );
+
+  if (!matchedCode) {
+    return {
+      phoneCountryCode: "+30",
+      phone: value,
+    };
+  }
+
+  return {
+    phoneCountryCode: matchedCode,
+    phone: value.slice(matchedCode.length).trim(),
+  };
+}
+
+export default function OnboardingForm({
+  dictionary,
+  adminMode = false,
+  adminContactId = null,
+  initialContact = null,
+  initialProperty = null,
+  returnTo,
+}: OnboardingFormProps) {
   const t = (key: string) => dictionary?.texts?.[key] ?? key;
   const tf = (
     key: string,
@@ -480,6 +555,28 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
       t(key)
     );
   const tCountry = (country: string) => dictionary?.countries?.[country] ?? country;
+
+  const readJsonResponse = async (response: Response) => {
+    const raw = await response.text();
+
+    try {
+      return JSON.parse(raw);
+    } catch {
+      const contentType =
+        response.headers.get("content-type") ?? "";
+
+      throw new Error(
+        contentType.includes("text/html") ||
+        raw.trimStart().startsWith("<")
+          ? t(
+              "The Get Started API returned an HTML page instead of JSON. Make sure the API file is located at src/app/api/onboarding/route.ts."
+            )
+          : t(
+              "The Get Started API returned an invalid response."
+            )
+      );
+    }
+  };
 
   const today = new Date();
   const adultCutoff = new Date(
@@ -495,13 +592,23 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
   const [step, setStep] = useState(1);
 
+  const initialNames =
+    splitFullName(
+      initialContact?.fullName
+    );
+
+  const initialPhone =
+    splitStoredPhone(
+      initialContact?.phone
+    );
+
   const [formData, setFormData] = useState<FormData>({
-    propertyCountry: "",
+    propertyCountry: initialProperty?.country ?? "",
     ownerType: "individual",
 
-    firstName: "",
-    lastName: "",
-    email: "",
+    firstName: initialNames.firstName,
+    lastName: initialNames.lastName,
+    email: initialContact?.email ?? "",
     phoneCountryCode: "+30",
     phone: "",
 
@@ -523,11 +630,11 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
 
     propertyName: "",
     propertyAddress: "",
-    propertyCity: "",
+    propertyCity: initialProperty?.city ?? "",
     propertyRegion: "",
     propertyPostalCode: "",
 
-    propertyCategory: "",
+    propertyCategory: initialProperty?.category ?? "",
     ownershipStatus: "",
 
     accommodationStructure: "",
@@ -573,10 +680,10 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     directBookingsStatus: "",
 
     // STEP 4
-    checkInFrom: "",
+    checkInFrom: "15:00",
     checkInUntil: "",
     checkOutFrom: "",
-    checkOutUntil: "",
+    checkOutUntil: "11:00",
 
     checkInMethod: "",
     receptionStatus: "",
@@ -798,6 +905,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
   };
 
   const renderUploadGroup = ({
+    reactKey,
     label,
     description,
     files,
@@ -805,6 +913,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     onAdd,
     onRemove,
   }: {
+    reactKey?: string;
     label: string;
     description: string;
     files: SelectedPhoto[];
@@ -812,7 +921,10 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     onAdd: (files: SelectedPhoto[]) => void;
     onRemove: (index: number) => void;
   }) => (
-    <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+    <div
+      key={reactKey}
+      className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
+    >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="font-bold text-slate-900">{t(label)}</p>
@@ -1645,6 +1757,12 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
     }
 
     setErrors({});
+
+    if (adminMode) {
+      void submitOnboarding();
+      return;
+    }
+
     setStep(7);
 
     window.scrollTo({
@@ -1691,7 +1809,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
   };
 
   const submitOnboarding = async () => {
-    if (!validateStepSeven()) {
+    if (!adminMode && !validateStepSeven()) {
       window.scrollTo({
         top: 0,
         behavior: "smooth",
@@ -1852,7 +1970,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           }),
         });
 
-        const sessionResult = await sessionResponse.json();
+        const sessionResult = await readJsonResponse(sessionResponse);
 
         if (!sessionResponse.ok || !sessionResult.success) {
           throw new Error(
@@ -1955,6 +2073,8 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
         },
         body: JSON.stringify({
           action: "submit-onboarding",
+          adminMode,
+          adminContactId,
           formData,
           units,
           selectedPlatforms,
@@ -1970,7 +2090,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
         }),
       });
 
-      const result = await response.json();
+      const result = await readJsonResponse(response);
 
       if (!response.ok || !result.success) {
         throw new Error(
@@ -2061,15 +2181,25 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           </div>
 
           <p className="mt-7 text-sm font-bold uppercase tracking-[0.2em] text-green-600">
-            {t("Onboarding Complete")}
+            {adminMode
+              ? t("Admin Get Started Complete")
+              : t("Onboarding Complete")}
           </p>
 
           <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
-            {t("Your property information is ready for review")}
+            {adminMode
+              ? t("The property was added successfully")
+              : t("Your property information is ready for review")}
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-            {t("Your onboarding information has been saved securely and sent to the HostMetric team for review. We will contact you if we need any clarification or additional material.")}
+            {adminMode
+              ? t(
+                  "The property information and uploaded files were saved successfully. The property is now pending review and can be activated when everything is ready."
+                )
+              : t(
+                  "Your onboarding information has been saved securely and sent to the HostMetric team for review. We will contact you if we need any clarification or additional material."
+                )}
           
 
 </p>
@@ -2077,18 +2207,34 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           <div className="mt-8 rounded-2xl bg-blue-50 px-6 py-5 text-left">
 
             <p className="font-bold text-blue-950">
-              {t("Need to speak with us?")}
+              {adminMode
+                ? t("What happens next?")
+                : t("Need to speak with us?")}
             </p>
 
             <p className="mt-1 text-sm leading-6 text-blue-800">
-              {t("You can contact our team for help, corrections or questions about your property.")}
+              {adminMode
+                ? t(
+                    "Review the saved property details and activate the property when the setup is complete."
+                  )
+                : t(
+                    "You can contact our team for help, corrections or questions about your property."
+                  )}
             </p>
 
             <a
-              href="/contact"
+              href={
+                adminMode && returnTo
+                  ? returnTo
+                  : adminMode
+                    ? "/admin/leads"
+                    : "/contact"
+              }
               className="mt-4 inline-flex rounded-xl bg-blue-600 px-5 py-3 font-bold text-white transition hover:-translate-y-1 hover:shadow-lg"
             >
-              {t("Contact Us →")}
+              {adminMode
+                ? t("Back to Client →")
+                : t("Contact Us →")}
             </a>
 
           </div>
@@ -2115,7 +2261,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           </p>
 
           <p className="text-sm font-semibold text-slate-500">
-            {t("Step")} {step} {t("of 7")}
+            {t("Step")} {step} {adminMode ? t("of 6") : t("of 7")}
           </p>
 
         </div>
@@ -2125,7 +2271,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           <div
             className="h-full rounded-full bg-blue-600 transition-all duration-500"
             style={{
-              width: `${(step / 7) * 100}%`,
+              width: `${(step / (adminMode ? 6 : 7)) * 100}%`,
             }}
           />
 
@@ -2137,6 +2283,18 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
       {/* =====================================================
           GENERAL NOTICE
       ===================================================== */}
+
+      {adminMode && (
+        <div className="mb-6 rounded-2xl border border-emerald-200 bg-emerald-50 px-6 py-5">
+          <p className="font-bold text-emerald-950">
+            {t("Admin completion mode")}
+          </p>
+
+          <p className="mt-1 text-sm leading-6 text-emerald-800">
+            {t("Complete this Get Started form using the information provided by the client. This submission will remain linked to the existing client record.")}
+          </p>
+        </div>
+      )}
 
       <div className="mb-6 rounded-2xl border border-blue-100 bg-blue-50/90 px-6 py-5">
 
@@ -6662,6 +6820,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
             <div className="mt-8 grid gap-4 md:grid-cols-2">
               {propertyUploadCategories.map((category) =>
                 renderUploadGroup({
+                  reactKey: `property-${category.key}`,
                   label: category.label,
                   description: category.description,
                   files: propertyPhotoGroups[category.key] || [],
@@ -6709,6 +6868,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                   <div className="mt-6 grid gap-4 md:grid-cols-2">
                     {unitUploadCategories.map((category) =>
                       renderUploadGroup({
+                        reactKey: `unit-${unit.id}-${category.key}`,
                         label: category.label,
                         description: category.description,
                         files: unitPhotoGroups[unit.id]?.[category.key] || [],
@@ -6774,6 +6934,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                       .filter((category) => selectedPropertyAccessibility.includes(category.feature))
                       .map((category) =>
                         renderUploadGroup({
+                          reactKey: `property-accessibility-${category.key}`,
                           label: category.label,
                           description: category.description,
                           files: accessibilityPhotoGroups[category.key] || [],
@@ -6812,6 +6973,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
                           .filter((category) => selectedFeatures.includes(category.feature))
                           .map((category) =>
                             renderUploadGroup({
+                              reactKey: `unit-accessibility-${unit.id}-${category.key}`,
                               label: category.label,
                               description: category.description,
                               files: unitAccessibilityPhotoGroups[unit.id]?.[category.key] || [],
@@ -6869,6 +7031,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
             <div className="mt-8 grid gap-4 md:grid-cols-2">
               {checkInUploadCategories.map((category) =>
                 renderUploadGroup({
+                  reactKey: `checkin-${category.key}`,
                   label: category.label,
                   description: category.description,
                   files: checkInPhotoGroups[category.key] || [],
@@ -7179,6 +7342,15 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           )}
 
 
+          {adminMode && uploadProgress && (
+            <div className="mt-8 rounded-2xl border border-blue-200 bg-blue-50 px-5 py-4 text-blue-900">
+              <p className="font-bold">{t("Uploading files...")}</p>
+              <p className="mt-1 text-sm font-semibold">
+                {uploadProgress.completed} / {uploadProgress.total}
+              </p>
+            </div>
+          )}
+
           {/* NAVIGATION */}
 
           <div className="mt-12 flex flex-col-reverse gap-4 sm:flex-row sm:justify-between">
@@ -7195,9 +7367,14 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
             <button
               type="button"
               onClick={continueFromStepSix}
-              className="cursor-pointer rounded-2xl bg-blue-600 px-8 py-4 text-lg font-bold text-white transition hover:-translate-y-1 hover:shadow-xl"
+              disabled={isSubmitting}
+              className="cursor-pointer rounded-2xl bg-blue-600 px-8 py-4 text-lg font-bold text-white transition hover:-translate-y-1 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {t("Continue to Final Review →")}
+              {adminMode
+                ? isSubmitting
+                  ? t("Submitting...")
+                  : t("Submit Property Onboarding →")
+                : t("Continue to Final Review →")}
             </button>
 
           </div>
@@ -7210,7 +7387,7 @@ export default function OnboardingForm({ dictionary }: { dictionary: any }) {
           STEP 7
       ===================================================== */}
 
-      {step === 7 && (
+      {!adminMode && step === 7 && (
         <div className="rounded-[32px] border border-slate-200 bg-white/95 p-8 shadow-xl backdrop-blur-sm md:p-12">
 
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">

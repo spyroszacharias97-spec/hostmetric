@@ -61,10 +61,13 @@ export default async function FAQPage() {
      CURRENT LANGUAGE
   ========================================== */
 
-  const cookieStore = await cookies();
+  const cookieStore =
+    await cookies();
 
   const savedLocale =
-    cookieStore.get("hostmetric_locale")?.value;
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
 
 
   let currentLocale: Locale =
@@ -75,7 +78,8 @@ export default async function FAQPage() {
     savedLocale &&
     isSupportedLocale(savedLocale)
   ) {
-    currentLocale = savedLocale;
+    currentLocale =
+      savedLocale;
   }
 
 
@@ -84,7 +88,9 @@ export default async function FAQPage() {
   ========================================== */
 
   const dictionary =
-    await getDictionary(currentLocale);
+    await getDictionary(
+      currentLocale
+    );
 
 
   let faq =
@@ -102,7 +108,9 @@ export default async function FAQPage() {
   if (!faq) {
 
     const fallbackDictionary =
-      await getDictionary(defaultLocale);
+      await getDictionary(
+        defaultLocale
+      );
 
 
     faq =
@@ -266,16 +274,30 @@ export default async function FAQPage() {
               <div
                 className="
                   mt-10
+
                   [&_button]:!bg-[#2166f3]
-                  [&_button]:!text-white
-                  [&_button_*]:!text-white
                   [&_button]:!font-semibold
                   [&_button]:!tracking-[0.01em]
                   [&_button]:![font-family:'Trebuchet_MS',Arial,sans-serif]
+
+                  [&_button>span:first-child]:!text-white
+
+                  [&_button>span:last-child]:!h-12
+                  [&_button>span:last-child]:!w-12
+                  [&_button>span:last-child]:!bg-white
+                  [&_button>span:last-child]:!text-[#2166f3]
+                  [&_button>span:last-child]:!shadow-sm
+
+                  [&_button>span:last-child>span]:!text-[30px]
+                  [&_button>span:last-child>span]:!font-black
+                  [&_button>span:last-child>span]:!leading-none
+                  [&_button>span:last-child>span]:!text-[#2166f3]
+
                   [&_button+div]:!bg-[#2166f3]
                   [&_button+div]:!text-white
                   [&_button+div_*]:!text-white
                   [&_button+div]:![font-family:'Trebuchet_MS',Arial,sans-serif]
+
                   [&_button~div]:!bg-[#2166f3]
                   [&_button~div]:!text-white
                   [&_button~div_*]:!text-white
@@ -318,16 +340,30 @@ export default async function FAQPage() {
               <div
                 className="
                   mt-10
+
                   [&_button]:!bg-[#2166f3]
-                  [&_button]:!text-white
-                  [&_button_*]:!text-white
                   [&_button]:!font-semibold
                   [&_button]:!tracking-[0.01em]
                   [&_button]:![font-family:'Trebuchet_MS',Arial,sans-serif]
+
+                  [&_button>span:first-child]:!text-white
+
+                  [&_button>span:last-child]:!h-12
+                  [&_button>span:last-child]:!w-12
+                  [&_button>span:last-child]:!bg-white
+                  [&_button>span:last-child]:!text-[#2166f3]
+                  [&_button>span:last-child]:!shadow-sm
+
+                  [&_button>span:last-child>span]:!text-[30px]
+                  [&_button>span:last-child>span]:!font-black
+                  [&_button>span:last-child>span]:!leading-none
+                  [&_button>span:last-child>span]:!text-[#2166f3]
+
                   [&_button+div]:!bg-[#2166f3]
                   [&_button+div]:!text-white
                   [&_button+div_*]:!text-white
                   [&_button+div]:![font-family:'Trebuchet_MS',Arial,sans-serif]
+
                   [&_button~div]:!bg-[#2166f3]
                   [&_button~div]:!text-white
                   [&_button~div_*]:!text-white

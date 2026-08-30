@@ -1984,7 +1984,17 @@
       "Google Drive upload failed with status {{status}}.": "Η μεταφόρτωση στο Google Drive απέτυχε με κατάσταση {{status}}.",
       "The onboarding submission could not be completed.": "Η υποβολή των στοιχείων του ακινήτου δεν μπόρεσε να ολοκληρωθεί.",
       "Something went wrong while submitting the onboarding form. Please try again.": "Παρουσιάστηκε πρόβλημα κατά την υποβολή της φόρμας. Παρακαλώ δοκιμάστε ξανά.",
-      "Your onboarding information has been saved securely and sent to the HostMetric team for review. We will contact you if we need any clarification or additional material.": "Τα στοιχεία του ακινήτου σας αποθηκεύτηκαν με ασφάλεια και στάλθηκαν στην ομάδα της HostMetric για έλεγχο. Θα επικοινωνήσουμε μαζί σας εάν χρειαστούμε κάποια διευκρίνιση ή επιπλέον υλικό."
+      "Your onboarding information has been saved securely and sent to the HostMetric team for review. We will contact you if we need any clarification or additional material.": "Τα στοιχεία του ακινήτου σας αποθηκεύτηκαν με ασφάλεια και στάλθηκαν στην ομάδα της HostMetric για έλεγχο. Θα επικοινωνήσουμε μαζί σας εάν χρειαστούμε κάποια διευκρίνιση ή επιπλέον υλικό.",
+      "of 6": "από 6",
+      "Admin completion mode": "Λειτουργία συμπλήρωσης από διαχειριστή",
+      "Complete this Get Started form using the information provided by the client. This submission will remain linked to the existing client record.": "Συμπληρώστε το Get Started με τα στοιχεία του πελάτη. Η υποβολή θα παραμείνει συνδεδεμένη με τον συγκεκριμένο πελάτη.",
+      "Admin Get Started Complete": "Η καταχώριση ολοκληρώθηκε",
+      "The property was added successfully": "Το ακίνητο προστέθηκε με επιτυχία",
+      "The property information and uploaded files were saved successfully. The property is now pending review and can be activated when everything is ready.": "Τα στοιχεία του ακινήτου και τα αρχεία αποθηκεύτηκαν με επιτυχία. Το ακίνητο βρίσκεται πλέον σε αναμονή και μπορεί να ενεργοποιηθεί όταν ολοκληρωθεί ο έλεγχος.",
+      "What happens next?": "Τι γίνεται στη συνέχεια;",
+      "Review the saved property details and activate the property when the setup is complete.": "Ελέγξτε τα αποθηκευμένα στοιχεία του ακινήτου και ενεργοποιήστε το όταν ολοκληρωθεί η προετοιμασία.",
+      "The Get Started API returned an HTML page instead of JSON. Make sure the API file is located at src/app/api/onboarding/route.ts.": "Το Get Started API επέστρεψε σελίδα HTML αντί για JSON. Βεβαιωθείτε ότι το αρχείο του API βρίσκεται ακριβώς στο src/app/api/onboarding/route.ts.",
+      "The Get Started API returned an invalid response.": "Το Get Started API επέστρεψε μη έγκυρη απάντηση."
     },
     "countries": {
       "Afghanistan": "Αφγανιστάν",
@@ -2185,6 +2195,525 @@
       "Yemen": "Υεμένη",
       "Zambia": "Ζάμπια",
       "Zimbabwe": "Ζιμπάμπουε"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "eyebrow": "HostMetric Admin",
+      "title": "Πίνακας Ελέγχου",
+      "description": "Κεντρική εικόνα πελατών, αιτημάτων και ακινήτων της HostMetric.",
+      "cards": {
+        "leads": "Πελάτες",
+        "contactRequests": "Αιτήματα Επικοινωνίας",
+        "getStarted": "Get Started",
+        "properties": "Ακίνητα"
+      },
+      "actions": {
+        "open": "Άνοιγμα"
+      },
+      "propertiesSection": {
+        "eyebrow": "Ακίνητα",
+        "title": "Κατάσταση ακινήτων",
+        "description": "Πάτησε οποιοδήποτε ακίνητο για να ανοίξεις όλα τα στοιχεία του.",
+        "allProperties": "Όλα τα ακίνητα",
+        "units": "Μονάδες",
+        "empty": "Δεν υπάρχουν ακίνητα ακόμη."
+      },
+      "statusCards": {
+        "active": "Ενεργά",
+        "pending": "Σε αναμονή",
+        "inactive": "Ανενεργά"
+      },
+      "contactRequests": {
+        "unansweredBadge": "Αναπάντητα"
+      }
+    },
+    "leads": {
+      "eyebrow": "HostMetric Admin",
+      "title": "Πελάτες",
+      "description": "Όλοι οι πελάτες και η κατάσταση ολοκλήρωσης του Get Started.",
+      "stats": {
+        "total": "Σύνολο πελατών",
+        "completed": "Ολοκλήρωσαν το Get Started",
+        "pending": "Δεν ολοκλήρωσαν το Get Started"
+      },
+      "sections": {
+        "completed": {
+          "title": "Ολοκλήρωσαν το Get Started",
+          "description": "Πελάτες που έχουν ήδη υποβάλει τα πλήρη στοιχεία του ακινήτου τους.",
+          "empty": "Δεν υπάρχουν ακόμη πελάτες σε αυτή την κατηγορία."
+        },
+        "pending": {
+          "title": "Αναμονή για Get Started",
+          "description": "Πελάτες που επικοινώνησαν μαζί μας αλλά δεν έχουν ακόμη ολοκληρώσει το Get Started.",
+          "empty": "Δεν υπάρχουν πελάτες σε αναμονή."
+        }
+      },
+      "fields": {
+        "email": "Email",
+        "phone": "Τηλέφωνο",
+        "requests": "Αιτήματα",
+        "properties": "Ακίνητα",
+        "latestContact": "Τελευταία επικοινωνία",
+        "getStarted": "Get Started",
+        "propertyType": "Τύπος ακινήτου",
+        "location": "Τοποθεσία",
+        "unitTypes": "Τύποι μονάδων",
+        "physicalProperties": "Συνολικά καταλύματα",
+        "totalCapacity": "Συνολική χωρητικότητα",
+        "listingStatus": "Κατάσταση καταχώρησης",
+        "channelManager": "Channel Manager",
+        "pms": "PMS",
+        "website": "Ιστοσελίδα",
+        "directBookings": "Απευθείας κρατήσεις"
+      },
+      "cards": {
+        "getStarted": "Get Started"
+      },
+      "status": {
+        "completed": "Get Started ολοκληρωμένο",
+        "pending": "Αναμονή για Get Started"
+      },
+      "actions": {
+        "openClient": "Άνοιγμα πελάτη",
+        "backToClients": "Επιστροφή στους πελάτες",
+        "openProperty": "Άνοιγμα ακινήτου",
+        "completeGetStarted": "Ολοκλήρωση Get Started",
+        "editClient": "Επεξεργασία πελάτη",
+        "newClient": "Νέος πελάτης"
+      },
+      "fallback": {
+        "unnamedClient": "Χωρίς όνομα",
+        "unnamedProperty": "Χωρίς όνομα ακινήτου",
+        "unnamedUnit": "Χωρίς όνομα μονάδας",
+        "noPhone": "Δεν υπάρχει τηλέφωνο",
+        "noDate": "—",
+        "noAddress": "Δεν υπάρχει διεύθυνση",
+        "noValue": "Δεν έχει καταχωρηθεί",
+        "notConfigured": "Δεν έχει ρυθμιστεί"
+      },
+      "client": {
+        "overviewTitle": "Στοιχεία πελάτη",
+        "propertiesTitle": "Ακίνητα πελάτη",
+        "propertiesDescription": "Όλα τα ακίνητα και οι μονάδες που ανήκουν στον συγκεκριμένο πελάτη.",
+        "bedrooms": "Υπνοδωμάτια",
+        "bathrooms": "Μπάνια",
+        "maxGuests": "Μέγιστοι επισκέπτες",
+        "quantity": "Ποσότητα",
+        "units": "Τύποι μονάδων",
+        "physicalProperties": "Συνολικά καταλύματα",
+        "totalCapacity": "Συνολική χωρητικότητα",
+        "noUnits": "Δεν υπάρχουν καταχωρημένες μονάδες για αυτό το ακίνητο.",
+        "noProperties": "Δεν υπάρχουν ακόμη ακίνητα για αυτόν τον πελάτη.",
+        "pendingTitle": "Το Get Started δεν έχει ολοκληρωθεί",
+        "pendingDescription": "Μπορείτε να συμπληρώσετε το Get Started εκ μέρους του πελάτη, για παράδειγμα όταν σας δώσει τα στοιχεία τηλεφωνικά.",
+        "completedDescription": "Ο πελάτης έχει ολοκληρώσει τη διαδικασία Get Started."
+      },
+      "search": {
+        "placeholder": "Αναζήτηση με όνομα, email ή τηλέφωνο...",
+        "button": "Αναζήτηση",
+        "clear": "Καθαρισμός",
+        "noResults": "Δεν βρέθηκαν πελάτες που να ταιριάζουν με την αναζήτησή σας."
+      }
+    },
+    "contactRequests": {
+      "title": "Αιτήματα Επικοινωνίας",
+      "description": "Όλα τα αιτήματα που έχουν σταλεί από τη φόρμα επικοινωνίας της HostMetric.",
+      "stats": {
+        "total": "Σύνολο αιτημάτων",
+        "unanswered": "Δεν απαντήθηκαν",
+        "answered": "Απαντήθηκαν"
+      },
+      "search": {
+        "placeholder": "Αναζήτηση με όνομα, email, τηλέφωνο, τοποθεσία ή μήνυμα...",
+        "button": "Αναζήτηση",
+        "clear": "Καθαρισμός"
+      },
+      "sections": {
+        "unanswered": {
+          "title": "Αναμονή απάντησης",
+          "description": "Αιτήματα επικοινωνίας που δεν έχουν ακόμη απαντηθεί.",
+          "empty": "Δεν υπάρχουν αιτήματα σε αναμονή απάντησης."
+        },
+        "answered": {
+          "title": "Απαντημένα",
+          "description": "Αιτήματα επικοινωνίας που έχουν ήδη απαντηθεί.",
+          "empty": "Δεν υπάρχουν ακόμη απαντημένα αιτήματα επικοινωνίας."
+        }
+      },
+      "fields": {
+        "request": "Αίτημα",
+        "email": "Email",
+        "phone": "Τηλέφωνο",
+        "location": "Τοποθεσία",
+        "date": "Ημερομηνία",
+        "propertyType": "Τύπος ακινήτου",
+        "client": "Πελάτης",
+        "message": "Μήνυμα",
+        "photos": "Φωτογραφίες",
+        "photo": "Φωτογραφία"
+      },
+      "actions": {
+        "markAnswered": "Σήμανση ως απαντημένο",
+        "markUnanswered": "Σήμανση ως μη απαντημένο",
+        "openClient": "Άνοιγμα πελάτη"
+      },
+      "fallback": {
+        "noValue": "Δεν δηλώθηκε",
+        "noClient": "Δεν υπάρχει συνδεδεμένος πελάτης"
+      }
+    },
+    "properties": {
+      "eyebrow": "HostMetric Admin",
+      "title": "Ακίνητα",
+      "description": "Όλα τα ακίνητα της HostMetric, οργανωμένα ανά κατάσταση και πελάτη.",
+      "search": {
+        "placeholder": "Αναζήτηση με όνομα ακινήτου, πελάτη, email, τύπο ή τοποθεσία...",
+        "button": "Αναζήτηση",
+        "clear": "Καθαρισμός"
+      },
+      "filters": {
+        "all": "Όλα",
+        "active": "Ενεργά",
+        "pending": "Σε αναμονή",
+        "inactive": "Ανενεργά"
+      },
+      "fields": {
+        "owner": "Πελάτης",
+        "propertyType": "Τύπος ακινήτου",
+        "location": "Τοποθεσία",
+        "units": "Μονάδες",
+        "status": "Κατάσταση"
+      },
+      "actions": {
+        "openProperty": "Άνοιγμα ακινήτου",
+        "newProperty": "Νέο ακίνητο"
+      },
+      "empty": {
+        "title": "Δεν υπάρχουν ακίνητα",
+        "description": "Δεν υπάρχουν ακόμη ακίνητα σε αυτή την κατηγορία.",
+        "searchTitle": "Δεν βρέθηκαν αποτελέσματα",
+        "searchDescription": "Δοκίμασε διαφορετικό όνομα, email, τύπο ακινήτου ή τοποθεσία."
+      },
+      "newProperty": {
+        "eyebrow": "Νέο ακίνητο",
+        "title": "Προσθήκη νέου ακινήτου",
+        "description": "Πριν προστεθεί το νέο ακίνητο, πρέπει να συνδεθεί υποχρεωτικά με έναν πελάτη.",
+        "existingClient": "Υφιστάμενος πελάτης",
+        "existingClientDescription": "Επιλέξτε έναν πελάτη που υπάρχει ήδη στο σύστημα.",
+        "newClient": "Νέος πελάτης",
+        "newClientDescription": "Καταχωρίστε έναν νέο πελάτη και στη συνέχεια συνδέστε μαζί του το νέο ακίνητο.",
+        "selectClient": "Επιλογή πελάτη",
+        "selectClientPlaceholder": "Επιλέξτε πελάτη",
+        "searchClientPlaceholder": "Αναζήτηση με όνομα, email ή τηλέφωνο...",
+        "continue": "Συνέχεια",
+        "back": "Πίσω",
+        "requiredClient": "Η σύνδεση του ακινήτου με πελάτη είναι υποχρεωτική.",
+        "selectedClient": "Επιλεγμένος πελάτης",
+        "changeClient": "Αλλαγή πελάτη",
+        "search": "Αναζήτηση",
+        "noClientsFound": "Δεν βρέθηκαν πελάτες.",
+        "fullName": "Ονοματεπώνυμο",
+        "email": "Email",
+        "phone": "Τηλέφωνο",
+        "phoneOptional": "Τηλέφωνο (προαιρετικό)",
+        "createClientAndContinue": "Δημιουργία πελάτη και συνέχεια",
+        "propertyCountry": "Χώρα ακινήτου",
+        "propertyType": "Τύπος ακινήτου",
+        "propertyCityArea": "Πόλη / Περιοχή ακινήτου",
+        "selectPropertyCountry": "Επιλέξτε χώρα ακινήτου",
+        "selectPropertyType": "Επιλέξτε τύπο ακινήτου"
+      }
+    },
+    "propertyDetails": {
+      "eyebrow": "HostMetric Admin",
+      "status": {
+        "pending": "Σε αναμονή",
+        "active": "Ενεργό",
+        "inactive": "Ανενεργό"
+      },
+      "stats": {
+        "units": "Τύποι μονάδων",
+        "bedrooms": "Υπνοδωμάτια",
+        "bathrooms": "Μπάνια",
+        "maxGuests": "Μέγιστοι επισκέπτες",
+        "totalUnits": "Συνολικές μονάδες"
+      },
+      "actions": {
+        "backToClient": "Επιστροφή στον πελάτη",
+        "openPhotos": "Άνοιγμα φωτογραφιών",
+        "showRawData": "Προβολή αρχικών δεδομένων",
+        "activateProperty": "Ενεργοποίηση ακινήτου",
+        "deactivateProperty": "Απενεργοποίηση ακινήτου",
+        "saveChanges": "Αποθήκευση αλλαγών",
+        "saveUnit": "Αποθήκευση μονάδας"
+      },
+      "client": {
+        "ownerLabel": "Πελάτης",
+        "openClient": "Άνοιγμα πελάτη"
+      },
+      "common": {
+        "yes": "Ναι",
+        "no": "Όχι"
+      },
+      "fallback": {
+        "unnamedProperty": "Χωρίς όνομα ακινήτου",
+        "unnamedUnit": "Χωρίς όνομα μονάδας",
+        "noValue": "Δεν έχει καταχωρηθεί",
+        "noUnits": "Δεν υπάρχουν καταχωρημένες μονάδες.",
+        "noPhotoFolder": "Δεν υπάρχει φάκελος φωτογραφιών."
+      },
+      "sections": {
+        "property": {
+          "title": "Στοιχεία ακινήτου",
+          "description": "Βασικά στοιχεία, τοποθεσία, ιδιοκτησία και στοιχεία εγγραφής του ακινήτου."
+        },
+        "units": {
+          "title": "Μονάδες και χωρητικότητα",
+          "description": "Όλοι οι τύποι μονάδων, οι ποσότητες, η διαρρύθμιση και η χωρητικότητά τους."
+        },
+        "distribution": {
+          "title": "Πλατφόρμες και συστήματα",
+          "description": "Πλατφόρμες κρατήσεων, Channel Manager, PMS, ιστοσελίδα και απευθείας κρατήσεις."
+        },
+        "operations": {
+          "title": "Λειτουργία καταλύματος",
+          "description": "Check-in, check-out, τρόπος άφιξης, γλώσσες επισκεπτών και στοιχεία λειτουργίας."
+        },
+        "policies": {
+          "title": "Πολιτικές",
+          "description": "Πολιτικές για παιδιά, κατοικίδια, κάπνισμα, πάρτι, ακυρώσεις και διαμονή."
+        },
+        "facilities": {
+          "title": "Παροχές και προσβασιμότητα",
+          "description": "Parking, πρωινό, internet, παροχές και πληροφορίες προσβασιμότητας."
+        },
+        "pricing": {
+          "title": "Τιμολόγηση και απόδοση",
+          "description": "Τιμές, χρεώσεις, εκπτώσεις, πληρότητα, έσοδα και στόχοι απόδοσης."
+        },
+        "listingContent": {
+          "title": "Περιεχόμενο καταχώρησης",
+          "description": "Τίτλος, περιγραφή, δυνατά σημεία, γειτονιά, αξιοθέατα και πληροφορίες καταχώρησης."
+        },
+        "goals": {
+          "title": "Στόχοι και προτιμήσεις",
+          "description": "Κύριοι στόχοι του πελάτη, χρονοδιάγραμμα έναρξης και προτιμήσεις επικοινωνίας."
+        },
+        "owner": {
+          "title": "Στοιχεία ιδιοκτήτη",
+          "description": "Προσωπικά, φορολογικά και επαγγελματικά στοιχεία του ιδιοκτήτη."
+        },
+        "confirmations": {
+          "title": "Επιβεβαιώσεις και εξουσιοδοτήσεις",
+          "description": "Επιβεβαιώσεις ακρίβειας στοιχείων και εξουσιοδοτήσεις για τη διαχείριση και δημιουργία καταχωρήσεων."
+        },
+        "photos": {
+          "title": "Φωτογραφίες και αρχεία",
+          "description": "Πρόσβαση στον φάκελο φωτογραφιών και στα σχετικά αρχεία του ακινήτου."
+        },
+        "raw": {
+          "title": "Αρχικά δεδομένα",
+          "description": "Πλήρες αρχικό snapshot των δεδομένων που υποβλήθηκαν μέσω του Get Started."
+        }
+      },
+      "labels": {
+        "propertyName": "Όνομα ακινήτου",
+        "propertyType": "Τύπος ακινήτου",
+        "country": "Χώρα",
+        "region": "Περιοχή",
+        "city": "Πόλη",
+        "address": "Διεύθυνση",
+        "postalCode": "Ταχυδρομικός κώδικας",
+        "ownershipStatus": "Καθεστώς ιδιοκτησίας",
+        "accommodationStructure": "Δομή καταλύματος",
+        "registrationStatus": "Κατάσταση εγγραφής",
+        "registrationNumber": "Αριθμός εγγραφής",
+        "landRegistrationNumber": "Αριθμός κτηματολογικής εγγραφής",
+        "additionalLegalNumber": "Πρόσθετος νομικός αριθμός",
+        "listingStatus": "Κατάσταση καταχώρησης",
+        "currentlyOperating": "Λειτουργεί αυτή τη στιγμή",
+        "existingListings": "Υφιστάμενες καταχωρήσεις",
+        "internalNotes": "Εσωτερικές σημειώσεις",
+        "bedrooms": "Υπνοδωμάτια",
+        "bathrooms": "Μπάνια",
+        "sizeSqm": "Μέγεθος (τ.μ.)",
+        "maxGuests": "Μέγιστοι επισκέπτες",
+        "maxAdults": "Μέγιστοι ενήλικες",
+        "maxChildren": "Μέγιστα παιδιά",
+        "kitchen": "Κουζίνα",
+        "smokingPolicy": "Πολιτική καπνίσματος",
+        "beds": "Κρεβάτια",
+        "kingBeds": "King κρεβάτια",
+        "queenBeds": "Queen κρεβάτια",
+        "doubleBeds": "Διπλά κρεβάτια",
+        "singleBeds": "Μονά κρεβάτια",
+        "sofaBeds": "Καναπέδες-κρεβάτια",
+        "bunkBeds": "Κουκέτες",
+        "amenities": "Παροχές",
+        "accessibility": "Προσβασιμότητα",
+        "currentBaseRate": "Τρέχουσα βασική τιμή",
+        "weekendRate": "Τιμή Σαββατοκύριακου",
+        "minimumNightlyRate": "Ελάχιστη τιμή ανά βράδυ",
+        "extraGuestFee": "Χρέωση επιπλέον επισκέπτη",
+        "childFee": "Χρέωση παιδιού",
+        "notes": "Σημειώσεις",
+        "bookingId": "Booking.com ID",
+        "airbnbId": "Airbnb ID",
+        "vrboId": "Vrbo ID",
+        "expediaId": "Expedia ID",
+        "agodaId": "Agoda ID",
+        "tripcomId": "Trip.com ID",
+        "otherPlatform": "Άλλη πλατφόρμα",
+        "channelManagerStatus": "Κατάσταση Channel Manager",
+        "channelManagerName": "Channel Manager",
+        "pmsStatus": "Κατάσταση PMS",
+        "pmsName": "PMS",
+        "websiteStatus": "Κατάσταση ιστοσελίδας",
+        "directBookingsStatus": "Απευθείας κρατήσεις",
+        "selectedPlatforms": "Επιλεγμένες πλατφόρμες",
+        "checkInFrom": "Check-in από",
+        "checkInUntil": "Check-in μέχρι",
+        "checkOutFrom": "Check-out από",
+        "checkOutUntil": "Check-out μέχρι",
+        "checkInMethod": "Τρόπος check-in",
+        "receptionStatus": "Reception",
+        "guestLanguages": "Γλώσσες επισκεπτών",
+        "advanceNotice": "Προειδοποίηση πριν την κράτηση",
+        "bookingWindow": "Παράθυρο κρατήσεων",
+        "sameDayBooking": "Κράτηση ίδιας ημέρας",
+        "minimumStay": "Ελάχιστη διαμονή",
+        "maximumStay": "Μέγιστη διαμονή",
+        "guestArrivalNotes": "Οδηγίες άφιξης επισκεπτών",
+        "ownerBlockedDates": "Ημερομηνίες δεσμευμένες από ιδιοκτήτη",
+        "childrenPolicy": "Πολιτική παιδιών",
+        "minimumGuestAge": "Ελάχιστη ηλικία επισκέπτη",
+        "petsPolicy": "Πολιτική κατοικίδιων",
+        "partiesPolicy": "Πολιτική πάρτι",
+        "smokingPropertyPolicy": "Πολιτική καπνίσματος ακινήτου",
+        "quietHours": "Ώρες κοινής ησυχίας",
+        "cancellationPreference": "Πολιτική ακύρωσης",
+        "noShowPolicy": "Πολιτική μη εμφάνισης",
+        "parkingDetails": "Parking",
+        "breakfastDetails": "Πρωινό",
+        "internetDetails": "Internet",
+        "accessibilityNotes": "Σημειώσεις προσβασιμότητας",
+        "propertyFacilities": "Παροχές ακινήτου",
+        "propertyAccessibility": "Προσβασιμότητα ακινήτου",
+        "currency": "Νόμισμα",
+        "cleaningFee": "Χρέωση καθαρισμού",
+        "cleaningFeeType": "Τύπος χρέωσης καθαρισμού",
+        "securityDeposit": "Εγγύηση",
+        "localTaxKnown": "Γνωστός τοπικός φόρος",
+        "breakfastPricing": "Χρέωση πρωινού",
+        "breakfastPrice": "Τιμή πρωινού",
+        "currentAverageOccupancy": "Τρέχουσα μέση πληρότητα",
+        "currentAverageDailyRate": "Τρέχουσα μέση ημερήσια τιμή",
+        "annualRevenueEstimate": "Εκτιμώμενα ετήσια έσοδα",
+        "revenueTarget": "Στόχος εσόδων",
+        "weeklyDiscount": "Εβδομαδιαία έκπτωση",
+        "monthlyDiscount": "Μηνιαία έκπτωση",
+        "nonRefundableRate": "Μη επιστρέψιμη τιμή",
+        "mobileRate": "Έκπτωση για κινητές συσκευές",
+        "lastMinuteDiscount": "Έκπτωση τελευταίας στιγμής",
+        "earlyBookerDiscount": "Έκπτωση έγκαιρης κράτησης",
+        "localTaxDetails": "Στοιχεία τοπικού φόρου",
+        "pricingNotes": "Σημειώσεις τιμολόγησης",
+        "existingListingTitle": "Υφιστάμενος τίτλος καταχώρησης",
+        "propertySummary": "Περιγραφή ακινήτου",
+        "uniqueSellingPoints": "Μοναδικά πλεονεκτήματα",
+        "neighbourhoodDescription": "Περιγραφή γειτονιάς",
+        "gettingAround": "Μετακινήσεις",
+        "nearbyAttractions": "Κοντινά αξιοθέατα",
+        "otherListingNotes": "Άλλες σημειώσεις καταχώρησης",
+        "photoRightsConfirmed": "Επιβεβαίωση δικαιωμάτων φωτογραφιών",
+        "primaryGoal": "Κύριος στόχος",
+        "preferredStartTimeline": "Επιθυμητό χρονοδιάγραμμα έναρξης",
+        "preferredContactMethod": "Προτιμώμενος τρόπος επικοινωνίας",
+        "bestContactTime": "Καλύτερη ώρα επικοινωνίας",
+        "finalNotes": "Τελικές σημειώσεις",
+        "ownerType": "Τύπος ιδιοκτήτη",
+        "firstName": "Όνομα",
+        "lastName": "Επώνυμο",
+        "email": "Email",
+        "phone": "Τηλέφωνο",
+        "countryOfResidence": "Χώρα διαμονής",
+        "birthDate": "Ημερομηνία γέννησης",
+        "homeAddress": "Διεύθυνση κατοικίας",
+        "homeCity": "Πόλη κατοικίας",
+        "homePostalCode": "Ταχυδρομικός κώδικας κατοικίας",
+        "businessName": "Επωνυμία επιχείρησης",
+        "businessRegistrationNumber": "Αριθμός εγγραφής επιχείρησης",
+        "vatNumber": "Αριθμός ΦΠΑ",
+        "taxId": "Φορολογικός αριθμός",
+        "businessAddress": "Διεύθυνση επιχείρησης",
+        "businessCity": "Πόλη επιχείρησης",
+        "businessPostalCode": "Ταχυδρομικός κώδικας επιχείρησης",
+        "informationAccuracyConfirmed": "Επιβεβαίωση ακρίβειας πληροφοριών",
+        "authorizationConfirmed": "Επιβεβαίωση εξουσιοδότησης",
+        "listingSetupAuthorization": "Εξουσιοδότηση δημιουργίας καταχωρήσεων",
+        "submissionStatus": "Κατάσταση υποβολής",
+        "createdAt": "Ημερομηνία δημιουργίας",
+        "updatedAt": "Τελευταία ενημέρωση",
+        "driveFolderId": "Google Drive Folder ID",
+        "unitName": "Όνομα μονάδας",
+        "unitType": "Τύπος μονάδας",
+        "quantity": "Ποσότητα",
+        "bookingUrl": "Σύνδεσμος Booking.com",
+        "airbnbUrl": "Σύνδεσμος Airbnb",
+        "vrboUrl": "Σύνδεσμος Vrbo",
+        "expediaUrl": "Σύνδεσμος Expedia",
+        "agodaUrl": "Σύνδεσμος Agoda",
+        "tripcomUrl": "Σύνδεσμος Trip.com",
+        "otherPlatformUrl": "Σύνδεσμος άλλης πλατφόρμας",
+        "websiteUrl": "Σύνδεσμος ιστοσελίδας"
+      },
+      "photos": {
+        "propertyFiles": "Αρχεία ακινήτου",
+        "unitFiles": "Αρχεία μονάδας",
+        "category": "Κατηγορία",
+        "scope": "Επίπεδο",
+        "unit": "Μονάδα",
+        "uploaded": "Ανέβηκε",
+        "fileSize": "Μέγεθος",
+        "openFile": "Άνοιγμα αρχείου",
+        "addPhotos": "Προσθήκη φωτογραφιών",
+        "deleteFile": "Διαγραφή",
+        "moveFile": "Αλλαγή κατηγορίας",
+        "moveToCategory": "Μετακίνηση σε κατηγορία",
+        "chooseCategory": "Επιλογή κατηγορίας",
+        "chooseUnit": "Επιλογή μονάδας",
+        "propertyLevel": "Ακίνητο / κοινόχρηστοι χώροι",
+        "noFiles": "Δεν υπάρχουν ακόμη φωτογραφίες ή αρχεία.",
+        "uploadFiles": "Ανέβασμα αρχείων",
+        "uploading": "Ανέβασμα...",
+        "deleteConfirm": "Θέλεις σίγουρα να διαγράψεις αυτό το αρχείο από το Google Drive και τη βάση δεδομένων;",
+        "move": "Μετακίνηση",
+        "cancel": "Ακύρωση",
+        "fileName": "Όνομα αρχείου",
+        "fileType": "Τύπος αρχείου"
+      }
+    },
+    "navigation": {
+      "management": "Διαχείριση",
+      "dashboard": "Πίνακας Ελέγχου",
+      "leads": "Πελάτες",
+      "contactRequests": "Αιτήματα Επικοινωνίας",
+      "getStarted": "Get Started",
+      "properties": "Ακίνητα",
+      "photos": "Φωτογραφίες",
+      "logout": "Αποσύνδεση"
+    },
+    "common": {
+      "administration": "HostMetric Administration",
+      "managementSystem": "Σύστημα Διαχείρισης",
+      "internalManagementSystem": "Εσωτερικό Σύστημα Διαχείρισης",
+      "dateLocale": "el-GR",
+      "adminConsole": "Admin Console",
+      "administrator": "Διαχειριστής",
+      "hostMetricTeam": "Ομάδα HostMetric",
+      "openMenu": "Άνοιγμα μενού διαχείρισης",
+      "closeMenu": "Κλείσιμο μενού διαχείρισης"
     }
   }
 }

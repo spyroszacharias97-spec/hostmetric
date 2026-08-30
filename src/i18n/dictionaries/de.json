@@ -2186,5 +2186,524 @@
       "Zambia": "Sambia",
       "Zimbabwe": "Simbabwe"
     }
+  },
+  "admin": {
+    "dashboard": {
+      "eyebrow": "HostMetric Admin",
+      "title": "Dashboard",
+      "description": "Central overview of HostMetric clients, requests and properties.",
+      "cards": {
+        "leads": "Clients",
+        "contactRequests": "Contact Requests",
+        "getStarted": "Get Started",
+        "properties": "Properties"
+      },
+      "actions": {
+        "open": "Open"
+      },
+      "propertiesSection": {
+        "eyebrow": "Properties",
+        "title": "Property Status",
+        "description": "Select any property to open all of its details.",
+        "allProperties": "All Properties",
+        "units": "Units",
+        "empty": "There are no properties yet."
+      },
+      "statusCards": {
+        "active": "Active",
+        "pending": "Pending",
+        "inactive": "Inactive"
+      },
+      "contactRequests": {
+        "unansweredBadge": "Unanswered"
+      }
+    },
+    "leads": {
+      "eyebrow": "HostMetric Admin",
+      "title": "Clients",
+      "description": "All clients and their Get Started completion status.",
+      "stats": {
+        "total": "Total Clients",
+        "completed": "Completed Get Started",
+        "pending": "Pending Get Started"
+      },
+      "sections": {
+        "completed": {
+          "title": "Completed Get Started",
+          "description": "Clients who have already submitted their complete property information.",
+          "empty": "There are no clients in this category yet."
+        },
+        "pending": {
+          "title": "Pending Get Started",
+          "description": "Clients who contacted us but have not yet completed Get Started.",
+          "empty": "There are no clients waiting to complete Get Started."
+        }
+      },
+      "fields": {
+        "email": "Email",
+        "phone": "Phone",
+        "requests": "Requests",
+        "properties": "Properties",
+        "latestContact": "Latest Contact",
+        "getStarted": "Get Started",
+        "propertyType": "Property Type",
+        "location": "Location",
+        "unitTypes": "Unit Types",
+        "physicalProperties": "Total Properties",
+        "totalCapacity": "Total Capacity",
+        "listingStatus": "Listing Status",
+        "channelManager": "Channel Manager",
+        "pms": "PMS",
+        "website": "Website",
+        "directBookings": "Direct Bookings"
+      },
+      "cards": {
+        "getStarted": "Get Started"
+      },
+      "status": {
+        "completed": "Get Started Completed",
+        "pending": "Pending Get Started"
+      },
+      "actions": {
+        "openClient": "Open Client",
+        "backToClients": "Back to Clients",
+        "openProperty": "Open Property",
+        "completeGetStarted": "Complete Get Started",
+        "editClient": "Edit Client",
+        "newClient": "New Client"
+      },
+      "fallback": {
+        "unnamedClient": "Unnamed Client",
+        "unnamedProperty": "Unnamed Property",
+        "unnamedUnit": "Unnamed Unit",
+        "noPhone": "No Phone",
+        "noDate": "—",
+        "noAddress": "No Address",
+        "noValue": "Not Provided",
+        "notConfigured": "Not Configured"
+      },
+      "client": {
+        "overviewTitle": "Client Details",
+        "propertiesTitle": "Client Properties",
+        "propertiesDescription": "All properties and units belonging to this client.",
+        "bedrooms": "Bedrooms",
+        "bathrooms": "Bathrooms",
+        "maxGuests": "Maximum Guests",
+        "quantity": "Quantity",
+        "units": "Unit Types",
+        "physicalProperties": "Total Properties",
+        "totalCapacity": "Total Capacity",
+        "noUnits": "There are no registered units for this property.",
+        "noProperties": "There are no properties for this client yet.",
+        "pendingTitle": "Get Started Has Not Been Completed",
+        "pendingDescription": "You can complete Get Started on behalf of the client, for example when they provide their information by phone.",
+        "completedDescription": "The client has completed the Get Started process."
+      },
+      "search": {
+        "placeholder": "Search by name, email or phone...",
+        "button": "Search",
+        "clear": "Clear",
+        "noResults": "No clients matched your search."
+      }
+    },
+    "contactRequests": {
+      "title": "Contact Requests",
+      "description": "All enquiries submitted through the HostMetric contact form.",
+      "stats": {
+        "total": "Total Requests",
+        "unanswered": "Unanswered",
+        "answered": "Answered"
+      },
+      "search": {
+        "placeholder": "Search by name, email, phone, location or message...",
+        "button": "Search",
+        "clear": "Clear"
+      },
+      "sections": {
+        "unanswered": {
+          "title": "Awaiting Reply",
+          "description": "Contact requests that have not yet been answered.",
+          "empty": "There are no contact requests awaiting a reply."
+        },
+        "answered": {
+          "title": "Answered",
+          "description": "Contact requests that have already been answered.",
+          "empty": "There are no answered contact requests yet."
+        }
+      },
+      "fields": {
+        "request": "Request",
+        "email": "Email",
+        "phone": "Phone",
+        "location": "Location",
+        "date": "Date",
+        "propertyType": "Property Type",
+        "client": "Client",
+        "message": "Message",
+        "photos": "Photos",
+        "photo": "Photo"
+      },
+      "actions": {
+        "markAnswered": "Mark as Answered",
+        "markUnanswered": "Mark as Unanswered",
+        "openClient": "Open Client"
+      },
+      "fallback": {
+        "noValue": "Not Provided",
+        "noClient": "No linked client"
+      }
+    },
+    "properties": {
+      "eyebrow": "HostMetric Admin",
+      "title": "Properties",
+      "description": "All HostMetric properties, organized by status and client.",
+      "search": {
+        "placeholder": "Search by property name, client, email, type or location...",
+        "button": "Search",
+        "clear": "Clear"
+      },
+      "filters": {
+        "all": "All",
+        "active": "Active",
+        "pending": "Pending",
+        "inactive": "Inactive"
+      },
+      "fields": {
+        "owner": "Client",
+        "propertyType": "Property Type",
+        "location": "Location",
+        "units": "Units",
+        "status": "Status"
+      },
+      "actions": {
+        "openProperty": "Open Property",
+        "newProperty": "New Property"
+      },
+      "empty": {
+        "title": "No Properties",
+        "description": "There are no properties in this category yet.",
+        "searchTitle": "No Results Found",
+        "searchDescription": "Try a different name, email, property type or location."
+      },
+      "newProperty": {
+        "eyebrow": "New Property",
+        "title": "Add New Property",
+        "description": "Before adding a new property, it must be linked to a client.",
+        "existingClient": "Existing Client",
+        "existingClientDescription": "Select a client who already exists in the system.",
+        "newClient": "New Client",
+        "newClientDescription": "Create a new client and then link the new property to them.",
+        "selectClient": "Select Client",
+        "selectClientPlaceholder": "Select a client",
+        "searchClientPlaceholder": "Search by name, email or phone...",
+        "continue": "Continue",
+        "back": "Back",
+        "requiredClient": "The property must be linked to a client.",
+        "selectedClient": "Selected Client",
+        "changeClient": "Change Client",
+        "search": "Search",
+        "noClientsFound": "No clients found.",
+        "fullName": "Full Name",
+        "email": "Email",
+        "phone": "Phone",
+        "phoneOptional": "Phone (optional)",
+        "createClientAndContinue": "Create Client and Continue",
+        "propertyCountry": "Property Country",
+        "propertyType": "Property Type",
+        "propertyCityArea": "Property City / Area",
+        "selectPropertyCountry": "Select property country",
+        "selectPropertyType": "Select property type"
+      }
+    },
+    "propertyDetails": {
+      "eyebrow": "HostMetric Admin",
+      "status": {
+        "pending": "Pending",
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "stats": {
+        "units": "Unit Types",
+        "bedrooms": "Bedrooms",
+        "bathrooms": "Bathrooms",
+        "maxGuests": "Maximum Guests",
+        "totalUnits": "Total Units"
+      },
+      "actions": {
+        "backToClient": "Back to Client",
+        "openPhotos": "Open Photos",
+        "showRawData": "Show Raw Data",
+        "activateProperty": "Activate Property",
+        "deactivateProperty": "Deactivate Property",
+        "saveChanges": "Save Changes",
+        "saveUnit": "Save Unit"
+      },
+      "client": {
+        "ownerLabel": "Client",
+        "openClient": "Open Client"
+      },
+      "common": {
+        "yes": "Yes",
+        "no": "No"
+      },
+      "fallback": {
+        "unnamedProperty": "Unnamed Property",
+        "unnamedUnit": "Unnamed Unit",
+        "noValue": "Not Provided",
+        "noUnits": "No units have been registered for this property.",
+        "noPhotoFolder": "No photo folder is available."
+      },
+      "sections": {
+        "property": {
+          "title": "Property Information",
+          "description": "Main identification, location and legal information for the property."
+        },
+        "units": {
+          "title": "Units",
+          "description": "Complete information for all unit types belonging to this property."
+        },
+        "distribution": {
+          "title": "Distribution & Listings",
+          "description": "Booking platforms, listings, Channel Manager, PMS, website and direct bookings."
+        },
+        "operations": {
+          "title": "Operations",
+          "description": "Check-in, check-out, reception and day-to-day operating information."
+        },
+        "policies": {
+          "title": "Policies",
+          "description": "Guest, children, pets, smoking, cancellation and other property policies."
+        },
+        "facilities": {
+          "title": "Facilities & Accessibility",
+          "description": "Facilities, internet, parking, breakfast and accessibility information."
+        },
+        "pricing": {
+          "title": "Pricing & Revenue",
+          "description": "Rates, fees, discounts, taxes, occupancy and revenue information."
+        },
+        "listingContent": {
+          "title": "Listing Content",
+          "description": "Listing title, property description, selling points, neighbourhood and arrival information."
+        },
+        "goals": {
+          "title": "Goals & Preferences",
+          "description": "Client goals, preferred timeline and communication preferences."
+        },
+        "owner": {
+          "title": "Owner Information",
+          "description": "Personal or business information belonging to the property owner."
+        },
+        "confirmations": {
+          "title": "Confirmations",
+          "description": "Authorizations, confirmations and submission information."
+        },
+        "photos": {
+          "title": "Photos & Files",
+          "description": "Access the property's uploaded photos and files."
+        },
+        "raw": {
+          "title": "Technical Data",
+          "description": "Raw stored submission data for technical or administrative use."
+        }
+      },
+      "labels": {
+        "propertyName": "Property Name",
+        "propertyType": "Property Type",
+        "country": "Country",
+        "region": "Region",
+        "city": "City",
+        "address": "Address",
+        "postalCode": "Postal Code",
+        "ownershipStatus": "Ownership Status",
+        "accommodationStructure": "Accommodation Structure",
+        "registrationStatus": "Registration Status",
+        "registrationNumber": "Registration Number",
+        "landRegistrationNumber": "Land Registration Number",
+        "additionalLegalNumber": "Additional Legal Number",
+        "listingStatus": "Listing Status",
+        "currentlyOperating": "Currently Operating",
+        "existingListings": "Existing Listings",
+        "internalNotes": "Internal Notes",
+        "bedrooms": "Bedrooms",
+        "bathrooms": "Bathrooms",
+        "sizeSqm": "Size (m²)",
+        "maxGuests": "Maximum Guests",
+        "maxAdults": "Maximum Adults",
+        "maxChildren": "Maximum Children",
+        "kitchen": "Kitchen",
+        "smokingPolicy": "Smoking Policy",
+        "beds": "Beds",
+        "kingBeds": "King Beds",
+        "queenBeds": "Queen Beds",
+        "doubleBeds": "Double Beds",
+        "singleBeds": "Single Beds",
+        "sofaBeds": "Sofa Beds",
+        "bunkBeds": "Bunk Beds",
+        "amenities": "Amenities",
+        "accessibility": "Accessibility",
+        "currentBaseRate": "Current Base Rate",
+        "weekendRate": "Weekend Rate",
+        "minimumNightlyRate": "Minimum Nightly Rate",
+        "extraGuestFee": "Extra Guest Fee",
+        "childFee": "Child Fee",
+        "notes": "Notes",
+        "bookingId": "Booking.com ID",
+        "airbnbId": "Airbnb ID",
+        "vrboId": "Vrbo ID",
+        "expediaId": "Expedia ID",
+        "agodaId": "Agoda ID",
+        "tripcomId": "Trip.com ID",
+        "otherPlatform": "Other Platform",
+        "channelManagerStatus": "Channel Manager Status",
+        "channelManagerName": "Channel Manager",
+        "pmsStatus": "PMS Status",
+        "pmsName": "PMS",
+        "websiteStatus": "Website Status",
+        "directBookingsStatus": "Direct Bookings Status",
+        "selectedPlatforms": "Selected Platforms",
+        "checkInFrom": "Check-in From",
+        "checkInUntil": "Check-in Until",
+        "checkOutFrom": "Check-out From",
+        "checkOutUntil": "Check-out Until",
+        "checkInMethod": "Check-in Method",
+        "receptionStatus": "Reception Status",
+        "guestLanguages": "Guest Languages",
+        "advanceNotice": "Advance Notice",
+        "bookingWindow": "Booking Window",
+        "sameDayBooking": "Same-Day Booking",
+        "minimumStay": "Minimum Stay",
+        "maximumStay": "Maximum Stay",
+        "guestArrivalNotes": "Guest Arrival Notes",
+        "ownerBlockedDates": "Owner Blocked Dates",
+        "childrenPolicy": "Children Policy",
+        "minimumGuestAge": "Minimum Guest Age",
+        "petsPolicy": "Pets Policy",
+        "partiesPolicy": "Parties Policy",
+        "smokingPropertyPolicy": "Property Smoking Policy",
+        "quietHours": "Quiet Hours",
+        "cancellationPreference": "Cancellation Preference",
+        "noShowPolicy": "No-Show Policy",
+        "parkingDetails": "Parking",
+        "breakfastDetails": "Breakfast",
+        "internetDetails": "Internet",
+        "accessibilityNotes": "Accessibility Notes",
+        "propertyFacilities": "Property Facilities",
+        "propertyAccessibility": "Property Accessibility",
+        "currency": "Currency",
+        "cleaningFee": "Cleaning Fee",
+        "cleaningFeeType": "Cleaning Fee Type",
+        "securityDeposit": "Security Deposit",
+        "localTaxKnown": "Local Tax Known",
+        "breakfastPricing": "Breakfast Pricing",
+        "breakfastPrice": "Breakfast Price",
+        "currentAverageOccupancy": "Current Average Occupancy",
+        "currentAverageDailyRate": "Current Average Daily Rate",
+        "annualRevenueEstimate": "Estimated Annual Revenue",
+        "revenueTarget": "Revenue Target",
+        "weeklyDiscount": "Weekly Discount",
+        "monthlyDiscount": "Monthly Discount",
+        "nonRefundableRate": "Non-Refundable Rate",
+        "mobileRate": "Mobile Rate",
+        "lastMinuteDiscount": "Last-Minute Discount",
+        "earlyBookerDiscount": "Early Booker Discount",
+        "localTaxDetails": "Local Tax Details",
+        "pricingNotes": "Pricing Notes",
+        "existingListingTitle": "Existing Listing Title",
+        "propertySummary": "Property Summary",
+        "uniqueSellingPoints": "Unique Selling Points",
+        "neighbourhoodDescription": "Neighbourhood Description",
+        "gettingAround": "Getting Around",
+        "nearbyAttractions": "Nearby Attractions",
+        "otherListingNotes": "Other Listing Notes",
+        "photoRightsConfirmed": "Photo Rights Confirmed",
+        "primaryGoal": "Primary Goal",
+        "preferredStartTimeline": "Preferred Start Timeline",
+        "preferredContactMethod": "Preferred Contact Method",
+        "bestContactTime": "Best Contact Time",
+        "finalNotes": "Final Notes",
+        "ownerType": "Owner Type",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "phone": "Phone",
+        "countryOfResidence": "Country of Residence",
+        "birthDate": "Date of Birth",
+        "homeAddress": "Home Address",
+        "homeCity": "Home City",
+        "homePostalCode": "Home Postal Code",
+        "businessName": "Business Name",
+        "businessRegistrationNumber": "Business Registration Number",
+        "vatNumber": "VAT Number",
+        "taxId": "Tax ID",
+        "businessAddress": "Business Address",
+        "businessCity": "Business City",
+        "businessPostalCode": "Business Postal Code",
+        "informationAccuracyConfirmed": "Information Accuracy Confirmed",
+        "authorizationConfirmed": "Authorization Confirmed",
+        "listingSetupAuthorization": "Listing Setup Authorization",
+        "submissionStatus": "Submission Status",
+        "createdAt": "Created At",
+        "updatedAt": "Updated At",
+        "driveFolderId": "Drive Folder ID",
+        "unitName": "Unit Name",
+        "unitType": "Unit Type",
+        "quantity": "Quantity",
+        "bookingUrl": "Booking.com URL",
+        "airbnbUrl": "Airbnb URL",
+        "vrboUrl": "Vrbo URL",
+        "expediaUrl": "Expedia URL",
+        "agodaUrl": "Agoda URL",
+        "tripcomUrl": "Trip.com URL",
+        "otherPlatformUrl": "Other Platform URL",
+        "websiteUrl": "Website URL"
+      },
+      "photos": {
+        "propertyFiles": "Property Files",
+        "unitFiles": "Unit Files",
+        "category": "Category",
+        "scope": "Scope",
+        "unit": "Unit",
+        "uploaded": "Uploaded",
+        "fileSize": "Size",
+        "openFile": "Open File",
+        "addPhotos": "Add Photos",
+        "deleteFile": "Delete",
+        "moveFile": "Change Category",
+        "moveToCategory": "Move to Category",
+        "chooseCategory": "Choose Category",
+        "chooseUnit": "Choose Unit",
+        "propertyLevel": "Property / Shared Areas",
+        "noFiles": "There are no photos or files yet.",
+        "uploadFiles": "Upload Files",
+        "uploading": "Uploading...",
+        "deleteConfirm": "Are you sure you want to delete this file from Google Drive and the database?",
+        "move": "Move",
+        "cancel": "Cancel",
+        "fileName": "File Name",
+        "fileType": "File Type"
+      }
+    },
+    "navigation": {
+      "management": "Management",
+      "dashboard": "Dashboard",
+      "leads": "Clients",
+      "contactRequests": "Contact Requests",
+      "getStarted": "Get Started",
+      "properties": "Properties",
+      "photos": "Photos",
+      "logout": "Log Out"
+    },
+    "common": {
+      "administration": "HostMetric Administration",
+      "managementSystem": "Management System",
+      "internalManagementSystem": "Internal Management System",
+      "dateLocale": "en-GB",
+      "adminConsole": "Admin Console",
+      "administrator": "Administrator",
+      "hostMetricTeam": "HostMetric Team",
+      "openMenu": "Open administration menu",
+      "closeMenu": "Close administration menu"
+    }
   }
 }

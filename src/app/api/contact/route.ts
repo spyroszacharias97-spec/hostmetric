@@ -646,6 +646,23 @@ async function submitContact(
   const submission =
     result[0];
 
+  // Use the shared contact/lead ID for email numbering, not the
+  // independent contact_submissions primary key. The database trigger
+  // that maintains contacts has already run by the time the INSERT returns.
+  const contactRows = await sql`
+    SELECT id
+    FROM contacts
+    WHERE LOWER(email) = LOWER(${email})
+    ORDER BY id ASC
+    LIMIT 1;
+  `;
+
+  const contactId = Number(contactRows[0]?.id);
+
+  if (!Number.isFinite(contactId)) {
+    throw new Error("Could not resolve the contact ID for this submission.");
+  }
+
   const safeFullName =
     escapeHtml(fullName);
 
@@ -750,7 +767,7 @@ async function submitContact(
       replyTo: email,
 
       subject:
-        `Νέο αίτημα #${submission.id} από ${fullName}`,
+        `Νέο αίτημα #${contactId} από ${fullName}`,
 
       html: `
         <div
@@ -821,6 +838,9 @@ async function submitContact(
               color:#777;
             "
           >
+            Lead ID:
+            ${contactId}
+            <br />
             Submission ID:
             ${submission.id}
           </p>

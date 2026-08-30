@@ -3,6 +3,8 @@ import { neon } from "@neondatabase/serverless";
 import { Resend } from "resend";
 import { google } from "googleapis";
 
+import { auth } from "@/auth";
+
 export const runtime = "nodejs";
 
 const MAX_TOTAL_FILES = 300;
@@ -172,17 +174,15 @@ function getDriveClient() {
   });
 }
 
+const DEFAULT_ONBOARDING_PARENT_FOLDER_ID =
+  "11wKPub-OlfbVJM8t-yLiwhC2ZYiyFT9i";
+
 function getOnboardingParentFolderId() {
-  const parentFolderId =
-    process.env.GOOGLE_ONBOARDING_DRIVE_FOLDER_ID;
-
-  if (!parentFolderId) {
-    throw new Error(
-      "GOOGLE_ONBOARDING_DRIVE_FOLDER_ID is missing."
-    );
-  }
-
-  return parentFolderId;
+  return (
+    process.env.GOOGLE_ONBOARDING_DRIVE_FOLDER_ID?.trim() ||
+    process.env.GOOGLE_DRIVE_FOLDER_ID?.trim() ||
+    DEFAULT_ONBOARDING_PARENT_FOLDER_ID
+  );
 }
 
 function escapeHtml(value: string) {
@@ -875,7 +875,7 @@ async function verifyUploadedFiles(
   }
 
   throw new Error(
-    `Ανέβηκαν ${lastVerified.length} από ${expectedFileCount} αρχεία. Παρακαλώ δοκιμάστε ξανά.`
+    `Uploaded ${lastVerified.length} of ${expectedFileCount} files. Please try again.`
   );
 }
 
@@ -900,7 +900,8 @@ async function cleanupUploadBatch(
 function validateOnboardingPayload(
   formData: Record<string, unknown>,
   units: UnitInput[],
-  selectedPlatforms: string[]
+  selectedPlatforms: string[],
+  adminMode = false
 ) {
   const requiredFields = [
     "propertyCountry",
@@ -929,8 +930,12 @@ function validateOnboardingPayload(
     "petsPolicy",
     "partiesPolicy",
     "smokingPropertyPolicy",
-    "primaryGoal",
-    "preferredContactMethod",
+    ...(adminMode
+      ? []
+      : [
+          "primaryGoal",
+          "preferredContactMethod",
+        ]),
   ];
 
   for (const field of requiredFields) {
@@ -954,9 +959,12 @@ function validateOnboardingPayload(
   }
 
   if (
-    formData.informationAccuracyConfirmed !== "yes" ||
-    formData.authorizationConfirmed !== "yes" ||
-    formData.listingSetupAuthorization !== "yes"
+    !adminMode &&
+    (
+      formData.informationAccuracyConfirmed !== "yes" ||
+      formData.authorizationConfirmed !== "yes" ||
+      formData.listingSetupAuthorization !== "yes"
+    )
   ) {
     throw new Error("The final onboarding confirmations are required.");
   }
@@ -977,7 +985,10 @@ function validateOnboardingPayload(
   }
 }
 
-async function submitOnboarding(body: Record<string, unknown>) {
+async function submitOnboarding(
+  body: Record<string, unknown>,
+  adminContactId: number | null = null
+) {
   const formData =
     body.formData && typeof body.formData === "object"
       ? (body.formData as Record<string, unknown>)
@@ -1013,7 +1024,12 @@ async function submitOnboarding(body: Record<string, unknown>) {
       ? (body.unitPricing as Record<string, Record<string, string>>)
       : {};
 
-  validateOnboardingPayload(formData, units, selectedPlatforms);
+  validateOnboardingPayload(
+    formData,
+    units,
+    selectedPlatforms,
+    adminContactId !== null
+  );
 
   const driveFolderId =
     typeof body.driveFolderId === "string" && body.driveFolderId
@@ -1055,6 +1071,11 @@ async function submitOnboarding(body: Record<string, unknown>) {
 
   const completeFormSnapshot = {
     ...formData,
+    _submissionMeta: {
+      submittedByAdmin:
+        adminContactId !== null,
+      adminContactId,
+    },
     selectedPlatforms,
     selectedPropertyFacilities,
     selectedPropertyAccessibility,
@@ -1065,8 +1086,117 @@ async function submitOnboarding(body: Record<string, unknown>) {
 
   const sql = getSql();
 
+  let resolvedContactId =
+    adminContactId;
+
+  if (resolvedContactId) {
+    const contactRows =
+      await sql`
+        SELECT
+          id
+        FROM contacts
+        WHERE id =
+          ${resolvedContactId}
+        LIMIT 1;
+      `;
+
+    if (
+      contactRows.length === 0
+    ) {
+      throw new Error(
+        "The selected admin client does not exist."
+      );
+    }
+
+    await sql`
+      UPDATE contacts
+      SET
+        full_name =
+          ${fullName || null},
+        email =
+          ${email},
+        phone =
+          ${phone || null},
+        updated_at =
+          NOW()
+      WHERE id =
+        ${resolvedContactId};
+    `;
+  } else {
+    const contactRows =
+      await sql`
+        SELECT
+          id
+        FROM contacts
+        WHERE LOWER(email) =
+          LOWER(${email})
+        ORDER BY id ASC
+        LIMIT 1;
+      `;
+
+    if (
+      contactRows.length > 0
+    ) {
+      resolvedContactId =
+        Number(
+          contactRows[0].id
+        );
+
+      await sql`
+        UPDATE contacts
+        SET
+          full_name =
+            COALESCE(
+              ${fullName || null},
+              full_name
+            ),
+          phone =
+            COALESCE(
+              ${phone || null},
+              phone
+            ),
+          updated_at =
+            NOW()
+        WHERE id =
+          ${resolvedContactId};
+      `;
+    } else {
+      const insertedContactRows =
+        await sql`
+          INSERT INTO contacts (
+            email,
+            full_name,
+            phone
+          )
+          VALUES (
+            ${email},
+            ${fullName || null},
+            ${phone || null}
+          )
+          RETURNING id;
+        `;
+
+      resolvedContactId =
+        Number(
+          insertedContactRows[0].id
+        );
+    }
+  }
+
+  if (
+    !resolvedContactId ||
+    !Number.isFinite(
+      resolvedContactId
+    )
+  ) {
+    throw new Error(
+      "Could not resolve the contact ID for this onboarding submission."
+    );
+  }
+
   const submissionRows = await sql`
     INSERT INTO onboarding_submissions (
+      contact_id,
       owner_type,
       first_name,
       last_name,
@@ -1205,6 +1335,7 @@ async function submitOnboarding(body: Record<string, unknown>) {
       status
     )
     VALUES (
+      ${resolvedContactId},
       ${String(formData.ownerType ?? "") || null},
       ${String(formData.firstName ?? "") || null},
       ${String(formData.lastName ?? "") || null},
@@ -1340,13 +1471,69 @@ async function submitOnboarding(body: Record<string, unknown>) {
       ${hasExistingListings},
       ${hasExistingListings},
       ${JSON.stringify(completeFormSnapshot)}::jsonb,
-      ${"new"}
+      ${
+        adminContactId
+          ? "completed_by_admin"
+          : "new"
+      }
     )
     RETURNING id, contact_id, created_at;
   `;
 
   const submission = submissionRows[0];
   const submissionId = Number(submission.id);
+  const contactId = Number(submission.contact_id);
+
+  if (!Number.isFinite(contactId)) {
+    throw new Error("Could not resolve the contact ID for this onboarding submission.");
+  }
+
+  const propertyRows =
+    await sql`
+      INSERT INTO properties (
+        contact_id,
+        source_onboarding_submission_id,
+        property_name,
+        property_type,
+        country,
+        city,
+        region,
+        address,
+        postal_code,
+        status,
+        notes
+      )
+      VALUES (
+        ${contactId},
+        ${submissionId},
+        ${String(formData.propertyName ?? "") || null},
+        ${String(formData.propertyCategory ?? "") || null},
+        ${String(formData.propertyCountry ?? "") || null},
+        ${String(formData.propertyCity ?? "") || null},
+        ${String(formData.propertyRegion ?? "") || null},
+        ${String(formData.propertyAddress ?? "") || null},
+        ${String(formData.propertyPostalCode ?? "") || null},
+        ${"pending"},
+        ${String(formData.finalNotes ?? "") || null}
+      )
+      RETURNING id;
+    `;
+
+  const operationalPropertyId =
+    Number(
+      propertyRows[0].id
+    );
+
+  if (
+    !Number.isFinite(
+      operationalPropertyId
+    )
+  ) {
+    throw new Error(
+      "Could not create the operational property record."
+    );
+  }
+
   const databaseUnitIds = new Map<number, number>();
 
   for (const unit of units) {
@@ -1425,7 +1612,98 @@ async function submitOnboarding(body: Record<string, unknown>) {
       RETURNING id;
     `;
 
-    databaseUnitIds.set(clientUnitId, Number(unitRows[0].id));
+    const onboardingUnitId =
+      Number(
+        unitRows[0].id
+      );
+
+    databaseUnitIds.set(
+      clientUnitId,
+      onboardingUnitId
+    );
+
+    await sql`
+      INSERT INTO property_units (
+        property_id,
+        source_onboarding_unit_id,
+        unit_name,
+        unit_type,
+        quantity,
+        bedrooms,
+        bathrooms,
+        size_sqm,
+        max_guests,
+        max_adults,
+        max_children,
+        king_beds,
+        queen_beds,
+        double_beds,
+        single_beds,
+        sofa_beds,
+        bunk_beds,
+        kitchen,
+        smoking_policy,
+        amenities,
+        accessibility,
+        current_base_rate,
+        weekend_rate,
+        minimum_nightly_rate,
+        extra_guest_fee,
+        child_fee,
+        notes
+      )
+      VALUES (
+        ${operationalPropertyId},
+        ${onboardingUnitId},
+        ${unit.name || null},
+        ${unit.type || null},
+        ${parseInteger(unit.quantity) ?? 1},
+        ${parseInteger(unit.bedrooms)},
+        ${parseInteger(unit.bathrooms)},
+        ${parseDecimal(unit.size)},
+        ${parseInteger(unit.maxGuests)},
+        ${parseInteger(unit.maxAdults)},
+        ${parseInteger(unit.maxChildren)},
+        ${parseInteger(unit.kingBeds)},
+        ${parseInteger(unit.queenBeds)},
+        ${parseInteger(unit.doubleBeds)},
+        ${parseInteger(unit.singleBeds)},
+        ${parseInteger(unit.sofaBeds)},
+        ${parseInteger(unit.bunkBeds)},
+        ${unit.kitchen || null},
+        ${unit.smokingPolicy || null},
+        ${JSON.stringify(
+          unitAmenities[
+            String(
+              clientUnitId
+            )
+          ] ?? []
+        )}::jsonb,
+        ${JSON.stringify(
+          unitAccessibility[
+            String(
+              clientUnitId
+            )
+          ] ?? []
+        )}::jsonb,
+        ${parseDecimal(
+          unitPricingValues.currentBaseRate
+        )},
+        ${parseDecimal(
+          unitPricingValues.weekendRate
+        )},
+        ${parseDecimal(
+          unitPricingValues.minimumNightlyRate
+        )},
+        ${parseDecimal(
+          unitPricingValues.extraGuestFee
+        )},
+        ${parseDecimal(
+          unitPricingValues.childFee
+        )},
+        ${String(formData.pricingNotes ?? "") || null}
+      );
+    `;
   }
 
   const unitNamesByClientId = new Map<number, string>(
@@ -1521,31 +1799,32 @@ async function submitOnboarding(body: Record<string, unknown>) {
     from: "HostMetric Website <notifications@hostmetric.gr>",
     to: ["info@hostmetric.gr"],
     replyTo: email,
-    subject: `Νέο Get Started #${submissionId} από ${fullName}`,
+    subject: `New Get Started #${contactId} from ${fullName}`,
     html: `
       <div style="font-family:Arial,sans-serif;max-width:700px;margin:0 auto;line-height:1.55;">
-        <h2>Νέο Get Started αίτημα</h2>
+        <h2>New Get Started submission</h2>
 
-        <p><strong>Όνομα:</strong> ${escapeHtml(fullName)}</p>
+        <p><strong>Name:</strong> ${escapeHtml(fullName)}</p>
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-        <p><strong>Ακίνητο:</strong> ${escapeHtml(String(formData.propertyName ?? ""))}</p>
+        <p><strong>Property:</strong> ${escapeHtml(String(formData.propertyName ?? ""))}</p>
+        <p><strong>Lead ID:</strong> ${contactId}</p>
         <p><strong>Submission ID:</strong> ${submissionId}</p>
         <p><strong>Units:</strong> ${units.length}</p>
         <p><strong>Uploads:</strong> ${uploadedFiles.length}</p>
 
         ${
           driveFolderLink
-            ? `<p><a href="${driveFolderLink}" style="display:inline-block;padding:10px 16px;border-radius:8px;background:#2563eb;color:#fff;text-decoration:none;font-weight:700;">Άνοιγμα Get Started φακέλου</a></p>`
+            ? `<p><a href="${driveFolderLink}" style="display:inline-block;padding:10px 16px;border-radius:8px;background:#2563eb;color:#fff;text-decoration:none;font-weight:700;">Open Get Started folder</a></p>`
             : ""
         }
 
         <hr />
-        <p><strong>Πεδία που συμπληρώθηκαν:</strong></p>
+        <p><strong>Completed fields:</strong></p>
         <ul>
           ${filledFields.map((field) => `<li>${escapeHtml(field)}</li>`).join("")}
         </ul>
 
-        <p style="font-size:12px;color:#777;">Τα πλήρη στοιχεία της αίτησης βρίσκονται στη Neon.</p>
+        <p style="font-size:12px;color:#777;">The full submission details are stored in Neon.</p>
       </div>
     `,
   });
@@ -1557,6 +1836,7 @@ async function submitOnboarding(body: Record<string, unknown>) {
   return {
     submissionId,
     contactId: submission.contact_id,
+    propertyId: operationalPropertyId,
     uploadedFiles: uploadedFiles.length,
     driveFolderLink,
     emailNotificationSent: !emailError,
@@ -1617,7 +1897,76 @@ export async function POST(request: Request) {
     if (action === "submit-onboarding") {
       console.log("[onboarding] submit-onboarding started");
 
-      const result = await submitOnboarding(body);
+      const requestedAdminMode =
+        body.adminMode === true;
+
+      const requestedAdminContactId =
+        body.adminContactId === null ||
+        body.adminContactId === undefined ||
+        body.adminContactId === ""
+          ? null
+          : Number(
+              body.adminContactId
+            );
+
+      let verifiedAdminContactId:
+        | number
+        | null = null;
+
+      if (
+        requestedAdminMode ||
+        requestedAdminContactId !==
+          null
+      ) {
+        const session =
+          await auth();
+
+        if (
+          !session?.user?.email
+        ) {
+          return NextResponse.json(
+            {
+              success: false,
+              error:
+                "Administrator authentication is required for admin onboarding completion.",
+            },
+            {
+              status: 401,
+            }
+          );
+        }
+
+        if (
+          !Number.isInteger(
+            requestedAdminContactId
+          ) ||
+          Number(
+            requestedAdminContactId
+          ) < 1
+        ) {
+          return NextResponse.json(
+            {
+              success: false,
+              error:
+                "A valid existing client ID is required for admin onboarding completion.",
+            },
+            {
+              status: 400,
+            }
+          );
+        }
+
+        verifiedAdminContactId =
+          Number(
+            requestedAdminContactId
+          );
+      }
+
+      const result =
+        await submitOnboarding(
+          body,
+          verifiedAdminContactId
+        );
 
       console.log("[onboarding] submit-onboarding completed", {
         submissionId: result.submissionId,
