@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { neon } from "@neondatabase/serverless";
 import {
@@ -34,6 +34,9 @@ import {
 type PageProps = {
   params: Promise<{
     id: string;
+  }>;
+  searchParams: Promise<{
+    saved?: string;
   }>;
 };
 
@@ -308,6 +311,8 @@ async function updatePropertyStatus(
   revalidatePath("/admin/properties");
   revalidatePath("/admin/leads");
   revalidatePath("/admin");
+
+  redirect(`/admin/properties/${propertyId}?saved=1`);
 }
 
 
@@ -357,6 +362,8 @@ async function updatePropertyCore(
   revalidatePath("/admin/properties");
   revalidatePath("/admin/leads");
   revalidatePath("/admin");
+
+  redirect(`/admin/properties/${propertyId}?saved=1`);
 }
 
 function formNumber(value: FormDataEntryValue | null) {
@@ -464,6 +471,8 @@ async function updatePropertyUnit(
   revalidatePath("/admin/properties");
   revalidatePath("/admin/leads");
   revalidatePath("/admin");
+
+  redirect(`/admin/properties/${propertyId}?saved=1`);
 }
 
 
@@ -733,6 +742,8 @@ async function updateOnboardingSection(
   revalidatePath("/admin/properties");
   revalidatePath("/admin/leads");
   revalidatePath("/admin");
+
+  redirect(`/admin/properties/${propertyId}?saved=1`);
 }
 
 function AdminInput({
@@ -1249,8 +1260,11 @@ function FileLinkCard({
 
 export default async function PropertyDetailsPage({
   params,
+  searchParams,
 }: PageProps) {
   const { id } = await params;
+  const resolvedSearchParams = await searchParams;
+  const savedSuccessfully = resolvedSearchParams.saved === "1";
   const propertyId = Number(id);
 
   if (!Number.isInteger(propertyId) || propertyId < 1) {
@@ -1345,6 +1359,19 @@ export default async function PropertyDetailsPage({
 
   return (
     <div className="pb-12">
+
+      {savedSuccessfully ? (
+        <div className="mb-6 flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-emerald-800 shadow-sm">
+          <CheckCircle2 className="mt-0.5 shrink-0" size={20} />
+          <div>
+            <p className="font-black">Οι αλλαγές αποθηκεύτηκαν επιτυχώς</p>
+            <p className="mt-0.5 text-sm font-semibold text-emerald-700">
+              Τα ενημερωμένα στοιχεία έχουν αποθηκευτεί.
+            </p>
+          </div>
+        </div>
+      ) : null}
+
       <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
         <div>
           <Link

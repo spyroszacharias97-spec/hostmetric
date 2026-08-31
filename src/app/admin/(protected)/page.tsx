@@ -216,7 +216,7 @@ export default async function AdminPage() {
       value: data.getStarted,
       href: "/admin/get-started",
       icon: CheckCircle2,
-      unanswered: 0,
+      unanswered: data.pending,
     },
     {
       label: d.cards.properties,
