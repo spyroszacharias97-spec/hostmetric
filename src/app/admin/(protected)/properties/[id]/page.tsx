@@ -26,6 +26,7 @@ import {
 import { auth } from "@/auth";
 import { getAdminDictionary } from "@/i18n/admin";
 import AdminPhotoManager from "@/components/admin-photo-manager";
+import AdminSaveToast from "@/components/admin-save-toast";
 import {
   defaultLocale,
   type Locale,
@@ -1359,18 +1360,8 @@ export default async function PropertyDetailsPage({
 
   return (
     <div className="pb-12">
+      <AdminSaveToast show={savedSuccessfully} />
 
-      {savedSuccessfully ? (
-        <div className="mb-6 flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-emerald-800 shadow-sm">
-          <CheckCircle2 className="mt-0.5 shrink-0" size={20} />
-          <div>
-            <p className="font-black">Οι αλλαγές αποθηκεύτηκαν επιτυχώς</p>
-            <p className="mt-0.5 text-sm font-semibold text-emerald-700">
-              Τα ενημερωμένα στοιχεία έχουν αποθηκευτεί.
-            </p>
-          </div>
-        </div>
-      ) : null}
 
       <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
         <div>
