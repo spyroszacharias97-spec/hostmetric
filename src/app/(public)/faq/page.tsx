@@ -135,25 +135,71 @@ export default async function FAQPage() {
 
 
   return (
-    <main className="min-h-screen bg-[#f5fbff] text-[#111827]">
+    <main
+      className="
+        min-h-screen
+        overflow-x-hidden
+        bg-[#f5fbff]
+        text-[#111827]
+      "
+    >
 
       {/* ========================================
           HERO
       ======================================== */}
 
-      <section className="relative overflow-hidden px-6 pb-20 pt-28 md:px-10 md:pb-28 md:pt-36">
+      <section
+        className="
+          relative
+          overflow-hidden
+          px-4
+          pb-14
+          pt-16
+          sm:px-6
+          sm:pb-18
+          sm:pt-20
+          md:px-10
+          md:pb-28
+          md:pt-36
+        "
+      >
 
         <AnimatedWave />
 
 
         <div className="relative z-10 mx-auto max-w-7xl text-center">
 
-          <p className="mb-5 text-sm font-bold uppercase tracking-[0.22em] text-[#2166f3]">
+          <p
+            className="
+              mb-4
+              text-xs
+              font-bold
+              uppercase
+              tracking-[0.16em]
+              text-[#2166f3]
+              sm:mb-5
+              sm:text-sm
+              sm:tracking-[0.22em]
+            "
+          >
             {faq.hero.eyebrow}
           </p>
 
 
-          <h1 className="mx-auto max-w-5xl text-5xl font-bold tracking-tight md:text-7xl">
+          <h1
+            className="
+              mx-auto
+              max-w-5xl
+              break-words
+              text-4xl
+              font-bold
+              leading-[1.05]
+              tracking-tight
+              min-[390px]:text-[2.7rem]
+              sm:text-5xl
+              md:text-7xl
+            "
+          >
 
             {faq.hero.titleLine1}
 
@@ -164,7 +210,21 @@ export default async function FAQPage() {
           </h1>
 
 
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-slate-600 md:text-xl">
+          <p
+            className="
+              mx-auto
+              mt-6
+              max-w-3xl
+              text-base
+              leading-7
+              text-slate-600
+              sm:mt-7
+              sm:text-lg
+              sm:leading-8
+              md:mt-8
+              md:text-xl
+            "
+          >
             {faq.hero.description}
           </p>
 
@@ -177,23 +237,65 @@ export default async function FAQPage() {
           PLATFORM INTRO
       ======================================== */}
 
-      <section className="px-6 pb-20 md:px-10 md:pb-28">
+      <section
+        className="
+          px-4
+          pb-14
+          sm:px-6
+          sm:pb-20
+          md:px-10
+          md:pb-28
+        "
+      >
 
         <div className="mx-auto max-w-7xl">
 
           <div className="max-w-4xl">
 
-            <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#2166f3]">
+            <p
+              className="
+                text-xs
+                font-bold
+                uppercase
+                tracking-[0.16em]
+                text-[#2166f3]
+                sm:text-sm
+                sm:tracking-[0.22em]
+              "
+            >
               {faq.platformIntro.eyebrow}
             </p>
 
 
-            <h2 className="mt-4 text-4xl font-bold tracking-tight md:text-6xl">
+            <h2
+              className="
+                mt-4
+                break-words
+                text-3xl
+                font-bold
+                leading-tight
+                tracking-tight
+                sm:text-4xl
+                md:text-6xl
+              "
+            >
               {faq.platformIntro.title}
             </h2>
 
 
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600 md:text-xl">
+            <p
+              className="
+                mt-5
+                max-w-3xl
+                text-base
+                leading-7
+                text-slate-600
+                sm:mt-6
+                sm:text-lg
+                sm:leading-8
+                md:text-xl
+              "
+            >
               {faq.platformIntro.description}
             </p>
 
@@ -208,9 +310,29 @@ export default async function FAQPage() {
           FAQ CONTENT
       ======================================== */}
 
-      <section className="px-6 pb-28 md:px-10 md:pb-36">
+      <section
+        className="
+          px-4
+          pb-20
+          sm:px-6
+          sm:pb-24
+          md:px-10
+          md:pb-36
+        "
+      >
 
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+        <div
+          className="
+            mx-auto
+            grid
+            max-w-7xl
+            gap-8
+            sm:gap-10
+            md:gap-12
+            lg:grid-cols-[0.85fr_1.15fr]
+            lg:gap-16
+          "
+        >
 
 
           {/* ======================================
@@ -221,9 +343,34 @@ export default async function FAQPage() {
 
             <div className="lg:sticky lg:top-32">
 
-              <div className="overflow-hidden rounded-[36px] border border-emerald-100 bg-[#eef9f3] p-4 shadow-[0_24px_70px_rgba(15,61,50,0.10)] md:p-6">
+              <div
+                className="
+                  overflow-hidden
+                  rounded-[22px]
+                  border
+                  border-emerald-100
+                  bg-[#eef9f3]
+                  p-3
+                  shadow-[0_18px_45px_rgba(15,61,50,0.08)]
+                  sm:rounded-[28px]
+                  sm:p-4
+                  md:rounded-[36px]
+                  md:p-6
+                  md:shadow-[0_24px_70px_rgba(15,61,50,0.10)]
+                "
+              >
 
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-white">
+                <div
+                  className="
+                    relative
+                    aspect-[4/5]
+                    overflow-hidden
+                    rounded-[16px]
+                    bg-white
+                    sm:rounded-[22px]
+                    md:rounded-[28px]
+                  "
+                >
 
                   <Image
                     src="/faq-dashboard.png"
@@ -256,24 +403,58 @@ export default async function FAQPage() {
 
             <div>
 
-              <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#2166f3]">
+              <p
+              className="
+                text-xs
+                font-bold
+                uppercase
+                tracking-[0.16em]
+                text-[#2166f3]
+                sm:text-sm
+                sm:tracking-[0.22em]
+              "
+            >
                 {faq.propertySection.eyebrow}
               </p>
 
 
-              <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+              <h2
+                className="
+                  mt-4
+                  break-words
+                  text-2xl
+                  font-bold
+                  leading-tight
+                  tracking-tight
+                  sm:text-3xl
+                  md:text-5xl
+                "
+              >
                 {faq.propertySection.title}
               </h2>
 
 
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
+              <p
+                className="
+                  mt-4
+                  max-w-3xl
+                  text-base
+                  leading-7
+                  text-slate-600
+                  sm:mt-5
+                  sm:text-lg
+                  sm:leading-8
+                "
+              >
                 {faq.propertySection.description}
               </p>
 
 
               <div
                 className="
-                  mt-10
+                  mt-7
+                  sm:mt-8
+                  md:mt-10
 
                   [&_button]:!bg-[#2166f3]
                   [&_button]:!font-semibold
@@ -282,13 +463,19 @@ export default async function FAQPage() {
 
                   [&_button>span:first-child]:!text-white
 
-                  [&_button>span:last-child]:!h-12
-                  [&_button>span:last-child]:!w-12
+                  [&_button>span:last-child]:!h-9
+                  [&_button>span:last-child]:!w-9
+                  sm:[&_button>span:last-child]:!h-10
+                  sm:[&_button>span:last-child]:!w-10
+                  md:[&_button>span:last-child]:!h-12
+                  md:[&_button>span:last-child]:!w-12
                   [&_button>span:last-child]:!bg-white
                   [&_button>span:last-child]:!text-[#2166f3]
                   [&_button>span:last-child]:!shadow-sm
 
-                  [&_button>span:last-child>span]:!text-[30px]
+                  [&_button>span:last-child>span]:!text-[24px]
+                  sm:[&_button>span:last-child>span]:!text-[26px]
+                  md:[&_button>span:last-child>span]:!text-[30px]
                   [&_button>span:last-child>span]:!font-black
                   [&_button>span:last-child>span]:!leading-none
                   [&_button>span:last-child>span]:!text-[#2166f3]
@@ -320,26 +507,66 @@ export default async function FAQPage() {
                 SECTION 2 — THE PARTNERSHIP
             ==================================== */}
 
-            <div className="mt-24 md:mt-32">
+            <div
+              className="
+                mt-16
+                sm:mt-20
+                md:mt-32
+              "
+            >
 
-              <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#2166f3]">
+              <p
+              className="
+                text-xs
+                font-bold
+                uppercase
+                tracking-[0.16em]
+                text-[#2166f3]
+                sm:text-sm
+                sm:tracking-[0.22em]
+              "
+            >
                 {faq.partnershipSection.eyebrow}
               </p>
 
 
-              <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+              <h2
+                className="
+                  mt-4
+                  break-words
+                  text-2xl
+                  font-bold
+                  leading-tight
+                  tracking-tight
+                  sm:text-3xl
+                  md:text-5xl
+                "
+              >
                 {faq.partnershipSection.title}
               </h2>
 
 
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
+              <p
+                className="
+                  mt-4
+                  max-w-3xl
+                  text-base
+                  leading-7
+                  text-slate-600
+                  sm:mt-5
+                  sm:text-lg
+                  sm:leading-8
+                "
+              >
                 {faq.partnershipSection.description}
               </p>
 
 
               <div
                 className="
-                  mt-10
+                  mt-7
+                  sm:mt-8
+                  md:mt-10
 
                   [&_button]:!bg-[#2166f3]
                   [&_button]:!font-semibold
@@ -348,13 +575,19 @@ export default async function FAQPage() {
 
                   [&_button>span:first-child]:!text-white
 
-                  [&_button>span:last-child]:!h-12
-                  [&_button>span:last-child]:!w-12
+                  [&_button>span:last-child]:!h-9
+                  [&_button>span:last-child]:!w-9
+                  sm:[&_button>span:last-child]:!h-10
+                  sm:[&_button>span:last-child]:!w-10
+                  md:[&_button>span:last-child]:!h-12
+                  md:[&_button>span:last-child]:!w-12
                   [&_button>span:last-child]:!bg-white
                   [&_button>span:last-child]:!text-[#2166f3]
                   [&_button>span:last-child]:!shadow-sm
 
-                  [&_button>span:last-child>span]:!text-[30px]
+                  [&_button>span:last-child>span]:!text-[24px]
+                  sm:[&_button>span:last-child>span]:!text-[26px]
+                  md:[&_button>span:last-child>span]:!text-[30px]
                   [&_button>span:last-child>span]:!font-black
                   [&_button>span:last-child>span]:!leading-none
                   [&_button>span:last-child>span]:!text-[#2166f3]
@@ -392,16 +625,51 @@ export default async function FAQPage() {
           FINAL CTA
       ======================================== */}
 
-      <section className="bg-[#10214a] px-6 py-24 text-white md:px-10 md:py-28">
+      <section
+        className="
+          bg-[#10214a]
+          px-4
+          py-16
+          text-white
+          sm:px-6
+          sm:py-20
+          md:px-10
+          md:py-28
+        "
+      >
 
         <div className="mx-auto max-w-5xl text-center">
 
-          <p className="text-sm font-bold uppercase tracking-[0.22em] text-blue-300">
+          <p
+            className="
+              text-xs
+              font-bold
+              uppercase
+              tracking-[0.16em]
+              text-blue-300
+              sm:text-sm
+              sm:tracking-[0.22em]
+            "
+          >
             {faq.cta.eyebrow}
           </p>
 
 
-          <h2 className="mx-auto mt-5 max-w-4xl text-4xl font-bold tracking-tight md:text-6xl">
+          <h2
+            className="
+              mx-auto
+              mt-4
+              max-w-4xl
+              break-words
+              text-3xl
+              font-bold
+              leading-tight
+              tracking-tight
+              sm:mt-5
+              sm:text-4xl
+              md:text-6xl
+            "
+          >
 
             {faq.cta.titleLine1}
 
@@ -414,14 +682,50 @@ export default async function FAQPage() {
           </h2>
 
 
-          <p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-white/70">
+          <p
+            className="
+              mx-auto
+              mt-5
+              max-w-2xl
+              text-base
+              leading-7
+              text-white/70
+              sm:mt-7
+              sm:text-lg
+              sm:leading-8
+            "
+          >
             {faq.cta.description}
           </p>
 
 
           <Link
             href="/get-started"
-            className="mt-10 inline-flex rounded-2xl bg-[#2166f3] px-9 py-4 text-lg font-bold text-white transition hover:-translate-y-1 hover:bg-[#1857da] hover:shadow-xl"
+            className="
+              mt-8
+              inline-flex
+              w-full
+              items-center
+              justify-center
+              rounded-xl
+              bg-[#2166f3]
+              px-6
+              py-3.5
+              text-center
+              text-base
+              font-bold
+              text-white
+              transition
+              hover:-translate-y-1
+              hover:bg-[#1857da]
+              hover:shadow-xl
+              sm:mt-10
+              sm:w-auto
+              sm:rounded-2xl
+              sm:px-9
+              sm:py-4
+              sm:text-lg
+            "
           >
             {faq.cta.button} →
           </Link>

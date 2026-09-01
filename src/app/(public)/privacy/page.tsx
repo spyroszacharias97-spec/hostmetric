@@ -32,29 +32,111 @@ export default async function PrivacyPolicyPage() {
   return (
     <main
       id="top"
-      className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-slate-900"
+      className="
+        min-h-screen
+        overflow-x-hidden
+        bg-gradient-to-b
+        from-sky-50
+        via-white
+        to-slate-50
+        text-slate-900
+      "
     >
       {/* HERO */}
-      <section className="border-b border-slate-200/80">
-        <div className="mx-auto max-w-5xl px-6 py-16 md:px-8 md:py-20">
+      <section
+        className="
+          border-b
+          border-slate-200/80
+        "
+      >
+        <div
+          className="
+            mx-auto
+            max-w-5xl
+            px-4
+            py-12
+            sm:px-6
+            sm:py-14
+            md:px-8
+            md:py-20
+          "
+        >
 
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-600/20">
+          <div
+            className="
+              flex
+              h-11
+              w-11
+              items-center
+              justify-center
+              rounded-xl
+              bg-blue-600
+              text-white
+              shadow-lg
+              shadow-blue-600/20
+              sm:h-12
+              sm:w-12
+              sm:rounded-2xl
+            "
+          >
             <ShieldCheck size={25} />
           </div>
 
-          <p className="mt-7 text-xs font-bold uppercase tracking-[0.22em] text-blue-600">
+          <p
+            className="
+              mt-6
+              text-[11px]
+              font-bold
+              uppercase
+              tracking-[0.16em]
+              text-blue-600
+              sm:mt-7
+              sm:text-xs
+              sm:tracking-[0.22em]
+            "
+          >
             {privacy.hero.eyebrow}
           </p>
 
-          <h1 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
+          <h1
+            className="
+              mt-3
+              max-w-3xl
+              break-words
+              text-3xl
+              font-bold
+              leading-tight
+              tracking-tight
+              sm:text-4xl
+            "
+          >
             {privacy.hero.title}
           </h1>
 
-          <p className="mt-5 max-w-3xl text-base leading-7 text-slate-600">
+          <p
+            className="
+              mt-4
+              max-w-3xl
+              text-sm
+              leading-6
+              text-slate-600
+              sm:mt-5
+              sm:text-base
+              sm:leading-7
+            "
+          >
             {privacy.hero.description}
           </p>
 
-          <p className="mt-4 text-sm text-slate-400">
+          <p
+            className="
+              mt-4
+              text-xs
+              leading-5
+              text-slate-400
+              sm:text-sm
+            "
+          >
             {privacy.hero.lastUpdated}
           </p>
 
@@ -62,23 +144,82 @@ export default async function PrivacyPolicyPage() {
       </section>
 
 
-      <section className="mx-auto max-w-5xl px-6 py-14 md:px-8">
+      <section
+        className="
+          mx-auto
+          max-w-5xl
+          px-4
+          py-10
+          sm:px-6
+          sm:py-12
+          md:px-8
+          md:py-14
+        "
+      >
 
-        <div className="rounded-[32px] border border-slate-200 bg-white p-7 shadow-sm md:p-10">
+        <div
+          className="
+            rounded-[22px]
+            border
+            border-slate-200
+            bg-white
+            p-5
+            shadow-sm
+            sm:rounded-[26px]
+            sm:p-7
+            md:rounded-[32px]
+            md:p-10
+          "
+        >
 
-          <div className="space-y-11 text-[15px] leading-7 text-slate-600">
+          <div
+            className="
+              space-y-9
+              text-sm
+              leading-7
+              text-slate-600
+              sm:space-y-10
+              sm:text-[15px]
+              md:space-y-11
+            "
+          >
 
             {/* 1 */}
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+              <h2
+                className="
+                  break-words
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {privacy.sections.whoWeAre.title}
               </h2>
 
-              <p className="mt-4">
+              <p
+                className="
+                  mt-3
+                  sm:mt-4
+                "
+              >
                 {privacy.sections.whoWeAre.description}
               </p>
 
-              <div className="mt-5 rounded-2xl bg-slate-50 p-5">
+              <div
+                className="
+                  mt-4
+                  min-w-0
+                  rounded-xl
+                  bg-slate-50
+                  p-4
+                  sm:mt-5
+                  sm:rounded-2xl
+                  sm:p-5
+                "
+              >
                 <p className="font-semibold text-slate-900">
                   {privacy.sections.whoWeAre.brand}
                 </p>
@@ -96,19 +237,61 @@ export default async function PrivacyPolicyPage() {
 
             {/* 2 */}
             <section>
-              <div className="flex items-center gap-3">
-                <Database size={21} className="text-blue-600" />
+              <div
+                className="
+                  flex
+                  items-start
+                  gap-3
+                  sm:items-center
+                "
+              >
+                <Database
+                  size={21}
+                  className="
+                    mt-0.5
+                    h-5
+                    w-5
+                    shrink-0
+                    text-blue-600
+                    sm:mt-0
+                    sm:h-[21px]
+                    sm:w-[21px]
+                  "
+                />
 
-                <h2 className="text-xl font-bold text-slate-950">
+                <h2
+                className="
+                  break-words
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                   {privacy.sections.informationCollected.title}
                 </h2>
               </div>
 
-              <p className="mt-4">
+              <p
+                className="
+                  mt-3
+                  sm:mt-4
+                "
+              >
                 {privacy.sections.informationCollected.description}
               </p>
 
-              <ul className="mt-4 list-disc space-y-2 pl-5">
+              <ul
+                className="
+                  mt-4
+                  list-disc
+                  space-y-2.5
+                  pl-5
+                  marker:text-blue-500
+                  sm:space-y-2
+                "
+              >
                 <li>{privacy.sections.informationCollected.items[0]}</li>
                 <li>{privacy.sections.informationCollected.items[1]}</li>
                 <li>{privacy.sections.informationCollected.items[2]}</li>
@@ -146,23 +329,64 @@ export default async function PrivacyPolicyPage() {
 
             {/* 3 */}
             <section>
-              <div className="flex items-center gap-3">
-                <Camera size={21} className="text-blue-600" />
+              <div
+                className="
+                  flex
+                  items-start
+                  gap-3
+                  sm:items-center
+                "
+              >
+                <Camera
+                  size={21}
+                  className="
+                    mt-0.5
+                    h-5
+                    w-5
+                    shrink-0
+                    text-blue-600
+                    sm:mt-0
+                    sm:h-[21px]
+                    sm:w-[21px]
+                  "
+                />
 
-                <h2 className="text-xl font-bold text-slate-950">
+                <h2
+                className="
+                  break-words
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                   {privacy.sections.propertyPhotos.title}
                 </h2>
               </div>
 
-              <p className="mt-4">
+              <p
+                className="
+                  mt-3
+                  sm:mt-4
+                "
+              >
                 {privacy.sections.propertyPhotos.paragraph1}
               </p>
 
-              <p className="mt-3">
+              <p
+                className="
+                  mt-3
+                "
+              >
                 {privacy.sections.propertyPhotos.paragraph2}
               </p>
 
-              <p className="mt-3">
+              <p
+                className="
+                  mt-3
+                "
+              >
                 {privacy.sections.propertyPhotos.paragraph3}
               </p>
             </section>
@@ -170,15 +394,38 @@ export default async function PrivacyPolicyPage() {
 
             {/* 4 */}
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+              <h2
+                className="
+                  break-words
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {privacy.sections.collection.title}
               </h2>
 
-              <p className="mt-4">
+              <p
+                className="
+                  mt-3
+                  sm:mt-4
+                "
+              >
                 {privacy.sections.collection.description}
               </p>
 
-              <ul className="mt-4 list-disc space-y-2 pl-5">
+              <ul
+                className="
+                  mt-4
+                  list-disc
+                  space-y-2.5
+                  pl-5
+                  marker:text-blue-500
+                  sm:space-y-2
+                "
+              >
                 <li>{privacy.sections.collection.items[0]}</li>
                 <li>{privacy.sections.collection.items[1]}</li>
                 <li>{privacy.sections.collection.items[2]}</li>
@@ -193,15 +440,38 @@ export default async function PrivacyPolicyPage() {
 
             {/* 5 */}
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+              <h2
+                className="
+                  break-words
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {privacy.sections.processing.title}
               </h2>
 
-              <p className="mt-4">
+              <p
+                className="
+                  mt-3
+                  sm:mt-4
+                "
+              >
                 {privacy.sections.processing.description}
               </p>
 
-              <ul className="mt-4 list-disc space-y-2 pl-5">
+              <ul
+                className="
+                  mt-4
+                  list-disc
+                  space-y-2.5
+                  pl-5
+                  marker:text-blue-500
+                  sm:space-y-2
+                "
+              >
                 <li>{privacy.sections.processing.items[0]}</li>
                 <li>{privacy.sections.processing.items[1]}</li>
                 <li>{privacy.sections.processing.items[2]}</li>
@@ -227,15 +497,33 @@ export default async function PrivacyPolicyPage() {
 
             {/* 6 */}
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+              <h2
+                className="
+                  break-words
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {privacy.sections.legalBases.title}
               </h2>
 
-              <p className="mt-4">
+              <p
+                className="
+                  mt-3
+                  sm:mt-4
+                "
+              >
                 {privacy.sections.legalBases.paragraph1}
               </p>
 
-              <p className="mt-3">
+              <p
+                className="
+                  mt-3
+                "
+              >
                 {privacy.sections.legalBases.paragraph2}
               </p>
             </section>
@@ -243,19 +531,43 @@ export default async function PrivacyPolicyPage() {
 
             {/* 7 */}
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+              <h2
+                className="
+                  break-words
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {privacy.sections.platforms.title}
               </h2>
 
-              <p className="mt-4">
+              <p
+                className="
+                  mt-3
+                  sm:mt-4
+                "
+              >
                 {privacy.sections.platforms.paragraph1}
               </p>
 
-              <p className="mt-3">
+              <p
+                className="
+                  mt-3
+                "
+              >
                 {privacy.sections.platforms.paragraph2}
               </p>
 
-              <p className="mt-3 font-semibold text-slate-800">
+              <p
+                className="
+                  mt-3
+                  font-semibold
+                  text-slate-800
+                "
+              >
                 {privacy.sections.platforms.noSale}
               </p>
             </section>
@@ -263,15 +575,33 @@ export default async function PrivacyPolicyPage() {
 
             {/* 8 */}
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+              <h2
+                className="
+                  break-words
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {privacy.sections.transfers.title}
               </h2>
 
-              <p className="mt-4">
+              <p
+                className="
+                  mt-3
+                  sm:mt-4
+                "
+              >
                 {privacy.sections.transfers.paragraph1}
               </p>
 
-              <p className="mt-3">
+              <p
+                className="
+                  mt-3
+                "
+              >
                 {privacy.sections.transfers.paragraph2}
               </p>
             </section>
@@ -279,15 +609,33 @@ export default async function PrivacyPolicyPage() {
 
             {/* 9 */}
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+              <h2
+                className="
+                  break-words
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {privacy.sections.retention.title}
               </h2>
 
-              <p className="mt-4">
+              <p
+                className="
+                  mt-3
+                  sm:mt-4
+                "
+              >
                 {privacy.sections.retention.paragraph1}
               </p>
 
-              <p className="mt-3">
+              <p
+                className="
+                  mt-3
+                "
+              >
                 {privacy.sections.retention.paragraph2}
               </p>
             </section>
@@ -295,19 +643,56 @@ export default async function PrivacyPolicyPage() {
 
             {/* 10 */}
             <section>
-              <div className="flex items-center gap-3">
-                <LockKeyhole size={21} className="text-blue-600" />
+              <div
+                className="
+                  flex
+                  items-start
+                  gap-3
+                  sm:items-center
+                "
+              >
+                <LockKeyhole
+                  size={21}
+                  className="
+                    mt-0.5
+                    h-5
+                    w-5
+                    shrink-0
+                    text-blue-600
+                    sm:mt-0
+                    sm:h-[21px]
+                    sm:w-[21px]
+                  "
+                />
 
-                <h2 className="text-xl font-bold text-slate-950">
+                <h2
+                className="
+                  break-words
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                   {privacy.sections.security.title}
                 </h2>
               </div>
 
-              <p className="mt-4">
+              <p
+                className="
+                  mt-3
+                  sm:mt-4
+                "
+              >
                 {privacy.sections.security.paragraph1}
               </p>
 
-              <p className="mt-3">
+              <p
+                className="
+                  mt-3
+                "
+              >
                 {privacy.sections.security.paragraph2}
               </p>
             </section>
@@ -315,19 +700,61 @@ export default async function PrivacyPolicyPage() {
 
             {/* 11 */}
             <section>
-              <div className="flex items-center gap-3">
-                <UserCheck size={21} className="text-blue-600" />
+              <div
+                className="
+                  flex
+                  items-start
+                  gap-3
+                  sm:items-center
+                "
+              >
+                <UserCheck
+                  size={21}
+                  className="
+                    mt-0.5
+                    h-5
+                    w-5
+                    shrink-0
+                    text-blue-600
+                    sm:mt-0
+                    sm:h-[21px]
+                    sm:w-[21px]
+                  "
+                />
 
-                <h2 className="text-xl font-bold text-slate-950">
+                <h2
+                className="
+                  break-words
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                   {privacy.sections.rights.title}
                 </h2>
               </div>
 
-              <p className="mt-4">
+              <p
+                className="
+                  mt-3
+                  sm:mt-4
+                "
+              >
                 {privacy.sections.rights.description}
               </p>
 
-              <ul className="mt-4 list-disc space-y-2 pl-5">
+              <ul
+                className="
+                  mt-4
+                  list-disc
+                  space-y-2.5
+                  pl-5
+                  marker:text-blue-500
+                  sm:space-y-2
+                "
+              >
                 <li>{privacy.sections.rights.items[0]}</li>
                 <li>{privacy.sections.rights.items[1]}</li>
                 <li>{privacy.sections.rights.items[2]}</li>
@@ -346,23 +773,65 @@ export default async function PrivacyPolicyPage() {
 
             {/* 12 */}
             <section>
-              <div className="flex items-center gap-3">
-                <Cookie size={21} className="text-blue-600" />
+              <div
+                className="
+                  flex
+                  items-start
+                  gap-3
+                  sm:items-center
+                "
+              >
+                <Cookie
+                  size={21}
+                  className="
+                    mt-0.5
+                    h-5
+                    w-5
+                    shrink-0
+                    text-blue-600
+                    sm:mt-0
+                    sm:h-[21px]
+                    sm:w-[21px]
+                  "
+                />
 
-                <h2 className="text-xl font-bold text-slate-950">
+                <h2
+                className="
+                  break-words
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                   {privacy.sections.cookies.title}
                 </h2>
               </div>
 
-              <p className="mt-4">
+              <p
+                className="
+                  mt-3
+                  sm:mt-4
+                "
+              >
                 {privacy.sections.cookies.paragraph1}
               </p>
 
-              <p className="mt-3">
+              <p
+                className="
+                  mt-3
+                "
+              >
                 {privacy.sections.cookies.paragraph2BeforeLink}{" "}
                 <Link
                   href="/cookies#top"
-                  className="font-semibold text-blue-600 hover:text-blue-800"
+                  className="
+                    font-semibold
+                    text-blue-600
+                    transition
+                    hover:text-blue-800
+                  "
                 >
                   {privacy.sections.cookies.link}
                 </Link>
@@ -373,11 +842,25 @@ export default async function PrivacyPolicyPage() {
 
             {/* 13 */}
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+              <h2
+                className="
+                  break-words
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {privacy.sections.externalWebsites.title}
               </h2>
 
-              <p className="mt-4">
+              <p
+                className="
+                  mt-3
+                  sm:mt-4
+                "
+              >
                 {privacy.sections.externalWebsites.description}
               </p>
             </section>
@@ -385,11 +868,25 @@ export default async function PrivacyPolicyPage() {
 
             {/* 14 */}
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+              <h2
+                className="
+                  break-words
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {privacy.sections.changes.title}
               </h2>
 
-              <p className="mt-4">
+              <p
+                className="
+                  mt-3
+                  sm:mt-4
+                "
+              >
                 {privacy.sections.changes.description}
               </p>
             </section>
@@ -397,21 +894,64 @@ export default async function PrivacyPolicyPage() {
 
             {/* 15 */}
             <section>
-              <div className="flex items-center gap-3">
-                <Mail size={21} className="text-blue-600" />
+              <div
+                className="
+                  flex
+                  items-start
+                  gap-3
+                  sm:items-center
+                "
+              >
+                <Mail
+                  size={21}
+                  className="
+                    mt-0.5
+                    h-5
+                    w-5
+                    shrink-0
+                    text-blue-600
+                    sm:mt-0
+                    sm:h-[21px]
+                    sm:w-[21px]
+                  "
+                />
 
-                <h2 className="text-xl font-bold text-slate-950">
+                <h2
+                className="
+                  break-words
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                   {privacy.sections.contact.title}
                 </h2>
               </div>
 
-              <p className="mt-4">
+              <p
+                className="
+                  mt-3
+                  sm:mt-4
+                "
+              >
                 {privacy.sections.contact.description}
               </p>
 
               <a
                 href="mailto:info@hostmetric.gr"
-                className="mt-3 inline-block font-semibold text-blue-600 hover:text-blue-800"
+                className="
+                  mt-3
+                  inline-block
+                  max-w-full
+                  break-all
+                  font-semibold
+                  text-blue-600
+                  transition
+                  hover:text-blue-800
+                  sm:break-normal
+                "
               >
                 {privacy.sections.contact.email}
               </a>

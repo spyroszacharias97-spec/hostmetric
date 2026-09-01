@@ -51,16 +51,20 @@ export default async function Services() {
       id="services"
       className="
         relative
-        scroll-mt-0.5
+        scroll-mt-20
         overflow-hidden
         bg-gradient-to-b
         from-[#f7fbff]
         via-white
         to-[#f7fbff]
-        px-6
-        py-28
+        px-4
+        py-16
+        sm:px-6
+        sm:py-20
         md:px-8
-        md:py-32
+        md:py-24
+        lg:py-28
+        xl:py-32
       "
     >
 
@@ -74,13 +78,19 @@ export default async function Services() {
         <div
           className="
             absolute
-            -left-40
-            top-20
-            h-[420px]
-            w-[420px]
+            -left-32
+            top-12
+            h-[280px]
+            w-[280px]
             rounded-full
-            bg-blue-100/40
+            bg-blue-100/35
             blur-3xl
+            sm:-left-40
+            sm:top-20
+            sm:h-[360px]
+            sm:w-[360px]
+            lg:h-[420px]
+            lg:w-[420px]
           "
         />
 
@@ -88,13 +98,19 @@ export default async function Services() {
         <div
           className="
             absolute
-            -right-40
-            bottom-10
-            h-[420px]
-            w-[420px]
+            -right-32
+            bottom-6
+            h-[280px]
+            w-[280px]
             rounded-full
-            bg-emerald-100/40
+            bg-emerald-100/35
             blur-3xl
+            sm:-right-40
+            sm:bottom-10
+            sm:h-[360px]
+            sm:w-[360px]
+            lg:h-[420px]
+            lg:w-[420px]
           "
         />
 
@@ -102,39 +118,57 @@ export default async function Services() {
         <div
           className="
             absolute
-            left-[-10%]
+            left-[-18%]
             top-20
-            h-64
-            w-[120%]
+            h-44
+            w-[136%]
             rounded-[50%]
             border
-            border-blue-200/40
+            border-blue-200/35
+            sm:left-[-12%]
+            sm:h-56
+            sm:w-[124%]
+            lg:left-[-10%]
+            lg:h-64
+            lg:w-[120%]
           "
         />
 
         <div
           className="
             absolute
-            left-[-8%]
+            left-[-15%]
             top-28
-            h-64
-            w-[116%]
+            h-44
+            w-[130%]
             rounded-[50%]
             border
-            border-blue-200/30
+            border-blue-200/25
+            sm:left-[-10%]
+            sm:h-56
+            sm:w-[120%]
+            lg:left-[-8%]
+            lg:h-64
+            lg:w-[116%]
           "
         />
 
         <div
           className="
             absolute
-            left-[-6%]
+            left-[-12%]
             top-36
-            h-64
-            w-[112%]
+            h-44
+            w-[124%]
             rounded-[50%]
             border
-            border-emerald-200/25
+            border-emerald-200/20
+            sm:left-[-8%]
+            sm:h-56
+            sm:w-[116%]
+            lg:left-[-6%]
+            lg:h-64
+            lg:w-[112%]
           "
         />
 
@@ -148,26 +182,28 @@ export default async function Services() {
       <div className="relative z-10 mx-auto max-w-7xl">
 
         {/* HEADER */}
-        <div className="mx-auto mb-16 max-w-4xl text-center">
+        <div className="mx-auto mb-10 max-w-4xl text-center sm:mb-12 md:mb-14 lg:mb-16">
 
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-blue-600">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-blue-600 sm:mb-4 sm:text-sm sm:tracking-[0.22em]">
             {services.eyebrow}
           </p>
 
           <h2
             className="
-              text-4xl
+              text-[2.25rem]
               font-bold
-              tracking-tight
+              leading-[1.08]
+              tracking-[-0.03em]
               text-slate-950
-              sm:text-5xl
+              sm:text-4xl
+              md:text-5xl
               lg:text-6xl
             "
           >
             {services.title}
           </h2>
 
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-600">
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-slate-600 sm:mt-6 sm:text-lg sm:leading-8">
             {services.description}
           </p>
 
@@ -175,7 +211,7 @@ export default async function Services() {
 
 
         {/* SERVICE CARDS */}
-        <div className="grid gap-7 md:grid-cols-3">
+        <div className="grid gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
 
           {/* GUEST COMMUNICATION */}
           <Link
@@ -183,55 +219,70 @@ export default async function Services() {
             className="
               group
               cursor-pointer
-              rounded-[32px]
+              rounded-[24px]
               border
               border-blue-100
               bg-white/90
-              p-10
+              p-6
               text-center
               shadow-sm
               backdrop-blur-sm
               transition-all
               duration-300
-              hover:-translate-y-3
-              hover:scale-[1.03]
+              hover:-translate-y-1
               hover:border-blue-200
-              hover:shadow-2xl
+              hover:shadow-xl
+              sm:rounded-[28px]
+              sm:p-8
+              lg:rounded-[32px]
+              lg:p-10
+              lg:hover:-translate-y-3
+              lg:hover:scale-[1.03]
+              lg:hover:shadow-2xl
             "
           >
 
             <div
               className="
                 mx-auto
-                mb-7
+                mb-5
                 flex
-                h-20
-                w-20
+                h-16
+                w-16
                 items-center
                 justify-center
-                rounded-3xl
+                rounded-2xl
                 bg-blue-50
                 text-blue-600
                 transition
                 duration-300
-                group-hover:scale-110
-                group-hover:rotate-3
+                group-hover:scale-105
+                sm:mb-6
+                sm:h-18
+                sm:w-18
+                sm:rounded-3xl
+                lg:mb-7
+                lg:h-20
+                lg:w-20
+                lg:group-hover:scale-110
+                lg:group-hover:rotate-3
               "
             >
               <MessageCircle
-                size={38}
+                size={32}
                 strokeWidth={2}
+                className="sm:h-9 sm:w-9 lg:h-[38px] lg:w-[38px]"
               />
             </div>
 
-            <h3 className="text-2xl font-bold text-slate-950">
+            <h3 className="text-xl font-bold text-slate-950 sm:text-2xl">
               {
                 services.guestCommunication
                   .title
               }
             </h3>
 
-            <p className="mt-5 text-lg leading-8 text-slate-600">
+            <p className="mt-4 text-base leading-7 text-slate-600 sm:mt-5 sm:text-lg sm:leading-8">
               {
                 services.guestCommunication
                   .description
@@ -239,14 +290,17 @@ export default async function Services() {
             </p>
 
             <ArrowRight
-              size={25}
+              size={23}
               className="
                 mx-auto
-                mt-7
+                mt-5
                 text-blue-600
                 transition
                 duration-300
-                group-hover:translate-x-2
+                group-hover:translate-x-1
+                sm:mt-6
+                lg:mt-7
+                lg:group-hover:translate-x-2
               "
             />
 
@@ -259,52 +313,67 @@ export default async function Services() {
             className="
               group
               cursor-pointer
-              rounded-[32px]
+              rounded-[24px]
               border
               border-emerald-100
               bg-white/90
-              p-10
+              p-6
               text-center
               shadow-sm
               backdrop-blur-sm
               transition-all
               duration-300
-              hover:-translate-y-3
-              hover:scale-[1.03]
+              hover:-translate-y-1
               hover:border-emerald-200
-              hover:shadow-2xl
+              hover:shadow-xl
+              sm:rounded-[28px]
+              sm:p-8
+              lg:rounded-[32px]
+              lg:p-10
+              lg:hover:-translate-y-3
+              lg:hover:scale-[1.03]
+              lg:hover:shadow-2xl
             "
           >
 
             <div
               className="
                 mx-auto
-                mb-7
+                mb-5
                 flex
-                h-20
-                w-20
+                h-16
+                w-16
                 items-center
                 justify-center
-                rounded-3xl
+                rounded-2xl
                 bg-emerald-50
                 text-emerald-600
                 transition
                 duration-300
-                group-hover:scale-110
-                group-hover:-rotate-3
+                group-hover:scale-105
+                sm:mb-6
+                sm:h-18
+                sm:w-18
+                sm:rounded-3xl
+                lg:mb-7
+                lg:h-20
+                lg:w-20
+                lg:group-hover:scale-110
+                lg:group-hover:-rotate-3
               "
             >
               <TrendingUp
-                size={38}
+                size={32}
                 strokeWidth={2}
+                className="sm:h-9 sm:w-9 lg:h-[38px] lg:w-[38px]"
               />
             </div>
 
-            <h3 className="text-2xl font-bold text-slate-950">
+            <h3 className="text-xl font-bold text-slate-950 sm:text-2xl">
               {services.smartPricing.title}
             </h3>
 
-            <p className="mt-5 text-lg leading-8 text-slate-600">
+            <p className="mt-4 text-base leading-7 text-slate-600 sm:mt-5 sm:text-lg sm:leading-8">
               {
                 services.smartPricing
                   .description
@@ -312,14 +381,17 @@ export default async function Services() {
             </p>
 
             <ArrowRight
-              size={25}
+              size={23}
               className="
                 mx-auto
-                mt-7
+                mt-5
                 text-emerald-600
                 transition
                 duration-300
-                group-hover:translate-x-2
+                group-hover:translate-x-1
+                sm:mt-6
+                lg:mt-7
+                lg:group-hover:translate-x-2
               "
             />
 
@@ -332,55 +404,72 @@ export default async function Services() {
             className="
               group
               cursor-pointer
-              rounded-[32px]
+              rounded-[24px]
               border
               border-purple-100
               bg-white/90
-              p-10
+              p-6
               text-center
               shadow-sm
               backdrop-blur-sm
               transition-all
               duration-300
-              hover:-translate-y-3
-              hover:scale-[1.03]
+              hover:-translate-y-1
               hover:border-purple-200
-              hover:shadow-2xl
+              hover:shadow-xl
+              sm:rounded-[28px]
+              sm:p-8
+              md:col-span-2
+              lg:col-span-1
+              lg:rounded-[32px]
+              lg:p-10
+              lg:hover:-translate-y-3
+              lg:hover:scale-[1.03]
+              lg:hover:shadow-2xl
             "
           >
 
             <div
               className="
                 mx-auto
-                mb-7
+                mb-5
                 flex
-                h-20
-                w-20
+                h-16
+                w-16
                 items-center
                 justify-center
-                rounded-3xl
+                rounded-2xl
                 bg-purple-50
                 text-purple-600
                 transition
                 duration-300
-                group-hover:scale-110
-                group-hover:rotate-3
+                group-hover:scale-105
+                sm:mb-6
+                sm:h-18
+                sm:w-18
+                sm:rounded-3xl
+                lg:mb-7
+                lg:h-20
+                lg:w-20
+                lg:group-hover:scale-110
+                lg:group-hover:rotate-3
               "
             >
               <CalendarDays
-                size={38}
+                size={32}
                 strokeWidth={2}
+                className="sm:h-9 sm:w-9 lg:h-[38px] lg:w-[38px]"
               />
             </div>
 
-            <h3 className="text-2xl font-bold text-slate-950">
+            <h3 className="text-xl font-bold text-slate-950 sm:text-2xl">
               {
                 services.bookingManagement
                   .title
               }
             </h3>
 
-            <p className="mt-5 text-lg leading-8 text-slate-600">
+            <p className="mt-4 text-base leading-7 text-slate-600 sm:mt-5 sm:text-lg sm:leading-8">
               {
                 services.bookingManagement
                   .description
@@ -388,14 +477,17 @@ export default async function Services() {
             </p>
 
             <ArrowRight
-              size={25}
+              size={23}
               className="
                 mx-auto
-                mt-7
+                mt-5
                 text-purple-600
                 transition
                 duration-300
-                group-hover:translate-x-2
+                group-hover:translate-x-1
+                sm:mt-6
+                lg:mt-7
+                lg:group-hover:translate-x-2
               "
             />
 

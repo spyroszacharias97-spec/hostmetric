@@ -923,7 +923,7 @@ export default function OnboardingForm({
   }) => (
     <div
       key={reactKey}
-      className="rounded-2xl border border-slate-200 bg-slate-50 p-5"
+      className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:p-5"
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
@@ -936,7 +936,7 @@ export default function OnboardingForm({
           )}
         </div>
 
-        <label className="inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-xl border border-blue-200 bg-white px-4 py-3 font-bold text-blue-600 transition hover:border-blue-500 hover:shadow-sm">
+        <label className="inline-flex w-full shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white px-4 py-3 font-bold text-blue-600 transition hover:border-blue-500 hover:shadow-sm sm:w-auto">
           <Upload size={17} />
           {t("Add Files")}
           <input
@@ -1044,16 +1044,16 @@ export default function OnboardingForm({
           {files.map((file, index) => (
             <div
               key={`${file.file.name}-${file.file.size}-${file.file.lastModified}-${index}`}
-              className="flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm"
+              className="flex min-w-0 items-center gap-3 rounded-xl bg-white p-3 shadow-sm"
             >
               {file.previewUrl ? (
                 <img
                   src={file.previewUrl}
                   alt={file.file.name}
-                  className="h-20 w-20 shrink-0 rounded-xl border border-slate-200 object-cover"
+                  className="h-16 w-16 shrink-0 rounded-xl border border-slate-200 object-cover sm:h-20 sm:w-20"
                 />
               ) : (
-                <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-100">
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-100 sm:h-20 sm:w-20">
                   <FileImage size={24} className="text-blue-600" />
                 </div>
               )}
@@ -1359,7 +1359,7 @@ export default function OnboardingForm({
   // =========================================================
 
   const inputClass = (field: string) =>
-    `w-full rounded-2xl border bg-white px-4 py-4 text-slate-900 outline-none transition ${
+    `w-full rounded-2xl border bg-white px-3.5 py-3.5 text-sm text-slate-900 outline-none transition sm:px-4 sm:py-4 sm:text-base ${
       errors[field]
         ? "border-red-500 ring-4 ring-red-50"
         : "border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
@@ -2174,7 +2174,7 @@ export default function OnboardingForm({
     return (
       <div className="mx-auto w-full max-w-4xl">
 
-        <div className="rounded-[32px] border border-green-100 bg-white p-10 text-center shadow-xl md:p-14">
+        <div className="rounded-[24px] border border-green-100 bg-white p-5 text-center shadow-xl sm:rounded-[28px] sm:p-8 md:rounded-[32px] md:p-14">
 
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-3xl">
             ✓
@@ -2186,13 +2186,13 @@ export default function OnboardingForm({
               : t("Onboarding Complete")}
           </p>
 
-          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+          <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl">
             {adminMode
               ? t("The property was added successfully")
               : t("Your property information is ready for review")}
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:mt-6 sm:text-lg sm:leading-8">
             {adminMode
               ? t(
                   "The property information and uploaded files were saved successfully. The property is now pending review and can be activated when everything is ready."
@@ -2204,7 +2204,7 @@ export default function OnboardingForm({
 
 </p>
 
-          <div className="mt-8 rounded-2xl bg-blue-50 px-6 py-5 text-left">
+          <div className="mt-7 rounded-2xl bg-blue-50 px-4 py-4 text-left sm:mt-8 sm:px-6 sm:py-5">
 
             <p className="font-bold text-blue-950">
               {adminMode
@@ -2245,22 +2245,28 @@ export default function OnboardingForm({
     );
   }
 
+  /* =========================================================
+     RESPONSIVE FORM SHELL
+     Mobile-first spacing only. Submission, validation,
+     upload and admin/public logic remain unchanged.
+  ========================================================= */
+
   return (
-    <div className="mx-auto w-full max-w-6xl">
+    <div className="mx-auto w-full max-w-6xl min-w-0 overflow-x-hidden">
 
       {/* =====================================================
           PROGRESS
       ===================================================== */}
 
-      <div className="mb-10">
+      <div className="mb-7 sm:mb-10">
 
-        <div className="flex items-center justify-between">
+        <div className="flex min-w-0 items-center justify-between gap-3">
 
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-600 sm:text-sm sm:tracking-[0.2em]">
             {t("Property Onboarding")}
           </p>
 
-          <p className="text-sm font-semibold text-slate-500">
+          <p className="shrink-0 text-xs font-semibold text-slate-500 sm:text-sm">
             {t("Step")} {step} {adminMode ? t("of 6") : t("of 7")}
           </p>
 
@@ -2285,7 +2291,7 @@ export default function OnboardingForm({
       ===================================================== */}
 
       {adminMode && (
-        <div className="mb-6 rounded-2xl border border-emerald-200 bg-emerald-50 px-6 py-5">
+        <div className="mb-5 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4 sm:mb-6 sm:px-6 sm:py-5">
           <p className="font-bold text-emerald-950">
             {t("Admin completion mode")}
           </p>
@@ -2296,7 +2302,7 @@ export default function OnboardingForm({
         </div>
       )}
 
-      <div className="mb-6 rounded-2xl border border-blue-100 bg-blue-50/90 px-6 py-5">
+      <div className="mb-5 rounded-2xl border border-blue-100 bg-blue-50/90 px-4 py-4 sm:mb-6 sm:px-6 sm:py-5">
 
         <p className="font-semibold text-blue-950">
           {t("Only fields marked with * are required.")}
@@ -2315,7 +2321,7 @@ export default function OnboardingForm({
           HELP / CONTACT — VISIBLE ON EVERY STEP
       ===================================================== */}
 
-      <div className="mb-8 flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white px-6 py-5 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+      <div className="mb-6 flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm sm:mb-8 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-5">
 
         <div>
 
@@ -2332,7 +2338,7 @@ export default function OnboardingForm({
 
         <a
           href="/contact"
-          className="inline-flex shrink-0 items-center justify-center rounded-xl bg-slate-950 px-6 py-3 font-bold text-white transition hover:-translate-y-1 hover:bg-blue-600 hover:shadow-lg"
+          className="inline-flex w-full shrink-0 items-center justify-center rounded-xl bg-slate-950 px-5 py-3 font-bold text-white transition hover:-translate-y-1 hover:bg-blue-600 hover:shadow-lg sm:w-auto sm:px-6"
         >
           {t("Contact Us →")}
         </a>
@@ -2345,17 +2351,17 @@ export default function OnboardingForm({
       ===================================================== */}
 
       {step === 1 && (
-        <div className="rounded-[32px] border border-slate-200 bg-white/95 p-8 shadow-xl backdrop-blur-sm md:p-12">
+        <div className="rounded-[24px] border border-slate-200 bg-white/95 p-5 shadow-xl backdrop-blur-sm sm:rounded-[28px] sm:p-7 md:rounded-[32px] md:p-12">
 
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-600 sm:text-sm sm:tracking-[0.2em]">
             {t("Step 01")}
           </p>
 
-          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+          <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl">
             {t("Owner & Business Details")}
           </h1>
 
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
+          <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 sm:mt-5 sm:text-lg sm:leading-8">
             {t("Tell us who owns or operates the property. Your answers help us determine which legal and property questions apply later.")}
           
 
@@ -2421,7 +2427,7 @@ export default function OnboardingForm({
                       "individual"
                     )
                   }
-                  className={`cursor-pointer rounded-2xl border px-6 py-5 text-left transition ${
+                  className={`cursor-pointer rounded-2xl border px-4 py-4 text-left transition sm:px-6 sm:py-5 ${
                     formData.ownerType ===
                     "individual"
                       ? "border-blue-600 bg-blue-50 shadow-sm"
@@ -2449,7 +2455,7 @@ export default function OnboardingForm({
                       "business"
                     )
                   }
-                  className={`cursor-pointer rounded-2xl border px-6 py-5 text-left transition ${
+                  className={`cursor-pointer rounded-2xl border px-4 py-4 text-left transition sm:px-6 sm:py-5 ${
                     formData.ownerType ===
                     "business"
                       ? "border-blue-600 bg-blue-50 shadow-sm"
@@ -2549,7 +2555,7 @@ export default function OnboardingForm({
               </label>
 
               <div
-                className={`flex overflow-hidden rounded-2xl border bg-white transition ${
+                className={`flex min-w-0 overflow-hidden rounded-2xl border bg-white transition ${
                   errors.phone
                     ? "border-red-500 ring-4 ring-red-50"
                     : "border-slate-300 focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100"
@@ -2565,7 +2571,7 @@ export default function OnboardingForm({
                       event.target.value
                     )
                   }
-                  className="w-[145px] shrink-0 cursor-pointer border-r border-slate-300 bg-slate-50 px-3 py-4 font-semibold text-slate-900 outline-none sm:w-[175px]"
+                  className="w-[112px] shrink-0 cursor-pointer border-r border-slate-300 bg-slate-50 px-2 py-3.5 text-sm font-semibold text-slate-900 outline-none min-[380px]:w-[125px] sm:w-[175px] sm:px-3 sm:py-4 sm:text-base"
                 >
 
                   {phoneCountryCodes.map((item) => (
@@ -2592,7 +2598,7 @@ export default function OnboardingForm({
                     )
                   }
                   placeholder={t("Phone number")}
-                  className="min-w-0 flex-1 bg-white px-4 py-4 text-slate-900 outline-none"
+                  className="min-w-0 flex-1 bg-white px-3 py-3.5 text-sm text-slate-900 outline-none sm:px-4 sm:py-4 sm:text-base"
                 />
 
               </div>
@@ -2936,7 +2942,7 @@ export default function OnboardingForm({
             <button
               type="button"
               onClick={continueFromStepOne}
-              className="cursor-pointer rounded-2xl bg-blue-600 px-8 py-4 text-lg font-bold text-white transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+              className="w-full cursor-pointer rounded-2xl bg-blue-600 px-5 py-3.5 text-base font-bold text-white transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
             >
               {t("Continue to Property Details →")}
             </button>
@@ -2952,13 +2958,13 @@ export default function OnboardingForm({
       ===================================================== */}
 
       {step === 2 && (
-        <div className="rounded-[32px] border border-slate-200 bg-white/95 p-8 shadow-xl backdrop-blur-sm md:p-12">
+        <div className="rounded-[24px] border border-slate-200 bg-white/95 p-5 shadow-xl backdrop-blur-sm sm:rounded-[28px] sm:p-7 md:rounded-[32px] md:p-12">
 
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-600 sm:text-sm sm:tracking-[0.2em]">
             {t("Step 02")}
           </p>
 
-          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+          <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl">
             {t("Property & Accommodation Setup")}
           </h1>
 
@@ -3209,7 +3215,7 @@ export default function OnboardingForm({
                 {t("Accommodation Structure")}
               </p>
 
-              <h2 className="mt-3 text-3xl font-bold">
+              <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
                 {t("How is your accommodation sold? *")}
               </h2>
 
@@ -3266,7 +3272,7 @@ export default function OnboardingForm({
 
           <div className="mt-12">
 
-            <div className="flex items-center justify-between">
+            <div className="flex min-w-0 items-center justify-between gap-3">
 
               <div>
 
@@ -3289,12 +3295,12 @@ export default function OnboardingForm({
 
                 <div
                   key={unit.id}
-                  className="rounded-[28px] border border-slate-200 bg-slate-50 p-7 md:p-9"
+                  className="rounded-[22px] border border-slate-200 bg-slate-50 p-4 sm:rounded-[24px] sm:p-6 md:rounded-[28px] md:p-9"
                 >
 
-                  <div className="flex items-center justify-between">
+                  <div className="flex min-w-0 items-center justify-between gap-3">
 
-                    <h3 className="text-2xl font-bold">
+                    <h3 className="break-words text-xl font-bold leading-tight sm:text-2xl">
                       {t("Unit Type")} {index + 1}
                     </h3>
 
@@ -3762,7 +3768,7 @@ export default function OnboardingForm({
             <button
               type="button"
               onClick={addUnit}
-              className="mt-7 flex cursor-pointer items-center gap-2 rounded-2xl border-2 border-dashed border-blue-300 bg-blue-50 px-6 py-4 font-bold text-blue-600 transition hover:border-blue-500 hover:bg-blue-100"
+              className="mt-7 flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-blue-300 bg-blue-50 px-4 py-4 text-center font-bold text-blue-600 transition hover:border-blue-500 hover:bg-blue-100 sm:w-auto sm:px-6"
             >
               <Plus size={21} />
               {t("Add Another Unit Type")}
@@ -3781,7 +3787,7 @@ export default function OnboardingForm({
               {t("Registration & Legal Information")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
 
               {formData.propertyCountry ===
                 "Cyprus" &&
@@ -3949,7 +3955,7 @@ export default function OnboardingForm({
             <button
               type="button"
               onClick={goBack}
-              className="cursor-pointer rounded-2xl border border-slate-300 bg-white px-8 py-4 text-lg font-bold transition hover:border-blue-400 hover:text-blue-600"
+              className="w-full cursor-pointer rounded-2xl border border-slate-300 bg-white px-5 py-3.5 text-base font-bold transition hover:border-blue-400 hover:text-blue-600 sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
             >
               {t("← Back")}
             </button>
@@ -3958,7 +3964,7 @@ export default function OnboardingForm({
             <button
               type="button"
               onClick={continueFromStepTwo}
-              className="cursor-pointer rounded-2xl bg-blue-600 px-8 py-4 text-lg font-bold text-white transition hover:-translate-y-1 hover:shadow-xl"
+              className="w-full cursor-pointer rounded-2xl bg-blue-600 px-5 py-3.5 text-base font-bold text-white transition hover:-translate-y-1 hover:shadow-xl sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
             >
               {t("Continue to Online Presence →")}
             </button>
@@ -3974,17 +3980,17 @@ export default function OnboardingForm({
       ===================================================== */}
 
       {step === 3 && (
-        <div className="rounded-[32px] border border-slate-200 bg-white/95 p-8 shadow-xl backdrop-blur-sm md:p-12">
+        <div className="rounded-[24px] border border-slate-200 bg-white/95 p-5 shadow-xl backdrop-blur-sm sm:rounded-[28px] sm:p-7 md:rounded-[32px] md:p-12">
 
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-600 sm:text-sm sm:tracking-[0.2em]">
             {t("Step 03")}
           </p>
 
-          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+          <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl">
             {t("Existing Online Presence & Systems")}
           </h1>
 
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
+          <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 sm:mt-5 sm:text-lg sm:leading-8">
             {t("Tell us where the property is currently listed and which booking systems you already use. If you are unsure about a technical system, simply select &quot;I&apos;m not sure&quot;.")}
           
 
@@ -4015,7 +4021,7 @@ export default function OnboardingForm({
                       setSelectedPlatforms([]);
                     }
                   }}
-                  className={`cursor-pointer rounded-2xl border px-6 py-5 font-bold transition ${
+                  className={`cursor-pointer rounded-2xl border px-4 py-4 font-bold transition sm:px-6 sm:py-5 ${
                     formData.listingStatus === value
                       ? "border-blue-600 bg-blue-50 text-blue-700"
                       : "border-slate-300 bg-white text-slate-800 hover:border-blue-300"
@@ -4041,7 +4047,7 @@ export default function OnboardingForm({
                 {t("Booking Platforms")}
               </p>
 
-              <h2 className="mt-3 text-3xl font-bold">
+              <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
                 {t("Where is the property currently listed?")}
               </h2>
 
@@ -4095,7 +4101,7 @@ export default function OnboardingForm({
                       onClick={() =>
                         togglePlatform(platform.key)
                       }
-                      className={`cursor-pointer rounded-2xl border p-5 text-left transition duration-300 ${
+                      className={`cursor-pointer rounded-2xl border p-4 text-left transition duration-300 sm:p-5 ${
                         selected
                           ? "border-blue-600 bg-blue-50 shadow-sm"
                           : "border-slate-200 bg-white hover:-translate-y-1 hover:border-blue-300 hover:shadow-md"
@@ -4134,7 +4140,7 @@ export default function OnboardingForm({
                   onClick={() =>
                     togglePlatform("other")
                   }
-                  className={`cursor-pointer rounded-2xl border p-5 text-left transition duration-300 ${
+                  className={`cursor-pointer rounded-2xl border p-4 text-left transition duration-300 sm:p-5 ${
                     selectedPlatforms.includes("other")
                       ? "border-blue-600 bg-blue-50 shadow-sm"
                       : "border-slate-200 bg-white hover:-translate-y-1 hover:border-blue-300 hover:shadow-md"
@@ -4154,7 +4160,7 @@ export default function OnboardingForm({
               </div>
 
               {selectedPlatforms.includes("other") && (
-                <div className="mt-6 rounded-2xl border border-blue-100 bg-blue-50 p-6">
+                <div className="mt-6 rounded-2xl border border-blue-100 bg-blue-50 p-4 sm:p-6">
 
                   <label className="mb-2 block text-sm font-bold text-slate-700">
                     {t("Which other platform?")}
@@ -4196,7 +4202,7 @@ export default function OnboardingForm({
                   {t("Existing Listings")}
                 </p>
 
-                <h2 className="mt-3 text-3xl font-bold">
+                <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
                   {t("Add your current listing details")}
                 </h2>
 
@@ -4208,7 +4214,7 @@ export default function OnboardingForm({
 
 
               {selectedPlatforms.includes("booking") && (
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7">
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:rounded-3xl sm:p-6 md:p-7">
 
                   <h3 className="text-xl font-bold">
                     {t("Booking.com")}
@@ -4247,7 +4253,7 @@ export default function OnboardingForm({
 
 
               {selectedPlatforms.includes("airbnb") && (
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7">
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:rounded-3xl sm:p-6 md:p-7">
 
                   <h3 className="text-xl font-bold">
                     {t("Airbnb")}
@@ -4286,7 +4292,7 @@ export default function OnboardingForm({
 
 
               {selectedPlatforms.includes("vrbo") && (
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7">
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:rounded-3xl sm:p-6 md:p-7">
 
                   <h3 className="text-xl font-bold">
                     {t("Vrbo")}
@@ -4325,7 +4331,7 @@ export default function OnboardingForm({
 
 
               {selectedPlatforms.includes("expedia") && (
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7">
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:rounded-3xl sm:p-6 md:p-7">
 
                   <h3 className="text-xl font-bold">
                     {t("Expedia")}
@@ -4364,7 +4370,7 @@ export default function OnboardingForm({
 
 
               {selectedPlatforms.includes("agoda") && (
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7">
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:rounded-3xl sm:p-6 md:p-7">
 
                   <h3 className="text-xl font-bold">
                     {t("Agoda")}
@@ -4403,7 +4409,7 @@ export default function OnboardingForm({
 
 
               {selectedPlatforms.includes("tripcom") && (
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7">
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:rounded-3xl sm:p-6 md:p-7">
 
                   <h3 className="text-xl font-bold">
                     {t("Trip.com")}
@@ -4442,7 +4448,7 @@ export default function OnboardingForm({
 
 
               {selectedPlatforms.includes("other") && (
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7">
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:rounded-3xl sm:p-6 md:p-7">
 
                   <h3 className="text-xl font-bold">
                     {formData.otherPlatformName || "Other Platform"}
@@ -4480,7 +4486,7 @@ export default function OnboardingForm({
               {t("Existing Systems")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("How are reservations currently managed?")}
             </h2>
 
@@ -4738,7 +4744,7 @@ export default function OnboardingForm({
             <button
               type="button"
               onClick={goBack}
-              className="cursor-pointer rounded-2xl border border-slate-300 bg-white px-8 py-4 text-lg font-bold transition hover:border-blue-400 hover:text-blue-600"
+              className="w-full cursor-pointer rounded-2xl border border-slate-300 bg-white px-5 py-3.5 text-base font-bold transition hover:border-blue-400 hover:text-blue-600 sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
             >
               {t("← Back")}
             </button>
@@ -4747,7 +4753,7 @@ export default function OnboardingForm({
             <button
               type="button"
               onClick={continueFromStepThree}
-              className="cursor-pointer rounded-2xl bg-blue-600 px-8 py-4 text-lg font-bold text-white transition hover:-translate-y-1 hover:shadow-xl"
+              className="w-full cursor-pointer rounded-2xl bg-blue-600 px-5 py-3.5 text-base font-bold text-white transition hover:-translate-y-1 hover:shadow-xl sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
             >
               {t("Continue to Property Setup →")}
             </button>
@@ -4763,17 +4769,17 @@ export default function OnboardingForm({
       ===================================================== */}
 
       {step === 4 && (
-        <div className="rounded-[32px] border border-slate-200 bg-white/95 p-8 shadow-xl backdrop-blur-sm md:p-12">
+        <div className="rounded-[24px] border border-slate-200 bg-white/95 p-5 shadow-xl backdrop-blur-sm sm:rounded-[28px] sm:p-7 md:rounded-[32px] md:p-12">
 
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-600 sm:text-sm sm:tracking-[0.2em]">
             {t("Step 04")}
           </p>
 
-          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+          <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl">
             {t("Facilities, Guest Policies & Operations")}
           </h1>
 
-          <p className="mt-5 max-w-4xl text-lg leading-8 text-slate-600">
+          <p className="mt-4 max-w-4xl text-base leading-7 text-slate-600 sm:mt-5 sm:text-lg sm:leading-8">
             {t("Tell us how the property operates day to day and which facilities guests can expect. These details are used across booking platforms, filters, house rules and the guest journey.")}
           
 
@@ -4790,7 +4796,7 @@ export default function OnboardingForm({
               {t("Arrival & Departure")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Check-in and check-out setup")}
             </h2>
 
@@ -5011,7 +5017,7 @@ export default function OnboardingForm({
               {t("Property Facilities")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("What does the property offer?")}
             </h2>
 
@@ -5036,7 +5042,7 @@ export default function OnboardingForm({
                     onClick={() =>
                       togglePropertyFacility(facility)
                     }
-                    className={`cursor-pointer rounded-2xl border px-5 py-4 text-left font-semibold transition ${
+                    className={`cursor-pointer rounded-2xl border px-4 py-3.5 text-left font-semibold transition sm:px-5 sm:py-4 ${
                       selected
                         ? "border-blue-600 bg-blue-50 text-blue-700 shadow-sm"
                         : "border-slate-200 bg-white text-slate-700 hover:border-blue-300"
@@ -5066,7 +5072,7 @@ export default function OnboardingForm({
               {t("Room & Unit Amenities")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Amenities by accommodation type")}
             </h2>
 
@@ -5086,7 +5092,7 @@ export default function OnboardingForm({
                 return (
                   <div
                     key={unit.id}
-                    className="rounded-[28px] border border-slate-200 bg-slate-50 p-7 md:p-9"
+                    className="rounded-[22px] border border-slate-200 bg-slate-50 p-4 sm:rounded-[24px] sm:p-6 md:rounded-[28px] md:p-9"
                   >
 
                     <div>
@@ -5095,7 +5101,7 @@ export default function OnboardingForm({
                         {t("Unit Type")} {index + 1}
                       </p>
 
-                      <h3 className="mt-2 text-2xl font-bold">
+                      <h3 className="mt-2 break-words text-xl font-bold leading-tight sm:text-2xl">
                         {unit.name ||
                           t("Unnamed Room / Unit Type")}
                       </h3>
@@ -5164,7 +5170,7 @@ export default function OnboardingForm({
               {t("Guest Policies")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Rules guests should know")}
             </h2>
 
@@ -5395,7 +5401,7 @@ export default function OnboardingForm({
               {t("Additional Details")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Helpful listing information")}
             </h2>
 
@@ -5505,7 +5511,7 @@ export default function OnboardingForm({
               {t("Accessibility")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Accessibility by property and accommodation type")}
             </h2>
 
@@ -5517,7 +5523,7 @@ export default function OnboardingForm({
               <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-600">
                 {t("Property / Shared Access")}
               </p>
-              <h3 className="mt-2 text-2xl font-bold">
+              <h3 className="mt-2 break-words text-xl font-bold leading-tight sm:text-2xl">
                 {t("Features that apply to the property or shared arrival areas")}
               </h3>
               <p className="mt-2 text-sm leading-6 text-slate-600">
@@ -5533,7 +5539,7 @@ export default function OnboardingForm({
                       key={feature}
                       type="button"
                       onClick={() => togglePropertyAccessibility(feature)}
-                      className={`cursor-pointer rounded-2xl border px-5 py-4 text-left font-semibold transition ${
+                      className={`cursor-pointer rounded-2xl border px-4 py-3.5 text-left font-semibold transition sm:px-5 sm:py-4 ${
                         selected
                           ? "border-blue-600 bg-white text-blue-700 shadow-sm"
                           : "border-slate-200 bg-white text-slate-700 hover:border-blue-300"
@@ -5554,12 +5560,12 @@ export default function OnboardingForm({
                 return (
                   <div
                     key={unit.id}
-                    className="rounded-[28px] border border-slate-200 bg-slate-50 p-7 md:p-9"
+                    className="rounded-[22px] border border-slate-200 bg-slate-50 p-4 sm:rounded-[24px] sm:p-6 md:rounded-[28px] md:p-9"
                   >
                     <p className="text-sm font-bold uppercase tracking-[0.16em] text-violet-600">
                       {t("Unit Type")} {index + 1}
                     </p>
-                    <h3 className="mt-2 text-2xl font-bold">
+                    <h3 className="mt-2 break-words text-xl font-bold leading-tight sm:text-2xl">
                       {unit.name || t("Unnamed Room / Unit Type")}
                     </h3>
                     <p className="mt-2 text-sm leading-6 text-slate-600">
@@ -5575,7 +5581,7 @@ export default function OnboardingForm({
                             key={feature}
                             type="button"
                             onClick={() => toggleUnitAccessibility(unit.id, feature)}
-                            className={`cursor-pointer rounded-2xl border px-5 py-4 text-left font-semibold transition ${
+                            className={`cursor-pointer rounded-2xl border px-4 py-3.5 text-left font-semibold transition sm:px-5 sm:py-4 ${
                               selected
                                 ? "border-violet-600 bg-white text-violet-700 shadow-sm"
                                 : "border-slate-200 bg-white text-slate-700 hover:border-violet-300"
@@ -5600,7 +5606,7 @@ export default function OnboardingForm({
             <button
               type="button"
               onClick={goBack}
-              className="cursor-pointer rounded-2xl border border-slate-300 bg-white px-8 py-4 text-lg font-bold transition hover:border-blue-400 hover:text-blue-600"
+              className="w-full cursor-pointer rounded-2xl border border-slate-300 bg-white px-5 py-3.5 text-base font-bold transition hover:border-blue-400 hover:text-blue-600 sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
             >
               {t("← Back")}
             </button>
@@ -5609,7 +5615,7 @@ export default function OnboardingForm({
             <button
               type="button"
               onClick={continueFromStepFour}
-              className="cursor-pointer rounded-2xl bg-blue-600 px-8 py-4 text-lg font-bold text-white transition hover:-translate-y-1 hover:shadow-xl"
+              className="w-full cursor-pointer rounded-2xl bg-blue-600 px-5 py-3.5 text-base font-bold text-white transition hover:-translate-y-1 hover:shadow-xl sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
             >
               {t("Continue to Pricing & Availability →")}
             </button>
@@ -5625,24 +5631,24 @@ export default function OnboardingForm({
       ===================================================== */}
 
       {step === 5 && (
-        <div className="rounded-[32px] border border-slate-200 bg-white/95 p-8 shadow-xl backdrop-blur-sm md:p-12">
+        <div className="rounded-[24px] border border-slate-200 bg-white/95 p-5 shadow-xl backdrop-blur-sm sm:rounded-[28px] sm:p-7 md:rounded-[32px] md:p-12">
 
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-600 sm:text-sm sm:tracking-[0.2em]">
             {t("Step 05")}
           </p>
 
-          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+          <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl">
             {t("Pricing, Availability & Booking Rules")}
           </h1>
 
-          <p className="mt-5 max-w-4xl text-lg leading-8 text-slate-600">
+          <p className="mt-4 max-w-4xl text-base leading-7 text-slate-600 sm:mt-5 sm:text-lg sm:leading-8">
             {t("This step is only an estimation of the property's current commercial setup. You may leave any field blank if you do not know the answer. HostMetric will analyse the market, booking history, competition and property performance before deciding the final pricing and booking strategy.")}
           
 
 
 </p>
 
-          <div className="mt-7 rounded-2xl border border-blue-100 bg-blue-50 px-6 py-5">
+          <div className="mt-6 rounded-2xl border border-blue-100 bg-blue-50 px-4 py-4 sm:mt-7 sm:px-6 sm:py-5">
             <p className="font-bold text-blue-950">
               {t("Everything in Step 5 is optional.")}
             </p>
@@ -5665,7 +5671,7 @@ export default function OnboardingForm({
               {t("Pricing Currency")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Currency used for the rates below")}
             </h2>
 
@@ -5701,7 +5707,7 @@ export default function OnboardingForm({
               {t("Current Rates by Unit Type")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Current pricing information")}
             </h2>
 
@@ -5727,14 +5733,14 @@ export default function OnboardingForm({
                 return (
                   <div
                     key={unit.id}
-                    className="rounded-[28px] border border-slate-200 bg-slate-50 p-7 md:p-9"
+                    className="rounded-[22px] border border-slate-200 bg-slate-50 p-4 sm:rounded-[24px] sm:p-6 md:rounded-[28px] md:p-9"
                   >
 
                     <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-600">
                       {t("Unit Type")} {index + 1}
                     </p>
 
-                    <h3 className="mt-2 text-2xl font-bold">
+                    <h3 className="mt-2 break-words text-xl font-bold leading-tight sm:text-2xl">
                       {unit.name ||
                         t("Unnamed Room / Unit Type")}
                     </h3>
@@ -5914,7 +5920,7 @@ export default function OnboardingForm({
               {t("Fees & Taxes")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Additional charges")}
             </h2>
 
@@ -6082,7 +6088,7 @@ export default function OnboardingForm({
               {t("Availability Rules")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("How should guests be allowed to book?")}
             </h2>
 
@@ -6269,7 +6275,7 @@ export default function OnboardingForm({
               {t("Booking Policies")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Cancellation & No-Show Policy")}
             </h2>
 
@@ -6388,7 +6394,7 @@ export default function OnboardingForm({
               {t("Meals")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Breakfast pricing")}
             </h2>
 
@@ -6475,7 +6481,7 @@ export default function OnboardingForm({
               {t("Promotions & Discounts")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Existing or preferred discounts")}
             </h2>
 
@@ -6540,7 +6546,7 @@ export default function OnboardingForm({
               {t("Current Performance")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Existing performance information")}
             </h2>
 
@@ -6674,7 +6680,7 @@ export default function OnboardingForm({
               {t("Owner Restrictions & Notes")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Anything that affects availability or pricing?")}
             </h2>
 
@@ -6740,7 +6746,7 @@ export default function OnboardingForm({
             <button
               type="button"
               onClick={goBack}
-              className="cursor-pointer rounded-2xl border border-slate-300 bg-white px-8 py-4 text-lg font-bold transition hover:border-blue-400 hover:text-blue-600"
+              className="w-full cursor-pointer rounded-2xl border border-slate-300 bg-white px-5 py-3.5 text-base font-bold transition hover:border-blue-400 hover:text-blue-600 sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
             >
               {t("← Back")}
             </button>
@@ -6749,7 +6755,7 @@ export default function OnboardingForm({
             <button
               type="button"
               onClick={continueFromStepFive}
-              className="cursor-pointer rounded-2xl bg-blue-600 px-8 py-4 text-lg font-bold text-white transition hover:-translate-y-1 hover:shadow-xl"
+              className="w-full cursor-pointer rounded-2xl bg-blue-600 px-5 py-3.5 text-base font-bold text-white transition hover:-translate-y-1 hover:shadow-xl sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
             >
               {t("Continue to Photos & Listing Content →")}
             </button>
@@ -6765,17 +6771,17 @@ export default function OnboardingForm({
       ===================================================== */}
 
       {step === 6 && (
-        <div className="rounded-[32px] border border-slate-200 bg-white/95 p-8 shadow-xl backdrop-blur-sm md:p-12">
+        <div className="rounded-[24px] border border-slate-200 bg-white/95 p-5 shadow-xl backdrop-blur-sm sm:rounded-[28px] sm:p-7 md:rounded-[32px] md:p-12">
 
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-600 sm:text-sm sm:tracking-[0.2em]">
             {t("Step 06")}
           </p>
 
-          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+          <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl">
             {t("Photos & Listing Content")}
           </h1>
 
-          <p className="mt-5 max-w-4xl text-lg leading-8 text-slate-600">
+          <p className="mt-4 max-w-4xl text-base leading-7 text-slate-600 sm:mt-5 sm:text-lg sm:leading-8">
             {t("Upload any photos you already have and tell us what makes the property special. Everything in this step is optional unless you upload files. HostMetric can reorganize the photo gallery, improve the listing copy and tell you which additional photographs are still needed.")}
           
 
@@ -6784,7 +6790,7 @@ export default function OnboardingForm({
 </p>
 
 
-          <div className="mt-7 rounded-2xl border border-blue-100 bg-blue-50 px-6 py-5">
+          <div className="mt-6 rounded-2xl border border-blue-100 bg-blue-50 px-4 py-4 sm:mt-7 sm:px-6 sm:py-5">
 
             <p className="font-bold text-blue-950">
               {t("You do not need professional photos to complete this form.")}
@@ -6809,7 +6815,7 @@ export default function OnboardingForm({
               {t("Property-Level Photos")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Property & common-area gallery")}
             </h2>
 
@@ -6843,7 +6849,7 @@ export default function OnboardingForm({
               {t("Room & Unit Galleries")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Photos for each sellable unit type")}
             </h2>
 
@@ -6855,13 +6861,13 @@ export default function OnboardingForm({
               {units.map((unit, index) => (
                 <div
                   key={unit.id}
-                  className="rounded-[28px] border border-slate-200 bg-slate-50 p-7 md:p-9"
+                  className="rounded-[22px] border border-slate-200 bg-slate-50 p-4 sm:rounded-[24px] sm:p-6 md:rounded-[28px] md:p-9"
                 >
                   <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-600">
                     {t("Unit Type")} {index + 1}
                   </p>
 
-                  <h3 className="mt-2 text-2xl font-bold">
+                  <h3 className="mt-2 break-words text-xl font-bold leading-tight sm:text-2xl">
                     {unit.name || t("Unnamed Room / Unit Type")}
                   </h3>
 
@@ -6916,7 +6922,7 @@ export default function OnboardingForm({
                 {t("Accessibility Evidence")}
               </p>
 
-              <h2 className="mt-3 text-3xl font-bold">
+              <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
                 {t("Evidence for the accessibility features you selected")}
               </h2>
 
@@ -6959,12 +6965,12 @@ export default function OnboardingForm({
                   return (
                     <div
                       key={unit.id}
-                      className="rounded-[28px] border border-violet-100 bg-violet-50/40 p-7 md:p-9"
+                      className="rounded-[22px] border border-violet-100 bg-violet-50/40 p-4 sm:rounded-[24px] sm:p-6 md:rounded-[28px] md:p-9"
                     >
                       <p className="text-sm font-bold uppercase tracking-[0.16em] text-violet-600">
                         {t("Accessibility — Unit Type")} {index + 1}
                       </p>
-                      <h3 className="mt-2 text-2xl font-bold">
+                      <h3 className="mt-2 break-words text-xl font-bold leading-tight sm:text-2xl">
                         {unit.name || t("Unnamed Room / Unit Type")}
                       </h3>
 
@@ -7020,7 +7026,7 @@ export default function OnboardingForm({
               {t("Check-in & Access")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Arrival and access photos")}
             </h2>
 
@@ -7054,7 +7060,7 @@ export default function OnboardingForm({
               {t("Optional Supporting Files")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Floor plans")}
             </h2>
 
@@ -7087,7 +7093,7 @@ export default function OnboardingForm({
               {t("Listing Content")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Tell us the story of the property")}
             </h2>
 
@@ -7358,7 +7364,7 @@ export default function OnboardingForm({
             <button
               type="button"
               onClick={goBack}
-              className="cursor-pointer rounded-2xl border border-slate-300 bg-white px-8 py-4 text-lg font-bold transition hover:border-blue-400 hover:text-blue-600"
+              className="w-full cursor-pointer rounded-2xl border border-slate-300 bg-white px-5 py-3.5 text-base font-bold transition hover:border-blue-400 hover:text-blue-600 sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
             >
               {t("← Back")}
             </button>
@@ -7368,7 +7374,7 @@ export default function OnboardingForm({
               type="button"
               onClick={continueFromStepSix}
               disabled={isSubmitting}
-              className="cursor-pointer rounded-2xl bg-blue-600 px-8 py-4 text-lg font-bold text-white transition hover:-translate-y-1 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full cursor-pointer rounded-2xl bg-blue-600 px-5 py-3.5 text-base font-bold text-white transition hover:-translate-y-1 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
             >
               {adminMode
                 ? isSubmitting
@@ -7388,17 +7394,17 @@ export default function OnboardingForm({
       ===================================================== */}
 
       {!adminMode && step === 7 && (
-        <div className="rounded-[32px] border border-slate-200 bg-white/95 p-8 shadow-xl backdrop-blur-sm md:p-12">
+        <div className="rounded-[24px] border border-slate-200 bg-white/95 p-5 shadow-xl backdrop-blur-sm sm:rounded-[28px] sm:p-7 md:rounded-[32px] md:p-12">
 
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-600">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-600 sm:text-sm sm:tracking-[0.2em]">
             {t("Step 07")}
           </p>
 
-          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+          <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl">
             {t("Final Review & Property Goals")}
           </h1>
 
-          <p className="mt-5 max-w-4xl text-lg leading-8 text-slate-600">
+          <p className="mt-4 max-w-4xl text-base leading-7 text-slate-600 sm:mt-5 sm:text-lg sm:leading-8">
             {t("Review the key information below, tell us what you want to achieve and confirm that we may use the information you provided to prepare your HostMetric onboarding and listing strategy.")}
           
 
@@ -7415,14 +7421,14 @@ export default function OnboardingForm({
               {t("Quick Review")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Your onboarding summary")}
             </h2>
 
 
             <div className="mt-8 grid gap-5 md:grid-cols-2">
 
-              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:rounded-3xl sm:p-6 md:p-7">
 
                 <p className="text-sm font-bold uppercase tracking-[0.14em] text-slate-500">
                   {t("Owner / Contact")}
@@ -7446,7 +7452,7 @@ export default function OnboardingForm({
               </div>
 
 
-              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:rounded-3xl sm:p-6 md:p-7">
 
                 <p className="text-sm font-bold uppercase tracking-[0.14em] text-slate-500">
                   {t("Property")}
@@ -7470,7 +7476,7 @@ export default function OnboardingForm({
               </div>
 
 
-              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:rounded-3xl sm:p-6 md:p-7">
 
                 <p className="text-sm font-bold uppercase tracking-[0.14em] text-slate-500">
                   {t("Accommodation Inventory")}
@@ -7508,7 +7514,7 @@ export default function OnboardingForm({
               </div>
 
 
-              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:rounded-3xl sm:p-6 md:p-7">
 
                 <p className="text-sm font-bold uppercase tracking-[0.14em] text-slate-500">
                   {t("Existing Online Presence")}
@@ -7542,7 +7548,7 @@ export default function OnboardingForm({
               </div>
 
 
-              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:rounded-3xl sm:p-6 md:p-7">
 
                 <p className="text-sm font-bold uppercase tracking-[0.14em] text-slate-500">
                   {t("Facilities Selected")}
@@ -7559,7 +7565,7 @@ export default function OnboardingForm({
               </div>
 
 
-              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-7">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:rounded-3xl sm:p-6 md:p-7">
 
                 <p className="text-sm font-bold uppercase tracking-[0.14em] text-slate-500">
                   {t("Files Selected")}
@@ -7590,7 +7596,7 @@ export default function OnboardingForm({
               {t("Your Goals")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("What would you like HostMetric to improve?")}
             </h2>
 
@@ -7814,7 +7820,7 @@ export default function OnboardingForm({
               {t("Final Confirmations")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("Before sending your property")}
             </h2>
 
@@ -7947,17 +7953,17 @@ export default function OnboardingForm({
               WHAT HAPPENS NEXT
           ================================================= */}
 
-          <div className="mt-14 rounded-[28px] bg-slate-950 p-8 text-white md:p-10">
+          <div className="mt-10 rounded-[22px] bg-slate-950 p-5 text-white sm:mt-12 sm:rounded-[24px] sm:p-7 md:mt-14 md:rounded-[28px] md:p-10">
 
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-300">
               {t("What Happens Next?")}
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold">
+            <h2 className="mt-3 break-words text-2xl font-bold leading-tight sm:text-3xl">
               {t("We review the property before anything goes live.")}
             </h2>
 
-            <p className="mt-5 max-w-4xl text-lg leading-8 text-slate-300">
+            <p className="mt-4 max-w-4xl text-base leading-7 text-slate-300 sm:mt-5 sm:text-lg sm:leading-8">
               {t("Our team will review the property information, current listings, room or unit structure, facilities, photos and commercial setup. We can then contact you for anything missing and prepare the recommended listing, distribution and pricing strategy.")}
             
 
@@ -8032,7 +8038,7 @@ export default function OnboardingForm({
             <button
               type="button"
               onClick={goBack}
-              className="cursor-pointer rounded-2xl border border-slate-300 bg-white px-8 py-4 text-lg font-bold transition hover:border-blue-400 hover:text-blue-600"
+              className="w-full cursor-pointer rounded-2xl border border-slate-300 bg-white px-5 py-3.5 text-base font-bold transition hover:border-blue-400 hover:text-blue-600 sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
             >
               {t("← Back")}
             </button>
@@ -8042,7 +8048,7 @@ export default function OnboardingForm({
               type="button"
               onClick={submitOnboarding}
               disabled={isSubmitting}
-              className="cursor-pointer rounded-2xl bg-blue-600 px-8 py-4 text-lg font-bold text-white transition hover:-translate-y-1 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full cursor-pointer rounded-2xl bg-blue-600 px-5 py-3.5 text-base font-bold text-white transition hover:-translate-y-1 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
             >
               {isSubmitting ? t("Submitting...") : t("Submit Property Onboarding →")}
             </button>

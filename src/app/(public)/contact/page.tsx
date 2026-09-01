@@ -513,7 +513,7 @@ export default function ContactPage() {
 
   return (
 
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen overflow-x-hidden bg-white">
 
 
       {/* =====================================================
@@ -593,10 +593,17 @@ export default function ContactPage() {
             mx-auto
             grid
             max-w-7xl
-            gap-16
-            px-6
-            pb-28
-            pt-36
+            gap-10
+            px-4
+            pb-20
+            pt-28
+            sm:gap-12
+            sm:px-6
+            sm:pb-24
+            sm:pt-32
+            md:gap-14
+            md:pb-28
+            md:pt-36
             lg:grid-cols-[0.85fr_1.35fr]
             lg:px-8
             lg:pb-36
@@ -629,9 +636,11 @@ export default function ContactPage() {
             <h1
               className="
                 max-w-xl
-                text-5xl
+                text-4xl
                 font-black
+                leading-[1.05]
                 tracking-tight
+                min-[390px]:text-[2.65rem]
                 sm:text-6xl
                 lg:text-7xl
               "
@@ -642,10 +651,13 @@ export default function ContactPage() {
 
             <p
               className="
-                mt-7
+                mt-5
                 max-w-lg
-                text-lg
-                leading-8
+                text-base
+                leading-7
+                sm:mt-7
+                sm:text-lg
+                sm:leading-8
                 text-blue-50/90
               "
             >
@@ -655,7 +667,7 @@ export default function ContactPage() {
 
             {/* CONTACT DETAILS */}
 
-            <div className="mt-12 space-y-8">
+            <div className="mt-9 space-y-6 sm:mt-12 sm:space-y-8">
 
 
               {/* GREECE */}
@@ -840,14 +852,18 @@ export default function ContactPage() {
 
           <div
             className="
-              rounded-[36px]
+              min-w-0
+              rounded-[24px]
               border
               border-white/25
               bg-white/15
-              p-5
+              p-4
+              sm:rounded-[30px]
+              sm:p-6
               shadow-2xl
               backdrop-blur-md
-              sm:p-8
+              md:p-8
+              lg:rounded-[36px]
               lg:p-10
             "
           >
@@ -890,7 +906,9 @@ export default function ContactPage() {
               <div
                 className="
                   flex
-                  min-h-[500px]
+                  min-h-[390px]
+                  sm:min-h-[450px]
+                  lg:min-h-[500px]
                   flex-col
                   items-center
                   justify-center
@@ -994,9 +1012,12 @@ export default function ContactPage() {
                       contactPage.form.fields.fullName
                     }
                     className="
-                      h-16
+                      h-14
                       w-full
-                      rounded-2xl
+                      min-w-0
+                      rounded-xl
+                      sm:h-16
+                      sm:rounded-2xl
                       border
                       border-white/30
                       bg-white
@@ -1041,10 +1062,13 @@ export default function ContactPage() {
                       required
                       defaultValue=""
                       className="
-                        h-16
+                        h-14
                         w-full
+                        min-w-0
                         appearance-none
-                        rounded-2xl
+                        rounded-xl
+                        sm:h-16
+                        sm:rounded-2xl
                         border
                         border-white/30
                         bg-white
@@ -1119,10 +1143,13 @@ export default function ContactPage() {
                       required
                       defaultValue=""
                       className="
-                        h-16
+                        h-14
                         w-full
+                        min-w-0
                         appearance-none
-                        rounded-2xl
+                        rounded-xl
+                        sm:h-16
+                        sm:rounded-2xl
                         border
                         border-white/30
                         bg-white
@@ -1230,9 +1257,12 @@ export default function ContactPage() {
                         contactPage.form.fields.email
                       }
                       className="
-                        h-16
+                        h-14
                         w-full
-                        rounded-2xl
+                        min-w-0
+                        rounded-xl
+                        sm:h-16
+                        sm:rounded-2xl
                         border
                         border-white/30
                         bg-white
@@ -1274,9 +1304,12 @@ export default function ContactPage() {
                         contactPage.form.fields.phone
                       }
                       className="
-                        h-16
+                        h-14
                         w-full
-                        rounded-2xl
+                        min-w-0
+                        rounded-xl
+                        sm:h-16
+                        sm:rounded-2xl
                         border
                         border-white/30
                         bg-white
@@ -1309,9 +1342,12 @@ export default function ContactPage() {
                       .propertyCityArea
                   }
                   className="
-                    h-16
+                    h-14
                     w-full
-                    rounded-2xl
+                    min-w-0
+                    rounded-xl
+                    sm:h-16
+                    sm:rounded-2xl
                     border
                     border-white/30
                     bg-white
@@ -1339,8 +1375,10 @@ export default function ContactPage() {
                   }
                   className="
                     w-full
+                    min-w-0
                     resize-none
-                    rounded-2xl
+                    rounded-xl
+                    sm:rounded-2xl
                     border
                     border-white/30
                     bg-white
@@ -1366,9 +1404,12 @@ export default function ContactPage() {
                     className="
                       flex
                       cursor-pointer
-                      items-center
-                      justify-between
+                      flex-col
+                      items-stretch
                       gap-4
+                      sm:flex-row
+                      sm:items-center
+                      sm:justify-between
                       rounded-2xl
                       border
                       border-dashed
@@ -1455,7 +1496,7 @@ export default function ContactPage() {
                       </div>
 
 
-                      <div className="mt-3 flex max-h-56 flex-wrap gap-2 overflow-y-auto pr-1">
+                      <div className="mt-3 grid max-h-64 grid-cols-4 gap-2 overflow-y-auto pr-1 min-[390px]:grid-cols-5 sm:flex sm:max-h-56 sm:flex-wrap">
 
                         {selectedPhotos
                           .map(
@@ -1469,9 +1510,13 @@ export default function ContactPage() {
                                 className="
                                   group/photo
                                   relative
-                                  h-16
-                                  w-16
+                                  aspect-square
+                                  h-auto
+                                  w-full
+                                  min-w-0
                                   overflow-hidden
+                                  sm:h-16
+                                  sm:w-16
                                   rounded-xl
                                   border
                                   border-white/30
@@ -1508,11 +1553,12 @@ export default function ContactPage() {
                                       rounded-full
                                       bg-slate-950/80
                                       text-white
-                                      opacity-0
+                                      opacity-100
                                       shadow
                                       transition
                                       hover:bg-red-600
-                                      group-hover/photo:opacity-100
+                                      sm:opacity-0
+                                      sm:group-hover/photo:opacity-100
                                     "
                                   >
                                     <X size={14} />
@@ -1683,7 +1729,7 @@ export default function ContactPage() {
           SECOND SMALL SECTION
       ====================================================== */}
 
-      <section className="bg-white px-6 py-24">
+      <section className="bg-white px-4 py-16 sm:px-6 sm:py-20 md:py-24">
 
         <div className="mx-auto max-w-5xl text-center">
 
@@ -1704,10 +1750,12 @@ export default function ContactPage() {
           <h2
             className="
               mx-auto
-              mt-5
+              mt-4
               max-w-3xl
-              text-4xl
+              text-3xl
               font-black
+              leading-tight
+              sm:mt-5
               tracking-tight
               text-slate-950
               sm:text-5xl

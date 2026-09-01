@@ -1,14 +1,17 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
 
+import FooterGetStartedCta from "@/components/footer-get-started-cta";
+
 import {
   Mail,
   Phone,
   MapPin,
-  ArrowUpRight,
 } from "lucide-react";
 
-import { getDictionary } from "@/i18n/get-dictionary";
+import {
+  getDictionary,
+} from "@/i18n/get-dictionary";
 
 import {
   defaultLocale,
@@ -18,23 +21,33 @@ import {
 
 
 export default async function Footer() {
+
   /* ==========================================
      CURRENT LANGUAGE
   ========================================== */
 
-  const cookieStore = await cookies();
+  const cookieStore =
+    await cookies();
+
 
   const savedLocale =
-    cookieStore.get("hostmetric_locale")?.value;
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
 
   let currentLocale: Locale =
     defaultLocale;
 
+
   if (
     savedLocale &&
-    isSupportedLocale(savedLocale)
+    isSupportedLocale(
+      savedLocale
+    )
   ) {
-    currentLocale = savedLocale;
+    currentLocale =
+      savedLocale;
   }
 
 
@@ -43,46 +56,107 @@ export default async function Footer() {
   ========================================== */
 
   const dictionary =
-    await getDictionary(currentLocale);
+    await getDictionary(
+      currentLocale
+    );
+
 
   const footer =
     dictionary.footer;
 
 
+  /* =========================================================
+     RESPONSIVE FOOTER
+     Mobile-first presentation. Routes, contact details,
+     translations and server-side locale logic remain unchanged.
+  ========================================================= */
+
   return (
-    <footer className="bg-slate-950 text-white">
+    <footer
+      className="
+        overflow-hidden
+        bg-slate-950
+        text-white
+      "
+    >
 
-      {/* MAIN FOOTER */}
-      <div className="mx-auto max-w-7xl px-8 py-20">
+      {/* ==========================================
+          MAIN FOOTER
+      ========================================== */}
 
-        <div className="grid gap-14 md:grid-cols-2 lg:grid-cols-5">
+      <div
+        className="
+          mx-auto
+          max-w-7xl
+          px-4
+          py-14
+          sm:px-6
+          sm:py-16
+          md:px-8
+          md:py-20
+        "
+      >
+
+        <div
+          className="
+            grid
+            gap-10
+            sm:gap-12
+            md:grid-cols-2
+            md:gap-14
+            lg:grid-cols-5
+          "
+        >
 
           {/* =================================================
               BRAND
           ================================================= */}
-          <div className="lg:col-span-2">
+
+          <div
+            className="
+              min-w-0
+              md:col-span-2
+              lg:col-span-2
+            "
+          >
 
             <Link
               href="/#top"
-              className="inline-block text-3xl font-black tracking-tight transition hover:text-blue-400"
+              className="
+                inline-block
+                text-3xl
+                font-black
+                tracking-tight
+                transition
+                hover:text-blue-400
+                sm:text-[2rem]
+              "
             >
               HostMetric
             </Link>
 
 
-            <p className="mt-6 max-w-md text-lg leading-8 text-slate-400">
+            <p
+              className="
+                mt-5
+                max-w-md
+                text-base
+                leading-7
+                text-slate-400
+                sm:mt-6
+                sm:text-lg
+                sm:leading-8
+              "
+            >
               {footer.brandDescription}
             </p>
 
 
-            <Link
-              href="/get-started"
-              className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-6 py-4 font-bold text-white transition duration-300 hover:-translate-y-1 hover:bg-blue-500 hover:shadow-lg"
-            >
-              {footer.getStarted}
-
-              <ArrowUpRight size={18} />
-            </Link>
+            <FooterGetStartedCta
+              label={
+                footer.getStarted
+              }
+            />
 
           </div>
 
@@ -90,44 +164,103 @@ export default async function Footer() {
           {/* =================================================
               SERVICES
           ================================================= */}
-          <div>
 
-            <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-blue-400">
+          <div className="min-w-0">
+
+            <h3
+              className="
+                text-xs
+                font-bold
+                uppercase
+                tracking-[0.16em]
+                text-blue-400
+                sm:text-sm
+                sm:tracking-[0.2em]
+              "
+            >
               {footer.services.title}
             </h3>
 
 
-            <div className="mt-6 flex flex-col gap-4 text-slate-300">
+            <div
+              className="
+                mt-5
+                flex
+                flex-col
+                gap-3.5
+                text-sm
+                text-slate-300
+                sm:mt-6
+                sm:gap-4
+                sm:text-base
+              "
+            >
 
               <Link
                 href="/insights/occupancy"
-                className="transition hover:text-blue-400"
+                className="
+                  w-fit
+                  max-w-full
+                  break-words
+                  transition
+                  hover:text-blue-400
+                "
               >
-                {footer.services.propertyManagement}
+                {
+                  footer.services
+                    .propertyManagement
+                }
               </Link>
 
 
               <Link
                 href="/services/smart-pricing"
-                className="transition hover:text-blue-400"
+                className="
+                  w-fit
+                  max-w-full
+                  break-words
+                  transition
+                  hover:text-blue-400
+                "
               >
-                {footer.services.smartPricing}
+                {
+                  footer.services
+                    .smartPricing
+                }
               </Link>
 
 
               <Link
                 href="/services/guest-communication"
-                className="transition hover:text-blue-400"
+                className="
+                  w-fit
+                  max-w-full
+                  break-words
+                  transition
+                  hover:text-blue-400
+                "
               >
-                {footer.services.guestCommunication}
+                {
+                  footer.services
+                    .guestCommunication
+                }
               </Link>
 
 
               <Link
                 href="/services/booking-management"
-                className="transition hover:text-blue-400"
+                className="
+                  w-fit
+                  max-w-full
+                  break-words
+                  transition
+                  hover:text-blue-400
+                "
               >
-                {footer.services.bookingManagement}
+                {
+                  footer.services
+                    .bookingManagement
+                }
               </Link>
 
             </div>
@@ -138,18 +271,45 @@ export default async function Footer() {
           {/* =================================================
               COMPANY
           ================================================= */}
-          <div>
 
-            <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-blue-400">
+          <div className="min-w-0">
+
+            <h3
+              className="
+                text-xs
+                font-bold
+                uppercase
+                tracking-[0.16em]
+                text-blue-400
+                sm:text-sm
+                sm:tracking-[0.2em]
+              "
+            >
               {footer.company.title}
             </h3>
 
 
-            <div className="mt-6 flex flex-col gap-4 text-slate-300">
+            <div
+              className="
+                mt-5
+                flex
+                flex-col
+                gap-3.5
+                text-sm
+                text-slate-300
+                sm:mt-6
+                sm:gap-4
+                sm:text-base
+              "
+            >
 
               <Link
                 href="/about"
-                className="transition hover:text-blue-400"
+                className="
+                  w-fit
+                  transition
+                  hover:text-blue-400
+                "
               >
                 {footer.company.about}
               </Link>
@@ -157,15 +317,26 @@ export default async function Footer() {
 
               <Link
                 href="/#how-it-works"
-                className="transition hover:text-blue-400"
+                className="
+                  w-fit
+                  transition
+                  hover:text-blue-400
+                "
               >
-                {footer.company.howItWorks}
+                {
+                  footer.company
+                    .howItWorks
+                }
               </Link>
 
 
               <Link
                 href="/pricing"
-                className="transition hover:text-blue-400"
+                className="
+                  w-fit
+                  transition
+                  hover:text-blue-400
+                "
               >
                 {footer.company.pricing}
               </Link>
@@ -173,7 +344,13 @@ export default async function Footer() {
 
               <Link
                 href="/contact"
-                className="font-semibold text-white transition hover:text-blue-400"
+                className="
+                  w-fit
+                  font-semibold
+                  text-white
+                  transition
+                  hover:text-blue-400
+                "
               >
                 {footer.company.contact}
               </Link>
@@ -186,68 +363,203 @@ export default async function Footer() {
           {/* =================================================
               CONTACT
           ================================================= */}
-          <div>
 
-            <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-blue-400">
+          <div
+            className="
+              min-w-0
+              md:col-span-2
+              lg:col-span-1
+            "
+          >
+
+            <h3
+              className="
+                text-xs
+                font-bold
+                uppercase
+                tracking-[0.16em]
+                text-blue-400
+                sm:text-sm
+                sm:tracking-[0.2em]
+              "
+            >
               {footer.contact.title}
             </h3>
 
 
-            <div className="mt-6 space-y-6">
+            <div
+              className="
+                mt-5
+                grid
+                gap-5
+                sm:mt-6
+                sm:grid-cols-2
+                md:grid-cols-3
+                lg:grid-cols-1
+                lg:space-y-1
+              "
+            >
 
-              {/* GREECE */}
-              <div>
+              {/* ==========================================
+                  GREECE
+              ========================================== */}
 
-                <div className="flex items-center gap-2 text-sm text-slate-500">
-                  <MapPin size={16} />
+              <div className="min-w-0">
 
-                  {footer.contact.greece}
+                <div
+                  className="
+                    flex
+                    items-center
+                    gap-2
+                    text-sm
+                    text-slate-500
+                  "
+                >
+                  <MapPin
+                    size={16}
+                    className="shrink-0"
+                  />
+
+                  <span className="break-words">
+                    {footer.contact.greece}
+                  </span>
                 </div>
 
 
                 <a
                   href="tel:+306943404641"
-                  className="mt-2 flex items-center gap-2 font-semibold text-slate-200 transition hover:text-blue-400"
+                  className="
+                    mt-2
+                    flex
+                    w-fit
+                    max-w-full
+                    items-center
+                    gap-2
+                    font-semibold
+                    text-slate-200
+                    transition
+                    hover:text-blue-400
+                  "
                 >
-                  <Phone size={17} />
+                  <Phone
+                    size={17}
+                    className="shrink-0"
+                  />
 
-                  +30 694 340 4641
+                  <span className="whitespace-nowrap">
+                    +30 694 340 4641
+                  </span>
                 </a>
 
               </div>
 
 
-              {/* CYPRUS */}
-              <div>
+              {/* ==========================================
+                  CYPRUS
+              ========================================== */}
 
-                <div className="flex items-center gap-2 text-sm text-slate-500">
-                  <MapPin size={16} />
+              <div className="min-w-0">
 
-                  {footer.contact.cyprus}
+                <div
+                  className="
+                    flex
+                    items-center
+                    gap-2
+                    text-sm
+                    text-slate-500
+                  "
+                >
+                  <MapPin
+                    size={16}
+                    className="shrink-0"
+                  />
+
+                  <span className="break-words">
+                    {footer.contact.cyprus}
+                  </span>
                 </div>
 
 
                 <a
                   href="tel:+35799807870"
-                  className="mt-2 flex items-center gap-2 font-semibold text-slate-200 transition hover:text-blue-400"
+                  className="
+                    mt-2
+                    flex
+                    w-fit
+                    max-w-full
+                    items-center
+                    gap-2
+                    font-semibold
+                    text-slate-200
+                    transition
+                    hover:text-blue-400
+                  "
                 >
-                  <Phone size={17} />
+                  <Phone
+                    size={17}
+                    className="shrink-0"
+                  />
 
-                  +357 99 80 78 70
+                  <span className="whitespace-nowrap">
+                    +357 99 80 78 70
+                  </span>
                 </a>
 
               </div>
 
 
-              {/* EMAIL */}
-              <a
-                href="mailto:info@hostmetric.gr"
-                className="flex items-center gap-2 text-slate-300 transition hover:text-blue-400"
-              >
-                <Mail size={17} />
+              {/* ==========================================
+                  EMAIL
+              ========================================== */}
 
-                info@hostmetric.gr
-              </a>
+              <div className="min-w-0">
+
+                <div
+                  className="
+                    flex
+                    items-center
+                    gap-2
+                    text-sm
+                    text-slate-500
+                  "
+                >
+                  <Mail
+                    size={16}
+                    className="shrink-0"
+                  />
+
+                  <span>
+                    Email
+                  </span>
+                </div>
+
+
+                <a
+                  href="mailto:info@hostmetric.gr"
+                  className="
+                    mt-2
+                    flex
+                    w-fit
+                    max-w-full
+                    items-center
+                    gap-2
+                    break-all
+                    font-semibold
+                    text-slate-300
+                    transition
+                    hover:text-blue-400
+                    sm:break-normal
+                  "
+                >
+                  <Mail
+                    size={17}
+                    className="shrink-0"
+                  />
+
+                  info@hostmetric.gr
+                </a>
+
+              </div>
 
             </div>
 
@@ -259,21 +571,64 @@ export default async function Footer() {
         {/* =================================================
             BOTTOM FOOTER
         ================================================= */}
-        <div className="mt-16 border-t border-white/10 pt-8">
 
-          <div className="flex flex-col gap-6 text-sm text-slate-500 md:flex-row md:items-center md:justify-between">
+        <div
+          className="
+            mt-12
+            border-t
+            border-white/10
+            pt-6
+            sm:mt-14
+            sm:pt-7
+            md:mt-16
+            md:pt-8
+          "
+        >
 
-            <p>
-              © {new Date().getFullYear()} HostMetric.{" "}
+          <div
+            className="
+              flex
+              flex-col
+              gap-5
+              text-sm
+              leading-6
+              text-slate-500
+              md:flex-row
+              md:items-center
+              md:justify-between
+              md:gap-6
+            "
+          >
+
+            <p
+              className="
+                max-w-xl
+                break-words
+              "
+            >
+              ©{" "}
+              {new Date().getFullYear()}{" "}
+              HostMetric.{" "}
               {footer.copyright}
             </p>
 
 
-            <div className="flex flex-wrap gap-6">
+            <div
+              className="
+                flex
+                flex-wrap
+                gap-x-5
+                gap-y-3
+                sm:gap-x-6
+              "
+            >
 
               <Link
                 href="/privacy"
-                className="transition hover:text-white"
+                className="
+                  transition
+                  hover:text-white
+                "
               >
                 {footer.legal.privacy}
               </Link>
@@ -281,7 +636,10 @@ export default async function Footer() {
 
               <Link
                 href="/terms"
-                className="transition hover:text-white"
+                className="
+                  transition
+                  hover:text-white
+                "
               >
                 {footer.legal.terms}
               </Link>
@@ -289,7 +647,10 @@ export default async function Footer() {
 
               <Link
                 href="/cookies"
-                className="transition hover:text-white"
+                className="
+                  transition
+                  hover:text-white
+                "
               >
                 {footer.legal.cookies}
               </Link>

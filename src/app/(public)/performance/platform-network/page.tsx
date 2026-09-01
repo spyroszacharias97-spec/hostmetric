@@ -1,12 +1,18 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
+
 import AnimatedWave from "@/components/animated-wave";
-import { getDictionary } from "@/i18n/get-dictionary";
+
+import {
+  getDictionary,
+} from "@/i18n/get-dictionary";
+
 import {
   defaultLocale,
   isSupportedLocale,
   type Locale,
 } from "@/i18n/config";
+
 import {
   Laptop,
   RefreshCw,
@@ -14,6 +20,7 @@ import {
   Globe2,
   Layers3,
 } from "lucide-react";
+
 
 const platforms = [
   {
@@ -66,65 +73,252 @@ const platforms = [
   },
 ];
 
+
 export default async function PlatformNetworkPage() {
-  const cookieStore = await cookies();
+
+  /* ==========================================
+     CURRENT LANGUAGE
+  ========================================== */
+
+  const cookieStore =
+    await cookies();
+
+
   const savedLocale =
-    cookieStore.get("hostmetric_locale")?.value;
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
 
   let currentLocale: Locale =
     defaultLocale;
 
+
   if (
     savedLocale &&
-    isSupportedLocale(savedLocale)
+    isSupportedLocale(
+      savedLocale
+    )
   ) {
-    currentLocale = savedLocale;
+    currentLocale =
+      savedLocale;
   }
 
+
+  /* ==========================================
+     LOAD TRANSLATIONS
+  ========================================== */
+
   const dictionary =
-    await getDictionary(currentLocale);
+    await getDictionary(
+      currentLocale
+    );
+
 
   const platformNetwork =
     dictionary.platformNetworkPage;
 
-  return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-sky-50 via-white to-cyan-50">
 
-      {/* ANIMATED WAVE */}
+  /* =========================================================
+     RESPONSIVE PLATFORM NETWORK PAGE
+     Mobile-first presentation. Content, routes, platform data,
+     locale handling and animations remain unchanged.
+  ========================================================= */
+
+  return (
+    <main
+      className="
+        relative
+        min-h-screen
+        overflow-x-hidden
+        bg-gradient-to-br
+        from-sky-50
+        via-white
+        to-cyan-50
+      "
+    >
+
+      {/* ==========================================
+          ANIMATED WAVE
+      ========================================== */}
+
       <AnimatedWave />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-8 py-20">
+
+      <div
+        className="
+          relative
+          z-10
+          mx-auto
+          max-w-7xl
+          px-4
+          py-10
+          sm:px-6
+          sm:py-14
+          md:px-8
+          md:py-20
+        "
+      >
 
         <Link
           href="/"
-          className="text-lg font-medium text-blue-600 transition hover:text-blue-800"
+          className="
+            inline-flex
+            items-center
+            text-sm
+            font-medium
+            text-blue-600
+            transition
+            hover:text-blue-800
+            sm:text-base
+            md:text-lg
+          "
         >
           ← {platformNetwork.back}
         </Link>
 
 
-        <div className="mt-20 grid items-center gap-20 lg:grid-cols-2">
+        <div
+          className="
+            mt-10
+            grid
+            min-w-0
+            items-center
+            gap-12
+            sm:mt-14
+            sm:gap-14
+            md:mt-16
+            lg:mt-20
+            lg:grid-cols-2
+            lg:gap-16
+            xl:gap-20
+          "
+        >
 
-          {/* LEFT - ROTATING NETWORK */}
-          <div className="platform-network-orbit">
+          {/* =================================================
+              LEFT - ROTATING NETWORK
+          ================================================= */}
 
-            <div className="platform-network-center">
+          <div
+            className="
+              platform-network-orbit
+              !mx-auto
+              !h-[320px]
+              !w-[320px]
+              !max-w-full
+              [--network-orbit-radius:128px]
+              min-[390px]:!h-[350px]
+              min-[390px]:!w-[350px]
+              min-[390px]:[--network-orbit-radius:142px]
+              sm:!h-[430px]
+              sm:!w-[430px]
+              sm:[--network-orbit-radius:180px]
+              md:!h-[500px]
+              md:!w-[500px]
+              md:[--network-orbit-radius:215px]
+              lg:!h-[540px]
+              lg:!w-[540px]
+              lg:[--network-orbit-radius:235px]
+              xl:!h-[580px]
+              xl:!w-[580px]
+              xl:[--network-orbit-radius:260px]
+            "
+          >
 
-              <Laptop size={72} />
+            <div
+              className="
+                platform-network-center
+                !h-[158px]
+                !w-[158px]
+                !p-4
+                min-[390px]:!h-[170px]
+                min-[390px]:!w-[170px]
+                sm:!h-[205px]
+                sm:!w-[205px]
+                sm:!p-5
+                md:!h-[230px]
+                md:!w-[230px]
+                lg:!h-[240px]
+                lg:!w-[240px]
+              "
+            >
 
-              <p>
+              <Laptop
+                className="
+                  !h-10
+                  !w-10
+                  sm:!h-12
+                  sm:!w-12
+                  md:!h-14
+                  md:!w-14
+                  lg:!h-[72px]
+                  lg:!w-[72px]
+                "
+              />
+
+
+              <p
+                className="
+                  !mt-2
+                  !text-[10px]
+                  sm:!text-xs
+                "
+              >
                 HOSTMETRIC
               </p>
 
-              <strong>
-                {platformNetwork.center.titleLine1}
+
+              <strong
+                className="
+                  !mt-1
+                  !text-base
+                  !leading-[1.05]
+                  min-[390px]:!text-lg
+                  sm:!text-xl
+                  md:!text-2xl
+                "
+              >
+                {
+                  platformNetwork
+                    .center
+                    .titleLine1
+                }
+
                 <br />
-                {platformNetwork.center.titleLine2}
+
+                {
+                  platformNetwork
+                    .center
+                    .titleLine2
+                }
               </strong>
 
-              <span>
-                <RefreshCw size={14} />
-                {platformNetwork.center.status}
+
+              <span
+                className="
+                  !mt-2
+                  !gap-1
+                  !text-[9px]
+                  sm:!text-[10px]
+                  md:!text-xs
+                "
+              >
+
+                <RefreshCw
+                  className="
+                    !h-3
+                    !w-3
+                    md:!h-3.5
+                    md:!w-3.5
+                  "
+                />
+
+                {
+                  platformNetwork
+                    .center
+                    .status
+                }
+
               </span>
 
             </div>
@@ -132,141 +326,398 @@ export default async function PlatformNetworkPage() {
 
             <div className="platform-network-spinner">
 
-              {platforms.map((platform, index) => {
-                const angle =
-                  index * (360 / platforms.length);
+              {
+                platforms.map(
+                  (
+                    platform,
+                    index
+                  ) => {
 
-                return (
-                  <div
-                    key={platform.name}
-                    className="network-orbit-position"
-                    style={{
-                      transform: `rotate(${angle}deg) translateX(260px)`,
-                    }}
-                  >
+                    const angle =
+                      index *
+                      (
+                        360 /
+                        platforms.length
+                      );
 
-                    {/* Keeps initial position upright */}
-                    <div
-                      style={{
-                        transform: `rotate(-${angle}deg)`,
-                      }}
-                    >
 
-                      {/* Keeps logo upright during orbit */}
+                    return (
                       <div
-                        className="network-logo"
+                        key={
+                          platform.name
+                        }
+                        className="
+                          network-orbit-position
+                        "
                         style={{
-                          cursor: "default",
-                          animation:
-                            "network-counter-rotation 45s linear infinite",
+                          transform:
+                            `rotate(${angle}deg) translateX(var(--network-orbit-radius))`,
                         }}
                       >
-                        <img
-                          src={platform.logo}
-                          alt={`${platform.name} logo`}
-                        />
+
+                        {/* Keeps initial position upright */}
+                        <div
+                          style={{
+                            transform:
+                              `rotate(-${angle}deg)`,
+                          }}
+                        >
+
+                          {/* Keeps logo upright during orbit */}
+                          <div
+                            className="
+                              network-logo
+                              !h-12
+                              !w-12
+                              sm:!h-14
+                              sm:!w-14
+                              md:!h-16
+                              md:!w-16
+                              lg:!h-[72px]
+                              lg:!w-[72px]
+                            "
+                            style={{
+                              cursor:
+                                "default",
+
+                              animation:
+                                "network-counter-rotation 45s linear infinite",
+                            }}
+                          >
+
+                            <img
+                              src={
+                                platform.logo
+                              }
+                              alt={
+                                `${platform.name} logo`
+                              }
+                              className="
+                                !max-h-[60%]
+                                !max-w-[72%]
+                                object-contain
+                              "
+                            />
+
+                          </div>
+
+                        </div>
+
                       </div>
-
-                    </div>
-
-                  </div>
-                );
-              })}
+                    );
+                  }
+                )
+              }
 
             </div>
 
           </div>
 
 
-          {/* RIGHT SIDE */}
-          <div>
+          {/* =================================================
+              RIGHT SIDE
+          ================================================= */}
 
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-blue-600">
+          <div className="min-w-0">
+
+            <p
+              className="
+                text-xs
+                font-bold
+                uppercase
+                tracking-[0.18em]
+                text-blue-600
+                sm:text-sm
+                sm:tracking-[0.22em]
+                md:tracking-[0.25em]
+              "
+            >
               {platformNetwork.eyebrow}
             </p>
 
-            <h1 className="mt-6 text-6xl font-bold leading-tight">
+
+            <h1
+              className="
+                mt-4
+                break-words
+                text-4xl
+                font-bold
+                leading-[1.04]
+                tracking-tight
+                text-slate-950
+                sm:mt-5
+                sm:text-5xl
+                md:mt-6
+                md:text-6xl
+              "
+            >
               {platformNetwork.titleLine1}
+
               <br />
+
               {platformNetwork.titleLine2}
+
               <br />
+
               {platformNetwork.titleLine3}
             </h1>
 
-            <p className="mt-8 text-2xl leading-10 text-slate-600">
+
+            <p
+              className="
+                mt-6
+                max-w-2xl
+                text-base
+                leading-7
+                text-slate-600
+                sm:text-lg
+                sm:leading-8
+                md:mt-8
+                md:text-2xl
+                md:leading-10
+              "
+            >
               {platformNetwork.description}
             </p>
 
 
-            {/* PLATFORM LIST */}
-            <div className="mt-10 grid grid-cols-2 gap-3">
+            {/* ==========================================
+                PLATFORM LIST
+            ========================================== */}
 
-              {platforms.map((platform) => (
-                <div
-                  key={platform.name}
-                  className="rounded-xl border border-slate-200 bg-white/90 px-4 py-3 font-semibold text-slate-700 backdrop-blur-sm"
-                >
-                  ✓ {platform.name}
-                </div>
-              ))}
+            <div
+              className="
+                mt-8
+                grid
+                grid-cols-1
+                gap-2.5
+                min-[390px]:grid-cols-2
+                sm:gap-3
+                md:mt-10
+              "
+            >
+
+              {
+                platforms.map(
+                  (platform) => (
+                    <div
+                      key={
+                        platform.name
+                      }
+                      className="
+                        min-w-0
+                        rounded-xl
+                        border
+                        border-slate-200
+                        bg-white/90
+                        px-3
+                        py-2.5
+                        text-sm
+                        font-semibold
+                        text-slate-700
+                        backdrop-blur-sm
+                        sm:px-4
+                        sm:py-3
+                        sm:text-base
+                      "
+                    >
+                      ✓ {platform.name}
+                    </div>
+                  )
+                )
+              }
 
             </div>
 
 
-            {/* CALENDAR SYNC */}
-            <div className="mt-10 rounded-3xl bg-blue-600 p-8 text-white">
+            {/* ==========================================
+                CALENDAR SYNC
+            ========================================== */}
 
-              <div className="flex items-center gap-4">
+            <div
+              className="
+                mt-8
+                rounded-2xl
+                bg-blue-600
+                p-5
+                text-white
+                sm:p-6
+                md:mt-10
+                md:rounded-3xl
+                md:p-8
+              "
+            >
 
-                <CalendarSync size={34} />
+              <div
+                className="
+                  flex
+                  items-start
+                  gap-3
+                  sm:items-center
+                  sm:gap-4
+                "
+              >
 
-                <h2 className="text-2xl font-bold">
-                  {platformNetwork.calendarSync.title}
+                <CalendarSync
+                  className="
+                    h-7
+                    w-7
+                    shrink-0
+                    sm:h-8
+                    sm:w-8
+                    md:h-[34px]
+                    md:w-[34px]
+                  "
+                />
+
+
+                <h2
+                  className="
+                    text-xl
+                    font-bold
+                    leading-tight
+                    sm:text-2xl
+                  "
+                >
+                  {
+                    platformNetwork
+                      .calendarSync
+                      .title
+                  }
                 </h2>
 
               </div>
 
-              <p className="mt-4 text-lg leading-8 text-blue-50">
-                {platformNetwork.calendarSync.description}
+
+              <p
+                className="
+                  mt-4
+                  text-base
+                  leading-7
+                  text-blue-50
+                  md:text-lg
+                  md:leading-8
+                "
+              >
+                {
+                  platformNetwork
+                    .calendarSync
+                    .description
+                }
               </p>
 
             </div>
 
 
-            {/* EXTRA INFORMATION */}
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {/* ==========================================
+                EXTRA INFORMATION
+            ========================================== */}
 
-              <div className="rounded-2xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm">
+            <div
+              className="
+                mt-5
+                grid
+                gap-4
+                sm:mt-6
+                md:grid-cols-2
+              "
+            >
+
+              <div
+                className="
+                  rounded-2xl
+                  border
+                  border-slate-200
+                  bg-white/90
+                  p-5
+                  backdrop-blur-sm
+                  sm:p-6
+                "
+              >
 
                 <Globe2
                   size={28}
                   className="text-blue-600"
                 />
 
-                <h3 className="mt-4 text-lg font-bold">
-                  {platformNetwork.widerDistribution.title}
+
+                <h3
+                  className="
+                    mt-4
+                    text-lg
+                    font-bold
+                  "
+                >
+                  {
+                    platformNetwork
+                      .widerDistribution
+                      .title
+                  }
                 </h3>
 
-                <p className="mt-2 leading-7 text-slate-600">
-                  {platformNetwork.widerDistribution.description}
+
+                <p
+                  className="
+                    mt-2
+                    leading-7
+                    text-slate-600
+                  "
+                >
+                  {
+                    platformNetwork
+                      .widerDistribution
+                      .description
+                  }
                 </p>
 
               </div>
 
 
-              <div className="rounded-2xl border border-slate-200 bg-white/90 p-6 backdrop-blur-sm">
+              <div
+                className="
+                  rounded-2xl
+                  border
+                  border-slate-200
+                  bg-white/90
+                  p-5
+                  backdrop-blur-sm
+                  sm:p-6
+                "
+              >
 
                 <Layers3
                   size={28}
                   className="text-blue-600"
                 />
 
-                <h3 className="mt-4 text-lg font-bold">
-                  {platformNetwork.coordinatedStrategy.title}
+
+                <h3
+                  className="
+                    mt-4
+                    text-lg
+                    font-bold
+                  "
+                >
+                  {
+                    platformNetwork
+                      .coordinatedStrategy
+                      .title
+                  }
                 </h3>
 
-                <p className="mt-2 leading-7 text-slate-600">
-                  {platformNetwork.coordinatedStrategy.description}
+
+                <p
+                  className="
+                    mt-2
+                    leading-7
+                    text-slate-600
+                  "
+                >
+                  {
+                    platformNetwork
+                      .coordinatedStrategy
+                      .description
+                  }
                 </p>
 
               </div>

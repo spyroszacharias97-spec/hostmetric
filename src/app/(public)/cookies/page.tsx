@@ -1,11 +1,14 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
+
 import { getDictionary } from "@/i18n/get-dictionary";
+
 import {
   defaultLocale,
   isSupportedLocale,
   type Locale,
 } from "@/i18n/config";
+
 import {
   Cookie,
   Settings2,
@@ -14,46 +17,177 @@ import {
   Megaphone,
 } from "lucide-react";
 
+
 export default async function CookiePolicyPage() {
-  const cookieStore = await cookies();
-  const savedLocale = cookieStore.get("hostmetric_locale")?.value;
 
-  let currentLocale: Locale = defaultLocale;
+  /* ==========================================
+     CURRENT LANGUAGE
+  ========================================== */
 
-  if (savedLocale && isSupportedLocale(savedLocale)) {
-    currentLocale = savedLocale;
+  const cookieStore =
+    await cookies();
+
+  const savedLocale =
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
+  let currentLocale: Locale =
+    defaultLocale;
+
+  if (
+    savedLocale &&
+    isSupportedLocale(
+      savedLocale
+    )
+  ) {
+    currentLocale =
+      savedLocale;
   }
 
-  const dictionary = await getDictionary(currentLocale);
-  const cookiePolicy = dictionary.cookiePolicyPage;
+
+  /* ==========================================
+     LOAD TRANSLATIONS
+  ========================================== */
+
+  const dictionary =
+    await getDictionary(
+      currentLocale
+    );
+
+  const cookiePolicy =
+    dictionary.cookiePolicyPage;
+
+
+  /* ==========================================
+     PAGE
+  ========================================== */
 
   return (
     <main
       id="top"
-      className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-slate-50 text-slate-900"
+      className="
+        min-h-screen
+        overflow-x-hidden
+        bg-gradient-to-b
+        from-sky-50
+        via-white
+        to-slate-50
+        text-slate-900
+      "
     >
 
-      <section className="border-b border-slate-200/80">
+      {/* =================================================
+          HERO
+      ================================================= */}
 
-        <div className="mx-auto max-w-5xl px-6 py-16 md:px-8 md:py-20">
+      <section
+        className="
+          border-b
+          border-slate-200/80
+        "
+      >
 
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-600/20">
-            <Cookie size={25} />
+        <div
+          className="
+            mx-auto
+            max-w-5xl
+            px-4
+            py-12
+            sm:px-6
+            sm:py-14
+            md:px-8
+            md:py-20
+          "
+        >
+
+          <div
+            className="
+              flex
+              h-11
+              w-11
+              items-center
+              justify-center
+              rounded-xl
+              bg-blue-600
+              text-white
+              shadow-lg
+              shadow-blue-600/20
+              sm:h-12
+              sm:w-12
+              sm:rounded-2xl
+            "
+          >
+            <Cookie
+              size={25}
+              className="
+                h-6
+                w-6
+                sm:h-[25px]
+                sm:w-[25px]
+              "
+            />
           </div>
 
-          <p className="mt-7 text-xs font-bold uppercase tracking-[0.22em] text-blue-600">
+
+          <p
+            className="
+              mt-6
+              text-[11px]
+              font-bold
+              uppercase
+              tracking-[0.16em]
+              text-blue-600
+              sm:mt-7
+              sm:text-xs
+              sm:tracking-[0.22em]
+            "
+          >
             {cookiePolicy.hero.eyebrow}
           </p>
 
-          <h1 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
+
+          <h1
+            className="
+              mt-3
+              max-w-3xl
+              break-words
+              text-3xl
+              font-bold
+              leading-tight
+              tracking-tight
+              sm:text-4xl
+            "
+          >
             {cookiePolicy.hero.title}
           </h1>
 
-          <p className="mt-5 max-w-3xl text-base leading-7 text-slate-600">
+
+          <p
+            className="
+              mt-4
+              max-w-3xl
+              text-sm
+              leading-6
+              text-slate-600
+              sm:mt-5
+              sm:text-base
+              sm:leading-7
+            "
+          >
             {cookiePolicy.hero.description}
           </p>
 
-          <p className="mt-4 text-sm text-slate-400">
+
+          <p
+            className="
+              mt-4
+              text-xs
+              leading-5
+              text-slate-400
+              sm:text-sm
+            "
+          >
             {cookiePolicy.hero.lastUpdated}
           </p>
 
@@ -62,234 +196,646 @@ export default async function CookiePolicyPage() {
       </section>
 
 
-      <section className="mx-auto max-w-5xl px-6 py-14 md:px-8">
+      {/* =================================================
+          POLICY CONTENT
+      ================================================= */}
 
-        <div className="rounded-[32px] border border-slate-200 bg-white p-7 shadow-sm md:p-10">
+      <section
+        className="
+          mx-auto
+          max-w-5xl
+          px-4
+          py-10
+          sm:px-6
+          sm:py-12
+          md:px-8
+          md:py-14
+        "
+      >
 
-          <div className="space-y-11 text-[15px] leading-7 text-slate-600">
+        <div
+          className="
+            rounded-[22px]
+            border
+            border-slate-200
+            bg-white
+            p-5
+            shadow-sm
+            sm:rounded-[26px]
+            sm:p-7
+            md:rounded-[32px]
+            md:p-10
+          "
+        >
+
+          <div
+            className="
+              space-y-9
+              text-sm
+              leading-7
+              text-slate-600
+              sm:space-y-10
+              sm:text-[15px]
+              md:space-y-11
+            "
+          >
+
+            {/* ============================================
+                WHAT ARE COOKIES
+            ============================================ */}
 
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+
+              <h2
+                className="
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {cookiePolicy.sections.whatAreCookies.title}
               </h2>
 
-              <p className="mt-4">
+
+              <p className="mt-3 sm:mt-4">
                 {cookiePolicy.sections.whatAreCookies.paragraph1}
               </p>
+
 
               <p className="mt-3">
                 {cookiePolicy.sections.whatAreCookies.paragraph2}
               </p>
+
             </section>
 
 
+            {/* ============================================
+                SIMILAR TECHNOLOGIES
+            ============================================ */}
+
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+
+              <h2
+                className="
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {cookiePolicy.sections.similarTechnologies.title}
               </h2>
 
-              <p className="mt-4">
+
+              <p className="mt-3 sm:mt-4">
                 {cookiePolicy.sections.similarTechnologies.paragraph1}
               </p>
+
             </section>
 
 
-            <section>
-              <div className="flex items-center gap-3">
-                <ShieldCheck size={21} className="text-blue-600" />
+            {/* ============================================
+                NECESSARY COOKIES
+            ============================================ */}
 
-                <h2 className="text-xl font-bold text-slate-950">
+            <section>
+
+              <div
+                className="
+                  flex
+                  items-start
+                  gap-3
+                  sm:items-center
+                "
+              >
+
+                <ShieldCheck
+                  size={21}
+                  className="
+                    mt-0.5
+                    h-5
+                    w-5
+                    shrink-0
+                    text-blue-600
+                    sm:mt-0
+                    sm:h-[21px]
+                    sm:w-[21px]
+                  "
+                />
+
+
+                <h2
+                  className="
+                    min-w-0
+                    text-lg
+                    font-bold
+                    leading-snug
+                    text-slate-950
+                    sm:text-xl
+                  "
+                >
                   {cookiePolicy.sections.necessaryCookies.title}
                 </h2>
+
               </div>
 
-              <p className="mt-4">
+
+              <p className="mt-3 sm:mt-4">
                 {cookiePolicy.sections.necessaryCookies.paragraph1}
               </p>
+
 
               <p className="mt-3">
                 {cookiePolicy.sections.necessaryCookies.paragraph2}
               </p>
 
-              <div className="mt-5 rounded-2xl border border-green-100 bg-green-50 p-5">
-                <p className="font-semibold text-green-900">
+
+              <div
+                className="
+                  mt-4
+                  rounded-xl
+                  border
+                  border-green-100
+                  bg-green-50
+                  p-4
+                  sm:mt-5
+                  sm:rounded-2xl
+                  sm:p-5
+                "
+              >
+
+                <p
+                  className="
+                    text-sm
+                    font-semibold
+                    leading-6
+                    text-green-900
+                    sm:text-[15px]
+                    sm:leading-7
+                  "
+                >
                   {cookiePolicy.sections.necessaryCookies.notice}
                 </p>
+
               </div>
+
             </section>
 
 
-            <section>
-              <div className="flex items-center gap-3">
-                <Settings2 size={21} className="text-blue-600" />
+            {/* ============================================
+                PREFERENCE COOKIES
+            ============================================ */}
 
-                <h2 className="text-xl font-bold text-slate-950">
+            <section>
+
+              <div
+                className="
+                  flex
+                  items-start
+                  gap-3
+                  sm:items-center
+                "
+              >
+
+                <Settings2
+                  size={21}
+                  className="
+                    mt-0.5
+                    h-5
+                    w-5
+                    shrink-0
+                    text-blue-600
+                    sm:mt-0
+                    sm:h-[21px]
+                    sm:w-[21px]
+                  "
+                />
+
+
+                <h2
+                  className="
+                    min-w-0
+                    text-lg
+                    font-bold
+                    leading-snug
+                    text-slate-950
+                    sm:text-xl
+                  "
+                >
                   {cookiePolicy.sections.preferenceCookies.title}
                 </h2>
+
               </div>
 
-              <p className="mt-4">
+
+              <p className="mt-3 sm:mt-4">
                 {cookiePolicy.sections.preferenceCookies.paragraph1}
               </p>
+
             </section>
 
 
-            <section>
-              <div className="flex items-center gap-3">
-                <BarChart3 size={21} className="text-blue-600" />
+            {/* ============================================
+                ANALYTICS COOKIES
+            ============================================ */}
 
-                <h2 className="text-xl font-bold text-slate-950">
+            <section>
+
+              <div
+                className="
+                  flex
+                  items-start
+                  gap-3
+                  sm:items-center
+                "
+              >
+
+                <BarChart3
+                  size={21}
+                  className="
+                    mt-0.5
+                    h-5
+                    w-5
+                    shrink-0
+                    text-blue-600
+                    sm:mt-0
+                    sm:h-[21px]
+                    sm:w-[21px]
+                  "
+                />
+
+
+                <h2
+                  className="
+                    min-w-0
+                    text-lg
+                    font-bold
+                    leading-snug
+                    text-slate-950
+                    sm:text-xl
+                  "
+                >
                   {cookiePolicy.sections.analyticsCookies.title}
                 </h2>
+
               </div>
 
-              <p className="mt-4">
+
+              <p className="mt-3 sm:mt-4">
                 {cookiePolicy.sections.analyticsCookies.paragraph1}
               </p>
+
 
               <p className="mt-3">
                 {cookiePolicy.sections.analyticsCookies.paragraph2}
               </p>
+
             </section>
 
 
-            <section>
-              <div className="flex items-center gap-3">
-                <Megaphone size={21} className="text-blue-600" />
+            {/* ============================================
+                MARKETING COOKIES
+            ============================================ */}
 
-                <h2 className="text-xl font-bold text-slate-950">
+            <section>
+
+              <div
+                className="
+                  flex
+                  items-start
+                  gap-3
+                  sm:items-center
+                "
+              >
+
+                <Megaphone
+                  size={21}
+                  className="
+                    mt-0.5
+                    h-5
+                    w-5
+                    shrink-0
+                    text-blue-600
+                    sm:mt-0
+                    sm:h-[21px]
+                    sm:w-[21px]
+                  "
+                />
+
+
+                <h2
+                  className="
+                    min-w-0
+                    text-lg
+                    font-bold
+                    leading-snug
+                    text-slate-950
+                    sm:text-xl
+                  "
+                >
                   {cookiePolicy.sections.marketingCookies.title}
                 </h2>
+
               </div>
 
-              <p className="mt-4">
+
+              <p className="mt-3 sm:mt-4">
                 {cookiePolicy.sections.marketingCookies.paragraph1}
               </p>
+
 
               <p className="mt-3">
                 {cookiePolicy.sections.marketingCookies.paragraph2}
               </p>
+
             </section>
 
 
+            {/* ============================================
+                SESSION & PERSISTENT COOKIES
+            ============================================ */}
+
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+
+              <h2
+                className="
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {cookiePolicy.sections.sessionPersistentCookies.title}
               </h2>
 
-              <p className="mt-4">
+
+              <p className="mt-3 sm:mt-4">
                 {cookiePolicy.sections.sessionPersistentCookies.paragraph1}
               </p>
 
-              <ul className="mt-4 list-disc space-y-2 pl-5">
-                <li>
-                  <strong className="text-slate-800">{cookiePolicy.sections.sessionPersistentCookies.sessionTitle}</strong>{" "}
-                  {cookiePolicy.sections.sessionPersistentCookies.sessionText}
+
+              <ul
+                className="
+                  mt-4
+                  list-disc
+                  space-y-3
+                  pl-5
+                  marker:text-blue-500
+                "
+              >
+
+                <li className="pl-1">
+
+                  <strong className="text-slate-800">
+                    {
+                      cookiePolicy.sections
+                        .sessionPersistentCookies
+                        .sessionTitle
+                    }
+                  </strong>{" "}
+
+                  {
+                    cookiePolicy.sections
+                      .sessionPersistentCookies
+                      .sessionText
+                  }
+
                 </li>
 
-                <li>
+
+                <li className="pl-1">
+
                   <strong className="text-slate-800">
-                    {cookiePolicy.sections.sessionPersistentCookies.persistentTitle}
+                    {
+                      cookiePolicy.sections
+                        .sessionPersistentCookies
+                        .persistentTitle
+                    }
                   </strong>{" "}
-                  {cookiePolicy.sections.sessionPersistentCookies.persistentText}
+
+                  {
+                    cookiePolicy.sections
+                      .sessionPersistentCookies
+                      .persistentText
+                  }
+
                 </li>
+
               </ul>
+
             </section>
 
 
+            {/* ============================================
+                THIRD-PARTY SERVICES
+            ============================================ */}
+
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+
+              <h2
+                className="
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {cookiePolicy.sections.thirdPartyServices.title}
               </h2>
 
-              <p className="mt-4">
+
+              <p className="mt-3 sm:mt-4">
                 {cookiePolicy.sections.thirdPartyServices.paragraph1}
               </p>
+
 
               <p className="mt-3">
                 {cookiePolicy.sections.thirdPartyServices.paragraph2}
               </p>
+
             </section>
 
 
+            {/* ============================================
+                COOKIE CHOICES
+            ============================================ */}
+
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+
+              <h2
+                className="
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {cookiePolicy.sections.cookieChoices.title}
               </h2>
 
-              <p className="mt-4">
+
+              <p className="mt-3 sm:mt-4">
                 {cookiePolicy.sections.cookieChoices.paragraph1}
               </p>
+
 
               <p className="mt-3">
                 {cookiePolicy.sections.cookieChoices.paragraph2}
               </p>
+
             </section>
 
 
+            {/* ============================================
+                CONSENT
+            ============================================ */}
+
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+
+              <h2
+                className="
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {cookiePolicy.sections.consent.title}
               </h2>
 
-              <p className="mt-4">
+
+              <p className="mt-3 sm:mt-4">
                 {cookiePolicy.sections.consent.paragraph1}
               </p>
+
 
               <p className="mt-3">
                 {cookiePolicy.sections.consent.paragraph2}
               </p>
+
             </section>
 
 
+            {/* ============================================
+                UPDATES
+            ============================================ */}
+
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+
+              <h2
+                className="
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {cookiePolicy.sections.updates.title}
               </h2>
 
-              <p className="mt-4">
+
+              <p className="mt-3 sm:mt-4">
                 {cookiePolicy.sections.updates.paragraph1}
               </p>
+
 
               <p className="mt-3">
                 {cookiePolicy.sections.updates.paragraph2}
               </p>
+
             </section>
 
 
+            {/* ============================================
+                PRIVACY POLICY
+            ============================================ */}
+
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+
+              <h2
+                className="
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {cookiePolicy.sections.privacy.title}
               </h2>
 
-              <p className="mt-4">
+
+              <p className="mt-3 sm:mt-4">
+
                 {cookiePolicy.sections.privacy.paragraphBeforeLink}{" "}
+
                 <Link
                   href="/privacy#top"
-                  className="font-semibold text-blue-600 hover:text-blue-800"
+                  className="
+                    font-semibold
+                    text-blue-600
+                    transition
+                    hover:text-blue-800
+                  "
                 >
                   {cookiePolicy.sections.privacy.link}
                 </Link>
+
                 .
+
               </p>
+
             </section>
 
 
+            {/* ============================================
+                CONTACT
+            ============================================ */}
+
             <section>
-              <h2 className="text-xl font-bold text-slate-950">
+
+              <h2
+                className="
+                  text-lg
+                  font-bold
+                  leading-snug
+                  text-slate-950
+                  sm:text-xl
+                "
+              >
                 {cookiePolicy.sections.contact.title}
               </h2>
 
-              <p className="mt-4">
+
+              <p className="mt-3 sm:mt-4">
                 {cookiePolicy.sections.contact.description}
               </p>
 
+
               <a
                 href="mailto:info@hostmetric.gr"
-                className="mt-3 inline-block font-semibold text-blue-600 hover:text-blue-800"
+                className="
+                  mt-3
+                  inline-block
+                  break-all
+                  font-semibold
+                  text-blue-600
+                  transition
+                  hover:text-blue-800
+                  sm:break-normal
+                "
               >
                 {cookiePolicy.sections.contact.email}
               </a>
+
             </section>
 
           </div>
@@ -297,6 +843,7 @@ export default async function CookiePolicyPage() {
         </div>
 
       </section>
+
     </main>
   );
 }

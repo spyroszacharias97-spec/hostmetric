@@ -110,15 +110,15 @@ export default function PropertyGrowth() {
 
 
   return (
-    <section className="px-8 py-32">
+    <section className="overflow-hidden px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:py-32">
 
-      <div className="mx-auto grid max-w-7xl items-center gap-20 lg:grid-cols-2">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 sm:gap-16 lg:grid-cols-2 lg:gap-20">
 
         {/* =================================================
             LEFT — PERFORMANCE ENGINE
         ================================================= */}
 
-        <div className="relative flex min-h-[620px] items-center justify-center">
+        <div className="relative flex min-h-[460px] items-center justify-center sm:min-h-[520px] md:min-h-[580px] lg:min-h-[620px]">
 
           <div className="engine-line engine-line-one" />
           <div className="engine-line engine-line-two" />
@@ -129,7 +129,7 @@ export default function PropertyGrowth() {
 
           {/* CENTER */}
 
-          <div className="engine-center">
+          <div className="engine-center scale-[0.68] sm:scale-[0.8] md:scale-[0.92] lg:scale-100">
 
             <div className="engine-glow" />
 
@@ -172,7 +172,7 @@ export default function PropertyGrowth() {
 
           {/* SMART PRICING */}
 
-          <div className="engine-card engine-card-one">
+          <div className="engine-card engine-card-one scale-[0.72] sm:scale-[0.84] md:scale-[0.94] lg:scale-100">
 
             <TrendingUp
               size={28}
@@ -202,7 +202,7 @@ export default function PropertyGrowth() {
 
           {/* BOOKINGS */}
 
-          <div className="engine-card engine-card-two">
+          <div className="engine-card engine-card-two scale-[0.72] sm:scale-[0.84] md:scale-[0.94] lg:scale-100">
 
             <CalendarDays
               size={28}
@@ -232,7 +232,7 @@ export default function PropertyGrowth() {
 
           {/* GUEST COMMUNICATION */}
 
-          <div className="engine-card engine-card-three">
+          <div className="engine-card engine-card-three scale-[0.72] sm:scale-[0.84] md:scale-[0.94] lg:scale-100">
 
             <MessageCircle
               size={28}
@@ -264,7 +264,7 @@ export default function PropertyGrowth() {
 
           {/* GUEST EXPERIENCE */}
 
-          <div className="engine-card engine-card-four">
+          <div className="engine-card engine-card-four scale-[0.72] sm:scale-[0.84] md:scale-[0.94] lg:scale-100">
 
             <Star
               size={28}
@@ -296,7 +296,7 @@ export default function PropertyGrowth() {
 
           {/* REVENUE */}
 
-          <div className="engine-card engine-card-five">
+          <div className="engine-card engine-card-five scale-[0.72] sm:scale-[0.84] md:scale-[0.94] lg:scale-100">
 
             <TrendingUp
               size={28}
@@ -332,17 +332,17 @@ export default function PropertyGrowth() {
 
         <div>
 
-          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-blue-600">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-blue-600 sm:mb-4 sm:text-sm sm:tracking-widest">
             {propertyGrowth.eyebrow}
           </p>
 
 
-          <h2 className="text-5xl font-bold leading-tight tracking-tight">
+          <h2 className="text-[2.35rem] font-bold leading-[1.08] tracking-[-0.03em] sm:text-4xl md:text-5xl md:leading-tight lg:text-5xl">
             {propertyGrowth.title}
           </h2>
 
 
-          <p className="mt-6 text-xl leading-8 text-gray-600">
+          <p className="mt-5 text-base leading-7 text-gray-600 sm:mt-6 sm:text-lg sm:leading-8 md:text-xl">
             {propertyGrowth.description}
           </p>
 
@@ -351,7 +351,7 @@ export default function PropertyGrowth() {
               ACCORDIONS
           =============================================== */}
 
-          <div className="mt-10 space-y-5">
+          <div className="mt-8 space-y-4 sm:mt-10 sm:space-y-5">
 
             {/* BOOKING MANAGEMENT */}
 
@@ -362,10 +362,10 @@ export default function PropertyGrowth() {
                 onClick={() =>
                   toggleItem(0)
                 }
-                className="flex w-full cursor-pointer items-center justify-between px-8 py-7 text-left"
+                className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-5 text-left sm:px-6 sm:py-6 lg:px-8 lg:py-7"
               >
 
-                <span className="text-2xl font-bold">
+                <span className="min-w-0 text-lg font-bold leading-6 sm:text-xl md:text-2xl">
                   {
                     propertyGrowth.accordions[0]
                       .title
@@ -373,7 +373,7 @@ export default function PropertyGrowth() {
                 </span>
 
 
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-blue-600 transition duration-300 hover:scale-110">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-blue-600 transition duration-300 hover:scale-110 sm:h-11 sm:w-11 lg:h-12 lg:w-12">
 
                   {openItem === 0
                     ? <Minus />
@@ -386,7 +386,7 @@ export default function PropertyGrowth() {
 
 
               {openItem === 0 && (
-                <div className="px-8 pb-8 text-lg leading-8 text-blue-50">
+                <div className="px-5 pb-5 text-base leading-7 text-blue-50 sm:px-6 sm:pb-6 sm:text-lg sm:leading-8 lg:px-8 lg:pb-8">
 
                   {
                     propertyGrowth.accordions[0]
@@ -408,10 +408,10 @@ export default function PropertyGrowth() {
                 onClick={() =>
                   toggleItem(1)
                 }
-                className="flex w-full cursor-pointer items-center justify-between px-8 py-7 text-left"
+                className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-5 text-left sm:px-6 sm:py-6 lg:px-8 lg:py-7"
               >
 
-                <span className="text-2xl font-bold">
+                <span className="min-w-0 text-lg font-bold leading-6 sm:text-xl md:text-2xl">
                   {
                     propertyGrowth.accordions[1]
                       .title
@@ -419,7 +419,7 @@ export default function PropertyGrowth() {
                 </span>
 
 
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-blue-600 transition duration-300 hover:scale-110">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-blue-600 transition duration-300 hover:scale-110 sm:h-11 sm:w-11 lg:h-12 lg:w-12">
 
                   {openItem === 1
                     ? <Minus />
@@ -432,7 +432,7 @@ export default function PropertyGrowth() {
 
 
               {openItem === 1 && (
-                <div className="px-8 pb-8 text-lg leading-8 text-blue-50">
+                <div className="px-5 pb-5 text-base leading-7 text-blue-50 sm:px-6 sm:pb-6 sm:text-lg sm:leading-8 lg:px-8 lg:pb-8">
 
                   {
                     propertyGrowth.accordions[1]
@@ -454,10 +454,10 @@ export default function PropertyGrowth() {
                 onClick={() =>
                   toggleItem(2)
                 }
-                className="flex w-full cursor-pointer items-center justify-between px-8 py-7 text-left"
+                className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-5 text-left sm:px-6 sm:py-6 lg:px-8 lg:py-7"
               >
 
-                <span className="text-2xl font-bold">
+                <span className="min-w-0 text-lg font-bold leading-6 sm:text-xl md:text-2xl">
                   {
                     propertyGrowth.accordions[2]
                       .title
@@ -465,7 +465,7 @@ export default function PropertyGrowth() {
                 </span>
 
 
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-blue-600 transition duration-300 hover:scale-110">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-blue-600 transition duration-300 hover:scale-110 sm:h-11 sm:w-11 lg:h-12 lg:w-12">
 
                   {openItem === 2
                     ? <Minus />
@@ -478,7 +478,7 @@ export default function PropertyGrowth() {
 
 
               {openItem === 2 && (
-                <div className="px-8 pb-8 text-lg leading-8 text-blue-50">
+                <div className="px-5 pb-5 text-base leading-7 text-blue-50 sm:px-6 sm:pb-6 sm:text-lg sm:leading-8 lg:px-8 lg:pb-8">
 
                   {
                     propertyGrowth.accordions[2]

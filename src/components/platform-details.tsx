@@ -10,23 +10,33 @@ import {
 
 
 export default async function PlatformDetails() {
+
   /* ==========================================
      CURRENT LANGUAGE
   ========================================== */
 
-  const cookieStore = await cookies();
+  const cookieStore =
+    await cookies();
+
 
   const savedLocale =
-    cookieStore.get("hostmetric_locale")?.value;
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
 
   let currentLocale: Locale =
     defaultLocale;
 
+
   if (
     savedLocale &&
-    isSupportedLocale(savedLocale)
+    isSupportedLocale(
+      savedLocale
+    )
   ) {
-    currentLocale = savedLocale;
+    currentLocale =
+      savedLocale;
   }
 
 
@@ -35,16 +45,37 @@ export default async function PlatformDetails() {
   ========================================== */
 
   const dictionary =
-    await getDictionary(currentLocale);
+    await getDictionary(
+      currentLocale
+    );
+
 
   const platformDetails =
     dictionary.platformDetails;
 
 
   return (
-    <section className="px-8 py-28">
+    <section
+      className="
+        px-4
+        py-16
+        sm:px-6
+        sm:py-20
+        md:px-8
+        md:py-24
+        lg:py-28
+      "
+    >
 
-      <div className="mx-auto max-w-7xl space-y-10">
+      <div
+        className="
+          mx-auto
+          max-w-7xl
+          space-y-6
+          sm:space-y-8
+          lg:space-y-10
+        "
+      >
 
         {/* =================================================
             GREATER VISIBILITY
@@ -52,11 +83,33 @@ export default async function PlatformDetails() {
 
         <div
           id="greater-visibility"
-          className="group relative min-h-[430px] overflow-hidden rounded-[2.5rem] bg-gray-900"
+          className="
+            group
+            relative
+            min-h-[460px]
+            scroll-mt-24
+            overflow-hidden
+            rounded-[1.75rem]
+            bg-gray-900
+            sm:min-h-[480px]
+            sm:rounded-[2rem]
+            md:min-h-[500px]
+            lg:min-h-[430px]
+            lg:rounded-[2.5rem]
+          "
         >
 
+          {/* BACKGROUND IMAGE */}
           <div
-            className="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-105"
+            className="
+              absolute
+              inset-0
+              bg-cover
+              bg-center
+              transition
+              duration-700
+              lg:group-hover:scale-105
+            "
             style={{
               backgroundImage:
                 "url('/details/visibility.jpg')",
@@ -64,12 +117,51 @@ export default async function PlatformDetails() {
           />
 
 
-          <div className="absolute inset-0 bg-black/60" />
+          {/* DARK OVERLAY */}
+          <div
+            className="
+              absolute
+              inset-0
+              bg-black/65
+              sm:bg-black/60
+            "
+          />
 
 
-          <div className="relative z-10 flex min-h-[430px] max-w-3xl flex-col justify-end p-12 text-white">
+          {/* CONTENT */}
+          <div
+            className="
+              relative
+              z-10
+              flex
+              min-h-[460px]
+              max-w-3xl
+              flex-col
+              justify-end
+              p-6
+              text-white
+              sm:min-h-[480px]
+              sm:p-8
+              md:min-h-[500px]
+              md:p-10
+              lg:min-h-[430px]
+              lg:p-12
+            "
+          >
 
-            <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-blue-300">
+            <p
+              className="
+                mb-3
+                text-xs
+                font-semibold
+                uppercase
+                tracking-[0.17em]
+                text-blue-300
+                sm:mb-4
+                sm:text-sm
+                sm:tracking-widest
+              "
+            >
               {
                 platformDetails
                   .greaterVisibility
@@ -78,7 +170,17 @@ export default async function PlatformDetails() {
             </p>
 
 
-            <h2 className="text-5xl font-bold">
+            <h2
+              className="
+                text-[2.35rem]
+                font-bold
+                leading-[1.05]
+                tracking-[-0.03em]
+                sm:text-4xl
+                md:text-5xl
+                lg:text-5xl
+              "
+            >
               {
                 platformDetails
                   .greaterVisibility
@@ -87,7 +189,18 @@ export default async function PlatformDetails() {
             </h2>
 
 
-            <p className="mt-6 text-xl leading-8 text-gray-200">
+            <p
+              className="
+                mt-5
+                text-base
+                leading-7
+                text-gray-200
+                sm:mt-6
+                sm:text-lg
+                sm:leading-8
+                md:text-xl
+              "
+            >
               {
                 platformDetails
                   .greaterVisibility
@@ -96,7 +209,17 @@ export default async function PlatformDetails() {
             </p>
 
 
-            <p className="mt-4 text-lg leading-8 text-gray-300">
+            <p
+              className="
+                mt-4
+                text-sm
+                leading-7
+                text-gray-300
+                sm:text-base
+                sm:leading-8
+                md:text-lg
+              "
+            >
               {
                 platformDetails
                   .greaterVisibility
@@ -115,11 +238,33 @@ export default async function PlatformDetails() {
 
         <div
           id="centralized-management"
-          className="group relative min-h-[430px] overflow-hidden rounded-[2.5rem] bg-gray-900"
+          className="
+            group
+            relative
+            min-h-[460px]
+            scroll-mt-24
+            overflow-hidden
+            rounded-[1.75rem]
+            bg-gray-900
+            sm:min-h-[480px]
+            sm:rounded-[2rem]
+            md:min-h-[500px]
+            lg:min-h-[430px]
+            lg:rounded-[2.5rem]
+          "
         >
 
+          {/* BACKGROUND IMAGE */}
           <div
-            className="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-105"
+            className="
+              absolute
+              inset-0
+              bg-cover
+              bg-center
+              transition
+              duration-700
+              lg:group-hover:scale-105
+            "
             style={{
               backgroundImage:
                 "url('/details/management.jpg')",
@@ -127,12 +272,52 @@ export default async function PlatformDetails() {
           />
 
 
-          <div className="absolute inset-0 bg-black/60" />
+          {/* DARK OVERLAY */}
+          <div
+            className="
+              absolute
+              inset-0
+              bg-black/65
+              sm:bg-black/60
+            "
+          />
 
 
-          <div className="relative z-10 ml-auto flex min-h-[430px] max-w-3xl flex-col justify-end p-12 text-white">
+          {/* CONTENT */}
+          <div
+            className="
+              relative
+              z-10
+              ml-auto
+              flex
+              min-h-[460px]
+              max-w-3xl
+              flex-col
+              justify-end
+              p-6
+              text-white
+              sm:min-h-[480px]
+              sm:p-8
+              md:min-h-[500px]
+              md:p-10
+              lg:min-h-[430px]
+              lg:p-12
+            "
+          >
 
-            <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-blue-300">
+            <p
+              className="
+                mb-3
+                text-xs
+                font-semibold
+                uppercase
+                tracking-[0.17em]
+                text-blue-300
+                sm:mb-4
+                sm:text-sm
+                sm:tracking-widest
+              "
+            >
               {
                 platformDetails
                   .centralizedManagement
@@ -141,7 +326,17 @@ export default async function PlatformDetails() {
             </p>
 
 
-            <h2 className="text-5xl font-bold">
+            <h2
+              className="
+                text-[2.35rem]
+                font-bold
+                leading-[1.05]
+                tracking-[-0.03em]
+                sm:text-4xl
+                md:text-5xl
+                lg:text-5xl
+              "
+            >
               {
                 platformDetails
                   .centralizedManagement
@@ -150,7 +345,18 @@ export default async function PlatformDetails() {
             </h2>
 
 
-            <p className="mt-6 text-xl leading-8 text-gray-200">
+            <p
+              className="
+                mt-5
+                text-base
+                leading-7
+                text-gray-200
+                sm:mt-6
+                sm:text-lg
+                sm:leading-8
+                md:text-xl
+              "
+            >
               {
                 platformDetails
                   .centralizedManagement
@@ -159,7 +365,17 @@ export default async function PlatformDetails() {
             </p>
 
 
-            <p className="mt-4 text-lg leading-8 text-gray-300">
+            <p
+              className="
+                mt-4
+                text-sm
+                leading-7
+                text-gray-300
+                sm:text-base
+                sm:leading-8
+                md:text-lg
+              "
+            >
               {
                 platformDetails
                   .centralizedManagement
@@ -178,11 +394,33 @@ export default async function PlatformDetails() {
 
         <div
           id="smarter-distribution"
-          className="group relative min-h-[430px] overflow-hidden rounded-[2.5rem] bg-gray-900"
+          className="
+            group
+            relative
+            min-h-[460px]
+            scroll-mt-24
+            overflow-hidden
+            rounded-[1.75rem]
+            bg-gray-900
+            sm:min-h-[480px]
+            sm:rounded-[2rem]
+            md:min-h-[500px]
+            lg:min-h-[430px]
+            lg:rounded-[2.5rem]
+          "
         >
 
+          {/* BACKGROUND IMAGE */}
           <div
-            className="absolute inset-0 bg-cover bg-center transition duration-700 group-hover:scale-105"
+            className="
+              absolute
+              inset-0
+              bg-cover
+              bg-center
+              transition
+              duration-700
+              lg:group-hover:scale-105
+            "
             style={{
               backgroundImage:
                 "url('/details/distribution.jpg')",
@@ -190,12 +428,51 @@ export default async function PlatformDetails() {
           />
 
 
-          <div className="absolute inset-0 bg-black/60" />
+          {/* DARK OVERLAY */}
+          <div
+            className="
+              absolute
+              inset-0
+              bg-black/65
+              sm:bg-black/60
+            "
+          />
 
 
-          <div className="relative z-10 flex min-h-[430px] max-w-3xl flex-col justify-end p-12 text-white">
+          {/* CONTENT */}
+          <div
+            className="
+              relative
+              z-10
+              flex
+              min-h-[460px]
+              max-w-3xl
+              flex-col
+              justify-end
+              p-6
+              text-white
+              sm:min-h-[480px]
+              sm:p-8
+              md:min-h-[500px]
+              md:p-10
+              lg:min-h-[430px]
+              lg:p-12
+            "
+          >
 
-            <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-blue-300">
+            <p
+              className="
+                mb-3
+                text-xs
+                font-semibold
+                uppercase
+                tracking-[0.17em]
+                text-blue-300
+                sm:mb-4
+                sm:text-sm
+                sm:tracking-widest
+              "
+            >
               {
                 platformDetails
                   .smarterDistribution
@@ -204,7 +481,17 @@ export default async function PlatformDetails() {
             </p>
 
 
-            <h2 className="text-5xl font-bold">
+            <h2
+              className="
+                text-[2.35rem]
+                font-bold
+                leading-[1.05]
+                tracking-[-0.03em]
+                sm:text-4xl
+                md:text-5xl
+                lg:text-5xl
+              "
+            >
               {
                 platformDetails
                   .smarterDistribution
@@ -213,7 +500,18 @@ export default async function PlatformDetails() {
             </h2>
 
 
-            <p className="mt-6 text-xl leading-8 text-gray-200">
+            <p
+              className="
+                mt-5
+                text-base
+                leading-7
+                text-gray-200
+                sm:mt-6
+                sm:text-lg
+                sm:leading-8
+                md:text-xl
+              "
+            >
               {
                 platformDetails
                   .smarterDistribution
@@ -222,7 +520,17 @@ export default async function PlatformDetails() {
             </p>
 
 
-            <p className="mt-4 text-lg leading-8 text-gray-300">
+            <p
+              className="
+                mt-4
+                text-sm
+                leading-7
+                text-gray-300
+                sm:text-base
+                sm:leading-8
+                md:text-lg
+              "
+            >
               {
                 platformDetails
                   .smarterDistribution

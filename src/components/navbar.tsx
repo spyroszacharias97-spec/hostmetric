@@ -27,6 +27,8 @@ import {
   Check,
   ChevronDown,
   Languages,
+  Menu,
+  X,
 } from "lucide-react";
 
 import { getDictionary } from "@/i18n/get-dictionary";
@@ -117,6 +119,9 @@ const localeFlagComponents = {
 
 export default function Navbar() {
   const [languageOpen, setLanguageOpen] =
+    useState(false);
+
+  const [mobileMenuOpen, setMobileMenuOpen] =
     useState(false);
 
   const [currentLocale, setCurrentLocale] =
@@ -229,6 +234,87 @@ export default function Navbar() {
 
 
   /* ==========================================
+     MOBILE MENU BODY SCROLL
+  ========================================== */
+
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      return;
+    }
+
+    const previousOverflow =
+      document.body.style.overflow;
+
+    document.body.style.overflow =
+      "hidden";
+
+    return () => {
+      document.body.style.overflow =
+        previousOverflow;
+    };
+  }, [mobileMenuOpen]);
+
+
+  /* ==========================================
+     SECTION NAVIGATION
+  ========================================== */
+
+  function navigateToSection(
+    sectionId: string
+  ) {
+    setLanguageOpen(false);
+    setMobileMenuOpen(false);
+
+    const scrollToTarget = () => {
+      const target =
+        document.getElementById(
+          sectionId
+        );
+
+      if (!target) {
+        return false;
+      }
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
+      window.history.replaceState(
+        null,
+        "",
+        `/#${sectionId}`
+      );
+
+      return true;
+    };
+
+
+    const isHomePage =
+      window.location.pathname === "/";
+
+
+    if (isHomePage) {
+      window.requestAnimationFrame(
+        () => {
+          window.requestAnimationFrame(
+            () => {
+              scrollToTarget();
+            }
+          );
+        }
+      );
+
+      return;
+    }
+
+
+    window.location.href =
+      `/#${sectionId}`;
+  }
+
+
+  /* ==========================================
      CHANGE LANGUAGE
   ========================================== */
 
@@ -236,6 +322,7 @@ export default function Navbar() {
     locale: Locale
   ) {
     setLanguageOpen(false);
+    setMobileMenuOpen(false);
 
 
     try {
@@ -323,7 +410,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-[100] w-full border-b border-slate-200/60 bg-white/90 backdrop-blur-xl">
 
-      <nav className="mx-auto flex h-[105px] max-w-[1600px] items-center justify-between px-10">
+      <nav className="mx-auto flex h-[76px] max-w-[1600px] items-center justify-between px-4 sm:h-[84px] sm:px-6 lg:h-[105px] lg:px-10">
 
         {/* ==========================================
             LOGO
@@ -331,9 +418,12 @@ export default function Navbar() {
 
         <Link
           href="/"
-          className="group flex cursor-pointer items-center"
+          className="group flex min-w-0 cursor-pointer items-center"
           aria-label={
             navigation.homeAriaLabel
+          }
+          onClick={() =>
+            setMobileMenuOpen(false)
           }
         >
 
@@ -343,7 +433,7 @@ export default function Navbar() {
             width={185}
             height={90}
             priority
-            className="h-[84px] w-auto object-contain transition duration-300 group-hover:scale-[1.04]"
+            className="h-[56px] w-auto max-w-[138px] object-contain transition duration-300 group-hover:scale-[1.04] sm:h-[62px] sm:max-w-[150px] lg:h-[84px] lg:max-w-none"
           />
 
         </Link>
@@ -355,20 +445,30 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-11 lg:flex">
 
-          <Link
-            href="/#services"
+          <button
+            type="button"
+            onClick={() =>
+              navigateToSection(
+                "services"
+              )
+            }
             className="cursor-pointer text-[17px] font-semibold text-slate-800 transition duration-300 hover:-translate-y-0.5 hover:text-blue-600"
           >
             {navigation.services}
-          </Link>
+          </button>
 
 
-          <Link
-            href="/#how-it-works"
+          <button
+            type="button"
+            onClick={() =>
+              navigateToSection(
+                "how-it-works"
+              )
+            }
             className="cursor-pointer text-[17px] font-semibold text-slate-800 transition duration-300 hover:-translate-y-0.5 hover:text-blue-600"
           >
             {navigation.howItWorks}
-          </Link>
+          </button>
 
 
           <Link
@@ -401,7 +501,7 @@ export default function Navbar() {
             RIGHT SIDE
         ========================================== */}
 
-        <div className="flex items-center gap-4">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3 lg:gap-4">
 
           {/* ========================================
               LANGUAGE SELECTOR
@@ -416,12 +516,12 @@ export default function Navbar() {
 
             <button
               type="button"
-              onClick={() =>
+              onClick={() => {
                 setLanguageOpen(
                   (open) => !open
-                )
-              }
-              className="flex h-[56px] cursor-pointer items-center gap-2.5 rounded-2xl border border-slate-200 bg-white px-4 font-semibold text-slate-800 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-blue-300 hover:text-blue-600 hover:shadow-md"
+                );
+              }}
+              className="flex h-[44px] min-w-[58px] cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white px-2.5 font-semibold text-slate-800 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-blue-300 hover:text-blue-600 hover:shadow-md sm:h-[50px] sm:min-w-0 sm:justify-start sm:gap-2 sm:px-3 lg:h-[56px] lg:gap-2.5 lg:rounded-2xl lg:px-4"
               aria-label={
                 navigation.selectLanguage
               }
@@ -432,7 +532,7 @@ export default function Navbar() {
 
               {/* COUNTRY CODE */}
 
-              <span className="text-[15px] font-bold leading-none">
+              <span className="text-[13px] font-bold leading-none sm:text-[14px] lg:text-[15px]">
                 {
                   localeCountryCodes[
                     currentLocale
@@ -443,7 +543,7 @@ export default function Navbar() {
 
               {/* FLAG */}
 
-              <span className="flex h-[18px] w-[27px] shrink-0 items-center justify-center overflow-hidden rounded-[3px] shadow-sm">
+              <span className="hidden h-[17px] w-[25px] shrink-0 items-center justify-center overflow-hidden rounded-[3px] shadow-sm sm:flex lg:h-[18px] lg:w-[27px]">
                 <CurrentFlag
                   title={localeNames[currentLocale]}
                   className="block h-full w-full"
@@ -454,8 +554,8 @@ export default function Navbar() {
               {/* ARROW */}
 
               <ChevronDown
-                size={17}
-                className={`ml-0.5 transition duration-300 ${
+                size={15}
+                className={`ml-0 transition duration-300 sm:ml-0.5 lg:text-[17px] ${
                   languageOpen
                     ? "rotate-180"
                     : ""
@@ -470,7 +570,7 @@ export default function Navbar() {
             ======================================== */}
 
             {languageOpen && (
-              <div className="absolute right-0 top-[68px] z-[200] w-[300px] overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-2xl">
+              <div className="fixed left-4 right-4 top-[84px] z-[200] max-h-[calc(100vh-100px)] overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-2xl sm:absolute sm:left-auto sm:right-0 sm:top-[60px] sm:w-[300px] lg:top-[68px]">
 
                 {/* DROPDOWN TITLE */}
 
@@ -491,7 +591,7 @@ export default function Navbar() {
 
                 {/* LANGUAGE LIST */}
 
-                <div className="mt-2 max-h-[420px] overflow-y-auto">
+                <div className="mt-2 max-h-[min(420px,calc(100vh-180px))] overflow-y-auto">
 
                   {locales.map(
                     (locale) => {
@@ -578,19 +678,147 @@ export default function Navbar() {
 
 
           {/* ========================================
-              CTA
+              DESKTOP CTA
           ======================================== */}
 
           <Link
             href="/get-started"
-            className="cursor-pointer rounded-2xl bg-black px-8 py-4 text-[17px] font-semibold text-white transition duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:shadow-xl"
+            className="hidden cursor-pointer rounded-2xl bg-black px-8 py-4 text-[17px] font-semibold text-white transition duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:shadow-xl lg:inline-flex"
           >
             {navigation.getStarted} →
           </Link>
 
+
+          {/* ========================================
+              MOBILE MENU BUTTON
+          ======================================== */}
+
+          <button
+            type="button"
+            onClick={() => {
+              setLanguageOpen(false);
+              setMobileMenuOpen(
+                (open) => !open
+              );
+            }}
+            className="flex h-[44px] w-[44px] cursor-pointer items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-900 shadow-sm transition hover:border-blue-300 hover:text-blue-600 hover:shadow-md sm:h-[50px] sm:w-[50px] lg:hidden"
+            aria-label={
+              mobileMenuOpen
+                ? "Close navigation menu"
+                : "Open navigation menu"
+            }
+            aria-expanded={
+              mobileMenuOpen
+            }
+          >
+            {mobileMenuOpen ? (
+              <X size={22} />
+            ) : (
+              <Menu size={22} />
+            )}
+          </button>
+
         </div>
 
       </nav>
+
+
+      {/* ==========================================
+          MOBILE NAVIGATION PANEL
+      ========================================== */}
+
+      {mobileMenuOpen && (
+        <div className="fixed inset-x-0 top-[76px] z-[190] h-[calc(100dvh-76px)] overflow-y-auto border-t border-slate-200 bg-white/98 px-4 py-5 shadow-2xl backdrop-blur-xl sm:top-[84px] sm:h-[calc(100dvh-84px)] sm:px-6 lg:hidden">
+
+          <div className="mx-auto flex w-full max-w-xl flex-col">
+
+            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+
+              <button
+                type="button"
+                onClick={() =>
+                  navigateToSection(
+                    "services"
+                  )
+                }
+                className="flex min-h-[58px] w-full items-center justify-between border-b border-slate-100 px-5 py-4 text-left text-[17px] font-bold text-slate-900 transition hover:bg-blue-50 hover:text-blue-600"
+              >
+                {navigation.services}
+                <span aria-hidden="true">→</span>
+              </button>
+
+
+              <button
+                type="button"
+                onClick={() =>
+                  navigateToSection(
+                    "how-it-works"
+                  )
+                }
+                className="flex min-h-[58px] w-full items-center justify-between border-b border-slate-100 px-5 py-4 text-left text-[17px] font-bold text-slate-900 transition hover:bg-blue-50 hover:text-blue-600"
+              >
+                {navigation.howItWorks}
+                <span aria-hidden="true">→</span>
+              </button>
+
+
+              <Link
+                href="/faq"
+                onClick={() =>
+                  setMobileMenuOpen(false)
+                }
+                className="flex min-h-[58px] items-center justify-between border-b border-slate-100 px-5 py-4 text-[17px] font-bold text-slate-900 transition hover:bg-blue-50 hover:text-blue-600"
+              >
+                {navigation.pricing}
+                <span aria-hidden="true">→</span>
+              </Link>
+
+
+              <Link
+                href="/about"
+                onClick={() =>
+                  setMobileMenuOpen(false)
+                }
+                className="flex min-h-[58px] items-center justify-between border-b border-slate-100 px-5 py-4 text-[17px] font-bold text-slate-900 transition hover:bg-blue-50 hover:text-blue-600"
+              >
+                {navigation.about}
+                <span aria-hidden="true">→</span>
+              </Link>
+
+
+              <Link
+                href="/contact"
+                onClick={() =>
+                  setMobileMenuOpen(false)
+                }
+                className="flex min-h-[58px] items-center justify-between px-5 py-4 text-[17px] font-bold text-slate-900 transition hover:bg-blue-50 hover:text-blue-600"
+              >
+                {navigation.contact}
+                <span aria-hidden="true">→</span>
+              </Link>
+
+            </div>
+
+
+            <Link
+              href="/get-started"
+              onClick={() =>
+                setMobileMenuOpen(false)
+              }
+              className="mt-4 flex min-h-[58px] items-center justify-center rounded-2xl bg-black px-6 py-4 text-center text-[17px] font-bold text-white shadow-lg transition hover:bg-blue-600"
+            >
+              {navigation.getStarted} →
+            </Link>
+
+
+            <p className="mt-5 text-center text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+              HostMetric Property Management
+            </p>
+
+          </div>
+
+        </div>
+      )}
 
     </header>
   );

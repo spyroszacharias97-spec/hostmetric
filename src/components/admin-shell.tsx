@@ -134,10 +134,17 @@ export default function AdminShell({
     };
 
 
+  /* =========================================================
+     RESPONSIVE ADMIN SHELL
+     Mobile adjustments only. Navigation, auth, routing and
+     dictionary logic remain unchanged.
+  ========================================================= */
+
   return (
     <div
       className="
         min-h-screen
+        overflow-x-hidden
         bg-slate-50
         text-slate-900
       "
@@ -150,13 +157,13 @@ export default function AdminShell({
           top-0
           z-40
           flex
-          h-16
+          h-14 sm:h-16
           items-center
           justify-between
           border-b
           border-slate-200
           bg-white
-          px-5
+          px-4 sm:px-5
           lg:hidden
         "
       >
@@ -204,8 +211,11 @@ export default function AdminShell({
             hover:bg-slate-50
           "
           aria-label={
-            dictionary.common
-              .openMenu
+            mobileOpen
+              ? dictionary.common
+                  .closeMenu
+              : dictionary.common
+                  .openMenu
           }
         >
           {
@@ -264,8 +274,11 @@ export default function AdminShell({
           z-50
 
           flex
-          w-[285px]
+          w-[270px]
+          max-w-[88vw]
           flex-col
+          overflow-y-auto
+          sm:w-[285px]
 
           border-r
           border-slate-200
@@ -288,11 +301,11 @@ export default function AdminShell({
         <div
           className="
             flex
-            h-[96px]
+            h-[88px] lg:h-[96px]
             items-center
             border-b
             border-slate-100
-            px-7
+            px-5 sm:px-7
           "
         >
 
@@ -331,8 +344,8 @@ export default function AdminShell({
         <nav
           className="
             flex-1
-            px-4
-            py-6
+            px-3 sm:px-4
+            py-5 sm:py-6
           "
         >
 
@@ -399,8 +412,10 @@ export default function AdminShell({
                         gap-3
 
                         rounded-xl
-                        px-3.5
-                        py-3
+                        px-3
+                        py-2.5
+                        sm:px-3.5
+                        sm:py-3
 
                         text-sm
                         font-semibold
@@ -455,7 +470,7 @@ export default function AdminShell({
             className="
               rounded-2xl
               bg-slate-50
-              p-4
+              p-3 sm:p-4
             "
           >
 
@@ -534,6 +549,7 @@ export default function AdminShell({
       {/* MAIN AREA */}
       <div
         className="
+          min-w-0
           lg:pl-[285px]
         "
       >
@@ -542,7 +558,7 @@ export default function AdminShell({
         <header
           className="
             hidden
-            h-[96px]
+            h-[88px] lg:h-[96px]
             items-center
             justify-between
 
@@ -661,7 +677,7 @@ export default function AdminShell({
         <main
           className="
             min-h-[calc(100vh-96px)]
-            p-5
+            p-4
             sm:p-6
             lg:p-8
             xl:p-10
@@ -671,7 +687,7 @@ export default function AdminShell({
           <div
             className="
               mx-auto
-              max-w-[1500px]
+              max-w-[1500px] min-w-0
             "
           >
             {

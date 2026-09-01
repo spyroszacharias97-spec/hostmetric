@@ -75,23 +75,33 @@ const platforms = [
 
 
 export default async function PlatformOrbit() {
+
   /* ==========================================
      CURRENT LANGUAGE
   ========================================== */
 
-  const cookieStore = await cookies();
+  const cookieStore =
+    await cookies();
+
 
   const savedLocale =
-    cookieStore.get("hostmetric_locale")?.value;
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
 
   let currentLocale: Locale =
     defaultLocale;
 
+
   if (
     savedLocale &&
-    isSupportedLocale(savedLocale)
+    isSupportedLocale(
+      savedLocale
+    )
   ) {
-    currentLocale = savedLocale;
+    currentLocale =
+      savedLocale;
   }
 
 
@@ -100,7 +110,10 @@ export default async function PlatformOrbit() {
   ========================================== */
 
   const dictionary =
-    await getDictionary(currentLocale);
+    await getDictionary(
+      currentLocale
+    );
+
 
   const platformOrbit =
     dictionary.platformOrbit;
@@ -113,109 +126,160 @@ export default async function PlatformOrbit() {
           LEFT SIDE
       ================================================= */}
 
-      <div className="platform-orbit-area">
+      <div className="platform-orbit-shell">
 
-        <div className="orbit-ring orbit-ring-one" />
-        <div className="orbit-ring orbit-ring-two" />
-        <div className="orbit-ring orbit-ring-three" />
+        <div className="platform-orbit-area">
 
-
-        {/* CLICKABLE PHONE */}
-        <Link
-          href="/performance/platform-network"
-          className="platform-phone"
-          aria-label={platformOrbit.phoneAriaLabel}
-        >
-
-          <div className="platform-phone-notch" />
+          <div className="orbit-ring orbit-ring-one" />
+          <div className="orbit-ring orbit-ring-two" />
+          <div className="orbit-ring orbit-ring-three" />
 
 
-          <p className="platform-phone-brand">
-            HOSTMETRIC
-          </p>
+          {/* ============================================
+              CLICKABLE PHONE
+          ============================================ */}
 
-
-          <h3>
-            {platformOrbit.phone.titleLine1}
-
-            <br />
-
-            {platformOrbit.phone.titleLine2}
-          </h3>
-
-
-          <div className="platform-phone-card platform-phone-blue">
-
-            <span>
-              {platformOrbit.phone.smartPricing}
-            </span>
-
-            <strong>
-              {platformOrbit.phone.optimizing}
-            </strong>
-
-          </div>
-
-
-          <div className="platform-phone-card platform-phone-green">
-
-            <span>
-              {platformOrbit.phone.guestCommunication}
-            </span>
-
-            <strong>
-              {platformOrbit.phone.active}
-            </strong>
-
-          </div>
-
-
-          <div className="platform-phone-card platform-phone-purple">
-
-            <span>
-              {platformOrbit.phone.reservations}
-            </span>
-
-            <strong>
-              {platformOrbit.phone.synced}
-            </strong>
-
-          </div>
-
-
-          <div className="platform-phone-status">
-
-            <span className="status-dot" />
-
-            {platformOrbit.phone.channelsConnected}
-
-          </div>
-
-        </Link>
-
-
-        {/* NON-CLICKABLE PLATFORM LOGOS */}
-        {platforms.map((platform) => (
-          <div
-            key={platform.name}
-            className={`platform-logo-card ${platform.className}`}
-            style={{
-              cursor: "default",
-            }}
+          <Link
+            href="/performance/platform-network"
+            className="platform-phone"
+            aria-label={
+              platformOrbit.phoneAriaLabel
+            }
           >
 
-            <img
-              src={platform.logo}
-              alt={`${platform.name} logo`}
-            />
+            <div className="platform-phone-notch" />
 
 
-            <span>
-              {platform.name}
-            </span>
+            <p className="platform-phone-brand">
+              HOSTMETRIC
+            </p>
 
-          </div>
-        ))}
+
+            <h3>
+              {
+                platformOrbit.phone
+                  .titleLine1
+              }
+
+              <br />
+
+              {
+                platformOrbit.phone
+                  .titleLine2
+              }
+            </h3>
+
+
+            <div className="platform-phone-card platform-phone-blue">
+
+              <span>
+                {
+                  platformOrbit.phone
+                    .smartPricing
+                }
+              </span>
+
+              <strong>
+                {
+                  platformOrbit.phone
+                    .optimizing
+                }
+              </strong>
+
+            </div>
+
+
+            <div className="platform-phone-card platform-phone-green">
+
+              <span>
+                {
+                  platformOrbit.phone
+                    .guestCommunication
+                }
+              </span>
+
+              <strong>
+                {
+                  platformOrbit.phone
+                    .active
+                }
+              </strong>
+
+            </div>
+
+
+            <div className="platform-phone-card platform-phone-purple">
+
+              <span>
+                {
+                  platformOrbit.phone
+                    .reservations
+                }
+              </span>
+
+              <strong>
+                {
+                  platformOrbit.phone
+                    .synced
+                }
+              </strong>
+
+            </div>
+
+
+            <div className="platform-phone-status">
+
+              <span className="status-dot" />
+
+              {
+                platformOrbit.phone
+                  .channelsConnected
+              }
+
+            </div>
+
+          </Link>
+
+
+          {/* ============================================
+              NON-CLICKABLE PLATFORM LOGOS
+          ============================================ */}
+
+          {platforms.map(
+            (platform) => (
+              <div
+                key={
+                  platform.name
+                }
+                className={
+                  `platform-logo-card ${platform.className}`
+                }
+                style={{
+                  cursor: "default",
+                }}
+              >
+
+                <img
+                  src={
+                    platform.logo
+                  }
+                  alt={
+                    `${platform.name} logo`
+                  }
+                />
+
+
+                <span>
+                  {
+                    platform.name
+                  }
+                </span>
+
+              </div>
+            )
+          )}
+
+        </div>
 
       </div>
 
@@ -227,27 +291,38 @@ export default async function PlatformOrbit() {
       <div className="platform-content">
 
         <span className="section-label">
-          {platformOrbit.eyebrow}
+          {
+            platformOrbit.eyebrow
+          }
         </span>
 
 
         <h2>
-          {platformOrbit.titleLine1}
+          {
+            platformOrbit.titleLine1
+          }
 
           <br />
 
-          {platformOrbit.titleLine2}
+          {
+            platformOrbit.titleLine2
+          }
         </h2>
 
 
         <p className="platform-description">
-          {platformOrbit.description}
+          {
+            platformOrbit.description
+          }
         </p>
 
 
         <div className="platform-benefits">
 
-          {/* GREATER VISIBILITY */}
+          {/* ============================================
+              GREATER VISIBILITY
+          ============================================ */}
+
           <Link
             href="/solutions/greater-visibility"
             className="platform-benefit"
@@ -257,16 +332,20 @@ export default async function PlatformOrbit() {
 
               <h3>
                 {
-                  platformOrbit.benefits
-                    .greaterVisibility.title
+                  platformOrbit
+                    .benefits
+                    .greaterVisibility
+                    .title
                 }
               </h3>
 
 
               <p>
                 {
-                  platformOrbit.benefits
-                    .greaterVisibility.description
+                  platformOrbit
+                    .benefits
+                    .greaterVisibility
+                    .description
                 }
               </p>
 
@@ -280,7 +359,10 @@ export default async function PlatformOrbit() {
           </Link>
 
 
-          {/* CENTRALIZED MANAGEMENT */}
+          {/* ============================================
+              CENTRALIZED MANAGEMENT
+          ============================================ */}
+
           <Link
             href="/solutions/centralized-management"
             className="platform-benefit"
@@ -290,16 +372,20 @@ export default async function PlatformOrbit() {
 
               <h3>
                 {
-                  platformOrbit.benefits
-                    .centralizedManagement.title
+                  platformOrbit
+                    .benefits
+                    .centralizedManagement
+                    .title
                 }
               </h3>
 
 
               <p>
                 {
-                  platformOrbit.benefits
-                    .centralizedManagement.description
+                  platformOrbit
+                    .benefits
+                    .centralizedManagement
+                    .description
                 }
               </p>
 
@@ -313,7 +399,10 @@ export default async function PlatformOrbit() {
           </Link>
 
 
-          {/* SMARTER DISTRIBUTION */}
+          {/* ============================================
+              SMARTER DISTRIBUTION
+          ============================================ */}
+
           <Link
             href="/solutions/smarter-distribution"
             className="platform-benefit"
@@ -323,16 +412,20 @@ export default async function PlatformOrbit() {
 
               <h3>
                 {
-                  platformOrbit.benefits
-                    .smarterDistribution.title
+                  platformOrbit
+                    .benefits
+                    .smarterDistribution
+                    .title
                 }
               </h3>
 
 
               <p>
                 {
-                  platformOrbit.benefits
-                    .smarterDistribution.description
+                  platformOrbit
+                    .benefits
+                    .smarterDistribution
+                    .description
                 }
               </p>
 
