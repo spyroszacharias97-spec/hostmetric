@@ -357,13 +357,17 @@ export default function PropertyGrowth() {
 
             <div className="overflow-hidden rounded-3xl bg-blue-600 text-white">
 
-              <button
-                type="button"
-                onClick={() =>
-                  toggleItem(0)
-                }
-                className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-5 text-left sm:px-6 sm:py-6 lg:px-8 lg:py-7"
-              >
+              <h3>
+                <button
+                  id="property-growth-accordion-0-button"
+                  type="button"
+                  onClick={() =>
+                    toggleItem(0)
+                  }
+                  aria-expanded={openItem === 0}
+                  aria-controls="property-growth-accordion-0-panel"
+                  className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-5 text-left sm:px-6 sm:py-6 lg:px-8 lg:py-7"
+                >
 
                 <span className="min-w-0 text-lg font-bold leading-6 sm:text-xl md:text-2xl">
                   {
@@ -382,11 +386,17 @@ export default function PropertyGrowth() {
 
                 </span>
 
-              </button>
+                </button>
+              </h3>
 
 
               {openItem === 0 && (
-                <div className="px-5 pb-5 text-base leading-7 text-blue-50 sm:px-6 sm:pb-6 sm:text-lg sm:leading-8 lg:px-8 lg:pb-8">
+                <div
+                  id="property-growth-accordion-0-panel"
+                  role="region"
+                  aria-labelledby="property-growth-accordion-0-button"
+                  className="px-5 pb-5 text-base leading-7 text-blue-50 sm:px-6 sm:pb-6 sm:text-lg sm:leading-8 lg:px-8 lg:pb-8"
+                >
 
                   {
                     propertyGrowth.accordions[0]
@@ -403,13 +413,17 @@ export default function PropertyGrowth() {
 
             <div className="overflow-hidden rounded-3xl bg-blue-600 text-white">
 
-              <button
-                type="button"
-                onClick={() =>
-                  toggleItem(1)
-                }
-                className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-5 text-left sm:px-6 sm:py-6 lg:px-8 lg:py-7"
-              >
+              <h3>
+                <button
+                  id="property-growth-accordion-1-button"
+                  type="button"
+                  onClick={() =>
+                    toggleItem(1)
+                  }
+                  aria-expanded={openItem === 1}
+                  aria-controls="property-growth-accordion-1-panel"
+                  className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-5 text-left sm:px-6 sm:py-6 lg:px-8 lg:py-7"
+                >
 
                 <span className="min-w-0 text-lg font-bold leading-6 sm:text-xl md:text-2xl">
                   {
@@ -428,11 +442,17 @@ export default function PropertyGrowth() {
 
                 </span>
 
-              </button>
+                </button>
+              </h3>
 
 
               {openItem === 1 && (
-                <div className="px-5 pb-5 text-base leading-7 text-blue-50 sm:px-6 sm:pb-6 sm:text-lg sm:leading-8 lg:px-8 lg:pb-8">
+                <div
+                  id="property-growth-accordion-1-panel"
+                  role="region"
+                  aria-labelledby="property-growth-accordion-1-button"
+                  className="px-5 pb-5 text-base leading-7 text-blue-50 sm:px-6 sm:pb-6 sm:text-lg sm:leading-8 lg:px-8 lg:pb-8"
+                >
 
                   {
                     propertyGrowth.accordions[1]
@@ -449,13 +469,17 @@ export default function PropertyGrowth() {
 
             <div className="overflow-hidden rounded-3xl bg-blue-600 text-white">
 
-              <button
-                type="button"
-                onClick={() =>
-                  toggleItem(2)
-                }
-                className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-5 text-left sm:px-6 sm:py-6 lg:px-8 lg:py-7"
-              >
+              <h3>
+                <button
+                  id="property-growth-accordion-2-button"
+                  type="button"
+                  onClick={() =>
+                    toggleItem(2)
+                  }
+                  aria-expanded={openItem === 2}
+                  aria-controls="property-growth-accordion-2-panel"
+                  className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-5 text-left sm:px-6 sm:py-6 lg:px-8 lg:py-7"
+                >
 
                 <span className="min-w-0 text-lg font-bold leading-6 sm:text-xl md:text-2xl">
                   {
@@ -474,11 +498,17 @@ export default function PropertyGrowth() {
 
                 </span>
 
-              </button>
+                </button>
+              </h3>
 
 
               {openItem === 2 && (
-                <div className="px-5 pb-5 text-base leading-7 text-blue-50 sm:px-6 sm:pb-6 sm:text-lg sm:leading-8 lg:px-8 lg:pb-8">
+                <div
+                  id="property-growth-accordion-2-panel"
+                  role="region"
+                  aria-labelledby="property-growth-accordion-2-button"
+                  className="px-5 pb-5 text-base leading-7 text-blue-50 sm:px-6 sm:pb-6 sm:text-lg sm:leading-8 lg:px-8 lg:pb-8"
+                >
 
                   {
                     propertyGrowth.accordions[2]

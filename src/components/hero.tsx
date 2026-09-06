@@ -11,6 +11,10 @@ import {
   type Locale,
 } from "@/i18n/config";
 
+import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
 
 export default async function Hero() {
 
@@ -45,6 +49,41 @@ export default async function Hero() {
 
   const hero =
     dictionary.hero;
+
+
+  /* ==========================================
+     LOCALIZED ROUTES
+  ========================================== */
+
+  const getStartedPath =
+    getLocalizedPath(
+      "/get-started",
+      currentLocale
+    );
+
+  const revenuePath =
+    getLocalizedPath(
+      "/insights/revenue",
+      currentLocale
+    );
+
+  const guestRatingPath =
+    getLocalizedPath(
+      "/insights/guest-rating",
+      currentLocale
+    );
+
+  const occupancyPath =
+    getLocalizedPath(
+      "/insights/occupancy",
+      currentLocale
+    );
+
+  const aiPricingPath =
+    getLocalizedPath(
+      "/insights/ai-pricing",
+      currentLocale
+    );
 
 
   return (
@@ -82,7 +121,7 @@ export default async function Hero() {
           <div className="mt-7 flex flex-col gap-3 min-[380px]:flex-row sm:mt-8 sm:gap-4">
 
             <Link
-              href="/get-started"
+              href={getStartedPath}
               className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-black px-5 py-3.5 text-center text-sm font-medium text-white transition duration-300 hover:scale-[1.03] sm:px-7 sm:py-4 sm:text-base"
             >
               {hero.getStarted} →
@@ -106,7 +145,7 @@ export default async function Hero() {
 
           {/* REVENUE */}
           <Link
-            href="/insights/revenue"
+            href={revenuePath}
             className="group min-w-0 cursor-pointer rounded-2xl border border-blue-100 bg-[#f5fbff]/95 p-5 shadow-sm backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-6 lg:hover:-translate-y-2 lg:hover:scale-105"
           >
 
@@ -131,7 +170,7 @@ export default async function Hero() {
 
           {/* GUEST RATING */}
           <Link
-            href="/insights/guest-rating"
+            href={guestRatingPath}
             className="group min-w-0 cursor-pointer rounded-2xl border border-blue-100 bg-[#f5fbff]/95 p-5 shadow-sm backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-6 lg:hover:-translate-y-2 lg:hover:scale-105"
           >
 
@@ -156,7 +195,7 @@ export default async function Hero() {
 
           {/* OCCUPANCY */}
           <Link
-            href="/insights/occupancy"
+            href={occupancyPath}
             className="group min-w-0 cursor-pointer rounded-2xl border border-blue-100 bg-[#f5fbff]/95 p-5 shadow-sm backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-6 lg:hover:-translate-y-2 lg:hover:scale-105"
           >
 
@@ -181,7 +220,7 @@ export default async function Hero() {
 
           {/* AI PRICING */}
           <Link
-            href="/insights/ai-pricing"
+            href={aiPricingPath}
             className="group min-w-0 cursor-pointer rounded-2xl border border-emerald-100 bg-[#f4fbf7]/95 p-5 shadow-sm backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-6 lg:hover:-translate-y-2 lg:hover:scale-105"
           >
 

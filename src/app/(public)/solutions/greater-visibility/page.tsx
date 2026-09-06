@@ -1,13 +1,160 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 
 import { getDictionary } from "@/i18n/get-dictionary";
 
 import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
+  getLocalizedAlternates,
+} from "@/seo/metadata";
+
+import {
+  getBreadcrumbSchema,
+  getWebPageSchema,
+  serializeJsonLd,
+} from "@/seo/schema";
+
+import {
   defaultLocale,
   isSupportedLocale,
   type Locale,
 } from "@/i18n/config";
+
+
+/* ==========================================
+   FINAL SEO PASS NOTES
+
+   This Greater Visibility service page has now completed:
+   - SEO title + meta description
+   - Canonical + hreflang + x-default
+   - Open Graph + Twitter
+   - Robots index/follow
+   - Heading / internal-link / crawlability review
+
+   Primary commercial intent:
+   - Greater property visibility
+   - Increase Airbnb & Booking.com bookings
+   - Short-term rental visibility
+   - Channel performance
+
+   Supporting visible concepts:
+   - Channel performance
+   - Net revenue analysis
+   - Demand positioning
+   - Professional revenue logic
+
+   Smarter Distribution remains focused on
+   distribution strategy, while Platform Network
+   remains focused on the wider channel network.
+   Long-tail visibility queries remain reserved
+   for Guides / Blog in the keyword coverage map.
+
+   Do NOT repeat these items in a later pass.
+========================================== */
+
+const greaterVisibilityPageSeo: Record<
+  Locale,
+  { title: string; description: string }
+> = {
+  el: {
+    title: "Μεγαλύτερη Προβολή & Περισσότερες Κρατήσεις | HostMetric",
+    description: "Αυξήστε την προβολή και τις κρατήσεις του ακινήτου σας σε Airbnb, Booking.com και βραχυχρόνιες μισθώσεις με ανάλυση καναλιών, ζήτησης και καθαρών εσόδων.",
+  },
+  en: {
+    title: "Greater Visibility & More Airbnb and Booking.com Bookings | HostMetric",
+    description: "Increase property visibility and booking opportunities across Airbnb, Booking.com and short-term rental channels using channel performance, demand positioning and net revenue insights.",
+  },
+  de: {
+    title: "Mehr Sichtbarkeit & Buchungen auf Airbnb und Booking.com | HostMetric",
+    description: "Steigern Sie Sichtbarkeit und Buchungschancen Ihrer Unterkunft auf Airbnb, Booking.com und Kurzzeitmietkanälen durch Kanalperformance, Nachfragepositionierung und Nettoerlösanalysen.",
+  },
+  fr: {
+    title: "Plus de Visibilité & Réservations Airbnb et Booking.com | HostMetric",
+    description: "Augmentez la visibilité et les opportunités de réservation sur Airbnb, Booking.com et les canaux de location courte durée grâce à l’analyse des canaux, de la demande et des revenus nets.",
+  },
+  it: {
+    title: "Più Visibilità & Prenotazioni su Airbnb e Booking.com | HostMetric",
+    description: "Aumenta la visibilità e le opportunità di prenotazione su Airbnb, Booking.com e nei canali di affitto breve con analisi delle performance, della domanda e dei ricavi netti.",
+  },
+  es: {
+    title: "Más Visibilidad & Reservas en Airbnb y Booking.com | HostMetric",
+    description: "Aumenta la visibilidad y las oportunidades de reserva en Airbnb, Booking.com y canales de alquiler de corta estancia mediante análisis de canales, demanda e ingresos netos.",
+  },
+  pt: {
+    title: "Mais Visibilidade & Reservas no Airbnb e Booking.com | HostMetric",
+    description: "Aumente a visibilidade e as oportunidades de reserva no Airbnb, Booking.com e canais de alojamento de curta duração com análise de canais, procura e receitas líquidas.",
+  },
+  bg: {
+    title: "Повече видимост & резервации в Airbnb и Booking.com | HostMetric",
+    description: "Увеличете видимостта и възможностите за резервации в Airbnb, Booking.com и каналите за краткосрочни наеми чрез анализ на каналите, търсенето и нетните приходи.",
+  },
+  sr: {
+    title: "Veća vidljivost & više rezervacija na Airbnb-u i Booking.com-u | HostMetric",
+    description: "Povećajte vidljivost objekta i prilike za rezervacije na Airbnb-u, Booking.com-u i kanalima kratkoročnog najma analizom performansi kanala, potražnje i neto prihoda.",
+  },
+  tr: {
+    title: "Airbnb ve Booking.com'da Daha Fazla Görünürlük & Rezervasyon | HostMetric",
+    description: "Kanal performansı, talep konumlandırması ve net gelir analizleriyle Airbnb, Booking.com ve kısa süreli kiralama kanallarında görünürlüğü ve rezervasyon fırsatlarını artırın.",
+  },
+  pl: {
+    title: "Większa Widoczność & Więcej Rezerwacji Airbnb i Booking.com | HostMetric",
+    description: "Zwiększ widoczność obiektu i szanse na rezerwacje w Airbnb, Booking.com i kanałach najmu krótkoterminowego dzięki analizie kanałów, popytu i przychodów netto.",
+  },
+  ru: {
+    title: "Больше видимости и бронирований на Airbnb и Booking.com | HostMetric",
+    description: "Увеличьте видимость объекта и возможности бронирования на Airbnb, Booking.com и каналах краткосрочной аренды благодаря анализу эффективности каналов, спроса и чистого дохода.",
+  },
+};
+
+/* ==========================================
+   GREATER VISIBILITY PAGE SEO METADATA
+========================================== */
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const savedLocale = cookieStore.get("hostmetric_locale")?.value;
+
+  let currentLocale: Locale = defaultLocale;
+
+  if (savedLocale && isSupportedLocale(savedLocale)) {
+    currentLocale = savedLocale;
+  }
+
+  const seo = greaterVisibilityPageSeo[currentLocale];
+  const localizedGreaterVisibilityPath = getLocalizedPath(
+    "/solutions/greater-visibility",
+    currentLocale
+  );
+
+  return {
+    title: seo.title,
+    description: seo.description,
+    alternates: getLocalizedAlternates(
+      "/solutions/greater-visibility",
+      currentLocale
+    ),
+    openGraph: {
+      type: "website",
+      url: localizedGreaterVisibilityPath,
+      siteName: "HostMetric",
+      title: seo.title,
+      description: seo.description,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.title,
+      description: seo.description,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
 
 export default async function GreaterVisibilityPage() {
@@ -56,6 +203,54 @@ export default async function GreaterVisibilityPage() {
 
 
   /* =========================================================
+     LOCALE-AWARE PUBLIC ROUTES
+  ========================================================= */
+
+  const homePath =
+    getLocalizedPath(
+      "/",
+      currentLocale
+    );
+
+
+  /* ==========================================
+     STRUCTURED DATA
+  ========================================== */
+
+  const webPageSchema =
+    getWebPageSchema({
+      name:
+        greaterVisibility.title,
+      description:
+        greaterVisibility.description,
+      pathname:
+        "/solutions/greater-visibility",
+      locale:
+        currentLocale,
+    });
+
+  const breadcrumbSchema =
+    getBreadcrumbSchema({
+      items: [
+        {
+          name:
+            "HostMetric",
+          pathname:
+            "/",
+        },
+        {
+          name:
+            greaterVisibility.title,
+          pathname:
+            "/solutions/greater-visibility",
+        },
+      ],
+      locale:
+        currentLocale,
+    });
+
+
+  /* =========================================================
      PAGE
   ========================================================= */
 
@@ -66,6 +261,27 @@ export default async function GreaterVisibilityPage() {
         overflow-x-hidden
       "
     >
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              webPageSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              breadcrumbSchema
+            ),
+        }}
+      />
+
 
       {/* =====================================================
           GREATER VISIBILITY HERO / CONTENT SECTION
@@ -130,7 +346,7 @@ export default async function GreaterVisibilityPage() {
           ================================================ */}
 
           <Link
-            href="/"
+            href={homePath}
             className="
               inline-flex
               items-center

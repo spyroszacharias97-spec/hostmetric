@@ -15,6 +15,10 @@ import {
   type Locale,
 } from "@/i18n/config";
 
+import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
 
 export default async function Performance() {
 
@@ -59,6 +63,29 @@ export default async function Performance() {
 
   const performance =
     dictionary.performance;
+
+
+  /* ==========================================
+     LOCALIZED PERFORMANCE ROUTES
+  ========================================== */
+
+  const guestResponsePath =
+    getLocalizedPath(
+      "/performance/guest-response",
+      currentLocale
+    );
+
+  const platformNetworkPath =
+    getLocalizedPath(
+      "/performance/platform-network",
+      currentLocale
+    );
+
+  const pricingEnginePath =
+    getLocalizedPath(
+      "/performance/pricing-engine",
+      currentLocale
+    );
 
 
   return (
@@ -160,7 +187,7 @@ export default async function Performance() {
           ====================================== */}
 
           <Link
-            href="/performance/guest-response"
+            href={guestResponsePath}
             className="
               group
               cursor-pointer
@@ -278,7 +305,7 @@ export default async function Performance() {
           ====================================== */}
 
           <Link
-            href="/performance/platform-network"
+            href={platformNetworkPath}
             className="
               group
               cursor-pointer
@@ -396,7 +423,7 @@ export default async function Performance() {
           ====================================== */}
 
           <Link
-            href="/performance/pricing-engine"
+            href={pricingEnginePath}
             className="
               group
               cursor-pointer

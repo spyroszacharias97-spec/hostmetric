@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 
@@ -12,11 +13,235 @@ import {
 } from "@/i18n/config";
 
 import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
+  getLocalizedAlternates,
+} from "@/seo/metadata";
+
+import {
+  getBreadcrumbSchema,
+  getWebPageSchema,
+  serializeJsonLd,
+} from "@/seo/schema";
+
+import {
   Clock3,
   MessagesSquare,
   HeartHandshake,
   Star,
 } from "lucide-react";
+
+
+/* ==========================================
+   FINAL SEO PASS NOTES
+
+   This Guest Response page has now completed:
+   - SEO title + meta description
+   - Canonical + hreflang + x-default
+   - Open Graph + Twitter
+   - Robots index/follow
+   - Heading and internal-link review
+   - Conversion CTA review
+
+   Primary intent:
+   - Guest communication
+   - Fast guest response
+   - Guest experience
+   - Better guest reviews
+
+   Supporting platform terms:
+   - Airbnb
+   - Booking.com
+
+   Related long-tail phrases that do not belong
+   naturally on this commercial insight page will
+   be assigned to Guides / Blog in the final
+   keyword coverage map.
+
+   Do NOT repeat these items in a later pass.
+========================================== */
+
+
+/* ==========================================
+   GUEST RESPONSE PAGE SEO CONTENT
+========================================== */
+
+const guestResponsePageSeo: Record<
+  Locale,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  el: {
+    title:
+      "Επικοινωνία Επισκεπτών Airbnb & Booking.com | HostMetric",
+    description:
+      "Γρήγορη και φυσική επικοινωνία επισκεπτών για Airbnb, Booking.com και βραχυχρόνιες μισθώσεις. Καλύτερη εξυπηρέτηση, άμεση ανταπόκριση και ισχυρότερες αξιολογήσεις.",
+  },
+
+  en: {
+    title:
+      "Airbnb & Booking.com Guest Communication | HostMetric",
+    description:
+      "Fast, natural guest communication for Airbnb, Booking.com and short-term rentals. Improve response times, guest experience, issue handling and guest reviews.",
+  },
+
+  de: {
+    title:
+      "Gästekommunikation für Airbnb & Booking.com | HostMetric",
+    description:
+      "Schnelle, natürliche Gästekommunikation für Airbnb, Booking.com und Kurzzeitvermietungen. Verbessern Sie Reaktionszeiten, Gästeerlebnis, Problemlösung und Bewertungen.",
+  },
+
+  fr: {
+    title:
+      "Communication Voyageurs Airbnb & Booking.com | HostMetric",
+    description:
+      "Communication rapide et naturelle avec les voyageurs sur Airbnb, Booking.com et en location courte durée pour améliorer les délais de réponse, l’expérience client et les avis.",
+  },
+
+  it: {
+    title:
+      "Comunicazione Ospiti Airbnb & Booking.com | HostMetric",
+    description:
+      "Comunicazione rapida e naturale con gli ospiti su Airbnb, Booking.com e negli affitti brevi per migliorare tempi di risposta, esperienza, gestione dei problemi e recensioni.",
+  },
+
+  es: {
+    title:
+      "Comunicación con Huéspedes Airbnb y Booking.com | HostMetric",
+    description:
+      "Comunicación rápida y natural con huéspedes de Airbnb, Booking.com y alquileres de corta estancia para mejorar tiempos de respuesta, experiencia, incidencias y reseñas.",
+  },
+
+  pt: {
+    title:
+      "Comunicação com Hóspedes Airbnb e Booking.com | HostMetric",
+    description:
+      "Comunicação rápida e natural com hóspedes no Airbnb, Booking.com e alojamento de curta duração para melhorar tempos de resposta, experiência, resolução de problemas e avaliações.",
+  },
+
+  bg: {
+    title:
+      "Комуникация с гости в Airbnb и Booking.com | HostMetric",
+    description:
+      "Бърза и естествена комуникация с гости в Airbnb, Booking.com и краткосрочни наеми за по-добро време за отговор, обслужване, решаване на проблеми и оценки.",
+  },
+
+  sr: {
+    title:
+      "Komunikacija sa gostima na Airbnb-u i Booking.com-u | HostMetric",
+    description:
+      "Brza i prirodna komunikacija sa gostima na Airbnb-u, Booking.com-u i u kratkoročnom najmu za bolje vreme odgovora, iskustvo gostiju, rešavanje problema i recenzije.",
+  },
+
+  tr: {
+    title:
+      "Airbnb & Booking.com Misafir İletişimi | HostMetric",
+    description:
+      "Airbnb, Booking.com ve kısa süreli kiralamalarda hızlı ve doğal misafir iletişimiyle yanıt süresini, misafir deneyimini, sorun çözümünü ve değerlendirmeleri geliştirin.",
+  },
+
+  pl: {
+    title:
+      "Komunikacja z Gośćmi Airbnb i Booking.com | HostMetric",
+    description:
+      "Szybka i naturalna komunikacja z gośćmi Airbnb, Booking.com oraz najmu krótkoterminowego poprawia czas odpowiedzi, doświadczenie gości, obsługę problemów i opinie.",
+  },
+
+  ru: {
+    title:
+      "Общение с гостями Airbnb и Booking.com | HostMetric",
+    description:
+      "Быстрое и естественное общение с гостями Airbnb, Booking.com и краткосрочной аренды. Улучшайте скорость ответов, впечатления гостей, решение проблем и отзывы.",
+  },
+};
+
+
+/* ==========================================
+   GUEST RESPONSE PAGE SEO METADATA
+========================================== */
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore =
+    await cookies();
+
+  const savedLocale =
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
+  let currentLocale: Locale =
+    defaultLocale;
+
+  if (
+    savedLocale &&
+    isSupportedLocale(
+      savedLocale
+    )
+  ) {
+    currentLocale =
+      savedLocale;
+  }
+
+
+  const seo =
+    guestResponsePageSeo[currentLocale];
+
+
+  const localizedGuestResponsePath =
+    getLocalizedPath(
+      "/performance/guest-response",
+      currentLocale
+    );
+
+
+  return {
+    title:
+      seo.title,
+
+    description:
+      seo.description,
+
+    alternates:
+      getLocalizedAlternates(
+        "/performance/guest-response",
+        currentLocale
+      ),
+
+    openGraph: {
+      type:
+        "website",
+      url:
+        localizedGuestResponsePath,
+      siteName:
+        "HostMetric",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    twitter: {
+      card:
+        "summary_large_image",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    robots: {
+      index:
+        true,
+      follow:
+        true,
+    },
+  };
+}
 
 
 export default async function GuestResponsePage() {
@@ -65,6 +290,64 @@ export default async function GuestResponsePage() {
 
 
   /* =========================================================
+     LOCALIZED ROUTES
+  ========================================================= */
+
+  const homePath =
+    getLocalizedPath(
+      "/",
+      currentLocale
+    );
+
+
+  const getStartedPath =
+    getLocalizedPath(
+      "/get-started",
+      currentLocale
+    );
+
+
+  /* ==========================================
+     STRUCTURED DATA
+  ========================================== */
+
+  const schemaPageName =
+    `${guestResponse.titleLine1} ${guestResponse.titleLine2}`;
+
+  const webPageSchema =
+    getWebPageSchema({
+      name:
+        schemaPageName,
+      description:
+        guestResponse.description,
+      pathname:
+        "/performance/guest-response",
+      locale:
+        currentLocale,
+    });
+
+  const breadcrumbSchema =
+    getBreadcrumbSchema({
+      items: [
+        {
+          name:
+            "HostMetric",
+          pathname:
+            "/",
+        },
+        {
+          name:
+            schemaPageName,
+          pathname:
+            "/performance/guest-response",
+        },
+      ],
+      locale:
+        currentLocale,
+    });
+
+
+  /* =========================================================
      PAGE
   ========================================================= */
 
@@ -81,6 +364,27 @@ export default async function GuestResponsePage() {
         text-slate-950
       "
     >
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              webPageSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              breadcrumbSchema
+            ),
+        }}
+      />
+
 
       {/* =====================================================
           ANIMATED BACKGROUND WAVE
@@ -115,7 +419,7 @@ export default async function GuestResponsePage() {
         ==================================================== */}
 
         <Link
-          href="/"
+          href={homePath}
           className="
             inline-flex
             items-center
@@ -560,7 +864,7 @@ export default async function GuestResponsePage() {
           ================================================== */}
 
           <Link
-            href="/get-started"
+            href={getStartedPath}
             className="
               mt-8
               inline-flex

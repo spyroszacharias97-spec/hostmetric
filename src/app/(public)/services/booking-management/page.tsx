@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 
@@ -8,6 +9,236 @@ import {
   isSupportedLocale,
   type Locale,
 } from "@/i18n/config";
+
+import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
+  getLocalizedAlternates,
+} from "@/seo/metadata";
+
+import {
+  getBreadcrumbSchema,
+  getServiceSchema,
+  serializeJsonLd,
+} from "@/seo/schema";
+
+
+/* ==========================================
+   FINAL SEO PASS NOTES
+
+   This Booking Management page has now completed:
+   - SEO title + meta description
+   - Canonical + hreflang + x-default
+   - Open Graph + Twitter
+   - Robots index/follow
+   - Heading / internal-link / conversion review
+
+   Primary intent:
+   - Booking.com management
+   - Airbnb booking management
+   - Reservation management
+   - Multi-channel booking coordination
+
+   Supporting concepts already represented by
+   the visible page:
+   - Calendar synchronization
+   - Availability management
+   - Length-of-stay controls
+   - Gap-night management
+   - Booking pace
+   - Multi-channel coordination
+
+   Booking.com receives intentionally strong
+   visibility on this page. Airbnb remains a
+   co-important platform term, while broader
+   Property Management is reserved primarily
+   for broader commercial pages.
+
+   Remaining long-tail booking / owner questions
+   will be assigned to Guides / Blog in the final
+   keyword coverage map.
+
+   Do NOT repeat these items in a later pass.
+========================================== */
+
+
+/* ==========================================
+   BOOKING MANAGEMENT PAGE SEO CONTENT
+========================================== */
+
+const bookingManagementPageSeo: Record<
+  Locale,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  el: {
+    title:
+      "Διαχείριση Κρατήσεων Booking.com & Airbnb | HostMetric",
+    description:
+      "Επαγγελματική διαχείριση κρατήσεων Booking.com και Airbnb με συγχρονισμό ημερολογίων, διαθεσιμότητας και πολλαπλών καναλιών για περισσότερες κρατήσεις και καλύτερη πληρότητα.",
+  },
+
+  en: {
+    title:
+      "Booking.com & Airbnb Booking Management | HostMetric",
+    description:
+      "Professional Booking.com and Airbnb booking management with synchronized calendars, availability and multi-channel coordination to increase bookings and improve occupancy.",
+  },
+
+  de: {
+    title:
+      "Booking.com & Airbnb Buchungsmanagement | HostMetric",
+    description:
+      "Professionelles Buchungsmanagement für Booking.com und Airbnb mit synchronisierten Kalendern, Verfügbarkeiten und mehreren Kanälen für mehr Buchungen und bessere Auslastung.",
+  },
+
+  fr: {
+    title:
+      "Gestion des Réservations Booking.com & Airbnb | HostMetric",
+    description:
+      "Gestion professionnelle des réservations Booking.com et Airbnb avec synchronisation des calendriers, disponibilités et canaux pour augmenter les réservations et le taux d’occupation.",
+  },
+
+  it: {
+    title:
+      "Gestione Prenotazioni Booking.com & Airbnb | HostMetric",
+    description:
+      "Gestione professionale delle prenotazioni Booking.com e Airbnb con calendari, disponibilità e canali sincronizzati per aumentare le prenotazioni e migliorare l’occupazione.",
+  },
+
+  es: {
+    title:
+      "Gestión de Reservas Booking.com & Airbnb | HostMetric",
+    description:
+      "Gestión profesional de reservas de Booking.com y Airbnb con calendarios, disponibilidad y canales sincronizados para aumentar las reservas y mejorar la ocupación.",
+  },
+
+  pt: {
+    title:
+      "Gestão de Reservas Booking.com & Airbnb | HostMetric",
+    description:
+      "Gestão profissional de reservas Booking.com e Airbnb com calendários, disponibilidade e canais sincronizados para aumentar as reservas e melhorar a ocupação.",
+  },
+
+  bg: {
+    title:
+      "Управление на резервации Booking.com & Airbnb | HostMetric",
+    description:
+      "Професионално управление на резервации в Booking.com и Airbnb със синхронизирани календари, наличности и канали за повече резервации и по-добра заетост.",
+  },
+
+  sr: {
+    title:
+      "Upravljanje rezervacijama Booking.com & Airbnb | HostMetric",
+    description:
+      "Profesionalno upravljanje rezervacijama na Booking.com-u i Airbnb-u uz sinhronizovane kalendare, raspoloživost i kanale za više rezervacija i bolju popunjenost.",
+  },
+
+  tr: {
+    title:
+      "Booking.com & Airbnb Rezervasyon Yönetimi | HostMetric",
+    description:
+      "Booking.com ve Airbnb için senkronize takvimler, müsaitlik ve çok kanallı koordinasyonla profesyonel rezervasyon yönetimi; daha fazla rezervasyon ve daha yüksek doluluk.",
+  },
+
+  pl: {
+    title:
+      "Zarządzanie Rezerwacjami Booking.com & Airbnb | HostMetric",
+    description:
+      "Profesjonalne zarządzanie rezerwacjami Booking.com i Airbnb z synchronizacją kalendarzy, dostępności i kanałów, aby zwiększać liczbę rezerwacji i obłożenie.",
+  },
+
+  ru: {
+    title:
+      "Управление бронированиями Booking.com и Airbnb | HostMetric",
+    description:
+      "Профессиональное управление бронированиями Booking.com и Airbnb с синхронизацией календарей, доступности и каналов для увеличения числа бронирований и заполняемости.",
+  },
+};
+
+
+/* ==========================================
+   BOOKING MANAGEMENT PAGE SEO METADATA
+========================================== */
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore =
+    await cookies();
+
+  const savedLocale =
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
+  let currentLocale: Locale =
+    defaultLocale;
+
+  if (
+    savedLocale &&
+    isSupportedLocale(
+      savedLocale
+    )
+  ) {
+    currentLocale =
+      savedLocale;
+  }
+
+  const seo =
+    bookingManagementPageSeo[currentLocale];
+
+  const localizedBookingManagementPath =
+    getLocalizedPath(
+      "/services/booking-management",
+      currentLocale
+    );
+
+  return {
+    title:
+      seo.title,
+
+    description:
+      seo.description,
+
+    alternates:
+      getLocalizedAlternates(
+        "/services/booking-management",
+        currentLocale
+      ),
+
+    openGraph: {
+      type:
+        "website",
+      url:
+        localizedBookingManagementPath,
+      siteName:
+        "HostMetric",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    twitter: {
+      card:
+        "summary_large_image",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    robots: {
+      index:
+        true,
+      follow:
+        true,
+    },
+  };
+}
 
 
 export default async function BookingManagementPage() {
@@ -56,6 +287,64 @@ export default async function BookingManagementPage() {
 
 
   /* =========================================================
+     LOCALIZED ROUTES
+  ========================================================= */
+
+  const homePath =
+    getLocalizedPath(
+      "/",
+      currentLocale
+    );
+
+
+  const getStartedPath =
+    getLocalizedPath(
+      "/get-started",
+      currentLocale
+    );
+
+
+  /* ==========================================
+     STRUCTURED DATA
+  ========================================== */
+
+  const schemaPageName =
+    `${bookingManagement.titleLine1} ${bookingManagement.titleLine2}`;
+
+  const serviceSchema =
+    getServiceSchema({
+      name:
+        schemaPageName,
+      description:
+        bookingManagement.description,
+      pathname:
+        "/services/booking-management",
+      locale:
+        currentLocale,
+    });
+
+  const breadcrumbSchema =
+    getBreadcrumbSchema({
+      items: [
+        {
+          name:
+            "HostMetric",
+          pathname:
+            "/",
+        },
+        {
+          name:
+            schemaPageName,
+          pathname:
+            "/services/booking-management",
+        },
+      ],
+      locale:
+        currentLocale,
+    });
+
+
+  /* =========================================================
      PAGE
   ========================================================= */
 
@@ -75,6 +364,27 @@ export default async function BookingManagementPage() {
           "linear-gradient(rgba(3, 37, 65, 0.58), rgba(3, 37, 65, 0.68)), url('/services/booking-management.jpg')",
       }}
     >
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              serviceSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              breadcrumbSchema
+            ),
+        }}
+      />
+
 
       {/* =====================================================
           PAGE CONTAINER
@@ -100,7 +410,7 @@ export default async function BookingManagementPage() {
         ==================================================== */}
 
         <Link
-          href="/"
+          href={homePath}
           className="
             inline-flex
             items-center
@@ -697,7 +1007,7 @@ export default async function BookingManagementPage() {
           ================================================== */}
 
           <Link
-            href="/get-started"
+            href={getStartedPath}
             className="
               mt-8
               inline-flex

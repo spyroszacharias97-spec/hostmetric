@@ -10,6 +10,11 @@ import {
 
 import "./globals.css";
 
+
+/* ==========================================
+   FONTS
+========================================== */
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -20,29 +25,60 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+
+/* ==========================================
+   GLOBAL METADATA FOUNDATION
+
+   metadataBase gives Next.js the canonical
+   absolute origin for URL-based metadata.
+
+   Page-specific canonical URLs, hreflang,
+   Open Graph URLs and other alternates will
+   be added in the next SEO steps.
+========================================== */
+
 export const metadata: Metadata = {
-  title: "HostMetric | Smarter Hosting. Better Results.",
+  metadataBase:
+    new URL(
+      "https://hostmetric.gr"
+    ),
+
+  title:
+    "HostMetric | Smarter Hosting. Better Results.",
+
   description:
     "Professional short-term rental management with smart pricing, guest communication, multi-platform distribution and performance optimization.",
 };
+
+
+/* ==========================================
+   ROOT LAYOUT
+========================================== */
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
+  const cookieStore =
+    await cookies();
 
   const savedLocale =
-    cookieStore.get("hostmetric_locale")?.value;
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
 
-  let currentLocale: Locale = defaultLocale;
+  let currentLocale: Locale =
+    defaultLocale;
 
   if (
     savedLocale &&
-    isSupportedLocale(savedLocale)
+    isSupportedLocale(
+      savedLocale
+    )
   ) {
-    currentLocale = savedLocale;
+    currentLocale =
+      savedLocale;
   }
 
   return (
@@ -50,7 +86,11 @@ export default async function RootLayout({
       lang={currentLocale}
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full">
+      <body
+        className="
+          min-h-full
+        "
+      >
         {children}
       </body>
     </html>

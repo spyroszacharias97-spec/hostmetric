@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 
@@ -10,6 +11,237 @@ import {
   isSupportedLocale,
   type Locale,
 } from "@/i18n/config";
+
+import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
+  getLocalizedAlternates,
+} from "@/seo/metadata";
+
+import {
+  getBreadcrumbSchema,
+  getServiceSchema,
+  serializeJsonLd,
+} from "@/seo/schema";
+
+
+/* ==========================================
+   FINAL SEO PASS NOTES
+
+   This Smart Pricing service page has now completed:
+   - SEO title + meta description
+   - Canonical + hreflang + x-default
+   - Open Graph + Twitter
+   - Robots index/follow
+   - Heading / internal-link / conversion review
+
+   Primary commercial intent:
+   - Smart pricing
+   - Dynamic pricing
+   - Short-term rental pricing optimization
+   - Airbnb & Booking.com pricing management
+
+   Supporting concepts already represented by
+   the visible page:
+   - ADR
+   - RevPAR
+   - Booking pace
+   - Lead time
+   - Price elasticity
+   - Competitive positioning
+   - Dynamic revenue management
+
+   This SERVICE page targets commercial pricing
+   management intent. Pricing Engine remains the
+   data / optimization-engine insight, while AI
+   Pricing remains focused on AI-driven pricing
+   technology, reducing keyword cannibalization.
+
+   Remaining long-tail pricing and owner questions
+   will be assigned to Guides / Blog in the final
+   keyword coverage map.
+
+   Do NOT repeat these items in a later pass.
+========================================== */
+
+
+/* ==========================================
+   SMART PRICING PAGE SEO CONTENT
+========================================== */
+
+const smartPricingPageSeo: Record<
+  Locale,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  el: {
+    title:
+      "Έξυπνη & Δυναμική Τιμολόγηση Airbnb και Booking.com | HostMetric",
+    description:
+      "Έξυπνη και δυναμική τιμολόγηση για Airbnb, Booking.com και βραχυχρόνιες μισθώσεις με ADR, RevPAR, ρυθμό κρατήσεων και δεδομένα αγοράς για καλύτερες τιμές, πληρότητα και έσοδα.",
+  },
+
+  en: {
+    title:
+      "Smart & Dynamic Pricing for Airbnb and Booking.com | HostMetric",
+    description:
+      "Smart and dynamic pricing for Airbnb, Booking.com and short-term rentals using ADR, RevPAR, booking pace and market data to optimize rates, occupancy and rental revenue.",
+  },
+
+  de: {
+    title:
+      "Smart & Dynamic Pricing für Airbnb und Booking.com | HostMetric",
+    description:
+      "Intelligente und dynamische Preisgestaltung für Airbnb, Booking.com und Kurzzeitvermietungen mit ADR, RevPAR, Buchungstempo und Marktdaten zur Optimierung von Preisen, Auslastung und Einnahmen.",
+  },
+
+  fr: {
+    title:
+      "Tarification Intelligente & Dynamique Airbnb et Booking.com | HostMetric",
+    description:
+      "Tarification intelligente et dynamique pour Airbnb, Booking.com et la location courte durée avec ADR, RevPAR, rythme des réservations et données de marché pour optimiser tarifs, occupation et revenus.",
+  },
+
+  it: {
+    title:
+      "Prezzi Intelligenti & Dinamici Airbnb e Booking.com | HostMetric",
+    description:
+      "Prezzi intelligenti e dinamici per Airbnb, Booking.com e affitti brevi con ADR, RevPAR, ritmo delle prenotazioni e dati di mercato per ottimizzare tariffe, occupazione e ricavi.",
+  },
+
+  es: {
+    title:
+      "Precios Inteligentes & Dinámicos Airbnb y Booking.com | HostMetric",
+    description:
+      "Precios inteligentes y dinámicos para Airbnb, Booking.com y alquileres de corta estancia con ADR, RevPAR, ritmo de reservas y datos de mercado para optimizar tarifas, ocupación e ingresos.",
+  },
+
+  pt: {
+    title:
+      "Preços Inteligentes & Dinâmicos Airbnb e Booking.com | HostMetric",
+    description:
+      "Preços inteligentes e dinâmicos para Airbnb, Booking.com e alojamento de curta duração com ADR, RevPAR, ritmo de reservas e dados de mercado para otimizar tarifas, ocupação e receitas.",
+  },
+
+  bg: {
+    title:
+      "Интелигентно & динамично ценообразуване Airbnb и Booking.com | HostMetric",
+    description:
+      "Интелигентно и динамично ценообразуване за Airbnb, Booking.com и краткосрочни наеми чрез ADR, RevPAR, темп на резервациите и пазарни данни за по-добри цени, заетост и приходи.",
+  },
+
+  sr: {
+    title:
+      "Pametno & dinamičko formiranje cena Airbnb i Booking.com | HostMetric",
+    description:
+      "Pametno i dinamičko formiranje cena za Airbnb, Booking.com i kratkoročni najam uz ADR, RevPAR, tempo rezervacija i tržišne podatke za bolje cene, popunjenost i prihode.",
+  },
+
+  tr: {
+    title:
+      "Airbnb ve Booking.com Akıllı & Dinamik Fiyatlandırma | HostMetric",
+    description:
+      "Airbnb, Booking.com ve kısa süreli kiralamalar için ADR, RevPAR, rezervasyon hızı ve pazar verileriyle akıllı ve dinamik fiyatlandırma; fiyatları, doluluğu ve geliri optimize edin.",
+  },
+
+  pl: {
+    title:
+      "Inteligentne & Dynamiczne Ceny Airbnb i Booking.com | HostMetric",
+    description:
+      "Inteligentne i dynamiczne ceny dla Airbnb, Booking.com i najmu krótkoterminowego z wykorzystaniem ADR, RevPAR, tempa rezerwacji i danych rynkowych dla lepszych stawek, obłożenia i przychodów.",
+  },
+
+  ru: {
+    title:
+      "Умное и динамическое ценообразование Airbnb и Booking.com | HostMetric",
+    description:
+      "Умное и динамическое ценообразование для Airbnb, Booking.com и краткосрочной аренды с использованием ADR, RevPAR, темпа бронирований и рыночных данных для оптимизации цен, заполняемости и дохода.",
+  },
+};
+
+
+/* ==========================================
+   SMART PRICING PAGE SEO METADATA
+========================================== */
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore =
+    await cookies();
+
+  const savedLocale =
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
+  let currentLocale: Locale =
+    defaultLocale;
+
+  if (
+    savedLocale &&
+    isSupportedLocale(
+      savedLocale
+    )
+  ) {
+    currentLocale =
+      savedLocale;
+  }
+
+  const seo =
+    smartPricingPageSeo[currentLocale];
+
+  const localizedSmartPricingPath =
+    getLocalizedPath(
+      "/services/smart-pricing",
+      currentLocale
+    );
+
+  return {
+    title:
+      seo.title,
+
+    description:
+      seo.description,
+
+    alternates:
+      getLocalizedAlternates(
+        "/services/smart-pricing",
+        currentLocale
+      ),
+
+    openGraph: {
+      type:
+        "website",
+      url:
+        localizedSmartPricingPath,
+      siteName:
+        "HostMetric",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    twitter: {
+      card:
+        "summary_large_image",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    robots: {
+      index:
+        true,
+      follow:
+        true,
+    },
+  };
+}
 
 
 export default async function SmartPricingPage() {
@@ -58,6 +290,64 @@ export default async function SmartPricingPage() {
 
 
   /* =========================================================
+     LOCALIZED ROUTES
+  ========================================================= */
+
+  const homePath =
+    getLocalizedPath(
+      "/",
+      currentLocale
+    );
+
+
+  const getStartedPath =
+    getLocalizedPath(
+      "/get-started",
+      currentLocale
+    );
+
+
+  /* ==========================================
+     STRUCTURED DATA
+  ========================================== */
+
+  const schemaPageName =
+    `${smartPricing.titleLine1} ${smartPricing.titleLine2}`;
+
+  const serviceSchema =
+    getServiceSchema({
+      name:
+        schemaPageName,
+      description:
+        smartPricing.description,
+      pathname:
+        "/services/smart-pricing",
+      locale:
+        currentLocale,
+    });
+
+  const breadcrumbSchema =
+    getBreadcrumbSchema({
+      items: [
+        {
+          name:
+            "HostMetric",
+          pathname:
+            "/",
+        },
+        {
+          name:
+            schemaPageName,
+          pathname:
+            "/services/smart-pricing",
+        },
+      ],
+      locale:
+        currentLocale,
+    });
+
+
+  /* =========================================================
      RESPONSIVE SMART PRICING PAGE
 
      Mobile-first presentation:
@@ -86,6 +376,27 @@ export default async function SmartPricingPage() {
       }}
     >
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              serviceSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              breadcrumbSchema
+            ),
+        }}
+      />
+
+
       <div
         className="
           mx-auto
@@ -104,7 +415,7 @@ export default async function SmartPricingPage() {
         ========================================== */}
 
         <Link
-          href="/"
+          href={homePath}
           className="
             inline-flex
             items-center
@@ -645,7 +956,7 @@ export default async function SmartPricingPage() {
           ========================================== */}
 
           <Link
-            href="/get-started"
+            href={getStartedPath}
             className="
               mt-8
               inline-flex

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 
@@ -8,6 +9,232 @@ import {
   isSupportedLocale,
   type Locale,
 } from "@/i18n/config";
+
+import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
+  getLocalizedAlternates,
+} from "@/seo/metadata";
+
+import {
+  getBreadcrumbSchema,
+  getWebPageSchema,
+  serializeJsonLd,
+} from "@/seo/schema";
+
+
+/* ==========================================
+   FINAL SEO PASS NOTES
+
+   This Revenue page has now completed:
+   - SEO title + meta description
+   - Canonical + hreflang + x-default
+   - Open Graph + Twitter
+   - Robots index/follow
+   - Heading and internal-link review
+
+   Primary intent:
+   - Maximize short-term rental revenue
+   - Increase rental profits
+   - Revenue optimization
+   - Better property performance
+
+   Supporting concepts:
+   - ADR
+   - RevPAR
+   - Booking pace
+   - Demand forecasting
+
+   Airbnb and Booking.com are supporting platform
+   terms. Broader and lower-priority keyword phrases
+   are intentionally reserved for Guides / Blog so
+   the site can cover the full keyword universe
+   without keyword stuffing or cannibalization.
+
+   Do NOT repeat these items in a later pass.
+========================================== */
+
+
+/* ==========================================
+   REVENUE PAGE SEO CONTENT
+========================================== */
+
+const revenuePageSeo: Record<
+  Locale,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  el: {
+    title:
+      "Μεγιστοποίηση Εσόδων & Κερδών Βραχυχρόνιας Μίσθωσης | HostMetric",
+    description:
+      "Αυξήστε τα έσοδα και την κερδοφορία από Airbnb, Booking.com και βραχυχρόνιες μισθώσεις με ανάλυση ADR, RevPAR, ρυθμού κρατήσεων και πρόβλεψης ζήτησης.",
+  },
+
+  en: {
+    title:
+      "Maximize Short-Term Rental Revenue & Profits | HostMetric",
+    description:
+      "Maximize rental revenue and profitability across Airbnb, Booking.com and short-term rentals using ADR, RevPAR, booking pace and demand forecasting insights.",
+  },
+
+  de: {
+    title:
+      "Umsatz & Gewinn bei Kurzzeitvermietungen maximieren | HostMetric",
+    description:
+      "Maximieren Sie Mieteinnahmen und Rentabilität bei Airbnb, Booking.com und Kurzzeitvermietungen mit ADR, RevPAR, Buchungstempo und Nachfrageprognosen.",
+  },
+
+  fr: {
+    title:
+      "Maximiser les Revenus & Profits de Location Courte Durée | HostMetric",
+    description:
+      "Maximisez les revenus et la rentabilité sur Airbnb, Booking.com et en location courte durée grâce à l’ADR, au RevPAR, au rythme des réservations et aux prévisions de demande.",
+  },
+
+  it: {
+    title:
+      "Massimizzare Ricavi & Profitti degli Affitti Brevi | HostMetric",
+    description:
+      "Massimizza ricavi e redditività su Airbnb, Booking.com e affitti brevi attraverso ADR, RevPAR, ritmo delle prenotazioni e previsione della domanda.",
+  },
+
+  es: {
+    title:
+      "Maximizar Ingresos & Beneficios del Alquiler Vacacional | HostMetric",
+    description:
+      "Maximiza ingresos y rentabilidad en Airbnb, Booking.com y alquileres de corta estancia mediante ADR, RevPAR, ritmo de reservas y previsión de demanda.",
+  },
+
+  pt: {
+    title:
+      "Maximizar Receitas & Lucros do Alojamento de Curta Duração | HostMetric",
+    description:
+      "Maximize receitas e rentabilidade no Airbnb, Booking.com e alojamento de curta duração através de ADR, RevPAR, ritmo de reservas e previsão da procura.",
+  },
+
+  bg: {
+    title:
+      "Максимизиране на приходи & печалба от краткосрочни наеми | HostMetric",
+    description:
+      "Максимизирайте приходите и рентабилността от Airbnb, Booking.com и краткосрочни наеми чрез ADR, RevPAR, темп на резервациите и прогнозиране на търсенето.",
+  },
+
+  sr: {
+    title:
+      "Maksimizujte prihode & profit od kratkoročnog najma | HostMetric",
+    description:
+      "Maksimizujte prihode i profitabilnost na Airbnb-u, Booking.com-u i u kratkoročnom najmu uz ADR, RevPAR, tempo rezervacija i prognoziranje potražnje.",
+  },
+
+  tr: {
+    title:
+      "Kısa Süreli Kiralama Geliri & Kârını Maksimize Edin | HostMetric",
+    description:
+      "ADR, RevPAR, rezervasyon hızı ve talep tahminiyle Airbnb, Booking.com ve kısa süreli kiralamalarda geliri ve kârlılığı maksimize edin.",
+  },
+
+  pl: {
+    title:
+      "Maksymalizuj Przychody & Zyski z Najmu Krótkoterminowego | HostMetric",
+    description:
+      "Maksymalizuj przychody i rentowność na Airbnb, Booking.com oraz w najmie krótkoterminowym dzięki ADR, RevPAR, tempu rezerwacji i prognozowaniu popytu.",
+  },
+
+  ru: {
+    title:
+      "Максимизация дохода и прибыли от краткосрочной аренды | HostMetric",
+    description:
+      "Увеличивайте доход и прибыльность на Airbnb, Booking.com и в краткосрочной аренде с помощью анализа ADR, RevPAR, темпа бронирований и прогнозирования спроса.",
+  },
+};
+
+
+/* ==========================================
+   REVENUE PAGE SEO METADATA
+========================================== */
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore =
+    await cookies();
+
+  const savedLocale =
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
+  let currentLocale: Locale =
+    defaultLocale;
+
+  if (
+    savedLocale &&
+    isSupportedLocale(
+      savedLocale
+    )
+  ) {
+    currentLocale =
+      savedLocale;
+  }
+
+
+  const seo =
+    revenuePageSeo[currentLocale];
+
+
+  const localizedRevenuePath =
+    getLocalizedPath(
+      "/insights/revenue",
+      currentLocale
+    );
+
+
+  return {
+    title:
+      seo.title,
+
+    description:
+      seo.description,
+
+    alternates:
+      getLocalizedAlternates(
+        "/insights/revenue",
+        currentLocale
+      ),
+
+    openGraph: {
+      type:
+        "website",
+      url:
+        localizedRevenuePath,
+      siteName:
+        "HostMetric",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    twitter: {
+      card:
+        "summary_large_image",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    robots: {
+      index:
+        true,
+      follow:
+        true,
+    },
+  };
+}
 
 
 export default async function RevenuePage() {
@@ -56,6 +283,54 @@ export default async function RevenuePage() {
 
 
   /* =========================================================
+     LOCALIZED ROUTES
+  ========================================================= */
+
+  const homePath =
+    getLocalizedPath(
+      "/",
+      currentLocale
+    );
+
+
+  /* ==========================================
+     STRUCTURED DATA
+  ========================================== */
+
+  const webPageSchema =
+    getWebPageSchema({
+      name:
+        revenue.title,
+      description:
+        revenue.description,
+      pathname:
+        "/insights/revenue",
+      locale:
+        currentLocale,
+    });
+
+  const breadcrumbSchema =
+    getBreadcrumbSchema({
+      items: [
+        {
+          name:
+            "HostMetric",
+          pathname:
+            "/",
+        },
+        {
+          name:
+            revenue.title,
+          pathname:
+            "/insights/revenue",
+        },
+      ],
+      locale:
+        currentLocale,
+    });
+
+
+  /* =========================================================
      PAGE
   ========================================================= */
 
@@ -75,6 +350,27 @@ export default async function RevenuePage() {
           "linear-gradient(rgba(2,6,23,0.82), rgba(2,6,23,0.82)), url('/insights/revenue.jpg')",
       }}
     >
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              webPageSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              breadcrumbSchema
+            ),
+        }}
+      />
+
 
       {/* =====================================================
           PAGE CONTAINER
@@ -100,7 +396,7 @@ export default async function RevenuePage() {
         ==================================================== */}
 
         <Link
-          href="/"
+          href={homePath}
           className="
             inline-flex
             items-center

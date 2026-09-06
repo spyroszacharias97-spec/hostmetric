@@ -470,10 +470,9 @@ export default async function PropertiesPage({
                     .join(", ");
 
                 return (
-                  <Link
+                  <div
                     key={property.id}
-                    href={`/admin/properties/${property.id}`}
-                    className="group block px-6 py-5 transition hover:bg-slate-50"
+                    className="group px-6 py-5 transition hover:bg-slate-50"
                   >
                     <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
 
@@ -537,14 +536,18 @@ export default async function PropertiesPage({
                             </p>
                           </div>
 
-                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition group-hover:bg-blue-600 group-hover:text-white">
+                          <Link
+                            href={`/admin/properties/${property.id}`}
+                            className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-black text-blue-600 transition hover:bg-blue-50 hover:text-blue-700"
+                          >
+                            Open Property
                             <ArrowRight size={18} />
-                          </div>
+                          </Link>
                         </div>
                       </div>
 
                     </div>
-                  </Link>
+                  </div>
                 );
               }
             )}

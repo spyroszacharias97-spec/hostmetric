@@ -1,13 +1,241 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 
 import { getDictionary } from "@/i18n/get-dictionary";
 
 import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
+  getLocalizedAlternates,
+} from "@/seo/metadata";
+
+import {
+  getBreadcrumbSchema,
+  getWebPageSchema,
+  serializeJsonLd,
+} from "@/seo/schema";
+
+import {
   defaultLocale,
   isSupportedLocale,
   type Locale,
 } from "@/i18n/config";
+
+
+/* ==========================================
+   FINAL SEO PASS NOTES
+
+   This Centralized Management service page has now completed:
+   - SEO title + meta description
+   - Canonical + hreflang + x-default
+   - Open Graph + Twitter
+   - Robots index/follow
+   - Heading / internal-link / crawlability review
+
+   Primary commercial intent:
+   - Centralized property management
+   - Centralized short-term rental management
+   - Airbnb & Booking.com management
+   - Booking and calendar performance management
+
+   Supporting concepts already represented by
+   the visible page:
+   - Occupancy rate
+   - Booking window
+   - Booking pace
+   - Calendar efficiency
+
+   This page focuses on centralized management
+   and performance visibility. Booking Management
+   remains focused on reservation operations and
+   channel coordination, reducing cannibalization.
+
+   Remaining long-tail centralized-management and
+   owner questions will be assigned to Guides /
+   Blog in the final keyword coverage map.
+
+   Do NOT repeat these items in a later pass.
+========================================== */
+
+
+/* ==========================================
+   CENTRALIZED MANAGEMENT PAGE SEO CONTENT
+========================================== */
+
+const centralizedManagementPageSeo: Record<
+  Locale,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  el: {
+    title:
+      "Κεντρική Διαχείριση Ακινήτων, Airbnb & Booking.com | HostMetric",
+    description:
+      "Κεντρική διαχείριση Airbnb, Booking.com και βραχυχρόνιων μισθώσεων με παρακολούθηση πληρότητας, ρυθμού κρατήσεων, booking window και αποδοτικότητας ημερολογίου.",
+  },
+
+  en: {
+    title:
+      "Centralized Property, Airbnb & Booking.com Management | HostMetric",
+    description:
+      "Centralize Airbnb, Booking.com and short-term rental management with visibility into occupancy, booking pace, booking windows and calendar efficiency.",
+  },
+
+  de: {
+    title:
+      "Zentrale Verwaltung von Immobilien, Airbnb & Booking.com | HostMetric",
+    description:
+      "Zentralisieren Sie die Verwaltung von Airbnb, Booking.com und Kurzzeitvermietungen mit Einblicken in Auslastung, Buchungstempo, Buchungsfenster und Kalendereffizienz.",
+  },
+
+  fr: {
+    title:
+      "Gestion Centralisée des Biens, Airbnb & Booking.com | HostMetric",
+    description:
+      "Centralisez la gestion Airbnb, Booking.com et des locations courte durée avec une vision du taux d’occupation, du rythme des réservations, des fenêtres de réservation et de l’efficacité du calendrier.",
+  },
+
+  it: {
+    title:
+      "Gestione Centralizzata di Proprietà, Airbnb & Booking.com | HostMetric",
+    description:
+      "Centralizza la gestione di Airbnb, Booking.com e affitti brevi con dati su occupazione, ritmo delle prenotazioni, finestre di prenotazione ed efficienza del calendario.",
+  },
+
+  es: {
+    title:
+      "Gestión Centralizada de Propiedades, Airbnb & Booking.com | HostMetric",
+    description:
+      "Centraliza la gestión de Airbnb, Booking.com y alquileres de corta estancia con visibilidad sobre ocupación, ritmo y ventana de reservas y eficiencia del calendario.",
+  },
+
+  pt: {
+    title:
+      "Gestão Centralizada de Imóveis, Airbnb & Booking.com | HostMetric",
+    description:
+      "Centralize a gestão de Airbnb, Booking.com e alojamento de curta duração com dados sobre ocupação, ritmo e janela de reservas e eficiência do calendário.",
+  },
+
+  bg: {
+    title:
+      "Централизирано управление на имоти, Airbnb & Booking.com | HostMetric",
+    description:
+      "Централизирайте управлението на Airbnb, Booking.com и краткосрочни наеми с информация за заетостта, темпа и прозореца на резервациите и ефективността на календара.",
+  },
+
+  sr: {
+    title:
+      "Centralizovano upravljanje objektima, Airbnb & Booking.com | HostMetric",
+    description:
+      "Centralizujte upravljanje Airbnb-om, Booking.com-om i kratkoročnim najmom uz pregled popunjenosti, tempa i perioda rezervacija i efikasnosti kalendara.",
+  },
+
+  tr: {
+    title:
+      "Merkezi Mülk, Airbnb & Booking.com Yönetimi | HostMetric",
+    description:
+      "Airbnb, Booking.com ve kısa süreli kiralama yönetimini doluluk, rezervasyon hızı, rezervasyon penceresi ve takvim verimliliği görünürlüğüyle merkezileştirin.",
+  },
+
+  pl: {
+    title:
+      "Centralne Zarządzanie Nieruchomościami, Airbnb & Booking.com | HostMetric",
+    description:
+      "Scentralizuj zarządzanie Airbnb, Booking.com i najmem krótkoterminowym z wglądem w obłożenie, tempo i okno rezerwacji oraz efektywność kalendarza.",
+  },
+
+  ru: {
+    title:
+      "Централизованное управление недвижимостью, Airbnb и Booking.com | HostMetric",
+    description:
+      "Централизуйте управление Airbnb, Booking.com и краткосрочной арендой с контролем заполняемости, темпа и окна бронирований, а также эффективности календаря.",
+  },
+};
+
+
+/* ==========================================
+   CENTRALIZED MANAGEMENT PAGE SEO METADATA
+========================================== */
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore =
+    await cookies();
+
+  const savedLocale =
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
+  let currentLocale: Locale =
+    defaultLocale;
+
+  if (
+    savedLocale &&
+    isSupportedLocale(
+      savedLocale
+    )
+  ) {
+    currentLocale =
+      savedLocale;
+  }
+
+  const seo =
+    centralizedManagementPageSeo[currentLocale];
+
+  const localizedCentralizedManagementPath =
+    getLocalizedPath(
+      "/solutions/centralized-management",
+      currentLocale
+    );
+
+  return {
+    title:
+      seo.title,
+
+    description:
+      seo.description,
+
+    alternates:
+      getLocalizedAlternates(
+        "/solutions/centralized-management",
+        currentLocale
+      ),
+
+    openGraph: {
+      type:
+        "website",
+      url:
+        localizedCentralizedManagementPath,
+      siteName:
+        "HostMetric",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    twitter: {
+      card:
+        "summary_large_image",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    robots: {
+      index:
+        true,
+      follow:
+        true,
+    },
+  };
+}
 
 
 export default async function CentralizedManagementPage() {
@@ -56,6 +284,54 @@ export default async function CentralizedManagementPage() {
 
 
   /* =========================================================
+     LOCALE-AWARE PUBLIC ROUTES
+  ========================================================= */
+
+  const homePath =
+    getLocalizedPath(
+      "/",
+      currentLocale
+    );
+
+
+  /* ==========================================
+     STRUCTURED DATA
+  ========================================== */
+
+  const webPageSchema =
+    getWebPageSchema({
+      name:
+        centralizedManagement.title,
+      description:
+        centralizedManagement.description,
+      pathname:
+        "/solutions/centralized-management",
+      locale:
+        currentLocale,
+    });
+
+  const breadcrumbSchema =
+    getBreadcrumbSchema({
+      items: [
+        {
+          name:
+            "HostMetric",
+          pathname:
+            "/",
+        },
+        {
+          name:
+            centralizedManagement.title,
+          pathname:
+            "/solutions/centralized-management",
+        },
+      ],
+      locale:
+        currentLocale,
+    });
+
+
+  /* =========================================================
      PAGE
   ========================================================= */
 
@@ -66,6 +342,27 @@ export default async function CentralizedManagementPage() {
         overflow-x-hidden
       "
     >
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              webPageSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              breadcrumbSchema
+            ),
+        }}
+      />
+
 
       {/* =====================================================
           CENTRALIZED MANAGEMENT HERO / CONTENT SECTION
@@ -127,7 +424,7 @@ export default async function CentralizedManagementPage() {
           ================================================ */}
 
           <Link
-            href="/"
+            href={homePath}
             className="
               inline-flex
               items-center

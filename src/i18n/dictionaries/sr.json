@@ -15,7 +15,7 @@
     "eyebrow": "Short-Term Rental Performance",
     "titleLine1": "Smarter Hosting",
     "titleLine2": "Better Results",
-    "description": "Smarter pricing, seamless guest communication and professional booking management — all designed to maximize your property's performance.",
+    "description": "Pametnije određivanje cena, besprekornu komunikaciju sa gostima i profesionalno upravljanje rezervacijama na Airbnb-u, Booking.com-u i drugim kanalima za rezervacije — sve osmišljeno da maksimalno unapredi performanse vaše nekretnine.",
     "getStarted": "Započnite",
     "seeHowItWorks": "See How It Works",
     "revenue": {
@@ -43,7 +43,7 @@
   "services": {
     "eyebrow": "Naše usluge",
     "title": "Everything your property needs to perform better",
-    "description": "We take care of the details behind successful short-term rentals, giving you more time while helping your property reach its full potential.",
+    "description": "Brinemo o detaljima uspešnog upravljanja kratkoročnim izdavanjem na Airbnb-u, Booking.com-u i drugim kanalima za rezervacije, štedeći vam vreme i pomažući vašoj nekretnini da ostvari svoj puni potencijal.",
     "guestCommunication": {
       "title": "Komunikacija sa gostima",
       "description": "Professional, fast and thoughtful communication that keeps your guests informed and satisfied."
@@ -54,7 +54,7 @@
     },
     "bookingManagement": {
       "title": "Upravljanje rezervacijama",
-      "description": "Professional management of reservations, availability and day-to-day booking operations."
+      "description": "Profesionalno upravljanje rezervacijama na Airbnb-u, Booking.com-u i drugim kanalima, dostupnošću i svakodnevnim operacijama vezanim za rezervacije."
     }
   },
   "performance": {
@@ -307,7 +307,7 @@
     "eyebrow": "MULTI-PLATFORM DISTRIBUTION",
     "titleLine1": "Your property everywhere",
     "titleLine2": "your guests are looking",
-    "description": "Expand your property's visibility across 10+ leading booking platforms while keeping reservations, availability and pricing coordinated through one strategy.",
+    "description": "Povećajte vidljivost svoje nekretnine na Airbnb-u, Booking.com-u i više od 10 vodećih kanala za rezervacije, uz koordinisane rezervacije, dostupnost i cene kroz jednu objedinjenu strategiju.",
     "benefits": {
       "greaterVisibility": {
         "title": "Veća vidljivost",
@@ -416,7 +416,7 @@
     "awardClarification": "The Booking.com Traveller Review Award displayed above was awarded to Niki Breeze. It is presented as a featured client property result and does not represent an award granted directly to HostMetric."
   },
   "footer": {
-    "brandDescription": "Smarter short-term rental management, pricing, distribution and guest experience designed to improve property performance.",
+    "brandDescription": "Pametnije upravljanje kratkoročnim izdavanjem na Airbnb-u, Booking.com-u i drugim kanalima, uz određivanje cena, distribuciju i iskustvo gostiju osmišljene za bolje performanse nekretnine.",
     "getStarted": "Započnite",
     "services": {
       "title": "Usluge",
@@ -469,7 +469,7 @@
       "eyebrow": "About HostMetric",
       "titleLine1": "Data-driven strategy.",
       "titleLine2": "Human hospitality.",
-      "description": "HostMetric brings together analytical thinking, revenue management and genuine human hospitality to help short-term rental properties perform at their full potential."
+      "description": "HostMetric kombinuje analitičko razmišljanje, upravljanje prihodima i istinsko ljudsko gostoprimstvo kako bi kroz profesionalno upravljanje pomogao nekretninama za kratkoročno izdavanje da ostvare svoj puni potencijal."
     },
     "philosophy": {
       "eyebrow": "Our Philosophy",
@@ -544,10 +544,10 @@
       "fields": {
         "fullName": "Ime i prezime *",
         "propertyCountry": "Država nekretnine *",
-        "propertyType": "Tip nekretnine",
+        "propertyType": "Tip nekretnine *",
         "email": "E-pošta *",
-        "phone": "+30 / +357 Phone",
-        "propertyCityArea": "Grad / područje nekretnine",
+        "phone": "Broj telefona *",
+        "propertyCityArea": "Grad / područje nekretnine *",
         "message": "How can we help you? *"
       },
       "options": {
@@ -592,7 +592,7 @@
     "platformIntro": {
       "eyebrow": "GLOBALNA VIDLJIVOST",
       "title": "Povezani sa vodećim svetskim platformama za rezervacije",
-      "description": "HostMetric povezuje i upravlja vašom nekretninom na vodećim međunarodnim platformama za rezervacije, kombinujući stratešku distribuciju, inteligentno formiranje cena i profesionalno upravljanje kako bi se povećala vidljivost, ostvarilo više rezervacija i poboljšali ukupni rezultati."
+      "description": "HostMetric povezuje i upravlja vašom nekretninom na Airbnb-u, Booking.com-u i drugim vodećim međunarodnim platformama za rezervacije, kombinujući stratešku distribuciju, pametno određivanje cena i profesionalno upravljanje kako bi povećao vidljivost, ostvario više rezervacija i poboljšao ukupne performanse."
     },
     "propertySection": {
       "eyebrow": "VAŠA NEKRETNINA",
@@ -617,7 +617,7 @@
         },
         {
           "question": "Na kojim platformama za rezervacije moja nekretnina može biti dostupna?",
-          "answer": "Strategija distribucije zavisi od nekretnine i profila gostiju koje želite da privučete. HostMetric može da upravlja i koordinira oglasima na vodećim relevantnim kanalima za rezervacije, uz održavanje dosledne dostupnosti i komercijalne strategije nekretnine."
+          "answer": "Strategija distribucije zavisi od nekretnine i profila gostiju koje želite da privučete. HostMetric može da upravlja i koordinira oglasima na Airbnb-u, Booking.com-u i drugim odgovarajućim vodećim kanalima za rezervacije, uz usklađenu dostupnost i komercijalnu strategiju nekretnine."
         },
         {
           "question": "Kako se upravlja mojim rezervacijama i kalendarima?",
@@ -2406,7 +2406,7 @@
         "fullName": "Full Name",
         "email": "Email",
         "phone": "Phone",
-        "phoneOptional": "Phone (optional)",
+        "phoneOptional": "Phone",
         "createClientAndContinue": "Create Client and Continue",
         "propertyCountry": "Property Country",
         "propertyType": "Property Type",

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { cookies } from "next/headers";
@@ -15,6 +16,234 @@ import {
   isSupportedLocale,
   type Locale,
 } from "@/i18n/config";
+
+import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
+  getLocalizedAlternates,
+} from "@/seo/metadata";
+
+import {
+  getBreadcrumbSchema,
+  getFAQPageSchema,
+  serializeJsonLd,
+} from "@/seo/schema";
+
+
+/* ==========================================
+   FINAL SEO PASS NOTES
+
+   This FAQ page has now completed:
+   - SEO title
+   - Meta description
+   - Canonical
+   - Hreflang
+   - X-default
+   - Open Graph
+   - Twitter metadata
+   - Robots index/follow
+   - Search-intent / heading structure review
+   - Internal-link review
+   - FAQ content structure review
+
+   Primary intent:
+   - Property management questions
+   - Airbnb management questions
+   - Booking.com management questions
+   - Short-term rental management
+   - Owner / partnership questions
+
+   Do NOT repeat these items in a later pass.
+
+   Still handled separately at project level:
+   - sitemap.ts
+   - robots.ts
+   - Organization / WebSite schema
+   - FAQ structured-data decision
+   - Core Web Vitals / performance audit
+========================================== */
+
+
+/* ==========================================
+   FAQ PAGE SEO CONTENT
+========================================== */
+
+const faqPageSeo: Record<
+  Locale,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  el: {
+    title:
+      "Airbnb, Booking.com & Διαχείριση Ακινήτων: Συχνές Ερωτήσεις | HostMetric",
+    description:
+      "Απαντήσεις για διαχείριση ακινήτων, Airbnb, Booking.com και βραχυχρόνιες μισθώσεις: κρατήσεις, τιμολόγηση, συνεργασία, απόδοση και αύξηση εσόδων.",
+  },
+
+  en: {
+    title:
+      "Property, Airbnb & Booking.com Management FAQs | HostMetric",
+    description:
+      "Answers about property, Airbnb, Booking.com and short-term rental management, including reservations, pricing, partnership, performance and ways to increase rental revenue.",
+  },
+
+  de: {
+    title:
+      "Immobilien-, Airbnb- & Booking.com-Management: FAQ | HostMetric",
+    description:
+      "Antworten zu Immobilien-, Airbnb-, Booking.com- und Kurzzeitvermietungsmanagement: Buchungen, Preisgestaltung, Zusammenarbeit, Performance und höhere Mieteinnahmen.",
+  },
+
+  fr: {
+    title:
+      "Gestion de biens, Airbnb & Booking.com : FAQ | HostMetric",
+    description:
+      "Réponses sur la gestion de biens, Airbnb, Booking.com et la location courte durée : réservations, tarification, partenariat, performance et augmentation des revenus locatifs.",
+  },
+
+  it: {
+    title:
+      "Gestione Immobili, Airbnb & Booking.com: FAQ | HostMetric",
+    description:
+      "Risposte sulla gestione di immobili, Airbnb, Booking.com e affitti brevi: prenotazioni, prezzi, collaborazione, performance e aumento dei ricavi da locazione.",
+  },
+
+  es: {
+    title:
+      "Gestión de Propiedades, Airbnb y Booking.com: FAQ | HostMetric",
+    description:
+      "Respuestas sobre gestión de propiedades, Airbnb, Booking.com y alquileres de corta estancia: reservas, precios, colaboración, rendimiento y aumento de ingresos.",
+  },
+
+  pt: {
+    title:
+      "Gestão de Imóveis, Airbnb e Booking.com: FAQ | HostMetric",
+    description:
+      "Respostas sobre gestão de imóveis, Airbnb, Booking.com e alojamento de curta duração: reservas, preços, parceria, desempenho e aumento das receitas.",
+  },
+
+  bg: {
+    title:
+      "Управление на имоти, Airbnb и Booking.com: ЧЗВ | HostMetric",
+    description:
+      "Отговори за управление на имоти, Airbnb, Booking.com и краткосрочни наеми: резервации, ценообразуване, партньорство, ефективност и увеличаване на приходите.",
+  },
+
+  sr: {
+    title:
+      "Upravljanje nekretninama, Airbnb i Booking.com: FAQ | HostMetric",
+    description:
+      "Odgovori o upravljanju nekretninama, Airbnb-u, Booking.com-u i kratkoročnom najmu: rezervacije, cene, saradnja, učinak i povećanje prihoda od izdavanja.",
+  },
+
+  tr: {
+    title:
+      "Mülk, Airbnb ve Booking.com Yönetimi: SSS | HostMetric",
+    description:
+      "Mülk, Airbnb, Booking.com ve kısa süreli kiralama yönetimi hakkında yanıtlar: rezervasyonlar, fiyatlandırma, iş birliği, performans ve kira gelirini artırma.",
+  },
+
+  pl: {
+    title:
+      "Zarządzanie Nieruchomościami, Airbnb i Booking.com: FAQ | HostMetric",
+    description:
+      "Odpowiedzi o zarządzaniu nieruchomościami, Airbnb, Booking.com i najmie krótkoterminowym: rezerwacje, ceny, współpraca, wyniki i zwiększanie przychodów.",
+  },
+
+  ru: {
+    title:
+      "Управление недвижимостью, Airbnb и Booking.com: FAQ | HostMetric",
+    description:
+      "Ответы на вопросы об управлении недвижимостью, Airbnb, Booking.com и краткосрочной арендой: бронирования, ценообразование, сотрудничество, эффективность и увеличение дохода от аренды.",
+  },
+};
+
+
+/* ==========================================
+   FAQ PAGE SEO METADATA
+========================================== */
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore =
+    await cookies();
+
+  const savedLocale =
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
+  let currentLocale: Locale =
+    defaultLocale;
+
+  if (
+    savedLocale &&
+    isSupportedLocale(
+      savedLocale
+    )
+  ) {
+    currentLocale =
+      savedLocale;
+  }
+
+
+  const seo =
+    faqPageSeo[currentLocale];
+
+
+  const localizedFaqPath =
+    getLocalizedPath(
+      "/faq",
+      currentLocale
+    );
+
+
+  return {
+    title:
+      seo.title,
+
+    description:
+      seo.description,
+
+    alternates:
+      getLocalizedAlternates(
+        "/faq",
+        currentLocale
+      ),
+
+    openGraph: {
+      type:
+        "website",
+      url:
+        localizedFaqPath,
+      siteName:
+        "HostMetric",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    twitter: {
+      card:
+        "summary_large_image",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    robots: {
+      index:
+        true,
+      follow:
+        true,
+    },
+  };
+}
 
 
 type FAQPageDictionary = {
@@ -134,6 +363,60 @@ export default async function FAQPage() {
   }
 
 
+  /* ==========================================
+     LOCALIZED ROUTES
+  ========================================== */
+
+  const getStartedPath =
+    getLocalizedPath(
+      "/get-started",
+      currentLocale
+    );
+
+
+  /* ==========================================
+     STRUCTURED DATA
+  ========================================== */
+
+  const faqItems: FAQItem[] = [
+    ...faq.propertySection.questions,
+    ...faq.partnershipSection.questions,
+  ];
+
+  const faqPageSchema =
+    getFAQPageSchema({
+      items:
+        faqItems,
+      pathname:
+        "/faq",
+      locale:
+        currentLocale,
+    });
+
+  const schemaPageName =
+    `${faq.hero.titleLine1} ${faq.hero.titleLine2}`;
+
+  const breadcrumbSchema =
+    getBreadcrumbSchema({
+      items: [
+        {
+          name:
+            "HostMetric",
+          pathname:
+            "/",
+        },
+        {
+          name:
+            schemaPageName,
+          pathname:
+            "/faq",
+        },
+      ],
+      locale:
+        currentLocale,
+    });
+
+
   return (
     <main
       className="
@@ -143,6 +426,27 @@ export default async function FAQPage() {
         text-[#111827]
       "
     >
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              faqPageSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              breadcrumbSchema
+            ),
+        }}
+      />
+
 
       {/* ========================================
           HERO
@@ -700,7 +1004,7 @@ export default async function FAQPage() {
 
 
           <Link
-            href="/get-started"
+            href={getStartedPath}
             className="
               mt-8
               inline-flex

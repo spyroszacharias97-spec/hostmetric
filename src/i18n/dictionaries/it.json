@@ -15,7 +15,7 @@
     "eyebrow": "Performance degli affitti brevi",
     "titleLine1": "Gestione più intelligente",
     "titleLine2": "Risultati migliori",
-    "description": "Prezzi più intelligenti, comunicazione fluida con gli ospiti e gestione professionale delle prenotazioni — tutto progettato per massimizzare la performance della tua proprietà.",
+    "description": "Prezzi più intelligenti, comunicazione fluida con gli ospiti e gestione professionale delle prenotazioni su Airbnb, Booking.com e altri canali — tutto progettato per massimizzare la performance della tua proprietà.",
     "getStarted": "Inizia ora",
     "seeHowItWorks": "Scopri come funziona",
     "revenue": {
@@ -43,7 +43,7 @@
   "services": {
     "eyebrow": "I nostri servizi",
     "title": "Tutto ciò di cui la tua proprietà ha bisogno per ottenere risultati migliori",
-    "description": "Ci occupiamo dei dettagli che rendono efficace un affitto breve, lasciandoti più tempo e aiutando la tua proprietà a raggiungere il suo pieno potenziale.",
+    "description": "Ci occupiamo della gestione degli affitti brevi su Airbnb, Booking.com e altri canali, lasciandoti più tempo e aiutando la tua proprietà a raggiungere il suo pieno potenziale.",
     "guestCommunication": {
       "title": "Comunicazione con gli ospiti",
       "description": "Comunicazione professionale, rapida e attenta per mantenere gli ospiti informati e soddisfatti."
@@ -54,7 +54,7 @@
     },
     "bookingManagement": {
       "title": "Gestione delle prenotazioni",
-      "description": "Gestione professionale delle prenotazioni, della disponibilità e delle operazioni quotidiane."
+      "description": "Gestione professionale delle prenotazioni su Airbnb, Booking.com e altri canali, con coordinamento della disponibilità e delle operazioni quotidiane."
     }
   },
   "performance": {
@@ -307,7 +307,7 @@
     "eyebrow": "DISTRIBUZIONE MULTIPIATTAFORMA",
     "titleLine1": "La tua proprietà ovunque",
     "titleLine2": "i tuoi ospiti stiano cercando",
-    "description": "Aumenta la visibilità della tua proprietà su oltre 10 principali piattaforme di prenotazione, mantenendo prenotazioni, disponibilità e prezzi coordinati attraverso un'unica strategia.",
+    "description": "Aumenta la visibilità della tua proprietà su Airbnb, Booking.com e oltre 10 principali canali di prenotazione, mantenendo prenotazioni, disponibilità e prezzi coordinati attraverso un'unica strategia.",
     "benefits": {
       "greaterVisibility": {
         "title": "Maggiore visibilità",
@@ -416,7 +416,7 @@
     "awardClarification": "Il Booking.com Traveller Review Award mostrato sopra è stato assegnato a Niki Breeze. Viene presentato come risultato di una proprietà cliente in evidenza e non rappresenta un premio assegnato direttamente a HostMetric."
   },
   "footer": {
-    "brandDescription": "Gestione più intelligente degli affitti brevi, prezzi, distribuzione ed esperienza degli ospiti progettati per migliorare la performance della proprietà.",
+    "brandDescription": "Gestione più intelligente degli affitti brevi su Airbnb, Booking.com e altri canali, con prezzi, distribuzione ed esperienza degli ospiti progettati per migliorare la performance della proprietà.",
     "getStarted": "Inizia ora",
     "services": {
       "title": "Servizi",
@@ -469,7 +469,7 @@
       "eyebrow": "Chi è HostMetric",
       "titleLine1": "Strategia basata sui dati.",
       "titleLine2": "Ospitalità umana.",
-      "description": "HostMetric unisce pensiero analitico, revenue management e autentica ospitalità umana per aiutare le proprietà in affitto breve a raggiungere il loro pieno potenziale."
+      "description": "HostMetric unisce pensiero analitico, revenue management e autentica ospitalità umana per aiutare nella gestione professionale delle proprietà in affitto breve e massimizzarne la performance."
     },
     "philosophy": {
       "eyebrow": "La nostra filosofia",
@@ -544,10 +544,10 @@
       "fields": {
         "fullName": "Nome e cognome *",
         "propertyCountry": "Paese della proprietà *",
-        "propertyType": "Tipo di proprietà",
+        "propertyType": "Tipo di proprietà *",
         "email": "Email *",
-        "phone": "+30 / +357 Telefono",
-        "propertyCityArea": "Città / zona della proprietà",
+        "phone": "Numero di telefono *",
+        "propertyCityArea": "Città / zona della proprietà *",
         "message": "Come possiamo aiutarti? *"
       },
       "options": {
@@ -592,7 +592,7 @@
     "platformIntro": {
       "eyebrow": "VISIBILITÀ GLOBALE",
       "title": "Collegati alle principali piattaforme di prenotazione del mondo",
-      "description": "HostMetric collega e gestisce la tua proprietà sulle principali piattaforme di prenotazione internazionali, combinando distribuzione strategica, prezzi intelligenti e gestione professionale per aumentare la visibilità, generare più prenotazioni e migliorare le prestazioni complessive."
+      "description": "HostMetric collega e gestisce la tua proprietà su Airbnb, Booking.com e altre principali piattaforme di prenotazione internazionali, combinando distribuzione strategica, prezzi intelligenti e gestione professionale per aumentare la visibilità, generare più prenotazioni e migliorare le performance complessive."
     },
     "propertySection": {
       "eyebrow": "LA TUA PROPRIETÀ",
@@ -617,7 +617,7 @@
         },
         {
           "question": "Su quali piattaforme di prenotazione può essere pubblicata la mia proprietà?",
-          "answer": "La strategia di distribuzione dipende dalla proprietà e dal profilo degli ospiti target. HostMetric può gestire e coordinare gli annunci sui principali canali di prenotazione più adatti, mantenendo allineate la disponibilità e la strategia commerciale della proprietà."
+          "answer": "La strategia di distribuzione dipende dalla proprietà e dal profilo degli ospiti target. HostMetric può gestire e coordinare gli annunci su Airbnb, Booking.com e altri principali canali di prenotazione adatti, mantenendo allineate la disponibilità e la strategia commerciale della proprietà."
         },
         {
           "question": "Come vengono gestite le mie prenotazioni e i calendari?",
@@ -2406,7 +2406,7 @@
         "fullName": "Full Name",
         "email": "Email",
         "phone": "Phone",
-        "phoneOptional": "Phone (optional)",
+        "phoneOptional": "Phone",
         "createClientAndContinue": "Create Client and Continue",
         "propertyCountry": "Property Country",
         "propertyType": "Property Type",

@@ -15,7 +15,7 @@
     "eyebrow": "Performance des locations courte durée",
     "titleLine1": "Une gestion plus intelligente",
     "titleLine2": "De meilleurs résultats",
-    "description": "Tarification intelligente, communication fluide avec les voyageurs et gestion professionnelle des réservations — tout est conçu pour maximiser la performance de votre bien.",
+    "description": "Tarification intelligente, communication fluide avec les voyageurs et gestion professionnelle des réservations sur Airbnb, Booking.com et d’autres canaux de réservation — tout est conçu pour maximiser la performance de votre bien.",
     "getStarted": "Commencer",
     "seeHowItWorks": "Voir comment ça marche",
     "revenue": {
@@ -43,7 +43,7 @@
   "services": {
     "eyebrow": "Nos services",
     "title": "Tout ce dont votre bien a besoin pour mieux performer",
-    "description": "Nous prenons en charge les détails qui font le succès d’une location courte durée, afin de vous faire gagner du temps tout en aidant votre bien à atteindre son plein potentiel.",
+    "description": "Nous prenons en charge les détails qui font le succès de la gestion d’une location courte durée sur Airbnb, Booking.com et d’autres canaux de réservation, afin de vous faire gagner du temps tout en aidant votre bien à atteindre son plein potentiel.",
     "guestCommunication": {
       "title": "Communication voyageurs",
       "description": "Une communication professionnelle, rapide et attentionnée pour garder vos voyageurs informés et satisfaits."
@@ -54,7 +54,7 @@
     },
     "bookingManagement": {
       "title": "Gestion des réservations",
-      "description": "Gestion professionnelle des réservations, des disponibilités et des opérations quotidiennes liées aux bookings."
+      "description": "Gestion professionnelle des réservations sur Airbnb, Booking.com et d’autres canaux, des disponibilités et des opérations quotidiennes liées aux réservations."
     }
   },
   "performance": {
@@ -307,7 +307,7 @@
     "eyebrow": "DISTRIBUTION MULTIPLATEFORME",
     "titleLine1": "Votre bien partout",
     "titleLine2": "où vos voyageurs recherchent",
-    "description": "Développez la visibilité de votre bien sur plus de 10 grandes plateformes de réservation tout en coordonnant réservations, disponibilités et tarifs au sein d’une même stratégie.",
+    "description": "Développez la visibilité de votre bien sur Airbnb, Booking.com et plus de 10 grands canaux de réservation tout en coordonnant réservations, disponibilités et tarifs au sein d’une même stratégie.",
     "benefits": {
       "greaterVisibility": {
         "title": "Plus de visibilité",
@@ -416,7 +416,7 @@
     "awardClarification": "Le Traveller Review Award de Booking.com présenté ci-dessus a été attribué à Niki Breeze. Il est présenté comme résultat d’un bien client et ne constitue pas une distinction attribuée directement à HostMetric."
   },
   "footer": {
-    "brandDescription": "Gestion plus intelligente des locations courte durée, tarification, distribution et expérience voyageur conçues pour améliorer la performance du bien.",
+    "brandDescription": "Gestion plus intelligente des locations courte durée sur Airbnb, Booking.com et d’autres canaux, avec tarification, distribution et expérience voyageur conçues pour améliorer la performance du bien.",
     "getStarted": "Commencer",
     "services": {
       "title": "Services",
@@ -469,7 +469,7 @@
       "eyebrow": "À propos de HostMetric",
       "titleLine1": "Stratégie fondée sur les données.",
       "titleLine2": "Hospitalité humaine.",
-      "description": "HostMetric réunit analyse, revenue management et véritable hospitalité humaine afin d’aider les locations courte durée à atteindre leur plein potentiel."
+      "description": "HostMetric réunit analyse, revenue management et véritable hospitalité humaine afin d’aider les locations courte durée à atteindre leur plein potentiel grâce à une gestion immobilière professionnelle."
     },
     "philosophy": {
       "eyebrow": "Notre philosophie",
@@ -544,10 +544,10 @@
       "fields": {
         "fullName": "Nom complet *",
         "propertyCountry": "Pays du bien *",
-        "propertyType": "Type de bien",
+        "propertyType": "Type de bien *",
         "email": "E-mail *",
-        "phone": "+30 / +357 Téléphone",
-        "propertyCityArea": "Ville / zone du bien",
+        "phone": "Numéro de téléphone *",
+        "propertyCityArea": "Ville / zone du bien *",
         "message": "Comment pouvons-nous vous aider ? *"
       },
       "options": {
@@ -592,7 +592,7 @@
     "platformIntro": {
       "eyebrow": "VISIBILITÉ INTERNATIONALE",
       "title": "Connectés aux principales plateformes de réservation mondiales",
-      "description": "HostMetric connecte et gère votre propriété sur les principales plateformes de réservation internationales, en combinant distribution stratégique, tarification intelligente et gestion professionnelle afin d'accroître sa visibilité, de générer davantage de réservations et d'améliorer ses performances globales."
+      "description": "HostMetric connecte et gère votre propriété sur Airbnb, Booking.com et d’autres grandes plateformes de réservation internationales, en combinant distribution stratégique, tarification intelligente et gestion professionnelle afin d’accroître sa visibilité, de générer davantage de réservations et d’améliorer ses performances globales."
     },
     "propertySection": {
       "eyebrow": "VOTRE BIEN",
@@ -617,7 +617,7 @@
         },
         {
           "question": "Sur quelles plateformes de réservation mon bien peut-il être publié ?",
-          "answer": "La stratégie de distribution dépend du bien et de ses voyageurs cibles. HostMetric peut gérer et coordonner les annonces sur les principaux canaux de réservation adaptés, tout en maintenant alignées les disponibilités et la stratégie commerciale du bien."
+          "answer": "La stratégie de distribution dépend du bien et de ses voyageurs cibles. HostMetric peut gérer et coordonner les annonces sur Airbnb, Booking.com et d’autres grands canaux de réservation adaptés, tout en maintenant alignées les disponibilités et la stratégie commerciale du bien."
         },
         {
           "question": "Comment mes réservations et calendriers sont-ils gérés ?",
@@ -2406,7 +2406,7 @@
         "fullName": "Full Name",
         "email": "Email",
         "phone": "Phone",
-        "phoneOptional": "Phone (optional)",
+        "phoneOptional": "Phone",
         "createClientAndContinue": "Create Client and Continue",
         "propertyCountry": "Property Country",
         "propertyType": "Property Type",

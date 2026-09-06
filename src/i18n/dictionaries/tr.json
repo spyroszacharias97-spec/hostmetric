@@ -15,7 +15,7 @@
     "eyebrow": "Kısa Dönem Kiralama Performansı",
     "titleLine1": "Daha Akıllı Konaklama Yönetimi",
     "titleLine2": "Daha İyi Sonuçlar",
-    "description": "Daha akıllı fiyatlandırma, kesintisiz misafir iletişimi ve profesyonel rezervasyon yönetimi — tümü mülkünüzün performansını en üst düzeye çıkarmak için tasarlandı.",
+    "description": "Daha akıllı fiyatlandırma, kesintisiz misafir iletişimi ve Airbnb, Booking.com ve diğer rezervasyon kanallarında profesyonel rezervasyon yönetimi — tümü mülkünüzün performansını en üst düzeye çıkarmak için tasarlandı.",
     "getStarted": "Başlayın",
     "seeHowItWorks": "Nasıl Çalıştığını Görün",
     "revenue": {
@@ -43,7 +43,7 @@
   "services": {
     "eyebrow": "Hizmetlerimiz",
     "title": "Mülkünüzün daha iyi performans göstermesi için ihtiyaç duyduğu her şey",
-    "description": "Başarılı kısa dönem kiralamaların arkasındaki tüm ayrıntılarla ilgilenir, size daha fazla zaman kazandırırken mülkünüzün tam potansiyeline ulaşmasına yardımcı oluruz.",
+    "description": "Airbnb, Booking.com ve diğer rezervasyon kanallarında başarılı kısa dönem kiralama yönetiminin arkasındaki ayrıntılarla ilgilenir, size daha fazla zaman kazandırırken mülkünüzün tam potansiyeline ulaşmasına yardımcı oluruz.",
     "guestCommunication": {
       "title": "Misafir İletişimi",
       "description": "Misafirlerinizi bilgilendiren ve memnun eden profesyonel, hızlı ve özenli iletişim."
@@ -54,7 +54,7 @@
     },
     "bookingManagement": {
       "title": "Rezervasyon Yönetimi",
-      "description": "Rezervasyonların, müsaitliğin ve günlük rezervasyon operasyonlarının profesyonel yönetimi."
+      "description": "Airbnb, Booking.com ve diğer kanallardaki rezervasyonların, müsaitliğin ve günlük rezervasyon operasyonlarının profesyonel yönetimi."
     }
   },
   "performance": {
@@ -307,7 +307,7 @@
     "eyebrow": "ÇOK PLATFORMLU DAĞITIM",
     "titleLine1": "Mülkünüz her yerde",
     "titleLine2": "misafirlerinizin aradığı yerde",
-    "description": "Rezervasyonları, müsaitliği ve fiyatlandırmayı tek bir stratejiyle koordine ederken mülkünüzün görünürlüğünü 10'dan fazla önde gelen rezervasyon platformuna taşıyın.",
+    "description": "Rezervasyonları, müsaitliği ve fiyatlandırmayı tek bir stratejiyle koordine ederken mülkünüzün görünürlüğünü Airbnb, Booking.com ve 10'dan fazla önde gelen rezervasyon kanalında artırın.",
     "benefits": {
       "greaterVisibility": {
         "title": "Daha Fazla Görünürlük",
@@ -416,7 +416,7 @@
     "awardClarification": "Yukarıda gösterilen Booking.com Traveller Review Award, Niki Breeze'e verilmiştir. Öne çıkan bir müşteri mülkü sonucu olarak sunulmaktadır ve doğrudan HostMetric'e verilen bir ödülü temsil etmez."
   },
   "footer": {
-    "brandDescription": "Mülk performansını geliştirmek için tasarlanmış daha akıllı kısa dönem kiralama yönetimi, fiyatlandırma, dağıtım ve misafir deneyimi.",
+    "brandDescription": "Airbnb, Booking.com ve diğer kanallarda daha akıllı kısa dönem kiralama yönetimi; mülk performansını geliştirmek için tasarlanmış fiyatlandırma, dağıtım ve misafir deneyimi.",
     "getStarted": "Başlayın",
     "services": {
       "title": "Hizmetler",
@@ -469,7 +469,7 @@
       "eyebrow": "HostMetric Hakkında",
       "titleLine1": "Veriye dayalı strateji.",
       "titleLine2": "İnsani misafirperverlik.",
-      "description": "HostMetric; analitik düşünceyi, gelir yönetimini ve gerçek insani misafirperverliği bir araya getirerek kısa dönem kiralama mülklerinin tam potansiyellerinde performans göstermesine yardımcı olur."
+      "description": "HostMetric; analitik düşünceyi, gelir yönetimini ve gerçek insani misafirperverliği bir araya getirerek kısa dönem kiralama mülklerinin profesyonel mülk yönetimiyle tam potansiyellerine ulaşmasına yardımcı olur."
     },
     "philosophy": {
       "eyebrow": "Felsefemiz",
@@ -544,10 +544,10 @@
       "fields": {
         "fullName": "Ad Soyad *",
         "propertyCountry": "Mülkün Bulunduğu Ülke *",
-        "propertyType": "Mülk Türü",
+        "propertyType": "Mülk Türü *",
         "email": "E-posta *",
-        "phone": "+30 / +357 Telefon",
-        "propertyCityArea": "Mülkün Şehri / Bölgesi",
+        "phone": "Telefon numarası *",
+        "propertyCityArea": "Mülkün Şehri / Bölgesi *",
         "message": "Size nasıl yardımcı olabiliriz? *"
       },
       "options": {
@@ -592,7 +592,7 @@
     "platformIntro": {
       "eyebrow": "KÜRESEL GÖRÜNÜRLÜK",
       "title": "Dünyanın önde gelen rezervasyon platformlarıyla bağlantılı",
-      "description": "HostMetric, mülkünüzü önde gelen uluslararası rezervasyon platformlarına bağlar ve yönetir; görünürlüğü artırmak, daha fazla rezervasyon elde etmek ve genel performansı iyileştirmek için stratejik dağıtım, akıllı fiyatlandırma ve profesyonel yönetimi bir araya getirir."
+      "description": "HostMetric, mülkünüzü Airbnb, Booking.com ve diğer önde gelen uluslararası rezervasyon platformlarına bağlar ve yönetir; görünürlüğü artırmak, daha fazla rezervasyon elde etmek ve genel performansı iyileştirmek için stratejik dağıtım, akıllı fiyatlandırma ve profesyonel yönetimi bir araya getirir."
     },
     "propertySection": {
       "eyebrow": "MÜLKÜNÜZ",
@@ -617,7 +617,7 @@
         },
         {
           "question": "Mülküm hangi rezervasyon platformlarında yer alabilir?",
-          "answer": "Dağıtım stratejisi mülke ve çekmek istediğiniz misafir profiline bağlıdır. HostMetric, müsaitliği ve mülkün ticari stratejisini tutarlı tutarken önde gelen ve ilgili rezervasyon kanallarındaki ilanları yönetebilir ve koordine edebilir."
+          "answer": "Dağıtım stratejisi mülke ve çekmek istediğiniz misafir profiline bağlıdır. HostMetric, Airbnb, Booking.com ve diğer uygun önde gelen rezervasyon kanallarındaki ilanları yönetebilir ve koordine edebilir; mülkün müsaitliğini ve ticari stratejisini uyumlu tutar."
         },
         {
           "question": "Rezervasyonlarım ve takvimlerim nasıl yönetiliyor?",
@@ -2406,7 +2406,7 @@
         "fullName": "Full Name",
         "email": "Email",
         "phone": "Phone",
-        "phoneOptional": "Phone (optional)",
+        "phoneOptional": "Phone",
         "createClientAndContinue": "Create Client and Continue",
         "propertyCountry": "Property Country",
         "propertyType": "Property Type",

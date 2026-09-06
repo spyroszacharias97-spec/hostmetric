@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import {
   GR,
@@ -15,6 +16,7 @@ import {
   PL,
   RS,
   TR,
+  RU,
 } from "country-flag-icons/react/3x2";
 
 import {
@@ -32,6 +34,13 @@ import {
 } from "lucide-react";
 
 import { getDictionary } from "@/i18n/get-dictionary";
+import elDictionary from "@/i18n/dictionaries/el.json";
+
+import {
+  getLocaleFromPathname,
+  getLocalizedPath,
+  switchPathLocale,
+} from "@/i18n/routing";
 
 import {
   defaultLocale,
@@ -56,18 +65,8 @@ type NavigationDictionary = {
 };
 
 
-const fallbackNavigation: NavigationDictionary = {
-  services: "Services",
-  howItWorks: "How It Works",
-  pricing: "Pricing",
-  about: "About",
-  contact: "Contact",
-  getStarted: "Get Started",
-  language: "Language",
-  selectLanguage: "Select language",
-  homeAriaLabel: "HostMetric homepage",
-  logoAlt: "HostMetric Property Management",
-};
+const fallbackNavigation: NavigationDictionary =
+  elDictionary.navigation as NavigationDictionary;
 
 
 /* ==========================================
@@ -77,7 +76,7 @@ const fallbackNavigation: NavigationDictionary = {
    These are only visual country codes.
 
    The real locale codes remain:
-   el, en, de, fr, it, es, pt, bg, pl, sr, tr
+   el, en, de, fr, it, es, pt, bg, pl, sr, tr, ru
 ========================================== */
 
 const localeCountryCodes: Record<Locale, string> = {
@@ -92,6 +91,7 @@ const localeCountryCodes: Record<Locale, string> = {
   pl: "PL",
   sr: "RS",
   tr: "TR",
+  ru: "RU",
 };
 
 
@@ -114,10 +114,13 @@ const localeFlagComponents = {
   pl: PL,
   sr: RS,
   tr: TR,
+  ru: RU,
 } satisfies Record<Locale, typeof GR>;
 
 
 export default function Navbar() {
+  const pathname = usePathname();
+
   const [languageOpen, setLanguageOpen] =
     useState(false);
 
@@ -145,27 +148,14 @@ export default function Navbar() {
 
   useEffect(() => {
     async function loadInitialLanguage() {
-      const cookieLocale =
-        document.cookie
-          .split("; ")
-          .find((item) =>
-            item.startsWith(
-              "hostmetric_locale="
-            )
-          )
-          ?.split("=")[1];
+      const pathnameLocale =
+        getLocaleFromPathname(
+          window.location.pathname
+        );
 
 
-      let locale: Locale =
-        defaultLocale;
-
-
-      if (
-        cookieLocale &&
-        isSupportedLocale(cookieLocale)
-      ) {
-        locale = cookieLocale;
-      }
+      const locale: Locale =
+        pathnameLocale;
 
 
       setCurrentLocale(locale);
@@ -265,6 +255,12 @@ export default function Navbar() {
     setLanguageOpen(false);
     setMobileMenuOpen(false);
 
+    const localizedHomePath =
+      getLocalizedPath(
+        "/",
+        currentLocale
+      );
+
     const scrollToTarget = () => {
       const target =
         document.getElementById(
@@ -283,15 +279,20 @@ export default function Navbar() {
       window.history.replaceState(
         null,
         "",
-        `/#${sectionId}`
+        `${localizedHomePath}#${sectionId}`
       );
 
       return true;
     };
 
 
+    const currentPathname =
+      pathname ||
+      window.location.pathname;
+
     const isHomePage =
-      window.location.pathname === "/";
+      currentPathname ===
+      localizedHomePath;
 
 
     if (isHomePage) {
@@ -310,7 +311,7 @@ export default function Navbar() {
 
 
     window.location.href =
-      `/#${sectionId}`;
+      `${localizedHomePath}#${sectionId}`;
   }
 
 
@@ -328,75 +329,55 @@ export default function Navbar() {
     try {
       /* SAVE COOKIE */
 
-      const response = await fetch(
-        "/api/locale",
-        {
-          method: "POST",
+      const response =
+        await fetch(
+          "/api/locale",
+          {
+            method: "POST",
 
-          headers: {
-            "Content-Type":
-              "application/json",
-          },
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
 
-          body: JSON.stringify({
-            locale,
-          }),
-        }
-      );
+            body: JSON.stringify({
+              locale,
+            }),
+          }
+        );
 
 
       if (!response.ok) {
         console.error(
           "Could not save language preference."
         );
-
-        return;
       }
 
 
-      /* LOAD NEW DICTIONARY */
+      /* BUILD SAME PAGE IN SELECTED LANGUAGE */
 
-      const dictionary =
-        await getDictionary(locale);
-
-
-      setCurrentLocale(locale);
-
-
-      if (
-        (dictionary as any)
-          .navigation
-      ) {
-        setNavigation(
-          (dictionary as any)
-            .navigation
+      const localizedPath =
+        switchPathLocale(
+          window.location.pathname,
+          locale
         );
-      }
 
+      const currentSearch =
+        window.location.search;
 
-      /* RELOAD PAGE SO ALL SERVER COMPONENTS USE THE NEW LOCALE */
-
-      window.location.reload();
+      const currentHash =
+        window.location.hash;
 
 
       /*
-        NEXT ROUTING STEP:
+        Full navigation is intentional.
 
-        Greek:
-        /
-        /pricing
-        /contact
-
-        Other languages:
-        /en
-        /en/pricing
-        /de
-        /de/pricing
-        etc.
-
-        We will connect URL routing after the
-        translation migration is complete.
+        The URL now becomes the primary
+        language signal for SEO and routing.
       */
+
+      window.location.href =
+        `${localizedPath}${currentSearch}${currentHash}`;
 
     } catch (error) {
       console.error(
@@ -417,7 +398,7 @@ export default function Navbar() {
         ========================================== */}
 
         <Link
-          href="/"
+          href={getLocalizedPath("/", currentLocale)}
           className="group flex min-w-0 cursor-pointer items-center"
           aria-label={
             navigation.homeAriaLabel
@@ -472,7 +453,7 @@ export default function Navbar() {
 
 
           <Link
-            href="/faq"
+            href={getLocalizedPath("/faq", currentLocale)}
             className="cursor-pointer text-[17px] font-semibold text-slate-800 transition duration-300 hover:-translate-y-0.5 hover:text-blue-600"
           >
             {navigation.pricing}
@@ -480,7 +461,7 @@ export default function Navbar() {
 
 
           <Link
-            href="/about"
+            href={getLocalizedPath("/about", currentLocale)}
             className="cursor-pointer text-[17px] font-semibold text-slate-800 transition duration-300 hover:-translate-y-0.5 hover:text-blue-600"
           >
             {navigation.about}
@@ -488,7 +469,7 @@ export default function Navbar() {
 
 
           <Link
-            href="/contact"
+            href={getLocalizedPath("/contact", currentLocale)}
             className="cursor-pointer text-[17px] font-semibold text-slate-800 transition duration-300 hover:-translate-y-0.5 hover:text-blue-600"
           >
             {navigation.contact}
@@ -682,7 +663,7 @@ export default function Navbar() {
           ======================================== */}
 
           <Link
-            href="/get-started"
+            href={getLocalizedPath("/get-started", currentLocale)}
             className="hidden cursor-pointer rounded-2xl bg-black px-8 py-4 text-[17px] font-semibold text-white transition duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:shadow-xl lg:inline-flex"
           >
             {navigation.getStarted} →
@@ -763,7 +744,7 @@ export default function Navbar() {
 
 
               <Link
-                href="/faq"
+                href={getLocalizedPath("/faq", currentLocale)}
                 onClick={() =>
                   setMobileMenuOpen(false)
                 }
@@ -775,7 +756,7 @@ export default function Navbar() {
 
 
               <Link
-                href="/about"
+                href={getLocalizedPath("/about", currentLocale)}
                 onClick={() =>
                   setMobileMenuOpen(false)
                 }
@@ -787,7 +768,7 @@ export default function Navbar() {
 
 
               <Link
-                href="/contact"
+                href={getLocalizedPath("/contact", currentLocale)}
                 onClick={() =>
                   setMobileMenuOpen(false)
                 }
@@ -801,7 +782,7 @@ export default function Navbar() {
 
 
             <Link
-              href="/get-started"
+              href={getLocalizedPath("/get-started", currentLocale)}
               onClick={() =>
                 setMobileMenuOpen(false)
               }

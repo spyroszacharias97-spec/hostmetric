@@ -48,6 +48,12 @@ export default function FAQAccordion({
           const isOpen =
             openIndex === index;
 
+          const questionId =
+            `faq-question-${index}`;
+
+          const answerId =
+            `faq-answer-${index}`;
+
 
           return (
             <div
@@ -73,86 +79,90 @@ export default function FAQAccordion({
                   QUESTION
               ========================================== */}
 
-              <button
-                type="button"
-                onClick={() =>
-                  toggleItem(index)
-                }
-                aria-expanded={isOpen}
-                className="
-                  flex
-                  w-full
-                  items-center
-                  justify-between
-                  gap-3
-                  px-4
-                  py-4
-                  text-left
-                  sm:gap-4
-                  sm:px-5
-                  sm:py-5
-                  md:gap-6
-                  md:px-8
-                  md:py-7
-                "
-              >
-
-                <span
+              <h3>
+                <button
+                  id={questionId}
+                  type="button"
+                  onClick={() =>
+                    toggleItem(index)
+                  }
+                  aria-expanded={isOpen}
+                  aria-controls={answerId}
                   className="
-                    min-w-0
-                    flex-1
-                    break-words
-                    text-base
-                    font-bold
-                    leading-6
-                    text-[#111827]
-                    sm:text-lg
-                    sm:leading-7
-                    md:text-xl
-                  "
-                >
-                  {item.question}
-                </span>
-
-
-                <span
-                  className={`
                     flex
-                    h-9
-                    w-9
-                    shrink-0
+                    w-full
                     items-center
-                    justify-center
-                    rounded-full
-                    transition-all
-                    duration-300
-                    sm:h-10
-                    sm:w-10
-                    ${
-                      isOpen
-                        ? "rotate-180 bg-[#2166f3] text-white"
-                        : "bg-blue-50 text-[#2166f3]"
-                    }
-                  `}
-                  aria-hidden="true"
+                    justify-between
+                    gap-3
+                    px-4
+                    py-4
+                    text-left
+                    sm:gap-4
+                    sm:px-5
+                    sm:py-5
+                    md:gap-6
+                    md:px-8
+                    md:py-7
+                  "
                 >
 
                   <span
                     className="
-                      text-xl
-                      font-light
-                      leading-none
-                      sm:text-2xl
+                      min-w-0
+                      flex-1
+                      break-words
+                      text-base
+                      font-bold
+                      leading-6
+                      text-[#111827]
+                      sm:text-lg
+                      sm:leading-7
+                      md:text-xl
                     "
                   >
-                    {isOpen
-                      ? "−"
-                      : "+"}
+                    {item.question}
                   </span>
 
-                </span>
 
-              </button>
+                  <span
+                    className={`
+                      flex
+                      h-9
+                      w-9
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-full
+                      transition-all
+                      duration-300
+                      sm:h-10
+                      sm:w-10
+                      ${
+                        isOpen
+                          ? "rotate-180 bg-[#2166f3] text-white"
+                          : "bg-blue-50 text-[#2166f3]"
+                      }
+                    `}
+                    aria-hidden="true"
+                  >
+
+                    <span
+                      className="
+                        text-xl
+                        font-light
+                        leading-none
+                        sm:text-2xl
+                      "
+                    >
+                      {isOpen
+                        ? "−"
+                        : "+"}
+                    </span>
+
+                  </span>
+
+                </button>
+              </h3>
 
 
               {/* ==========================================
@@ -160,6 +170,9 @@ export default function FAQAccordion({
               ========================================== */}
 
               <div
+                id={answerId}
+                role="region"
+                aria-labelledby={questionId}
                 className={`
                   grid
                   transition-all

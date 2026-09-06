@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import AnimatedWave from "@/components/animated-wave";
 import OnboardingForm from "@/components/onboarding-form";
 
@@ -10,9 +12,239 @@ import {
   type Locale,
 } from "@/i18n/config";
 
+import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
+  getLocalizedAlternates,
+} from "@/seo/metadata";
+
+import {
+  getBreadcrumbSchema,
+  getWebPageSchema,
+  serializeJsonLd,
+} from "@/seo/schema";
+
 import { neon } from "@neondatabase/serverless";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
+
+
+/* =========================================================
+   FINAL SEO PASS NOTES
+
+   This Get Started page has now completed:
+   - SEO title
+   - Meta description
+   - Canonical
+   - Hreflang
+   - X-default
+   - Open Graph
+   - Twitter metadata
+   - Robots index/follow
+   - Search-intent / heading structure review
+   - Conversion / onboarding-flow review
+
+   FINAL commercial positioning:
+   - Conversion / owner-intent page.
+   - Property management is the broad authority term.
+   - Airbnb and Booking.com are both prominent platform terms.
+   - Short-term rental management supports the service intent.
+   - Bookings, occupancy, revenue and profitability are supporting benefits.
+   - Admin authentication, database lookup and onboarding logic remain untouched.
+
+   Do NOT repeat these items in a later pass.
+
+   Still handled separately at project level:
+   - sitemap.ts
+   - robots.ts
+   - Organization / WebSite schema
+   - Core Web Vitals / performance audit
+========================================================= */
+
+
+/* =========================================================
+   GET STARTED PAGE SEO CONTENT
+========================================================= */
+
+const getStartedPageSeo: Record<
+  Locale,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  el: {
+    title:
+      "Ξεκινήστε | Διαχείριση Ακινήτων, Airbnb & Booking.com | HostMetric",
+    description:
+      "Ξεκινήστε με τη HostMetric για επαγγελματική διαχείριση ακινήτων, Airbnb, Booking.com και βραχυχρόνιων μισθώσεων. Μοιραστείτε τα στοιχεία του ακινήτου σας και δείτε πώς μπορούμε να αυξήσουμε κρατήσεις, πληρότητα, έσοδα και κερδοφορία.",
+  },
+
+  en: {
+    title:
+      "Get Started | Property, Airbnb & Booking.com Management | HostMetric",
+    description:
+      "Get started with HostMetric for professional property, Airbnb, Booking.com and short-term rental management. Tell us about your property and explore ways to increase bookings, occupancy, revenue and profitability.",
+  },
+
+  de: {
+    title:
+      "Jetzt starten | Immobilien-, Airbnb- & Booking.com-Management | HostMetric",
+    description:
+      "Starten Sie mit HostMetric für professionelles Immobilien-, Airbnb-, Booking.com- und Kurzzeitvermietungsmanagement. Teilen Sie uns Ihre Immobiliendaten mit und entdecken Sie Möglichkeiten für mehr Buchungen, Auslastung, Umsatz und Rentabilität.",
+  },
+
+  fr: {
+    title:
+      "Commencer | Gestion de Biens, Airbnb & Booking.com | HostMetric",
+    description:
+      "Commencez avec HostMetric pour la gestion professionnelle de biens, Airbnb, Booking.com et locations courte durée. Présentez votre bien et découvrez comment augmenter les réservations, le taux d’occupation, les revenus et la rentabilité.",
+  },
+
+  it: {
+    title:
+      "Inizia | Gestione Immobili, Airbnb & Booking.com | HostMetric",
+    description:
+      "Inizia con HostMetric per la gestione professionale di immobili, Airbnb, Booking.com e affitti brevi. Parlaci del tuo immobile e scopri come aumentare prenotazioni, occupazione, ricavi e redditività.",
+  },
+
+  es: {
+    title:
+      "Empieza | Gestión de Propiedades, Airbnb y Booking.com | HostMetric",
+    description:
+      "Empieza con HostMetric para la gestión profesional de propiedades, Airbnb, Booking.com y alquileres de corta estancia. Cuéntanos sobre tu propiedad y descubre cómo aumentar reservas, ocupación, ingresos y rentabilidad.",
+  },
+
+  pt: {
+    title:
+      "Começar | Gestão de Imóveis, Airbnb e Booking.com | HostMetric",
+    description:
+      "Comece com a HostMetric para gestão profissional de imóveis, Airbnb, Booking.com e alojamento de curta duração. Fale-nos do seu imóvel e descubra como aumentar reservas, ocupação, receitas e rentabilidade.",
+  },
+
+  bg: {
+    title:
+      "Започнете | Управление на имоти, Airbnb и Booking.com | HostMetric",
+    description:
+      "Започнете с HostMetric за професионално управление на имоти, Airbnb, Booking.com и краткосрочни наеми. Разкажете ни за имота си и вижте как можем да увеличим резервациите, заетостта, приходите и рентабилността.",
+  },
+
+  sr: {
+    title:
+      "Započnite | Upravljanje nekretninama, Airbnb i Booking.com | HostMetric",
+    description:
+      "Započnite sa HostMetric-om za profesionalno upravljanje nekretninama, Airbnb-om, Booking.com-om i kratkoročnim najmom. Predstavite nam svoju nekretninu i saznajte kako da povećate rezervacije, popunjenost, prihode i profitabilnost.",
+  },
+
+  tr: {
+    title:
+      "Başlayın | Mülk, Airbnb ve Booking.com Yönetimi | HostMetric",
+    description:
+      "Profesyonel mülk, Airbnb, Booking.com ve kısa süreli kiralama yönetimi için HostMetric ile başlayın. Mülkünüzü anlatın; rezervasyon, doluluk, gelir ve kârlılığı artırma fırsatlarını değerlendirelim.",
+  },
+
+  pl: {
+    title:
+      "Zacznij | Zarządzanie Nieruchomościami, Airbnb i Booking.com | HostMetric",
+    description:
+      "Zacznij z HostMetric w zakresie profesjonalnego zarządzania nieruchomościami, Airbnb, Booking.com i najmem krótkoterminowym. Opowiedz nam o swojej nieruchomości i sprawdź, jak zwiększyć rezerwacje, obłożenie, przychody i rentowność.",
+  },
+
+  ru: {
+    title:
+      "Начать | Управление недвижимостью, Airbnb и Booking.com | HostMetric",
+    description:
+      "Начните работу с HostMetric для профессионального управления недвижимостью, Airbnb, Booking.com и краткосрочной арендой. Расскажите нам о своём объекте и узнайте, как увеличить бронирования, заполняемость, доход и прибыльность.",
+  },
+};
+
+
+/* =========================================================
+   GET STARTED PAGE SEO METADATA
+========================================================= */
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore =
+    await cookies();
+
+
+  const savedLocale =
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
+
+  let currentLocale: Locale =
+    defaultLocale;
+
+
+  if (
+    savedLocale &&
+    isSupportedLocale(
+      savedLocale
+    )
+  ) {
+    currentLocale =
+      savedLocale;
+  }
+
+
+  const seo =
+    getStartedPageSeo[currentLocale];
+
+
+  const localizedGetStartedPath =
+    getLocalizedPath(
+      "/get-started",
+      currentLocale
+    );
+
+
+  return {
+    title:
+      seo.title,
+
+    description:
+      seo.description,
+
+    alternates:
+      getLocalizedAlternates(
+        "/get-started",
+        currentLocale
+      ),
+
+    openGraph: {
+      type:
+        "website",
+      url:
+        localizedGetStartedPath,
+      siteName:
+        "HostMetric",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    twitter: {
+      card:
+        "summary_large_image",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    robots: {
+      index:
+        true,
+      follow:
+        true,
+    },
+  };
+}
 
 
 /* =========================================================
@@ -284,6 +516,43 @@ export default async function GetStartedPage({
     dictionary.getStartedPage;
 
 
+  /* ==========================================
+     STRUCTURED DATA
+  ========================================== */
+
+  const webPageSchema =
+    getWebPageSchema({
+      name:
+        getStarted.hero.title,
+      description:
+        getStarted.hero.description,
+      pathname:
+        "/get-started",
+      locale:
+        currentLocale,
+    });
+
+  const breadcrumbSchema =
+    getBreadcrumbSchema({
+      items: [
+        {
+          name:
+            "HostMetric",
+          pathname:
+            "/",
+        },
+        {
+          name:
+            getStarted.hero.title,
+          pathname:
+            "/get-started",
+        },
+      ],
+      locale:
+        currentLocale,
+    });
+
+
   /* =========================================================
      RESPONSIVE PAGE
 
@@ -311,6 +580,27 @@ export default async function GetStartedPage({
         lg:px-10
       "
     >
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              webPageSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              breadcrumbSchema
+            ),
+        }}
+      />
+
 
       {/* ==========================================
           BACKGROUND WAVE

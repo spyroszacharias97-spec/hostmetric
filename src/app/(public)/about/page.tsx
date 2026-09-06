@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import AnimatedWave from "@/components/animated-wave";
@@ -9,6 +10,20 @@ import {
 } from "@/i18n/config";
 
 import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
+  getLocalizedAlternates,
+} from "@/seo/metadata";
+
+import {
+  getBreadcrumbSchema,
+  getWebPageSchema,
+  serializeJsonLd,
+} from "@/seo/schema";
+
+import {
   BrainCircuit,
   BarChart3,
   HeartHandshake,
@@ -18,6 +33,218 @@ import {
   MessageCircle,
   LineChart,
 } from "lucide-react";
+
+
+/* ==========================================
+   FINAL SEO PASS NOTES
+
+   This About page has now completed:
+   - SEO title
+   - Meta description
+   - Canonical
+   - Hreflang
+   - X-default
+   - Open Graph
+   - Twitter metadata
+   - Robots index/follow
+   - Search-intent / heading structure review
+   - Internal-link review
+
+   FINAL commercial positioning:
+   - Property management is the broad authority term.
+   - Airbnb and Booking.com are both prominent platform terms.
+   - Short-term rental management supports the service intent.
+   - Revenue, bookings and performance are supporting benefits.
+   - The About page remains primarily a brand / trust page.
+
+   Do NOT repeat these items in a later pass.
+
+   Still handled separately at project level:
+   - sitemap.ts
+   - robots.ts
+   - Organization / WebSite schema
+   - Core Web Vitals / performance audit
+========================================== */
+
+
+/* ==========================================
+   ABOUT PAGE SEO CONTENT
+========================================== */
+
+const aboutPageSeo: Record<
+  Locale,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  el: {
+    title:
+      "Σχετικά με τη HostMetric | Διαχείριση Ακινήτων, Airbnb & Booking.com",
+    description:
+      "Γνωρίστε τη HostMetric, εταιρεία διαχείρισης ακινήτων, Airbnb, Booking.com και βραχυχρόνιων μισθώσεων με έξυπνη στρατηγική, ανθρώπινη επικοινωνία και στόχο περισσότερες κρατήσεις, καλύτερη απόδοση και υψηλότερα έσοδα.",
+  },
+
+  en: {
+    title:
+      "About HostMetric | Property, Airbnb & Booking.com Management",
+    description:
+      "Meet HostMetric, a property, Airbnb, Booking.com and short-term rental management company combining smart strategy, human communication and continuous optimization to increase bookings, improve performance and maximize rental revenue.",
+  },
+
+  de: {
+    title:
+      "Über HostMetric | Immobilien-, Airbnb- & Booking.com-Management",
+    description:
+      "Lernen Sie HostMetric kennen: Immobilien-, Airbnb-, Booking.com- und Kurzzeitvermietungsmanagement mit intelligenter Strategie, persönlicher Kommunikation und kontinuierlicher Optimierung für mehr Buchungen, bessere Performance und höhere Mieteinnahmen.",
+  },
+
+  fr: {
+    title:
+      "À propos de HostMetric | Gestion de biens, Airbnb & Booking.com",
+    description:
+      "Découvrez HostMetric, société de gestion de biens, Airbnb, Booking.com et locations courte durée, alliant stratégie intelligente, communication humaine et optimisation continue pour plus de réservations, de performance et de revenus.",
+  },
+
+  it: {
+    title:
+      "Chi è HostMetric | Gestione Immobili, Airbnb & Booking.com",
+    description:
+      "Scopri HostMetric, società di gestione di immobili, Airbnb, Booking.com e affitti brevi che unisce strategia intelligente, comunicazione umana e ottimizzazione continua per più prenotazioni, migliori performance e maggiori ricavi.",
+  },
+
+  es: {
+    title:
+      "Sobre HostMetric | Gestión de Propiedades, Airbnb y Booking.com",
+    description:
+      "Conoce HostMetric, empresa de gestión de propiedades, Airbnb, Booking.com y alquileres de corta estancia que combina estrategia inteligente, atención humana y optimización continua para aumentar reservas, rendimiento e ingresos.",
+  },
+
+  pt: {
+    title:
+      "Sobre a HostMetric | Gestão de Imóveis, Airbnb e Booking.com",
+    description:
+      "Conheça a HostMetric, empresa de gestão de imóveis, Airbnb, Booking.com e alojamento de curta duração que combina estratégia inteligente, comunicação humana e otimização contínua para aumentar reservas, desempenho e receitas.",
+  },
+
+  bg: {
+    title:
+      "За HostMetric | Управление на имоти, Airbnb и Booking.com",
+    description:
+      "Научете повече за HostMetric – компания за управление на имоти, Airbnb, Booking.com и краткосрочни наеми, съчетаваща интелигентна стратегия, лично отношение и постоянна оптимизация за повече резервации, по-добри резултати и по-високи приходи.",
+  },
+
+  sr: {
+    title:
+      "O HostMetric-u | Upravljanje nekretninama, Airbnb i Booking.com",
+    description:
+      "Upoznajte HostMetric, kompaniju za upravljanje nekretninama, Airbnb-om, Booking.com-om i kratkoročnim najmom koja spaja pametnu strategiju, ljudsku komunikaciju i kontinuiranu optimizaciju za više rezervacija, bolji učinak i veće prihode.",
+  },
+
+  tr: {
+    title:
+      "HostMetric Hakkında | Mülk, Airbnb ve Booking.com Yönetimi",
+    description:
+      "Mülk, Airbnb, Booking.com ve kısa süreli kiralama yönetimi sunan HostMetric'i tanıyın. Akıllı strateji, güçlü iletişim ve sürekli optimizasyonla daha fazla rezervasyon, daha iyi performans ve daha yüksek gelir hedefliyoruz.",
+  },
+
+  pl: {
+    title:
+      "O HostMetric | Zarządzanie Nieruchomościami, Airbnb i Booking.com",
+    description:
+      "Poznaj HostMetric, firmę zarządzającą nieruchomościami, Airbnb, Booking.com i najmem krótkoterminowym, łączącą inteligentną strategię, ludzką komunikację i ciągłą optymalizację dla większej liczby rezerwacji, lepszych wyników i wyższych przychodów.",
+  },
+
+  ru: {
+    title:
+      "О HostMetric | Управление недвижимостью, Airbnb и Booking.com",
+    description:
+      "Познакомьтесь с HostMetric — компанией по управлению недвижимостью, Airbnb, Booking.com и краткосрочной арендой, которая сочетает умную стратегию, человеческую коммуникацию и непрерывную оптимизацию для увеличения бронирований, улучшения эффективности и роста дохода.",
+  },
+};
+
+
+/* ==========================================
+   ABOUT PAGE SEO METADATA
+========================================== */
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore =
+    await cookies();
+
+  const savedLocale =
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
+  let currentLocale: Locale =
+    defaultLocale;
+
+  if (
+    savedLocale &&
+    isSupportedLocale(
+      savedLocale
+    )
+  ) {
+    currentLocale =
+      savedLocale;
+  }
+
+
+  const seo =
+    aboutPageSeo[currentLocale];
+
+
+  const localizedAboutPath =
+    getLocalizedPath(
+      "/about",
+      currentLocale
+    );
+
+
+  return {
+    title:
+      seo.title,
+
+    description:
+      seo.description,
+
+    alternates:
+      getLocalizedAlternates(
+        "/about",
+        currentLocale
+      ),
+
+    openGraph: {
+      type:
+        "website",
+      url:
+        localizedAboutPath,
+      siteName:
+        "HostMetric",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    twitter: {
+      card:
+        "summary_large_image",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    robots: {
+      index:
+        true,
+      follow:
+        true,
+    },
+  };
+}
 
 
 export default async function AboutPage() {
@@ -52,6 +279,59 @@ export default async function AboutPage() {
     dictionary.aboutPage;
 
 
+  /* ==========================================
+     LOCALIZED ROUTES
+  ========================================== */
+
+  const getStartedPath =
+    getLocalizedPath(
+      "/get-started",
+      currentLocale
+    );
+
+
+  /* ==========================================
+     STRUCTURED DATA
+  ========================================== */
+
+  const schemaPageName =
+    `${about.hero.titleLine1} ${about.hero.titleLine2}`;
+
+  const webPageSchema =
+    getWebPageSchema({
+      type:
+        "AboutPage",
+      name:
+        schemaPageName,
+      description:
+        about.hero.description,
+      pathname:
+        "/about",
+      locale:
+        currentLocale,
+    });
+
+  const breadcrumbSchema =
+    getBreadcrumbSchema({
+      items: [
+        {
+          name:
+            "HostMetric",
+          pathname:
+            "/",
+        },
+        {
+          name:
+            schemaPageName,
+          pathname:
+            "/about",
+        },
+      ],
+      locale:
+        currentLocale,
+    });
+
+
   return (
     <main className="
         min-h-screen
@@ -59,6 +339,27 @@ export default async function AboutPage() {
         bg-white
         text-slate-950
       ">
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              webPageSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              breadcrumbSchema
+            ),
+        }}
+      />
+
 
       {/* =================================================
           HERO
@@ -790,7 +1091,7 @@ export default async function AboutPage() {
           </p>
 
           <Link
-            href="/get-started"
+            href={getStartedPath}
             className="
               mt-8
               inline-flex

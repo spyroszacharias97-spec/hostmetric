@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { getDictionary } from "@/i18n/get-dictionary";
@@ -6,6 +7,20 @@ import {
   isSupportedLocale,
   type Locale,
 } from "@/i18n/config";
+
+import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
+  getLocalizedAlternates,
+} from "@/seo/metadata";
+
+import {
+  getBreadcrumbSchema,
+  getWebPageSchema,
+  serializeJsonLd,
+} from "@/seo/schema";
 import {
   ShieldCheck,
   Database,
@@ -15,6 +30,209 @@ import {
   UserCheck,
   Mail,
 } from "lucide-react";
+
+
+/* ==========================================
+   FINAL SEO PASS NOTES
+
+   This Privacy Policy page has now completed:
+   - Localized SEO title + meta description
+   - Canonical + hreflang + x-default
+   - Open Graph + Twitter
+   - Robots index/follow
+   - Heading / legal internal-link review
+
+   Search intent:
+   - HostMetric privacy policy
+   - Privacy / personal-data information
+   - Legal trust and transparency
+
+   Commercial Property Management, Airbnb,
+   Booking.com and revenue keywords are deliberately
+   NOT targeted here. This is a legal/trust page,
+   so commercial keyword phrases remain assigned
+   to the relevant service, insight and Guide pages.
+
+   Do NOT repeat these items in a later pass.
+========================================== */
+
+
+/* ==========================================
+   PRIVACY POLICY PAGE SEO CONTENT
+========================================== */
+
+const privacyPolicyPageSeo: Record<
+  Locale,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  el: {
+    title:
+      "Πολιτική Απορρήτου | HostMetric",
+    description:
+      "Διαβάστε την Πολιτική Απορρήτου της HostMetric και μάθετε πώς συλλέγουμε, χρησιμοποιούμε, αποθηκεύουμε και προστατεύουμε προσωπικά δεδομένα και πληροφορίες.",
+  },
+
+  en: {
+    title:
+      "Privacy Policy | HostMetric",
+    description:
+      "Read the HostMetric Privacy Policy to learn how we collect, use, store and protect personal data and information when you use our website and services.",
+  },
+
+  de: {
+    title:
+      "Datenschutzerklärung | HostMetric",
+    description:
+      "Lesen Sie die Datenschutzerklärung von HostMetric und erfahren Sie, wie wir personenbezogene Daten und Informationen erheben, verwenden, speichern und schützen.",
+  },
+
+  fr: {
+    title:
+      "Politique de Confidentialité | HostMetric",
+    description:
+      "Consultez la Politique de Confidentialité de HostMetric pour savoir comment nous collectons, utilisons, stockons et protégeons les données et informations personnelles.",
+  },
+
+  it: {
+    title:
+      "Informativa sulla Privacy | HostMetric",
+    description:
+      "Consulta l'Informativa sulla Privacy di HostMetric per sapere come raccogliamo, utilizziamo, conserviamo e proteggiamo dati personali e informazioni.",
+  },
+
+  es: {
+    title:
+      "Política de Privacidad | HostMetric",
+    description:
+      "Consulta la Política de Privacidad de HostMetric para conocer cómo recopilamos, utilizamos, almacenamos y protegemos los datos personales y la información.",
+  },
+
+  pt: {
+    title:
+      "Política de Privacidade | HostMetric",
+    description:
+      "Consulte a Política de Privacidade da HostMetric para saber como recolhemos, utilizamos, armazenamos e protegemos dados pessoais e informações.",
+  },
+
+  bg: {
+    title:
+      "Политика за поверителност | HostMetric",
+    description:
+      "Прочетете Политиката за поверителност на HostMetric и научете как събираме, използваме, съхраняваме и защитаваме лични данни и информация.",
+  },
+
+  sr: {
+    title:
+      "Politika privatnosti | HostMetric",
+    description:
+      "Pročitajte Politiku privatnosti HostMetric-a i saznajte kako prikupljamo, koristimo, čuvamo i štitimo lične podatke i informacije.",
+  },
+
+  tr: {
+    title:
+      "Gizlilik Politikası | HostMetric",
+    description:
+      "HostMetric Gizlilik Politikası'nı okuyarak kişisel verileri ve bilgileri nasıl topladığımızı, kullandığımızı, sakladığımızı ve koruduğumuzu öğrenin.",
+  },
+
+  pl: {
+    title:
+      "Polityka Prywatności | HostMetric",
+    description:
+      "Przeczytaj Politykę Prywatności HostMetric i dowiedz się, jak zbieramy, wykorzystujemy, przechowujemy i chronimy dane osobowe oraz informacje.",
+  },
+
+  ru: {
+    title:
+      "Политика конфиденциальности | HostMetric",
+    description:
+      "Ознакомьтесь с Политикой конфиденциальности HostMetric и узнайте, как мы собираем, используем, храним и защищаем персональные данные и информацию.",
+  },
+};
+
+
+/* ==========================================
+   PRIVACY POLICY PAGE SEO METADATA
+========================================== */
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore =
+    await cookies();
+
+  const savedLocale =
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
+  let currentLocale: Locale =
+    defaultLocale;
+
+  if (
+    savedLocale &&
+    isSupportedLocale(
+      savedLocale
+    )
+  ) {
+    currentLocale =
+      savedLocale;
+  }
+
+  const seo =
+    privacyPolicyPageSeo[currentLocale];
+
+  const localizedPrivacyPolicyPath =
+    getLocalizedPath(
+      "/privacy",
+      currentLocale
+    );
+
+  return {
+    title:
+      seo.title,
+
+    description:
+      seo.description,
+
+    alternates:
+      getLocalizedAlternates(
+        "/privacy",
+        currentLocale
+      ),
+
+    openGraph: {
+      type:
+        "website",
+      url:
+        localizedPrivacyPolicyPath,
+      siteName:
+        "HostMetric",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    twitter: {
+      card:
+        "summary_large_image",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    robots: {
+      index:
+        true,
+      follow:
+        true,
+    },
+  };
+}
+
 
 export default async function PrivacyPolicyPage() {
   const cookieStore = await cookies();
@@ -29,6 +247,55 @@ export default async function PrivacyPolicyPage() {
   const dictionary = await getDictionary(currentLocale);
   const privacy = dictionary.privacyPolicyPage;
 
+
+  /* =========================================================
+     LOCALIZED ROUTES
+  ========================================================= */
+
+  const cookiesPath =
+    `${getLocalizedPath(
+      "/cookies",
+      currentLocale
+    )}#top`;
+
+
+  /* ==========================================
+     STRUCTURED DATA
+  ========================================== */
+
+  const webPageSchema =
+    getWebPageSchema({
+      name:
+        privacy.hero.title,
+      description:
+        privacy.hero.description,
+      pathname:
+        "/privacy",
+      locale:
+        currentLocale,
+    });
+
+  const breadcrumbSchema =
+    getBreadcrumbSchema({
+      items: [
+        {
+          name:
+            "HostMetric",
+          pathname:
+            "/",
+        },
+        {
+          name:
+            privacy.hero.title,
+          pathname:
+            "/privacy",
+        },
+      ],
+      locale:
+        currentLocale,
+    });
+
+
   return (
     <main
       id="top"
@@ -42,6 +309,27 @@ export default async function PrivacyPolicyPage() {
         text-slate-900
       "
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              webPageSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              breadcrumbSchema
+            ),
+        }}
+      />
+
+
       {/* HERO */}
       <section
         className="
@@ -825,7 +1113,7 @@ export default async function PrivacyPolicyPage() {
               >
                 {privacy.sections.cookies.paragraph2BeforeLink}{" "}
                 <Link
-                  href="/cookies#top"
+                  href={cookiesPath}
                   className="
                     font-semibold
                     text-blue-600

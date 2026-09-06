@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 
@@ -10,12 +11,235 @@ import {
 } from "@/i18n/config";
 
 import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
+  getLocalizedAlternates,
+} from "@/seo/metadata";
+
+import {
+  getBreadcrumbSchema,
+  getWebPageSchema,
+  serializeJsonLd,
+} from "@/seo/schema";
+
+import {
   Cookie,
   Settings2,
   ShieldCheck,
   BarChart3,
   Megaphone,
 } from "lucide-react";
+
+
+/* ==========================================
+   FINAL SEO PASS NOTES
+
+   This Cookie Policy page has now completed:
+   - SEO title
+   - Meta description
+   - Canonical
+   - Hreflang
+   - X-default
+   - Open Graph
+   - Twitter metadata
+   - Robots index/follow
+   - Search-intent / heading structure review
+   - Internal-link review
+
+   Legal-policy intent is kept primary here.
+   Commercial Airbnb / Booking.com keywords are
+   intentionally NOT stuffed into this legal page.
+
+   Do NOT repeat these items in a later pass.
+
+   Still handled separately at project level:
+   - sitemap.ts
+   - robots.ts
+   - Organization / WebSite schema
+   - Core Web Vitals / performance audit
+========================================== */
+
+
+/* ==========================================
+   COOKIE POLICY SEO CONTENT
+========================================== */
+
+const cookiePolicySeo: Record<
+  Locale,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  el: {
+    title:
+      "Πολιτική Cookies | HostMetric",
+    description:
+      "Διαβάστε την Πολιτική Cookies της HostMetric και μάθετε ποια cookies και παρόμοιες τεχνολογίες μπορεί να χρησιμοποιούνται, για ποιους σκοπούς και ποιες επιλογές έχετε.",
+  },
+
+  en: {
+    title:
+      "Cookie Policy | HostMetric",
+    description:
+      "Read the HostMetric Cookie Policy to learn which cookies and similar technologies may be used, why they are used and what choices you have regarding cookies.",
+  },
+
+  de: {
+    title:
+      "Cookie-Richtlinie | HostMetric",
+    description:
+      "Lesen Sie die Cookie-Richtlinie von HostMetric und erfahren Sie, welche Cookies und ähnlichen Technologien verwendet werden können, zu welchen Zwecken und welche Wahlmöglichkeiten Sie haben.",
+  },
+
+  fr: {
+    title:
+      "Politique relative aux cookies | HostMetric",
+    description:
+      "Consultez la politique relative aux cookies de HostMetric pour savoir quels cookies et technologies similaires peuvent être utilisés, à quelles fins et quels choix sont à votre disposition.",
+  },
+
+  it: {
+    title:
+      "Informativa sui Cookie | HostMetric",
+    description:
+      "Consulta l'informativa sui cookie di HostMetric per sapere quali cookie e tecnologie simili possono essere utilizzati, per quali finalità e quali opzioni sono disponibili.",
+  },
+
+  es: {
+    title:
+      "Política de Cookies | HostMetric",
+    description:
+      "Consulta la Política de Cookies de HostMetric para saber qué cookies y tecnologías similares pueden utilizarse, con qué finalidad y qué opciones tienes a tu disposición.",
+  },
+
+  pt: {
+    title:
+      "Política de Cookies | HostMetric",
+    description:
+      "Consulte a Política de Cookies da HostMetric para saber que cookies e tecnologias semelhantes podem ser utilizados, para que fins e que opções estão disponíveis.",
+  },
+
+  bg: {
+    title:
+      "Политика за бисквитките | HostMetric",
+    description:
+      "Прочетете Политиката за бисквитките на HostMetric, за да научите какви бисквитки и подобни технологии могат да се използват, с каква цел и какви възможности за избор имате.",
+  },
+
+  sr: {
+    title:
+      "Politika kolačića | HostMetric",
+    description:
+      "Pročitajte HostMetric Politiku kolačića i saznajte koji kolačići i slične tehnologije mogu da se koriste, u koje svrhe i koje opcije imate na raspolaganju.",
+  },
+
+  tr: {
+    title:
+      "Çerez Politikası | HostMetric",
+    description:
+      "HostMetric Çerez Politikası'nı okuyarak hangi çerezlerin ve benzer teknolojilerin kullanılabileceğini, kullanım amaçlarını ve sahip olduğunuz seçenekleri öğrenin.",
+  },
+
+  pl: {
+    title:
+      "Polityka plików cookie | HostMetric",
+    description:
+      "Przeczytaj Politykę plików cookie HostMetric i dowiedz się, jakie pliki cookie oraz podobne technologie mogą być używane, w jakim celu i jakie masz możliwości wyboru.",
+  },
+
+  ru: {
+    title:
+      "Политика использования файлов cookie | HostMetric",
+    description:
+      "Ознакомьтесь с Политикой использования файлов cookie HostMetric, чтобы узнать, какие файлы cookie и аналогичные технологии могут использоваться, для каких целей и какие возможности выбора у вас есть.",
+  },
+};
+
+
+/* ==========================================
+   COOKIE POLICY SEO METADATA
+========================================== */
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore =
+    await cookies();
+
+  const savedLocale =
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
+  let currentLocale: Locale =
+    defaultLocale;
+
+  if (
+    savedLocale &&
+    isSupportedLocale(
+      savedLocale
+    )
+  ) {
+    currentLocale =
+      savedLocale;
+  }
+
+
+  const seo =
+    cookiePolicySeo[currentLocale];
+
+
+  const localizedCookiePolicyPath =
+    getLocalizedPath(
+      "/cookies",
+      currentLocale
+    );
+
+
+  return {
+    title:
+      seo.title,
+
+    description:
+      seo.description,
+
+    alternates:
+      getLocalizedAlternates(
+        "/cookies",
+        currentLocale
+      ),
+
+    openGraph: {
+      type:
+        "website",
+      url:
+        localizedCookiePolicyPath,
+      siteName:
+        "HostMetric",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    twitter: {
+      card:
+        "summary_large_image",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    robots: {
+      index:
+        true,
+      follow:
+        true,
+    },
+  };
+}
 
 
 export default async function CookiePolicyPage() {
@@ -60,6 +284,54 @@ export default async function CookiePolicyPage() {
 
 
   /* ==========================================
+     LOCALIZED ROUTES
+  ========================================== */
+
+  const privacyPath =
+    `${getLocalizedPath(
+      "/privacy",
+      currentLocale
+    )}#top`;
+
+
+  /* ==========================================
+     STRUCTURED DATA
+  ========================================== */
+
+  const webPageSchema =
+    getWebPageSchema({
+      name:
+        cookiePolicy.hero.title,
+      description:
+        cookiePolicy.hero.description,
+      pathname:
+        "/cookies",
+      locale:
+        currentLocale,
+    });
+
+  const breadcrumbSchema =
+    getBreadcrumbSchema({
+      items: [
+        {
+          name:
+            "HostMetric",
+          pathname:
+            "/",
+        },
+        {
+          name:
+            cookiePolicy.hero.title,
+          pathname:
+            "/cookies",
+        },
+      ],
+      locale:
+        currentLocale,
+    });
+
+
+  /* ==========================================
      PAGE
   ========================================== */
 
@@ -76,6 +348,27 @@ export default async function CookiePolicyPage() {
         text-slate-900
       "
     >
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              webPageSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              breadcrumbSchema
+            ),
+        }}
+      />
+
 
       {/* =================================================
           HERO
@@ -778,7 +1071,7 @@ export default async function CookiePolicyPage() {
                 {cookiePolicy.sections.privacy.paragraphBeforeLink}{" "}
 
                 <Link
-                  href="/privacy#top"
+                  href={privacyPath}
                   className="
                     font-semibold
                     text-blue-600

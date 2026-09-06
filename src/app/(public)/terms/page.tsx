@@ -1,6 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { getDictionary } from "@/i18n/get-dictionary";
+import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
+  getLocalizedAlternates,
+} from "@/seo/metadata";
+
+import {
+  getBreadcrumbSchema,
+  getWebPageSchema,
+  serializeJsonLd,
+} from "@/seo/schema";
 import {
   defaultLocale,
   isSupportedLocale,
@@ -14,6 +28,185 @@ import {
   ShieldAlert,
 } from "lucide-react";
 
+/* ==========================================
+   FINAL SEO PASS NOTES
+
+   This Terms & Conditions page has now completed:
+   - Localized SEO title + meta description
+   - Canonical + hreflang + x-default
+   - Open Graph + Twitter
+   - Robots index/follow
+   - H1 / H2 semantic review
+   - Internal-link review
+
+   Search intent:
+   - HostMetric Terms & Conditions
+   - Website / service terms
+   - Legal information and trust
+
+   This is a legal page, so commercial Property
+   Management, Airbnb, Booking.com and revenue
+   keywords are intentionally NOT stuffed here.
+
+   The Privacy Policy internal route uses the
+   actual public route /privacy#top.
+
+   Page-specific WebPage and BreadcrumbList schema
+   are included in the structured-data pass.
+
+   Do NOT repeat these items in a later pass.
+========================================== */
+
+
+/* ==========================================
+   TERMS PAGE SEO CONTENT
+========================================== */
+
+const termsPageSeo: Record<
+  Locale,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  el: {
+    title: "Όροι & Προϋποθέσεις | HostMetric",
+    description:
+      "Διαβάστε τους Όρους και τις Προϋποθέσεις της HostMetric σχετικά με τη χρήση της ιστοσελίδας, των υπηρεσιών, του περιεχομένου και των πληροφοριών μας.",
+  },
+  en: {
+    title: "Terms & Conditions | HostMetric",
+    description:
+      "Read the HostMetric Terms & Conditions covering use of our website, services, content, information, third-party platforms, responsibilities and related legal terms.",
+  },
+  de: {
+    title: "Allgemeine Geschäftsbedingungen | HostMetric",
+    description:
+      "Lesen Sie die Geschäftsbedingungen von HostMetric zur Nutzung unserer Website, Dienstleistungen, Inhalte und Informationen sowie zu Verantwortlichkeiten und rechtlichen Bedingungen.",
+  },
+  fr: {
+    title: "Conditions Générales | HostMetric",
+    description:
+      "Consultez les Conditions Générales de HostMetric concernant l’utilisation de notre site, de nos services, contenus et informations, ainsi que les responsabilités applicables.",
+  },
+  it: {
+    title: "Termini & Condizioni | HostMetric",
+    description:
+      "Leggi i Termini e le Condizioni di HostMetric relativi all’utilizzo del sito, dei servizi, dei contenuti e delle informazioni, incluse responsabilità e condizioni legali.",
+  },
+  es: {
+    title: "Términos & Condiciones | HostMetric",
+    description:
+      "Consulta los Términos y Condiciones de HostMetric sobre el uso de nuestro sitio web, servicios, contenidos e información, incluidas responsabilidades y condiciones legales.",
+  },
+  pt: {
+    title: "Termos & Condições | HostMetric",
+    description:
+      "Consulte os Termos e Condições da HostMetric sobre a utilização do nosso site, serviços, conteúdos e informações, incluindo responsabilidades e condições legais.",
+  },
+  bg: {
+    title: "Общи условия | HostMetric",
+    description:
+      "Прочетете Общите условия на HostMetric относно използването на нашия уебсайт, услуги, съдържание и информация, включително отговорности и приложими правни условия.",
+  },
+  sr: {
+    title: "Uslovi korišćenja | HostMetric",
+    description:
+      "Pročitajte uslove korišćenja HostMetric-a koji se odnose na naš sajt, usluge, sadržaj i informacije, uključujući odgovornosti i relevantne pravne uslove.",
+  },
+  tr: {
+    title: "Şartlar & Koşullar | HostMetric",
+    description:
+      "Web sitemizin, hizmetlerimizin, içerik ve bilgilerimizin kullanımına ilişkin sorumluluklar ve ilgili yasal hükümler dahil HostMetric Şartlar ve Koşullarını okuyun.",
+  },
+  pl: {
+    title: "Regulamin | HostMetric",
+    description:
+      "Zapoznaj się z Regulaminem HostMetric dotyczącym korzystania z naszej strony, usług, treści i informacji, w tym odpowiedzialności oraz odpowiednich warunków prawnych.",
+  },
+
+  ru: {
+    title: "Условия использования | HostMetric",
+    description:
+      "Ознакомьтесь с Условиями использования HostMetric, регулирующими использование нашего сайта, услуг, контента и информации, включая ответственность и применимые юридические условия.",
+  },
+};
+
+
+/* ==========================================
+   TERMS PAGE SEO METADATA
+========================================== */
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const savedLocale =
+    cookieStore.get("hostmetric_locale")?.value;
+
+  let currentLocale: Locale =
+    defaultLocale;
+
+  if (
+    savedLocale &&
+    isSupportedLocale(savedLocale)
+  ) {
+    currentLocale =
+      savedLocale;
+  }
+
+  const seo =
+    termsPageSeo[currentLocale];
+
+  const localizedTermsPath =
+    getLocalizedPath(
+      "/terms",
+      currentLocale
+    );
+
+  return {
+    title:
+      seo.title,
+
+    description:
+      seo.description,
+
+    alternates:
+      getLocalizedAlternates(
+        "/terms",
+        currentLocale
+      ),
+
+    openGraph: {
+      type:
+        "website",
+      url:
+        localizedTermsPath,
+      siteName:
+        "HostMetric",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    twitter: {
+      card:
+        "summary_large_image",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    robots: {
+      index:
+        true,
+      follow:
+        true,
+    },
+  };
+}
+
+
 export default async function TermsPage() {
   const cookieStore = await cookies();
   const savedLocale = cookieStore.get("hostmetric_locale")?.value;
@@ -26,6 +219,54 @@ export default async function TermsPage() {
 
   const dictionary = await getDictionary(currentLocale);
   const terms = dictionary.termsPage;
+
+  /* =========================================================
+     LOCALE-AWARE PUBLIC ROUTES
+  ========================================================= */
+
+  const privacyPath =
+    getLocalizedPath(
+      "/privacy#top",
+      currentLocale
+    );
+
+
+  /* ==========================================
+     STRUCTURED DATA
+  ========================================== */
+
+  const webPageSchema =
+    getWebPageSchema({
+      name:
+        "Terms & Conditions",
+      description:
+        terms.hero.description,
+      pathname:
+        "/terms",
+      locale:
+        currentLocale,
+    });
+
+  const breadcrumbSchema =
+    getBreadcrumbSchema({
+      items: [
+        {
+          name:
+            "HostMetric",
+          pathname:
+            "/",
+        },
+        {
+          name:
+            "Terms & Conditions",
+          pathname:
+            "/terms",
+        },
+      ],
+      locale:
+        currentLocale,
+    });
+
 
   /* =========================================================
      RESPONSIVE TERMS & CONDITIONS
@@ -48,6 +289,27 @@ export default async function TermsPage() {
         text-slate-900
       "
     >
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              webPageSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              breadcrumbSchema
+            ),
+        }}
+      />
+
 
       <section
         className="
@@ -759,7 +1021,7 @@ export default async function TermsPage() {
               >
                 {terms.sections.privacy.paragraphBeforeLink}{" "}
                 <Link
-                  href="/privacy#top"
+                  href={privacyPath}
                   className="
                     font-semibold
                     text-blue-600

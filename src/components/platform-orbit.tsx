@@ -9,6 +9,10 @@ import {
   type Locale,
 } from "@/i18n/config";
 
+import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
 
 const platforms = [
   {
@@ -119,6 +123,35 @@ export default async function PlatformOrbit() {
     dictionary.platformOrbit;
 
 
+  /* ==========================================
+     LOCALIZED ROUTES
+  ========================================== */
+
+  const platformNetworkPath =
+    getLocalizedPath(
+      "/performance/platform-network",
+      currentLocale
+    );
+
+  const greaterVisibilityPath =
+    getLocalizedPath(
+      "/solutions/greater-visibility",
+      currentLocale
+    );
+
+  const centralizedManagementPath =
+    getLocalizedPath(
+      "/solutions/centralized-management",
+      currentLocale
+    );
+
+  const smarterDistributionPath =
+    getLocalizedPath(
+      "/solutions/smarter-distribution",
+      currentLocale
+    );
+
+
   return (
     <section className="platform-section">
 
@@ -140,7 +173,7 @@ export default async function PlatformOrbit() {
           ============================================ */}
 
           <Link
-            href="/performance/platform-network"
+            href={platformNetworkPath}
             className="platform-phone"
             aria-label={
               platformOrbit.phoneAriaLabel
@@ -324,7 +357,7 @@ export default async function PlatformOrbit() {
           ============================================ */}
 
           <Link
-            href="/solutions/greater-visibility"
+            href={greaterVisibilityPath}
             className="platform-benefit"
           >
 
@@ -364,7 +397,7 @@ export default async function PlatformOrbit() {
           ============================================ */}
 
           <Link
-            href="/solutions/centralized-management"
+            href={centralizedManagementPath}
             className="platform-benefit"
           >
 
@@ -404,7 +437,7 @@ export default async function PlatformOrbit() {
           ============================================ */}
 
           <Link
-            href="/solutions/smarter-distribution"
+            href={smarterDistributionPath}
             className="platform-benefit"
           >
 

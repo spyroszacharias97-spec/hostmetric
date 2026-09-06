@@ -20,6 +20,10 @@ import {
   type Locale,
 } from "@/i18n/config";
 
+import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
 
 export default async function FeaturedResults() {
   /* ==========================================
@@ -51,6 +55,17 @@ export default async function FeaturedResults() {
 
   const featuredResults =
     dictionary.featuredResults;
+
+
+  /* ==========================================
+     LOCALIZED ROUTES
+  ========================================== */
+
+  const getStartedPath =
+    getLocalizedPath(
+      "/get-started",
+      currentLocale
+    );
 
 
   /* =========================================================
@@ -428,7 +443,7 @@ export default async function FeaturedResults() {
 
 
           <Link
-            href="/get-started"
+            href={getStartedPath}
             className="mt-7 inline-flex w-full items-center justify-center rounded-2xl bg-blue-600 px-6 py-3.5 text-base font-bold text-white transition duration-300 hover:-translate-y-1 hover:bg-blue-500 hover:shadow-xl hover:shadow-blue-600/20 sm:mt-8 sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
           >
             {featuredResults.cta.button} →

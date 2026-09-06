@@ -1,7 +1,14 @@
 "use client";
 
 import { useState, type Dispatch, type SetStateAction } from "react";
-import { Plus, Trash2, Upload, FileImage } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Plus, Trash2, Upload, FileImage, ChevronDown } from "lucide-react";
+import * as CountryFlags from "country-flag-icons/react/3x2";
+
+import {
+  getLocaleFromPathname,
+  getLocalizedPath,
+} from "@/i18n/routing";
 
 
 type SelectedPhoto = {
@@ -502,6 +509,42 @@ function splitFullName(fullName: string | null | undefined) {
   };
 }
 
+function getIsoCodeFromFlagEmoji(flag: string) {
+  return Array.from(flag)
+    .map((character) =>
+      String.fromCharCode(
+        (character.codePointAt(0) ?? 127397) - 127397
+      )
+    )
+    .join("");
+}
+
+function PhoneCountryFlag({
+  flag,
+  className = "h-4 w-6",
+}: {
+  flag: string;
+  className?: string;
+}) {
+  const countryCode = getIsoCodeFromFlagEmoji(flag);
+  const FlagComponent = (CountryFlags as any)[countryCode];
+
+  if (!FlagComponent) {
+    return (
+      <span aria-hidden="true" className="text-base leading-none">
+        {flag}
+      </span>
+    );
+  }
+
+  return (
+    <FlagComponent
+      aria-hidden="true"
+      className={`${className} shrink-0 rounded-[2px] object-cover shadow-sm`}
+    />
+  );
+}
+
 function splitStoredPhone(phone: string | null | undefined) {
   const value = String(phone ?? "").trim();
 
@@ -544,6 +587,29 @@ export default function OnboardingForm({
   initialProperty = null,
   returnTo,
 }: OnboardingFormProps) {
+  const pathname =
+    usePathname();
+
+
+  /* =========================================================
+     PUBLIC LOCALE ROUTING
+
+     Admin mode keeps its existing admin destinations.
+     Public Contact links follow the language in the URL.
+  ========================================================= */
+
+  const currentLocale =
+    getLocaleFromPathname(
+      pathname
+    );
+
+  const contactPath =
+    getLocalizedPath(
+      "/contact",
+      currentLocale
+    );
+
+
   const t = (key: string) => dictionary?.texts?.[key] ?? key;
   const tf = (
     key: string,
@@ -602,6 +668,17 @@ export default function OnboardingForm({
       initialContact?.phone
     );
 
+  const initialPhoneCountry =
+    phoneCountryCodes.find(
+      (item) => item.code === initialPhone.phoneCountryCode
+    ) ??
+    phoneCountryCodes.find(
+      (item) => item.country === "Greece"
+    )!;
+
+  const [selectedPhoneCountryName, setSelectedPhoneCountryName] =
+    useState(initialPhoneCountry.country);
+
   const [formData, setFormData] = useState<FormData>({
     propertyCountry: initialProperty?.country ?? "",
     ownerType: "individual",
@@ -609,8 +686,8 @@ export default function OnboardingForm({
     firstName: initialNames.firstName,
     lastName: initialNames.lastName,
     email: initialContact?.email ?? "",
-    phoneCountryCode: "+30",
-    phone: "",
+    phoneCountryCode: initialPhone.phoneCountryCode,
+    phone: initialPhone.phone,
 
     residenceCountry: "",
     dateOfBirth: "",
@@ -1357,6 +1434,11 @@ export default function OnboardingForm({
   // =========================================================
   // INPUT CLASSES
   // =========================================================
+
+  const selectedPhoneCountry =
+    phoneCountryCodes.find(
+      (item) => item.country === selectedPhoneCountryName
+    ) ?? initialPhoneCountry;
 
   const inputClass = (field: string) =>
     `w-full rounded-2xl border bg-white px-3.5 py-3.5 text-sm text-slate-900 outline-none transition sm:px-4 sm:py-4 sm:text-base ${
@@ -2228,7 +2310,7 @@ export default function OnboardingForm({
                   ? returnTo
                   : adminMode
                     ? "/admin/leads"
-                    : "/contact"
+                    : contactPath
               }
               className="mt-4 inline-flex rounded-xl bg-blue-600 px-5 py-3 font-bold text-white transition hover:-translate-y-1 hover:shadow-lg"
             >
@@ -2337,7 +2419,7 @@ export default function OnboardingForm({
 
 
         <a
-          href="/contact"
+          href={contactPath}
           className="inline-flex w-full shrink-0 items-center justify-center rounded-xl bg-slate-950 px-5 py-3 font-bold text-white transition hover:-translate-y-1 hover:bg-blue-600 hover:shadow-lg sm:w-auto sm:px-6"
         >
           {t("Contact Us →")}
@@ -2555,36 +2637,71 @@ export default function OnboardingForm({
               </label>
 
               <div
-                className={`flex min-w-0 overflow-hidden rounded-2xl border bg-white transition ${
+                className={`relative flex min-w-0 rounded-2xl border bg-white transition ${
                   errors.phone
                     ? "border-red-500 ring-4 ring-red-50"
                     : "border-slate-300 focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100"
                 }`}
               >
 
-                <select
-                  aria-label={t("Phone country code")}
-                  value={formData.phoneCountryCode}
-                  onChange={(event) =>
-                    updateField(
-                      "phoneCountryCode",
-                      event.target.value
-                    )
-                  }
-                  className="w-[112px] shrink-0 cursor-pointer border-r border-slate-300 bg-slate-50 px-2 py-3.5 text-sm font-semibold text-slate-900 outline-none min-[380px]:w-[125px] sm:w-[175px] sm:px-3 sm:py-4 sm:text-base"
+                <details
+                  className="group relative w-[132px] shrink-0 border-r border-slate-300 bg-slate-50 min-[380px]:w-[145px] sm:w-[205px]"
                 >
+                  <summary
+                    aria-label={t("Phone country code")}
+                    className="flex h-full min-h-[52px] cursor-pointer list-none items-center justify-between gap-2 px-2.5 py-3.5 text-sm font-semibold text-slate-900 outline-none [&::-webkit-details-marker]:hidden sm:min-h-[58px] sm:px-3 sm:py-4 sm:text-base"
+                  >
+                    <span className="flex min-w-0 items-center gap-2">
+                      <PhoneCountryFlag
+                        flag={selectedPhoneCountry.flag}
+                        className="h-4 w-6 sm:h-[18px] sm:w-7"
+                      />
+                      <span className="shrink-0">
+                        {selectedPhoneCountry.code}
+                      </span>
+                      <span className="hidden truncate sm:inline">
+                        {tCountry(selectedPhoneCountry.country)}
+                      </span>
+                    </span>
 
-                  {phoneCountryCodes.map((item) => (
-                    <option
-                      key={`${item.country}-${item.code}`}
-                      value={item.code}
-                    >
-                      {item.flag} {item.code} {tCountry(item.country)}
-                    </option>
-                  ))}
+                    <ChevronDown
+                      size={16}
+                      className="shrink-0 transition-transform group-open:rotate-180"
+                    />
+                  </summary>
 
-                </select>
-
+                  <div className="absolute left-0 top-full z-[80] mt-2 max-h-80 w-[290px] overflow-y-auto rounded-2xl border border-slate-200 bg-white p-1.5 shadow-2xl sm:w-[340px]">
+                    {phoneCountryCodes.map((item) => (
+                      <button
+                        key={`${item.country}-${item.code}`}
+                        type="button"
+                        onClick={(event) => {
+                          setSelectedPhoneCountryName(item.country);
+                          updateField("phoneCountryCode", item.code);
+                          event.currentTarget
+                            .closest("details")
+                            ?.removeAttribute("open");
+                        }}
+                        className={`flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm transition hover:bg-blue-50 ${
+                          selectedPhoneCountry.country === item.country
+                            ? "bg-blue-50 font-bold text-blue-700"
+                            : "text-slate-800"
+                        }`}
+                      >
+                        <PhoneCountryFlag
+                          flag={item.flag}
+                          className="h-[18px] w-7"
+                        />
+                        <span className="w-[58px] shrink-0 font-semibold">
+                          {item.code}
+                        </span>
+                        <span className="min-w-0 flex-1 truncate">
+                          {tCountry(item.country)}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </details>
 
                 <input
                   type="tel"
@@ -2598,7 +2715,7 @@ export default function OnboardingForm({
                     )
                   }
                   placeholder={t("Phone number")}
-                  className="min-w-0 flex-1 bg-white px-3 py-3.5 text-sm text-slate-900 outline-none sm:px-4 sm:py-4 sm:text-base"
+                  className="min-w-0 flex-1 rounded-r-2xl bg-white px-3 py-3.5 text-sm text-slate-900 outline-none sm:px-4 sm:py-4 sm:text-base"
                 />
 
               </div>

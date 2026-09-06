@@ -10,6 +10,11 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 
+import {
+  getLocaleFromPathname,
+  getLocalizedPath,
+} from "@/i18n/routing";
+
 
 type FooterGetStartedCtaProps = {
   label: string;
@@ -24,13 +29,61 @@ export default function FooterGetStartedCta({
     usePathname();
 
 
-  const isHomepage =
-    pathname === "/";
+  /* ==========================================
+     CURRENT LOCALE FROM URL
+  ========================================== */
 
+  const currentLocale =
+    getLocaleFromPathname(
+      pathname
+    );
+
+
+  /* ==========================================
+     LOCALIZED URLS
+  ========================================== */
+
+  const homepagePath =
+    getLocalizedPath(
+      "/",
+      currentLocale
+    );
+
+
+  const getStartedPath =
+    getLocalizedPath(
+      "/get-started",
+      currentLocale
+    );
+
+
+  /* ==========================================
+     HOMEPAGE DETECTION
+
+     Greek:
+     /
+
+     English:
+     /en
+
+     German:
+     /de
+
+     etc.
+  ========================================== */
+
+  const isHomepage =
+    pathname ===
+    homepagePath;
+
+
+  /* ==========================================
+     FOOTER CTA
+  ========================================== */
 
   return (
     <Link
-      href="/get-started"
+      href={getStartedPath}
       className={`
         mt-6
         w-full

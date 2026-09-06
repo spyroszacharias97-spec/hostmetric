@@ -14,6 +14,10 @@ import {
 } from "@/i18n/get-dictionary";
 
 import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
   defaultLocale,
   isSupportedLocale,
   type Locale,
@@ -121,7 +125,7 @@ export default async function Footer() {
           >
 
             <Link
-              href="/#top"
+              href={`${getLocalizedPath("/", currentLocale)}#top`}
               className="
                 inline-block
                 text-3xl
@@ -197,7 +201,7 @@ export default async function Footer() {
             >
 
               <Link
-                href="/insights/occupancy"
+                href={getLocalizedPath("/insights/occupancy", currentLocale)}
                 className="
                   w-fit
                   max-w-full
@@ -214,7 +218,7 @@ export default async function Footer() {
 
 
               <Link
-                href="/services/smart-pricing"
+                href={getLocalizedPath("/services/smart-pricing", currentLocale)}
                 className="
                   w-fit
                   max-w-full
@@ -231,7 +235,7 @@ export default async function Footer() {
 
 
               <Link
-                href="/services/guest-communication"
+                href={getLocalizedPath("/services/guest-communication", currentLocale)}
                 className="
                   w-fit
                   max-w-full
@@ -248,7 +252,7 @@ export default async function Footer() {
 
 
               <Link
-                href="/services/booking-management"
+                href={getLocalizedPath("/services/booking-management", currentLocale)}
                 className="
                   w-fit
                   max-w-full
@@ -304,7 +308,7 @@ export default async function Footer() {
             >
 
               <Link
-                href="/about"
+                href={getLocalizedPath("/about", currentLocale)}
                 className="
                   w-fit
                   transition
@@ -316,7 +320,7 @@ export default async function Footer() {
 
 
               <Link
-                href="/#how-it-works"
+                href={`${getLocalizedPath("/", currentLocale)}#how-it-works`}
                 className="
                   w-fit
                   transition
@@ -331,7 +335,7 @@ export default async function Footer() {
 
 
               <Link
-                href="/pricing"
+                href={getLocalizedPath("/pricing", currentLocale)}
                 className="
                   w-fit
                   transition
@@ -343,7 +347,7 @@ export default async function Footer() {
 
 
               <Link
-                href="/contact"
+                href={getLocalizedPath("/contact", currentLocale)}
                 className="
                   w-fit
                   font-semibold
@@ -624,7 +628,7 @@ export default async function Footer() {
             >
 
               <Link
-                href="/privacy"
+                href={getLocalizedPath("/privacy-policy", currentLocale)}
                 className="
                   transition
                   hover:text-white
@@ -635,7 +639,7 @@ export default async function Footer() {
 
 
               <Link
-                href="/terms"
+                href={getLocalizedPath("/terms", currentLocale)}
                 className="
                   transition
                   hover:text-white
@@ -646,7 +650,7 @@ export default async function Footer() {
 
 
               <Link
-                href="/cookies"
+                href={getLocalizedPath("/cookies", currentLocale)}
                 className="
                   transition
                   hover:text-white

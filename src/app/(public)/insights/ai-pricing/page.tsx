@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 
@@ -10,6 +11,145 @@ import {
   isSupportedLocale,
   type Locale,
 } from "@/i18n/config";
+
+import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
+  getLocalizedAlternates,
+} from "@/seo/metadata";
+
+import {
+  getBreadcrumbSchema,
+  getWebPageSchema,
+  serializeJsonLd,
+} from "@/seo/schema";
+
+
+/* ==========================================
+   FINAL SEO PASS NOTES
+
+   This AI Pricing page has now completed:
+   - SEO title + meta description
+   - Canonical + hreflang + x-default
+   - Open Graph + Twitter
+   - Robots index/follow
+   - Heading and internal-link review
+
+   Primary intent:
+   AI pricing, dynamic pricing and rental revenue
+   optimization. Airbnb and Booking.com support the
+   topic without replacing its specialized intent.
+
+   Do NOT repeat these items in a later pass.
+========================================== */
+
+const aiPricingPageSeo: Record<
+  Locale,
+  { title: string; description: string }
+> = {
+  el: {
+    title: "AI & Δυναμική Τιμολόγηση Βραχυχρόνιων Μισθώσεων | HostMetric",
+    description: "AI και δυναμική τιμολόγηση για Airbnb, Booking.com και βραχυχρόνιες μισθώσεις. Ανάλυση ζήτησης, αγοράς και ελαστικότητας τιμών για καλύτερες τιμές, πληρότητα και έσοδα.",
+  },
+  en: {
+    title: "AI & Dynamic Pricing for Short-Term Rentals | HostMetric",
+    description: "AI and dynamic pricing for Airbnb, Booking.com and short-term rentals. HostMetric analyzes demand, market positioning and price elasticity to optimize rates, occupancy and rental revenue.",
+  },
+  de: {
+    title: "KI & dynamische Preise für Kurzzeitvermietungen | HostMetric",
+    description: "KI-gestützte dynamische Preisgestaltung für Airbnb, Booking.com und Kurzzeitvermietungen zur Optimierung von Preisen, Auslastung und Mieteinnahmen.",
+  },
+  fr: {
+    title: "Tarification IA & Dynamique pour Locations Courte Durée | HostMetric",
+    description: "Tarification dynamique par IA pour Airbnb, Booking.com et locations courte durée afin d’optimiser les tarifs, l’occupation et les revenus locatifs.",
+  },
+  it: {
+    title: "Prezzi AI & Dinamici per Affitti Brevi | HostMetric",
+    description: "Prezzi dinamici basati sull’AI per Airbnb, Booking.com e affitti brevi per ottimizzare tariffe, occupazione e ricavi da locazione.",
+  },
+  es: {
+    title: "Precios con IA & Dinámicos para Alquileres Cortos | HostMetric",
+    description: "Precios dinámicos con IA para Airbnb, Booking.com y alquileres de corta estancia para optimizar tarifas, ocupación e ingresos.",
+  },
+  pt: {
+    title: "Preços com IA & Dinâmicos para Alojamento de Curta Duração | HostMetric",
+    description: "Preços dinâmicos com IA para Airbnb, Booking.com e alojamento de curta duração para otimizar tarifas, ocupação e receitas.",
+  },
+  bg: {
+    title: "AI & Динамично ценообразуване за краткосрочни наеми | HostMetric",
+    description: "AI и динамично ценообразуване за Airbnb, Booking.com и краткосрочни наеми за оптимизиране на цените, заетостта и приходите.",
+  },
+  sr: {
+    title: "AI & Dinamičko formiranje cena za kratkoročni najam | HostMetric",
+    description: "AI i dinamičko formiranje cena za Airbnb, Booking.com i kratkoročni najam radi optimizacije cena, popunjenosti i prihoda.",
+  },
+  tr: {
+    title: "Yapay Zekâ & Dinamik Fiyatlandırma | Kısa Süreli Kiralama | HostMetric",
+    description: "Airbnb, Booking.com ve kısa süreli kiralamalar için yapay zekâ destekli dinamik fiyatlandırma ile fiyatları, doluluğu ve geliri optimize edin.",
+  },
+  pl: {
+    title: "AI & Dynamiczne Ceny Najmu Krótkoterminowego | HostMetric",
+    description: "Dynamiczne ceny oparte na AI dla Airbnb, Booking.com i najmu krótkoterminowego w celu optymalizacji stawek, obłożenia i przychodów.",
+  },
+  ru: {
+    title: "AI и динамическое ценообразование для краткосрочной аренды | HostMetric",
+    description: "AI и динамическое ценообразование для Airbnb, Booking.com и краткосрочной аренды: анализ спроса, рынка и ценовой эластичности для оптимизации тарифов, заполняемости и дохода от аренды.",
+  },
+};
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const savedLocale = cookieStore.get("hostmetric_locale")?.value;
+
+  let currentLocale: Locale = defaultLocale;
+
+  if (
+    savedLocale &&
+    isSupportedLocale(savedLocale)
+  ) {
+    currentLocale = savedLocale;
+  }
+
+  const seo = aiPricingPageSeo[currentLocale];
+
+  const localizedAiPricingPath =
+    getLocalizedPath(
+      "/insights/ai-pricing",
+      currentLocale
+    );
+
+  return {
+    title: seo.title,
+    description: seo.description,
+
+    alternates:
+      getLocalizedAlternates(
+        "/insights/ai-pricing",
+        currentLocale
+      ),
+
+    openGraph: {
+      type: "website",
+      url: localizedAiPricingPath,
+      siteName: "HostMetric",
+      title: seo.title,
+      description: seo.description,
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: seo.title,
+      description: seo.description,
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
 
 export default async function AiPricingPage() {
@@ -57,6 +197,54 @@ export default async function AiPricingPage() {
     dictionary.aiPricingPage;
 
 
+  /* ==========================================
+     LOCALIZED ROUTES
+  ========================================== */
+
+  const homePath =
+    getLocalizedPath(
+      "/",
+      currentLocale
+    );
+
+
+  /* ==========================================
+     STRUCTURED DATA
+  ========================================== */
+
+  const webPageSchema =
+    getWebPageSchema({
+      name:
+        aiPricing.title,
+      description:
+        aiPricing.description,
+      pathname:
+        "/insights/ai-pricing",
+      locale:
+        currentLocale,
+    });
+
+  const breadcrumbSchema =
+    getBreadcrumbSchema({
+      items: [
+        {
+          name:
+            "HostMetric",
+          pathname:
+            "/",
+        },
+        {
+          name:
+            aiPricing.title,
+          pathname:
+            "/insights/ai-pricing",
+        },
+      ],
+      locale:
+        currentLocale,
+    });
+
+
   /* =========================================================
      RESPONSIVE AI PRICING PAGE
      Mobile-first presentation. Content, routes, translations
@@ -80,6 +268,27 @@ export default async function AiPricingPage() {
       }}
     >
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              webPageSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              breadcrumbSchema
+            ),
+        }}
+      />
+
+
       <div
         className="
           mx-auto
@@ -94,7 +303,7 @@ export default async function AiPricingPage() {
       >
 
         <Link
-          href="/"
+          href={homePath}
           className="
             inline-flex
             items-center

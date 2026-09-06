@@ -14,6 +14,7 @@ import { neon } from "@neondatabase/serverless";
 import { cookies } from "next/headers";
 
 import OnboardingForm from "@/components/onboarding-form";
+import AdminPhoneInput from "@/components/admin-phone-input";
 
 import {
   getAdminDictionary,
@@ -179,10 +180,18 @@ async function createClient(
       .trim()
       .toLowerCase();
 
-  const phone =
+  const phoneCountryCode =
+    String(
+      formData.get("phoneCountryCode") ?? ""
+    ).trim();
+
+  const phoneNumber =
     String(
       formData.get("phone") ?? ""
     ).trim();
+
+  const phone =
+    `${phoneCountryCode} ${phoneNumber}`.trim();
 
   const propertyCountry =
     String(
@@ -202,7 +211,11 @@ async function createClient(
   if (
     !fullName ||
     !email ||
-    !propertyCountry
+    !phoneCountryCode ||
+    !phoneNumber ||
+    !propertyCountry ||
+    !propertyType ||
+    !propertyCityArea
   ) {
     redirect(
       "/admin/get-started/new"
@@ -266,21 +279,9 @@ async function createClient(
       contactId:
         String(contactId),
       propertyCountry,
+      propertyType,
+      propertyCityArea,
     });
-
-  if (propertyType) {
-    nextParams.set(
-      "propertyType",
-      propertyType
-    );
-  }
-
-  if (propertyCityArea) {
-    nextParams.set(
-      "propertyCityArea",
-      propertyCityArea
-    );
-  }
 
   redirect(
     `/admin/get-started/new?${nextParams.toString()}`
@@ -1120,32 +1121,14 @@ export default async function NewPropertyPage({
               >
                 {
                   newPropertyDictionary
-                    .phoneOptional
+                    .phoneOptional.replace(
+                      /\s*\(optional\)\s*/i,
+                      ""
+                    )
                 }
               </label>
 
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                className="
-                  mt-2
-                  w-full
-                  rounded-xl
-                  border
-                  border-slate-200
-                  px-4
-                  py-3
-                  text-sm
-                  font-semibold
-                  text-slate-800
-                  outline-none
-                  transition
-                  focus:border-blue-400
-                  focus:ring-4
-                  focus:ring-blue-50
-                "
-              />
+              <AdminPhoneInput />
             </div>
 
 
@@ -1162,7 +1145,7 @@ export default async function NewPropertyPage({
                 {
                   newPropertyDictionary
                     .propertyCountry
-                } *
+                }
               </label>
 
               <select
@@ -1238,6 +1221,7 @@ export default async function NewPropertyPage({
               <select
                 id="propertyType"
                 name="propertyType"
+                required
                 defaultValue=""
                 className="
                   mt-2
@@ -1258,7 +1242,7 @@ export default async function NewPropertyPage({
                   focus:ring-blue-50
                 "
               >
-                <option value="">
+                <option value="" disabled>
                   {
                     newPropertyDictionary
                       .selectPropertyType
@@ -1329,6 +1313,7 @@ export default async function NewPropertyPage({
                 id="propertyCityArea"
                 name="propertyCityArea"
                 type="text"
+                required
                 className="
                   mt-2
                   w-full

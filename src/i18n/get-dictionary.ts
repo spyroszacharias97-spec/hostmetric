@@ -55,6 +55,11 @@ const dictionaries = {
     import("./dictionaries/tr.json").then(
       (module) => module.default
     ),
+
+  ru: () =>
+    import("./dictionaries/ru.json").then(
+      (module) => module.default
+    ),
 };
 
 export const getDictionary = async (

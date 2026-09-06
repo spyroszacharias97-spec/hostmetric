@@ -1,13 +1,236 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 
 import { getDictionary } from "@/i18n/get-dictionary";
 
 import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
+  getLocalizedAlternates,
+} from "@/seo/metadata";
+
+import {
+  getBreadcrumbSchema,
+  getWebPageSchema,
+  serializeJsonLd,
+} from "@/seo/schema";
+
+import {
   defaultLocale,
   isSupportedLocale,
   type Locale,
 } from "@/i18n/config";
+
+
+/* ==========================================
+   FINAL SEO PASS NOTES
+
+   This Smarter Distribution service page has now completed:
+   - SEO title + meta description
+   - Canonical + hreflang + x-default
+   - Open Graph + Twitter
+   - Robots index/follow
+   - Heading / internal-link / crawlability review
+
+   Primary commercial intent:
+   - Multi-platform distribution
+   - Airbnb & Booking.com distribution
+   - Short-term rental channel strategy
+   - Smarter distribution management
+
+   Supporting visible concepts:
+   - ADR
+   - Revenue per available night
+   - Price elasticity
+   - Competitive positioning
+
+   This page focuses on distribution strategy
+   and the commercial performance of channel
+   exposure. Platform Network remains focused on
+   the broader network of booking platforms, while
+   Greater Visibility focuses on visibility and
+   booking opportunities.
+
+   Remaining long-tail distribution/channel
+   questions are reserved for Guides / Blog in
+   the final keyword coverage map.
+
+   Do NOT repeat these items in a later pass.
+========================================== */
+
+
+/* ==========================================
+   SMARTER DISTRIBUTION PAGE SEO CONTENT
+========================================== */
+
+const smarterDistributionPageSeo: Record<
+  Locale,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  el: {
+    title:
+      "Έξυπνη Διανομή σε Airbnb, Booking.com & Πολλαπλά Κανάλια | HostMetric",
+    description:
+      "Έξυπνη στρατηγική διανομής για Airbnb, Booking.com και βραχυχρόνιες μισθώσεις, με ανάλυση απόδοσης, εσόδων, ελαστικότητας τιμών και ανταγωνιστικής θέσης.",
+  },
+
+  en: {
+    title:
+      "Smart Airbnb, Booking.com & Multi-Channel Distribution | HostMetric",
+    description:
+      "Smarter distribution across Airbnb, Booking.com and short-term rental channels using revenue performance, price elasticity and competitive positioning to strengthen channel strategy.",
+  },
+
+  de: {
+    title:
+      "Smarte Airbnb-, Booking.com- & Multi-Channel-Distribution | HostMetric",
+    description:
+      "Intelligente Distribution über Airbnb, Booking.com und Kurzzeitmietkanäle mit Umsatzperformance, Preiselastizität und Wettbewerbspositionierung für eine stärkere Kanalstrategie.",
+  },
+
+  fr: {
+    title:
+      "Distribution Intelligente Airbnb, Booking.com & Multicanal | HostMetric",
+    description:
+      "Distribution optimisée sur Airbnb, Booking.com et les canaux de location courte durée grâce à l’analyse des revenus, de l’élasticité des prix et du positionnement concurrentiel.",
+  },
+
+  it: {
+    title:
+      "Distribuzione Intelligente Airbnb, Booking.com & Multicanale | HostMetric",
+    description:
+      "Distribuzione più intelligente su Airbnb, Booking.com e canali di affitto breve con analisi dei ricavi, elasticità dei prezzi e posizionamento competitivo.",
+  },
+
+  es: {
+    title:
+      "Distribución Inteligente Airbnb, Booking.com & Multicanal | HostMetric",
+    description:
+      "Distribución inteligente en Airbnb, Booking.com y canales de alquiler de corta estancia mediante análisis de ingresos, elasticidad de precios y posicionamiento competitivo.",
+  },
+
+  pt: {
+    title:
+      "Distribuição Inteligente Airbnb, Booking.com & Multicanal | HostMetric",
+    description:
+      "Distribuição inteligente no Airbnb, Booking.com e canais de alojamento de curta duração com análise de receitas, elasticidade de preços e posicionamento competitivo.",
+  },
+
+  bg: {
+    title:
+      "Интелигентна дистрибуция Airbnb, Booking.com & много канали | HostMetric",
+    description:
+      "Интелигентна дистрибуция в Airbnb, Booking.com и канали за краткосрочни наеми чрез анализ на приходите, ценовата еластичност и конкурентното позициониране.",
+  },
+
+  sr: {
+    title:
+      "Pametna distribucija Airbnb, Booking.com & više kanala | HostMetric",
+    description:
+      "Pametna distribucija na Airbnb-u, Booking.com-u i kanalima kratkoročnog najma uz analizu prihoda, elastičnosti cena i konkurentskog pozicioniranja.",
+  },
+
+  tr: {
+    title:
+      "Akıllı Airbnb, Booking.com & Çok Kanallı Dağıtım | HostMetric",
+    description:
+      "Gelir performansı, fiyat esnekliği ve rekabetçi konumlandırma analizleriyle Airbnb, Booking.com ve kısa süreli kiralama kanallarında daha akıllı dağıtım stratejisi.",
+  },
+
+  pl: {
+    title:
+      "Inteligentna Dystrybucja Airbnb, Booking.com & Wielokanałowa | HostMetric",
+    description:
+      "Inteligentna dystrybucja w Airbnb, Booking.com i kanałach najmu krótkoterminowego z analizą przychodów, elastyczności cenowej i pozycji konkurencyjnej.",
+  },
+
+  ru: {
+    title:
+      "Умная дистрибуция Airbnb, Booking.com и по нескольким каналам | HostMetric",
+    description:
+      "Умная дистрибуция на Airbnb, Booking.com и каналах краткосрочной аренды с анализом доходности, ценовой эластичности и конкурентного позиционирования.",
+  },
+};
+
+
+/* ==========================================
+   SMARTER DISTRIBUTION PAGE SEO METADATA
+========================================== */
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const savedLocale =
+    cookieStore.get("hostmetric_locale")?.value;
+
+  let currentLocale: Locale =
+    defaultLocale;
+
+  if (
+    savedLocale &&
+    isSupportedLocale(savedLocale)
+  ) {
+    currentLocale =
+      savedLocale;
+  }
+
+  const seo =
+    smarterDistributionPageSeo[currentLocale];
+
+  const localizedSmarterDistributionPath =
+    getLocalizedPath(
+      "/solutions/smarter-distribution",
+      currentLocale
+    );
+
+  return {
+    title:
+      seo.title,
+
+    description:
+      seo.description,
+
+    alternates:
+      getLocalizedAlternates(
+        "/solutions/smarter-distribution",
+        currentLocale
+      ),
+
+    openGraph: {
+      type:
+        "website",
+      url:
+        localizedSmarterDistributionPath,
+      siteName:
+        "HostMetric",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    twitter: {
+      card:
+        "summary_large_image",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    robots: {
+      index:
+        true,
+      follow:
+        true,
+    },
+  };
+}
 
 
 export default async function SmarterDistributionPage() {
@@ -56,6 +279,54 @@ export default async function SmarterDistributionPage() {
 
 
   /* =========================================================
+     LOCALE-AWARE PUBLIC ROUTES
+  ========================================================= */
+
+  const homePath =
+    getLocalizedPath(
+      "/",
+      currentLocale
+    );
+
+
+  /* ==========================================
+     STRUCTURED DATA
+  ========================================== */
+
+  const webPageSchema =
+    getWebPageSchema({
+      name:
+        smarterDistribution.title,
+      description:
+        smarterDistribution.description,
+      pathname:
+        "/solutions/smarter-distribution",
+      locale:
+        currentLocale,
+    });
+
+  const breadcrumbSchema =
+    getBreadcrumbSchema({
+      items: [
+        {
+          name:
+            "HostMetric",
+          pathname:
+            "/",
+        },
+        {
+          name:
+            smarterDistribution.title,
+          pathname:
+            "/solutions/smarter-distribution",
+        },
+      ],
+      locale:
+        currentLocale,
+    });
+
+
+  /* =========================================================
      PAGE
   ========================================================= */
 
@@ -66,6 +337,27 @@ export default async function SmarterDistributionPage() {
         overflow-x-hidden
       "
     >
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              webPageSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              breadcrumbSchema
+            ),
+        }}
+      />
+
 
       {/* =====================================================
           SMARTER DISTRIBUTION HERO / CONTENT SECTION
@@ -131,7 +423,7 @@ export default async function SmarterDistributionPage() {
           ================================================ */}
 
           <Link
-            href="/"
+            href={homePath}
             className="
               inline-flex
               items-center

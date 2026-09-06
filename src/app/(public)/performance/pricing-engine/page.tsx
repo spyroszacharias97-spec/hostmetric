@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 
@@ -14,6 +15,20 @@ import {
 } from "@/i18n/config";
 
 import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
+  getLocalizedAlternates,
+} from "@/seo/metadata";
+
+import {
+  getBreadcrumbSchema,
+  getWebPageSchema,
+  serializeJsonLd,
+} from "@/seo/schema";
+
+import {
   BrainCircuit,
   Building2,
   CalendarClock,
@@ -22,6 +37,220 @@ import {
   MapPin,
   TrendingUp,
 } from "lucide-react";
+
+
+/* ==========================================
+   FINAL SEO PASS NOTES
+
+   This Pricing Engine page has now completed:
+   - SEO title + meta description
+   - Canonical + hreflang + x-default
+   - Open Graph + Twitter
+   - Robots index/follow
+   - Heading / internal-link / conversion review
+
+   Primary intent:
+   - Short-term rental pricing optimization
+   - Revenue management
+   - Dynamic pricing engine
+   - Maximize rental revenue
+
+   Supporting concepts already represented by
+   the visible page:
+   - Comparable properties
+   - Local market demand
+   - Historical booking data
+   - Booking pace
+   - Revenue KPIs
+   - Price elasticity
+
+   Airbnb and Booking.com are supporting platform
+   terms. AI Pricing remains a separate search intent
+   on the dedicated AI Pricing page.
+
+   Remaining long-tail pricing / owner questions
+   will be assigned to Guides / Blog in the final
+   keyword coverage map.
+
+   Do NOT repeat these items in a later pass.
+========================================== */
+
+
+/* ==========================================
+   PRICING ENGINE PAGE SEO CONTENT
+========================================== */
+
+const pricingEnginePageSeo: Record<
+  Locale,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  el: {
+    title:
+      "Μηχανή Δυναμικής Τιμολόγησης & Βελτιστοποίηση Εσόδων | HostMetric",
+    description:
+      "Βελτιστοποίηση τιμών και εσόδων για Airbnb, Booking.com και βραχυχρόνιες μισθώσεις με δεδομένα αγοράς, ρυθμό κρατήσεων, KPIs και ελαστικότητα τιμών.",
+  },
+
+  en: {
+    title:
+      "Dynamic Pricing Engine & Rental Revenue Optimization | HostMetric",
+    description:
+      "Optimize pricing and rental revenue across Airbnb, Booking.com and short-term rentals using market demand, booking pace, revenue KPIs, historical data and price elasticity.",
+  },
+
+  de: {
+    title:
+      "Dynamische Preisoptimierung & Umsatzmanagement | HostMetric",
+    description:
+      "Optimieren Sie Preise und Mieteinnahmen bei Airbnb, Booking.com und Kurzzeitvermietungen mit Marktnachfrage, Buchungstempo, Umsatz-KPIs, historischen Daten und Preiselastizität.",
+  },
+
+  fr: {
+    title:
+      "Moteur de Tarification Dynamique & Optimisation des Revenus | HostMetric",
+    description:
+      "Optimisez les tarifs et revenus sur Airbnb, Booking.com et en location courte durée grâce à la demande du marché, au rythme des réservations, aux KPI, aux données historiques et à l’élasticité des prix.",
+  },
+
+  it: {
+    title:
+      "Motore di Prezzi Dinamici & Ottimizzazione dei Ricavi | HostMetric",
+    description:
+      "Ottimizza prezzi e ricavi su Airbnb, Booking.com e affitti brevi usando domanda di mercato, ritmo delle prenotazioni, KPI, dati storici ed elasticità dei prezzi.",
+  },
+
+  es: {
+    title:
+      "Motor de Precios Dinámicos & Optimización de Ingresos | HostMetric",
+    description:
+      "Optimiza precios e ingresos en Airbnb, Booking.com y alquileres de corta estancia con demanda de mercado, ritmo de reservas, KPI, datos históricos y elasticidad de precios.",
+  },
+
+  pt: {
+    title:
+      "Motor de Preços Dinâmicos & Otimização de Receitas | HostMetric",
+    description:
+      "Otimize preços e receitas no Airbnb, Booking.com e alojamento de curta duração com procura de mercado, ritmo de reservas, KPIs, dados históricos e elasticidade de preços.",
+  },
+
+  bg: {
+    title:
+      "Динамично ценообразуване & оптимизация на приходите | HostMetric",
+    description:
+      "Оптимизирайте цените и приходите в Airbnb, Booking.com и краткосрочни наеми чрез пазарно търсене, темп на резервациите, KPI, исторически данни и ценова еластичност.",
+  },
+
+  sr: {
+    title:
+      "Dinamičko formiranje cena & optimizacija prihoda | HostMetric",
+    description:
+      "Optimizujte cene i prihode na Airbnb-u, Booking.com-u i u kratkoročnom najmu koristeći tržišnu potražnju, tempo rezervacija, KPI, istorijske podatke i cenovnu elastičnost.",
+  },
+
+  tr: {
+    title:
+      "Dinamik Fiyatlandırma Motoru & Gelir Optimizasyonu | HostMetric",
+    description:
+      "Pazar talebi, rezervasyon hızı, gelir KPI'ları, geçmiş veriler ve fiyat esnekliğiyle Airbnb, Booking.com ve kısa süreli kiralama fiyatlarını ve gelirini optimize edin.",
+  },
+
+  pl: {
+    title:
+      "Dynamiczny Silnik Cen & Optymalizacja Przychodów | HostMetric",
+    description:
+      "Optymalizuj ceny i przychody na Airbnb, Booking.com oraz w najmie krótkoterminowym dzięki popytowi rynkowemu, tempu rezerwacji, KPI, danym historycznym i elastyczności cenowej.",
+  },
+
+  ru: {
+    title:
+      "Динамическое ценообразование и оптимизация дохода | HostMetric",
+    description:
+      "Оптимизируйте цены и доход на Airbnb, Booking.com и в краткосрочной аренде с учетом рыночного спроса, темпа бронирований, KPI, исторических данных и ценовой эластичности.",
+  },
+};
+
+
+/* ==========================================
+   PRICING ENGINE PAGE SEO METADATA
+========================================== */
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore =
+    await cookies();
+
+  const savedLocale =
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
+  let currentLocale: Locale =
+    defaultLocale;
+
+  if (
+    savedLocale &&
+    isSupportedLocale(
+      savedLocale
+    )
+  ) {
+    currentLocale =
+      savedLocale;
+  }
+
+  const seo =
+    pricingEnginePageSeo[currentLocale];
+
+  const localizedPricingEnginePath =
+    getLocalizedPath(
+      "/performance/pricing-engine",
+      currentLocale
+    );
+
+  return {
+    title:
+      seo.title,
+
+    description:
+      seo.description,
+
+    alternates:
+      getLocalizedAlternates(
+        "/performance/pricing-engine",
+        currentLocale
+      ),
+
+    openGraph: {
+      type:
+        "website",
+      url:
+        localizedPricingEnginePath,
+      siteName:
+        "HostMetric",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    twitter: {
+      card:
+        "summary_large_image",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    robots: {
+      index:
+        true,
+      follow:
+        true,
+    },
+  };
+}
 
 
 export default async function PricingEnginePage() {
@@ -70,6 +299,64 @@ export default async function PricingEnginePage() {
 
 
   /* =========================================================
+     LOCALIZED ROUTES
+  ========================================================= */
+
+  const homePath =
+    getLocalizedPath(
+      "/",
+      currentLocale
+    );
+
+
+  const getStartedPath =
+    getLocalizedPath(
+      "/get-started",
+      currentLocale
+    );
+
+
+  /* ==========================================
+     STRUCTURED DATA
+  ========================================== */
+
+  const schemaPageName =
+    `${pricingEngine.titleLine1} ${pricingEngine.titleLine2}`;
+
+  const webPageSchema =
+    getWebPageSchema({
+      name:
+        schemaPageName,
+      description:
+        pricingEngine.description,
+      pathname:
+        "/performance/pricing-engine",
+      locale:
+        currentLocale,
+    });
+
+  const breadcrumbSchema =
+    getBreadcrumbSchema({
+      items: [
+        {
+          name:
+            "HostMetric",
+          pathname:
+            "/",
+        },
+        {
+          name:
+            schemaPageName,
+          pathname:
+            "/performance/pricing-engine",
+        },
+      ],
+      locale:
+        currentLocale,
+    });
+
+
+  /* =========================================================
      RESPONSIVE PRICING ENGINE PAGE
      The formula block has been intentionally removed from
      every viewport, including desktop and mobile.
@@ -88,6 +375,27 @@ export default async function PricingEnginePage() {
         text-white
       "
     >
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              webPageSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              breadcrumbSchema
+            ),
+        }}
+      />
+
 
       {/* ==========================================
           ANIMATED WAVE
@@ -112,7 +420,7 @@ export default async function PricingEnginePage() {
       >
 
         <Link
-          href="/"
+          href={homePath}
           className="
             inline-flex
             items-center
@@ -688,7 +996,7 @@ export default async function PricingEnginePage() {
           ========================================== */}
 
           <Link
-            href="/get-started"
+            href={getStartedPath}
             className="
               mt-8
               inline-flex

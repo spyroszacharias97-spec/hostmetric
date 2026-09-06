@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 
@@ -12,6 +13,20 @@ import {
   isSupportedLocale,
   type Locale,
 } from "@/i18n/config";
+
+import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
+import {
+  getLocalizedAlternates,
+} from "@/seo/metadata";
+
+import {
+  getBreadcrumbSchema,
+  getWebPageSchema,
+  serializeJsonLd,
+} from "@/seo/schema";
 
 import {
   Laptop,
@@ -74,6 +89,212 @@ const platforms = [
 ];
 
 
+/* ==========================================
+   FINAL SEO PASS NOTES
+
+   This Platform Network page has now completed:
+   - SEO title + meta description
+   - Canonical + hreflang + x-default
+   - Open Graph + Twitter
+   - Robots index/follow
+   - Heading / internal-link / platform-content review
+
+   Primary intent:
+   - Multi-platform distribution
+   - Airbnb & Booking.com distribution
+   - Channel / calendar synchronization
+   - Wider property visibility
+
+   Supporting concepts:
+   - Coordinated platform strategy
+   - More booking opportunities
+   - Short-term rental distribution
+
+   Lower-priority and long-tail platform phrases
+   are reserved for Guides / Blog and the final
+   keyword coverage map.
+
+   Do NOT repeat these items in a later pass.
+========================================== */
+
+
+/* ==========================================
+   PLATFORM NETWORK PAGE SEO CONTENT
+========================================== */
+
+const platformNetworkPageSeo: Record<
+  Locale,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  el: {
+    title:
+      "Airbnb, Booking.com & Multi-Platform Διανομή Ακινήτων | HostMetric",
+    description:
+      "Προβάλετε το ακίνητό σας σε Airbnb, Booking.com και πολλαπλά κανάλια με συγχρονισμένα ημερολόγια και συντονισμένη στρατηγική για μεγαλύτερη προβολή και περισσότερες ευκαιρίες κρατήσεων.",
+  },
+
+  en: {
+    title:
+      "Airbnb, Booking.com & Multi-Platform Distribution | HostMetric",
+    description:
+      "Distribute your property across Airbnb, Booking.com and multiple booking channels with synchronized calendars and coordinated strategy for wider visibility and more booking opportunities.",
+  },
+
+  de: {
+    title:
+      "Airbnb, Booking.com & Multi-Plattform-Vertrieb | HostMetric",
+    description:
+      "Präsentieren Sie Ihre Immobilie auf Airbnb, Booking.com und mehreren Buchungskanälen mit synchronisierten Kalendern und koordinierter Strategie für mehr Sichtbarkeit und Buchungschancen.",
+  },
+
+  fr: {
+    title:
+      "Airbnb, Booking.com & Distribution Multiplateforme | HostMetric",
+    description:
+      "Diffusez votre bien sur Airbnb, Booking.com et plusieurs canaux de réservation avec des calendriers synchronisés et une stratégie coordonnée pour gagner en visibilité et en opportunités de réservation.",
+  },
+
+  it: {
+    title:
+      "Airbnb, Booking.com & Distribuzione Multicanale | HostMetric",
+    description:
+      "Distribuisci il tuo immobile su Airbnb, Booking.com e più canali di prenotazione con calendari sincronizzati e una strategia coordinata per maggiore visibilità e più opportunità di prenotazione.",
+  },
+
+  es: {
+    title:
+      "Airbnb, Booking.com & Distribución Multiplataforma | HostMetric",
+    description:
+      "Distribuye tu propiedad en Airbnb, Booking.com y múltiples canales de reserva con calendarios sincronizados y una estrategia coordinada para lograr mayor visibilidad y más oportunidades de reserva.",
+  },
+
+  pt: {
+    title:
+      "Airbnb, Booking.com & Distribuição Multiplataforma | HostMetric",
+    description:
+      "Distribua o seu imóvel no Airbnb, Booking.com e vários canais de reserva com calendários sincronizados e estratégia coordenada para maior visibilidade e mais oportunidades de reserva.",
+  },
+
+  bg: {
+    title:
+      "Airbnb, Booking.com & Мултиплатформена дистрибуция | HostMetric",
+    description:
+      "Разпространявайте имота си в Airbnb, Booking.com и множество канали за резервации със синхронизирани календари и координирана стратегия за по-голяма видимост и повече възможности за резервации.",
+  },
+
+  sr: {
+    title:
+      "Airbnb, Booking.com & Distribucija na više platformi | HostMetric",
+    description:
+      "Predstavite nekretninu na Airbnb-u, Booking.com-u i više kanala za rezervacije uz sinhronizovane kalendare i koordinisanu strategiju za veću vidljivost i više prilika za rezervacije.",
+  },
+
+  tr: {
+    title:
+      "Airbnb, Booking.com & Çok Platformlu Dağıtım | HostMetric",
+    description:
+      "Mülkünüzü Airbnb, Booking.com ve birden fazla rezervasyon kanalında senkronize takvimler ve koordineli stratejiyle yayınlayarak görünürlüğü ve rezervasyon fırsatlarını artırın.",
+  },
+
+  pl: {
+    title:
+      "Airbnb, Booking.com & Dystrybucja Wielokanałowa | HostMetric",
+    description:
+      "Publikuj nieruchomość na Airbnb, Booking.com i wielu kanałach rezerwacyjnych z synchronizacją kalendarzy i skoordynowaną strategią, aby zwiększać widoczność i możliwości rezerwacji.",
+  },
+
+  ru: {
+    title:
+      "Airbnb, Booking.com и мультиплатформенная дистрибуция | HostMetric",
+    description:
+      "Размещайте объект на Airbnb, Booking.com и других каналах бронирования с синхронизацией календарей и единой стратегией для большей видимости и новых возможностей бронирования.",
+  },
+};
+
+
+/* ==========================================
+   PLATFORM NETWORK PAGE SEO METADATA
+========================================== */
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore =
+    await cookies();
+
+  const savedLocale =
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
+  let currentLocale: Locale =
+    defaultLocale;
+
+  if (
+    savedLocale &&
+    isSupportedLocale(
+      savedLocale
+    )
+  ) {
+    currentLocale =
+      savedLocale;
+  }
+
+  const seo =
+    platformNetworkPageSeo[currentLocale];
+
+  const localizedPlatformNetworkPath =
+    getLocalizedPath(
+      "/performance/platform-network",
+      currentLocale
+    );
+
+  return {
+    title:
+      seo.title,
+
+    description:
+      seo.description,
+
+    alternates:
+      getLocalizedAlternates(
+        "/performance/platform-network",
+        currentLocale
+      ),
+
+    openGraph: {
+      type:
+        "website",
+      url:
+        localizedPlatformNetworkPath,
+      siteName:
+        "HostMetric",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    twitter: {
+      card:
+        "summary_large_image",
+      title:
+        seo.title,
+      description:
+        seo.description,
+    },
+
+    robots: {
+      index:
+        true,
+      follow:
+        true,
+    },
+  };
+}
+
+
 export default async function PlatformNetworkPage() {
 
   /* ==========================================
@@ -120,6 +341,57 @@ export default async function PlatformNetworkPage() {
 
 
   /* =========================================================
+     LOCALIZED ROUTES
+  ========================================================= */
+
+  const homePath =
+    getLocalizedPath(
+      "/",
+      currentLocale
+    );
+
+
+  /* ==========================================
+     STRUCTURED DATA
+  ========================================== */
+
+  const schemaPageName =
+    `${platformNetwork.titleLine1} ${platformNetwork.titleLine2} ${platformNetwork.titleLine3}`;
+
+  const webPageSchema =
+    getWebPageSchema({
+      name:
+        schemaPageName,
+      description:
+        platformNetwork.description,
+      pathname:
+        "/performance/platform-network",
+      locale:
+        currentLocale,
+    });
+
+  const breadcrumbSchema =
+    getBreadcrumbSchema({
+      items: [
+        {
+          name:
+            "HostMetric",
+          pathname:
+            "/",
+        },
+        {
+          name:
+            schemaPageName,
+          pathname:
+            "/performance/platform-network",
+        },
+      ],
+      locale:
+        currentLocale,
+    });
+
+
+  /* =========================================================
      RESPONSIVE PLATFORM NETWORK PAGE
      Mobile-first presentation. Content, routes, platform data,
      locale handling and animations remain unchanged.
@@ -137,6 +409,27 @@ export default async function PlatformNetworkPage() {
         to-cyan-50
       "
     >
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              webPageSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            serializeJsonLd(
+              breadcrumbSchema
+            ),
+        }}
+      />
+
 
       {/* ==========================================
           ANIMATED WAVE
@@ -161,7 +454,7 @@ export default async function PlatformNetworkPage() {
       >
 
         <Link
-          href="/"
+          href={homePath}
           className="
             inline-flex
             items-center

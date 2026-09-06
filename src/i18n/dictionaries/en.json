@@ -15,7 +15,7 @@
     "eyebrow": "Short-Term Rental Performance",
     "titleLine1": "Smarter Hosting",
     "titleLine2": "Better Results",
-    "description": "Smarter pricing, seamless guest communication and professional booking management — all designed to maximize your property's performance.",
+    "description": "Smarter pricing, seamless guest communication and professional booking management across Airbnb, Booking.com and other booking channels — all designed to maximize your property's performance.",
     "getStarted": "Get Started",
     "seeHowItWorks": "See How It Works",
     "revenue": {
@@ -43,7 +43,7 @@
   "services": {
     "eyebrow": "Our Services",
     "title": "Everything your property needs to perform better",
-    "description": "We take care of the details behind successful short-term rentals, giving you more time while helping your property reach its full potential.",
+    "description": "We take care of the details behind successful short-term rental management across Airbnb, Booking.com and other booking channels, giving you more time while helping your property reach its full potential.",
     "guestCommunication": {
       "title": "Guest Communication",
       "description": "Professional, fast and thoughtful communication that keeps your guests informed and satisfied."
@@ -54,7 +54,7 @@
     },
     "bookingManagement": {
       "title": "Booking Management",
-      "description": "Professional management of reservations, availability and day-to-day booking operations."
+      "description": "Professional management of Airbnb, Booking.com and other channel reservations, availability and day-to-day booking operations."
     }
   },
   "performance": {
@@ -307,7 +307,7 @@
     "eyebrow": "MULTI-PLATFORM DISTRIBUTION",
     "titleLine1": "Your property everywhere",
     "titleLine2": "your guests are looking",
-    "description": "Expand your property's visibility across 10+ leading booking platforms while keeping reservations, availability and pricing coordinated through one strategy.",
+    "description": "Expand your property's visibility across Airbnb, Booking.com and 10+ leading booking channels while keeping reservations, availability and pricing coordinated through one strategy.",
     "benefits": {
       "greaterVisibility": {
         "title": "Greater Visibility",
@@ -416,7 +416,7 @@
     "awardClarification": "The Booking.com Traveller Review Award displayed above was awarded to Niki Breeze. It is presented as a featured client property result and does not represent an award granted directly to HostMetric."
   },
   "footer": {
-    "brandDescription": "Smarter short-term rental management, pricing, distribution and guest experience designed to improve property performance.",
+    "brandDescription": "Smarter short-term rental management across Airbnb, Booking.com and other booking channels, combining pricing, distribution and guest experience to improve property performance.",
     "getStarted": "Get Started",
     "services": {
       "title": "Services",
@@ -469,7 +469,7 @@
       "eyebrow": "About HostMetric",
       "titleLine1": "Data-driven strategy.",
       "titleLine2": "Human hospitality.",
-      "description": "HostMetric brings together analytical thinking, revenue management and genuine human hospitality to help short-term rental properties perform at their full potential."
+      "description": "HostMetric brings together analytical thinking, revenue management and genuine human hospitality to help short-term rental properties perform at their full potential through professional property management."
     },
     "philosophy": {
       "eyebrow": "Our Philosophy",
@@ -544,10 +544,10 @@
       "fields": {
         "fullName": "Full Name *",
         "propertyCountry": "Property Country *",
-        "propertyType": "Property Type",
+        "propertyType": "Property Type *",
         "email": "Email *",
-        "phone": "+30 / +357 Phone",
-        "propertyCityArea": "Property City / Area",
+        "phone": "Phone number *",
+        "propertyCityArea": "Property City / Area *",
         "message": "How can we help you? *"
       },
       "options": {
@@ -592,7 +592,7 @@
     "platformIntro": {
       "eyebrow": "GLOBAL DISTRIBUTION",
       "title": "Connected with the world's leading booking platforms",
-      "description": "HostMetric connects and manages your property across leading international booking platforms, combining strategic distribution, intelligent pricing and professional management to increase visibility, generate more bookings and improve overall performance."
+      "description": "HostMetric connects and manages your property across Airbnb, Booking.com and other leading international booking platforms, combining strategic distribution, intelligent pricing and professional management to increase visibility, generate more bookings and improve overall performance."
     },
     "propertySection": {
       "eyebrow": "YOUR PROPERTY",
@@ -617,7 +617,7 @@
         },
         {
           "question": "Which booking platforms can my property be listed on?",
-          "answer": "The distribution strategy depends on the property and its target guests. HostMetric can manage and coordinate listings across suitable major booking channels while keeping the property's availability and commercial strategy aligned."
+          "answer": "The distribution strategy depends on the property and its target guests. HostMetric can manage and coordinate listings across Airbnb, Booking.com and other suitable major booking channels while keeping the property's availability and commercial strategy aligned."
         },
         {
           "question": "How are my reservations and calendars managed?",
@@ -2406,7 +2406,7 @@
         "fullName": "Full Name",
         "email": "Email",
         "phone": "Phone",
-        "phoneOptional": "Phone (optional)",
+        "phoneOptional": "Phone",
         "createClientAndContinue": "Create Client and Continue",
         "propertyCountry": "Property Country",
         "propertyType": "Property Type",

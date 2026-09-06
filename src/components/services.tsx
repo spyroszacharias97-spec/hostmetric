@@ -16,6 +16,10 @@ import {
   type Locale,
 } from "@/i18n/config";
 
+import {
+  getLocalizedPath,
+} from "@/i18n/routing";
+
 export default async function Services() {
   /* ==========================================
      CURRENT LANGUAGE
@@ -45,6 +49,29 @@ export default async function Services() {
 
   const services =
     dictionary.services;
+
+
+  /* ==========================================
+     LOCALIZED SERVICE ROUTES
+  ========================================== */
+
+  const guestCommunicationPath =
+    getLocalizedPath(
+      "/services/guest-communication",
+      currentLocale
+    );
+
+  const smartPricingPath =
+    getLocalizedPath(
+      "/services/smart-pricing",
+      currentLocale
+    );
+
+  const bookingManagementPath =
+    getLocalizedPath(
+      "/services/booking-management",
+      currentLocale
+    );
 
   return (
     <section
@@ -215,7 +242,7 @@ export default async function Services() {
 
           {/* GUEST COMMUNICATION */}
           <Link
-            href="/services/guest-communication"
+            href={guestCommunicationPath}
             className="
               group
               cursor-pointer
@@ -309,7 +336,7 @@ export default async function Services() {
 
           {/* SMART PRICING */}
           <Link
-            href="/services/smart-pricing"
+            href={smartPricingPath}
             className="
               group
               cursor-pointer
@@ -400,7 +427,7 @@ export default async function Services() {
 
           {/* BOOKING MANAGEMENT */}
           <Link
-            href="/services/booking-management"
+            href={bookingManagementPath}
             className="
               group
               cursor-pointer

@@ -15,7 +15,7 @@
     "eyebrow": "Wyniki najmu krótkoterminowego",
     "titleLine1": "Inteligentniejsze zarządzanie",
     "titleLine2": "Lepsze wyniki",
-    "description": "Inteligentniejsze ceny, płynna komunikacja z gośćmi i profesjonalne zarządzanie rezerwacjami — wszystko po to, aby maksymalizować wyniki Twojej nieruchomości.",
+    "description": "Inteligentniejsze ceny, płynna komunikacja z gośćmi i profesjonalne zarządzanie rezerwacjami na Airbnb, Booking.com i innych kanałach — wszystko po to, aby maksymalizować wyniki Twojej nieruchomości.",
     "getStarted": "Zacznij",
     "seeHowItWorks": "Zobacz, jak to działa",
     "revenue": {
@@ -43,7 +43,7 @@
   "services": {
     "eyebrow": "Nasze usługi",
     "title": "Wszystko, czego potrzebuje Twoja nieruchomość, aby osiągać lepsze wyniki",
-    "description": "Dbamy o szczegóły stojące za skutecznym najmem krótkoterminowym, dając Ci więcej czasu i pomagając Twojej nieruchomości osiągnąć pełny potencjał.",
+    "description": "Zajmujemy się zarządzaniem najmem krótkoterminowym na Airbnb, Booking.com i innych kanałach, dając Ci więcej czasu i pomagając Twojej nieruchomości osiągnąć pełny potencjał.",
     "guestCommunication": {
       "title": "Komunikacja z gośćmi",
       "description": "Profesjonalna, szybka i przemyślana komunikacja, dzięki której goście są dobrze poinformowani i zadowoleni."
@@ -54,7 +54,7 @@
     },
     "bookingManagement": {
       "title": "Zarządzanie rezerwacjami",
-      "description": "Profesjonalne zarządzanie rezerwacjami, dostępnością i codzienną obsługą bookingów."
+      "description": "Profesjonalne zarządzanie rezerwacjami na Airbnb, Booking.com i innych kanałach, wraz z koordynacją dostępności i codziennej obsługi rezerwacji."
     }
   },
   "performance": {
@@ -307,7 +307,7 @@
     "eyebrow": "DYSTRYBUCJA WIELOPLATFORMOWA",
     "titleLine1": "Twoja nieruchomość wszędzie tam,",
     "titleLine2": "gdzie szukają goście",
-    "description": "Zwiększ widoczność swojej nieruchomości na ponad 10 wiodących platformach rezerwacyjnych, zachowując rezerwacje, dostępność i ceny w ramach jednej skoordynowanej strategii.",
+    "description": "Zwiększ widoczność swojej nieruchomości na Airbnb, Booking.com i ponad 10 wiodących kanałach rezerwacyjnych, zachowując rezerwacje, dostępność i ceny w ramach jednej skoordynowanej strategii.",
     "benefits": {
       "greaterVisibility": {
         "title": "Większa widoczność",
@@ -416,7 +416,7 @@
     "awardClarification": "Pokazana powyżej nagroda Booking.com Traveller Review Award została przyznana Niki Breeze. Prezentujemy ją jako wynik wyróżnionej nieruchomości klienta i nie oznacza ona nagrody przyznanej bezpośrednio HostMetric."
   },
   "footer": {
-    "brandDescription": "Inteligentniejsze zarządzanie najmem krótkoterminowym, cenami, dystrybucją i doświadczeniem gości zaprojektowane tak, aby poprawiać wyniki nieruchomości.",
+    "brandDescription": "Inteligentniejsze zarządzanie najmem krótkoterminowym na Airbnb, Booking.com i innych kanałach, łączące ceny, dystrybucję i doświadczenie gości w celu poprawy wyników nieruchomości.",
     "getStarted": "Zacznij",
     "services": {
       "title": "Usługi",
@@ -469,7 +469,7 @@
       "eyebrow": "O HostMetric",
       "titleLine1": "Strategia oparta na danych.",
       "titleLine2": "Ludzkie podejście do gościnności.",
-      "description": "HostMetric łączy analityczne podejście, revenue management i prawdziwie ludzką gościnność, aby pomagać nieruchomościom na wynajem krótkoterminowy osiągać pełny potencjał."
+      "description": "HostMetric łączy analityczne podejście, revenue management i prawdziwie ludzką gościnność, aby poprzez profesjonalne zarządzanie pomagać nieruchomościom na wynajem krótkoterminowy osiągać pełny potencjał."
     },
     "philosophy": {
       "eyebrow": "Nasza filozofia",
@@ -546,7 +546,7 @@
         "propertyCountry": "Kraj nieruchomości *",
         "propertyType": "Typ nieruchomości",
         "email": "E-mail *",
-        "phone": "+30 / +357 Telefon",
+        "phone": "Numer telefonu *",
         "propertyCityArea": "Miasto / obszar nieruchomości",
         "message": "Jak możemy Ci pomóc? *"
       },
@@ -592,7 +592,7 @@
     "platformIntro": {
       "eyebrow": "GLOBALNY ZASIĘG",
       "title": "Połączeni z wiodącymi platformami rezerwacyjnymi na świecie",
-      "description": "HostMetric łączy i zarządza Twoją nieruchomością na wiodących międzynarodowych platformach rezerwacyjnych, łącząc strategiczną dystrybucję, inteligentne ustalanie cen i profesjonalne zarządzanie w celu zwiększenia widoczności, generowania większej liczby rezerwacji i poprawy ogólnych wyników."
+      "description": "HostMetric łączy i zarządza Twoją nieruchomością na Airbnb, Booking.com i innych wiodących międzynarodowych platformach rezerwacyjnych, łącząc strategiczną dystrybucję, inteligentne ustalanie cen i profesjonalne zarządzanie w celu zwiększenia widoczności, generowania większej liczby rezerwacji i poprawy ogólnych wyników."
     },
     "propertySection": {
       "eyebrow": "TWOJA NIERUCHOMOŚĆ",
@@ -617,7 +617,7 @@
         },
         {
           "question": "Na jakich platformach rezerwacyjnych może być dostępna moja nieruchomość?",
-          "answer": "Strategia dystrybucji zależy od nieruchomości i jej docelowych gości. HostMetric może zarządzać i koordynować oferty na odpowiednich głównych kanałach rezerwacyjnych, utrzymując spójność dostępności i strategii komercyjnej nieruchomości."
+          "answer": "Strategia dystrybucji zależy od nieruchomości i jej docelowych gości. HostMetric może zarządzać i koordynować oferty na Airbnb, Booking.com i innych odpowiednich głównych kanałach rezerwacyjnych, utrzymując spójność dostępności i strategii komercyjnej nieruchomości."
         },
         {
           "question": "Jak zarządzane są moje rezerwacje i kalendarze?",
@@ -2406,7 +2406,7 @@
         "fullName": "Full Name",
         "email": "Email",
         "phone": "Phone",
-        "phoneOptional": "Phone (optional)",
+        "phoneOptional": "Phone",
         "createClientAndContinue": "Create Client and Continue",
         "propertyCountry": "Property Country",
         "propertyType": "Property Type",
