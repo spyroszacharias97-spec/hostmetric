@@ -335,7 +335,7 @@ export default async function Footer() {
 
 
               <Link
-                href={getLocalizedPath("/pricing", currentLocale)}
+                href={getLocalizedPath("/faq", currentLocale)}
                 className="
                   w-fit
                   transition
@@ -628,7 +628,7 @@ export default async function Footer() {
             >
 
               <Link
-                href={getLocalizedPath("/privacy-policy", currentLocale)}
+                href={getLocalizedPath("/privacy", currentLocale)}
                 className="
                   transition
                   hover:text-white
