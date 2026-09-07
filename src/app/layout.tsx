@@ -1,5 +1,13 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type {
+  Metadata,
+  Viewport,
+} from "next";
+
+import {
+  Geist,
+  Geist_Mono,
+} from "next/font/google";
+
 import { cookies } from "next/headers";
 
 import {
@@ -27,14 +35,27 @@ const geistMono = Geist_Mono({
 
 
 /* ==========================================
+   GLOBAL VIEWPORT
+
+   HostMetric uses a light-only design.
+   This prevents supported browsers from
+   treating the site as a dark color scheme.
+========================================== */
+
+export const viewport: Viewport = {
+  colorScheme: "light",
+};
+
+
+/* ==========================================
    GLOBAL METADATA FOUNDATION
 
    metadataBase gives Next.js the canonical
    absolute origin for URL-based metadata.
 
    Page-specific canonical URLs, hreflang,
-   Open Graph URLs and other alternates will
-   be added in the next SEO steps.
+   Open Graph URLs and other alternates are
+   handled by the page-level SEO metadata.
 ========================================== */
 
 export const metadata: Metadata = {
@@ -60,6 +81,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   const cookieStore =
     await cookies();
 
