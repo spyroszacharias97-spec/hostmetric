@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import {
   CheckCircle2,
@@ -39,7 +39,8 @@ type SectionDraft = {
   h2: string;
   paragraph: string;
   h3: string;
-  internalLink: string;
+  internalLinkLabel: string;
+  internalLinkHref: string;
   bullets: string;
   callout: string;
 };
@@ -55,7 +56,8 @@ function emptySection(index = 0): SectionDraft {
     h2: "",
     paragraph: "",
     h3: "",
-    internalLink: "",
+    internalLinkLabel: "",
+    internalLinkHref: "",
     bullets: "",
     callout: "",
   };
@@ -74,7 +76,8 @@ function blocksToSections(blocks: GuideBlock[]): SectionDraft[] {
       current.h2 ||
       current.paragraph ||
       current.h3 ||
-      current.internalLink ||
+      current.internalLinkLabel ||
+      current.internalLinkHref ||
       current.bullets ||
       current.callout;
 
@@ -114,7 +117,10 @@ function blocksToSections(blocks: GuideBlock[]): SectionDraft[] {
     }
 
     if (block.type === "internalLink") {
-      current.internalLink = block.href;
+      current.internalLinkLabel =
+        block.label || block.href;
+      current.internalLinkHref =
+        block.href;
     }
   }
 
@@ -178,12 +184,15 @@ function sectionsToBlocks(
       });
     }
 
-    if (section.internalLink.trim()) {
+    if (section.internalLinkHref.trim()) {
       blocks.push({
         id: `s${sectionIndex + 1}-internal-link`,
         type: "internalLink",
-        label: section.internalLink.trim(),
-        href: section.internalLink.trim(),
+        label:
+          section.internalLinkLabel.trim() ||
+          section.internalLinkHref.trim(),
+        href:
+          section.internalLinkHref.trim(),
       });
     }
   });
@@ -312,6 +321,54 @@ export default function AdminGuideEditor({
       initialGuide?.status ?? "draft"
     );
 
+  const [
+    relatedGuideSlugs,
+    setRelatedGuideSlugs,
+  ] = useState<string[]>(
+    initialGuide?.relatedGuideSlugs ?? []
+  );
+
+  const [
+    availableGuides,
+    setAvailableGuides,
+  ] = useState<GuideRecord[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadGuides() {
+      try {
+        const response =
+          await fetch("/api/admin/guides");
+
+        if (!response.ok) {
+          return;
+        }
+
+        const result =
+          await response.json();
+
+        if (
+          !cancelled &&
+          Array.isArray(result.guides)
+        ) {
+          setAvailableGuides(
+            result.guides
+          );
+        }
+      } catch {
+        // Related-article loading should not
+        // block editing or saving the article.
+      }
+    }
+
+    void loadGuides();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const [publishingGuide, setPublishingGuide] =
     useState(false);
 
@@ -365,67 +422,6 @@ export default function AdminGuideEditor({
   const blocks = useMemo(
     () => sectionsToBlocks(sections),
     [sections]
-  );
-
-  const seoState = useMemo(() => {
-    const hasH2 = blocks.some(
-      (block) =>
-        block.type === "heading" &&
-        block.level === 2
-    );
-
-    const hasInternalLink = blocks.some(
-      (block) =>
-        block.type === "internalLink"
-    );
-
-    return {
-      title: seoTitle.trim().length > 0,
-      focusKeyword:
-        focusKeyword.trim().length > 0,
-      metaDescription:
-        metaDescription.trim().length >= 110 &&
-        metaDescription.trim().length <= 165,
-      headings: hasH2,
-      internalLinks: hasInternalLink,
-      imageAlt: imageAlt.trim().length > 0,
-      canonical: slug.trim().length > 0,
-    };
-  }, [
-    blocks,
-    seoTitle,
-    focusKeyword,
-    metaDescription,
-    imageAlt,
-    slug,
-  ]);
-
-  const seoChecks = [
-    [d.seoChecks.title, seoState.title],
-    [
-      d.seoChecks.focusKeyword,
-      seoState.focusKeyword,
-    ],
-    [
-      d.seoChecks.metaDescription,
-      seoState.metaDescription,
-    ],
-    [d.seoChecks.headings, seoState.headings],
-    [
-      d.seoChecks.internalLinks,
-      seoState.internalLinks,
-    ],
-    [d.seoChecks.imageAlt, seoState.imageAlt],
-    [d.seoChecks.canonical, seoState.canonical],
-  ] as const;
-
-  const completedSeoChecks =
-    seoChecks.filter(([, complete]) => complete)
-      .length;
-
-  const seoScore = Math.round(
-    (completedSeoChecks / seoChecks.length) *
-      100
   );
 
   const updateSection = (
@@ -572,7 +568,7 @@ export default function AdminGuideEditor({
         alt: imageAlt.trim(),
         caption: "",
       },
-      relatedGuideSlugs: [],
+      relatedGuideSlugs,
       sourceContent: {
         locale: sourceLocale,
         translationStatus: "draft",
@@ -1436,42 +1432,51 @@ export default function AdminGuideEditor({
                           />
                         </label>
 
-                        <label>
-                          <span
-                            className={
-                              labelClass
-                            }
-                          >
-                            {
-                              d.fields
-                                .internalLink
-                            }
-                          </span>
+                        <div className="grid gap-4">
+                          <label>
+                            <span className={labelClass}>
+                              Κείμενο εσωτερικού link
+                            </span>
 
-                          <input
-                            type="text"
-                            value={
-                              section.internalLink
-                            }
-                            onChange={(
-                              event
-                            ) =>
-                              updateSection(
-                                section.id,
-                                "internalLink",
-                                event.target
-                                  .value
-                              )
-                            }
-                            placeholder={
-                              d.placeholders
-                                .internalLink
-                            }
-                            className={
-                              inputClass
-                            }
-                          />
-                        </label>
+                            <input
+                              type="text"
+                              value={
+                                section.internalLinkLabel
+                              }
+                              onChange={(event) =>
+                                updateSection(
+                                  section.id,
+                                  "internalLinkLabel",
+                                  event.target.value
+                                )
+                              }
+                              placeholder="π.χ. Διαχείριση κρατήσεων σε πολλές πλατφόρμες"
+                              className={inputClass}
+                            />
+                          </label>
+
+                          <label>
+                            <span className={labelClass}>
+                              URL εσωτερικού link
+                            </span>
+
+                            <input
+                              type="text"
+                              value={
+                                section.internalLinkHref
+                              }
+                              onChange={(event) =>
+                                updateSection(
+                                  section.id,
+                                  "internalLinkHref",
+                                  event.target.value
+                                )
+                              }
+                              placeholder="/performance/platform-network"
+                              className={inputClass}
+                            />
+                          </label>
+                        </div>
                       </div>
 
                       <div className="grid gap-5 lg:grid-cols-2">
@@ -1553,6 +1558,101 @@ export default function AdminGuideEditor({
                   </div>
                 )
               )}
+            </div>
+          </section>
+
+          <section className={sectionClass}>
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-cyan-50 text-cyan-600">
+                <FileText size={21} />
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-black text-slate-950">
+                  Σχετικά άρθρα
+                </h2>
+
+                <p className="mt-1 text-sm leading-6 text-slate-500">
+                  Επιλέξτε έως 3 σχετικά δημοσιευμένα άρθρα που θα εμφανίζονται στο τέλος του άρθρου.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 grid gap-3">
+              {availableGuides
+                .filter(
+                  (candidate) =>
+                    candidate.id !== guideId &&
+                    candidate.status === "published"
+                )
+                .map((candidate) => {
+                  const checked =
+                    relatedGuideSlugs.includes(
+                      candidate.slug
+                    );
+
+                  return (
+                    <label
+                      key={candidate.id}
+                      className="flex cursor-pointer items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 transition hover:border-cyan-200 hover:bg-cyan-50/40"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={() =>
+                          setRelatedGuideSlugs(
+                            (current) => {
+                              if (checked) {
+                                return current.filter(
+                                  (slugValue) =>
+                                    slugValue !==
+                                    candidate.slug
+                                );
+                              }
+
+                              if (
+                                current.length >= 3
+                              ) {
+                                return current;
+                              }
+
+                              return [
+                                ...current,
+                                candidate.slug,
+                              ];
+                            }
+                          )
+                        }
+                        className="mt-1 h-4 w-4"
+                      />
+
+                      <div>
+                        <p className="text-sm font-black text-slate-900">
+                          {
+                            candidate.translations[
+                              candidate.sourceLocale
+                            ]?.title ||
+                            candidate.slug
+                          }
+                        </p>
+
+                        <p className="mt-1 text-xs font-semibold text-slate-500">
+                          /blog/{candidate.slug}
+                        </p>
+                      </div>
+                    </label>
+                  );
+                })}
+
+              {availableGuides.filter(
+                (candidate) =>
+                  candidate.id !== guideId &&
+                  candidate.status === "published"
+              ).length === 0 ? (
+                <p className="text-sm font-semibold text-slate-500">
+                  Δεν υπάρχουν ακόμη άλλα δημοσιευμένα άρθρα.
+                </p>
+              ) : null}
             </div>
           </section>
 
@@ -2151,50 +2251,6 @@ export default function AdminGuideEditor({
               </button>
             </div>
 
-            <div className="mt-8 border-t border-slate-100 pt-6">
-              <div className="flex items-center justify-between gap-4">
-                <p className="text-sm font-black text-slate-900">
-                  {d.seoChecks.scoreLabel}
-                </p>
-
-                <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-black text-slate-500">
-                  {seoScore} / 100
-                </span>
-              </div>
-
-              <div className="mt-4 space-y-3">
-                {seoChecks.map(
-                  ([check, complete]) => (
-                    <div
-                      key={check}
-                      className="flex items-start gap-3"
-                    >
-                      <div
-                        className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
-                          complete
-                            ? "bg-emerald-100 text-emerald-600"
-                            : "bg-slate-100 text-slate-400"
-                        }`}
-                      >
-                        <CheckCircle2
-                          size={13}
-                        />
-                      </div>
-
-                      <p
-                        className={`text-sm font-semibold leading-5 ${
-                          complete
-                            ? "text-slate-800"
-                            : "text-slate-500"
-                        }`}
-                      >
-                        {check}
-                      </p>
-                    </div>
-                  )
-                )}
-              </div>
-            </div>
           </section>
         </aside>
       </div>

@@ -5,6 +5,7 @@ import {
   getGuideById,
   updateGuideStatus,
 } from "@/lib/guides/db";
+import { validateGuideForPublish } from "@/lib/guides/validation";
 
 type RouteContext = {
   params: Promise<{
@@ -13,7 +14,8 @@ type RouteContext = {
 };
 
 async function requireAdmin() {
-  const session = await auth();
+  const session =
+    await auth();
 
   return Boolean(
     session?.user?.email
@@ -23,7 +25,8 @@ async function requireAdmin() {
 function parseGuideId(
   value: string
 ): number | null {
-  const id = Number(value);
+  const id =
+    Number(value);
 
   if (
     !Number.isInteger(id) ||
@@ -42,7 +45,8 @@ export async function POST(
   if (!(await requireAdmin())) {
     return NextResponse.json(
       {
-        error: "Unauthorized",
+        error:
+          "Unauthorized",
       },
       {
         status: 401,
@@ -54,7 +58,9 @@ export async function POST(
     await context.params;
 
   const id =
-    parseGuideId(rawId);
+    parseGuideId(
+      rawId
+    );
 
   if (!id) {
     return NextResponse.json(
@@ -89,10 +95,12 @@ export async function POST(
     };
 
   if (
-    body.action === "publish"
+    body.action ===
+    "publish"
   ) {
     if (
-      guide.status === "published"
+      guide.status ===
+      "published"
     ) {
       return NextResponse.json(
         {
@@ -105,6 +113,26 @@ export async function POST(
       );
     }
 
+    const validation =
+      validateGuideForPublish(
+        guide
+      );
+
+    if (
+      !validation.valid
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "The article is not ready to publish.",
+          validation,
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
     await updateGuideStatus(
       id,
       "published"
@@ -112,7 +140,10 @@ export async function POST(
 
     return NextResponse.json({
       id,
-      status: "published",
+      status:
+        "published",
+      warnings:
+        validation.warnings,
     });
   }
 
