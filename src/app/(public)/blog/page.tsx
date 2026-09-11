@@ -316,19 +316,40 @@ export default async function BlogPage() {
         />
 
         <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
-          <div className="mb-5 h-1 w-20 rounded-full bg-gradient-to-r from-blue-600 to-emerald-500" />
+          <div className="mb-5 flex items-center gap-3">
+            <span className="h-2.5 w-2.5 rounded-full bg-blue-600" />
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
+            <span className="h-2.5 w-2.5 rounded-full bg-violet-500" />
+            <span className="ml-1 h-px w-14 bg-gradient-to-r from-slate-300 to-transparent" />
+          </div>
 
           <p className="text-sm font-black uppercase tracking-[0.22em] text-blue-600">
             {copy.eyebrow}
           </p>
 
           <h1 className="mt-4 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
-            {copy.title}
+            <span className="bg-gradient-to-r from-slate-950 via-blue-700 to-emerald-600 bg-clip-text text-transparent">
+              {copy.title}
+            </span>
           </h1>
 
           <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600 sm:text-xl">
             {copy.description}
           </p>
+
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute right-6 top-1/2 hidden -translate-y-1/2 lg:block"
+          >
+            <div className="relative h-40 w-64">
+              <div className="absolute right-0 top-0 h-16 w-40 rotate-[-8deg] rounded-[28px] border border-blue-200/80 bg-white/70 shadow-sm backdrop-blur" />
+              <div className="absolute right-14 top-12 h-16 w-40 rotate-[6deg] rounded-[28px] border border-emerald-200/80 bg-white/70 shadow-sm backdrop-blur" />
+              <div className="absolute right-2 top-24 h-12 w-28 rotate-[-3deg] rounded-full border border-violet-200/80 bg-white/70 shadow-sm backdrop-blur" />
+              <div className="absolute right-10 top-5 h-2.5 w-2.5 rounded-full bg-blue-500" />
+              <div className="absolute right-28 top-20 h-2.5 w-2.5 rounded-full bg-emerald-500" />
+              <div className="absolute right-8 top-32 h-2.5 w-2.5 rounded-full bg-violet-500" />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -343,7 +364,7 @@ export default async function BlogPage() {
         ) : (
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {publicArticles.map(
-              (guide) => {
+              (guide, index) => {
                 const content =
                   guide.translations[
                     currentLocale
@@ -355,11 +376,55 @@ export default async function BlogPage() {
                     currentLocale
                   );
 
+                const cardTheme =
+                  index % 3 === 0
+                    ? {
+                        shell:
+                          "border-blue-200/80 bg-gradient-to-br from-white via-blue-50/40 to-white hover:border-blue-300",
+                        glow:
+                          "bg-blue-300/25",
+                        accent:
+                          "from-blue-600 to-cyan-400",
+                        category:
+                          "text-blue-700",
+                        title:
+                          "group-hover:text-blue-700",
+                      }
+                    : index % 3 === 1
+                      ? {
+                          shell:
+                            "border-emerald-200/80 bg-gradient-to-br from-white via-emerald-50/45 to-white hover:border-emerald-300",
+                          glow:
+                            "bg-emerald-300/25",
+                          accent:
+                            "from-emerald-600 to-teal-400",
+                          category:
+                            "text-emerald-700",
+                          title:
+                            "group-hover:text-emerald-700",
+                        }
+                      : {
+                          shell:
+                            "border-violet-200/80 bg-gradient-to-br from-white via-violet-50/40 to-white hover:border-violet-300",
+                          glow:
+                            "bg-violet-300/20",
+                          accent:
+                            "from-violet-600 to-fuchsia-400",
+                          category:
+                            "text-violet-700",
+                          title:
+                            "group-hover:text-violet-700",
+                        };
+
                 return (
                   <article
                     key={guide.id}
-                    className="group flex min-w-0 flex-col overflow-hidden rounded-[28px] border border-slate-200/80 bg-white shadow-[0_18px_50px_-34px_rgba(15,23,42,0.35)] transition duration-300 hover:-translate-y-1.5 hover:border-blue-200 hover:shadow-[0_28px_70px_-34px_rgba(37,99,235,0.28)]"
+                    className={`group relative flex min-w-0 flex-col overflow-hidden rounded-[30px] border shadow-[0_18px_50px_-34px_rgba(15,23,42,0.35)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_30px_75px_-34px_rgba(15,23,42,0.28)] ${cardTheme.shell}`}
                   >
+                    <div
+                      aria-hidden="true"
+                      className={`pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full blur-3xl ${cardTheme.glow}`}
+                    />
                     {guide
                       .featuredImage
                       .src ? (
@@ -388,7 +453,9 @@ export default async function BlogPage() {
 
                     <div className="flex flex-1 flex-col p-6">
                       <div className="mb-4 h-1 w-12 rounded-full bg-gradient-to-r from-blue-600 to-emerald-500 transition-all duration-300 group-hover:w-20" />
-                      <p className="text-xs font-black uppercase tracking-[0.14em] text-blue-600">
+                      <p
+                        className={`text-xs font-black uppercase tracking-[0.14em] ${cardTheme.category}`}
+                      >
                         {
                           guide.category
                         }
@@ -397,7 +464,7 @@ export default async function BlogPage() {
                       <h2 className="mt-3 text-2xl font-black leading-tight tracking-tight text-slate-950">
                         <Link
                           href={href}
-                          className="transition hover:text-blue-700"
+                          className={`transition ${cardTheme.title}`}
                         >
                           {
                             content.title
