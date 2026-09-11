@@ -65,10 +65,10 @@ export const metadata: Metadata = {
     ),
 
   title:
-    "HostMetric | Smarter Hosting. Better Results.",
+    "HostMetric | Smarter Hosting, Better Results",
 
   description:
-    "Professional short-term rental management with smart pricing, guest communication, multi-platform distribution and performance optimization.",
+    "Professional short-term rental management with smart pricing, guest communication, multi-platform distribution and performance optimization",
 };
 
 

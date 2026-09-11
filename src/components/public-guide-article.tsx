@@ -56,7 +56,7 @@ function renderBlock(
     return (
       <ul
         key={block.id}
-        className="mt-6 list-disc space-y-3 pl-6 text-[17px] leading-8 text-slate-700 sm:text-lg"
+        className="mt-6 list-disc space-y-3 pl-6 text-[17px] leading-8 text-slate-700 marker:text-blue-500 sm:text-lg"
       >
         {block.items.map((item) => (
           <li key={item}>{item}</li>
@@ -69,7 +69,7 @@ function renderBlock(
     return (
       <aside
         key={block.id}
-        className="mt-8 rounded-[24px] border border-blue-100 bg-blue-50 px-5 py-5 text-base font-semibold leading-7 text-slate-800 sm:px-6"
+        className="mt-8 rounded-[24px] border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-emerald-50 px-5 py-5 text-base font-semibold leading-7 text-slate-800 shadow-sm sm:px-6"
       >
         {block.title ? (
           <p className="mb-2 font-black text-slate-950">
@@ -104,12 +104,27 @@ export default function PublicGuideArticle({
   backToAllLabel,
 }: PublicGuideArticleProps) {
   return (
-    <main className="bg-slate-50">
-      <article className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+    <main className="relative overflow-hidden bg-slate-50">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[560px] bg-gradient-to-br from-blue-50 via-white to-emerald-50"
+      />
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-24 top-32 h-72 w-72 rounded-full bg-blue-200/30 blur-3xl"
+      />
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-24 top-10 h-80 w-80 rounded-full bg-emerald-200/30 blur-3xl"
+      />
+
+      <article className="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <header className="mx-auto max-w-4xl text-center">
           <Link
             href={getLocalizedPath("/blog", locale)}
-            className="inline-flex rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-blue-700 transition hover:bg-blue-100"
+            className="inline-flex rounded-full border border-blue-200/80 bg-white/80 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-blue-700 shadow-sm backdrop-blur transition hover:border-blue-300 hover:bg-blue-50"
           >
             {guide.category}
           </Link>
@@ -127,7 +142,10 @@ export default function PublicGuideArticle({
 
             {guide.publishedAt ? (
               <>
-                <span aria-hidden="true">•</span>
+                <span
+                  aria-hidden="true"
+                  className="h-1.5 w-1.5 rounded-full bg-blue-400"
+                />
                 <time dateTime={guide.publishedAt}>
                   {new Intl.DateTimeFormat(
                     locale === "el"
@@ -150,7 +168,7 @@ export default function PublicGuideArticle({
         </header>
 
         {guide.featuredImage.src ? (
-          <div className="mx-auto mt-10 max-w-4xl overflow-hidden rounded-[30px] border border-slate-200 bg-white shadow-sm">
+          <div className="mx-auto mt-10 max-w-4xl overflow-hidden rounded-[30px] border border-white/80 bg-white shadow-[0_24px_70px_-32px_rgba(15,23,42,0.35)] ring-1 ring-slate-200/70">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={guide.featuredImage.src}
@@ -163,7 +181,9 @@ export default function PublicGuideArticle({
           </div>
         ) : null}
 
-        <div className="mx-auto mt-10 max-w-3xl rounded-[30px] border border-slate-200 bg-white px-6 py-8 shadow-sm sm:px-9 sm:py-10">
+        <div className="mx-auto mt-10 max-w-3xl rounded-[30px] border border-slate-200/80 bg-white/95 px-6 py-8 shadow-[0_20px_60px_-36px_rgba(15,23,42,0.35)] sm:px-9 sm:py-10">
+          <div className="mb-8 h-1 w-20 rounded-full bg-gradient-to-r from-blue-600 to-emerald-500" />
+
           {content.blocks.map((block) =>
             renderBlock(block, locale)
           )}
@@ -172,7 +192,7 @@ export default function PublicGuideArticle({
         <div className="mx-auto mt-10 flex max-w-3xl justify-center">
           <Link
             href={getLocalizedPath("/blog", locale)}
-            className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-black text-slate-700 shadow-sm transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+            className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-black text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 hover:shadow-md"
           >
             ← {backToAllLabel}
           </Link>

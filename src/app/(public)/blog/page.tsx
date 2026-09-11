@@ -29,7 +29,7 @@ const blogPageCopy: Record<Locale, BlogPageCopy> = {
     seo: {
       title: "Blog για Βραχυχρόνιες Μισθώσεις | HostMetric",
       description:
-        "Άρθρα και πρακτικές αναλύσεις για Airbnb, Booking.com, τιμολόγηση, πληρότητα, κρατήσεις και επαγγελματική διαχείριση καταλυμάτων.",
+        "Άρθρα και πρακτικές αναλύσεις για Airbnb, Booking.com, τιμολόγηση, πληρότητα, κρατήσεις και επαγγελματική διαχείριση καταλυμάτων",
     },
     eyebrow: "HOSTMETRIC BLOG",
     title: "Blog",
@@ -43,7 +43,7 @@ const blogPageCopy: Record<Locale, BlogPageCopy> = {
     seo: {
       title: "Short-Term Rental Blog | HostMetric",
       description:
-        "Articles and practical insights about Airbnb, Booking.com, pricing, occupancy, bookings and professional short-term rental management.",
+        "Articles and practical insights about Airbnb, Booking.com, pricing, occupancy, bookings and professional short-term rental management",
     },
     eyebrow: "HOSTMETRIC BLOG",
     title: "Blog",
@@ -57,7 +57,7 @@ const blogPageCopy: Record<Locale, BlogPageCopy> = {
     seo: {
       title: "Blog für Kurzzeitvermietungen | HostMetric",
       description:
-        "Artikel und praktische Einblicke zu Airbnb, Booking.com, Preisgestaltung, Auslastung, Buchungen und professionellem Management von Kurzzeitvermietungen.",
+        "Artikel und praktische Einblicke zu Airbnb, Booking.com, Preisgestaltung, Auslastung, Buchungen und professionellem Management von Kurzzeitvermietungen",
     },
     eyebrow: "HOSTMETRIC BLOG",
     title: "Blog",
@@ -71,7 +71,7 @@ const blogPageCopy: Record<Locale, BlogPageCopy> = {
     seo: {
       title: "Blog sur la location courte durée | HostMetric",
       description:
-        "Articles et analyses pratiques sur Airbnb, Booking.com, la tarification, l’occupation, les réservations et la gestion professionnelle des locations courte durée.",
+        "Articles et analyses pratiques sur Airbnb, Booking.com, la tarification, l’occupation, les réservations et la gestion professionnelle des locations courte durée",
     },
     eyebrow: "BLOG HOSTMETRIC",
     title: "Blog",
@@ -85,7 +85,7 @@ const blogPageCopy: Record<Locale, BlogPageCopy> = {
     seo: {
       title: "Blog sugli affitti brevi | HostMetric",
       description:
-        "Articoli e analisi pratiche su Airbnb, Booking.com, prezzi, occupazione, prenotazioni e gestione professionale degli affitti brevi.",
+        "Articoli e analisi pratiche su Airbnb, Booking.com, prezzi, occupazione, prenotazioni e gestione professionale degli affitti brevi",
     },
     eyebrow: "BLOG HOSTMETRIC",
     title: "Blog",
@@ -99,7 +99,7 @@ const blogPageCopy: Record<Locale, BlogPageCopy> = {
     seo: {
       title: "Blog de alquiler vacacional | HostMetric",
       description:
-        "Artículos y análisis prácticos sobre Airbnb, Booking.com, precios, ocupación, reservas y gestión profesional de alquileres vacacionales.",
+        "Artículos y análisis prácticos sobre Airbnb, Booking.com, precios, ocupación, reservas y gestión profesional de alquileres vacacionales",
     },
     eyebrow: "BLOG HOSTMETRIC",
     title: "Blog",
@@ -113,7 +113,7 @@ const blogPageCopy: Record<Locale, BlogPageCopy> = {
     seo: {
       title: "Blog de alojamento local | HostMetric",
       description:
-        "Artigos e análises práticas sobre Airbnb, Booking.com, preços, ocupação, reservas e gestão profissional de alojamentos de curta duração.",
+        "Artigos e análises práticas sobre Airbnb, Booking.com, preços, ocupação, reservas e gestão profissional de alojamentos de curta duração",
     },
     eyebrow: "BLOG HOSTMETRIC",
     title: "Blog",
@@ -127,7 +127,7 @@ const blogPageCopy: Record<Locale, BlogPageCopy> = {
     seo: {
       title: "Блог за краткосрочни наеми | HostMetric",
       description:
-        "Статии и практически анализи за Airbnb, Booking.com, ценообразуване, заетост, резервации и професионално управление на краткосрочни наеми.",
+        "Статии и практически анализи за Airbnb, Booking.com, ценообразуване, заетост, резервации и професионално управление на краткосрочни наеми",
     },
     eyebrow: "HOSTMETRIC БЛОГ",
     title: "Блог",
@@ -141,7 +141,7 @@ const blogPageCopy: Record<Locale, BlogPageCopy> = {
     seo: {
       title: "Blog o kratkoročnom izdavanju | HostMetric",
       description:
-        "Članci i praktične analize o Airbnb-u, Booking.com-u, cenama, popunjenosti, rezervacijama i profesionalnom upravljanju kratkoročnim izdavanjem.",
+        "Članci i praktične analize o Airbnb-u, Booking.com-u, cenama, popunjenosti, rezervacijama i profesionalnom upravljanju kratkoročnim izdavanjem",
     },
     eyebrow: "HOSTMETRIC BLOG",
     title: "Blog",
@@ -155,7 +155,7 @@ const blogPageCopy: Record<Locale, BlogPageCopy> = {
     seo: {
       title: "Kısa Süreli Kiralama Blogu | HostMetric",
       description:
-        "Airbnb, Booking.com, fiyatlandırma, doluluk, rezervasyonlar ve profesyonel kısa süreli kiralama yönetimi hakkında makaleler ve pratik analizler.",
+        "Airbnb, Booking.com, fiyatlandırma, doluluk, rezervasyonlar ve profesyonel kısa süreli kiralama yönetimi hakkında makaleler ve pratik analizler",
     },
     eyebrow: "HOSTMETRIC BLOG",
     title: "Blog",
@@ -169,7 +169,7 @@ const blogPageCopy: Record<Locale, BlogPageCopy> = {
     seo: {
       title: "Blog o najmie krótkoterminowym | HostMetric",
       description:
-        "Artykuły i praktyczne analizy o Airbnb, Booking.com, cenach, obłożeniu, rezerwacjach i profesjonalnym zarządzaniu najmem krótkoterminowym.",
+        "Artykuły i praktyczne analizy o Airbnb, Booking.com, cenach, obłożeniu, rezerwacjach i profesjonalnym zarządzaniu najmem krótkoterminowym",
     },
     eyebrow: "BLOG HOSTMETRIC",
     title: "Blog",
@@ -183,7 +183,7 @@ const blogPageCopy: Record<Locale, BlogPageCopy> = {
     seo: {
       title: "Блог о краткосрочной аренде | HostMetric",
       description:
-        "Статьи и практические материалы об Airbnb, Booking.com, ценообразовании, загрузке, бронированиях и профессиональном управлении краткосрочной арендой.",
+        "Статьи и практические материалы об Airbnb, Booking.com, ценообразовании, загрузке, бронированиях и профессиональном управлении краткосрочной арендой",
     },
     eyebrow: "БЛОГ HOSTMETRIC",
     title: "Блог",
@@ -300,9 +300,24 @@ export default async function BlogPage() {
     });
 
   return (
-    <main className="min-h-[65vh] bg-slate-50">
-      <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+    <main className="relative min-h-[65vh] overflow-hidden bg-slate-50">
+      <section className="relative overflow-hidden border-b border-slate-200/80 bg-gradient-to-br from-blue-50 via-white to-emerald-50">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-blue-200/35 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-20 -top-16 h-80 w-80 rounded-full bg-emerald-200/35 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-300/70 to-transparent"
+        />
+
+        <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+          <div className="mb-5 h-1 w-20 rounded-full bg-gradient-to-r from-blue-600 to-emerald-500" />
+
           <p className="text-sm font-black uppercase tracking-[0.22em] text-blue-600">
             {copy.eyebrow}
           </p>
@@ -317,10 +332,10 @@ export default async function BlogPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+      <section className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         {publicArticles.length ===
         0 ? (
-          <div className="rounded-[28px] border border-slate-200 bg-white px-6 py-12 text-center shadow-sm">
+          <div className="rounded-[28px] border border-slate-200/80 bg-white px-6 py-12 text-center shadow-[0_18px_50px_-34px_rgba(15,23,42,0.35)]">
             <p className="text-lg font-bold text-slate-600">
               {copy.empty}
             </p>
@@ -343,14 +358,14 @@ export default async function BlogPage() {
                 return (
                   <article
                     key={guide.id}
-                    className="group flex min-w-0 flex-col overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    className="group flex min-w-0 flex-col overflow-hidden rounded-[28px] border border-slate-200/80 bg-white shadow-[0_18px_50px_-34px_rgba(15,23,42,0.35)] transition duration-300 hover:-translate-y-1.5 hover:border-blue-200 hover:shadow-[0_28px_70px_-34px_rgba(37,99,235,0.28)]"
                   >
                     {guide
                       .featuredImage
                       .src ? (
                       <Link
                         href={href}
-                        className="block overflow-hidden bg-slate-100"
+                        className="relative block overflow-hidden bg-slate-100"
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
@@ -366,12 +381,13 @@ export default async function BlogPage() {
                               .featuredImage
                               .alt
                           }
-                          className="aspect-[16/9] w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                          className="aspect-[16/9] w-full object-cover transition duration-500 group-hover:scale-[1.04]"
                         />
                       </Link>
                     ) : null}
 
                     <div className="flex flex-1 flex-col p-6">
+                      <div className="mb-4 h-1 w-12 rounded-full bg-gradient-to-r from-blue-600 to-emerald-500 transition-all duration-300 group-hover:w-20" />
                       <p className="text-xs font-black uppercase tracking-[0.14em] text-blue-600">
                         {
                           guide.category
@@ -398,7 +414,7 @@ export default async function BlogPage() {
                       <div className="mt-auto pt-6">
                         <Link
                           href={href}
-                          className="inline-flex items-center font-black text-blue-700 transition hover:text-blue-900"
+                          className="inline-flex items-center font-black text-blue-700 transition group-hover:translate-x-1 hover:text-blue-900"
                         >
                           {copy.readMore} →
                         </Link>

@@ -80,84 +80,84 @@ const homepageSeo: Record<
     title:
       "Διαχείριση Ακινήτων, Airbnb & Booking.com στην Κύπρο | HostMetric",
     description:
-      "Επαγγελματική διαχείριση ακινήτων, Airbnb, Booking.com και βραχυχρόνιων μισθώσεων με έξυπνη τιμολόγηση, περισσότερες κρατήσεις, υψηλότερη πληρότητα και μεγιστοποίηση εσόδων.",
+      "Επαγγελματική διαχείριση ακινήτων, Airbnb, Booking.com και βραχυχρόνιων μισθώσεων με έξυπνη τιμολόγηση, περισσότερες κρατήσεις, υψηλότερη πληρότητα και μεγιστοποίηση εσόδων",
   },
 
   en: {
     title:
       "Property, Airbnb & Booking.com Management Cyprus | HostMetric",
     description:
-      "Professional property, Airbnb, Booking.com and short-term rental management in Cyprus with smart pricing, guest communication and multi-platform distribution to increase bookings, occupancy and rental revenue.",
+      "Professional property, Airbnb, Booking.com and short-term rental management in Cyprus with smart pricing, guest communication and multi-platform distribution to increase bookings, occupancy and rental revenue",
   },
 
   de: {
     title:
       "Immobilien-, Airbnb- & Booking.com-Management in Zypern | HostMetric",
     description:
-      "Professionelles Immobilien-, Airbnb-, Booking.com- und Kurzzeitvermietungsmanagement in Zypern mit intelligenter Preisgestaltung, Gästekommunikation und Multichannel-Distribution für mehr Buchungen, Auslastung und Einnahmen.",
+      "Professionelles Immobilien-, Airbnb-, Booking.com- und Kurzzeitvermietungsmanagement in Zypern mit intelligenter Preisgestaltung, Gästekommunikation und Multichannel-Distribution für mehr Buchungen, Auslastung und Einnahmen",
   },
 
   fr: {
     title:
       "Gestion de Biens, Airbnb & Booking.com à Chypre | HostMetric",
     description:
-      "Gestion professionnelle de biens, Airbnb, Booking.com et locations courte durée à Chypre avec tarification intelligente, communication voyageurs et diffusion multicanale pour augmenter réservations, occupation et revenus.",
+      "Gestion professionnelle de biens, Airbnb, Booking.com et locations courte durée à Chypre avec tarification intelligente, communication voyageurs et diffusion multicanale pour augmenter réservations, occupation et revenus",
   },
 
   it: {
     title:
       "Gestione Proprietà, Airbnb & Booking.com a Cipro | HostMetric",
     description:
-      "Gestione professionale di proprietà, Airbnb, Booking.com e affitti brevi a Cipro con prezzi intelligenti, comunicazione con gli ospiti e distribuzione multicanale per aumentare prenotazioni, occupazione e ricavi.",
+      "Gestione professionale di proprietà, Airbnb, Booking.com e affitti brevi a Cipro con prezzi intelligenti, comunicazione con gli ospiti e distribuzione multicanale per aumentare prenotazioni, occupazione e ricavi",
   },
 
   es: {
     title:
       "Gestión de Propiedades, Airbnb & Booking.com en Chipre | HostMetric",
     description:
-      "Gestión profesional de propiedades, Airbnb, Booking.com y alquileres de corta estancia en Chipre con precios inteligentes, atención al huésped y distribución multicanal para aumentar reservas, ocupación e ingresos.",
+      "Gestión profesional de propiedades, Airbnb, Booking.com y alquileres de corta estancia en Chipre con precios inteligentes, atención al huésped y distribución multicanal para aumentar reservas, ocupación e ingresos",
   },
 
   pt: {
     title:
       "Gestão de Imóveis, Airbnb & Booking.com em Chipre | HostMetric",
     description:
-      "Gestão profissional de imóveis, Airbnb, Booking.com e alojamento de curta duração em Chipre com preços inteligentes, comunicação com hóspedes e distribuição multicanal para aumentar reservas, ocupação e receitas.",
+      "Gestão profissional de imóveis, Airbnb, Booking.com e alojamento de curta duração em Chipre com preços inteligentes, comunicação com hóspedes e distribuição multicanal para aumentar reservas, ocupação e receitas",
   },
 
   bg: {
     title:
       "Управление на имоти, Airbnb & Booking.com в Кипър | HostMetric",
     description:
-      "Професионално управление на имоти, Airbnb, Booking.com и краткосрочни наеми в Кипър с интелигентно ценообразуване, комуникация с гости и многоканална дистрибуция за повече резервации, заетост и приходи.",
+      "Професионално управление на имоти, Airbnb, Booking.com и краткосрочни наеми в Кипър с интелигентно ценообразуване, комуникация с гости и многоканална дистрибуция за повече резервации, заетост и приходи",
   },
 
   sr: {
     title:
       "Upravljanje nekretninama, Airbnb & Booking.com na Kipru | HostMetric",
     description:
-      "Profesionalno upravljanje nekretninama, Airbnb-om, Booking.com-om i kratkoročnim najmom na Kipru uz pametno formiranje cena, komunikaciju sa gostima i distribuciju na više kanala za više rezervacija, popunjenosti i prihoda.",
+      "Profesionalno upravljanje nekretninama, Airbnb-om, Booking.com-om i kratkoročnim najmom na Kipru uz pametno formiranje cena, komunikaciju sa gostima i distribuciju na više kanala za više rezervacija, popunjenosti i prihoda",
   },
 
   tr: {
     title:
       "Kıbrıs Mülk, Airbnb & Booking.com Yönetimi | HostMetric",
     description:
-      "Kıbrıs'ta profesyonel mülk, Airbnb, Booking.com ve kısa süreli kiralama yönetimi; akıllı fiyatlandırma, misafir iletişimi ve çok kanallı dağıtımla rezervasyon, doluluk ve geliri artırın.",
+      "Kıbrıs'ta profesyonel mülk, Airbnb, Booking.com ve kısa süreli kiralama yönetimi; akıllı fiyatlandırma, misafir iletişimi ve çok kanallı dağıtımla rezervasyon, doluluk ve geliri artırın",
   },
 
   pl: {
     title:
       "Zarządzanie Nieruchomościami, Airbnb & Booking.com na Cyprze | HostMetric",
     description:
-      "Profesjonalne zarządzanie nieruchomościami, Airbnb, Booking.com i najmem krótkoterminowym na Cyprze z inteligentnymi cenami, obsługą gości i dystrybucją wielokanałową dla większej liczby rezerwacji, obłożenia i przychodów.",
+      "Profesjonalne zarządzanie nieruchomościami, Airbnb, Booking.com i najmem krótkoterminowym na Cyprze z inteligentnymi cenami, obsługą gości i dystrybucją wielokanałową dla większej liczby rezerwacji, obłożenia i przychodów",
   },
 
   ru: {
     title:
       "Управление недвижимостью, Airbnb & Booking.com на Кипре | HostMetric",
     description:
-      "Профессиональное управление недвижимостью, Airbnb, Booking.com и краткосрочной арендой на Кипре с умным ценообразованием, коммуникацией с гостями и мультиканальной дистрибуцией для роста бронирований, заполняемости и дохода.",
+      "Профессиональное управление недвижимостью, Airbnb, Booking.com и краткосрочной арендой на Кипре с умным ценообразованием, коммуникацией с гостями и мультиканальной дистрибуцией для роста бронирований, заполняемости и дохода",
   },
 };
 

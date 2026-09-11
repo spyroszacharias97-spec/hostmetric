@@ -485,7 +485,7 @@ export default async function Footer() {
 
 
                 <a
-                  href="tel:+35799807870"
+                  href="tel:+35797729792"
                   className="
                     mt-2
                     flex
@@ -505,7 +505,7 @@ export default async function Footer() {
                   />
 
                   <span className="whitespace-nowrap">
-                    +357 99 80 78 70
+                    +357 97 72 97 92
                   </span>
                 </a>
 

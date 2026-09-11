@@ -11,6 +11,7 @@ import {
 } from "@/i18n/config";
 import { getLocalizedPath } from "@/i18n/routing";
 import { getGuideBySlug } from "@/lib/guides/db";
+import { serializeJsonLd } from "@/seo/schema";
 
 const siteUrl = "https://hostmetric.gr";
 
@@ -72,6 +73,44 @@ function isLocalePublic(
   );
 }
 
+function getPublicContentLocale(
+  guide: NonNullable<
+    Awaited<
+      ReturnType<typeof getGuideBySlug>
+    >
+  >,
+  requestedLocale: Locale
+): Locale | null {
+  if (
+    isLocalePublic(
+      guide,
+      requestedLocale
+    )
+  ) {
+    return requestedLocale;
+  }
+
+  if (
+    isLocalePublic(
+      guide,
+      "en"
+    )
+  ) {
+    return "en";
+  }
+
+  if (
+    isLocalePublic(
+      guide,
+      guide.sourceLocale
+    )
+  ) {
+    return guide.sourceLocale;
+  }
+
+  return null;
+}
+
 function absoluteUrl(path: string) {
   if (
     path.startsWith("http://") ||
@@ -91,7 +130,7 @@ export async function generateMetadata({
   params,
 }: GuideArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const locale =
+  const requestedLocale =
     await getCurrentLocale();
 
   const guide =
@@ -99,8 +138,7 @@ export async function generateMetadata({
 
   if (
     !guide ||
-    guide.status !== "published" ||
-    !isLocalePublic(guide, locale)
+    guide.status !== "published"
   ) {
     return {
       robots: {
@@ -110,13 +148,30 @@ export async function generateMetadata({
     };
   }
 
+  const contentLocale =
+    getPublicContentLocale(
+      guide,
+      requestedLocale
+    );
+
+  if (!contentLocale) {
+    return {
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
+
   const content =
-    guide.translations[locale]!;
+    guide.translations[
+      contentLocale
+    ]!;
 
   const pathname =
     getLocalizedPath(
       `/blog/${guide.slug}`,
-      locale
+      contentLocale
     );
 
   const languages =
@@ -238,7 +293,7 @@ export default async function BlogArticlePage({
   params,
 }: GuideArticlePageProps) {
   const { slug } = await params;
-  const locale =
+  const requestedLocale =
     await getCurrentLocale();
 
   const guide =
@@ -246,22 +301,33 @@ export default async function BlogArticlePage({
 
   if (
     !guide ||
-    guide.status !== "published" ||
-    !isLocalePublic(guide, locale)
+    guide.status !== "published"
   ) {
     notFound();
   }
 
+  const contentLocale =
+    getPublicContentLocale(
+      guide,
+      requestedLocale
+    );
+
+  if (!contentLocale) {
+    notFound();
+  }
+
   const content =
-    guide.translations[locale]!;
+    guide.translations[
+      contentLocale
+    ]!;
 
   const backToAllLabel =
-    blogBackLabels[locale];
+    blogBackLabels[contentLocale];
 
   const articleUrl =
     `${siteUrl}${getLocalizedPath(
       `/blog/${guide.slug}`,
-      locale
+      contentLocale
     )}`;
 
   const articleSchema = {
@@ -278,7 +344,7 @@ export default async function BlogArticlePage({
       content.excerpt,
 
     inLanguage:
-      locale,
+      contentLocale,
 
     datePublished:
       guide.publishedAt,
@@ -325,7 +391,7 @@ export default async function BlogArticlePage({
         item:
           `${siteUrl}${getLocalizedPath(
             "/",
-            locale
+            contentLocale
           )}`,
       },
 
@@ -337,7 +403,7 @@ export default async function BlogArticlePage({
         item:
           `${siteUrl}${getLocalizedPath(
             "/blog",
-            locale
+            contentLocale
           )}`,
       },
 
@@ -359,7 +425,7 @@ export default async function BlogArticlePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html:
-            JSON.stringify(
+            serializeJsonLd(
               articleSchema
             ),
         }}
@@ -369,7 +435,7 @@ export default async function BlogArticlePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html:
-            JSON.stringify(
+            serializeJsonLd(
               breadcrumbSchema
             ),
         }}
@@ -378,7 +444,7 @@ export default async function BlogArticlePage({
       <PublicGuideArticle
         guide={guide}
         content={content}
-        locale={locale}
+        locale={contentLocale}
         backToAllLabel={
           backToAllLabel
         }

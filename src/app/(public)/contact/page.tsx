@@ -1002,7 +1002,7 @@ export default function ContactPage() {
 
 
                   <a
-                    href="tel:+35799807870"
+                    href="tel:+35797729792"
                     className="
                       mt-1
                       block
@@ -1012,7 +1012,7 @@ export default function ContactPage() {
                       hover:text-blue-100
                     "
                   >
-                    +357 99 80 78 70
+                    +357 97 72 97 92
                   </a>
 
                 </div>

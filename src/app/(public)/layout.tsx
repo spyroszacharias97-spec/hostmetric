@@ -19,7 +19,7 @@ const organizationSchema = {
   contactPoint: [
     {
       "@type": "ContactPoint",
-      telephone: "+35799807870",
+      telephone: "+35797729792",
       contactType: "customer service",
       areaServed: {
         "@type": "Country",
