@@ -80,14 +80,19 @@ function absoluteUrl(path: string) {
     return path;
   }
 
-  return `${siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
+  return `${siteUrl}${
+    path.startsWith("/")
+      ? path
+      : `/${path}`
+  }`;
 }
 
 export async function generateMetadata({
   params,
 }: GuideArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const locale = await getCurrentLocale();
+  const locale =
+    await getCurrentLocale();
 
   const guide =
     await getGuideBySlug(slug);
@@ -114,22 +119,23 @@ export async function generateMetadata({
       locale
     );
 
-  const languages = Object.fromEntries(
-    locales
-      .filter((candidate) =>
-        isLocalePublic(
-          guide,
-          candidate
+  const languages =
+    Object.fromEntries(
+      locales
+        .filter((candidate) =>
+          isLocalePublic(
+            guide,
+            candidate
+          )
         )
-      )
-      .map((candidate) => [
-        candidate,
-        `${siteUrl}${getLocalizedPath(
-          `/blog/${guide.slug}`,
-          candidate
-        )}`,
-      ])
-  );
+        .map((candidate) => [
+          candidate,
+          `${siteUrl}${getLocalizedPath(
+            `/blog/${guide.slug}`,
+            candidate
+          )}`,
+        ])
+    );
 
   return {
     title:
@@ -232,7 +238,8 @@ export default async function BlogArticlePage({
   params,
 }: GuideArticlePageProps) {
   const { slug } = await params;
-  const locale = await getCurrentLocale();
+  const locale =
+    await getCurrentLocale();
 
   const guide =
     await getGuideBySlug(slug);

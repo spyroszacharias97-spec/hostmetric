@@ -259,19 +259,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function BlogPage() {
-  /* ==========================================
-     CURRENT LANGUAGE
-  ========================================== */
-
   const currentLocale =
     await getCurrentLocale();
 
   const copy =
     blogPageCopy[currentLocale];
-
-  /* ==========================================
-     LOAD PUBLISHED ARTICLES
-  ========================================== */
 
   const guides =
     await listGuides();
@@ -307,16 +299,8 @@ export default async function BlogPage() {
       );
     });
 
-  /* ==========================================
-     PAGE
-  ========================================== */
-
   return (
     <main className="min-h-[65vh] bg-slate-50">
-      {/* ======================================
-          BLOG HERO
-      ====================================== */}
-
       <section className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
           <p className="text-sm font-black uppercase tracking-[0.22em] text-blue-600">
@@ -332,10 +316,6 @@ export default async function BlogPage() {
           </p>
         </div>
       </section>
-
-      {/* ======================================
-          ARTICLES
-      ====================================== */}
 
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         {publicArticles.length ===
@@ -420,9 +400,7 @@ export default async function BlogPage() {
                           href={href}
                           className="inline-flex items-center font-black text-blue-700 transition hover:text-blue-900"
                         >
-                          {copy.readMore}
-                          {" "}
-                          →
+                          {copy.readMore} →
                         </Link>
                       </div>
                     </div>
