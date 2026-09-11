@@ -30,7 +30,7 @@ import type {
 } from "@/content/guides/types";
 import type { AdminDictionary } from "@/i18n/admin";
 import type { Locale } from "@/i18n/config";
-import { createGuideSlug } from "@/lib/guides/slug";
+import { createGuideSlug, isValidGuideSlug } from "@/lib/guides/slug";
 
 type GuideDictionary = AdminDictionary["guides"];
 
@@ -316,6 +316,11 @@ export default function AdminGuideEditor({
   const [saveSuccess, setSaveSuccess] =
     useState("");
 
+  const [
+    publishAttempted,
+    setPublishAttempted,
+  ] = useState(false);
+
   const [guideStatus, setGuideStatus] =
     useState<GuideStatus>(
       initialGuide?.status ?? "draft"
@@ -393,6 +398,133 @@ export default function AdminGuideEditor({
 
   const sectionClass =
     "rounded-[30px] border border-slate-200 bg-white p-6 shadow-sm sm:p-7";
+
+  const errorInputClass =
+    "border-red-300 bg-red-50/40 focus:border-red-400 focus:ring-red-50";
+
+  const fieldErrorClass =
+    "mt-2 text-xs font-bold leading-5 text-red-600";
+
+  const publishErrors = useMemo(() => {
+    const errors: Record<string, string> = {};
+
+    if (!title.trim()) {
+      errors.title =
+        "Ο τίτλος άρθρου / H1 είναι υποχρεωτικός.";
+    }
+
+    if (
+      !slug.trim() ||
+      !isValidGuideSlug(slug.trim())
+    ) {
+      errors.slug =
+        "Το slug λείπει ή δεν είναι έγκυρο.";
+    }
+
+    if (!category.trim()) {
+      errors.category =
+        "Η κατηγορία είναι υποχρεωτική.";
+    }
+
+    if (!excerpt.trim()) {
+      errors.excerpt =
+        "Η σύντομη περιγραφή είναι υποχρεωτική.";
+    }
+
+    if (!author.trim()) {
+      errors.author =
+        "Ο συγγραφέας είναι υποχρεωτικός.";
+    }
+
+    const hasH2 =
+      sections.some(
+        (section) =>
+          section.h2.trim().length > 0
+      );
+
+    if (!hasH2) {
+      errors.h2 =
+        "Απαιτείται τουλάχιστον μία επικεφαλίδα H2.";
+    }
+
+    sections.forEach(
+      (section) => {
+        const href =
+          section.internalLinkHref.trim();
+
+        if (
+          href &&
+          !href.startsWith("/") &&
+          !href.startsWith("https://") &&
+          !href.startsWith("http://")
+        ) {
+          errors[
+            `internalLink:${section.id}`
+          ] =
+            "Το URL πρέπει να αρχίζει με / ή με http:// / https://.";
+        }
+      }
+    );
+
+    if (!seoTitle.trim()) {
+      errors.seoTitle =
+        "Το SEO Title είναι υποχρεωτικό.";
+    }
+
+    if (!metaDescription.trim()) {
+      errors.metaDescription =
+        "Το Meta Description είναι υποχρεωτικό.";
+    }
+
+    if (!focusKeyword.trim()) {
+      errors.focusKeyword =
+        "Το Focus Keyword είναι υποχρεωτικό.";
+    }
+
+    if (
+      featuredImage.trim() &&
+      !imageAlt.trim()
+    ) {
+      errors.imageAlt =
+        "Το Alt Text είναι υποχρεωτικό όταν υπάρχει κεντρική εικόνα.";
+    }
+
+    return errors;
+  }, [
+    title,
+    slug,
+    category,
+    excerpt,
+    author,
+    sections,
+    seoTitle,
+    metaDescription,
+    focusKeyword,
+    featuredImage,
+    imageAlt,
+  ]);
+
+  const publishErrorCount =
+    Object.keys(
+      publishErrors
+    ).length;
+
+  const getFieldError = (
+    key: string
+  ) =>
+    publishAttempted
+      ? publishErrors[key]
+      : undefined;
+
+  const withFieldError = (
+    baseClass: string,
+    key: string
+  ) =>
+    `${baseClass} ${
+      getFieldError(key)
+        ? errorInputClass
+        : ""
+    }`;
 
   const translationLanguages = [
     ["en", d.translationLanguages.en],
@@ -681,6 +813,14 @@ export default function AdminGuideEditor({
       return;
     }
 
+    setPublishAttempted(true);
+    setSaveError("");
+    setSaveSuccess("");
+
+    if (publishErrorCount > 0) {
+      return;
+    }
+
     const confirmed = window.confirm(
       "Είστε σίγουροι ότι θέλετε να δημοσιεύσετε το άρθρο; Οι τρέχουσες αλλαγές θα αποθηκευτούν πρώτα και μετά θα γίνει ο έλεγχος δημοσίευσης."
     );
@@ -798,6 +938,7 @@ export default function AdminGuideEditor({
       setGuideStatus(
         "published"
       );
+      setPublishAttempted(false);
 
       const warningText =
         Array.isArray(
@@ -1146,8 +1287,16 @@ export default function AdminGuideEditor({
                     )
                   }
                   placeholder={d.placeholders.title}
-                  className={inputClass}
+                  className={withFieldError(
+                    inputClass,
+                    "title"
+                  )}
                 />
+                {getFieldError("title") ? (
+                  <p className={fieldErrorClass}>
+                    {getFieldError("title")}
+                  </p>
+                ) : null}
               </label>
 
               <div className="grid gap-5 lg:grid-cols-2">
@@ -1170,8 +1319,16 @@ export default function AdminGuideEditor({
                     placeholder={
                       d.placeholders.slug
                     }
-                    className={inputClass}
+                    className={withFieldError(
+                      inputClass,
+                      "slug"
+                    )}
                   />
+                  {getFieldError("slug") ? (
+                    <p className={fieldErrorClass}>
+                      {getFieldError("slug")}
+                    </p>
+                  ) : null}
                 </label>
 
                 <label>
@@ -1190,8 +1347,16 @@ export default function AdminGuideEditor({
                     placeholder={
                       d.placeholders.category
                     }
-                    className={inputClass}
+                    className={withFieldError(
+                      inputClass,
+                      "category"
+                    )}
                   />
+                  {getFieldError("category") ? (
+                    <p className={fieldErrorClass}>
+                      {getFieldError("category")}
+                    </p>
+                  ) : null}
                 </label>
               </div>
 
@@ -1211,8 +1376,16 @@ export default function AdminGuideEditor({
                   placeholder={
                     d.placeholders.excerpt
                   }
-                  className={inputClass}
+                  className={withFieldError(
+                    inputClass,
+                    "excerpt"
+                  )}
                 />
+                {getFieldError("excerpt") ? (
+                  <p className={fieldErrorClass}>
+                    {getFieldError("excerpt")}
+                  </p>
+                ) : null}
               </label>
 
               <div className="grid gap-5 lg:grid-cols-2">
@@ -1232,8 +1405,16 @@ export default function AdminGuideEditor({
                     placeholder={
                       d.placeholders.author
                     }
-                    className={inputClass}
+                    className={withFieldError(
+                      inputClass,
+                      "author"
+                    )}
                   />
+                  {getFieldError("author") ? (
+                    <p className={fieldErrorClass}>
+                      {getFieldError("author")}
+                    </p>
+                  ) : null}
                 </label>
 
                 <div>
@@ -1450,10 +1631,17 @@ export default function AdminGuideEditor({
                           placeholder={
                             d.placeholders.h2
                           }
-                          className={
-                            inputClass
-                          }
+                          className={withFieldError(
+                            inputClass,
+                            "h2"
+                          )}
                         />
+                        {index === 0 &&
+                        getFieldError("h2") ? (
+                          <p className={fieldErrorClass}>
+                            {getFieldError("h2")}
+                          </p>
+                        ) : null}
                       </label>
 
                       <label>
@@ -1567,8 +1755,20 @@ export default function AdminGuideEditor({
                                 )
                               }
                               placeholder="/performance/platform-network"
-                              className={inputClass}
+                              className={withFieldError(
+                                inputClass,
+                                `internalLink:${section.id}`
+                              )}
                             />
+                            {getFieldError(
+                              `internalLink:${section.id}`
+                            ) ? (
+                              <p className={fieldErrorClass}>
+                                {getFieldError(
+                                  `internalLink:${section.id}`
+                                )}
+                              </p>
+                            ) : null}
                           </label>
                         </div>
                       </div>
@@ -1784,8 +1984,16 @@ export default function AdminGuideEditor({
                   placeholder={
                     d.placeholders.seoTitle
                   }
-                  className={inputClass}
+                  className={withFieldError(
+                    inputClass,
+                    "seoTitle"
+                  )}
                 />
+                {getFieldError("seoTitle") ? (
+                  <p className={fieldErrorClass}>
+                    {getFieldError("seoTitle")}
+                  </p>
+                ) : null}
               </label>
 
               <label>
@@ -1805,8 +2013,25 @@ export default function AdminGuideEditor({
                     d.placeholders
                       .metaDescription
                   }
-                  className={inputClass}
+                  className={withFieldError(
+                    inputClass,
+                    "metaDescription"
+                  )}
                 />
+                {getFieldError("metaDescription") ? (
+                  <p className={fieldErrorClass}>
+                    {getFieldError("metaDescription")}
+                  </p>
+                ) : metaDescription.trim() &&
+                  (
+                    metaDescription.trim().length < 110 ||
+                    metaDescription.trim().length > 165
+                  ) ? (
+                  <p className="mt-2 text-xs font-bold leading-5 text-amber-600">
+                    Προτεινόμενο μήκος: 110–165 χαρακτήρες
+                    (τώρα {metaDescription.trim().length}).
+                  </p>
+                ) : null}
               </label>
 
               <div className="grid gap-5 lg:grid-cols-2">
@@ -1827,8 +2052,16 @@ export default function AdminGuideEditor({
                       d.placeholders
                         .focusKeyword
                     }
-                    className={inputClass}
+                    className={withFieldError(
+                      inputClass,
+                      "focusKeyword"
+                    )}
                   />
+                  {getFieldError("focusKeyword") ? (
+                    <p className={fieldErrorClass}>
+                      {getFieldError("focusKeyword")}
+                    </p>
+                  ) : null}
                 </label>
 
                 <label>
@@ -1978,8 +2211,16 @@ export default function AdminGuideEditor({
                   placeholder={
                     d.placeholders.imageAlt
                   }
-                  className={inputClass}
+                  className={withFieldError(
+                    inputClass,
+                    "imageAlt"
+                  )}
                 />
+                {getFieldError("imageAlt") ? (
+                  <p className={fieldErrorClass}>
+                    {getFieldError("imageAlt")}
+                  </p>
+                ) : null}
               </label>
 
               <div className="grid gap-5 lg:grid-cols-2">
@@ -2243,10 +2484,23 @@ export default function AdminGuideEditor({
               </div>
             </div>
 
+            {publishAttempted &&
+            publishErrorCount > 0 ? (
+              <div className="mt-5 rounded-2xl border border-red-200 bg-red-50 px-4 py-4 text-sm font-bold leading-6 text-red-700">
+                <p className="font-black">
+                  Το άρθρο χρειάζεται διορθώσεις πριν δημοσιευτεί.
+                </p>
+                <p className="mt-1">
+                  Βρέθηκαν {publishErrorCount} πεδία που χρειάζονται διόρθωση.
+                  Οι οδηγίες εμφανίζονται δίπλα στα αντίστοιχα πεδία.
+                </p>
+              </div>
+            ) : null}
+
             {saveError ? (
               <div className="mt-5 rounded-2xl border border-red-200 bg-red-50 px-4 py-4 text-sm font-bold leading-6 text-red-700">
                 <p className="font-black">
-                  Δεν μπορεί να δημοσιευτεί ακόμη:
+                  Παρουσιάστηκε πρόβλημα:
                 </p>
                 <p className="mt-1">
                   {saveError}
