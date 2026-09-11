@@ -315,40 +315,31 @@ export default async function BlogPage() {
           className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-300/70 to-transparent"
         />
 
-        <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
-          <div className="mb-5 flex items-center gap-3">
-            <span className="h-2.5 w-2.5 rounded-full bg-blue-600" />
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
-            <span className="h-2.5 w-2.5 rounded-full bg-violet-500" />
-            <span className="ml-1 h-px w-14 bg-gradient-to-r from-slate-300 to-transparent" />
+        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+          <div className="relative z-10 mx-auto max-w-4xl text-center">
+            <p className="text-sm font-black uppercase tracking-[0.22em] text-blue-600">
+              {copy.eyebrow}
+            </p>
+
+            <h1 className="mt-4 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
+              <span className="bg-gradient-to-r from-slate-950 via-blue-700 to-emerald-600 bg-clip-text text-transparent">
+                {copy.title}
+              </span>
+            </h1>
+
+            <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600 sm:text-xl">
+              {copy.description}
+            </p>
           </div>
-
-          <p className="text-sm font-black uppercase tracking-[0.22em] text-blue-600">
-            {copy.eyebrow}
-          </p>
-
-          <h1 className="mt-4 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
-            <span className="bg-gradient-to-r from-slate-950 via-blue-700 to-emerald-600 bg-clip-text text-transparent">
-              {copy.title}
-            </span>
-          </h1>
-
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600 sm:text-xl">
-            {copy.description}
-          </p>
 
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute right-6 top-1/2 hidden -translate-y-1/2 lg:block"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-28 overflow-hidden sm:h-32 lg:h-36"
           >
-            <div className="relative h-40 w-64">
-              <div className="absolute right-0 top-0 h-16 w-40 rotate-[-8deg] rounded-[28px] border border-blue-200/80 bg-white/70 shadow-sm backdrop-blur" />
-              <div className="absolute right-14 top-12 h-16 w-40 rotate-[6deg] rounded-[28px] border border-emerald-200/80 bg-white/70 shadow-sm backdrop-blur" />
-              <div className="absolute right-2 top-24 h-12 w-28 rotate-[-3deg] rounded-full border border-violet-200/80 bg-white/70 shadow-sm backdrop-blur" />
-              <div className="absolute right-10 top-5 h-2.5 w-2.5 rounded-full bg-blue-500" />
-              <div className="absolute right-28 top-20 h-2.5 w-2.5 rounded-full bg-emerald-500" />
-              <div className="absolute right-8 top-32 h-2.5 w-2.5 rounded-full bg-violet-500" />
-            </div>
+            <div className="absolute -bottom-20 left-[-8%] h-32 w-[116%] rotate-[-2deg] rounded-[50%] bg-blue-200/55 blur-[1px]" />
+            <div className="absolute -bottom-16 left-[-7%] h-28 w-[114%] rotate-[1.5deg] rounded-[50%] bg-blue-400/22" />
+            <div className="absolute -bottom-12 left-[-6%] h-24 w-[112%] rotate-[-1deg] rounded-[50%] bg-emerald-300/20" />
+            <div className="absolute bottom-5 left-[8%] h-px w-[84%] bg-gradient-to-r from-transparent via-blue-400/55 to-transparent" />
           </div>
         </div>
       </section>
