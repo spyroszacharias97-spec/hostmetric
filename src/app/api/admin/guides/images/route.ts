@@ -14,12 +14,6 @@ const ALLOWED_TYPES = new Set([
   "image/webp",
 ]);
 
-const HOSTMETRIC_UPLOADS_FOLDER_NAME =
-  "HostMetric Uploads";
-
-const GUIDES_FOLDER_NAME =
-  "Blog - Pictures";
-
 type ServiceAccountCredentials = {
   client_email: string;
   private_key: string;
@@ -95,11 +89,19 @@ function getGoogleAuth() {
   });
 }
 
-function getDriveClient() {
-  return google.drive({
-    version: "v3",
-    auth: getGoogleAuth(),
-  });
+function getGuidesFolderId() {
+  const folderId =
+    process.env
+      .GOOGLE_GUIDES_FOLDER_ID
+      ?.trim();
+
+  if (!folderId) {
+    throw new Error(
+      "GOOGLE_GUIDES_FOLDER_ID is missing."
+    );
+  }
+
+  return folderId;
 }
 
 function safeFileName(
@@ -114,107 +116,6 @@ function safeFileName(
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "")
     .slice(0, 120);
-}
-
-function escapeDriveQueryValue(
-  value: string
-) {
-  return value
-    .replace(/\\/g, "\\\\")
-    .replace(/'/g, "\\'");
-}
-
-/*
- * Find:
- *
- * HostMetric Uploads
- *   └── Blog - Pictures
- *
- * No dedicated folder ID is required
- * in .env.local.
- */
-async function getGuidesFolderId() {
-  const drive =
-    getDriveClient();
-
-  const rootFolderName =
-    escapeDriveQueryValue(
-      HOSTMETRIC_UPLOADS_FOLDER_NAME
-    );
-
-  const rootFolders =
-    await drive.files.list({
-      q:
-        `name = '${rootFolderName}' ` +
-        `and mimeType = 'application/vnd.google-apps.folder' ` +
-        `and trashed = false`,
-
-      pageSize: 100,
-
-      fields:
-        "files(id,name,parents)",
-
-      includeItemsFromAllDrives:
-        true,
-
-      supportsAllDrives:
-        true,
-    });
-
-  const rootFolder =
-    rootFolders.data.files?.find(
-      (item) =>
-        item.id &&
-        item.name ===
-          HOSTMETRIC_UPLOADS_FOLDER_NAME
-    );
-
-  if (!rootFolder?.id) {
-    throw new Error(
-      `Google Drive folder "${HOSTMETRIC_UPLOADS_FOLDER_NAME}" was not found. Make sure the service account has access to it.`
-    );
-  }
-
-  const guidesFolderName =
-    escapeDriveQueryValue(
-      GUIDES_FOLDER_NAME
-    );
-
-  const guidesFolders =
-    await drive.files.list({
-      q:
-        `'${rootFolder.id}' in parents ` +
-        `and name = '${guidesFolderName}' ` +
-        `and mimeType = 'application/vnd.google-apps.folder' ` +
-        `and trashed = false`,
-
-      pageSize: 100,
-
-      fields:
-        "files(id,name,parents)",
-
-      includeItemsFromAllDrives:
-        true,
-
-      supportsAllDrives:
-        true,
-    });
-
-  const guidesFolder =
-    guidesFolders.data.files?.find(
-      (item) =>
-        item.id &&
-        item.name ===
-          GUIDES_FOLDER_NAME
-    );
-
-  if (!guidesFolder?.id) {
-    throw new Error(
-      `Google Drive folder "${GUIDES_FOLDER_NAME}" was not found inside "${HOSTMETRIC_UPLOADS_FOLDER_NAME}".`
-    );
-  }
-
-  return guidesFolder.id;
 }
 
 export async function POST(
@@ -236,17 +137,8 @@ export async function POST(
       );
     }
 
-    /*
-     * We intentionally do NOT use:
-     *
-     * GOOGLE_GUIDES_FOLDER_ID
-     * GOOGLE_DRIVE_FOLDER_ID
-     *
-     * The folder is discovered through
-     * the existing Google service account.
-     */
     const folderId =
-      await getGuidesFolderId();
+      getGuidesFolderId();
 
     const formData =
       await request.formData();
