@@ -3,47 +3,52 @@ import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import type { GuideDraftInput } from "@/content/guides/types";
 import {
-  createGuideDraft,
+  getGuideById,
   guideSlugExists,
-  listGuides,
+  updateGuideDraft,
 } from "@/lib/guides/db";
 import { validateGuideDraft } from "@/lib/guides/validation";
 
+type RouteContext = {
+  params: Promise<{
+    id: string;
+  }>;
+};
+
 async function requireAdmin() {
-  const session = await auth();
+  const session =
+    await auth();
 
   return Boolean(
     session?.user?.email
   );
 }
 
-export async function GET() {
-  if (!(await requireAdmin())) {
-    return NextResponse.json(
-      {
-        error: "Unauthorized",
-      },
-      {
-        status: 401,
-      }
-    );
+function parseGuideId(
+  value: string
+): number | null {
+  const id =
+    Number(value);
+
+  if (
+    !Number.isInteger(id) ||
+    id <= 0
+  ) {
+    return null;
   }
 
-  const guides =
-    await listGuides();
-
-  return NextResponse.json({
-    guides,
-  });
+  return id;
 }
 
-export async function POST(
-  request: Request
+export async function GET(
+  _request: Request,
+  context: RouteContext
 ) {
   if (!(await requireAdmin())) {
     return NextResponse.json(
       {
-        error: "Unauthorized",
+        error:
+          "Unauthorized",
       },
       {
         status: 401,
@@ -51,8 +56,109 @@ export async function POST(
     );
   }
 
-  const input =
-    (await request.json()) as GuideDraftInput;
+  const { id: rawId } =
+    await context.params;
+
+  const id =
+    parseGuideId(rawId);
+
+  if (!id) {
+    return NextResponse.json(
+      {
+        error:
+          "Invalid guide id.",
+      },
+      {
+        status: 400,
+      }
+    );
+  }
+
+  const guide =
+    await getGuideById(id);
+
+  if (!guide) {
+    return NextResponse.json(
+      {
+        error:
+          "Guide not found.",
+      },
+      {
+        status: 404,
+      }
+    );
+  }
+
+  return NextResponse.json({
+    guide,
+  });
+}
+
+export async function PATCH(
+  request: Request,
+  context: RouteContext
+) {
+  if (!(await requireAdmin())) {
+    return NextResponse.json(
+      {
+        error:
+          "Unauthorized",
+      },
+      {
+        status: 401,
+      }
+    );
+  }
+
+  const { id: rawId } =
+    await context.params;
+
+  const id =
+    parseGuideId(rawId);
+
+  if (!id) {
+    return NextResponse.json(
+      {
+        error:
+          "Invalid guide id.",
+      },
+      {
+        status: 400,
+      }
+    );
+  }
+
+  const existingGuide =
+    await getGuideById(id);
+
+  if (!existingGuide) {
+    return NextResponse.json(
+      {
+        error:
+          "Guide not found.",
+      },
+      {
+        status: 404,
+      }
+    );
+  }
+
+  let input: GuideDraftInput;
+
+  try {
+    input =
+      (await request.json()) as GuideDraftInput;
+  } catch {
+    return NextResponse.json(
+      {
+        error:
+          "Invalid JSON body.",
+      },
+      {
+        status: 400,
+      }
+    );
+  }
 
   const validation =
     validateGuideDraft(input);
@@ -70,11 +176,13 @@ export async function POST(
     );
   }
 
-  if (
+  const slugAlreadyExists =
     await guideSlugExists(
-      input.slug
-    )
-  ) {
+      input.slug,
+      id
+    );
+
+  if (slugAlreadyExists) {
     return NextResponse.json(
       {
         error:
@@ -86,20 +194,22 @@ export async function POST(
     );
   }
 
-  const id =
-    await createGuideDraft(
-      input
-    );
-
-  return NextResponse.json(
-    {
-      id,
-      status: "draft",
-      warnings:
-        validation.warnings,
-    },
-    {
-      status: 201,
-    }
+  await updateGuideDraft(
+    id,
+    input
   );
+
+  const updatedGuide =
+    await getGuideById(id);
+
+  return NextResponse.json({
+    id,
+    status:
+      updatedGuide?.status ??
+      existingGuide.status,
+    warnings:
+      validation.warnings,
+    guide:
+      updatedGuide,
+  });
 }
