@@ -15,6 +15,33 @@ type PublicGuideArticleProps = {
   backToAllLabel: string;
 };
 
+function getCategoryHref(
+  category: string,
+  locale: Locale
+) {
+  const normalizedCategory =
+    category
+      .trim()
+      .toLocaleLowerCase("el-GR");
+
+  if (
+    normalizedCategory ===
+      "πλατφόρμες κρατήσεων" ||
+    normalizedCategory ===
+      "booking platforms"
+  ) {
+    return getLocalizedPath(
+      "/performance/platform-network",
+      locale
+    );
+  }
+
+  return getLocalizedPath(
+    "/blog",
+    locale
+  );
+}
+
 function renderBlock(
   block: GuideBlock,
   locale: Locale
@@ -103,6 +130,12 @@ export default function PublicGuideArticle({
   locale,
   backToAllLabel,
 }: PublicGuideArticleProps) {
+  const categoryHref =
+    getCategoryHref(
+      guide.category,
+      locale
+    );
+
   return (
     <main className="relative overflow-hidden bg-slate-50">
       <div
@@ -123,7 +156,7 @@ export default function PublicGuideArticle({
       <article className="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <header className="mx-auto max-w-4xl text-center">
           <Link
-            href={getLocalizedPath("/blog", locale)}
+            href={categoryHref}
             className="inline-flex rounded-full border border-blue-200/80 bg-white/80 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-blue-700 shadow-sm backdrop-blur transition hover:border-blue-300 hover:bg-blue-50"
           >
             {guide.category}

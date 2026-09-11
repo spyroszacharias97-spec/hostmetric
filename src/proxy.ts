@@ -94,6 +94,82 @@ function removeLanguagePrefix(
 
 
 /* ==========================================
+   LEGACY GUIDES -> BLOG REDIRECT
+
+   Public URLs now use /blog.
+
+   Examples:
+
+   /guides
+   -> /blog
+
+   /guides/article-slug
+   -> /blog/article-slug
+
+   /en/guides/article-slug
+   -> /en/blog/article-slug
+
+   This is generic: new blog articles do not
+   need to be added here one by one.
+========================================== */
+
+function getLegacyGuidesRedirectPath(
+  pathname: string
+): string | null {
+  const segments =
+    pathname
+      .split("/")
+      .filter(Boolean);
+
+  if (
+    segments.length === 0
+  ) {
+    return null;
+  }
+
+  const firstSegment =
+    segments[0];
+
+  if (
+    firstSegment === "guides"
+  ) {
+    const remainingSegments =
+      segments.slice(1);
+
+    return remainingSegments.length > 0
+      ? `/blog/${remainingSegments.join("/")}`
+      : "/blog";
+  }
+
+  if (
+    isSupportedLocale(
+      firstSegment
+    ) &&
+    segments[1] === "guides"
+  ) {
+    const remainingSegments =
+      segments.slice(2);
+
+    const blogPath =
+      remainingSegments.length > 0
+        ? `/blog/${remainingSegments.join("/")}`
+        : "/blog";
+
+    if (
+      firstSegment ===
+      defaultLocale
+    ) {
+      return blogPath;
+    }
+
+    return `/${firstSegment}${blogPath}`;
+  }
+
+  return null;
+}
+
+
+/* ==========================================
    BUILD REQUEST COOKIE HEADER
 
    The public URL is authoritative for the
@@ -309,6 +385,35 @@ export function proxy(
     shouldIgnorePath(pathname)
   ) {
     return NextResponse.next();
+  }
+
+
+  /* ========================================
+     REDIRECT OLD /guides URLS TO /blog
+
+     This happens before locale routing so
+     both default Greek and prefixed locales
+     keep the correct public URL.
+  ======================================== */
+
+  const legacyGuidesRedirectPath =
+    getLegacyGuidesRedirectPath(
+      pathname
+    );
+
+  if (
+    legacyGuidesRedirectPath
+  ) {
+    const redirectUrl =
+      request.nextUrl.clone();
+
+    redirectUrl.pathname =
+      legacyGuidesRedirectPath;
+
+    return NextResponse.redirect(
+      redirectUrl,
+      308
+    );
   }
 
 
