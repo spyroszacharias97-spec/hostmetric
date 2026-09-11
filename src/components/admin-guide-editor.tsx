@@ -672,7 +672,7 @@ export default function AdminGuideEditor({
   const handlePublish = async () => {
     if (!guideId) {
       setSaveError(
-        d.messages.previewRequiresSave
+        "Αποθηκεύστε πρώτα το άρθρο ως πρόχειρο πριν τη δημοσίευση."
       );
       return;
     }
@@ -682,7 +682,7 @@ export default function AdminGuideEditor({
     }
 
     const confirmed = window.confirm(
-      "Είστε σίγουροι ότι θέλετε να δημοσιεύσετε το άρθρο; Θα γίνει δημόσιο και θα μπορεί να εμφανιστεί στις μηχανές αναζήτησης σύμφωνα με τους κανόνες δημοσίευσης."
+      "Είστε σίγουροι ότι θέλετε να δημοσιεύσετε το άρθρο; Οι τρέχουσες αλλαγές θα αποθηκευτούν πρώτα και μετά θα γίνει ο έλεγχος δημοσίευσης."
     );
 
     if (!confirmed) {
@@ -694,31 +694,98 @@ export default function AdminGuideEditor({
     setSaveSuccess("");
 
     try {
-      const response = await fetch(
-        `/api/admin/guides/${guideId}/workflow`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            action: "publish",
-          }),
-        }
-      );
+      /*
+       * Πρώτα αποθηκεύουμε ΠΑΝΤΑ την τρέχουσα φόρμα.
+       * Έτσι το publish validation ελέγχει τα στοιχεία
+       * που βλέπει ο διαχειριστής αυτή τη στιγμή και
+       * όχι μια παλαιότερη έκδοση από τη βάση.
+       */
+      const input =
+        buildDraftInput();
 
-      const result = await response.json();
+      const saveResponse =
+        await fetch(
+          `/api/admin/guides/${guideId}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+            body: JSON.stringify(
+              input
+            ),
+          }
+        );
+
+      const saveResult =
+        await saveResponse
+          .json()
+          .catch(() => null);
+
+      if (!saveResponse.ok) {
+        const validationErrors =
+          saveResult?.validation?.errors;
+
+        if (
+          Array.isArray(
+            validationErrors
+          ) &&
+          validationErrors.length > 0
+        ) {
+          throw new Error(
+            validationErrors.join(
+              " • "
+            )
+          );
+        }
+
+        throw new Error(
+          saveResult?.error ||
+            "Δεν ήταν δυνατή η αποθήκευση των αλλαγών πριν τη δημοσίευση."
+        );
+      }
+
+      /*
+       * Αφού αποθηκευτεί η τρέχουσα έκδοση,
+       * καλούμε το canonical publish workflow.
+       * Το backend κάνει τον τελικό SEO/content
+       * validation έλεγχο πριν αλλάξει status.
+       */
+      const response =
+        await fetch(
+          `/api/admin/guides/${guideId}/workflow`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+            body: JSON.stringify({
+              action: "publish",
+            }),
+          }
+        );
+
+      const result =
+        await response
+          .json()
+          .catch(() => null);
 
       if (!response.ok) {
         const validationErrors =
           result?.validation?.errors;
 
         if (
-          Array.isArray(validationErrors) &&
+          Array.isArray(
+            validationErrors
+          ) &&
           validationErrors.length > 0
         ) {
           throw new Error(
-            validationErrors.join(" ")
+            validationErrors.join(
+              " • "
+            )
           );
         }
 
@@ -728,9 +795,22 @@ export default function AdminGuideEditor({
         );
       }
 
-      setGuideStatus("published");
+      setGuideStatus(
+        "published"
+      );
+
+      const warningText =
+        Array.isArray(
+          result?.warnings
+        ) &&
+        result.warnings.length > 0
+          ? ` Προειδοποιήσεις: ${result.warnings.join(
+              " • "
+            )}`
+          : "";
+
       setSaveSuccess(
-        "Το άρθρο δημοσιεύτηκε επιτυχώς."
+        `Το άρθρο αποθηκεύτηκε και δημοσιεύτηκε επιτυχώς.${warningText}`
       );
 
       router.refresh();
@@ -741,7 +821,9 @@ export default function AdminGuideEditor({
           : "Η δημοσίευση απέτυχε."
       );
     } finally {
-      setPublishingGuide(false);
+      setPublishingGuide(
+        false
+      );
     }
   };
 
@@ -2162,8 +2244,13 @@ export default function AdminGuideEditor({
             </div>
 
             {saveError ? (
-              <div className="mt-5 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-bold leading-6 text-red-700">
-                {saveError}
+              <div className="mt-5 rounded-2xl border border-red-200 bg-red-50 px-4 py-4 text-sm font-bold leading-6 text-red-700">
+                <p className="font-black">
+                  Δεν μπορεί να δημοσιευτεί ακόμη:
+                </p>
+                <p className="mt-1">
+                  {saveError}
+                </p>
               </div>
             ) : null}
 

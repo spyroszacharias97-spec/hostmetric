@@ -7,6 +7,7 @@ import {
   EyeOff,
   Loader2,
   Plus,
+  Rocket,
   Trash2,
 } from "lucide-react";
 
@@ -78,6 +79,80 @@ export default function AdminGuidesList({
       return guide.status === filter;
     });
   }, [filter, guides]);
+
+  const handlePublish = async (
+    guide: GuideRecord
+  ) => {
+    const sourceTitle =
+      guide.translations[
+        guide.sourceLocale
+      ]?.title ?? guide.slug;
+
+    const confirmed =
+      window.confirm(
+        `Να δημοσιευτεί το άρθρο «${sourceTitle}»;\n\nΘα γίνει πρώτα ο πλήρης έλεγχος περιεχομένου και SEO.`
+      );
+
+    if (!confirmed) return;
+
+    setBusyId(guide.id);
+    setError("");
+
+    try {
+      const response =
+        await fetch(
+          `/api/admin/guides/${guide.id}/workflow`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+            body: JSON.stringify({
+              action: "publish",
+            }),
+          }
+        );
+
+      const result =
+        await response
+          .json()
+          .catch(() => null);
+
+      if (!response.ok) {
+        const validationErrors =
+          result?.validation?.errors;
+
+        if (
+          Array.isArray(
+            validationErrors
+          ) &&
+          validationErrors.length > 0
+        ) {
+          throw new Error(
+            validationErrors.join(
+              " • "
+            )
+          );
+        }
+
+        throw new Error(
+          result?.error ||
+            "Η δημοσίευση απέτυχε."
+        );
+      }
+
+      router.refresh();
+    } catch (actionError) {
+      setError(
+        actionError instanceof Error
+          ? actionError.message
+          : "Η δημοσίευση απέτυχε."
+      );
+    } finally {
+      setBusyId(null);
+    }
+  };
 
   const handleUnpublish = async (
     guide: GuideRecord
@@ -233,8 +308,13 @@ export default function AdminGuidesList({
       </div>
 
       {error ? (
-        <div className="mt-5 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
-          {error}
+        <div className="mt-5 rounded-2xl border border-red-200 bg-red-50 px-4 py-4 text-sm font-bold leading-6 text-red-700">
+          <p className="font-black">
+            Το άρθρο δεν μπορεί να δημοσιευτεί ακόμη:
+          </p>
+          <p className="mt-1">
+            {error}
+          </p>
         </div>
       ) : null}
 
@@ -326,7 +406,26 @@ export default function AdminGuidesList({
                     Άνοιγμα
                   </Link>
 
-                  {guide.status === "published" ? (
+                  {guide.status !== "published" ? (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        void handlePublish(guide)
+                      }
+                      disabled={busy}
+                      className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-blue-600 bg-blue-600 px-3.5 py-2.5 text-sm font-black text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      {busy ? (
+                        <Loader2
+                          size={15}
+                          className="animate-spin"
+                        />
+                      ) : (
+                        <Rocket size={15} />
+                      )}
+                      Δημοσίευση
+                    </button>
+                  ) : (
                     <button
                       type="button"
                       onClick={() =>
@@ -345,7 +444,7 @@ export default function AdminGuidesList({
                       )}
                       Απόκρυψη
                     </button>
-                  ) : null}
+                  )}
 
                   <button
                     type="button"

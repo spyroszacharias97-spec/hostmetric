@@ -6,6 +6,7 @@ import {
   getGuideById,
   updateGuideStatus,
 } from "@/lib/guides/db";
+import { validateGuideForPublish } from "@/lib/guides/validation";
 
 type RouteContext = {
   params: Promise<{
@@ -16,7 +17,8 @@ type RouteContext = {
 function parseGuideId(
   rawId: string
 ): number | null {
-  const guideId = Number(rawId);
+  const guideId =
+    Number(rawId);
 
   if (
     !Number.isInteger(guideId) ||
@@ -32,12 +34,18 @@ export async function POST(
   request: Request,
   { params }: RouteContext
 ) {
-  const session = await auth();
+  const session =
+    await auth();
 
   if (!session?.user?.email) {
     return NextResponse.json(
-      { error: "Unauthorized" },
-      { status: 401 }
+      {
+        error:
+          "Unauthorized",
+      },
+      {
+        status: 401,
+      }
     );
   }
 
@@ -49,24 +57,38 @@ export async function POST(
 
   if (!guideId) {
     return NextResponse.json(
-      { error: "Invalid guide id." },
-      { status: 400 }
+      {
+        error:
+          "Invalid guide id.",
+      },
+      {
+        status: 400,
+      }
     );
   }
 
   const guide =
-    await getGuideById(guideId);
+    await getGuideById(
+      guideId
+    );
 
   if (!guide) {
     return NextResponse.json(
-      { error: "Guide not found." },
-      { status: 404 }
+      {
+        error:
+          "Guide not found.",
+      },
+      {
+        status: 404,
+      }
     );
   }
 
   const body =
     (await request.json()) as {
-      action?: "publish" | "unpublish";
+      action?:
+        | "publish"
+        | "unpublish";
     };
 
   if (
@@ -74,19 +96,59 @@ export async function POST(
     body.action !== "unpublish"
   ) {
     return NextResponse.json(
-      { error: "Unknown action." },
-      { status: 400 }
+      {
+        error:
+          "Unknown action.",
+      },
+      {
+        status: 400,
+      }
     );
   }
 
-  if (body.action === "publish") {
-    if (guide.status === "published") {
+  /*
+   * IMPORTANT:
+   * Every publish action from the Admin list
+   * must pass through the same validation used
+   * by the article editor workflow.
+   *
+   * This prevents an incomplete article from
+   * being published through a second UI route.
+   */
+  if (
+    body.action ===
+    "publish"
+  ) {
+    if (
+      guide.status ===
+      "published"
+    ) {
       return NextResponse.json(
         {
           error:
             "Το άρθρο είναι ήδη δημοσιευμένο.",
         },
-        { status: 400 }
+        {
+          status: 400,
+        }
+      );
+    }
+
+    const validation =
+      validateGuideForPublish(
+        guide
+      );
+
+    if (!validation.valid) {
+      return NextResponse.json(
+        {
+          error:
+            "Το άρθρο δεν είναι ακόμη έτοιμο για δημοσίευση.",
+          validation,
+        },
+        {
+          status: 400,
+        }
       );
     }
 
@@ -97,19 +159,25 @@ export async function POST(
 
     return NextResponse.json({
       success: true,
-      status: "published",
+      status:
+        "published",
+      warnings:
+        validation.warnings,
     });
   }
 
   if (
-    guide.status !== "published"
+    guide.status !==
+    "published"
   ) {
     return NextResponse.json(
       {
         error:
           "Το άρθρο δεν είναι δημοσιευμένο.",
       },
-      { status: 400 }
+      {
+        status: 400,
+      }
     );
   }
 
@@ -120,7 +188,8 @@ export async function POST(
 
   return NextResponse.json({
     success: true,
-    status: "unpublished",
+    status:
+      "unpublished",
   });
 }
 
@@ -128,12 +197,18 @@ export async function DELETE(
   _request: Request,
   { params }: RouteContext
 ) {
-  const session = await auth();
+  const session =
+    await auth();
 
   if (!session?.user?.email) {
     return NextResponse.json(
-      { error: "Unauthorized" },
-      { status: 401 }
+      {
+        error:
+          "Unauthorized",
+      },
+      {
+        status: 401,
+      }
     );
   }
 
@@ -145,18 +220,30 @@ export async function DELETE(
 
   if (!guideId) {
     return NextResponse.json(
-      { error: "Invalid guide id." },
-      { status: 400 }
+      {
+        error:
+          "Invalid guide id.",
+      },
+      {
+        status: 400,
+      }
     );
   }
 
   const guide =
-    await getGuideById(guideId);
+    await getGuideById(
+      guideId
+    );
 
   if (!guide) {
     return NextResponse.json(
-      { error: "Guide not found." },
-      { status: 404 }
+      {
+        error:
+          "Guide not found.",
+      },
+      {
+        status: 404,
+      }
     );
   }
 
@@ -166,10 +253,13 @@ export async function DELETE(
    * επιτρέπεται οριστική διαγραφή σε:
    * draft / review / published / unpublished.
    */
-  await deleteGuideDraft(guideId);
+  await deleteGuideDraft(
+    guideId
+  );
 
   return NextResponse.json({
     success: true,
-    deletedId: guideId,
+    deletedId:
+      guideId,
   });
 }
