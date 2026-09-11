@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+
+import BlogWave from "@/components/blog-wave";
 import { cookies } from "next/headers";
 
 import {
@@ -332,15 +334,7 @@ export default async function BlogPage() {
             </p>
           </div>
 
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-28 overflow-hidden sm:h-32 lg:h-36"
-          >
-            <div className="absolute -bottom-20 left-[-8%] h-32 w-[116%] rotate-[-2deg] rounded-[50%] bg-blue-200/55 blur-[1px]" />
-            <div className="absolute -bottom-16 left-[-7%] h-28 w-[114%] rotate-[1.5deg] rounded-[50%] bg-blue-400/22" />
-            <div className="absolute -bottom-12 left-[-6%] h-24 w-[112%] rotate-[-1deg] rounded-[50%] bg-emerald-300/20" />
-            <div className="absolute bottom-5 left-[8%] h-px w-[84%] bg-gradient-to-r from-transparent via-blue-400/55 to-transparent" />
-          </div>
+          <BlogWave />
         </div>
       </section>
 
