@@ -18,13 +18,13 @@ export function validateGuideDraft(
     !isValidGuideSlug(input.slug)
   ) {
     errors.push(
-      "The guide slug is missing or invalid."
+      "Το slug λείπει ή δεν είναι έγκυρο."
     );
   }
 
   if (!input.author.trim()) {
     errors.push(
-      "The guide author is required."
+      "Ο συγγραφέας είναι υποχρεωτικός."
     );
   }
 
@@ -58,7 +58,7 @@ export function validateGuideDraft(
 
   if (!content.title.trim()) {
     errors.push(
-      "The article title / H1 is required."
+      "Ο τίτλος άρθρου / H1 είναι υποχρεωτικός."
     );
   }
 
@@ -72,7 +72,7 @@ export function validateGuideDraft(
     content.blocks.length === 0
   ) {
     errors.push(
-      "The article must contain at least one content block."
+      "Το άρθρο πρέπει να περιέχει τουλάχιστον ένα block περιεχομένου."
     );
   }
 
@@ -146,7 +146,7 @@ export function validateGuideForPublish(
 
   if (!content) {
     errors.push(
-      "The source-language content is missing."
+      "Λείπει το περιεχόμενο της βασικής γλώσσας."
     );
 
     return {
@@ -163,31 +163,31 @@ export function validateGuideForPublish(
     )
   ) {
     errors.push(
-      "The guide slug is missing or invalid."
+      "Το slug λείπει ή δεν είναι έγκυρο."
     );
   }
 
   if (!guide.author.trim()) {
     errors.push(
-      "The guide author is required."
+      "Ο συγγραφέας είναι υποχρεωτικός."
     );
   }
 
   if (!guide.category.trim()) {
     errors.push(
-      "The guide category is required before publishing."
+      "Η κατηγορία είναι υποχρεωτική πριν τη δημοσίευση."
     );
   }
 
   if (!content.title.trim()) {
     errors.push(
-      "The article title / H1 is required."
+      "Ο τίτλος άρθρου / H1 είναι υποχρεωτικός."
     );
   }
 
   if (!content.excerpt.trim()) {
     errors.push(
-      "The article excerpt is required before publishing."
+      "Η σύντομη περιγραφή είναι υποχρεωτική πριν τη δημοσίευση."
     );
   }
 
@@ -195,7 +195,7 @@ export function validateGuideForPublish(
     content.blocks.length === 0
   ) {
     errors.push(
-      "The article must contain at least one content block."
+      "Το άρθρο πρέπει να περιέχει τουλάχιστον ένα block περιεχομένου."
     );
   }
 
@@ -208,7 +208,7 @@ export function validateGuideForPublish(
 
   if (!hasH2) {
     errors.push(
-      "At least one H2 heading is required before publishing."
+      "Απαιτείται τουλάχιστον μία επικεφαλίδα H2 πριν τη δημοσίευση."
     );
   }
 
@@ -230,13 +230,13 @@ export function validateGuideForPublish(
 
   if (invalidInternalLink) {
     errors.push(
-      "Internal links must use an absolute URL or a path beginning with /."
+      "Το URL εσωτερικού link πρέπει να αρχίζει με / ή με http:// / https://."
     );
   }
 
   if (!content.seo.title.trim()) {
     errors.push(
-      "SEO title is required before publishing."
+      "Το SEO title είναι υποχρεωτικό πριν τη δημοσίευση."
     );
   }
 
@@ -244,8 +244,8 @@ export function validateGuideForPublish(
     content.seo.title.trim().length >
     65
   ) {
-    errors.push(
-      "SEO title must be 65 characters or fewer before publishing."
+    warnings.push(
+      "Το SEO title είναι μεγαλύτερο από το προτεινόμενο όριο των 65 χαρακτήρων."
     );
   }
 
@@ -254,12 +254,16 @@ export function validateGuideForPublish(
       .trim()
       .length;
 
-  if (
+  if (metaLength === 0) {
+    errors.push(
+      "Το Meta Description είναι υποχρεωτικό πριν τη δημοσίευση."
+    );
+  } else if (
     metaLength < 110 ||
     metaLength > 165
   ) {
-    errors.push(
-      "Meta description must be between 110 and 165 characters before publishing."
+    warnings.push(
+      "Το Meta Description είναι εκτός του προτεινόμενου εύρους 110–165 χαρακτήρων."
     );
   }
 
@@ -267,7 +271,7 @@ export function validateGuideForPublish(
     !content.seo.focusKeyword.trim()
   ) {
     errors.push(
-      "Focus keyword is required before publishing."
+      "Το Focus Keyword είναι υποχρεωτικό πριν τη δημοσίευση."
     );
   }
 
@@ -276,7 +280,7 @@ export function validateGuideForPublish(
     !content.seo.imageAlt.trim()
   ) {
     errors.push(
-      "Image alt text is required when a featured image is used."
+      "Το Alt Text είναι υποχρεωτικό όταν υπάρχει Featured Image."
     );
   }
 
@@ -284,7 +288,7 @@ export function validateGuideForPublish(
     !content.seo.ogTitle.trim()
   ) {
     warnings.push(
-      "OG title is empty; the public page will fall back to the SEO title."
+      "Το OG Title είναι κενό και θα χρησιμοποιηθεί αυτόματα το SEO Title."
     );
   }
 
@@ -292,7 +296,7 @@ export function validateGuideForPublish(
     !content.seo.ogDescription.trim()
   ) {
     warnings.push(
-      "OG description is empty; the public page will fall back to the meta description."
+      "Το OG Description είναι κενό και θα χρησιμοποιηθεί αυτόματα το Meta Description."
     );
   }
 
@@ -301,7 +305,7 @@ export function validateGuideForPublish(
     !guide.featuredImage.src
   ) {
     warnings.push(
-      "No Open Graph or featured image is configured."
+      "Δεν έχει οριστεί Open Graph Image ή Featured Image."
     );
   }
 

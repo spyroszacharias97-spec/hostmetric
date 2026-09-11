@@ -710,6 +710,18 @@ export default function AdminGuideEditor({
       const result = await response.json();
 
       if (!response.ok) {
+        const validationErrors =
+          result?.validation?.errors;
+
+        if (
+          Array.isArray(validationErrors) &&
+          validationErrors.length > 0
+        ) {
+          throw new Error(
+            validationErrors.join(" ")
+          );
+        }
+
         throw new Error(
           result?.error ||
             "Η δημοσίευση απέτυχε."
