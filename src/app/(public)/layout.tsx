@@ -2,7 +2,8 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
 const siteUrl = "https://hostmetric.gr";
-const logoUrl = "https://www.hostmetric.gr/hostmetric-email-logo.png";
+const logoUrl =
+  "https://www.hostmetric.gr/hostmetric-email-logo.png";
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -24,7 +25,10 @@ const organizationSchema = {
         "@type": "Country",
         name: "Cyprus",
       },
-      availableLanguage: ["el", "en"],
+      availableLanguage: [
+        "el",
+        "en",
+      ],
     },
     {
       "@type": "ContactPoint",
@@ -34,7 +38,10 @@ const organizationSchema = {
         "@type": "Country",
         name: "Greece",
       },
-      availableLanguage: ["el", "en"],
+      availableLanguage: [
+        "el",
+        "en",
+      ],
     },
   ],
   areaServed: [
@@ -74,6 +81,7 @@ const websiteSchema = {
     "sr",
     "tr",
     "pl",
+    "ru",
   ],
 };
 
@@ -87,14 +95,20 @@ export default function PublicLayout({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationSchema),
+          __html:
+            JSON.stringify(
+              organizationSchema
+            ),
         }}
       />
 
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(websiteSchema),
+          __html:
+            JSON.stringify(
+              websiteSchema
+            ),
         }}
       />
 

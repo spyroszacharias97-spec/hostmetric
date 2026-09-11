@@ -9,7 +9,8 @@
     "language": "Γλώσσα",
     "selectLanguage": "Επιλέξτε γλώσσα",
     "homeAriaLabel": "Αρχική σελίδα HostMetric",
-    "logoAlt": "HostMetric Διαχείριση Ακινήτων"
+    "logoAlt": "HostMetric Διαχείριση Ακινήτων",
+    "blog": "Blog"
   },
   "hero": {
     "eyebrow": "Εξυπνη Διαχειριση Ακινητων",
@@ -2702,7 +2703,8 @@
       "getStarted": "Get Started",
       "properties": "Ακίνητα",
       "photos": "Φωτογραφίες",
-      "logout": "Αποσύνδεση"
+      "logout": "Αποσύνδεση",
+      "contentStudio": "Δημιουργία Άρθρου"
     },
     "common": {
       "administration": "HostMetric Administration",
@@ -2714,6 +2716,175 @@
       "hostMetricTeam": "Ομάδα HostMetric",
       "openMenu": "Άνοιγμα μενού διαχείρισης",
       "closeMenu": "Κλείσιμο μενού διαχείρισης"
+    },
+    "guides": {
+      "eyebrow": "Content Studio",
+      "title": "Δημιουργία & Βελτιστοποίηση Άρθρων",
+      "description": "Γράψτε SEO-focused οδηγούς για τη HostMetric, ετοιμάστε τις μεταφράσεις και ελέγξτε τη ροή δημοσίευσης από ένα σημείο.",
+      "newArticle": "Νέο Άρθρο",
+      "allArticles": "Όλα τα Άρθρα",
+      "sections": {
+        "content": "Περιεχόμενο Άρθρου",
+        "contentDescription": "Δημιουργήστε τον οδηγό σε δομημένες ενότητες ώστε το ίδιο περιεχόμενο να χρησιμοποιείται στη δημόσια σελίδα, στις μεταφράσεις και στο SEO.",
+        "seo": "SEO Στρατηγική",
+        "seoDescription": "Ορίστε search intent, στόχευση keywords και metadata πριν από τη δημοσίευση.",
+        "translations": "Μεταφράσεις",
+        "translationsDescription": "Ετοιμάστε κάθε δημόσια γλώσσα και ελέγξτε τη μετάφραση πριν μπορέσει να δημοσιευτεί.",
+        "publishing": "Δημοσίευση",
+        "publishingDescription": "Αποθηκεύστε, κάντε preview, review και publish χωρίς να γίνεται indexable ημιτελές περιεχόμενο."
+      },
+      "fields": {
+        "title": "Τίτλος Άρθρου / H1",
+        "slug": "Slug",
+        "excerpt": "Σύντομη Περίληψη",
+        "category": "Κατηγορία / Θέμα",
+        "author": "Συγγραφέας",
+        "featuredImage": "Κεντρική Εικόνα",
+        "h2": "Επικεφαλίδα H2",
+        "h3": "Επικεφαλίδα H3",
+        "paragraph": "Παράγραφος",
+        "bullets": "Bullets",
+        "callout": "Callout",
+        "internalLink": "Εσωτερικό Link",
+        "seoTitle": "SEO Title",
+        "metaDescription": "Meta Description",
+        "focusKeyword": "Focus Keyword",
+        "secondaryKeywords": "Secondary Keywords / Φράσεις",
+        "searchIntent": "Search Intent",
+        "targetCommercialPage": "Στοχευμένη Εμπορική Σελίδα",
+        "imageAlt": "Alt Text Κεντρικής Εικόνας",
+        "ogTitle": "Open Graph Title",
+        "ogDescription": "Open Graph Description",
+        "ogImage": "Open Graph Image",
+        "originalLanguage": "Αρχική Γλώσσα",
+        "translationStatus": "Κατάσταση Μετάφρασης",
+        "publicationStatus": "Κατάσταση Δημοσίευσης"
+      },
+      "placeholders": {
+        "title": "π.χ. Airbnb vs Booking.com: Ποια πλατφόρμα είναι καλύτερη για οικοδεσπότες;",
+        "slug": "airbnb-vs-booking-com",
+        "excerpt": "Σύντομη περίληψη για cards και search previews.",
+        "category": "π.χ. Πλατφόρμες Κρατήσεων",
+        "author": "HostMetric",
+        "featuredImage": "/images/guides/...",
+        "h2": "Κύρια επικεφαλίδα ενότητας",
+        "h3": "Προαιρετική υποενότητα",
+        "paragraph": "Γράψτε το περιεχόμενο της ενότητας...",
+        "bullets": "Ένα σημείο ανά γραμμή",
+        "callout": "Προαιρετικό σημαντικό takeaway ή σημείωση.",
+        "internalLink": "/services/smart-pricing",
+        "seoTitle": "Τίτλος που θα εμφανίζεται στα αποτελέσματα Google",
+        "metaDescription": "Ελκυστική περιγραφή αναζήτησης για το άρθρο",
+        "focusKeyword": "Κύρια φράση αναζήτησης",
+        "secondaryKeywords": "keyword 2, keyword 3, υποστηρικτική φράση",
+        "imageAlt": "Περιγράψτε με ακρίβεια την κεντρική εικόνα",
+        "ogTitle": "Προαιρετικός τίτλος για social sharing",
+        "ogDescription": "Προαιρετική περιγραφή για social sharing",
+        "ogImage": "/images/guides/..."
+      },
+      "options": {
+        "informational": "Informational",
+        "commercial": "Commercial Investigation",
+        "transactional": "Transactional",
+        "navigational": "Navigational",
+        "greek": "Ελληνικά",
+        "english": "Αγγλικά",
+        "draft": "Πρόχειρο",
+        "published": "Δημοσιευμένο",
+        "notGenerated": "Δεν Δημιουργήθηκε"
+      },
+      "actions": {
+        "saveDraft": "Αποθήκευση Πρόχειρου",
+        "preview": "Προεπισκόπηση",
+        "generateTranslations": "Δημιουργία Μεταφράσεων",
+        "publish": "Δημοσίευση",
+        "addSection": "Προσθήκη Ενότητας",
+        "savingDraft": "Αποθήκευση...",
+        "removeSection": "Αφαίρεση Ενότητας",
+        "uploadImage": "Ανέβασμα Εικόνας",
+        "uploadingImage": "Ανέβασμα...",
+        "removeImage": "Αφαίρεση",
+        "generatingTranslations": "Δημιουργία Μεταφράσεων..."
+      },
+      "seoChecks": {
+        "title": "Μήκος και συνάφεια SEO title",
+        "focusKeyword": "Focus keyword σε title και H1",
+        "metaDescription": "Συμπληρωμένο meta description",
+        "headings": "Καθαρή δομή H2/H3",
+        "internalLinks": "Σχετικά internal links",
+        "imageAlt": "Alt text κεντρικής εικόνας",
+        "canonical": "Canonical και hreflang έτοιμα",
+        "scoreLabel": "SEO Ετοιμότητα"
+      },
+      "translationLanguages": {
+        "en": "Αγγλικά",
+        "de": "Γερμανικά",
+        "fr": "Γαλλικά",
+        "it": "Ιταλικά",
+        "es": "Ισπανικά",
+        "pt": "Πορτογαλικά",
+        "bg": "Βουλγαρικά",
+        "sr": "Σερβικά",
+        "tr": "Τουρκικά",
+        "pl": "Πολωνικά",
+        "ru": "Ρωσικά"
+      },
+      "messages": {
+        "draftCreated": "Το πρόχειρο άρθρο δημιουργήθηκε επιτυχώς.",
+        "draftUpdated": "Το πρόχειρο άρθρο ενημερώθηκε επιτυχώς.",
+        "saveFailed": "Το πρόχειρο άρθρο δεν μπόρεσε να αποθηκευτεί. Δοκιμάστε ξανά.",
+        "validationFailed": "Συμπληρώστε τα απαραίτητα πεδία άρθρου και SEO πριν από την αποθήκευση.",
+        "previewRequiresSave": "Αποθηκεύστε πρώτα το άρθρο για να ανοίξει η προεπισκόπηση.",
+        "imageUploadFailed": "Η εικόνα δεν μπόρεσε να ανέβει.",
+        "translationsRequireSave": "Αποθηκεύστε πρώτα το άρθρο πριν δημιουργήσετε μεταφράσεις.",
+        "translationsFailed": "Η δημιουργία μεταφράσεων απέτυχε.",
+        "translationsGenerated": "Δημιουργήθηκαν {count} μεταφράσεις. Αποτυχίες: {failed}."
+      },
+      "list": {
+        "eyebrow": "Content Studio",
+        "title": "Άρθρα & Οδηγοί",
+        "description": "Διαχειριστείτε τα πρόχειρα, τα άρθρα υπό έλεγχο, τις δημοσιεύσεις και την κατάσταση μεταφράσεων από ένα σημείο.",
+        "newArticle": "Νέο Άρθρο",
+        "filters": {
+          "all": "Όλα",
+          "drafts": "Πρόχειρα",
+          "published": "Δημοσιευμένα",
+          "needsTranslation": "Χρειάζονται Μετάφραση"
+        },
+        "columns": {
+          "article": "Άρθρο",
+          "status": "Κατάσταση",
+          "locale": "Αρχική Γλώσσα",
+          "translations": "Μεταφράσεις",
+          "updated": "Τελευταία Ενημέρωση",
+          "action": "Ενέργεια"
+        },
+        "status": {
+          "draft": "Πρόχειρο",
+          "review": "Σε Έλεγχο",
+          "published": "Δημοσιευμένο",
+          "unpublished": "Μη Δημοσιευμένο"
+        },
+        "translationSummary": "{current} / {total} γλώσσες",
+        "needsTranslation": "Χρειάζεται μετάφραση",
+        "completeTranslations": "Πλήρεις μεταφράσεις",
+        "open": "Άνοιγμα",
+        "emptyTitle": "Δεν υπάρχουν άρθρα σε αυτή την κατηγορία.",
+        "emptyDescription": "Δημιουργήστε νέο άρθρο ή αλλάξτε φίλτρο για να δείτε άλλα άρθρα.",
+        "publish": "Δημοσίευση"
+      }
     }
+  },
+  "blogPage": {
+    "seo": {
+      "title": "Blog για Βραχυχρόνιες Μισθώσεις | HostMetric",
+      "description": "Άρθρα και πρακτικές αναλύσεις για Airbnb, Booking.com, τιμολόγηση, πληρότητα, κρατήσεις και επαγγελματική διαχείριση καταλυμάτων."
+    },
+    "eyebrow": "HOSTMETRIC BLOG",
+    "title": "Blog",
+    "description": "Άρθρα και πρακτικές αναλύσεις για ιδιοκτήτες καταλυμάτων που θέλουν καλύτερη προβολή, περισσότερες κρατήσεις και ισχυρότερη απόδοση.",
+    "readMore": "Διαβάστε το άρθρο",
+    "empty": "Δεν υπάρχουν ακόμη δημοσιευμένα άρθρα.",
+    "backToAll": "Όλα τα άρθρα"
   }
 }

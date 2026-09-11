@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import {
-  ArrowRight,
   Building2,
   CalendarDays,
   ChevronDown,
@@ -15,6 +14,8 @@ import {
 
 import { neon } from "@neondatabase/serverless";
 import { cookies } from "next/headers";
+import AdminDeleteButton from "@/components/admin-delete-button";
+import AdminPropertyStatusButton from "@/components/admin-property-status-button";
 
 import {
   getAdminDictionary,
@@ -1193,6 +1194,7 @@ export default async function AdminOnboardingPage({
                       <Link
                         href={`/admin/leads/${item.contact_id}`}
                         className="
+                          pointer-events-auto
                           relative
                           z-20
                           text-sm
@@ -1209,27 +1211,39 @@ export default async function AdminOnboardingPage({
                       </Link>
 
 
-                      <div
-                        className="
-                          flex
-                          items-center
-                          gap-2
-                          text-sm
-                          font-black
-                          text-blue-600
-                        "
-                      >
-                        {
-                          propertiesDictionary.actions
-                            .openProperty
-                        }
+                      <div className="flex flex-wrap items-center justify-end gap-2">
+                        {item.property_id ? (
+                          <AdminPropertyStatusButton
+                            propertyId={item.property_id}
+                            currentStatus={item.property_status}
+                            activateLabel={
+                              propertyDetailsDictionary.actions
+                                .activateProperty
+                            }
+                            deactivateLabel={
+                              propertyDetailsDictionary.actions
+                                .deactivateProperty
+                            }
+                          />
+                        ) : null}
 
-                        <ArrowRight
-                          size={16}
-                          className="
-                            transition-transform
-                            group-hover:translate-x-1
-                          "
+                        <AdminDeleteButton
+                          endpoint={`/api/admin/get-started/${item.submission_id}`}
+                          label={
+                            currentLocale === "el" ? "Διαγραφή" : "Delete"
+                          }
+                          confirmMessage={
+                            currentLocale === "el"
+                              ? `Θέλεις σίγουρα να διαγράψεις αυτό το Get Started για το ακίνητο «${
+                                  item.property_name ||
+                                  leadsDictionary.fallback.unnamedProperty
+                                }»; Αν υπάρχει συνδεδεμένο ακίνητο, θα διαγραφεί και αυτό. Ο πελάτης θα παραμείνει.`
+                              : `Are you sure you want to delete this Get Started submission for “${
+                                  item.property_name ||
+                                  leadsDictionary.fallback.unnamedProperty
+                                }”? If a linked property exists, it will also be deleted. The client will remain.`
+                          }
+                          compact
                         />
                       </div>
 
@@ -1238,86 +1252,28 @@ export default async function AdminOnboardingPage({
                 );
 
 
-                if (
+                const cardHref =
                   item.property_id
-                ) {
-                  return (
-                    <div
-                      key={
-                        item.submission_id
-                      }
-                      className="
-                        group
-                        relative
-                        block
-                        rounded-2xl
-                        border
-                        border-slate-200
-                        bg-white
-                        p-5
-                        shadow-sm
-                        transition
-                        duration-200
-                        hover:-translate-y-0.5
-                        hover:border-blue-200
-                        hover:shadow-md
-                      "
-                    >
-                      <Link
-                        href={`/admin/properties/${item.property_id}`}
-                        aria-label={
-                          item.property_name ||
-                          leadsDictionary
-                            .fallback
-                            .unnamedProperty
-                        }
-                        className="
-                          absolute
-                          inset-0
-                          z-0
-                          rounded-2xl
-                        "
-                      />
-
-                      <div
-                        className="
-                          relative
-                          z-10
-                          pointer-events-none
-                        "
-                      >
-                        <div
-                          className="
-                            pointer-events-auto
-                          "
-                        >
-                          {
-                            cardContent
-                          }
-                        </div>
-                      </div>
-                    </div>
-                  );
-                }
-
+                    ? `/admin/properties/${item.property_id}`
+                    : `/admin/leads/${item.contact_id}`;
 
                 return (
                   <div
-                    key={
-                      item.submission_id
-                    }
-                    className="
-                      rounded-2xl
-                      border
-                      border-slate-200
-                      bg-white
-                      p-5
-                      shadow-sm
-                    "
+                    key={item.submission_id}
+                    className="group relative block rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md"
                   >
-                    {
-                      cardContent
-                    }
+                    <Link
+                      href={cardHref}
+                      aria-label={
+                        item.property_name ||
+                        leadsDictionary.fallback.unnamedProperty
+                      }
+                      className="absolute inset-0 z-0 rounded-2xl"
+                    />
+
+                    <div className="pointer-events-none relative z-10">
+                      <div>{cardContent}</div>
+                    </div>
                   </div>
                 );
                           }

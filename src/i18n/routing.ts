@@ -39,8 +39,10 @@ export function normalizePathname(
 
    /               -> el
    /about          -> el
+   /blog           -> el
    /en             -> en
    /en/about       -> en
+   /en/blog        -> en
    /de/contact     -> de
 ========================================== */
 
@@ -77,8 +79,10 @@ export function getLocaleFromPathname(
 
    /               -> /
    /about          -> /about
+   /blog           -> /blog
    /en             -> /
    /en/about       -> /about
+   /en/blog        -> /blog
    /de/contact     -> /contact
 ========================================== */
 
@@ -127,9 +131,11 @@ export function removeLocaleFromPathname(
 
    el + /           -> /
    el + /about      -> /about
+   el + /blog       -> /blog
 
    en + /           -> /en
    en + /about      -> /en/about
+   en + /blog       -> /en/blog
 
    de + /contact    -> /de/contact
 ========================================== */
@@ -166,6 +172,9 @@ export function getLocalizedPath(
 
    /about + en
    -> /en/about
+
+   /blog + de
+   -> /de/blog
 
    /de/contact + en
    -> /en/contact

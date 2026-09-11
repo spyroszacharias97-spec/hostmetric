@@ -1,0 +1,27 @@
+warning: in the working copy of 'package-lock.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/i18n/admin.ts', LF will be replaced by CRLF the next time Git touches it
+package-lock.json
+package.json
+src/app/(public)/layout.tsx
+src/app/admin/(protected)/get-started/page.tsx
+src/app/admin/(protected)/leads/[id]/page.tsx
+src/app/admin/(protected)/properties/[id]/page.tsx
+src/app/admin/(protected)/properties/page.tsx
+src/app/sitemap.ts
+src/components/admin-shell.tsx
+src/components/navbar.tsx
+src/i18n/admin.ts
+src/i18n/dictionaries/bg.json
+src/i18n/dictionaries/de.json
+src/i18n/dictionaries/el.json
+src/i18n/dictionaries/en.json
+src/i18n/dictionaries/es.json
+src/i18n/dictionaries/fr.json
+src/i18n/dictionaries/it.json
+src/i18n/dictionaries/pl.json
+src/i18n/dictionaries/pt.json
+src/i18n/dictionaries/ru.json
+src/i18n/dictionaries/sr.json
+src/i18n/dictionaries/tr.json
+src/i18n/routing.ts

@@ -62,6 +62,7 @@ type NavigationDictionary = {
   selectLanguage: string;
   homeAriaLabel: string;
   logoAlt: string;
+  blog?: string;
 };
 
 
@@ -424,7 +425,7 @@ export default function Navbar() {
             CENTER NAVIGATION
         ========================================== */}
 
-        <div className="hidden items-center gap-11 lg:flex">
+        <div className="hidden items-center gap-7 xl:gap-9 lg:flex">
 
           <button
             type="button"
@@ -457,6 +458,14 @@ export default function Navbar() {
             className="cursor-pointer text-[17px] font-semibold text-slate-800 transition duration-300 hover:-translate-y-0.5 hover:text-blue-600"
           >
             {navigation.pricing}
+          </Link>
+
+
+          <Link
+            href={getLocalizedPath("/blog", currentLocale)}
+            className="cursor-pointer text-[17px] font-semibold text-slate-800 transition duration-300 hover:-translate-y-0.5 hover:text-blue-600"
+          >
+            {navigation.blog ?? "Blog"}
           </Link>
 
 
@@ -751,6 +760,18 @@ export default function Navbar() {
                 className="flex min-h-[58px] items-center justify-between border-b border-slate-100 px-5 py-4 text-[17px] font-bold text-slate-900 transition hover:bg-blue-50 hover:text-blue-600"
               >
                 {navigation.pricing}
+                <span aria-hidden="true">→</span>
+              </Link>
+
+
+              <Link
+                href={getLocalizedPath("/blog", currentLocale)}
+                onClick={() =>
+                  setMobileMenuOpen(false)
+                }
+                className="flex min-h-[58px] items-center justify-between border-b border-slate-100 px-5 py-4 text-[17px] font-bold text-slate-900 transition hover:bg-blue-50 hover:text-blue-600"
+              >
+                {navigation.blog ?? "Blog"}
                 <span aria-hidden="true">→</span>
               </Link>
 

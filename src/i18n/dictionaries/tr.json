@@ -9,7 +9,8 @@
     "language": "Dil",
     "selectLanguage": "Dil seçin",
     "homeAriaLabel": "HostMetric ana sayfası",
-    "logoAlt": "HostMetric Mülk Yönetimi"
+    "logoAlt": "HostMetric Mülk Yönetimi",
+    "blog": "Blog"
   },
   "hero": {
     "eyebrow": "Kısa Dönem Kiralama Performansı",
@@ -2692,7 +2693,8 @@
       "getStarted": "Get Started",
       "properties": "Properties",
       "photos": "Photos",
-      "logout": "Log Out"
+      "logout": "Log Out",
+      "contentStudio": "Content Studio"
     },
     "common": {
       "administration": "HostMetric Administration",
@@ -2704,6 +2706,179 @@
       "hostMetricTeam": "HostMetric Team",
       "openMenu": "Open administration menu",
       "closeMenu": "Close administration menu"
+    },
+    "guides": {
+      "eyebrow": "Content Studio",
+      "title": "Create & Optimize Articles",
+      "description": "Write SEO-focused HostMetric guides, prepare translations and control the publishing workflow from one place.",
+      "newArticle": "New Article",
+      "allArticles": "All Articles",
+      "sections": {
+        "content": "Article Content",
+        "contentDescription": "Build the guide in structured sections so the same content can power the public page, translations and SEO.",
+        "seo": "SEO Strategy",
+        "seoDescription": "Define search intent, keyword targeting and metadata before publishing.",
+        "translations": "Translations",
+        "translationsDescription": "Prepare every public-language version and review each translation before it can go live.",
+        "publishing": "Publishing",
+        "publishingDescription": "Save, preview, review and publish without making unfinished content indexable."
+      },
+      "fields": {
+        "title": "Article Title / H1",
+        "slug": "Slug",
+        "excerpt": "Excerpt",
+        "category": "Category / Topic",
+        "author": "Author",
+        "featuredImage": "Featured Image",
+        "h2": "Section H2",
+        "h3": "Section H3",
+        "paragraph": "Paragraph",
+        "bullets": "Bullet Points",
+        "callout": "Callout",
+        "internalLink": "Internal Link",
+        "seoTitle": "SEO Title",
+        "metaDescription": "Meta Description",
+        "focusKeyword": "Focus Keyword",
+        "secondaryKeywords": "Secondary Keywords / Phrases",
+        "searchIntent": "Search Intent",
+        "targetCommercialPage": "Target Commercial Page",
+        "imageAlt": "Featured Image Alt Text",
+        "ogTitle": "Open Graph Title",
+        "ogDescription": "Open Graph Description",
+        "ogImage": "Open Graph Image",
+        "originalLanguage": "Original Language",
+        "translationStatus": "Translation Status",
+        "publicationStatus": "Publication Status"
+      },
+      "placeholders": {
+        "title": "e.g. Airbnb vs Booking.com: Which Platform Is Better for Hosts?",
+        "slug": "airbnb-vs-booking-com",
+        "excerpt": "Short summary used on guide cards and search previews.",
+        "category": "e.g. Booking Platforms",
+        "author": "HostMetric",
+        "featuredImage": "/images/guides/...",
+        "h2": "Main section heading",
+        "h3": "Optional subsection heading",
+        "paragraph": "Write the section content...",
+        "bullets": "One point per line",
+        "callout": "Optional important takeaway or highlighted note.",
+        "internalLink": "/services/smart-pricing",
+        "seoTitle": "SEO title shown in Google results",
+        "metaDescription": "Compelling search description for the article",
+        "focusKeyword": "Primary search phrase",
+        "secondaryKeywords": "keyword 2, keyword 3, supporting phrase",
+        "imageAlt": "Describe the featured image accurately",
+        "ogTitle": "Optional social sharing title",
+        "ogDescription": "Optional social sharing description",
+        "ogImage": "/images/guides/..."
+      },
+      "options": {
+        "informational": "Informational",
+        "commercial": "Commercial Investigation",
+        "transactional": "Transactional",
+        "navigational": "Navigational",
+        "greek": "Greek",
+        "english": "English",
+        "draft": "Draft",
+        "review": "In Review",
+        "published": "Published",
+        "notGenerated": "Not Generated"
+      },
+      "actions": {
+        "saveDraft": "Save Draft",
+        "preview": "Preview",
+        "sendToReview": "Send to Review",
+        "generateTranslations": "Generate Translations",
+        "publish": "Publish",
+        "addSection": "Add Content Section",
+        "savingDraft": "Saving...",
+        "removeSection": "Remove Section",
+        "uploadImage": "Upload Image",
+        "uploadingImage": "Uploading...",
+        "removeImage": "Remove",
+        "generatingTranslations": "Generating Translations..."
+      },
+      "seoChecks": {
+        "title": "SEO title length and relevance",
+        "focusKeyword": "Focus keyword in title and H1",
+        "metaDescription": "Meta description completed",
+        "headings": "Clear H2/H3 structure",
+        "internalLinks": "Relevant internal links",
+        "imageAlt": "Featured image alt text",
+        "canonical": "Canonical and hreflang ready",
+        "scoreLabel": "SEO Readiness"
+      },
+      "translationLanguages": {
+        "en": "English",
+        "de": "German",
+        "fr": "French",
+        "it": "Italian",
+        "es": "Spanish",
+        "pt": "Portuguese",
+        "bg": "Bulgarian",
+        "sr": "Serbian",
+        "tr": "Turkish",
+        "pl": "Polish",
+        "ru": "Russian"
+      },
+      "messages": {
+        "draftCreated": "Draft created successfully.",
+        "draftUpdated": "Draft updated successfully.",
+        "saveFailed": "The draft could not be saved. Please try again.",
+        "validationFailed": "Please complete the required article and SEO fields before saving.",
+        "sentToReview": "The article was sent to review.",
+        "reviewFailed": "The article could not be sent to review.",
+        "previewRequiresSave": "Save the article first to open the preview.",
+        "imageUploadFailed": "The image could not be uploaded.",
+        "translationsRequireSave": "Save the article before generating translations.",
+        "translationsFailed": "Translation generation failed.",
+        "translationsGenerated": "Generated {count} translations. Failed: {failed}."
+      },
+      "list": {
+        "eyebrow": "Content Studio",
+        "title": "Articles & Guides",
+        "description": "Manage drafts, articles in review, published guides and translation progress from one place.",
+        "newArticle": "New Article",
+        "filters": {
+          "all": "All",
+          "drafts": "Drafts",
+          "review": "In Review",
+          "published": "Published",
+          "needsTranslation": "Needs Translation"
+        },
+        "columns": {
+          "article": "Article",
+          "status": "Status",
+          "locale": "Source Language",
+          "translations": "Translations",
+          "updated": "Last Updated",
+          "action": "Action"
+        },
+        "status": {
+          "draft": "Draft",
+          "review": "In Review",
+          "published": "Published",
+          "unpublished": "Unpublished"
+        },
+        "translationSummary": "{current} / {total} languages",
+        "needsTranslation": "Needs translation",
+        "completeTranslations": "Translations complete",
+        "open": "Open",
+        "emptyTitle": "There are no articles in this category.",
+        "emptyDescription": "Create a new article or change the filter to view other guides."
+      }
     }
+  },
+  "blogPage": {
+    "seo": {
+      "title": "Kısa Dönem Kiralama Blogu | HostMetric",
+      "description": "Airbnb, Booking.com, fiyatlandırma, doluluk, rezervasyonlar ve profesyonel kısa dönem kiralama yönetimi hakkında makaleler ve pratik analizler."
+    },
+    "eyebrow": "HOSTMETRIC BLOG",
+    "title": "Blog",
+    "description": "Daha fazla görünürlük, daha fazla rezervasyon ve mülkleri için daha güçlü performans isteyen mülk sahiplerine yönelik pratik makaleler ve analizler.",
+    "readMore": "Makaleyi okuyun",
+    "empty": "Henüz yayınlanmış makale yok.",
+    "backToAll": "Tüm makaleler"
   }
 }

@@ -566,6 +566,174 @@ export type AdminDictionary = {
     };
   };
 
+
+  guides: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    newArticle: string;
+    allArticles: string;
+
+    sections: {
+      content: string;
+      contentDescription: string;
+      seo: string;
+      seoDescription: string;
+      translations: string;
+      translationsDescription: string;
+      publishing: string;
+      publishingDescription: string;
+    };
+
+    fields: {
+      title: string;
+      slug: string;
+      excerpt: string;
+      category: string;
+      author: string;
+      featuredImage: string;
+      h2: string;
+      h3: string;
+      paragraph: string;
+      bullets: string;
+      callout: string;
+      internalLink: string;
+      seoTitle: string;
+      metaDescription: string;
+      focusKeyword: string;
+      secondaryKeywords: string;
+      searchIntent: string;
+      targetCommercialPage: string;
+      imageAlt: string;
+      ogTitle: string;
+      ogDescription: string;
+      ogImage: string;
+      originalLanguage: string;
+      translationStatus: string;
+      publicationStatus: string;
+    };
+
+    placeholders: {
+      title: string;
+      slug: string;
+      excerpt: string;
+      category: string;
+      author: string;
+      featuredImage: string;
+      h2: string;
+      h3: string;
+      paragraph: string;
+      bullets: string;
+      callout: string;
+      internalLink: string;
+      seoTitle: string;
+      metaDescription: string;
+      focusKeyword: string;
+      secondaryKeywords: string;
+      imageAlt: string;
+      ogTitle: string;
+      ogDescription: string;
+      ogImage: string;
+    };
+
+    options: {
+      informational: string;
+      commercial: string;
+      transactional: string;
+      navigational: string;
+      greek: string;
+      english: string;
+      draft: string;
+      published: string;
+      notGenerated: string;
+    };
+
+    actions: {
+      saveDraft: string;
+      savingDraft: string;
+      preview: string;
+      generateTranslations: string;
+      publish: string;
+      addSection: string;
+      removeSection: string;
+      uploadImage: string;
+      uploadingImage: string;
+      removeImage: string;
+      generatingTranslations: string;
+    };
+
+    messages: {
+      draftCreated: string;
+      draftUpdated: string;
+      saveFailed: string;
+      validationFailed: string;
+      previewRequiresSave: string;
+      imageUploadFailed: string;
+      translationsRequireSave: string;
+      translationsFailed: string;
+      translationsGenerated: string;
+    };
+
+    list: {
+      eyebrow: string;
+      title: string;
+      description: string;
+      newArticle: string;
+      filters: {
+        all: string;
+        drafts: string;
+        published: string;
+        needsTranslation: string;
+      };
+      columns: {
+        article: string;
+        status: string;
+        locale: string;
+        translations: string;
+        updated: string;
+        action: string;
+      };
+      status: {
+        draft: string;
+        review: string;
+        published: string;
+        unpublished: string;
+      };
+      translationSummary: string;
+      needsTranslation: string;
+      completeTranslations: string;
+      open: string;
+      publish: string;
+      emptyTitle: string;
+      emptyDescription: string;
+    };
+
+    seoChecks: {
+      title: string;
+      focusKeyword: string;
+      metaDescription: string;
+      headings: string;
+      internalLinks: string;
+      imageAlt: string;
+      canonical: string;
+      scoreLabel: string;
+    };
+
+    translationLanguages: {
+      en: string;
+      de: string;
+      fr: string;
+      it: string;
+      es: string;
+      pt: string;
+      bg: string;
+      sr: string;
+      tr: string;
+      pl: string;
+      ru: string;
+    };
+  };
+
   navigation: {
     management: string;
     dashboard: string;
@@ -573,6 +741,7 @@ export type AdminDictionary = {
     contactRequests: string;
     getStarted: string;
     properties: string;
+    contentStudio: string;
     photos: string;
     logout: string;
   };

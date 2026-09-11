@@ -843,7 +843,7 @@ export default async function LeadDetailsPage({
 
 
             <Link
-              href={`/get-started?contactId=${client.id}&admin=1`}
+              href={`/admin/get-started/new?contactId=${client.id}`}
               className="
                 inline-flex
                 shrink-0

@@ -22,6 +22,7 @@ import {
   MessageSquareText,
   ClipboardList,
   Building2,
+  FilePenLine,
   Menu,
   X,
   LogOut,
@@ -120,6 +121,20 @@ export default function AdminShell({
       icon:
         Building2,
     },
+
+
+    {
+      label:
+        dictionary.navigation
+          .contentStudio,
+
+      href:
+        "/admin/guides",
+
+      icon:
+        FilePenLine,
+    },
+
   ];
 
 
@@ -144,7 +159,7 @@ export default function AdminShell({
     <div
       className="
         min-h-screen
-        overflow-x-hidden
+        overflow-x-clip
         bg-slate-50
         text-slate-900
       "

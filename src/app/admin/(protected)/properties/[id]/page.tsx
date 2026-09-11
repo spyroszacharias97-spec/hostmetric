@@ -27,6 +27,7 @@ import { auth } from "@/auth";
 import { getAdminDictionary } from "@/i18n/admin";
 import AdminPhotoManager from "@/components/admin-photo-manager";
 import AdminSaveToast from "@/components/admin-save-toast";
+import AdminDeleteButton from "@/components/admin-delete-button";
 import {
   defaultLocale,
   type Locale,
@@ -1430,6 +1431,17 @@ export default async function PropertyDetailsPage({
               </button>
             </form>
           )}
+
+          <AdminDeleteButton
+            endpoint={`/api/admin/properties/${property.id}`}
+            label={locale === "el" ? "Διαγραφή" : "Delete"}
+            confirmMessage={
+              locale === "el"
+                ? `Θέλεις σίγουρα να διαγράψεις το ακίνητο «${propertyName}»; Θα διαγραφεί και το συνδεδεμένο Get Started, αλλά ο πελάτης θα παραμείνει.`
+                : `Are you sure you want to delete “${propertyName}”? The linked Get Started submission will also be deleted, but the client will remain.`
+            }
+            redirectTo="/admin/properties"
+          />
         </div>
       </div>
 

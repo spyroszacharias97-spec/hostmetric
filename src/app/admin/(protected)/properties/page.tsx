@@ -2,10 +2,10 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 
 import {
-  ArrowRight,
   Building2,
   CheckCircle2,
   Clock3,
+  Plus,
   Search,
   X,
 } from "lucide-react";
@@ -13,6 +13,8 @@ import {
 import { neon } from "@neondatabase/serverless";
 
 import { getAdminDictionary } from "@/i18n/admin";
+import AdminPropertyStatusButton from "@/components/admin-property-status-button";
+import AdminDeleteButton from "@/components/admin-delete-button";
 
 import {
   defaultLocale,
@@ -331,18 +333,28 @@ export default async function PropertiesPage({
   return (
     <div className="pb-12">
 
-      <div>
-        <p className="text-sm font-black uppercase tracking-[0.22em] text-blue-600">
-          {d.eyebrow}
-        </p>
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+          <p className="text-sm font-black uppercase tracking-[0.22em] text-blue-600">
+            {d.eyebrow}
+          </p>
 
-        <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-950">
-          {d.title}
-        </h1>
+          <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-950">
+            {d.title}
+          </h1>
 
-        <p className="mt-3 max-w-3xl text-base leading-7 text-slate-500">
-          {d.description}
-        </p>
+          <p className="mt-3 max-w-3xl text-base leading-7 text-slate-500">
+            {d.description}
+          </p>
+        </div>
+
+        <Link
+          href="/admin/properties/new"
+          className="inline-flex shrink-0 items-center justify-center gap-2 self-start rounded-2xl bg-blue-600 px-5 py-3 text-sm font-black text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-md"
+        >
+          <Plus size={17} />
+          {d.actions.newProperty}
+        </Link>
       </div>
 
 
@@ -536,13 +548,44 @@ export default async function PropertiesPage({
                             </p>
                           </div>
 
-                          <Link
-                            href={`/admin/properties/${property.id}`}
-                            className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-black text-blue-600 transition hover:bg-blue-50 hover:text-blue-700"
-                          >
-                            Open Property
-                            <ArrowRight size={18} />
-                          </Link>
+                          <div className="flex flex-wrap items-center justify-end gap-2">
+                            <Link
+                              href={`/admin/properties/${property.id}`}
+                              className="inline-flex items-center justify-center rounded-xl border border-blue-200 bg-blue-50 px-3 py-2 text-sm font-black text-blue-700 transition hover:border-blue-300 hover:bg-blue-100"
+                            >
+                              {d.actions.openProperty}
+                            </Link>
+
+                            <AdminPropertyStatusButton
+                              propertyId={property.id}
+                              currentStatus={property.status}
+                              activateLabel={propertyD.actions.activateProperty}
+                              deactivateLabel={
+                                propertyD.actions.deactivateProperty
+                              }
+                            />
+
+                            <AdminDeleteButton
+                              endpoint={`/api/admin/properties/${property.id}`}
+                              label={
+                                currentLocale === "el"
+                                  ? "Διαγραφή"
+                                  : "Delete"
+                              }
+                              confirmMessage={
+                                currentLocale === "el"
+                                  ? `Θέλεις σίγουρα να διαγράψεις το ακίνητο «${
+                                      property.property_name ||
+                                      propertyD.fallback.unnamedProperty
+                                    }»; Θα διαγραφεί και το συνδεδεμένο Get Started, αλλά ο πελάτης θα παραμείνει.`
+                                  : `Are you sure you want to delete “${
+                                      property.property_name ||
+                                      propertyD.fallback.unnamedProperty
+                                    }”? The linked Get Started submission will also be deleted, but the client will remain.`
+                              }
+                              compact
+                            />
+                          </div>
                         </div>
                       </div>
 

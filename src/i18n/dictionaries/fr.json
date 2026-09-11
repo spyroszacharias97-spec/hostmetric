@@ -9,7 +9,8 @@
     "language": "Langue",
     "selectLanguage": "Choisir la langue",
     "homeAriaLabel": "Page d’accueil HostMetric",
-    "logoAlt": "Gestion immobilière HostMetric"
+    "logoAlt": "Gestion immobilière HostMetric",
+    "blog": "Blog"
   },
   "hero": {
     "eyebrow": "Performance des locations courte durée",
@@ -355,15 +356,15 @@
     "accordions": [
       {
         "title": "Gestion complète des réservations",
-        "description": "Availability, reservations and length-of-stay restrictions are assessed as a connected calendar rather than isolated bookings. Booking window, booking pace and occupancy patterns help determine whether inventory should be protected, released or repositioned as arrival dates approach."
+        "description": "Les disponibilités, les réservations et les restrictions de durée de séjour sont analysées comme un calendrier connecté plutôt que comme des réservations isolées. La fenêtre de réservation, le rythme des réservations et les tendances d’occupation permettent de déterminer si l’inventaire doit être protégé, libéré ou repositionné à mesure que les dates d’arrivée approchent."
       },
       {
         "title": "Optimisation des revenus",
-        "description": "Pricing decisions evaluate ADR, occupancy and RevPAN together with booking pace, lead time, seasonality, competitive positioning and price elasticity. The objective is not simply the highest nightly rate or highest occupancy, but stronger revenue capture across the available calendar."
+        "description": "Les décisions tarifaires évaluent conjointement l’ADR, le taux d’occupation et le RevPAN, ainsi que le rythme des réservations, le délai de réservation, la saisonnalité, le positionnement concurrentiel et l’élasticité-prix. L’objectif n’est pas simplement d’obtenir le tarif par nuit ou le taux d’occupation le plus élevé, mais de maximiser les revenus sur l’ensemble du calendrier disponible."
       },
       {
         "title": "Expérience voyageur exceptionnelle",
-        "description": "Guest communication is treated as measurable operational performance. Response time, recurring questions, issue resolution patterns and review outcomes can be monitored to identify friction points and continuously improve the guest journey from pre-arrival through post-stay communication."
+        "description": "La communication avec les voyageurs est considérée comme une performance opérationnelle mesurable. Les temps de réponse, les questions récurrentes, les schémas de résolution des problèmes et les résultats des avis peuvent être suivis afin d’identifier les points de friction et d’améliorer continuellement le parcours voyageur, de la pré-arrivée jusqu’au suivi après le séjour."
       }
     ]
   },
@@ -701,23 +702,23 @@
     "eyebrow": "Assistance humaine aux voyageurs",
     "titleLine1": "De vraies personnes derrière",
     "titleLine2": "chaque expérience voyageur",
-    "description": "Guest communication should feel natural, helpful and personal. HostMetric combines structured communication systems with trained human support, so your guests receive thoughtful answers rather than robotic responses.",
+    "description": "La communication avec les voyageurs doit rester naturelle, utile et personnalisée. HostMetric associe des systèmes de communication structurés à une assistance humaine formée afin que vos voyageurs reçoivent des réponses attentionnées plutôt que des messages robotiques.",
     "cards": {
       "continuousCoverage": {
         "title": "Couverture continue par équipes",
-        "description": "Trained team members work in coordinated shifts so guest conversations remain actively monitored throughout the day and night."
+        "description": "Des membres de l’équipe formés travaillent en rotations coordonnées afin que les conversations avec les voyageurs soient suivies activement tout au long de la journée et de la nuit."
       },
       "naturalCommunication": {
         "title": "Communication naturelle",
-        "description": "Responses are adapted to the actual question, situation and guest rather than relying solely on fixed automated templates."
+        "description": "Les réponses sont adaptées à la question, à la situation et au voyageur, plutôt que de reposer uniquement sur des modèles automatisés prédéfinis."
       },
       "hospitalityTraining": {
         "title": "Formation en hospitalité",
-        "description": "Communication focuses on clarity, empathy, speed and practical problem-solving — helping guests feel supported throughout their stay."
+        "description": "La communication privilégie la clarté, l’empathie, la rapidité et la résolution pratique des problèmes afin que les voyageurs se sentent accompagnés tout au long de leur séjour."
       },
       "betterReviews": {
         "title": "Conçu pour de meilleurs avis",
-        "description": "Recurring questions, service issues and review feedback become operational insights that help us continuously improve the guest journey."
+        "description": "Les questions récurrentes, les problèmes de service et les commentaires issus des avis deviennent des informations opérationnelles qui nous aident à améliorer continuellement le parcours voyageur."
       }
     },
     "cta": "Confiez-nous vos voyageurs"
@@ -733,18 +734,18 @@
     "titleLine1": "Un bien.",
     "titleLine2": "Plusieurs canaux",
     "titleLine3": "de réservation.",
-    "description": "Your property can be distributed across leading travel and accommodation platforms while availability, reservations and commercial strategy remain coordinated.",
+    "description": "Votre bien peut être distribué sur les principales plateformes de voyage et d’hébergement, tandis que les disponibilités, les réservations et la stratégie commerciale restent coordonnées.",
     "calendarSync": {
       "title": "Synchronisation du calendrier",
-      "description": "Reservations and availability are coordinated across supported channels to reduce conflicting inventory and provide one connected view of the property's booking calendar."
+      "description": "Les réservations et les disponibilités sont coordonnées sur les canaux pris en charge afin de réduire les conflits d’inventaire et d’offrir une vue unifiée du calendrier de réservation du bien."
     },
     "widerDistribution": {
       "title": "Distribution élargie",
-      "description": "Reach travelers across multiple accommodation and travel marketplaces."
+      "description": "Atteignez davantage de voyageurs sur plusieurs plateformes d’hébergement et de voyage."
     },
     "coordinatedStrategy": {
       "title": "Une stratégie coordonnée",
-      "description": "Channel activity forms part of one commercial view rather than separate platform strategies."
+      "description": "L’activité de chaque canal s’intègre dans une vision commerciale unique plutôt que dans des stratégies de plateforme séparées."
     }
   },
   "pricingEnginePage": {
@@ -752,38 +753,38 @@
     "eyebrow": "Moteur d’intelligence tarifaire",
     "titleLine1": "Des milliers de signaux.",
     "titleLine2": "Un prix plus intelligent.",
-    "description": "HostMetric's pricing methodology combines property-level, historical and market-level data to estimate demand conditions and support dynamic pricing decisions designed to improve revenue performance.",
+    "description": "La méthodologie tarifaire de HostMetric combine les données propres au bien, les données historiques et les données de marché afin d’estimer les conditions de demande et de soutenir des décisions de tarification dynamique conçues pour améliorer la performance des revenus.",
     "cards": {
       "comparableProperties": {
         "title": "Biens comparables",
-        "description": "Similar accommodation type, location, capacity, amenities, positioning and market segment provide competitive pricing context."
+        "description": "Les hébergements comparables en matière de type, localisation, capacité, équipements, positionnement et segment de marché fournissent un contexte tarifaire concurrentiel."
       },
       "localMarketDemand": {
         "title": "Demande du marché local",
-        "description": "Seasonal patterns, local demand conditions and differences between high- and low-demand periods influence expected willingness to book."
+        "description": "Les tendances saisonnières, les conditions de demande locale et les différences entre périodes de forte et de faible demande influencent la propension attendue à réserver."
       },
       "historicalBookingData": {
         "title": "Données historiques de réservation",
-        "description": "Historical reservations, observed rates, lead time and booking patterns create a baseline for analysing future demand."
+        "description": "Les réservations historiques, les tarifs observés, le délai de réservation et les habitudes de réservation constituent une base pour analyser la demande future."
       },
       "bookingPace": {
         "title": "Booking Pace",
-        "description": "Pickup velocity measures how quickly future nights are being reserved relative to previous comparable periods."
+        "description": "La vitesse de pickup mesure la rapidité avec laquelle les nuits futures sont réservées par rapport à des périodes comparables précédentes."
       },
       "revenueKpis": {
         "title": "KPI de revenus",
-        "description": "ADR, occupancy and revenue-per-available-inventory metrics help evaluate the balance between price and inventory utilization."
+        "description": "Les indicateurs d’ADR, d’occupation et de revenu par inventaire disponible permettent d’évaluer l’équilibre entre le prix et l’utilisation de l’inventaire."
       },
       "priceElasticity": {
         "title": "Price Elasticity",
-        "description": "The relationship between price changes and expected demand provides information about how aggressively a rate can be adjusted under different market conditions."
+        "description": "La relation entre les variations de prix et la demande attendue indique dans quelle mesure un tarif peut être ajusté selon les différentes conditions du marché."
       }
     },
     "objective": {
       "eyebrow": "Objectif d’optimisation",
       "titleLine1": "Pas l’occupation maximale.",
       "titleLine2": "La performance économique maximale.",
-      "description": "A property filled at an unnecessarily low rate may achieve strong occupancy while leaving revenue on the table. The pricing engine therefore evaluates rate and expected demand together, adjusting recommendations as booking pace, remaining inventory and market conditions change.",
+      "description": "Un bien rempli à un tarif inutilement bas peut afficher un excellent taux d’occupation tout en perdant du potentiel de revenus. Le moteur tarifaire évalue donc conjointement le tarif et la demande attendue, puis ajuste ses recommandations selon le rythme des réservations, l’inventaire restant et l’évolution du marché.",
       "formula": "Prix optimal = arg max [ Prix × Demande attendue(Prix) ]"
     },
     "cta": "Optimiser mon bien"
@@ -792,27 +793,27 @@
     "back": "Retour à HostMetric",
     "eyebrow": "Intelligence des revenus",
     "title": "Les revenus ne se résument pas à un prix par nuit",
-    "description": "Our revenue methodology is designed around hospitality-grade performance metrics, demand forecasting and market intelligence rather than static pricing.",
+    "description": "Notre méthodologie de revenus repose sur des indicateurs de performance professionnels de l’hébergement, la prévision de la demande et l’intelligence de marché plutôt que sur une tarification statique.",
     "cards": {
       "adr": {
         "label": "Tarif journalier moyen",
         "title": "ADR",
-        "description": "ADR measures average rental revenue generated per occupied night.",
-        "formula": "ADR = Room Revenue ÷ Rooms Sold"
+        "description": "L’ADR mesure le revenu locatif moyen généré par nuit occupée.",
+        "formula": "ADR = revenus locatifs ÷ nuits occupées"
       },
       "revpar": {
         "label": "Efficacité des revenus",
         "title": "RevPAR",
-        "description": "RevPAR combines price and occupancy by measuring revenue generated across all available inventory.",
-        "formula": "RevPAR = ADR × Occupancy"
+        "description": "Le RevPAR combine le prix et l’occupation en mesurant le revenu généré sur l’ensemble de l’inventaire disponible.",
+        "formula": "RevPAR = ADR × taux d’occupation"
       },
       "bookingPace": {
         "title": "Booking Pace",
-        "description": "We examine how quickly future dates accumulate bookings and compare that pace with historical behaviour, seasonality and current market demand."
+        "description": "Nous analysons la rapidité avec laquelle les dates futures accumulent des réservations et comparons ce rythme au comportement historique, à la saisonnalité et à la demande actuelle du marché."
       },
       "demandForecasting": {
         "title": "Prévision de la demande",
-        "description": "Booking curves, pickup patterns, lead time and forward-looking demand signals help inform pricing and inventory decisions."
+        "description": "Les courbes de réservation, les tendances de pickup, le délai de réservation et les signaux prospectifs de demande orientent les décisions tarifaires et d’inventaire."
       }
     }
   },
@@ -821,23 +822,23 @@
     "eyebrow": "Intelligence de l’expérience voyageur",
     "titleLine1": "Une meilleure communication.",
     "titleLine2": "De meilleures expériences voyageurs.",
-    "description": "Guest experience should be managed as an operational system: communication speed, issue resolution, recurring questions and review feedback can all reveal opportunities for improvement.",
+    "description": "L’expérience voyageur doit être gérée comme un système opérationnel : la rapidité de communication, la résolution des problèmes, les questions récurrentes et les avis peuvent tous révéler des opportunités d’amélioration.",
     "cards": {
       "responseTime": {
         "title": "Temps de réponse",
-        "description": "Fast, clear communication reduces uncertainty before arrival and helps resolve guest questions before they become problems."
+        "description": "Une communication rapide et claire réduit l’incertitude avant l’arrivée et permet de répondre aux questions des voyageurs avant qu’elles ne deviennent des problèmes."
       },
       "issueResolution": {
         "title": "Résolution des problèmes",
-        "description": "Recurring guest issues can be categorized and tracked so that operational causes are corrected rather than repeatedly handled as isolated incidents."
+        "description": "Les problèmes récurrents rencontrés par les voyageurs peuvent être catégorisés et suivis afin de corriger leurs causes opérationnelles plutôt que de les traiter constamment comme des incidents isolés."
       },
       "reviewIntelligence": {
         "title": "Analyse des avis",
-        "description": "Review themes can reveal recurring strengths and weaknesses across cleanliness, communication, accuracy, location and overall guest satisfaction."
+        "description": "Les thèmes récurrents des avis peuvent révéler les forces et faiblesses liées à la propreté, la communication, l’exactitude, la localisation et la satisfaction globale des voyageurs."
       },
       "continuousImprovement": {
         "title": "Amélioration continue",
-        "description": "Guest feedback becomes actionable information that can feed back into communication templates, property instructions and operational decisions."
+        "description": "Les retours des voyageurs deviennent des informations exploitables permettant d’améliorer les modèles de communication, les instructions du bien et les décisions opérationnelles."
       }
     }
   },
@@ -846,24 +847,24 @@
     "eyebrow": "Intelligence de l’occupation",
     "titleLine1": "L’objectif n’est pas l’occupation maximale.",
     "titleLine2": "C’est l’occupation optimale.",
-    "description": "Selling every available night at an unnecessarily low rate can produce high occupancy without maximizing revenue. Our strategy evaluates occupancy together with rate and revenue efficiency.",
+    "description": "Vendre toutes les nuits disponibles à un tarif inutilement bas peut produire un taux d’occupation élevé sans maximiser les revenus. Notre stratégie évalue conjointement l’occupation, le tarif et l’efficacité des revenus.",
     "cards": {
       "occupancyRate": {
         "title": "Taux d’occupation",
         "formula": "Occupation = chambres vendues ÷ chambres disponibles",
-        "description": "Occupancy identifies how much available inventory has been sold during a given period."
+        "description": "Le taux d’occupation indique quelle part de l’inventaire disponible a été vendue pendant une période donnée."
       },
       "bookingWindow": {
         "title": "Fenêtre de réservation",
-        "description": "The number of days between booking and arrival helps indicate changes in customer behaviour and future demand conditions."
+        "description": "Le nombre de jours entre la réservation et l’arrivée permet d’identifier les évolutions du comportement des clients et les conditions futures de la demande."
       },
       "lengthOfStay": {
         "title": "Contrôle de durée de séjour",
-        "description": "Minimum-stay rules can protect high-demand periods while poor restrictions can unnecessarily block valuable inventory."
+        "description": "Les règles de séjour minimum peuvent protéger les périodes de forte demande, tandis que des restrictions mal adaptées peuvent bloquer inutilement un inventaire précieux."
       },
       "calendarOptimization": {
         "title": "Optimisation du calendrier",
-        "description": "Gap nights, arrival restrictions, seasonality and booking pace are evaluated together to improve calendar efficiency."
+        "description": "Les nuits isolées, les restrictions d’arrivée, la saisonnalité et le rythme des réservations sont évalués ensemble afin d’améliorer l’efficacité du calendrier."
       }
     }
   },
@@ -871,23 +872,23 @@
     "back": "Retour à HostMetric",
     "eyebrow": "Tarification dynamique fondée sur les études",
     "title": "Des prix qui répondent à la demande",
-    "description": "Our pricing methodology is designed around research-backed revenue management principles combining demand forecasting, booking pace, market conditions and price responsiveness.",
+    "description": "Notre méthodologie tarifaire repose sur des principes de revenue management étayés par la recherche, combinant prévision de la demande, rythme des réservations, conditions du marché et sensibilité au prix.",
     "cards": {
       "priceElasticity": {
         "title": "Price Elasticity",
-        "description": "Demand does not respond equally to every price change. Price-elasticity modelling examines how expected booking demand changes as price changes."
+        "description": "La demande ne réagit pas de la même manière à chaque variation de prix. La modélisation de l’élasticité-prix analyse l’évolution de la demande de réservation attendue lorsque le prix change."
       },
       "demandCurves": {
         "title": "Courbes de demande",
-        "description": "Historical demand, time until arrival and booking patterns can be modelled to estimate future demand across different commercial conditions."
+        "description": "La demande historique, le temps restant avant l’arrivée et les habitudes de réservation peuvent être modélisés afin d’estimer la demande future selon différentes conditions commerciales."
       },
       "marketPositioning": {
         "title": "Positionnement marché",
-        "description": "Comparable properties, local supply, demand, seasonality and event-driven conditions provide context for rate decisions."
+        "description": "Les biens comparables, l’offre locale, la demande, la saisonnalité et les événements fournissent le contexte nécessaire aux décisions tarifaires."
       },
       "continuousRecalculation": {
         "title": "Recalcul continu",
-        "description": "Instead of relying on one fixed rate, pricing inputs can be recalculated as market conditions, booking pace and remaining inventory change."
+        "description": "Au lieu de s’appuyer sur un tarif fixe, les paramètres tarifaires peuvent être recalculés à mesure que les conditions du marché, le rythme des réservations et l’inventaire restant évoluent."
       }
     }
   },
@@ -896,7 +897,7 @@
     "eyebrow": "Tarification intelligente",
     "titleLine1": "Des prix guidés par la demande,",
     "titleLine2": "pas par l’intuition",
-    "description": "HostMetric applies study-informed revenue-management principles built around demand forecasting, booking behaviour, seasonality, market positioning and measurable performance indicators.",
+    "description": "HostMetric applique des principes de revenue management fondés sur l’analyse, autour de la prévision de la demande, du comportement de réservation, de la saisonnalité, du positionnement marché et d’indicateurs de performance mesurables.",
     "cards": {
       "adr": {
         "label": "Tarif journalier moyen",
@@ -908,29 +909,29 @@
         "label": "Efficacité des revenus",
         "title": "RevPAR",
         "description": "Combine tarif et occupation en une seule mesure de performance des revenus.",
-        "formula": "RevPAR = ADR × Occupancy"
+        "formula": "RevPAR = ADR × taux d’occupation"
       },
       "bookingPace": {
         "title": "Rythme de réservation et pickup",
-        "description": "The rate at which future dates accumulate reservations can be compared with historical booking curves to identify periods where demand is developing faster or slower than expected."
+        "description": "Le rythme auquel les dates futures accumulent des réservations peut être comparé aux courbes historiques afin d’identifier les périodes où la demande progresse plus rapidement ou plus lentement que prévu."
       },
       "leadTime": {
         "title": "Lead Time",
-        "description": "The number of days between reservation and arrival provides another demand signal. Booking behaviour often changes as the arrival date approaches."
+        "description": "Le nombre de jours entre la réservation et l’arrivée constitue un autre signal de demande. Le comportement de réservation évolue souvent à mesure que la date d’arrivée approche."
       },
       "priceElasticity": {
         "title": "Price Elasticity",
-        "description": "Pricing models can examine how expected demand responds to changes in price. This relationship helps distinguish between periods where stronger rates can be supported and periods where pricing needs to stimulate demand."
+        "description": "Les modèles tarifaires peuvent analyser la réaction de la demande attendue aux variations de prix. Cette relation permet de distinguer les périodes où des tarifs plus élevés peuvent être soutenus de celles où la tarification doit stimuler la demande."
       },
       "competitivePositioning": {
         "title": "Positionnement concurrentiel",
-        "description": "Comparable accommodation, local supply, day-of-week patterns, seasonality and major demand periods provide market context around each pricing decision."
+        "description": "Les hébergements comparables, l’offre locale, les tendances selon le jour de la semaine, la saisonnalité et les principales périodes de demande fournissent le contexte de marché de chaque décision tarifaire."
       }
     },
     "dynamicRevenueManagement": {
       "eyebrow": "Revenue management dynamique",
       "title": "Le prix optimal évolue avec le marché",
-      "description": "Hotel revenue-management training uses forecasting, booking curves, pick-up, demand segmentation, pricing and length-of-stay controls rather than relying on one fixed nightly rate. HostMetric's pricing philosophy follows these core professional revenue-management principles."
+      "description": "Le revenue management hôtelier s’appuie sur les prévisions, les courbes de réservation, le pickup, la segmentation de la demande, la tarification et les contrôles de durée de séjour plutôt que sur un tarif fixe par nuit. La philosophie tarifaire de HostMetric suit ces principes professionnels fondamentaux."
     },
     "cta": "Optimiser mes tarifs"
   },
@@ -939,29 +940,29 @@
     "eyebrow": "Communication voyageurs",
     "titleLine1": "Chaque interaction avec un voyageur",
     "titleLine2": "façonne l’expérience",
-    "description": "Professional guest communication is managed as a complete journey — from the first question before booking to arrival, the stay, checkout and post-stay follow-up.",
+    "description": "La communication professionnelle avec les voyageurs est gérée comme un parcours complet — de la première question avant réservation jusqu’à l’arrivée, au séjour, au départ et au suivi après séjour.",
     "cards": {
       "fastResponseStrategy": {
         "title": "Stratégie de réponse rapide",
-        "description": "Guest enquiries are handled quickly, clearly and professionally, reducing uncertainty and helping potential guests receive the information they need before making a decision."
+        "description": "Les demandes des voyageurs sont traitées rapidement, clairement et professionnellement, réduisant l’incertitude et fournissant aux voyageurs potentiels les informations nécessaires avant leur décision."
       },
       "preArrivalCommunication": {
         "title": "Communication avant arrivée",
-        "description": "Arrival instructions, access information, directions and important property details are communicated proactively to create a smoother check-in experience."
+        "description": "Les instructions d’arrivée, les informations d’accès, l’itinéraire et les détails importants du bien sont communiqués de manière proactive afin de faciliter l’expérience d’arrivée."
       },
       "inStaySupport": {
         "title": "Assistance pendant le séjour",
-        "description": "Questions and issues during the stay are handled through a structured communication workflow focused on fast resolution and minimal disruption to the guest experience."
+        "description": "Les questions et problèmes pendant le séjour sont traités via un processus de communication structuré axé sur une résolution rapide et une perturbation minimale de l’expérience voyageur."
       },
       "reviewIntelligence": {
         "title": "Analyse des avis",
-        "description": "Guest feedback can be grouped into recurring themes such as communication, accuracy, comfort and arrival experience, allowing operational improvements to be based on patterns rather than isolated comments."
+        "description": "Les retours voyageurs peuvent être regroupés en thèmes récurrents tels que la communication, l’exactitude, le confort et l’expérience d’arrivée, afin que les améliorations opérationnelles reposent sur des tendances plutôt que sur des commentaires isolés."
       }
     },
     "continuousImprovement": {
       "eyebrow": "Amélioration continue",
       "title": "La communication devient une donnée opérationnelle",
-      "description": "Response times, repeated guest questions, issue categories and review themes can reveal friction points across the guest journey. These insights can then improve instructions, communication templates and property operations over time."
+      "description": "Les temps de réponse, les questions répétées, les catégories de problèmes et les thèmes des avis peuvent révéler des points de friction dans le parcours voyageur. Ces informations permettent ensuite d’améliorer les instructions, les modèles de communication et les opérations du bien."
     },
     "cta": "Améliorer l’expérience de vos voyageurs"
   },
@@ -970,37 +971,37 @@
     "eyebrow": "Gestion des réservations",
     "titleLine1": "Chaque réservation.",
     "titleLine2": "Un calendrier coordonné.",
-    "description": "Reservations, availability, calendars and booking restrictions are managed as one connected system across supported distribution channels.",
+    "description": "Les réservations, les disponibilités, les calendriers et les restrictions de réservation sont gérés comme un système connecté sur l’ensemble des canaux de distribution pris en charge.",
     "cards": {
       "calendarSynchronization": {
         "title": "Synchronisation du calendrier",
-        "description": "Availability is coordinated across connected booking channels so that reservation changes can be reflected across the distribution strategy."
+        "description": "Les disponibilités sont coordonnées sur les canaux de réservation connectés afin que les modifications de réservation soient répercutées dans toute la stratégie de distribution."
       },
       "availabilityManagement": {
         "title": "Gestion des disponibilités",
-        "description": "Available nights are monitored as perishable inventory: once an unsold night passes, its revenue opportunity cannot be recovered."
+        "description": "Les nuits disponibles sont suivies comme un inventaire périssable : une fois qu’une nuit invendue est passée, son potentiel de revenu ne peut plus être récupéré."
       },
       "lengthOfStayControls": {
         "title": "Contrôles de durée de séjour",
-        "description": "Minimum-stay rules can be adjusted strategically around high-demand periods while avoiding unnecessary restrictions that create unusable gaps in the calendar."
+        "description": "Les règles de séjour minimum peuvent être ajustées stratégiquement autour des périodes de forte demande tout en évitant les restrictions inutiles qui créent des trous inexploités dans le calendrier."
       },
       "gapNightManagement": {
         "title": "Gestion des nuits isolées",
-        "description": "Orphan nights and short availability gaps can be identified and managed so that booking rules do not unnecessarily prevent otherwise valuable reservations."
+        "description": "Les nuits isolées et les courtes périodes de disponibilité peuvent être identifiées et gérées afin que les règles de réservation n’empêchent pas inutilement des réservations intéressantes."
       },
       "bookingPace": {
         "title": "Booking Pace",
-        "description": "Pickup patterns indicate how quickly future inventory is being consumed. Comparing booking pace across equivalent periods provides useful information for pricing and availability decisions."
+        "description": "Les tendances de pickup indiquent la vitesse à laquelle l’inventaire futur est réservé. Comparer le rythme des réservations entre des périodes équivalentes fournit des informations utiles pour les décisions de tarification et de disponibilité."
       },
       "multiChannelCoordination": {
         "title": "Coordination multicanale",
-        "description": "Reservations from supported channels form part of a single commercial view of the property rather than being treated as unrelated platform activity."
+        "description": "Les réservations provenant des canaux pris en charge s’intègrent dans une vision commerciale unique du bien plutôt que d’être traitées comme des activités de plateformes indépendantes."
       }
     },
     "connectedStrategy": {
       "eyebrow": "Une stratégie connectée",
       "title": "Les décisions de calendrier influencent les revenus",
-      "description": "Pricing and availability cannot be optimized independently. Booking pace, remaining inventory, length-of-stay restrictions and time until arrival all influence how valuable each remaining night may be."
+      "description": "La tarification et les disponibilités ne peuvent pas être optimisées séparément. Le rythme des réservations, l’inventaire restant, les restrictions de durée de séjour et le temps avant l’arrivée influencent tous la valeur potentielle de chaque nuit restante."
     },
     "cta": "Simplifier mes réservations"
   },
@@ -1008,23 +1009,23 @@
     "back": "Retour à HostMetric",
     "eyebrow": "Plus de visibilité",
     "title": "Une visibilité guidée par l’intelligence de distribution",
-    "description": "Strong distribution is not simply about appearing on more platforms. It is about understanding where demand originates, how each channel converts and what each booking contributes to commercial performance.",
+    "description": "Une distribution performante ne consiste pas simplement à être présent sur davantage de plateformes. Il s’agit de comprendre l’origine de la demande, la capacité de conversion de chaque canal et la contribution de chaque réservation à la performance commerciale.",
     "cards": {
       "channelPerformance": {
         "title": "Performance des canaux",
-        "description": "We evaluate channel contribution using booking volume, booking value, acquisition cost, commission exposure and net revenue rather than relying on gross booking totals alone."
+        "description": "Nous évaluons la contribution des canaux selon le volume et la valeur des réservations, le coût d’acquisition, les commissions et le revenu net, plutôt qu’en nous appuyant uniquement sur les totaux bruts."
       },
       "netRevenueAnalysis": {
         "title": "Analyse des revenus nets",
-        "description": "Net Revenue = Gross Rental Revenue − Channel Costs. Comparing channels on a net basis gives a more meaningful picture of their economic value."
+        "description": "Revenu net = revenu locatif brut − coûts des canaux. Comparer les canaux sur une base nette offre une vision plus pertinente de leur valeur économique."
       },
       "demandPositioning": {
         "title": "Positionnement de la demande",
-        "description": "Search visibility, market demand, seasonality, local events and competitive positioning all influence where inventory should be exposed and at what price."
+        "description": "La visibilité dans les recherches, la demande du marché, la saisonnalité, les événements locaux et le positionnement concurrentiel influencent les canaux sur lesquels l’inventaire doit être proposé et à quel prix."
       },
       "professionalRevenueLogic": {
         "title": "Logique professionnelle de revenus",
-        "description": "Our methodology follows hospitality-grade revenue management principles built around the same core demand signals and commercial KPIs used across professional accommodation revenue teams."
+        "description": "Notre méthodologie suit des principes professionnels de revenue management fondés sur les mêmes signaux essentiels de demande et KPI commerciaux utilisés par les équipes revenue du secteur de l’hébergement."
       }
     }
   },
@@ -1032,23 +1033,23 @@
     "back": "Retour à HostMetric",
     "eyebrow": "Gestion centralisée",
     "title": "Une vision commerciale coordonnée de votre bien",
-    "description": "Pricing, availability, reservations and guest activity are most valuable when they are analysed together instead of as isolated pieces of information.",
+    "description": "La tarification, les disponibilités, les réservations et l’activité des voyageurs prennent tout leur sens lorsqu’elles sont analysées ensemble plutôt que comme des informations isolées.",
     "cards": {
       "occupancyRate": {
         "title": "Taux d’occupation",
-        "description": "Occupancy Rate = Booked Nights ÷ Available Nights × 100. We evaluate occupancy alongside rate performance rather than treating maximum occupancy as the objective."
+        "description": "Taux d’occupation = nuits réservées ÷ nuits disponibles × 100. Nous évaluons l’occupation parallèlement à la performance tarifaire plutôt que de considérer l’occupation maximale comme l’objectif."
       },
       "bookingWindow": {
         "title": "Fenêtre de réservation",
-        "description": "Lead time measures the number of days between reservation and arrival. Changes in booking window can provide useful signals about demand behaviour and pricing conditions."
+        "description": "Le délai de réservation mesure le nombre de jours entre la réservation et l’arrivée. Les variations de cette fenêtre peuvent fournir des signaux utiles sur le comportement de la demande et les conditions tarifaires."
       },
       "bookingPace": {
         "title": "Booking Pace",
-        "description": "Booking pace measures how quickly future inventory is being reserved relative to a historical baseline or commercial target, helping identify whether demand is building ahead of or behind expectations."
+        "description": "Le rythme des réservations mesure la vitesse à laquelle l’inventaire futur est réservé par rapport à une référence historique ou à un objectif commercial, afin d’identifier si la demande progresse en avance ou en retard sur les attentes."
       },
       "calendarEfficiency": {
         "title": "Efficacité du calendrier",
-        "description": "Minimum-stay rules, orphan nights and availability gaps are reviewed as part of the calendar strategy so that valuable inventory is not unnecessarily constrained."
+        "description": "Les règles de séjour minimum, les nuits isolées et les trous de disponibilité sont examinés dans le cadre de la stratégie du calendrier afin de ne pas limiter inutilement un inventaire précieux."
       }
     }
   },
@@ -1056,23 +1057,23 @@
     "back": "Retour à HostMetric",
     "eyebrow": "Distribution plus intelligente",
     "title": "Des décisions de revenus fondées sur une demande mesurable",
-    "description": "Our pricing approach analyses the relationship between rate, occupancy, booking pace, seasonality and market positioning rather than optimizing a single metric in isolation.",
+    "description": "Notre approche tarifaire analyse la relation entre le tarif, l’occupation, le rythme des réservations, la saisonnalité et le positionnement marché plutôt que d’optimiser un seul indicateur isolément.",
     "cards": {
       "adr": {
         "title": "ADR",
-        "description": "Average Daily Rate measures the average revenue generated by each occupied night: ADR = Rental Revenue ÷ Occupied Nights."
+        "description": "Le tarif journalier moyen mesure le revenu moyen généré par chaque nuit occupée : ADR = revenus locatifs ÷ nuits occupées."
       },
       "revpan": {
         "title": "RevPAN",
-        "description": "Revenue Per Available Night combines pricing and occupancy: RevPAN = Rental Revenue ÷ Available Nights. This makes it especially useful for short-term rentals."
+        "description": "Le revenu par nuit disponible combine tarification et occupation : RevPAN = revenus locatifs ÷ nuits disponibles. Cet indicateur est particulièrement utile pour les locations courte durée."
       },
       "priceElasticity": {
         "title": "Price Elasticity",
-        "description": "Price elasticity describes how strongly booking demand responds to changes in price. Understanding that relationship helps avoid both unnecessary discounting and unrealistic pricing."
+        "description": "L’élasticité-prix décrit l’intensité de la réaction de la demande de réservation aux variations de prix. Comprendre cette relation aide à éviter à la fois les remises inutiles et les tarifs irréalistes."
       },
       "competitivePositioning": {
         "title": "Positionnement concurrentiel",
-        "description": "Comparable properties, demand conditions, booking pace, events and seasonal patterns provide context for rate decisions instead of relying on a fixed nightly price."
+        "description": "Les biens comparables, les conditions de demande, le rythme des réservations, les événements et les tendances saisonnières fournissent le contexte nécessaire aux décisions tarifaires plutôt que de s’appuyer sur un prix fixe par nuit."
       }
     }
   },
@@ -2692,7 +2693,8 @@
       "getStarted": "Get Started",
       "properties": "Properties",
       "photos": "Photos",
-      "logout": "Log Out"
+      "logout": "Log Out",
+      "contentStudio": "Content Studio"
     },
     "common": {
       "administration": "HostMetric Administration",
@@ -2704,6 +2706,180 @@
       "hostMetricTeam": "HostMetric Team",
       "openMenu": "Open administration menu",
       "closeMenu": "Close administration menu"
+    },
+    "guides": {
+      "eyebrow": "Content Studio",
+      "title": "Create & Optimize Articles",
+      "description": "Write SEO-focused HostMetric guides, prepare translations and control the publishing workflow from one place.",
+      "newArticle": "New Article",
+      "allArticles": "All Articles",
+      "sections": {
+        "content": "Article Content",
+        "contentDescription": "Build the guide in structured sections so the same content can power the public page, translations and SEO.",
+        "seo": "SEO Strategy",
+        "seoDescription": "Define search intent, keyword targeting and metadata before publishing.",
+        "translations": "Translations",
+        "translationsDescription": "Prepare every public-language version and review each translation before it can go live.",
+        "publishing": "Publishing",
+        "publishingDescription": "Save, preview, review and publish without making unfinished content indexable."
+      },
+      "fields": {
+        "title": "Article Title / H1",
+        "slug": "Slug",
+        "excerpt": "Excerpt",
+        "category": "Category / Topic",
+        "author": "Author",
+        "featuredImage": "Featured Image",
+        "h2": "Section H2",
+        "h3": "Section H3",
+        "paragraph": "Paragraph",
+        "bullets": "Bullet Points",
+        "callout": "Callout",
+        "internalLink": "Internal Link",
+        "seoTitle": "SEO Title",
+        "metaDescription": "Meta Description",
+        "focusKeyword": "Focus Keyword",
+        "secondaryKeywords": "Secondary Keywords / Phrases",
+        "searchIntent": "Search Intent",
+        "targetCommercialPage": "Target Commercial Page",
+        "imageAlt": "Featured Image Alt Text",
+        "ogTitle": "Open Graph Title",
+        "ogDescription": "Open Graph Description",
+        "ogImage": "Open Graph Image",
+        "originalLanguage": "Original Language",
+        "translationStatus": "Translation Status",
+        "publicationStatus": "Publication Status"
+      },
+      "placeholders": {
+        "title": "e.g. Airbnb vs Booking.com: Which Platform Is Better for Hosts?",
+        "slug": "airbnb-vs-booking-com",
+        "excerpt": "Short summary used on guide cards and search previews.",
+        "category": "e.g. Booking Platforms",
+        "author": "HostMetric",
+        "featuredImage": "/images/guides/...",
+        "h2": "Main section heading",
+        "h3": "Optional subsection heading",
+        "paragraph": "Write the section content...",
+        "bullets": "One point per line",
+        "callout": "Optional important takeaway or highlighted note.",
+        "internalLink": "/services/smart-pricing",
+        "seoTitle": "SEO title shown in Google results",
+        "metaDescription": "Compelling search description for the article",
+        "focusKeyword": "Primary search phrase",
+        "secondaryKeywords": "keyword 2, keyword 3, supporting phrase",
+        "imageAlt": "Describe the featured image accurately",
+        "ogTitle": "Optional social sharing title",
+        "ogDescription": "Optional social sharing description",
+        "ogImage": "/images/guides/..."
+      },
+      "options": {
+        "informational": "Informational",
+        "commercial": "Commercial Investigation",
+        "transactional": "Transactional",
+        "navigational": "Navigational",
+        "greek": "Greek",
+        "english": "English",
+        "draft": "Draft",
+        "review": "In Review",
+        "published": "Published",
+        "notGenerated": "Not Generated"
+      },
+      "actions": {
+        "saveDraft": "Save Draft",
+        "preview": "Preview",
+        "sendToReview": "Send to Review",
+        "generateTranslations": "Generate Translations",
+        "publish": "Publish",
+        "addSection": "Add Content Section",
+        "savingDraft": "Saving...",
+        "removeSection": "Remove Section",
+        "uploadImage": "Upload Image",
+        "uploadingImage": "Uploading...",
+        "removeImage": "Remove",
+        "generatingTranslations": "Generating Translations..."
+      },
+      "seoChecks": {
+        "title": "SEO title length and relevance",
+        "focusKeyword": "Focus keyword in title and H1",
+        "metaDescription": "Meta description completed",
+        "headings": "Clear H2/H3 structure",
+        "internalLinks": "Relevant internal links",
+        "imageAlt": "Featured image alt text",
+        "canonical": "Canonical and hreflang ready",
+        "scoreLabel": "SEO Readiness"
+      },
+      "translationLanguages": {
+        "en": "English",
+        "de": "German",
+        "fr": "French",
+        "it": "Italian",
+        "es": "Spanish",
+        "pt": "Portuguese",
+        "bg": "Bulgarian",
+        "sr": "Serbian",
+        "tr": "Turkish",
+        "pl": "Polish",
+        "ru": "Russian"
+      },
+      "messages": {
+        "draftCreated": "Draft created successfully.",
+        "draftUpdated": "Draft updated successfully.",
+        "saveFailed": "The draft could not be saved. Please try again.",
+        "validationFailed": "Please complete the required article and SEO fields before saving.",
+        "sentToReview": "The article was sent to review.",
+        "reviewFailed": "The article could not be sent to review.",
+        "previewRequiresSave": "Save the article first to open the preview.",
+        "imageUploadFailed": "The image could not be uploaded.",
+        "translationsRequireSave": "Save the article before generating translations.",
+        "translationsFailed": "Translation generation failed.",
+        "translationsGenerated": "Generated {count} translations. Failed: {failed}."
+      },
+      "list": {
+        "eyebrow": "Content Studio",
+        "title": "Articles & Guides",
+        "description": "Manage drafts, articles in review, published guides and translation progress from one place.",
+        "newArticle": "New Article",
+        "filters": {
+          "all": "All",
+          "drafts": "Drafts",
+          "review": "In Review",
+          "published": "Published",
+          "needsTranslation": "Needs Translation"
+        },
+        "columns": {
+          "article": "Article",
+          "status": "Status",
+          "locale": "Source Language",
+          "translations": "Translations",
+          "updated": "Last Updated",
+          "action": "Action"
+        },
+        "status": {
+          "draft": "Draft",
+          "review": "In Review",
+          "published": "Published",
+          "unpublished": "Unpublished"
+        },
+        "translationSummary": "{current} / {total} languages",
+        "needsTranslation": "Needs translation",
+        "completeTranslations": "Translations complete",
+        "open": "Open",
+        "emptyTitle": "There are no articles in this category.",
+        "emptyDescription": "Create a new article or change the filter to view other guides."
+      }
     }
+  },
+  "blogPage": {
+    "seo": {
+      "title": "Blog location saisonnière | HostMetric",
+      "description": "Articles et analyses pratiques sur Airbnb, Booking.com, la tarification, le taux d’occupation, les réservations et la gestion professionnelle des locations saisonnières."
+    },
+    "eyebrow": "HOSTMETRIC BLOG",
+    "title": "Blog",
+    "description": "Articles et analyses pratiques pour les propriétaires qui souhaitent gagner en visibilité, obtenir plus de réservations et améliorer les performances de leur location.",
+    "readMore": "Lire l'article",
+    "empty": "Aucun article publié pour le moment.",
+    "backToAll": "Tous les articles"
   }
 }
+
