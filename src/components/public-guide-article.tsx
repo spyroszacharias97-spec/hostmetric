@@ -24,11 +24,26 @@ function getCategoryHref(
       .trim()
       .toLocaleLowerCase("el-GR");
 
+  const isBookingPlatformsCategory =
+    (
+      normalizedCategory.includes(
+        "πλατφόρμες"
+      ) &&
+      normalizedCategory.includes(
+        "κρατήσεων"
+      )
+    ) ||
+    (
+      normalizedCategory.includes(
+        "booking"
+      ) &&
+      normalizedCategory.includes(
+        "platform"
+      )
+    );
+
   if (
-    normalizedCategory ===
-      "πλατφόρμες κρατήσεων" ||
-    normalizedCategory ===
-      "booking platforms"
+    isBookingPlatformsCategory
   ) {
     return getLocalizedPath(
       "/performance/platform-network",
