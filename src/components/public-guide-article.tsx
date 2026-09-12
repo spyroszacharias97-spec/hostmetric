@@ -20,63 +20,8 @@ type PublicGuideArticleProps = {
   locale: Locale;
   backToAllLabel: string;
   relatedArticles: RelatedArticle[];
-};
-
-const relatedArticlesLabels: Record<
-  Locale,
-  {
-    title: string;
-    readMore: string;
-  }
-> = {
-  el: {
-    title: "Σχετικά άρθρα",
-    readMore: "Διαβάστε το άρθρο",
-  },
-  en: {
-    title: "Related articles",
-    readMore: "Read article",
-  },
-  de: {
-    title: "Ähnliche Artikel",
-    readMore: "Artikel lesen",
-  },
-  fr: {
-    title: "Articles associés",
-    readMore: "Lire l’article",
-  },
-  it: {
-    title: "Articoli correlati",
-    readMore: "Leggi l’articolo",
-  },
-  es: {
-    title: "Artículos relacionados",
-    readMore: "Leer artículo",
-  },
-  pt: {
-    title: "Artigos relacionados",
-    readMore: "Ler artigo",
-  },
-  bg: {
-    title: "Свързани статии",
-    readMore: "Прочетете статията",
-  },
-  sr: {
-    title: "Povezani članci",
-    readMore: "Pročitaj članak",
-  },
-  tr: {
-    title: "İlgili makaleler",
-    readMore: "Makaleyi oku",
-  },
-  pl: {
-    title: "Powiązane artykuły",
-    readMore: "Przeczytaj artykuł",
-  },
-  ru: {
-    title: "Похожие статьи",
-    readMore: "Читать статью",
-  },
+  relatedArticlesLabel: string;
+  readMoreLabel: string;
 };
 
 function getCategoryHref(
@@ -130,7 +75,7 @@ function renderBlock(
       return (
         <h2
           key={block.id}
-          className="mt-12 scroll-mt-32 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl"
+          className="mt-10 scroll-mt-28 text-2xl font-black tracking-tight text-slate-950 sm:mt-12 sm:text-3xl lg:text-4xl"
         >
           {block.text}
         </h2>
@@ -140,7 +85,7 @@ function renderBlock(
     return (
       <h3
         key={block.id}
-        className="mt-8 scroll-mt-32 text-2xl font-black tracking-tight text-slate-900 sm:text-3xl"
+        className="mt-7 scroll-mt-28 text-xl font-black tracking-tight text-slate-900 sm:mt-8 sm:text-2xl lg:text-3xl"
       >
         {block.text}
       </h3>
@@ -151,7 +96,7 @@ function renderBlock(
     return (
       <div
         key={block.id}
-        className="mt-5 whitespace-pre-line text-[17px] leading-8 text-slate-700 sm:text-lg sm:leading-9"
+        className="mt-4 whitespace-pre-line text-base leading-7 text-slate-700 sm:mt-5 sm:text-[17px] sm:leading-8 lg:text-lg lg:leading-9"
       >
         {block.text}
       </div>
@@ -162,7 +107,7 @@ function renderBlock(
     return (
       <ul
         key={block.id}
-        className="mt-6 list-disc space-y-3 pl-6 text-[17px] leading-8 text-slate-700 marker:text-blue-500 sm:text-lg"
+        className="mt-5 list-disc space-y-2.5 pl-5 text-base leading-7 text-slate-700 marker:text-blue-500 sm:mt-6 sm:space-y-3 sm:pl-6 sm:text-[17px] sm:leading-8 lg:text-lg"
       >
         {block.items.map((item) => (
           <li key={item}>{item}</li>
@@ -175,7 +120,7 @@ function renderBlock(
     return (
       <aside
         key={block.id}
-        className="mt-8 rounded-[24px] border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-emerald-50 px-5 py-5 text-base font-semibold leading-7 text-slate-800 shadow-sm sm:px-6"
+        className="mt-6 rounded-[20px] border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-emerald-50 px-4 py-4 text-sm font-semibold leading-6 text-slate-800 shadow-sm sm:mt-8 sm:rounded-[24px] sm:px-6 sm:py-5 sm:text-base sm:leading-7"
       >
         {block.title ? (
           <p className="mb-2 font-black text-slate-950">
@@ -196,7 +141,7 @@ function renderBlock(
     <Link
       key={block.id}
       href={href}
-      className="mt-7 inline-flex font-black text-blue-700 underline decoration-blue-200 decoration-2 underline-offset-4 transition hover:text-blue-800"
+      className="mt-6 inline-flex text-sm font-black text-blue-700 underline decoration-blue-200 decoration-2 underline-offset-4 transition hover:text-blue-800 sm:mt-7 sm:text-base"
     >
       {block.label}
     </Link>
@@ -209,6 +154,8 @@ export default function PublicGuideArticle({
   locale,
   backToAllLabel,
   relatedArticles,
+  relatedArticlesLabel,
+  readMoreLabel,
 }: PublicGuideArticleProps) {
   const categoryHref =
     getCategoryHref(
@@ -216,44 +163,41 @@ export default function PublicGuideArticle({
       locale
     );
 
-  const relatedLabels =
-    relatedArticlesLabels[locale];
-
   return (
     <main className="relative overflow-hidden bg-slate-50">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-[560px] bg-gradient-to-br from-blue-50 via-white to-emerald-50"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[460px] bg-gradient-to-br from-blue-50 via-white to-emerald-50 sm:h-[520px] lg:h-[560px]"
       />
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-24 top-32 h-72 w-72 rounded-full bg-blue-200/30 blur-3xl"
+        className="pointer-events-none absolute -left-24 top-32 h-56 w-56 rounded-full bg-blue-200/30 blur-3xl sm:h-72 sm:w-72"
       />
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-24 top-10 h-80 w-80 rounded-full bg-emerald-200/30 blur-3xl"
+        className="pointer-events-none absolute -right-24 top-10 h-64 w-64 rounded-full bg-emerald-200/30 blur-3xl sm:h-80 sm:w-80"
       />
 
-      <article className="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+      <article className="relative mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20">
         <header className="mx-auto max-w-4xl text-center">
           <Link
             href={categoryHref}
-            className="inline-flex rounded-full border border-blue-200/80 bg-white/80 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-blue-700 shadow-sm backdrop-blur transition hover:border-blue-300 hover:bg-blue-50"
+            className="inline-flex rounded-full border border-blue-200/80 bg-white/80 px-3.5 py-2 text-[11px] font-black uppercase tracking-[0.15em] text-blue-700 shadow-sm backdrop-blur transition hover:border-blue-300 hover:bg-blue-50 sm:px-4 sm:text-xs"
           >
             {guide.category}
           </Link>
 
-          <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
+          <h1 className="mt-5 text-3xl font-black tracking-tight text-slate-950 sm:mt-6 sm:text-5xl lg:text-6xl">
             {content.title}
           </h1>
 
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-600 sm:text-xl">
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-slate-600 sm:mt-6 sm:text-lg sm:leading-8 lg:text-xl">
             {content.excerpt}
           </p>
 
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm font-semibold text-slate-500">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xs font-semibold text-slate-500 sm:mt-7 sm:gap-x-4 sm:text-sm">
             <span>{guide.author}</span>
 
             {guide.publishedAt ? (
@@ -284,7 +228,7 @@ export default function PublicGuideArticle({
         </header>
 
         {guide.featuredImage.src ? (
-          <div className="mx-auto mt-10 max-w-4xl overflow-hidden rounded-[30px] border border-white/80 bg-white shadow-[0_24px_70px_-32px_rgba(15,23,42,0.35)] ring-1 ring-slate-200/70">
+          <div className="mx-auto mt-8 max-w-4xl overflow-hidden rounded-[22px] border border-white/80 bg-white shadow-[0_24px_70px_-32px_rgba(15,23,42,0.35)] ring-1 ring-slate-200/70 sm:mt-10 sm:rounded-[30px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={guide.featuredImage.src}
@@ -297,8 +241,8 @@ export default function PublicGuideArticle({
           </div>
         ) : null}
 
-        <div className="mx-auto mt-10 max-w-3xl rounded-[30px] border border-slate-200/80 bg-white/95 px-6 py-8 shadow-[0_20px_60px_-36px_rgba(15,23,42,0.35)] sm:px-9 sm:py-10">
-          <div className="mb-8 h-1 w-20 rounded-full bg-gradient-to-r from-blue-600 to-emerald-500" />
+        <div className="mx-auto mt-8 max-w-3xl rounded-[24px] border border-slate-200/80 bg-white/95 px-4 py-6 shadow-[0_20px_60px_-36px_rgba(15,23,42,0.35)] sm:mt-10 sm:rounded-[30px] sm:px-9 sm:py-10">
+          <div className="mb-6 h-1 w-16 rounded-full bg-gradient-to-r from-blue-600 to-emerald-500 sm:mb-8 sm:w-20" />
 
           {content.blocks.map((block) =>
             renderBlock(block, locale)
@@ -306,18 +250,18 @@ export default function PublicGuideArticle({
         </div>
 
         {relatedArticles.length > 0 ? (
-          <section className="mx-auto mt-14 max-w-5xl">
-            <div className="mb-6">
-              <div className="h-1 w-16 rounded-full bg-gradient-to-r from-blue-600 to-emerald-500" />
-              <h2 className="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
-                {relatedLabels.title}
+          <section className="mx-auto mt-10 max-w-4xl sm:mt-12 lg:mt-14">
+            <div className="mb-4 sm:mb-5">
+              <div className="h-1 w-14 rounded-full bg-gradient-to-r from-blue-600 to-emerald-500 sm:w-16" />
+              <h2 className="mt-3 text-2xl font-black tracking-tight text-slate-950 sm:mt-4 sm:text-3xl">
+                {relatedArticlesLabel}
               </h2>
             </div>
 
             <div
-              className={`grid gap-6 ${
+              className={`grid gap-4 sm:gap-5 ${
                 relatedArticles.length === 1
-                  ? "md:grid-cols-1"
+                  ? "mx-auto max-w-2xl"
                   : relatedArticles.length === 2
                     ? "md:grid-cols-2"
                     : "md:grid-cols-2 xl:grid-cols-3"
@@ -335,14 +279,27 @@ export default function PublicGuideArticle({
                       relatedLocale
                     );
 
+                  const singleCard =
+                    relatedArticles.length === 1;
+
                   return (
                     <Link
                       key={relatedGuide.id}
                       href={href}
-                      className="group overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
+                      className={`group overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg ${
+                        singleCard
+                          ? "sm:grid sm:grid-cols-[180px_minmax(0,1fr)]"
+                          : ""
+                      }`}
                     >
                       {relatedGuide.featuredImage.src ? (
-                        <div className="aspect-[16/10] overflow-hidden bg-slate-100">
+                        <div
+                          className={`overflow-hidden bg-slate-100 ${
+                            singleCard
+                              ? "aspect-[16/9] sm:aspect-auto sm:min-h-[170px]"
+                              : "aspect-[16/9]"
+                          }`}
+                        >
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={
@@ -356,37 +313,34 @@ export default function PublicGuideArticle({
                                 .featuredImage.alt ||
                               relatedContent.title
                             }
-                            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025]"
                           />
                         </div>
                       ) : null}
 
-                      <div className="p-6">
-                        <p className="text-xs font-black uppercase tracking-[0.16em] text-blue-600">
+                      <div className="p-4 sm:p-5">
+                        <p className="text-[10px] font-black uppercase tracking-[0.15em] text-blue-600 sm:text-[11px]">
                           {
                             relatedGuide.category
                           }
                         </p>
 
-                        <h3 className="mt-3 text-xl font-black leading-tight text-slate-950 transition group-hover:text-blue-700">
+                        <h3 className="mt-2 text-lg font-black leading-snug text-slate-950 transition group-hover:text-blue-700 sm:text-xl">
                           {
                             relatedContent.title
                           }
                         </h3>
 
                         {relatedContent.excerpt ? (
-                          <p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-600">
+                          <p className="mt-2 line-clamp-2 text-sm leading-5 text-slate-600 sm:leading-6">
                             {
                               relatedContent.excerpt
                             }
                           </p>
                         ) : null}
 
-                        <span className="mt-5 inline-flex font-black text-blue-700">
-                          {
-                            relatedLabels.readMore
-                          }{" "}
-                          →
+                        <span className="mt-4 inline-flex text-sm font-black text-blue-700">
+                          {readMoreLabel} →
                         </span>
                       </div>
                     </Link>
@@ -397,10 +351,10 @@ export default function PublicGuideArticle({
           </section>
         ) : null}
 
-        <div className="mx-auto mt-10 flex max-w-3xl justify-center">
+        <div className="mx-auto mt-8 flex max-w-3xl justify-center sm:mt-10">
           <Link
             href={getLocalizedPath("/blog", locale)}
-            className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-black text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 hover:shadow-md"
+            className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-black text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 hover:shadow-md sm:rounded-2xl sm:px-5 sm:py-3 sm:text-sm"
           >
             ← {backToAllLabel}
           </Link>

@@ -9,6 +9,7 @@ import {
   locales,
   type Locale,
 } from "@/i18n/config";
+import { getDictionary } from "@/i18n/get-dictionary";
 import { getLocalizedPath } from "@/i18n/routing";
 import { getGuideBySlug } from "@/lib/guides/db";
 import { serializeJsonLd } from "@/seo/schema";
@@ -21,19 +22,10 @@ type GuideArticlePageProps = {
   }>;
 };
 
-const blogBackLabels: Record<Locale, string> = {
-  el: "Όλα τα άρθρα",
-  en: "All articles",
-  de: "Alle Artikel",
-  fr: "Tous les articles",
-  it: "Tutti gli articoli",
-  es: "Todos los artículos",
-  pt: "Todos os artigos",
-  bg: "Всички статии",
-  sr: "Svi članci",
-  tr: "Tüm makaleler",
-  pl: "Wszystkie artykuły",
-  ru: "Все статьи",
+type BlogPageDictionary = {
+  readMore: string;
+  backToAll: string;
+  relatedArticles?: string;
 };
 
 async function getCurrentLocale(): Promise<Locale> {
@@ -46,6 +38,44 @@ async function getCurrentLocale(): Promise<Locale> {
     isSupportedLocale(savedLocale)
     ? savedLocale
     : defaultLocale;
+}
+
+async function getBlogDictionary(
+  locale: Locale
+): Promise<BlogPageDictionary> {
+  const dictionary =
+    await getDictionary(locale);
+
+  const blogPage =
+    (
+      dictionary as {
+        blogPage?: BlogPageDictionary;
+      }
+    ).blogPage;
+
+  if (blogPage) {
+    return blogPage;
+  }
+
+  const fallbackDictionary =
+    await getDictionary(
+      defaultLocale
+    );
+
+  const fallbackBlogPage =
+    (
+      fallbackDictionary as {
+        blogPage?: BlogPageDictionary;
+      }
+    ).blogPage;
+
+  if (!fallbackBlogPage) {
+    throw new Error(
+      "blogPage is missing from the default language dictionary."
+    );
+  }
+
+  return fallbackBlogPage;
 }
 
 function isLocalePublic(
@@ -321,8 +351,22 @@ export default async function BlogArticlePage({
       contentLocale
     ]!;
 
-  const backToAllLabel =
-    blogBackLabels[contentLocale];
+  const blogDictionary =
+    await getBlogDictionary(
+      contentLocale
+    );
+
+  const fallbackBlogDictionary =
+    contentLocale === defaultLocale
+      ? blogDictionary
+      : await getBlogDictionary(
+          defaultLocale
+        );
+
+  const relatedArticlesLabel =
+    blogDictionary.relatedArticles ||
+    fallbackBlogDictionary.relatedArticles ||
+    "Related articles";
 
   const relatedGuidesRaw =
     await Promise.all(
@@ -505,10 +549,16 @@ export default async function BlogArticlePage({
         content={content}
         locale={contentLocale}
         backToAllLabel={
-          backToAllLabel
+          blogDictionary.backToAll
         }
         relatedArticles={
           relatedGuides
+        }
+        relatedArticlesLabel={
+          relatedArticlesLabel
+        }
+        readMoreLabel={
+          blogDictionary.readMore
         }
       />
     </>
