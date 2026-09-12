@@ -324,6 +324,65 @@ export default async function BlogArticlePage({
   const backToAllLabel =
     blogBackLabels[contentLocale];
 
+  const relatedGuidesRaw =
+    await Promise.all(
+      guide.relatedGuideSlugs
+        .filter(
+          (relatedSlug) =>
+            relatedSlug !==
+            guide.slug
+        )
+        .slice(0, 3)
+        .map((relatedSlug) =>
+          getGuideBySlug(
+            relatedSlug
+          )
+        )
+    );
+
+  const relatedGuides =
+    relatedGuidesRaw.flatMap(
+      (relatedGuide) => {
+        if (
+          !relatedGuide ||
+          relatedGuide.status !==
+            "published"
+        ) {
+          return [];
+        }
+
+        const relatedLocale =
+          getPublicContentLocale(
+            relatedGuide,
+            requestedLocale
+          );
+
+        if (!relatedLocale) {
+          return [];
+        }
+
+        const relatedContent =
+          relatedGuide.translations[
+            relatedLocale
+          ];
+
+        if (!relatedContent) {
+          return [];
+        }
+
+        return [
+          {
+            guide:
+              relatedGuide,
+            content:
+              relatedContent,
+            locale:
+              relatedLocale,
+          },
+        ];
+      }
+    );
+
   const articleUrl =
     `${siteUrl}${getLocalizedPath(
       `/blog/${guide.slug}`,
@@ -447,6 +506,9 @@ export default async function BlogArticlePage({
         locale={contentLocale}
         backToAllLabel={
           backToAllLabel
+        }
+        relatedArticles={
+          relatedGuides
         }
       />
     </>

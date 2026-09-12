@@ -8,11 +8,75 @@ import type {
 import type { Locale } from "@/i18n/config";
 import { getLocalizedPath } from "@/i18n/routing";
 
+type RelatedArticle = {
+  guide: GuideRecord;
+  content: GuideLocaleContent;
+  locale: Locale;
+};
+
 type PublicGuideArticleProps = {
   guide: GuideRecord;
   content: GuideLocaleContent;
   locale: Locale;
   backToAllLabel: string;
+  relatedArticles: RelatedArticle[];
+};
+
+const relatedArticlesLabels: Record<
+  Locale,
+  {
+    title: string;
+    readMore: string;
+  }
+> = {
+  el: {
+    title: "Σχετικά άρθρα",
+    readMore: "Διαβάστε το άρθρο",
+  },
+  en: {
+    title: "Related articles",
+    readMore: "Read article",
+  },
+  de: {
+    title: "Ähnliche Artikel",
+    readMore: "Artikel lesen",
+  },
+  fr: {
+    title: "Articles associés",
+    readMore: "Lire l’article",
+  },
+  it: {
+    title: "Articoli correlati",
+    readMore: "Leggi l’articolo",
+  },
+  es: {
+    title: "Artículos relacionados",
+    readMore: "Leer artículo",
+  },
+  pt: {
+    title: "Artigos relacionados",
+    readMore: "Ler artigo",
+  },
+  bg: {
+    title: "Свързани статии",
+    readMore: "Прочетете статията",
+  },
+  sr: {
+    title: "Povezani članci",
+    readMore: "Pročitaj članak",
+  },
+  tr: {
+    title: "İlgili makaleler",
+    readMore: "Makaleyi oku",
+  },
+  pl: {
+    title: "Powiązane artykuły",
+    readMore: "Przeczytaj artykuł",
+  },
+  ru: {
+    title: "Похожие статьи",
+    readMore: "Читать статью",
+  },
 };
 
 function getCategoryHref(
@@ -144,12 +208,16 @@ export default function PublicGuideArticle({
   content,
   locale,
   backToAllLabel,
+  relatedArticles,
 }: PublicGuideArticleProps) {
   const categoryHref =
     getCategoryHref(
       guide.category,
       locale
     );
+
+  const relatedLabels =
+    relatedArticlesLabels[locale];
 
   return (
     <main className="relative overflow-hidden bg-slate-50">
@@ -236,6 +304,98 @@ export default function PublicGuideArticle({
             renderBlock(block, locale)
           )}
         </div>
+
+        {relatedArticles.length > 0 ? (
+          <section className="mx-auto mt-14 max-w-5xl">
+            <div className="mb-6">
+              <div className="h-1 w-16 rounded-full bg-gradient-to-r from-blue-600 to-emerald-500" />
+              <h2 className="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
+                {relatedLabels.title}
+              </h2>
+            </div>
+
+            <div
+              className={`grid gap-6 ${
+                relatedArticles.length === 1
+                  ? "md:grid-cols-1"
+                  : relatedArticles.length === 2
+                    ? "md:grid-cols-2"
+                    : "md:grid-cols-2 xl:grid-cols-3"
+              }`}
+            >
+              {relatedArticles.map(
+                ({
+                  guide: relatedGuide,
+                  content: relatedContent,
+                  locale: relatedLocale,
+                }) => {
+                  const href =
+                    getLocalizedPath(
+                      `/blog/${relatedGuide.slug}`,
+                      relatedLocale
+                    );
+
+                  return (
+                    <Link
+                      key={relatedGuide.id}
+                      href={href}
+                      className="group overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
+                    >
+                      {relatedGuide.featuredImage.src ? (
+                        <div className="aspect-[16/10] overflow-hidden bg-slate-100">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={
+                              relatedGuide
+                                .featuredImage.src
+                            }
+                            alt={
+                              relatedContent.seo
+                                .imageAlt ||
+                              relatedGuide
+                                .featuredImage.alt ||
+                              relatedContent.title
+                            }
+                            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                          />
+                        </div>
+                      ) : null}
+
+                      <div className="p-6">
+                        <p className="text-xs font-black uppercase tracking-[0.16em] text-blue-600">
+                          {
+                            relatedGuide.category
+                          }
+                        </p>
+
+                        <h3 className="mt-3 text-xl font-black leading-tight text-slate-950 transition group-hover:text-blue-700">
+                          {
+                            relatedContent.title
+                          }
+                        </h3>
+
+                        {relatedContent.excerpt ? (
+                          <p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-600">
+                            {
+                              relatedContent.excerpt
+                            }
+                          </p>
+                        ) : null}
+
+                        <span className="mt-5 inline-flex font-black text-blue-700">
+                          {
+                            relatedLabels.readMore
+                          }{" "}
+                          →
+                        </span>
+                      </div>
+                    </Link>
+                  );
+                }
+              )}
+            </div>
+          </section>
+        ) : null}
 
         <div className="mx-auto mt-10 flex max-w-3xl justify-center">
           <Link
