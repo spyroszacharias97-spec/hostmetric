@@ -38,94 +38,55 @@ function parseGuideId(
   return id;
 }
 
+function internalServerError(
+  error: unknown
+) {
+  console.error(
+    "Admin guide workflow route error:",
+    error
+  );
+
+  return NextResponse.json(
+    {
+      error:
+        "Something went wrong while processing the workflow action. Please try again.",
+    },
+    {
+      status: 500,
+    }
+  );
+}
+
 export async function POST(
   request: Request,
   context: RouteContext
 ) {
-  if (!(await requireAdmin())) {
-    return NextResponse.json(
-      {
-        error:
-          "Unauthorized",
-      },
-      {
-        status: 401,
-      }
-    );
-  }
-
-  const { id: rawId } =
-    await context.params;
-
-  const id =
-    parseGuideId(
-      rawId
-    );
-
-  if (!id) {
-    return NextResponse.json(
-      {
-        error:
-          "Invalid guide id.",
-      },
-      {
-        status: 400,
-      }
-    );
-  }
-
-  const guide =
-    await getGuideById(id);
-
-  if (!guide) {
-    return NextResponse.json(
-      {
-        error:
-          "Guide not found.",
-      },
-      {
-        status: 404,
-      }
-    );
-  }
-
-  const body =
-    (await request.json()) as {
-      action?: "publish";
-    };
-
-  if (
-    body.action ===
-    "publish"
-  ) {
-    if (
-      guide.status ===
-      "published"
-    ) {
+  try {
+    if (!(await requireAdmin())) {
       return NextResponse.json(
         {
           error:
-            "Guide is already published.",
+            "Unauthorized",
         },
         {
-          status: 409,
+          status: 401,
         }
       );
     }
 
-    const validation =
-      validateGuideForPublish(
-        guide
+    const { id: rawId } =
+      await context.params;
+
+    const id =
+      parseGuideId(
+        rawId
       );
 
-    if (
-      !validation.valid
-    ) {
+    if (!id) {
       return NextResponse.json(
         {
           error:
-            "The article is not ready to publish.",
-          validation,
+            "Invalid guide id.",
         },
         {
           status: 400,
@@ -133,27 +94,107 @@ export async function POST(
       );
     }
 
-    await updateGuideStatus(
-      id,
-      "published"
-    );
+    const guide =
+      await getGuideById(id);
 
-    return NextResponse.json({
-      id,
-      status:
-        "published",
-      warnings:
-        validation.warnings,
-    });
-  }
-
-  return NextResponse.json(
-    {
-      error:
-        "Unsupported workflow action.",
-    },
-    {
-      status: 400,
+    if (!guide) {
+      return NextResponse.json(
+        {
+          error:
+            "Guide not found.",
+        },
+        {
+          status: 404,
+        }
+      );
     }
-  );
+
+    let body: {
+      action?: "publish";
+    };
+
+    try {
+      body =
+        (await request.json()) as {
+          action?: "publish";
+        };
+    } catch {
+      return NextResponse.json(
+        {
+          error:
+            "Invalid JSON body.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    if (
+      body.action ===
+      "publish"
+    ) {
+      if (
+        guide.status ===
+        "published"
+      ) {
+        return NextResponse.json(
+          {
+            error:
+              "Guide is already published.",
+          },
+          {
+            status: 409,
+          }
+        );
+      }
+
+      const validation =
+        validateGuideForPublish(
+          guide
+        );
+
+      if (
+        !validation.valid
+      ) {
+        return NextResponse.json(
+          {
+            error:
+              "The article is not ready to publish.",
+            validation,
+          },
+          {
+            status: 400,
+          }
+        );
+      }
+
+      await updateGuideStatus(
+        id,
+        "published"
+      );
+
+      return NextResponse.json({
+        id,
+        status:
+          "published",
+        warnings:
+          validation.warnings,
+      });
+    }
+
+    return NextResponse.json(
+      {
+        error:
+          "Unsupported workflow action.",
+      },
+      {
+        status: 400,
+      }
+    );
+  } catch (error) {
+    return internalServerError(
+      error
+    );
+  }
 }
