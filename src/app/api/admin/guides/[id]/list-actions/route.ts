@@ -30,103 +30,56 @@ function parseGuideId(
   return guideId;
 }
 
+function internalServerError(
+  error: unknown
+) {
+  console.error(
+    "Admin guide list-actions route error:",
+    error
+  );
+
+  return NextResponse.json(
+    {
+      error:
+        "Something went wrong while processing the guide action. Please try again.",
+    },
+    {
+      status: 500,
+    }
+  );
+}
+
 export async function POST(
   request: Request,
   { params }: RouteContext
 ) {
-  const session =
-    await auth();
+  try {
+    const session =
+      await auth();
 
-  if (!session?.user?.email) {
-    return NextResponse.json(
-      {
-        error:
-          "Unauthorized",
-      },
-      {
-        status: 401,
-      }
-    );
-  }
-
-  const { id: rawId } =
-    await params;
-
-  const guideId =
-    parseGuideId(rawId);
-
-  if (!guideId) {
-    return NextResponse.json(
-      {
-        error:
-          "Invalid guide id.",
-      },
-      {
-        status: 400,
-      }
-    );
-  }
-
-  const guide =
-    await getGuideById(
-      guideId
-    );
-
-  if (!guide) {
-    return NextResponse.json(
-      {
-        error:
-          "Guide not found.",
-      },
-      {
-        status: 404,
-      }
-    );
-  }
-
-  const body =
-    (await request.json()) as {
-      action?:
-        | "publish"
-        | "unpublish";
-    };
-
-  if (
-    body.action !== "publish" &&
-    body.action !== "unpublish"
-  ) {
-    return NextResponse.json(
-      {
-        error:
-          "Unknown action.",
-      },
-      {
-        status: 400,
-      }
-    );
-  }
-
-  /*
-   * IMPORTANT:
-   * Every publish action from the Admin list
-   * must pass through the same validation used
-   * by the article editor workflow.
-   *
-   * This prevents an incomplete article from
-   * being published through a second UI route.
-   */
-  if (
-    body.action ===
-    "publish"
-  ) {
-    if (
-      guide.status ===
-      "published"
-    ) {
+    if (!session?.user?.email) {
       return NextResponse.json(
         {
           error:
-            "Το άρθρο είναι ήδη δημοσιευμένο.",
+            "Unauthorized",
+        },
+        {
+          status: 401,
+        }
+      );
+    }
+
+    const { id: rawId } =
+      await params;
+
+    const guideId =
+      parseGuideId(rawId);
+
+    if (!guideId) {
+      return NextResponse.json(
+        {
+          error:
+            "Invalid guide id.",
         },
         {
           status: 400,
@@ -134,132 +87,218 @@ export async function POST(
       );
     }
 
-    const validation =
-      validateGuideForPublish(
-        guide
+    const guide =
+      await getGuideById(
+        guideId
       );
 
-    if (!validation.valid) {
+    if (!guide) {
       return NextResponse.json(
         {
           error:
-            "Το άρθρο δεν είναι ακόμη έτοιμο για δημοσίευση.",
-          validation,
+            "Guide not found.",
+        },
+        {
+          status: 404,
+        }
+      );
+    }
+
+    let body: {
+      action?:
+        | "publish"
+        | "unpublish";
+    };
+
+    try {
+      body =
+        (await request.json()) as {
+          action?:
+            | "publish"
+            | "unpublish";
+        };
+    } catch {
+      return NextResponse.json(
+        {
+          error:
+            "Invalid JSON body.",
         },
         {
           status: 400,
+        }
+      );
+    }
+
+    if (
+      body.action !== "publish" &&
+      body.action !== "unpublish"
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Unknown action.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    if (
+      body.action ===
+      "publish"
+    ) {
+      if (
+        guide.status ===
+        "published"
+      ) {
+        return NextResponse.json(
+          {
+            error:
+              "The article is already published.",
+          },
+          {
+            status: 409,
+          }
+        );
+      }
+
+      const validation =
+        validateGuideForPublish(
+          guide
+        );
+
+      if (!validation.valid) {
+        return NextResponse.json(
+          {
+            error:
+              "The article is not ready to publish.",
+            validation,
+          },
+          {
+            status: 400,
+          }
+        );
+      }
+
+      await updateGuideStatus(
+        guideId,
+        "published"
+      );
+
+      return NextResponse.json({
+        success: true,
+        status:
+          "published",
+        warnings:
+          validation.warnings,
+      });
+    }
+
+    if (
+      guide.status !==
+      "published"
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "The article is not published.",
+        },
+        {
+          status: 409,
         }
       );
     }
 
     await updateGuideStatus(
       guideId,
-      "published"
+      "unpublished"
     );
 
     return NextResponse.json({
       success: true,
       status:
-        "published",
-      warnings:
-        validation.warnings,
+        "unpublished",
     });
-  }
-
-  if (
-    guide.status !==
-    "published"
-  ) {
-    return NextResponse.json(
-      {
-        error:
-          "Το άρθρο δεν είναι δημοσιευμένο.",
-      },
-      {
-        status: 400,
-      }
+  } catch (error) {
+    return internalServerError(
+      error
     );
   }
-
-  await updateGuideStatus(
-    guideId,
-    "unpublished"
-  );
-
-  return NextResponse.json({
-    success: true,
-    status:
-      "unpublished",
-  });
 }
 
 export async function DELETE(
   _request: Request,
   { params }: RouteContext
 ) {
-  const session =
-    await auth();
+  try {
+    const session =
+      await auth();
 
-  if (!session?.user?.email) {
-    return NextResponse.json(
-      {
-        error:
-          "Unauthorized",
-      },
-      {
-        status: 401,
-      }
-    );
-  }
+    if (!session?.user?.email) {
+      return NextResponse.json(
+        {
+          error:
+            "Unauthorized",
+        },
+        {
+          status: 401,
+        }
+      );
+    }
 
-  const { id: rawId } =
-    await params;
+    const { id: rawId } =
+      await params;
 
-  const guideId =
-    parseGuideId(rawId);
+    const guideId =
+      parseGuideId(rawId);
 
-  if (!guideId) {
-    return NextResponse.json(
-      {
-        error:
-          "Invalid guide id.",
-      },
-      {
-        status: 400,
-      }
-    );
-  }
+    if (!guideId) {
+      return NextResponse.json(
+        {
+          error:
+            "Invalid guide id.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
 
-  const guide =
-    await getGuideById(
+    const guide =
+      await getGuideById(
+        guideId
+      );
+
+    if (!guide) {
+      return NextResponse.json(
+        {
+          error:
+            "Guide not found.",
+        },
+        {
+          status: 404,
+        }
+      );
+    }
+
+    /*
+     * Deliberately do not restrict deletion by status.
+     * With explicit admin confirmation, permanent deletion
+     * is allowed for draft / review / published / unpublished.
+     */
+    await deleteGuideDraft(
       guideId
     );
 
-  if (!guide) {
-    return NextResponse.json(
-      {
-        error:
-          "Guide not found.",
-      },
-      {
-        status: 404,
-      }
+    return NextResponse.json({
+      success: true,
+      deletedId:
+        guideId,
+    });
+  } catch (error) {
+    return internalServerError(
+      error
     );
   }
-
-  /*
-   * Σκόπιμα ΔΕΝ ελέγχουμε status εδώ.
-   * Με ρητή επιβεβαίωση από τον διαχειριστή
-   * επιτρέπεται οριστική διαγραφή σε:
-   * draft / review / published / unpublished.
-   */
-  await deleteGuideDraft(
-    guideId
-  );
-
-  return NextResponse.json({
-    success: true,
-    deletedId:
-      guideId,
-  });
 }
