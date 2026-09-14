@@ -2879,6 +2879,7 @@
     "description": "Praktische Einblicke für Eigentümer, die mehr Sichtbarkeit, mehr Buchungen und eine bessere Vermietungsperformance erreichen möchten.",
     "readMore": "Artikel lesen",
     "empty": "Noch keine Ratgeber veröffentlicht.",
-    "backToAll": "Alle Ratgeber"
+    "backToAll": "Alle Ratgeber",
+    "relatedArticles": "Ähnliche Artikel"
   }
 }

@@ -2885,6 +2885,7 @@
     "description": "Articles and practical insights for property owners who want stronger visibility, more bookings and better rental performance.",
     "readMore": "Read article",
     "empty": "No published articles are available yet.",
-    "backToAll": "All articles"
+    "backToAll": "All articles",
+    "relatedArticles": "Related articles"
   }
 }

@@ -2879,6 +2879,7 @@
     "description": "Artykuły i praktyczne analizy dla właścicieli nieruchomości, którzy chcą zwiększyć widoczność, liczbę rezerwacji i wyniki swoich obiektów.",
     "readMore": "Przeczytaj artykuł",
     "empty": "Nie ma jeszcze opublikowanych artykułów.",
-    "backToAll": "Wszystkie artykuły"
+    "backToAll": "Wszystkie artykuły",
+    "relatedArticles": "Powiązane artykuły"
   }
 }

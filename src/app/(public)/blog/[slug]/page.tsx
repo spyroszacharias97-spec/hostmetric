@@ -464,6 +464,8 @@ export default async function BlogArticlePage({
       name:
         guide.author ||
         "HostMetric",
+      url:
+        `${siteUrl}/`,
     },
 
     publisher: {

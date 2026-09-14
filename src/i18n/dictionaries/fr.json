@@ -2879,7 +2879,8 @@
     "description": "Articles et analyses pratiques pour les propriétaires qui souhaitent gagner en visibilité, obtenir plus de réservations et améliorer les performances de leur location.",
     "readMore": "Lire l'article",
     "empty": "Aucun article publié pour le moment.",
-    "backToAll": "Tous les articles"
+    "backToAll": "Tous les articles",
+    "relatedArticles": "Articles associés"
   }
 }
 

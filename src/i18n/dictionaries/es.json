@@ -2879,6 +2879,7 @@
     "description": "Información práctica para propietarios que quieren conseguir más visibilidad, más reservas y un mejor rendimiento de su alojamiento.",
     "readMore": "Leer artículo",
     "empty": "Todavía no hay artículos publicados.",
-    "backToAll": "Todos los artículos"
+    "backToAll": "Todos los artículos",
+    "relatedArticles": "Artículos relacionados"
   }
 }

@@ -2879,6 +2879,7 @@
     "description": "Praktični članci i analize za vlasnike koji žele veću vidljivost, više rezervacija i bolje performanse svoje nekretnine.",
     "readMore": "Pročitajte članak",
     "empty": "Još nema objavljenih članaka.",
-    "backToAll": "Svi članci"
+    "backToAll": "Svi članci",
+    "relatedArticles": "Povezani članci"
   }
 }

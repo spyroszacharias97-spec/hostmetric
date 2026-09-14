@@ -2879,6 +2879,7 @@
     "description": "Daha fazla görünürlük, daha fazla rezervasyon ve mülkleri için daha güçlü performans isteyen mülk sahiplerine yönelik pratik makaleler ve analizler.",
     "readMore": "Makaleyi okuyun",
     "empty": "Henüz yayınlanmış makale yok.",
-    "backToAll": "Tüm makaleler"
+    "backToAll": "Tüm makaleler",
+    "relatedArticles": "İlgili makaleler"
   }
 }
