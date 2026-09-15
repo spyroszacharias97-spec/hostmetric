@@ -22,6 +22,7 @@ import {
   MessageSquareText,
   ClipboardList,
   Building2,
+  PlugZap,
   FilePenLine,
   Menu,
   X,
@@ -120,6 +121,18 @@ export default function AdminShell({
 
       icon:
         Building2,
+    },
+
+
+    {
+      label:
+        "Guesty Properties",
+
+      href:
+        "/admin/guesty-properties",
+
+      icon:
+        PlugZap,
     },
 
 

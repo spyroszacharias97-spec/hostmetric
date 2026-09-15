@@ -34,6 +34,7 @@ import {
 } from "lucide-react";
 
 import { getDictionary } from "@/i18n/get-dictionary";
+import { features } from "@/config/features";
 import elDictionary from "@/i18n/dictionaries/el.json";
 
 import {
@@ -431,19 +432,6 @@ export default function Navbar() {
             type="button"
             onClick={() =>
               navigateToSection(
-                "services"
-              )
-            }
-            className="cursor-pointer text-[17px] font-semibold text-slate-800 transition duration-300 hover:-translate-y-0.5 hover:text-blue-600"
-          >
-            {navigation.services}
-          </button>
-
-
-          <button
-            type="button"
-            onClick={() =>
-              navigateToSection(
                 "how-it-works"
               )
             }
@@ -475,6 +463,16 @@ export default function Navbar() {
           >
             {navigation.about}
           </Link>
+
+
+          {features.directBooking && (
+            <Link
+              href={getLocalizedPath("/book", currentLocale)}
+              className="cursor-pointer text-[17px] font-semibold text-blue-600 transition duration-300 hover:-translate-y-0.5 hover:text-blue-700"
+            >
+              Book a Stay
+            </Link>
+          )}
 
 
           <Link
@@ -728,20 +726,6 @@ export default function Navbar() {
                 type="button"
                 onClick={() =>
                   navigateToSection(
-                    "services"
-                  )
-                }
-                className="flex min-h-[58px] w-full items-center justify-between border-b border-slate-100 px-5 py-4 text-left text-[17px] font-bold text-slate-900 transition hover:bg-blue-50 hover:text-blue-600"
-              >
-                {navigation.services}
-                <span aria-hidden="true">→</span>
-              </button>
-
-
-              <button
-                type="button"
-                onClick={() =>
-                  navigateToSection(
                     "how-it-works"
                   )
                 }
@@ -786,6 +770,20 @@ export default function Navbar() {
                 {navigation.about}
                 <span aria-hidden="true">→</span>
               </Link>
+
+
+              {features.directBooking && (
+                <Link
+                  href={getLocalizedPath("/book", currentLocale)}
+                  onClick={() =>
+                    setMobileMenuOpen(false)
+                  }
+                  className="flex min-h-[58px] items-center justify-between border-b border-slate-100 px-5 py-4 text-[17px] font-bold text-blue-600 transition hover:bg-blue-50"
+                >
+                  Book a Stay
+                  <span aria-hidden="true">→</span>
+                </Link>
+              )}
 
 
               <Link
