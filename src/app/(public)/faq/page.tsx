@@ -421,7 +421,7 @@ export default async function FAQPage() {
     <main
       className="
         min-h-screen
-        overflow-x-hidden
+        overflow-x-clip
         bg-[#f5fbff]
         text-[#111827]
       "
@@ -643,7 +643,7 @@ export default async function FAQPage() {
               LEFT — STICKY VISUAL
           ====================================== */}
 
-          <div className="relative">
+          <div className="relative lg:self-start">
 
             <div className="lg:sticky lg:top-32">
 

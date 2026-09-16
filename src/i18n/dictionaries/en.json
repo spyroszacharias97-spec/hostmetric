@@ -10,7 +10,8 @@
     "selectLanguage": "Select language",
     "homeAriaLabel": "HostMetric homepage",
     "logoAlt": "HostMetric Property Management",
-    "blog": "Blog"
+    "blog": "Blog",
+    "bookStay": "Book a Stay"
   },
   "hero": {
     "eyebrow": "Short-Term Rental Performance",
@@ -593,7 +594,8 @@
     "platformIntro": {
       "eyebrow": "GLOBAL DISTRIBUTION",
       "title": "Connected with the world's leading booking platforms",
-      "description": "HostMetric connects and manages your property across Airbnb, Booking.com and other leading international booking platforms, combining strategic distribution, intelligent pricing and professional management to increase visibility, generate more bookings and improve overall performance."
+      "description": "HostMetric connects and manages your property across Airbnb, Booking.com and other leading international booking platforms, combining strategic distribution, intelligent pricing and professional management to increase visibility, generate more bookings and improve overall performance.",
+      "imageAlt": "HostMetric property management dashboard"
     },
     "propertySection": {
       "eyebrow": "YOUR PROPERTY",
@@ -2887,5 +2889,10 @@
     "empty": "No published articles are available yet.",
     "backToAll": "All articles",
     "relatedArticles": "Related articles"
+  },
+  "bookingPage": {
+    "eyebrow": "HOSTMETRIC DIRECT BOOKING",
+    "title": "Book your stay",
+    "description": "Choose your dates and number of guests to explore available HostMetric properties."
   }
 }

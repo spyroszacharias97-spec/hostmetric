@@ -20,10 +20,91 @@ export type CreateGuestyQuoteInput = {
   coupons?: string[];
 };
 
+export type GuestyInvoiceItem = {
+  title?: string;
+  amount?: number;
+  currency?: string;
+  type?: string;
+  normalType?: string;
+  description?: string;
+
+  [key: string]: unknown;
+};
+
+export type GuestyRatePlanMoney = {
+  invoiceItems?: GuestyInvoiceItem[];
+
+  _id?: string;
+
+  fareAccommodationAdjusted?: number;
+  currency?: string;
+  fareAccommodation?: number;
+  fareCleaning?: number;
+  totalFees?: number;
+  subTotalPrice?: number;
+  hostPayout?: number;
+  hostPayoutUsd?: number;
+  totalTaxes?: number;
+
+  [key: string]: unknown;
+};
+
+export type GuestyRatePlanDay = {
+  date?: string;
+  price?: number;
+  currency?: string;
+  basePrice?: number;
+  rateStrategy?: number;
+  ratePlan?: number;
+  lengthOfStay?: number;
+
+  [key: string]: unknown;
+};
+
+export type GuestyRatePlanPriceAdjustment = {
+  type?: string;
+  direction?: string;
+  amount?: number;
+
+  [key: string]: unknown;
+};
+
 export type GuestyRatePlan = {
   _id?: string;
   id?: string;
+
   name?: string;
+  type?: string;
+
+  mealPlans?: string[];
+  cancellationPolicy?: string[];
+  cancellationFee?: string;
+
+  priceAdjustment?: GuestyRatePlanPriceAdjustment;
+
+  days?: GuestyRatePlanDay[];
+
+  money?: GuestyRatePlanMoney;
+
+  inquiryId?: string;
+
+  [key: string]: unknown;
+};
+
+export type GuestyQuotePromotion = {
+  name?: string;
+  type?: string;
+  description?: string;
+  adjustment?: number;
+
+  [key: string]: unknown;
+};
+
+export type GuestyQuoteCoupon = {
+  name?: string;
+  type?: string;
+  code?: string;
+  adjustment?: number;
 
   [key: string]: unknown;
 };
@@ -41,20 +122,17 @@ export type GuestyQuote = {
 
   guestsCount?: number;
 
-  ratePlans?: GuestyRatePlan[];
+  promotions?: GuestyQuotePromotion;
 
-  currency?: string;
+  coupons?: GuestyQuoteCoupon[];
 
-  money?: {
-    currency?: string;
-    fareAccommodation?: number;
-    fareCleaning?: number;
-    subTotalPrice?: number;
-    hostPayout?: number;
-    totalPrice?: number;
+  rates?: {
+    ratePlans?: GuestyRatePlan[];
 
     [key: string]: unknown;
   };
+
+  guestId?: string;
 
   [key: string]: unknown;
 };
@@ -155,7 +233,7 @@ export async function getGuestyQuote(
 
   return guestyClient.get<GuestyQuote>(
     `/reservations/quotes/${encodeURIComponent(
-      quoteId
+      quoteId.trim()
     )}`
   );
 }

@@ -57,6 +57,25 @@ export type GuestyListingsSearchParams = {
   numberOfBedrooms?: number;
   numberOfBathrooms?: number;
 
+  propertyType?: string;
+
+  minPrice?: number;
+  maxPrice?: number;
+  currency?: string;
+
+  includeAmenities?: string[];
+  excludeAmenities?: string[];
+
+  city?: string;
+  country?: string;
+  state?: string;
+  neighborhood?: string;
+
+  minLng?: number;
+  maxLng?: number;
+  minLat?: number;
+  maxLat?: number;
+
   limit?: number;
   cursor?: string;
 
@@ -107,6 +126,112 @@ function buildQueryString(
     searchParams.set(
       "numberOfBathrooms",
       String(params.numberOfBathrooms)
+    );
+  }
+
+  if (params.propertyType) {
+    searchParams.set(
+      "propertyType",
+      params.propertyType
+    );
+  }
+
+  if (
+    params.minPrice !== undefined
+  ) {
+    searchParams.set(
+      "minPrice",
+      String(params.minPrice)
+    );
+  }
+
+  if (
+    params.maxPrice !== undefined
+  ) {
+    searchParams.set(
+      "maxPrice",
+      String(params.maxPrice)
+    );
+  }
+
+  if (params.currency) {
+    searchParams.set(
+      "currency",
+      params.currency
+    );
+  }
+
+  if (
+    params.includeAmenities?.length
+  ) {
+    searchParams.set(
+      "includeAmenities",
+      params.includeAmenities.join(",")
+    );
+  }
+
+  if (
+    params.excludeAmenities?.length
+  ) {
+    searchParams.set(
+      "excludeAmenities",
+      params.excludeAmenities.join(",")
+    );
+  }
+
+  if (params.city) {
+    searchParams.set(
+      "city",
+      params.city
+    );
+  }
+
+  if (params.country) {
+    searchParams.set(
+      "country",
+      params.country
+    );
+  }
+
+  if (params.state) {
+    searchParams.set(
+      "state",
+      params.state
+    );
+  }
+
+  if (params.neighborhood) {
+    searchParams.set(
+      "neighborhood",
+      params.neighborhood
+    );
+  }
+
+  if (params.minLng !== undefined) {
+    searchParams.set(
+      "minLng",
+      String(params.minLng)
+    );
+  }
+
+  if (params.maxLng !== undefined) {
+    searchParams.set(
+      "maxLng",
+      String(params.maxLng)
+    );
+  }
+
+  if (params.minLat !== undefined) {
+    searchParams.set(
+      "minLat",
+      String(params.minLat)
+    );
+  }
+
+  if (params.maxLat !== undefined) {
+    searchParams.set(
+      "maxLat",
+      String(params.maxLat)
     );
   }
 

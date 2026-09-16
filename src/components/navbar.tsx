@@ -53,7 +53,6 @@ import {
 
 
 type NavigationDictionary = {
-  services: string;
   howItWorks: string;
   pricing: string;
   about: string;
@@ -64,6 +63,7 @@ type NavigationDictionary = {
   homeAriaLabel: string;
   logoAlt: string;
   blog?: string;
+  bookStay?: string;
 };
 
 
@@ -137,6 +137,9 @@ export default function Navbar() {
       fallbackNavigation
     );
 
+  const [directBookingEnabled, setDirectBookingEnabled] =
+    useState(false);
+
   const languageMenuRef =
     useRef<HTMLDivElement>(null);
 
@@ -187,6 +190,112 @@ export default function Navbar() {
 
     loadInitialLanguage();
 
+  }, []);
+
+
+  /* ==========================================
+     PUBLIC DIRECT BOOKING STATUS
+
+     The deployment feature flag is the first gate.
+     The public Guesty endpoint also checks the global
+     database switch and fails closed.
+
+     Refresh on mount, focus, visibility change and
+     short polling so an Admin ON/OFF change made in
+     another tab is reflected in the public navbar.
+  ========================================== */
+
+  useEffect(() => {
+    if (!features.directBooking) {
+      setDirectBookingEnabled(false);
+      return;
+    }
+
+    let cancelled = false;
+
+    async function loadDirectBookingStatus() {
+      try {
+        const response = await fetch(
+          "/api/booking/status",
+          {
+            method: "GET",
+            cache: "no-store",
+          }
+        );
+
+        if (!response.ok) {
+          if (!cancelled) {
+            setDirectBookingEnabled(false);
+          }
+          return;
+        }
+
+        const data = (await response.json()) as {
+          enabled?: boolean;
+        };
+
+        if (!cancelled) {
+          setDirectBookingEnabled(
+            data.enabled === true
+          );
+        }
+      } catch {
+        if (!cancelled) {
+          setDirectBookingEnabled(false);
+        }
+      }
+    }
+
+    function handleFocus() {
+      void loadDirectBookingStatus();
+    }
+
+    function handleVisibilityChange() {
+      if (
+        document.visibilityState ===
+        "visible"
+      ) {
+        void loadDirectBookingStatus();
+      }
+    }
+
+    void loadDirectBookingStatus();
+
+    window.addEventListener(
+      "focus",
+      handleFocus
+    );
+
+    document.addEventListener(
+      "visibilitychange",
+      handleVisibilityChange
+    );
+
+    const intervalId =
+      window.setInterval(
+        () => {
+          void loadDirectBookingStatus();
+        },
+        3000
+      );
+
+    return () => {
+      cancelled = true;
+
+      window.removeEventListener(
+        "focus",
+        handleFocus
+      );
+
+      document.removeEventListener(
+        "visibilitychange",
+        handleVisibilityChange
+      );
+
+      window.clearInterval(
+        intervalId
+      );
+    };
   }, []);
 
 
@@ -428,6 +537,7 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-7 xl:gap-9 lg:flex">
 
+
           <button
             type="button"
             onClick={() =>
@@ -453,7 +563,7 @@ export default function Navbar() {
             href={getLocalizedPath("/blog", currentLocale)}
             className="cursor-pointer text-[17px] font-semibold text-slate-800 transition duration-300 hover:-translate-y-0.5 hover:text-blue-600"
           >
-            {navigation.blog ?? "Blog"}
+            {navigation.blog}
           </Link>
 
 
@@ -465,12 +575,14 @@ export default function Navbar() {
           </Link>
 
 
-          {features.directBooking && (
+          {features.directBooking &&
+            directBookingEnabled &&
+            navigation.bookStay && (
             <Link
               href={getLocalizedPath("/book", currentLocale)}
               className="cursor-pointer text-[17px] font-semibold text-blue-600 transition duration-300 hover:-translate-y-0.5 hover:text-blue-700"
             >
-              Book a Stay
+              {navigation.bookStay}
             </Link>
           )}
 
@@ -722,6 +834,7 @@ export default function Navbar() {
 
             <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
 
+
               <button
                 type="button"
                 onClick={() =>
@@ -755,7 +868,7 @@ export default function Navbar() {
                 }
                 className="flex min-h-[58px] items-center justify-between border-b border-slate-100 px-5 py-4 text-[17px] font-bold text-slate-900 transition hover:bg-blue-50 hover:text-blue-600"
               >
-                {navigation.blog ?? "Blog"}
+                {navigation.blog}
                 <span aria-hidden="true">→</span>
               </Link>
 
@@ -772,7 +885,9 @@ export default function Navbar() {
               </Link>
 
 
-              {features.directBooking && (
+              {features.directBooking &&
+              directBookingEnabled &&
+              navigation.bookStay && (
                 <Link
                   href={getLocalizedPath("/book", currentLocale)}
                   onClick={() =>
@@ -780,7 +895,7 @@ export default function Navbar() {
                   }
                   className="flex min-h-[58px] items-center justify-between border-b border-slate-100 px-5 py-4 text-[17px] font-bold text-blue-600 transition hover:bg-blue-50"
                 >
-                  Book a Stay
+                  {navigation.bookStay}
                   <span aria-hidden="true">→</span>
                 </Link>
               )}
