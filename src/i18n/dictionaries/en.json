@@ -2894,5 +2894,127 @@
     "eyebrow": "HOSTMETRIC DIRECT BOOKING",
     "title": "Book your stay",
     "description": "Choose your dates and number of guests to explore available HostMetric properties."
+  },
+  "adminGuestyProperties": {
+    "integration": "Guesty Integration",
+    "title": "Guesty Properties",
+    "description": "Properties retrieved from the Guesty Booking Engine API and available for HostMetric direct booking management.",
+    "apiConfigured": "Guesty API configured",
+    "apiNotConfigured": "Guesty API not configured",
+    "global": {
+      "title": "Global Direct Booking",
+      "description": "Controls whether the HostMetric direct booking experience is enabled globally.",
+      "propertyRequirement": "Individual properties must also have Direct Booking enabled.",
+      "credentialsWarning": "Guesty API credentials are not configured yet. The controls are ready, but live Guesty sync and calendar requests require valid credentials.",
+      "statusLabel": "STATUS",
+      "on": "Book Now is ON",
+      "off": "Book Now is OFF",
+      "turnOn": "Turn Book Now ON",
+      "turnOff": "Turn Book Now OFF",
+      "sync": "Sync Guesty",
+      "syncing": "Syncing...",
+      "addProperty": "Add Guesty Property"
+    },
+    "stats": {
+      "properties": "Guesty Properties",
+      "bookable": "Direct Booking Enabled",
+      "syncErrors": "Sync Errors"
+    },
+    "sections": {
+      "bookable": "Direct Booking Properties",
+      "notBookable": "Properties Without Direct Booking",
+      "synced": "Synced Properties",
+      "unsynced": "Unsynced Properties"
+    },
+    "property": {
+      "listingId": "Guesty Listing ID",
+      "lastSynced": "Last synced",
+      "never": "Never",
+      "locationUnavailable": "Location unavailable",
+      "directBookingOn": "Direct Booking ON",
+      "directBookingOff": "Direct Booking OFF",
+      "enable": "Enable",
+      "disable": "Disable",
+      "sync": "Sync",
+      "calendar": "Calendar",
+      "delete": "Remove",
+      "synced": "Synced",
+      "syncing": "Syncing",
+      "error": "Error",
+      "pending": "Pending"
+    },
+    "empty": {
+      "title": "No Guesty properties yet",
+      "description": "No mock properties are used. Real Guesty listings will appear here after the Guesty account is configured and a successful sync has been completed."
+    },
+    "addModal": {
+      "title": "Add Guesty Property",
+      "description": "Add a real Guesty listing to HostMetric using its Guesty Listing ID.",
+      "listingId": "Guesty Listing ID",
+      "placeholder": "Enter the Guesty Listing ID",
+      "cancel": "Cancel",
+      "add": "Add Property",
+      "adding": "Adding..."
+    },
+    "calendarModal": {
+      "title": "Guesty Calendar",
+      "from": "From",
+      "to": "To",
+      "load": "Load Calendar",
+      "loading": "Loading...",
+      "close": "Close",
+      "available": "Available",
+      "unavailable": "Unavailable",
+      "reserved": "Reserved",
+      "booked": "Booked",
+      "minimumNights": "Minimum nights"
+    },
+    "confirm": {
+      "delete": "Are you sure you want to remove this Guesty property from HostMetric?"
+    },
+    "messages": {
+      "genericError": "Something went wrong. Please try again.",
+      "listingIdRequired": "Guesty Listing ID is required.",
+      "calendarDatesRequired": "Choose both a start date and an end date.",
+      "loadGlobalError": "Could not load the global direct booking setting.",
+      "updateGlobalError": "Could not update the global direct booking setting.",
+      "addError": "Could not add the Guesty property.",
+      "syncAllError": "Could not synchronize Guesty properties.",
+      "syncPropertyError": "Could not synchronize the Guesty property.",
+      "updatePropertyError": "Could not update direct booking.",
+      "removeError": "Could not remove the Guesty property.",
+      "calendarError": "Could not load the Guesty calendar.",
+      "fromToRequired": "From and to dates are required.",
+      "invalidDateRange": "From date cannot be after the to date."
+    },
+    "tooltips": {
+      "syncAll": "Import and update all listings from Guesty",
+      "credentialsRequired": "Guesty API credentials are required",
+      "syncProperty": "Synchronize this property with Guesty",
+      "calendar": "Open live Guesty availability"
+    },
+    "groups": {
+      "synced": "Synced",
+      "syncedDescription": "Properties successfully synchronized with Guesty.",
+      "syncedEmpty": "No synchronized Guesty properties yet.",
+      "attention": "Unsynced / Needs Attention",
+      "attentionDescription": "Newly connected properties and properties whose latest sync needs attention.",
+      "attentionEmpty": "No properties need attention."
+    },
+    "form": {
+      "title": "Title",
+      "nickname": "Nickname",
+      "listingType": "Listing Type",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms",
+      "accommodates": "Guest Capacity",
+      "city": "City",
+      "state": "State / Region",
+      "country": "Country",
+      "currency": "Currency",
+      "required": "Required",
+      "optional": "Optional",
+      "optionalBeforeSync": "Optional before sync"
+    }
   }
 }

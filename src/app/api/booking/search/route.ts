@@ -216,6 +216,56 @@ function matchesDestination(
   );
 }
 
+function getDestinationKey(
+  city: string | null,
+  state: string | null,
+  country: string | null
+) {
+  return [city, state, country]
+    .filter(Boolean)
+    .join("|")
+    .toLocaleLowerCase();
+}
+
+function toDestination(
+  listing: GuestyListing
+) {
+  const city =
+    listing.address?.city?.trim() ||
+    null;
+
+  const state =
+    listing.address?.state?.trim() ||
+    null;
+
+  const country =
+    listing.address?.country?.trim() ||
+    null;
+
+  const full =
+    listing.address?.full?.trim() ||
+    null;
+
+  const label =
+    [city, country]
+      .filter(Boolean)
+      .join(", ") ||
+    state ||
+    country ||
+    full;
+
+  if (!label) {
+    return null;
+  }
+
+  return {
+    label,
+    city,
+    state,
+    country,
+  };
+}
+
 function toPublicListing(
   listing: GuestyListing,
   localPropertyId: number
@@ -604,6 +654,7 @@ export async function GET(
       return NextResponse.json({
         enabled: true,
         results: [],
+        destinations: [],
         total: 0,
       });
     }
@@ -727,6 +778,60 @@ export async function GET(
      * synced and explicitly enabled for
      * Direct Booking.
      */
+    const destinationsMap =
+      new Map<
+        string,
+        {
+          label: string;
+          city: string | null;
+          state: string | null;
+          country: string | null;
+        }
+      >();
+
+    for (const listing of guestyResults) {
+      if (
+        !enabledProperties.has(
+          listing._id
+        )
+      ) {
+        continue;
+      }
+
+      const destination =
+        toDestination(listing);
+
+      if (!destination) {
+        continue;
+      }
+
+      const key =
+        getDestinationKey(
+          destination.city,
+          destination.state,
+          destination.country
+        ) ||
+        destination.label.toLocaleLowerCase();
+
+      if (
+        !destinationsMap.has(key)
+      ) {
+        destinationsMap.set(
+          key,
+          destination
+        );
+      }
+    }
+
+    const destinations =
+      Array.from(
+        destinationsMap.values()
+      ).sort((a, b) =>
+        a.label.localeCompare(
+          b.label
+        )
+      );
+
     const results =
       guestyResults
         .filter((listing) =>
@@ -790,6 +895,8 @@ export async function GET(
 
       total:
         results.length,
+
+      destinations,
 
       results,
     });

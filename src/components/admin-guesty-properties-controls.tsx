@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  useEffect,
   useState,
 } from "react";
 
@@ -47,12 +48,111 @@ type GuestyProperty = {
 };
 
 
+export type AdminGuestyPropertiesDictionary = {
+  global: {
+    title: string;
+    description: string;
+    propertyRequirement: string;
+    credentialsWarning: string;
+    statusLabel: string;
+    on: string;
+    off: string;
+    turnOn: string;
+    turnOff: string;
+    sync: string;
+    syncing: string;
+    addProperty: string;
+  };
+  property: {
+    locationUnavailable: string;
+    directBookingOn: string;
+    directBookingOff: string;
+    sync: string;
+    calendar: string;
+    delete: string;
+    synced: string;
+    syncing: string;
+    error: string;
+    pending: string;
+  };
+  addModal: {
+    title: string;
+    description: string;
+    listingId: string;
+    placeholder: string;
+    cancel: string;
+    add: string;
+    adding: string;
+  };
+  calendarModal: {
+    title: string;
+    from: string;
+    to: string;
+    load: string;
+    loading: string;
+    close: string;
+    available: string;
+    unavailable: string;
+    reserved: string;
+    booked: string;
+    minimumNights: string;
+  };
+  confirm: {
+    delete: string;
+  };
+  tooltips: {
+    syncAll: string;
+    credentialsRequired: string;
+    syncProperty: string;
+    calendar: string;
+  };
+  groups: {
+    synced: string;
+    syncedDescription: string;
+    syncedEmpty: string;
+    attention: string;
+    attentionDescription: string;
+    attentionEmpty: string;
+  };
+  form: {
+    title: string;
+    nickname: string;
+    listingType: string;
+    bedrooms: string;
+    bathrooms: string;
+    accommodates: string;
+    city: string;
+    state: string;
+    country: string;
+    currency: string;
+    required: string;
+    optional: string;
+    optionalBeforeSync: string;
+  };
+  messages: {
+    listingIdRequired: string;
+    loadGlobalError: string;
+    updateGlobalError: string;
+    addError: string;
+    syncAllError: string;
+    syncPropertyError: string;
+    updatePropertyError: string;
+    removeError: string;
+    calendarError: string;
+    fromToRequired: string;
+    invalidDateRange: string;
+  };
+};
+
 type AdminGuestyPropertiesControlsProps = {
   properties:
     GuestyProperty[];
 
   guestyConfigured:
     boolean;
+
+  dictionary:
+    AdminGuestyPropertiesDictionary;
 };
 
 
@@ -211,6 +311,7 @@ function getErrorMessage(
 export default function AdminGuestyPropertiesControls({
   properties,
   guestyConfigured,
+  dictionary,
 }: AdminGuestyPropertiesControlsProps) {
   const router =
     useRouter();
@@ -396,7 +497,7 @@ export default function AdminGuestyPropertiesControls({
         throw new Error(
           getErrorMessage(
             data,
-            "Could not load the global direct booking setting."
+            dictionary.messages.loadGlobalError
           )
         );
       }
@@ -415,7 +516,7 @@ export default function AdminGuestyPropertiesControls({
       setActionError(
         error instanceof Error
           ? error.message
-          : "Could not load the global direct booking setting."
+          : dictionary.messages.loadGlobalError
       );
     } finally {
       setGlobalLoading(
@@ -423,6 +524,13 @@ export default function AdminGuestyPropertiesControls({
       );
     }
   }
+
+
+  useEffect(() => {
+    void loadGlobalSetting();
+    // loadGlobalSetting intentionally runs once on mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
 
   async function toggleGlobalBooking() {
@@ -461,7 +569,7 @@ export default function AdminGuestyPropertiesControls({
           throw new Error(
             getErrorMessage(
               data,
-              "Could not load the global direct booking setting."
+              dictionary.messages.loadGlobalError
             )
           );
         }
@@ -483,7 +591,7 @@ export default function AdminGuestyPropertiesControls({
         setActionError(
           error instanceof Error
             ? error.message
-            : "Could not load the global direct booking setting."
+            : dictionary.messages.loadGlobalError
         );
 
         setGlobalLoading(
@@ -539,7 +647,7 @@ export default function AdminGuestyPropertiesControls({
         throw new Error(
           getErrorMessage(
             data,
-            "Could not update the global direct booking setting."
+            dictionary.messages.updateGlobalError
           )
         );
       }
@@ -563,7 +671,7 @@ export default function AdminGuestyPropertiesControls({
       setActionError(
         error instanceof Error
           ? error.message
-          : "Could not update the global direct booking setting."
+          : dictionary.messages.updateGlobalError
       );
     } finally {
       setGlobalLoading(
@@ -585,7 +693,7 @@ export default function AdminGuestyPropertiesControls({
         .trim()
     ) {
       setAddError(
-        "Guesty Listing ID is required."
+        dictionary.messages.listingIdRequired
       );
 
       return;
@@ -664,7 +772,7 @@ export default function AdminGuestyPropertiesControls({
         throw new Error(
           getErrorMessage(
             data,
-            "Could not add the Guesty property."
+            dictionary.messages.addError
           )
         );
       }
@@ -683,7 +791,7 @@ export default function AdminGuestyPropertiesControls({
       setAddError(
         error instanceof Error
           ? error.message
-          : "Could not add the Guesty property."
+          : dictionary.messages.addError
       );
     } finally {
       setAddLoading(
@@ -722,7 +830,7 @@ export default function AdminGuestyPropertiesControls({
         throw new Error(
           getErrorMessage(
             data,
-            "Could not synchronize Guesty properties."
+            dictionary.messages.syncAllError
           )
         );
       }
@@ -732,7 +840,7 @@ export default function AdminGuestyPropertiesControls({
       setActionError(
         error instanceof Error
           ? error.message
-          : "Could not synchronize Guesty properties."
+          : dictionary.messages.syncAllError
       );
     } finally {
       setGlobalSyncLoading(
@@ -777,7 +885,7 @@ export default function AdminGuestyPropertiesControls({
         throw new Error(
           getErrorMessage(
             data,
-            "Could not synchronize the Guesty property."
+            dictionary.messages.syncPropertyError
           )
         );
       }
@@ -788,7 +896,7 @@ export default function AdminGuestyPropertiesControls({
       setActionError(
         error instanceof Error
           ? error.message
-          : "Could not synchronize the Guesty property."
+          : dictionary.messages.syncPropertyError
       );
 
       router.refresh();
@@ -847,7 +955,7 @@ export default function AdminGuestyPropertiesControls({
         throw new Error(
           getErrorMessage(
             data,
-            "Could not update direct booking."
+            dictionary.messages.updatePropertyError
           )
         );
       }
@@ -858,7 +966,7 @@ export default function AdminGuestyPropertiesControls({
       setActionError(
         error instanceof Error
           ? error.message
-          : "Could not update direct booking."
+          : dictionary.messages.updatePropertyError
       );
     } finally {
       setBusyPropertyId(
@@ -874,7 +982,7 @@ export default function AdminGuestyPropertiesControls({
   ) {
     const confirmed =
       window.confirm(
-        `Remove "${property.name}" from HostMetric?\n\nThis removes only the HostMetric Guesty record. It does not delete the listing from Guesty.`
+        dictionary.confirm.delete
       );
 
 
@@ -914,7 +1022,7 @@ export default function AdminGuestyPropertiesControls({
         throw new Error(
           getErrorMessage(
             data,
-            "Could not remove the Guesty property."
+            dictionary.messages.removeError
           )
         );
       }
@@ -925,7 +1033,7 @@ export default function AdminGuestyPropertiesControls({
       setActionError(
         error instanceof Error
           ? error.message
-          : "Could not remove the Guesty property."
+          : dictionary.messages.removeError
       );
     } finally {
       setBusyPropertyId(
@@ -948,7 +1056,7 @@ export default function AdminGuestyPropertiesControls({
       !calendarTo
     ) {
       setCalendarError(
-        "From and to dates are required."
+        dictionary.messages.fromToRequired
       );
 
       return;
@@ -960,7 +1068,7 @@ export default function AdminGuestyPropertiesControls({
       calendarTo
     ) {
       setCalendarError(
-        "From date cannot be after the to date."
+        dictionary.messages.invalidDateRange
       );
 
       return;
@@ -1012,7 +1120,7 @@ export default function AdminGuestyPropertiesControls({
         throw new Error(
           getErrorMessage(
             data,
-            "Could not load the Guesty calendar."
+            dictionary.messages.calendarError
           )
         );
       }
@@ -1029,7 +1137,7 @@ export default function AdminGuestyPropertiesControls({
       setCalendarError(
         error instanceof Error
           ? error.message
-          : "Could not load the Guesty calendar."
+          : dictionary.messages.calendarError
       );
     } finally {
       setCalendarLoading(
@@ -1088,13 +1196,13 @@ export default function AdminGuestyPropertiesControls({
     const statusLabel =
       property.syncStatus ===
       "error"
-        ? "Sync Error"
+        ? dictionary.property.error
         : property.syncStatus ===
             "connected"
-          ? "Unsynced"
+          ? dictionary.property.pending
           : property.syncStatus ===
               "syncing"
-            ? "Syncing"
+            ? dictionary.property.syncing
             : property.syncStatus;
 
     return (
@@ -1236,8 +1344,8 @@ export default function AdminGuestyPropertiesControls({
 
             {
               property.directBookingEnabled
-                ? "Direct Booking ON"
-                : "Direct Booking OFF"
+                ? dictionary.property.directBookingOn
+                : dictionary.property.directBookingOff
             }
           </span>
         </div>
@@ -1285,8 +1393,8 @@ export default function AdminGuestyPropertiesControls({
             }
             title={
               guestyConfigured
-                ? "Synchronize this property with Guesty"
-                : "Guesty API credentials are required"
+                ? dictionary.tooltips.syncProperty
+                : dictionary.tooltips.credentialsRequired
             }
             className="
               inline-flex
@@ -1325,8 +1433,8 @@ export default function AdminGuestyPropertiesControls({
 
             {
               busy
-                ? "Syncing..."
-                : "Sync Now"
+                ? dictionary.global.syncing
+                : dictionary.property.sync
             }
           </button>
 
@@ -1342,8 +1450,8 @@ export default function AdminGuestyPropertiesControls({
             }
             title={
               guestyConfigured
-                ? "Open live Guesty availability"
-                : "Guesty API credentials are required"
+                ? dictionary.tooltips.calendar
+                : dictionary.tooltips.credentialsRequired
             }
             className="
               inline-flex
@@ -1369,7 +1477,7 @@ export default function AdminGuestyPropertiesControls({
               size={15}
             />
 
-            Calendar
+            {dictionary.property.calendar}
           </button>
 
           <button
@@ -1419,8 +1527,8 @@ export default function AdminGuestyPropertiesControls({
 
             {
               property.directBookingEnabled
-                ? "Booking ON"
-                : "Booking OFF"
+                ? dictionary.property.directBookingOn
+                : dictionary.property.directBookingOff
             }
           </button>
 
@@ -1456,7 +1564,7 @@ export default function AdminGuestyPropertiesControls({
               size={15}
             />
 
-            Remove
+            {dictionary.property.delete}
           </button>
         </div>
       </article>
@@ -1510,7 +1618,7 @@ export default function AdminGuestyPropertiesControls({
                   text-slate-950
                 "
               >
-                Global Direct Booking
+                {dictionary.global.title}
               </h2>
             </div>
 
@@ -1523,11 +1631,8 @@ export default function AdminGuestyPropertiesControls({
                 text-slate-500
               "
             >
-              Controls whether the HostMetric
-              direct booking experience is
-              enabled globally. Individual
-              properties must also have Direct
-              Booking enabled.
+              {dictionary.global.description}{" "}
+              {dictionary.global.propertyRequirement}
             </p>
 
             {
@@ -1540,12 +1645,7 @@ export default function AdminGuestyPropertiesControls({
                     text-amber-600
                   "
                 >
-                  Guesty API credentials are
-                  not configured yet. The
-                  controls are ready, but live
-                  Guesty sync and calendar
-                  requests will require valid
-                  credentials.
+                  {dictionary.global.credentialsWarning}
                 </p>
               )
             }
@@ -1554,203 +1654,229 @@ export default function AdminGuestyPropertiesControls({
 
           <div
             className="
-              flex
-              flex-wrap
-              items-center
-              gap-3
+              w-full
+              lg:max-w-3xl
             "
           >
-            <button
-              type="button"
-              onClick={
-                loadGlobalSetting
-              }
-              disabled={
-                globalLoading
-              }
+            <div
               className="
-                inline-flex
-                min-h-11
-                items-center
-                justify-center
-                gap-2
-                rounded-xl
-                border
-                border-slate-200
-                bg-white
-                px-4
-                text-sm
-                font-bold
-                text-slate-700
-                transition
-                hover:bg-slate-50
-                disabled:cursor-not-allowed
-                disabled:opacity-60
+                flex
+                justify-start
+                lg:justify-end
               "
             >
-              {
-                globalLoading
-                  ? (
-                    <Loader2
-                      size={17}
-                      className="
-                        animate-spin
-                      "
-                    />
-                  )
-                  : (
-                    <RefreshCw
-                      size={17}
-                    />
-                  )
-              }
+              <div
+                className={`
+                  min-w-[230px]
+                  rounded-2xl
+                  border
+                  px-4
+                  py-3
 
-              {
-                globalLoaded
-                  ? (
+                  ${
                     globalEnabled
-                      ? "Book Now is ON"
-                      : "Book Now is OFF"
-                  )
-                  : "Check Book Now Status"
-              }
-            </button>
+                      ? "border-emerald-200 bg-emerald-50"
+                      : "border-slate-200 bg-slate-50"
+                  }
+                `}
+                aria-live="polite"
+              >
+                <div className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
+                  {dictionary.global.statusLabel}
+                </div>
 
+                <div
+                  className={`
+                    mt-1
+                    flex
+                    items-center
+                    gap-2
+                    text-sm
+                    font-black
 
-            <button
-              type="button"
-              onClick={
-                toggleGlobalBooking
-              }
-              disabled={
-                globalLoading
-              }
-              className={`
-                inline-flex
-                min-h-11
-                items-center
-                justify-center
-                gap-2
-                rounded-xl
-                px-5
-                text-sm
-                font-black
-                text-white
-                transition
-                disabled:cursor-not-allowed
-                disabled:opacity-60
-
-                ${
-                  globalEnabled
-                    ? "bg-red-600 hover:bg-red-700"
-                    : "bg-emerald-600 hover:bg-emerald-700"
-                }
-              `}
-            >
-              <Power
-                size={17}
-              />
-
-              {
-                globalEnabled
-                  ? "Turn Book Now OFF"
-                  : "Turn Book Now ON"
-              }
-            </button>
-
-
-            <button
-              type="button"
-              onClick={
-                syncAllGuestyProperties
-              }
-              disabled={
-                globalSyncLoading ||
-                !guestyConfigured
-              }
-              title={
-                guestyConfigured
-                  ? "Import and update all listings from Guesty"
-                  : "Guesty API credentials are required"
-              }
-              className="
-                inline-flex
-                min-h-11
-                items-center
-                justify-center
-                gap-2
-                rounded-xl
-                border
-                border-blue-200
-                bg-blue-50
-                px-5
-                text-sm
-                font-black
-                text-blue-700
-                transition
-                hover:bg-blue-100
-                disabled:cursor-not-allowed
-                disabled:opacity-50
-              "
-            >
-              {
-                globalSyncLoading
-                  ? (
+                    ${
+                      globalEnabled
+                        ? "text-emerald-700"
+                        : "text-slate-700"
+                    }
+                  `}
+                >
+                  {globalLoading ? (
                     <Loader2
-                      size={17}
-                      className="
-                        animate-spin
-                      "
+                      size={16}
+                      className="animate-spin"
                     />
-                  )
-                  : (
-                    <RefreshCw
-                      size={17}
+                  ) : (
+                    <span
+                      className={`
+                        h-2.5
+                        w-2.5
+                        rounded-full
+
+                        ${
+                          globalEnabled
+                            ? "bg-emerald-500"
+                            : "bg-slate-400"
+                        }
+                      `}
                     />
-                  )
-              }
+                  )}
 
-              {
-                globalSyncLoading
-                  ? "Syncing Guesty..."
-                  : "Sync Guesty"
-              }
-            </button>
+                  {globalEnabled
+                    ? dictionary.global.on
+                    : dictionary.global.off}
+                </div>
+              </div>
+            </div>
 
-
-            <button
-              type="button"
-              onClick={() => {
-                setAddError(
-                  null
-                );
-
-                setAddOpen(
-                  true
-                );
-              }}
+            <div
               className="
-                inline-flex
-                min-h-11
-                items-center
-                justify-center
-                gap-2
-                rounded-xl
-                bg-blue-600
-                px-5
-                text-sm
-                font-black
-                text-white
-                transition
-                hover:bg-blue-700
+                mt-3
+                grid
+                grid-cols-1
+                gap-3
+                sm:grid-cols-3
               "
             >
-              <Plus
-                size={18}
-              />
+              <button
+                type="button"
+                onClick={
+                  toggleGlobalBooking
+                }
+                disabled={
+                  globalLoading
+                }
+                className={`
+                  inline-flex
+                  min-h-12
+                  w-full
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-xl
+                  px-4
+                  text-center
+                  text-sm
+                  font-black
+                  text-white
+                  transition
+                  disabled:cursor-not-allowed
+                  disabled:opacity-60
 
-              Add Guesty Property
-            </button>
+                  ${
+                    globalEnabled
+                      ? "bg-red-600 hover:bg-red-700"
+                      : "bg-emerald-600 hover:bg-emerald-700"
+                  }
+                `}
+              >
+                <Power
+                  size={17}
+                />
+
+                {
+                  globalEnabled
+                    ? dictionary.global.turnOff
+                    : dictionary.global.turnOn
+                }
+              </button>
+
+              <button
+                type="button"
+                onClick={
+                  syncAllGuestyProperties
+                }
+                disabled={
+                  globalSyncLoading ||
+                  !guestyConfigured
+                }
+                title={
+                  guestyConfigured
+                    ? dictionary.tooltips.syncAll
+                    : dictionary.tooltips.credentialsRequired
+                }
+                className="
+                  inline-flex
+                  min-h-12
+                  w-full
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-xl
+                  border
+                  border-blue-200
+                  bg-blue-50
+                  px-4
+                  text-center
+                  text-sm
+                  font-black
+                  text-blue-700
+                  transition
+                  hover:bg-blue-100
+                  disabled:cursor-not-allowed
+                  disabled:opacity-50
+                "
+              >
+                {
+                  globalSyncLoading
+                    ? (
+                        <Loader2
+                          size={17}
+                          className="
+                            animate-spin
+                          "
+                        />
+                      )
+                    : (
+                        <RefreshCw
+                          size={17}
+                        />
+                      )
+                }
+
+                {
+                  globalSyncLoading
+                    ? dictionary.global.syncing
+                    : dictionary.global.sync
+                }
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setAddError(
+                    null
+                  );
+
+                  setAddOpen(
+                    true
+                  );
+                }}
+                className="
+                  inline-flex
+                  min-h-12
+                  w-full
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-xl
+                  bg-blue-600
+                  px-4
+                  text-center
+                  text-sm
+                  font-black
+                  text-white
+                  transition
+                  hover:bg-blue-700
+                "
+              >
+                <Plus
+                  size={18}
+                />
+
+                {dictionary.global.addProperty}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -1829,7 +1955,7 @@ export default function AdminGuestyPropertiesControls({
                       text-slate-950
                     "
                   >
-                    Synced (
+                    {dictionary.groups.synced} (
                     {
                       syncedProperties.length
                     }
@@ -1844,7 +1970,7 @@ export default function AdminGuestyPropertiesControls({
                       text-slate-500
                     "
                   >
-                    Properties successfully synchronized with Guesty.
+                    {dictionary.groups.syncedDescription}
                   </p>
                 </div>
 
@@ -1906,7 +2032,7 @@ export default function AdminGuestyPropertiesControls({
                               text-slate-500
                             "
                           >
-                            No synchronized Guesty properties yet.
+                            {dictionary.groups.syncedEmpty}
                           </div>
                         )
                     }
@@ -1956,7 +2082,7 @@ export default function AdminGuestyPropertiesControls({
                       text-slate-950
                     "
                   >
-                    Unsynced / Needs Attention (
+                    {dictionary.groups.attention} (
                     {
                       attentionProperties.length
                     }
@@ -1971,7 +2097,7 @@ export default function AdminGuestyPropertiesControls({
                       text-slate-500
                     "
                   >
-                    Newly connected properties and properties whose latest sync needs attention.
+                    {dictionary.groups.attentionDescription}
                   </p>
                 </div>
 
@@ -2033,7 +2159,7 @@ export default function AdminGuestyPropertiesControls({
                               text-slate-500
                             "
                           >
-                            No properties need attention.
+                            {dictionary.groups.attentionEmpty}
                           </div>
                         )
                     }
@@ -2096,7 +2222,7 @@ export default function AdminGuestyPropertiesControls({
                       text-slate-950
                     "
                   >
-                    Add Guesty Property
+                    {dictionary.addModal.title}
                   </h2>
 
                   <p
@@ -2106,9 +2232,7 @@ export default function AdminGuestyPropertiesControls({
                       text-slate-500
                     "
                   >
-                    Connect a Guesty listing
-                    to HostMetric. Guesty
-                    Listing ID is required.
+                    {dictionary.addModal.description}
                   </p>
                 </div>
 
@@ -2157,67 +2281,67 @@ export default function AdminGuestyPropertiesControls({
                   [
                     [
                       "guestyListingId",
-                      "Guesty Listing ID",
-                      "Required",
+                      dictionary.addModal.listingId,
+                      dictionary.form.required,
                     ],
 
                     [
                       "title",
-                      "Title",
-                      "Optional before sync",
+                      dictionary.form.title,
+                      dictionary.form.optionalBeforeSync,
                     ],
 
                     [
                       "nickname",
-                      "Nickname",
-                      "Optional",
+                      dictionary.form.nickname,
+                      dictionary.form.optional,
                     ],
 
                     [
                       "listingType",
-                      "Listing Type",
-                      "Optional",
+                      dictionary.form.listingType,
+                      dictionary.form.optional,
                     ],
 
                     [
                       "bedrooms",
-                      "Bedrooms",
-                      "Optional",
+                      dictionary.form.bedrooms,
+                      dictionary.form.optional,
                     ],
 
                     [
                       "bathrooms",
-                      "Bathrooms",
-                      "Optional",
+                      dictionary.form.bathrooms,
+                      dictionary.form.optional,
                     ],
 
                     [
                       "accommodates",
-                      "Guest Capacity",
-                      "Optional",
+                      dictionary.form.accommodates,
+                      dictionary.form.optional,
                     ],
 
                     [
                       "city",
-                      "City",
-                      "Optional",
+                      dictionary.form.city,
+                      dictionary.form.optional,
                     ],
 
                     [
                       "state",
-                      "State / Region",
-                      "Optional",
+                      dictionary.form.state,
+                      dictionary.form.optional,
                     ],
 
                     [
                       "country",
-                      "Country",
-                      "Optional",
+                      dictionary.form.country,
+                      dictionary.form.optional,
                     ],
 
                     [
                       "currency",
-                      "Currency",
+                      dictionary.form.currency,
                       "EUR",
                     ],
                   ].map(
@@ -2389,7 +2513,7 @@ export default function AdminGuestyPropertiesControls({
                     hover:bg-slate-50
                   "
                 >
-                  Cancel
+                  {dictionary.addModal.cancel}
                 </button>
 
 
@@ -2435,7 +2559,7 @@ export default function AdminGuestyPropertiesControls({
                       )
                   }
 
-                  Add Property
+                  {addLoading ? dictionary.addModal.adding : dictionary.addModal.add}
                 </button>
               </div>
             </div>
@@ -2494,7 +2618,7 @@ export default function AdminGuestyPropertiesControls({
                       text-slate-950
                     "
                   >
-                    Guesty Calendar
+                    {dictionary.calendarModal.title}
                   </h2>
 
                   <p
@@ -2561,7 +2685,7 @@ export default function AdminGuestyPropertiesControls({
                         text-slate-700
                       "
                     >
-                      From
+                      {dictionary.calendarModal.from}
                     </span>
 
                     <input
@@ -2604,7 +2728,7 @@ export default function AdminGuestyPropertiesControls({
                         text-slate-700
                       "
                     >
-                      To
+                      {dictionary.calendarModal.to}
                     </span>
 
                     <input

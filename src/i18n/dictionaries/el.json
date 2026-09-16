@@ -2894,5 +2894,127 @@
     "eyebrow": "ΑΠΕΥΘΕΙΑΣ ΚΡΑΤΗΣΗ HOSTMETRIC",
     "title": "Κλείστε τη διαμονή σας",
     "description": "Επιλέξτε ημερομηνίες και αριθμό επισκεπτών για να δείτε τα διαθέσιμα καταλύματα της HostMetric."
+  },
+  "adminGuestyProperties": {
+    "integration": "Ενσωμάτωση Guesty",
+    "title": "Ακίνητα Guesty",
+    "description": "Ακίνητα που ανακτώνται από το Guesty Booking Engine API και είναι διαθέσιμα για διαχείριση απευθείας κρατήσεων μέσω HostMetric.",
+    "apiConfigured": "Το Guesty API είναι συνδεδεμένο",
+    "apiNotConfigured": "Το Guesty API δεν είναι συνδεδεμένο",
+    "global": {
+      "title": "Καθολικές Απευθείας Κρατήσεις",
+      "description": "Ελέγχει αν η εμπειρία απευθείας κράτησης της HostMetric είναι ενεργή συνολικά.",
+      "propertyRequirement": "Κάθε ακίνητο πρέπει επίσης να έχει ενεργοποιημένη την Απευθείας Κράτηση.",
+      "credentialsWarning": "Τα στοιχεία σύνδεσης του Guesty API δεν έχουν ρυθμιστεί ακόμη. Τα χειριστήρια είναι έτοιμα, αλλά ο ζωντανός συγχρονισμός Guesty και τα αιτήματα ημερολογίου απαιτούν έγκυρα στοιχεία σύνδεσης.",
+      "statusLabel": "ΚΑΤΑΣΤΑΣΗ",
+      "on": "Το Book Now είναι ΕΝΕΡΓΟ",
+      "off": "Το Book Now είναι ΑΝΕΝΕΡΓΟ",
+      "turnOn": "Ενεργοποίηση Book Now",
+      "turnOff": "Απενεργοποίηση Book Now",
+      "sync": "Συγχρονισμός Guesty",
+      "syncing": "Γίνεται συγχρονισμός...",
+      "addProperty": "Προσθήκη Ακινήτου Guesty"
+    },
+    "stats": {
+      "properties": "Ακίνητα Guesty",
+      "bookable": "Απευθείας Κράτηση Ενεργή",
+      "syncErrors": "Σφάλματα Συγχρονισμού"
+    },
+    "sections": {
+      "bookable": "Ακίνητα με Απευθείας Κράτηση",
+      "notBookable": "Ακίνητα χωρίς Απευθείας Κράτηση",
+      "synced": "Συγχρονισμένα Ακίνητα",
+      "unsynced": "Μη Συγχρονισμένα Ακίνητα"
+    },
+    "property": {
+      "listingId": "Guesty Listing ID",
+      "lastSynced": "Τελευταίος συγχρονισμός",
+      "never": "Ποτέ",
+      "locationUnavailable": "Η τοποθεσία δεν είναι διαθέσιμη",
+      "directBookingOn": "Απευθείας Κράτηση ΕΝΕΡΓΗ",
+      "directBookingOff": "Απευθείας Κράτηση ΑΝΕΝΕΡΓΗ",
+      "enable": "Ενεργοποίηση",
+      "disable": "Απενεργοποίηση",
+      "sync": "Συγχρονισμός",
+      "calendar": "Ημερολόγιο",
+      "delete": "Αφαίρεση",
+      "synced": "Συγχρονισμένο",
+      "syncing": "Γίνεται συγχρονισμός",
+      "error": "Σφάλμα",
+      "pending": "Σε αναμονή"
+    },
+    "empty": {
+      "title": "Δεν υπάρχουν ακόμη ακίνητα Guesty",
+      "description": "Δεν χρησιμοποιούνται δοκιμαστικά ακίνητα. Οι πραγματικές καταχωρίσεις Guesty θα εμφανιστούν εδώ αφού συνδεθεί ο λογαριασμός Guesty και ολοκληρωθεί επιτυχώς ο συγχρονισμός."
+    },
+    "addModal": {
+      "title": "Προσθήκη Ακινήτου Guesty",
+      "description": "Προσθέστε ένα πραγματικό Guesty listing στη HostMetric χρησιμοποιώντας το Guesty Listing ID.",
+      "listingId": "Guesty Listing ID",
+      "placeholder": "Εισαγάγετε το Guesty Listing ID",
+      "cancel": "Ακύρωση",
+      "add": "Προσθήκη Ακινήτου",
+      "adding": "Γίνεται προσθήκη..."
+    },
+    "calendarModal": {
+      "title": "Ημερολόγιο Guesty",
+      "from": "Από",
+      "to": "Έως",
+      "load": "Φόρτωση Ημερολογίου",
+      "loading": "Φόρτωση...",
+      "close": "Κλείσιμο",
+      "available": "Διαθέσιμο",
+      "unavailable": "Μη διαθέσιμο",
+      "reserved": "Δεσμευμένο",
+      "booked": "Κρατημένο",
+      "minimumNights": "Ελάχιστες νύχτες"
+    },
+    "confirm": {
+      "delete": "Θέλετε σίγουρα να αφαιρέσετε αυτό το Guesty ακίνητο από τη HostMetric;"
+    },
+    "messages": {
+      "genericError": "Κάτι πήγε στραβά. Δοκιμάστε ξανά.",
+      "listingIdRequired": "Το Guesty Listing ID είναι υποχρεωτικό.",
+      "calendarDatesRequired": "Επιλέξτε ημερομηνία έναρξης και λήξης.",
+      "loadGlobalError": "Δεν ήταν δυνατή η φόρτωση της καθολικής ρύθμισης απευθείας κρατήσεων.",
+      "updateGlobalError": "Δεν ήταν δυνατή η ενημέρωση της καθολικής ρύθμισης απευθείας κρατήσεων.",
+      "addError": "Δεν ήταν δυνατή η προσθήκη του ακινήτου Guesty.",
+      "syncAllError": "Δεν ήταν δυνατός ο συγχρονισμός των ακινήτων Guesty.",
+      "syncPropertyError": "Δεν ήταν δυνατός ο συγχρονισμός του ακινήτου Guesty.",
+      "updatePropertyError": "Δεν ήταν δυνατή η ενημέρωση της απευθείας κράτησης.",
+      "removeError": "Δεν ήταν δυνατή η αφαίρεση του ακινήτου Guesty.",
+      "calendarError": "Δεν ήταν δυνατή η φόρτωση του ημερολογίου Guesty.",
+      "fromToRequired": "Απαιτούνται ημερομηνίες από και έως.",
+      "invalidDateRange": "Η ημερομηνία «Από» δεν μπορεί να είναι μετά την ημερομηνία «Έως»."
+    },
+    "tooltips": {
+      "syncAll": "Εισαγωγή και ενημέρωση όλων των καταχωρίσεων από το Guesty",
+      "credentialsRequired": "Απαιτούνται στοιχεία σύνδεσης Guesty API",
+      "syncProperty": "Συγχρονισμός αυτού του ακινήτου με το Guesty",
+      "calendar": "Άνοιγμα ζωντανής διαθεσιμότητας Guesty"
+    },
+    "groups": {
+      "synced": "Συγχρονισμένα",
+      "syncedDescription": "Ακίνητα που έχουν συγχρονιστεί επιτυχώς με το Guesty.",
+      "syncedEmpty": "Δεν υπάρχουν ακόμη συγχρονισμένα ακίνητα Guesty.",
+      "attention": "Μη συγχρονισμένα / Χρειάζονται προσοχή",
+      "attentionDescription": "Νέα συνδεδεμένα ακίνητα και ακίνητα των οποίων ο τελευταίος συγχρονισμός χρειάζεται προσοχή.",
+      "attentionEmpty": "Κανένα ακίνητο δεν χρειάζεται προσοχή."
+    },
+    "form": {
+      "title": "Τίτλος",
+      "nickname": "Σύντομη ονομασία",
+      "listingType": "Τύπος καταχώρισης",
+      "bedrooms": "Υπνοδωμάτια",
+      "bathrooms": "Μπάνια",
+      "accommodates": "Χωρητικότητα επισκεπτών",
+      "city": "Πόλη",
+      "state": "Επαρχία / Περιοχή",
+      "country": "Χώρα",
+      "currency": "Νόμισμα",
+      "required": "Υποχρεωτικό",
+      "optional": "Προαιρετικό",
+      "optionalBeforeSync": "Προαιρετικό πριν τον συγχρονισμό"
+    }
   }
 }

@@ -13,7 +13,17 @@ import {
   isGuestyConfigured,
 } from "@/lib/guesty/config";
 
-import AdminGuestyPropertiesControls from "@/components/admin-guesty-properties-controls";
+import AdminGuestyPropertiesControls, {
+  type AdminGuestyPropertiesDictionary,
+} from "@/components/admin-guesty-properties-controls";
+
+import { cookies } from "next/headers";
+import { getDictionary } from "@/i18n/get-dictionary";
+import {
+  defaultLocale,
+  isSupportedLocale,
+  type Locale,
+} from "@/i18n/config";
 
 export const runtime =
   "nodejs";
@@ -88,10 +98,12 @@ function getSql() {
 
 function formatDate(
   value:
-    string | null
+    string | null,
+  locale: Locale,
+  neverLabel: string
 ) {
   if (!value) {
-    return "Never";
+    return neverLabel;
   }
 
   const date =
@@ -106,7 +118,7 @@ function formatDate(
   }
 
   return new Intl.DateTimeFormat(
-    "en-GB",
+    locale === "el" ? "el-GR" : "en-GB",
     {
       dateStyle:
         "medium",
@@ -132,7 +144,8 @@ function getPropertyName(
 
 function getLocation(
   property:
-    GuestyPropertyRow
+    GuestyPropertyRow,
+  unavailableLabel: string
 ) {
   const parts = [
     property.city,
@@ -142,7 +155,7 @@ function getLocation(
 
   return (
     parts.join(", ") ||
-    "Location unavailable"
+    unavailableLabel
   );
 }
 
@@ -299,6 +312,55 @@ async function getGuestyProperties() {
 
 
 export default async function GuestyPropertiesPage() {
+  const cookieStore =
+    await cookies();
+
+  const savedLocale =
+    cookieStore.get(
+      "hostmetric_locale"
+    )?.value;
+
+  let currentLocale: Locale =
+    defaultLocale;
+
+  if (
+    savedLocale &&
+    isSupportedLocale(
+      savedLocale
+    )
+  ) {
+    currentLocale =
+      savedLocale;
+  }
+
+  const siteDictionary =
+    await getDictionary(
+      currentLocale
+    );
+
+  const dictionary =
+    (
+      siteDictionary as {
+        adminGuestyProperties:
+          AdminGuestyPropertiesDictionary & {
+            integration: string;
+            title: string;
+            description: string;
+            apiConfigured: string;
+            apiNotConfigured: string;
+            stats: {
+              properties: string;
+              bookable: string;
+              syncErrors: string;
+            };
+            empty: {
+              title: string;
+              description: string;
+            };
+          };
+      }
+    ).adminGuestyProperties;
+
   const properties =
     await getGuestyProperties();
 
@@ -369,7 +431,7 @@ export default async function GuestyPropertiesPage() {
                 size={18}
               />
 
-              Guesty Integration
+              {dictionary.integration}
             </div>
 
             <h1
@@ -382,7 +444,7 @@ export default async function GuestyPropertiesPage() {
                 sm:text-4xl
               "
             >
-              Guesty Properties
+              {dictionary.title}
             </h1>
 
             <p
@@ -395,10 +457,7 @@ export default async function GuestyPropertiesPage() {
                 sm:text-base
               "
             >
-              Properties retrieved from the
-              Guesty Booking Engine API and
-              available for HostMetric direct
-              booking management.
+              {dictionary.description}
             </p>
           </div>
 
@@ -437,52 +496,12 @@ export default async function GuestyPropertiesPage() {
 
             {
               isGuestyConfigured
-                ? "Guesty API configured"
-                : "Guesty API not configured"
+                ? dictionary.apiConfigured
+                : dictionary.apiNotConfigured
             }
           </div>
         </div>
       </section>
-
-
-      <AdminGuestyPropertiesControls
-        guestyConfigured={
-          isGuestyConfigured
-        }
-        properties={
-          properties.map(
-            (property) => ({
-              id:
-                property.id,
-
-              guestyListingId:
-                property.guesty_listing_id,
-
-              name:
-                getPropertyName(
-                  property
-                ),
-
-              location:
-                getLocation(
-                  property
-                ),
-
-              syncStatus:
-                property.sync_status,
-
-              lastSyncedAt:
-                property.last_synced_at,
-
-              lastSyncError:
-                property.last_sync_error,
-
-              directBookingEnabled:
-                property.direct_booking_enabled,
-            })
-          )
-        }
-      />
 
 
       {/* STATS */}
@@ -542,7 +561,7 @@ export default async function GuestyPropertiesPage() {
               text-slate-500
             "
           >
-            Guesty Properties
+            {dictionary.stats.properties}
           </p>
         </div>
 
@@ -595,7 +614,7 @@ export default async function GuestyPropertiesPage() {
               text-slate-500
             "
           >
-            Direct Booking Enabled
+            {dictionary.stats.bookable}
           </p>
         </div>
 
@@ -648,10 +667,56 @@ export default async function GuestyPropertiesPage() {
               text-slate-500
             "
           >
-            Sync Errors
+            {dictionary.stats.syncErrors}
           </p>
         </div>
       </section>
+
+
+      <AdminGuestyPropertiesControls
+        guestyConfigured={
+          isGuestyConfigured
+        }
+        dictionary={
+          dictionary
+        }
+        properties={
+          properties.map(
+            (property) => ({
+              id:
+                property.id,
+
+              guestyListingId:
+                property.guesty_listing_id,
+
+              name:
+                getPropertyName(
+                  property
+                ),
+
+              location:
+                getLocation(
+                  property,
+                  dictionary.property.locationUnavailable
+                ),
+
+              syncStatus:
+                property.sync_status,
+
+              lastSyncedAt:
+                property.last_synced_at,
+
+              lastSyncError:
+                property.last_sync_error,
+
+              directBookingEnabled:
+                property.direct_booking_enabled,
+            })
+          )
+        }
+      />
+
+
 
 
       {/* EMPTY STATE */}
@@ -703,7 +768,7 @@ export default async function GuestyPropertiesPage() {
                   text-slate-900
                 "
               >
-                No Guesty properties yet
+                {dictionary.empty.title}
               </h3>
 
               <p
@@ -715,11 +780,7 @@ export default async function GuestyPropertiesPage() {
                   text-slate-500
                 "
               >
-                No mock properties are used.
-                Real Guesty listings will appear
-                here after the Guesty account is
-                configured and a successful sync
-                has been completed.
+                {dictionary.empty.description}
               </p>
             </div>
           </section>
