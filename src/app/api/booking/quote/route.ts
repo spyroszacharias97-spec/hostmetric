@@ -21,10 +21,8 @@ type GuestyPropertyRow = {
 
 type QuoteRequestBody = {
   propertyId?: unknown;
-
   checkInDate?: unknown;
   checkOutDate?: unknown;
-
   guestsCount?: unknown;
 
   numberOfGuests?: {
@@ -35,6 +33,14 @@ type QuoteRequestBody = {
   };
 
   coupons?: unknown;
+};
+
+type GuestyQuoteForSession = Awaited<
+  ReturnType<typeof createGuestyQuote>
+> & {
+  _id?: string;
+  id?: string;
+  expiresAt?: string;
 };
 
 function getSql() {
@@ -53,21 +59,12 @@ function getSql() {
 function parseBooleanSetting(
   value: unknown
 ) {
-  if (value === true) {
-    return true;
-  }
+  if (value === true) return true;
+  if (value === false) return false;
 
-  if (value === false) {
-    return false;
-  }
-
-  if (
-    typeof value === "string"
-  ) {
+  if (typeof value === "string") {
     const normalized =
-      value
-        .trim()
-        .toLowerCase();
+      value.trim().toLowerCase();
 
     return (
       normalized === "true" ||
@@ -135,9 +132,7 @@ function parseGuestBreakdown(
   value:
     QuoteRequestBody["numberOfGuests"]
 ): GuestyGuestBreakdown | null | undefined {
-  if (
-    value === undefined
-  ) {
+  if (value === undefined) {
     return undefined;
   }
 
@@ -179,27 +174,19 @@ function parseGuestBreakdown(
 
   return {
     ...(adults !== undefined
-      ? {
-          adults,
-        }
+      ? { adults }
       : {}),
 
     ...(children !== undefined
-      ? {
-          children,
-        }
+      ? { children }
       : {}),
 
     ...(infants !== undefined
-      ? {
-          infants,
-        }
+      ? { infants }
       : {}),
 
     ...(pets !== undefined
-      ? {
-          pets,
-        }
+      ? { pets }
       : {}),
   };
 }
@@ -207,9 +194,7 @@ function parseGuestBreakdown(
 function parseCoupons(
   value: unknown
 ) {
-  if (
-    value === undefined
-  ) {
+  if (value === undefined) {
     return undefined;
   }
 
@@ -239,6 +224,53 @@ function parseCoupons(
   }
 
   return coupons;
+}
+
+function getQuoteId(
+  quote: GuestyQuoteForSession
+) {
+  const value =
+    quote._id ?? quote.id;
+
+  if (
+    typeof value !== "string"
+  ) {
+    return null;
+  }
+
+  const trimmed =
+    value.trim();
+
+  return trimmed || null;
+}
+
+function getSessionExpiry(
+  quote: GuestyQuoteForSession
+) {
+  if (
+    typeof quote.expiresAt ===
+    "string"
+  ) {
+    const expiresAt =
+      new Date(
+        quote.expiresAt
+      );
+
+    if (
+      !Number.isNaN(
+        expiresAt.getTime()
+      ) &&
+      expiresAt.getTime() >
+        Date.now()
+    ) {
+      return expiresAt;
+    }
+  }
+
+  return new Date(
+    Date.now() +
+      24 * 60 * 60 * 1000
+  );
 }
 
 export async function POST(
@@ -399,10 +431,6 @@ export async function POST(
 
     const sql = getSql();
 
-    /*
-     * Global booking switch.
-     * Fail closed.
-     */
     const settingRows =
       (await sql`
         SELECT setting_value
@@ -432,13 +460,6 @@ export async function POST(
       );
     }
 
-    /*
-     * Resolve the Guesty listing ID
-     * server-side.
-     *
-     * Never trust a Guesty listing ID
-     * supplied by the public browser.
-     */
     const propertyRows =
       (await sql`
         SELECT
@@ -467,15 +488,8 @@ export async function POST(
       );
     }
 
-    /*
-     * Guesty remains the pricing
-     * source of truth.
-     *
-     * We do not calculate nightly
-     * rates, taxes or fees ourselves.
-     */
     const quote =
-      await createGuestyQuote({
+      (await createGuestyQuote({
         listingId:
           property.guesty_listing_id,
 
@@ -498,11 +512,91 @@ export async function POST(
               coupons,
             }
           : {}),
-      });
+      })) as GuestyQuoteForSession;
+
+    const quoteId =
+      getQuoteId(quote);
+
+    if (!quoteId) {
+      console.error(
+        "Guesty quote response did not include a quote ID."
+      );
+
+      return NextResponse.json(
+        {
+          error:
+            "Unable to initialize booking session.",
+        },
+        {
+          status: 502,
+        }
+      );
+    }
+
+    const expiresAt =
+      getSessionExpiry(
+        quote
+      );
+
+    /*
+     * The selected rate plan and guest email
+     * do not exist yet at quote creation time.
+     * They are bound to this session later,
+     * during the reservation step.
+     *
+     * The public token is the capability the
+     * browser must present. Guesty IDs alone
+     * are never treated as authorization.
+     */
+    const sessionRows =
+      (await sql`
+        INSERT INTO booking_sessions (
+          guesty_property_id,
+          guesty_listing_id,
+          quote_id,
+          rate_plan_id,
+          guest_email,
+          status,
+          expires_at
+        )
+        VALUES (
+          ${property.id},
+          ${property.guesty_listing_id},
+          ${quoteId},
+          '',
+          '',
+          'quote_created',
+          ${expiresAt.toISOString()}
+        )
+        RETURNING
+          public_token,
+          expires_at;
+      `) as unknown as Array<{
+        public_token: string;
+        expires_at: string | Date;
+      }>;
+
+    const bookingSession =
+      sessionRows[0];
+
+    if (
+      !bookingSession
+        ?.public_token
+    ) {
+      throw new Error(
+        "Booking session was not created."
+      );
+    }
 
     return NextResponse.json({
       propertyId:
         property.id,
+
+      bookingSessionToken:
+        bookingSession.public_token,
+
+      bookingSessionExpiresAt:
+        bookingSession.expires_at,
 
       quote,
     });

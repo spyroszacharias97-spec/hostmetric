@@ -13,8 +13,10 @@ import {
   CalendarDays,
   Check,
   ChevronDown,
+  Eye,
+  EyeOff,
+  Link2,
   Loader2,
-  Plus,
   Power,
   RefreshCw,
   Trash2,
@@ -62,6 +64,23 @@ export type AdminGuestyPropertiesDictionary = {
     sync: string;
     syncing: string;
     addProperty: string;
+  };
+  connection: {
+    connect: string;
+    title: string;
+    description: string;
+    clientId: string;
+    clientIdPlaceholder: string;
+    clientSecret: string;
+    clientSecretPlaceholder: string;
+    showSecret: string;
+    hideSecret: string;
+    cancel: string;
+    saveAndConnect: string;
+    connecting: string;
+    required: string;
+    connectionError: string;
+    connectedAndSynced: string;
   };
   property: {
     locationUnavailable: string;
@@ -156,42 +175,6 @@ type AdminGuestyPropertiesControlsProps = {
 };
 
 
-type AddPropertyForm = {
-  guestyListingId:
-    string;
-
-  title:
-    string;
-
-  nickname:
-    string;
-
-  listingType:
-    string;
-
-  bedrooms:
-    string;
-
-  bathrooms:
-    string;
-
-  accommodates:
-    string;
-
-  city:
-    string;
-
-  state:
-    string;
-
-  country:
-    string;
-
-  currency:
-    string;
-};
-
-
 type CalendarDay = {
   date:
     string;
@@ -214,43 +197,6 @@ type CalendarDay = {
   [key: string]:
     unknown;
 };
-
-
-const EMPTY_ADD_FORM:
-  AddPropertyForm = {
-    guestyListingId:
-      "",
-
-    title:
-      "",
-
-    nickname:
-      "",
-
-    listingType:
-      "",
-
-    bedrooms:
-      "",
-
-    bathrooms:
-      "",
-
-    accommodates:
-      "",
-
-    city:
-      "",
-
-    state:
-      "",
-
-    country:
-      "",
-
-    currency:
-      "",
-  };
 
 
 function getToday() {
@@ -362,36 +308,42 @@ export default function AdminGuestyPropertiesControls({
 
 
   const [
-    addOpen,
-    setAddOpen,
+    connectionOpen,
+    setConnectionOpen,
   ] =
     useState(false);
 
+  const [
+    clientId,
+    setClientId,
+  ] =
+    useState("");
 
   const [
-    addLoading,
-    setAddLoading,
+    clientSecret,
+    setClientSecret,
+  ] =
+    useState("");
+
+  const [
+    showClientSecret,
+    setShowClientSecret,
   ] =
     useState(false);
 
+  const [
+    connectionLoading,
+    setConnectionLoading,
+  ] =
+    useState(false);
 
   const [
-    addError,
-    setAddError,
+    connectionError,
+    setConnectionError,
   ] =
     useState<string | null>(
       null
     );
-
-
-  const [
-    addForm,
-    setAddForm,
-  ] =
-    useState<AddPropertyForm>(
-      EMPTY_ADD_FORM
-    );
-
 
   const [
     busyPropertyId,
@@ -681,34 +633,36 @@ export default function AdminGuestyPropertiesControls({
   }
 
 
-  async function addProperty() {
-    setAddError(
+  async function connectGuesty() {
+    setConnectionError(
       null
     );
 
+    const normalizedClientId =
+      clientId.trim();
+
+    const normalizedClientSecret =
+      clientSecret.trim();
 
     if (
-      !addForm
-        .guestyListingId
-        .trim()
+      !normalizedClientId ||
+      !normalizedClientSecret
     ) {
-      setAddError(
-        dictionary.messages.listingIdRequired
+      setConnectionError(
+        dictionary.connection.required
       );
 
       return;
     }
 
-
-    setAddLoading(
+    setConnectionLoading(
       true
     );
-
 
     try {
       const response =
         await fetch(
-          "/api/admin/guesty-properties",
+          "/api/admin/guesty-properties/connection",
           {
             method:
               "POST",
@@ -720,50 +674,17 @@ export default function AdminGuestyPropertiesControls({
 
             body:
               JSON.stringify({
-                guestyListingId:
-                  addForm
-                    .guestyListingId
-                    .trim(),
+                clientId:
+                  normalizedClientId,
 
-                title:
-                  addForm.title,
-
-                nickname:
-                  addForm.nickname,
-
-                listingType:
-                  addForm
-                    .listingType,
-
-                bedrooms:
-                  addForm.bedrooms,
-
-                bathrooms:
-                  addForm.bathrooms,
-
-                accommodates:
-                  addForm
-                    .accommodates,
-
-                city:
-                  addForm.city,
-
-                state:
-                  addForm.state,
-
-                country:
-                  addForm.country,
-
-                currency:
-                  addForm.currency,
+                clientSecret:
+                  normalizedClientSecret,
               }),
           }
         );
 
-
       const data =
         await response.json();
-
 
       if (
         !response.ok ||
@@ -772,29 +693,49 @@ export default function AdminGuestyPropertiesControls({
         throw new Error(
           getErrorMessage(
             data,
-            dictionary.messages.addError
+            dictionary.connection.connectionError
           )
         );
       }
 
+      const syncResponse =
+        await fetch(
+          "/api/admin/guesty-properties/sync",
+          {
+            method:
+              "POST",
+          }
+        );
 
-      setAddForm(
-        EMPTY_ADD_FORM
-      );
+      const syncData =
+        await syncResponse.json();
 
-      setAddOpen(
-        false
-      );
+      if (
+        !syncResponse.ok ||
+        !syncData.success
+      ) {
+        throw new Error(
+          getErrorMessage(
+            syncData,
+            dictionary.messages.syncAllError
+          )
+        );
+      }
+
+      setClientId("");
+      setClientSecret("");
+      setShowClientSecret(false);
+      setConnectionOpen(false);
 
       router.refresh();
     } catch (error) {
-      setAddError(
+      setConnectionError(
         error instanceof Error
           ? error.message
-          : dictionary.messages.addError
+          : dictionary.connection.connectionError
       );
     } finally {
-      setAddLoading(
+      setConnectionLoading(
         false
       );
     }
@@ -1731,11 +1672,13 @@ export default function AdminGuestyPropertiesControls({
 
             <div
               className="
-                mt-3
-                grid
-                grid-cols-1
+                mt-4
+                flex
+                flex-col
                 gap-3
-                sm:grid-cols-3
+                sm:flex-row
+                sm:items-center
+                sm:justify-end
               "
             >
               <button
@@ -1748,31 +1691,40 @@ export default function AdminGuestyPropertiesControls({
                 }
                 className={`
                   inline-flex
-                  min-h-12
-                  w-full
+                  min-h-11
                   items-center
                   justify-center
                   gap-2
                   rounded-xl
-                  px-4
-                  text-center
+                  border
+                  px-5
                   text-sm
                   font-black
-                  text-white
                   transition
                   disabled:cursor-not-allowed
                   disabled:opacity-60
 
                   ${
                     globalEnabled
-                      ? "bg-red-600 hover:bg-red-700"
-                      : "bg-emerald-600 hover:bg-emerald-700"
+                      ? "border-red-200 bg-white text-red-600 hover:bg-red-50"
+                      : "border-emerald-600 bg-emerald-600 text-white hover:bg-emerald-700"
                   }
                 `}
               >
-                <Power
-                  size={17}
-                />
+                {
+                  globalLoading
+                    ? (
+                      <Loader2
+                        size={17}
+                        className="animate-spin"
+                      />
+                    )
+                    : (
+                      <Power
+                        size={17}
+                      />
+                    )
+                }
 
                 {
                   globalEnabled
@@ -1781,101 +1733,99 @@ export default function AdminGuestyPropertiesControls({
                 }
               </button>
 
-              <button
-                type="button"
-                onClick={
-                  syncAllGuestyProperties
-                }
-                disabled={
-                  globalSyncLoading ||
-                  !guestyConfigured
-                }
-                title={
-                  guestyConfigured
-                    ? dictionary.tooltips.syncAll
-                    : dictionary.tooltips.credentialsRequired
-                }
-                className="
-                  inline-flex
-                  min-h-12
-                  w-full
-                  items-center
-                  justify-center
-                  gap-2
-                  rounded-xl
-                  border
-                  border-blue-200
-                  bg-blue-50
-                  px-4
-                  text-center
-                  text-sm
-                  font-black
-                  text-blue-700
-                  transition
-                  hover:bg-blue-100
-                  disabled:cursor-not-allowed
-                  disabled:opacity-50
-                "
-              >
-                {
-                  globalSyncLoading
-                    ? (
-                        <Loader2
-                          size={17}
-                          className="
-                            animate-spin
-                          "
-                        />
-                      )
-                    : (
-                        <RefreshCw
-                          size={17}
-                        />
-                      )
-                }
+              {
+                guestyConfigured
+                  ? (
+                    <button
+                      type="button"
+                      onClick={
+                        syncAllGuestyProperties
+                      }
+                      disabled={
+                        globalSyncLoading
+                      }
+                      title={
+                        dictionary.tooltips.syncAll
+                      }
+                      className="
+                        inline-flex
+                        min-h-11
+                        items-center
+                        justify-center
+                        gap-2
+                        rounded-xl
+                        border
+                        border-blue-200
+                        bg-blue-50
+                        px-5
+                        text-sm
+                        font-black
+                        text-blue-700
+                        transition
+                        hover:bg-blue-100
+                        disabled:cursor-not-allowed
+                        disabled:opacity-60
+                      "
+                    >
+                      {
+                        globalSyncLoading
+                          ? (
+                            <Loader2
+                              size={17}
+                              className="animate-spin"
+                            />
+                          )
+                          : (
+                            <RefreshCw
+                              size={17}
+                            />
+                          )
+                      }
 
-                {
-                  globalSyncLoading
-                    ? dictionary.global.syncing
-                    : dictionary.global.sync
-                }
-              </button>
+                      {
+                        globalSyncLoading
+                          ? dictionary.global.syncing
+                          : dictionary.global.sync
+                      }
+                    </button>
+                  )
+                  : (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setConnectionError(
+                          null
+                        );
 
-              <button
-                type="button"
-                onClick={() => {
-                  setAddError(
-                    null
-                  );
+                        setConnectionOpen(
+                          true
+                        );
+                      }}
+                      className="
+                        inline-flex
+                        min-h-11
+                        items-center
+                        justify-center
+                        gap-2
+                        rounded-xl
+                        bg-blue-600
+                        px-5
+                        text-sm
+                        font-black
+                        text-white
+                        shadow-sm
+                        transition
+                        hover:bg-blue-700
+                      "
+                    >
+                      <Link2
+                        size={17}
+                      />
 
-                  setAddOpen(
-                    true
-                  );
-                }}
-                className="
-                  inline-flex
-                  min-h-12
-                  w-full
-                  items-center
-                  justify-center
-                  gap-2
-                  rounded-xl
-                  bg-blue-600
-                  px-4
-                  text-center
-                  text-sm
-                  font-black
-                  text-white
-                  transition
-                  hover:bg-blue-700
-                "
-              >
-                <Plus
-                  size={18}
-                />
-
-                {dictionary.global.addProperty}
-              </button>
+                      {dictionary.connection.connect}
+                    </button>
+                  )
+              }
             </div>
           </div>
         </div>
@@ -2172,9 +2122,9 @@ export default function AdminGuestyPropertiesControls({
       }
 
 
-      {/* ADD PROPERTY MODAL */}
+      {/* GUESTY CONNECTION MODAL */}
       {
-        addOpen && (
+        connectionOpen && (
           <div
             className="
               fixed
@@ -2183,352 +2133,313 @@ export default function AdminGuestyPropertiesControls({
               flex
               items-center
               justify-center
-              bg-slate-950/50
+              bg-slate-950/45
               p-4
               backdrop-blur-sm
             "
           >
             <div
               className="
-                max-h-[90vh]
                 w-full
-                max-w-3xl
-                overflow-y-auto
+                max-w-lg
+                overflow-hidden
                 rounded-3xl
+                border
+                border-slate-200
                 bg-white
                 shadow-2xl
               "
             >
               <div
                 className="
-                  sticky
-                  top-0
-                  z-10
                   flex
-                  items-center
+                  items-start
                   justify-between
+                  gap-4
                   border-b
                   border-slate-100
-                  bg-white
-                  p-5
-                  sm:p-6
+                  px-6
+                  py-5
                 "
               >
                 <div>
+                  <div
+                    className="
+                      flex
+                      h-11
+                      w-11
+                      items-center
+                      justify-center
+                      rounded-2xl
+                      bg-blue-50
+                      text-blue-600
+                    "
+                  >
+                    <Link2
+                      size={21}
+                    />
+                  </div>
+
                   <h2
                     className="
+                      mt-4
                       text-xl
                       font-black
                       text-slate-950
                     "
                   >
-                    {dictionary.addModal.title}
+                    {dictionary.connection.title}
                   </h2>
 
                   <p
                     className="
-                      mt-1
+                      mt-2
                       text-sm
+                      leading-6
                       text-slate-500
                     "
                   >
-                    {dictionary.addModal.description}
+                    {dictionary.connection.description}
                   </p>
                 </div>
 
-
                 <button
                   type="button"
+                  disabled={
+                    connectionLoading
+                  }
                   onClick={() =>
-                    setAddOpen(
+                    setConnectionOpen(
                       false
                     )
-                  }
-                  disabled={
-                    addLoading
                   }
                   className="
                     flex
                     h-10
                     w-10
+                    shrink-0
                     items-center
                     justify-center
                     rounded-xl
-                    border
-                    border-slate-200
-                    text-slate-500
+                    text-slate-400
                     transition
-                    hover:bg-slate-50
+                    hover:bg-slate-100
+                    hover:text-slate-700
                   "
                 >
-                  <X
-                    size={19}
-                  />
+                  <X size={19} />
                 </button>
               </div>
 
-
               <div
                 className="
-                  grid
-                  gap-4
-                  p-5
-                  sm:grid-cols-2
-                  sm:p-6
+                  space-y-5
+                  px-6
+                  py-6
                 "
               >
+                <label className="block">
+                  <span
+                    className="
+                      text-sm
+                      font-black
+                      text-slate-800
+                    "
+                  >
+                    {dictionary.connection.clientId}
+                  </span>
+
+                  <input
+                    value={clientId}
+                    onChange={(event) =>
+                      setClientId(
+                        event.target.value
+                      )
+                    }
+                    autoComplete="off"
+                    placeholder={
+                      dictionary.connection.clientIdPlaceholder
+                    }
+                    className="
+                      mt-2
+                      h-12
+                      w-full
+                      rounded-xl
+                      border
+                      border-slate-200
+                      px-4
+                      text-sm
+                      font-semibold
+                      outline-none
+                      transition
+                      focus:border-blue-400
+                      focus:ring-4
+                      focus:ring-blue-50
+                    "
+                  />
+                </label>
+
+                <label className="block">
+                  <span
+                    className="
+                      text-sm
+                      font-black
+                      text-slate-800
+                    "
+                  >
+                    {dictionary.connection.clientSecret}
+                  </span>
+
+                  <div
+                    className="
+                      relative
+                      mt-2
+                    "
+                  >
+                    <input
+                      type={
+                        showClientSecret
+                          ? "text"
+                          : "password"
+                      }
+                      value={clientSecret}
+                      onChange={(event) =>
+                        setClientSecret(
+                          event.target.value
+                        )
+                      }
+                      autoComplete="new-password"
+                      placeholder={
+                        dictionary.connection.clientSecretPlaceholder
+                      }
+                      className="
+                        h-12
+                        w-full
+                        rounded-xl
+                        border
+                        border-slate-200
+                        px-4
+                        pr-12
+                        text-sm
+                        font-semibold
+                        outline-none
+                        transition
+                        focus:border-blue-400
+                        focus:ring-4
+                        focus:ring-blue-50
+                      "
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setShowClientSecret(
+                          !showClientSecret
+                        )
+                      }
+                      title={
+                        showClientSecret
+                          ? dictionary.connection.hideSecret
+                          : dictionary.connection.showSecret
+                      }
+                      className="
+                        absolute
+                        right-2
+                        top-1/2
+                        flex
+                        h-9
+                        w-9
+                        -translate-y-1/2
+                        items-center
+                        justify-center
+                        rounded-lg
+                        text-slate-400
+                        hover:bg-slate-100
+                      "
+                    >
+                      {
+                        showClientSecret
+                          ? <EyeOff size={18} />
+                          : <Eye size={18} />
+                      }
+                    </button>
+                  </div>
+                </label>
+
                 {
-                  [
-                    [
-                      "guestyListingId",
-                      dictionary.addModal.listingId,
-                      dictionary.form.required,
-                    ],
-
-                    [
-                      "title",
-                      dictionary.form.title,
-                      dictionary.form.optionalBeforeSync,
-                    ],
-
-                    [
-                      "nickname",
-                      dictionary.form.nickname,
-                      dictionary.form.optional,
-                    ],
-
-                    [
-                      "listingType",
-                      dictionary.form.listingType,
-                      dictionary.form.optional,
-                    ],
-
-                    [
-                      "bedrooms",
-                      dictionary.form.bedrooms,
-                      dictionary.form.optional,
-                    ],
-
-                    [
-                      "bathrooms",
-                      dictionary.form.bathrooms,
-                      dictionary.form.optional,
-                    ],
-
-                    [
-                      "accommodates",
-                      dictionary.form.accommodates,
-                      dictionary.form.optional,
-                    ],
-
-                    [
-                      "city",
-                      dictionary.form.city,
-                      dictionary.form.optional,
-                    ],
-
-                    [
-                      "state",
-                      dictionary.form.state,
-                      dictionary.form.optional,
-                    ],
-
-                    [
-                      "country",
-                      dictionary.form.country,
-                      dictionary.form.optional,
-                    ],
-
-                    [
-                      "currency",
-                      dictionary.form.currency,
-                      "EUR",
-                    ],
-                  ].map(
-                    ([
-                      key,
-                      label,
-                      placeholder,
-                    ]) => (
-                      <label
-                        key={
-                          key
-                        }
-                        className="
-                          block
-                        "
-                      >
-                        <span
-                          className="
-                            text-sm
-                            font-bold
-                            text-slate-700
-                          "
-                        >
-                          {
-                            label
-                          }
-                        </span>
-
-                        <input
-                          type={
-                            key ===
-                              "bedrooms" ||
-                            key ===
-                              "bathrooms" ||
-                            key ===
-                              "accommodates"
-                              ? "number"
-                              : "text"
-                          }
-                          min={
-                            key ===
-                            "accommodates"
-                              ? "1"
-                              : key ===
-                                    "bedrooms" ||
-                                  key ===
-                                    "bathrooms"
-                                ? "0"
-                                : undefined
-                          }
-                          step={
-                            key ===
-                            "bathrooms"
-                              ? "0.5"
-                              : key ===
-                                    "bedrooms" ||
-                                  key ===
-                                    "accommodates"
-                                ? "1"
-                                : undefined
-                          }
-                          value={
-                            addForm[
-                              key as keyof AddPropertyForm
-                            ]
-                          }
-                          onChange={(
-                            event
-                          ) =>
-                            setAddForm(
-                              (
-                                current
-                              ) => ({
-                                ...current,
-
-                                [key]:
-                                  event
-                                    .target
-                                    .value,
-                              })
-                            )
-                          }
-                          placeholder={
-                            placeholder
-                          }
-                          className="
-                            mt-2
-                            min-h-11
-                            w-full
-                            rounded-xl
-                            border
-                            border-slate-200
-                            bg-white
-                            px-3.5
-                            text-sm
-                            text-slate-900
-                            outline-none
-                            transition
-                            placeholder:text-slate-400
-                            focus:border-blue-400
-                            focus:ring-4
-                            focus:ring-blue-50
-                          "
-                        />
-                      </label>
-                    )
+                  connectionError && (
+                    <div
+                      className="
+                        rounded-xl
+                        border
+                        border-red-200
+                        bg-red-50
+                        px-4
+                        py-3
+                        text-sm
+                        font-semibold
+                        text-red-700
+                      "
+                    >
+                      {connectionError}
+                    </div>
                   )
                 }
               </div>
 
-
-              {
-                addError && (
-                  <div
-                    className="
-                      mx-5
-                      mb-4
-                      rounded-2xl
-                      border
-                      border-red-100
-                      bg-red-50
-                      px-4
-                      py-3
-                      text-sm
-                      font-semibold
-                      text-red-700
-                      sm:mx-6
-                    "
-                  >
-                    {
-                      addError
-                    }
-                  </div>
-                )
-              }
-
-
               <div
                 className="
                   flex
-                  justify-end
+                  flex-col-reverse
                   gap-3
                   border-t
                   border-slate-100
-                  p-5
-                  sm:p-6
+                  bg-slate-50
+                  px-6
+                  py-4
+                  sm:flex-row
+                  sm:justify-end
                 "
               >
                 <button
                   type="button"
+                  disabled={
+                    connectionLoading
+                  }
                   onClick={() =>
-                    setAddOpen(
+                    setConnectionOpen(
                       false
                     )
-                  }
-                  disabled={
-                    addLoading
                   }
                   className="
                     min-h-11
                     rounded-xl
                     border
                     border-slate-200
+                    bg-white
                     px-5
                     text-sm
-                    font-bold
+                    font-black
                     text-slate-700
-                    transition
-                    hover:bg-slate-50
+                    hover:bg-slate-100
                   "
                 >
-                  {dictionary.addModal.cancel}
+                  {dictionary.connection.cancel}
                 </button>
-
 
                 <button
                   type="button"
-                  onClick={
-                    addProperty
-                  }
                   disabled={
-                    addLoading
+                    connectionLoading
+                  }
+                  onClick={
+                    connectGuesty
                   }
                   className="
                     inline-flex
                     min-h-11
                     items-center
+                    justify-center
                     gap-2
                     rounded-xl
                     bg-blue-600
@@ -2536,30 +2447,30 @@ export default function AdminGuestyPropertiesControls({
                     text-sm
                     font-black
                     text-white
-                    transition
+                    shadow-sm
                     hover:bg-blue-700
                     disabled:cursor-not-allowed
                     disabled:opacity-60
                   "
                 >
                   {
-                    addLoading
+                    connectionLoading
                       ? (
                         <Loader2
                           size={17}
-                          className="
-                            animate-spin
-                          "
+                          className="animate-spin"
                         />
                       )
                       : (
-                        <Plus
-                          size={17}
-                        />
+                        <Link2 size={17} />
                       )
                   }
 
-                  {addLoading ? dictionary.addModal.adding : dictionary.addModal.add}
+                  {
+                    connectionLoading
+                      ? dictionary.connection.connecting
+                      : dictionary.connection.saveAndConnect
+                  }
                 </button>
               </div>
             </div>

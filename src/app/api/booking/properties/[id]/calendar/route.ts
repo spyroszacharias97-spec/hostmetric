@@ -22,6 +22,12 @@ type GuestyPropertyRow = {
   guesty_listing_id: string;
 };
 
+const DAY_MS =
+  24 * 60 * 60 * 1000;
+
+const MAX_CALENDAR_AHEAD_YEARS =
+  2;
+
 function getSql() {
   const databaseUrl =
     process.env.DATABASE_URL;
@@ -93,6 +99,44 @@ function isValidDate(
       .slice(0, 10) ===
     value
   );
+}
+
+function parseUtcDate(
+  value: string
+) {
+  return new Date(
+    `${value}T00:00:00Z`
+  );
+}
+
+function getTodayUtc() {
+  const now =
+    new Date();
+
+  return new Date(
+    Date.UTC(
+      now.getUTCFullYear(),
+      now.getUTCMonth(),
+      now.getUTCDate()
+    )
+  );
+}
+
+function addUtcYears(
+  date: Date,
+  years: number
+) {
+  const result =
+    new Date(
+      date.getTime()
+    );
+
+  result.setUTCFullYear(
+    result.getUTCFullYear() +
+      years
+  );
+
+  return result;
 }
 
 export async function GET(
@@ -167,6 +211,80 @@ export async function GET(
         {
           error:
             "The to date must be on or after the from date.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    const today =
+      getTodayUtc();
+
+    const fromDate =
+      parseUtcDate(from);
+
+    const toDate =
+      parseUtcDate(to);
+
+    if (
+      fromDate.getTime() <
+      today.getTime()
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "The calendar cannot be requested for past dates.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    const maximumDate =
+      addUtcYears(
+        today,
+        MAX_CALENDAR_AHEAD_YEARS
+      );
+
+    if (
+      fromDate.getTime() >
+        maximumDate.getTime() ||
+      toDate.getTime() >
+        maximumDate.getTime()
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "The calendar can only be requested up to 2 years ahead.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    /*
+     * Defensive sanity check so a malformed or
+     * unexpectedly huge range never reaches Guesty.
+     */
+    const requestedDays =
+      Math.floor(
+        (
+          toDate.getTime() -
+          fromDate.getTime()
+        ) /
+          DAY_MS
+      );
+
+    if (
+      requestedDays < 0
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Invalid calendar date range.",
         },
         {
           status: 400,

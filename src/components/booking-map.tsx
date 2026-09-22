@@ -15,6 +15,10 @@ import {
 
 import "maplibre-gl/dist/maplibre-gl.css";
 
+import type {
+  BookingSearchDictionary,
+} from "@/components/book-search";
+
 export type BookingMapProperty = {
   id: number;
 
@@ -48,6 +52,7 @@ export type BookingMapProperty = {
 
 type BookingMapProps = {
   properties: BookingMapProperty[];
+  dictionary: BookingSearchDictionary;
 
   activePropertyId?: number | null;
 
@@ -57,12 +62,13 @@ type BookingMapProps = {
 };
 
 function getPropertyName(
-  property: BookingMapProperty
+  property: BookingMapProperty,
+  dictionary: BookingSearchDictionary
 ) {
   return (
     property.title ||
     property.nickname ||
-    "HostMetric Stay"
+    dictionary.property.defaultTitle
   );
 }
 
@@ -184,7 +190,8 @@ function getPropertyPrice(
 }
 
 function createPopupContent(
-  property: BookingMapProperty
+  property: BookingMapProperty,
+  dictionary: BookingSearchDictionary
 ) {
   const wrapper =
     document.createElement(
@@ -213,7 +220,8 @@ function createPopupContent(
 
     imageElement.alt =
       getPropertyName(
-        property
+        property,
+        dictionary
       );
 
     imageElement.style.width =
@@ -243,8 +251,9 @@ function createPopupContent(
 
   title.textContent =
     getPropertyName(
-      property
-    );
+        property,
+        dictionary
+      );
 
   title.style.fontSize =
     "14px";
@@ -292,21 +301,24 @@ function createPopupContent(
     null &&
     property.bedrooms !==
     undefined
-      ? `${property.bedrooms} bd`
+      ? `${property.bedrooms} ${dictionary.property.bedroomsShort}`
       : null,
 
     property.bathrooms !==
     null &&
     property.bathrooms !==
     undefined
-      ? `${property.bathrooms} ba`
+      ? `${property.bathrooms} ${dictionary.property.bathroomsShort}`
       : null,
 
     property.accommodates !==
     null &&
     property.accommodates !==
     undefined
-      ? `Up to ${property.accommodates}`
+      ? dictionary.property.upToGuests.replace(
+          "{count}",
+          String(property.accommodates)
+        )
       : null,
   ]
     .filter(Boolean)
@@ -347,7 +359,7 @@ function createPopupContent(
       );
 
     priceElement.textContent =
-      `${price} total`;
+      `${price} ${dictionary.property.total}`;
 
     priceElement.style.marginTop =
       "10px";
@@ -375,7 +387,7 @@ function createPopupContent(
     "button";
 
   button.textContent =
-    "View stay";
+    dictionary.actions.viewStay;
 
   button.dataset.propertyId =
     String(property.id);
@@ -422,6 +434,7 @@ function createPopupContent(
 
 export default function BookingMap({
   properties,
+  dictionary,
   activePropertyId = null,
   onPropertySelect,
 }: BookingMapProps) {
@@ -565,9 +578,13 @@ export default function BookingMap({
 
         element.setAttribute(
           "aria-label",
-          `View ${getPropertyName(
-            property
-          )}`
+          dictionary.map.viewPropertyAria.replace(
+            "{property}",
+            getPropertyName(
+              property,
+              dictionary
+            )
+          )
         );
 
         element.dataset.propertyId =
@@ -629,7 +646,8 @@ export default function BookingMap({
           button,
         } =
           createPopupContent(
-            property
+            property,
+            dictionary
           );
 
         const popup =
@@ -762,6 +780,7 @@ export default function BookingMap({
   }, [
     properties,
     activePropertyId,
+    dictionary,
   ]);
 
   useEffect(() => {
@@ -836,11 +855,11 @@ export default function BookingMap({
   ]);
 
   return (
-    <div className="relative h-full min-h-[520px] w-full">
+    <div className="relative h-full min-h-[420px] w-full">
       <div
         ref={containerRef}
-        className="h-full min-h-[520px] w-full"
-        aria-label="Available properties map"
+        className="h-full min-h-[420px] w-full"
+        aria-label={dictionary.map.ariaLabel}
       />
 
       {properties.filter(
@@ -851,14 +870,11 @@ export default function BookingMap({
             <MapFallbackIcon />
 
             <p className="mt-3 text-sm font-semibold text-slate-700">
-              Map locations are not
-              available for these stays
+              {dictionary.map.noLocationsTitle}
             </p>
 
             <p className="mt-1 text-xs text-slate-500">
-              Property coordinates will
-              appear here when provided
-              by Guesty.
+              {dictionary.map.noLocationsDescription}
             </p>
           </div>
         </div>

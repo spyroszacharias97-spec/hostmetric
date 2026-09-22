@@ -17,8 +17,19 @@ type GuestyPropertyRow = {
   guesty_listing_id: string;
 };
 
+type BookingSessionRow = {
+  id: number;
+  guesty_property_id: number;
+  guesty_listing_id: string;
+  quote_id: string;
+  status: string;
+  expires_at: string | Date;
+};
+
 type ReservationRequestBody = {
   propertyId?: unknown;
+
+  bookingSessionToken?: unknown;
 
   quoteId?: unknown;
   ratePlanId?: unknown;
@@ -97,6 +108,19 @@ function isValidEmail(
   );
 }
 
+function isRecord(
+  value: unknown
+): value is Record<
+  string,
+  unknown
+> {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    !Array.isArray(value)
+  );
+}
+
 function getQuoteRatePlanIds(
   quote: Awaited<
     ReturnType<
@@ -124,6 +148,128 @@ function getQuoteRatePlanIds(
           value.trim()
         )
     );
+}
+
+function getReservationId(
+  reservation: unknown
+) {
+  if (!isRecord(reservation)) {
+    return null;
+  }
+
+  return (
+    requireString(
+      reservation._id
+    ) ??
+    requireString(
+      reservation.id
+    )
+  );
+}
+
+function getReservationStatus(
+  reservation: unknown
+) {
+  if (!isRecord(reservation)) {
+    return null;
+  }
+
+  return requireString(
+    reservation.status
+  );
+}
+
+type PendingAuthPayment = {
+  paymentId: string;
+  threeDSChallenge: Record<string, unknown> | null;
+};
+
+function findThreeDSChallenge(
+  value: unknown
+): Record<string, unknown> | null {
+  if (!isRecord(value)) {
+    return null;
+  }
+
+  const directChallenge =
+    value.threeDSChallenge;
+
+  if (isRecord(directChallenge)) {
+    return directChallenge;
+  }
+
+  for (const nestedValue of Object.values(value)) {
+    if (isRecord(nestedValue)) {
+      const nestedChallenge =
+        findThreeDSChallenge(nestedValue);
+
+      if (nestedChallenge) {
+        return nestedChallenge;
+      }
+    }
+  }
+
+  return null;
+}
+
+function getPendingAuthPayment(
+  reservation: unknown
+): PendingAuthPayment | null {
+  if (!isRecord(reservation)) {
+    return null;
+  }
+
+  const money =
+    reservation.money;
+
+  if (!isRecord(money)) {
+    return null;
+  }
+
+  const payments =
+    money.payments;
+
+  if (!Array.isArray(payments)) {
+    return null;
+  }
+
+  for (
+    const payment of payments
+  ) {
+    if (!isRecord(payment)) {
+      continue;
+    }
+
+    const status =
+      requireString(
+        payment.status
+      );
+
+    if (
+      status?.toUpperCase() !==
+      "PENDING_AUTH"
+    ) {
+      continue;
+    }
+
+    const paymentId =
+      requireString(
+        payment._id
+      ) ??
+      requireString(
+        payment.id
+      );
+
+    if (paymentId) {
+      return {
+        paymentId,
+        threeDSChallenge:
+          findThreeDSChallenge(payment),
+      };
+    }
+  }
+
+  return null;
 }
 
 export async function POST(
@@ -170,6 +316,11 @@ export async function POST(
       );
     }
 
+    const bookingSessionToken =
+      requireString(
+        body.bookingSessionToken
+      );
+
     const quoteId =
       requireString(
         body.quoteId
@@ -184,6 +335,18 @@ export async function POST(
       requireString(
         body.initialPaymentMethodId
       );
+
+    if (!bookingSessionToken) {
+      return NextResponse.json(
+        {
+          error:
+            "Booking session token is required.",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
 
     if (!quoteId) {
       return NextResponse.json(
@@ -335,6 +498,48 @@ export async function POST(
     }
 
     /*
+     * The browser must prove possession of the
+     * HostMetric booking-session token.
+     *
+     * Guesty quote/reservation IDs alone are
+     * never treated as authorization.
+     */
+    const sessionRows =
+      (await sql`
+        SELECT
+          id,
+          guesty_property_id,
+          guesty_listing_id,
+          quote_id,
+          status,
+          expires_at
+        FROM booking_sessions
+        WHERE
+          public_token::text = ${bookingSessionToken}
+          AND guesty_property_id = ${property.id}
+          AND guesty_listing_id = ${property.guesty_listing_id}
+          AND quote_id = ${quoteId}
+          AND status = 'quote_created'
+          AND expires_at > NOW()
+        LIMIT 1;
+      `) as unknown as BookingSessionRow[];
+
+    const bookingSession =
+      sessionRows[0];
+
+    if (!bookingSession) {
+      return NextResponse.json(
+        {
+          error:
+            "Booking session is invalid, expired or already used.",
+        },
+        {
+          status: 409,
+        }
+      );
+    }
+
+    /*
      * Retrieve the quote directly from Guesty.
      *
      * This prevents the browser from choosing
@@ -383,6 +588,40 @@ export async function POST(
     }
 
     /*
+     * Atomically claim the booking session before
+     * calling Guesty. This prevents two concurrent
+     * browser requests from using the same quote.
+     */
+    const claimedRows =
+      (await sql`
+        UPDATE booking_sessions
+        SET
+          rate_plan_id = ${ratePlanId},
+          guest_email = ${email.toLowerCase()},
+          status = 'payment_pending',
+          updated_at = NOW()
+        WHERE
+          id = ${bookingSession.id}
+          AND status = 'quote_created'
+          AND expires_at > NOW()
+        RETURNING id;
+      `) as unknown as Array<{
+        id: number;
+      }>;
+
+    if (!claimedRows[0]) {
+      return NextResponse.json(
+        {
+          error:
+            "Booking session is already being processed.",
+        },
+        {
+          status: 409,
+        }
+      );
+    }
+
+    /*
      * GuestyPay:
      *
      * The browser obtains this payment method ID
@@ -390,29 +629,153 @@ export async function POST(
      *
      * Raw card details never reach this route.
      */
-    const reservation =
-      await createGuestyInstantChargeReservation(
-        {
-          quoteId,
-          ratePlanId,
+    let reservation: Awaited<
+      ReturnType<
+        typeof createGuestyInstantChargeReservation
+      >
+    >;
 
-          initialPaymentMethodId,
+    try {
+      reservation =
+        await createGuestyInstantChargeReservation(
+          {
+            quoteId,
+            ratePlanId,
 
-          guest: {
-            firstName,
-            lastName,
-            email,
+            initialPaymentMethodId,
 
-            ...(phone
-              ? {
-                  phone,
-                }
-              : {}),
-          },
-        }
+            guest: {
+              firstName,
+              lastName,
+              email,
+
+              ...(phone
+                ? {
+                    phone,
+                  }
+                : {}),
+            },
+          }
+        );
+    } catch (error) {
+      /*
+       * The session was claimed before the Guesty call.
+       * If instant-charge fails, do not leave it stuck
+       * forever in payment_pending and do not reopen it
+       * for an unsafe blind payment retry.
+       */
+      await sql`
+        UPDATE booking_sessions
+        SET
+          status = 'failed',
+          updated_at = NOW()
+        WHERE
+          id = ${bookingSession.id}
+          AND status = 'payment_pending'
+          AND reservation_id IS NULL;
+      `;
+
+      throw error;
+    }
+
+    const reservationId =
+      getReservationId(
+        reservation
       );
 
+    if (!reservationId) {
+      console.error(
+        "Guesty instant-charge response did not include a reservation ID."
+      );
+
+      await sql`
+        UPDATE booking_sessions
+        SET
+          status = 'failed',
+          updated_at = NOW()
+        WHERE
+          id = ${bookingSession.id}
+          AND status = 'payment_pending'
+          AND reservation_id IS NULL;
+      `;
+
+      return NextResponse.json(
+        {
+          error:
+            "Reservation was submitted but its Guesty ID could not be confirmed.",
+        },
+        {
+          status: 502,
+        }
+      );
+    }
+
+    /*
+     * Guesty requires /verify-payment only when
+     * the instant-charge payment is PENDING_AUTH.
+     */
+    const pendingAuthPayment =
+      getPendingAuthPayment(
+        reservation
+      );
+
+    const pendingAuthPaymentId =
+      pendingAuthPayment?.paymentId ??
+      null;
+
+    const threeDSChallenge =
+      pendingAuthPayment
+        ?.threeDSChallenge ??
+      findThreeDSChallenge(
+        reservation
+      );
+
+    const reservationStatus =
+      getReservationStatus(
+        reservation
+      );
+
+    const nextSessionStatus =
+      pendingAuthPaymentId
+        ? "payment_authentication_required"
+        : reservationStatus
+              ?.toLowerCase() ===
+            "confirmed"
+          ? "confirmed"
+          : "payment_pending";
+
+    await sql`
+      UPDATE booking_sessions
+      SET
+        reservation_id = ${reservationId},
+        payment_id = ${pendingAuthPaymentId},
+        status = ${nextSessionStatus},
+        reservation_created_at = NOW(),
+        confirmed_at = CASE
+          WHEN ${nextSessionStatus} = 'confirmed'
+          THEN NOW()
+          ELSE confirmed_at
+        END,
+        updated_at = NOW()
+      WHERE
+        id = ${bookingSession.id};
+    `;
+
     return NextResponse.json({
+      bookingSessionToken,
+
+      requiresPaymentVerification:
+        Boolean(
+          pendingAuthPaymentId
+        ),
+
+      ...(pendingAuthPaymentId &&
+      threeDSChallenge
+        ? {
+            threeDSChallenge,
+          }
+        : {}),
+
       reservation,
     });
   } catch (error) {

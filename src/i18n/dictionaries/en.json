@@ -3015,6 +3015,23 @@
       "required": "Required",
       "optional": "Optional",
       "optionalBeforeSync": "Optional before sync"
+    },
+    "connection": {
+      "connect": "Connect Guesty",
+      "title": "Connect Guesty",
+      "description": "Enter the Client ID and Client Secret for the Guesty Booking Engine API to connect Guesty and automatically sync the properties.",
+      "clientId": "Client ID",
+      "clientIdPlaceholder": "Enter the Guesty Client ID",
+      "clientSecret": "Client Secret",
+      "clientSecretPlaceholder": "Enter the Guesty Client Secret",
+      "showSecret": "Show Client Secret",
+      "hideSecret": "Hide Client Secret",
+      "cancel": "Cancel",
+      "saveAndConnect": "Save and Connect",
+      "connecting": "Connecting...",
+      "required": "Enter the Client ID and Client Secret.",
+      "connectionError": "Could not connect to Guesty.",
+      "connectedAndSynced": "Guesty connected and properties synced."
     }
   }
 }

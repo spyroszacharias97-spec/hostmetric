@@ -2,15 +2,14 @@ import { guestyClient } from "@/lib/guesty/client";
 
 export type GuestyPaymentProvider = {
   _id?: string;
-  id?: string;
 
-  provider?: string;
-  type?: string;
-  name?: string;
+  providerType?: string;
+  providerAccountId?: string;
+  status?: string;
 
-  accountId?: string;
-
-  active?: boolean;
+  paymentProcessorName?: string;
+  accountName?: string;
+  paymentProcessorId?: string;
 
   [key: string]: unknown;
 };

@@ -10,7 +10,8 @@
     "selectLanguage": "Dil seçin",
     "homeAriaLabel": "HostMetric ana sayfası",
     "logoAlt": "HostMetric Mülk Yönetimi",
-    "blog": "Blog"
+    "blog": "Blog",
+    "bookStay": "Konaklama rezervasyonu"
   },
   "hero": {
     "eyebrow": "Kısa Dönem Kiralama Performansı",
@@ -2780,14 +2781,12 @@
         "greek": "Greek",
         "english": "English",
         "draft": "Draft",
-        "review": "In Review",
         "published": "Published",
         "notGenerated": "Not Generated"
       },
       "actions": {
         "saveDraft": "Save Draft",
         "preview": "Preview",
-        "sendToReview": "Send to Review",
         "generateTranslations": "Generate Translations",
         "publish": "Publish",
         "addSection": "Add Content Section",
@@ -2826,8 +2825,6 @@
         "draftUpdated": "Draft updated successfully.",
         "saveFailed": "The draft could not be saved. Please try again.",
         "validationFailed": "Please complete the required article and SEO fields before saving.",
-        "sentToReview": "The article was sent to review.",
-        "reviewFailed": "The article could not be sent to review.",
         "previewRequiresSave": "Save the article first to open the preview.",
         "imageUploadFailed": "The image could not be uploaded.",
         "translationsRequireSave": "Save the article before generating translations.",
@@ -2842,7 +2839,6 @@
         "filters": {
           "all": "All",
           "drafts": "Drafts",
-          "review": "In Review",
           "published": "Published",
           "needsTranslation": "Needs Translation"
         },
@@ -2865,7 +2861,8 @@
         "completeTranslations": "Translations complete",
         "open": "Open",
         "emptyTitle": "There are no articles in this category.",
-        "emptyDescription": "Create a new article or change the filter to view other guides."
+        "emptyDescription": "Create a new article or change the filter to view other guides.",
+        "publish": "Publish"
       }
     }
   },
@@ -2881,5 +2878,208 @@
     "empty": "Henüz yayınlanmış makale yok.",
     "backToAll": "Tüm makaleler",
     "relatedArticles": "İlgili makaleler"
+  },
+  "bookingPage": {
+    "eyebrow": "HOSTMETRIC İLE DOĞRUDAN REZERVASYON",
+    "title": "Konaklamanızı rezerve edin",
+    "description": "Mevcut HostMetric konaklama seçeneklerini keşfetmek için seyahat tarihlerinizi ve misafir sayısını seçin."
+  },
+  "adminGuestyProperties": {
+    "integration": "Guesty Integration",
+    "title": "Guesty Properties",
+    "description": "Properties retrieved from the Guesty Booking Engine API and available for HostMetric direct booking management.",
+    "apiConfigured": "Guesty API configured",
+    "apiNotConfigured": "Guesty API not configured",
+    "global": {
+      "title": "Global Direct Booking",
+      "description": "Controls whether the HostMetric direct booking experience is enabled globally.",
+      "propertyRequirement": "Individual properties must also have Direct Booking enabled.",
+      "credentialsWarning": "Guesty API credentials are not configured yet. The controls are ready, but live Guesty sync and calendar requests require valid credentials.",
+      "statusLabel": "STATUS",
+      "on": "Book Now is ON",
+      "off": "Book Now is OFF",
+      "turnOn": "Turn Book Now ON",
+      "turnOff": "Turn Book Now OFF",
+      "sync": "Sync Guesty",
+      "syncing": "Syncing...",
+      "addProperty": "Add Guesty Property"
+    },
+    "stats": {
+      "properties": "Guesty Properties",
+      "bookable": "Direct Booking Enabled",
+      "syncErrors": "Sync Errors"
+    },
+    "sections": {
+      "bookable": "Direct Booking Properties",
+      "notBookable": "Properties Without Direct Booking",
+      "synced": "Synced Properties",
+      "unsynced": "Unsynced Properties"
+    },
+    "property": {
+      "listingId": "Guesty Listing ID",
+      "lastSynced": "Last synced",
+      "never": "Never",
+      "locationUnavailable": "Location unavailable",
+      "directBookingOn": "Direct Booking ON",
+      "directBookingOff": "Direct Booking OFF",
+      "enable": "Enable",
+      "disable": "Disable",
+      "sync": "Sync",
+      "calendar": "Calendar",
+      "delete": "Remove",
+      "synced": "Synced",
+      "syncing": "Syncing",
+      "error": "Error",
+      "pending": "Pending"
+    },
+    "empty": {
+      "title": "No Guesty properties yet",
+      "description": "No mock properties are used. Real Guesty listings will appear here after the Guesty account is configured and a successful sync has been completed."
+    },
+    "addModal": {
+      "title": "Add Guesty Property",
+      "description": "Add a real Guesty listing to HostMetric using its Guesty Listing ID.",
+      "listingId": "Guesty Listing ID",
+      "placeholder": "Enter the Guesty Listing ID",
+      "cancel": "Cancel",
+      "add": "Add Property",
+      "adding": "Adding..."
+    },
+    "calendarModal": {
+      "title": "Guesty Calendar",
+      "from": "From",
+      "to": "To",
+      "load": "Load Calendar",
+      "loading": "Loading...",
+      "close": "Close",
+      "available": "Available",
+      "unavailable": "Unavailable",
+      "reserved": "Reserved",
+      "booked": "Booked",
+      "minimumNights": "Minimum nights"
+    },
+    "confirm": {
+      "delete": "Are you sure you want to remove this Guesty property from HostMetric?"
+    },
+    "messages": {
+      "genericError": "Something went wrong. Please try again.",
+      "listingIdRequired": "Guesty Listing ID is required.",
+      "calendarDatesRequired": "Choose both a start date and an end date.",
+      "loadGlobalError": "Could not load the global direct booking setting.",
+      "updateGlobalError": "Could not update the global direct booking setting.",
+      "addError": "Could not add the Guesty property.",
+      "syncAllError": "Could not synchronize Guesty properties.",
+      "syncPropertyError": "Could not synchronize the Guesty property.",
+      "updatePropertyError": "Could not update direct booking.",
+      "removeError": "Could not remove the Guesty property.",
+      "calendarError": "Could not load the Guesty calendar.",
+      "fromToRequired": "From and to dates are required.",
+      "invalidDateRange": "From date cannot be after the to date."
+    },
+    "tooltips": {
+      "syncAll": "Import and update all listings from Guesty",
+      "credentialsRequired": "Guesty API credentials are required",
+      "syncProperty": "Synchronize this property with Guesty",
+      "calendar": "Open live Guesty availability"
+    },
+    "groups": {
+      "synced": "Synced",
+      "syncedDescription": "Properties successfully synchronized with Guesty.",
+      "syncedEmpty": "No synchronized Guesty properties yet.",
+      "attention": "Unsynced / Needs Attention",
+      "attentionDescription": "Newly connected properties and properties whose latest sync needs attention.",
+      "attentionEmpty": "No properties need attention."
+    },
+    "form": {
+      "title": "Title",
+      "nickname": "Nickname",
+      "listingType": "Listing Type",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms",
+      "accommodates": "Guest Capacity",
+      "city": "City",
+      "state": "State / Region",
+      "country": "Country",
+      "currency": "Currency",
+      "required": "Required",
+      "optional": "Optional",
+      "optionalBeforeSync": "Optional before sync"
+    },
+    "connection": {
+      "connect": "Connect Guesty",
+      "title": "Connect Guesty",
+      "description": "Enter the Client ID and Client Secret for the Guesty Booking Engine API to connect Guesty and automatically sync the properties.",
+      "clientId": "Client ID",
+      "clientIdPlaceholder": "Enter the Guesty Client ID",
+      "clientSecret": "Client Secret",
+      "clientSecretPlaceholder": "Enter the Guesty Client Secret",
+      "showSecret": "Show Client Secret",
+      "hideSecret": "Hide Client Secret",
+      "cancel": "Cancel",
+      "saveAndConnect": "Save and Connect",
+      "connecting": "Connecting...",
+      "required": "Enter the Client ID and Client Secret.",
+      "connectionError": "Could not connect to Guesty.",
+      "connectedAndSynced": "Guesty connected and properties synced."
+    }
+  },
+  "bookingSearch": {
+    "fields": {
+      "where": "Nerede",
+      "destinationPlaceholder": "Destinasyon ara",
+      "checkIn": "Giriş",
+      "checkOut": "Çıkış",
+      "guests": "Misafirler",
+      "guest": "misafir",
+      "guestsPlural": "misafir",
+      "adults": "Yetişkinler",
+      "adultsDescription": "13 yaş ve üzeri",
+      "children": "Çocuklar",
+      "childrenDescription": "0–12 yaş"
+    },
+    "actions": {
+      "search": "Ara",
+      "searching": "Aranıyor...",
+      "viewStay": "Konaklamayı görüntüle"
+    },
+    "destinations": {
+      "searchHint": "Mevcut HostMetric mülklerindeki destinasyonları görmek için arama yapın."
+    },
+    "results": {
+      "exploreTitle": "Konaklama seçeneklerimizi keşfedin",
+      "availableTitle": "Mevcut konaklamalar",
+      "propertiesSingular": "mülk",
+      "propertiesPlural": "mülk",
+      "staySingular": "konaklama",
+      "stayPlural": "konaklama",
+      "availableSuffix": "mevcut",
+      "loadingProperties": "Guesty mülkleri yükleniyor...",
+      "intro": "Doğrudan Rezervasyon için etkinleştirilmiş HostMetric mülkleri gösteriliyor. Guesty üzerinden canlı müsaitlik ve fiyatları kontrol etmek için tarihleri seçin.",
+      "guestyConnected": "Guesty bağlı",
+      "noBookableTitle": "Henüz rezerve edilebilir mülk yok",
+      "noBookableDescription": "Mülkler, Guesty senkronizasyonundan sonra ve HostMetric'te Doğrudan Rezervasyon etkinleştirildiğinde burada otomatik olarak görünecektir.",
+      "noResultsTitle": "Konaklama bulunamadı",
+      "noResultsDescription": "Farklı tarihler, destinasyon veya misafir bilgileri deneyin.",
+      "noPhoto": "Mülk fotoğrafı mevcut değil",
+      "selectDatesPricing": "Guesty üzerinden canlı müsaitlik ve fiyatları kontrol etmek için yukarıdan tarihleri seçin."
+    },
+    "property": {
+      "bedroomsShort": "yd.",
+      "bathroomsShort": "bn.",
+      "upToGuests": "{count} misafire kadar",
+      "total": "toplam",
+      "perNight": "gecelik"
+    },
+    "map": {
+      "ariaLabel": "Mevcut mülkler haritası",
+      "noLocationsTitle": "Bu konaklamalar için harita konumları mevcut değil",
+      "noLocationsDescription": "Mülk koordinatları Guesty tarafından sağlandığında burada görünecektir."
+    },
+    "errors": {
+      "datesRequired": "Geçerli giriş ve çıkış tarihleri gereklidir.",
+      "loadProperties": "Mülkler yüklenemedi.",
+      "searchProperties": "Mülkler aranamadı.",
+      "directBookingUnavailable": "Doğrudan rezervasyon şu anda kullanılamıyor."
+    }
   }
 }

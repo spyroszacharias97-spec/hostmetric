@@ -2,7 +2,9 @@ import { neon } from "@neondatabase/serverless";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 
-import BookSearch from "@/components/book-search";
+import BookSearch, {
+  type BookingSearchDictionary,
+} from "@/components/book-search";
 import { features } from "@/config/features";
 import { getDictionary } from "@/i18n/get-dictionary";
 import {
@@ -108,20 +110,42 @@ export default async function BookPage() {
     }
   ).bookingPage;
 
-  if (!bookingPage) {
+  let bookingSearch = (
+    dictionary as {
+      bookingSearch?: BookingSearchDictionary;
+    }
+  ).bookingSearch;
+
+  if (!bookingPage || !bookingSearch) {
     const fallbackDictionary =
       await getDictionary(defaultLocale);
 
-    bookingPage = (
-      fallbackDictionary as {
-        bookingPage?: BookingPageDictionary;
-      }
-    ).bookingPage;
+    if (!bookingPage) {
+      bookingPage = (
+        fallbackDictionary as {
+          bookingPage?: BookingPageDictionary;
+        }
+      ).bookingPage;
+    }
+
+    if (!bookingSearch) {
+      bookingSearch = (
+        fallbackDictionary as {
+          bookingSearch?: BookingSearchDictionary;
+        }
+      ).bookingSearch;
+    }
   }
 
   if (!bookingPage) {
     throw new Error(
       "bookingPage is missing from the default language dictionary."
+    );
+  }
+
+  if (!bookingSearch) {
+    throw new Error(
+      "bookingSearch is missing from the default language dictionary."
     );
   }
 
@@ -184,7 +208,9 @@ export default async function BookPage() {
       </section>
 
       <section className="relative z-10 mx-auto -mt-12 max-w-7xl px-4 pb-12 sm:-mt-14 sm:px-6 lg:px-8">
-        <BookSearch />
+        <BookSearch
+          dictionary={bookingSearch}
+        />
       </section>
     </main>
   );

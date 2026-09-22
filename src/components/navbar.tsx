@@ -152,25 +152,27 @@ export default function Navbar() {
   ========================================== */
 
   useEffect(() => {
-    async function loadInitialLanguage() {
-      const pathnameLocale =
+    let cancelled = false;
+
+    async function loadLanguage() {
+      const locale =
         getLocaleFromPathname(
-          window.location.pathname
+          pathname ||
+            window.location.pathname
         );
 
-
-      const locale: Locale =
-        pathnameLocale;
-
+      if (cancelled) {
+        return;
+      }
 
       setCurrentLocale(locale);
-
 
       try {
         const dictionary =
           await getDictionary(locale);
 
         if (
+          !cancelled &&
           (dictionary as any)
             .navigation
         ) {
@@ -188,9 +190,14 @@ export default function Navbar() {
     }
 
 
-    loadInitialLanguage();
+    void loadLanguage();
 
-  }, []);
+
+    return () => {
+      cancelled = true;
+    };
+
+  }, [pathname]);
 
 
   /* ==========================================

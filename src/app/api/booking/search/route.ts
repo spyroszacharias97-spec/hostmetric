@@ -406,6 +406,10 @@ export async function GET(
       request.nextUrl
         .searchParams;
 
+    const browse =
+      searchParams.get("browse") ===
+      "true";
+
     const destination =
       searchParams
         .get("destination")
@@ -483,10 +487,13 @@ export async function GET(
       );
 
     if (
-      !checkIn ||
-      !checkOut ||
-      !isValidDate(checkIn) ||
-      !isValidDate(checkOut)
+      !browse &&
+      (
+        !checkIn ||
+        !checkOut ||
+        !isValidDate(checkIn) ||
+        !isValidDate(checkOut)
+      )
     ) {
       return NextResponse.json(
         {
@@ -500,6 +507,7 @@ export async function GET(
     }
 
     if (
+      !browse &&
       checkOut <= checkIn
     ) {
       return NextResponse.json(
@@ -689,8 +697,12 @@ export async function GET(
     do {
       const response =
         await getGuestyListings({
-          checkIn,
-          checkOut,
+          ...(!browse
+            ? {
+                checkIn,
+                checkOut,
+              }
+            : {}),
 
           ...(guests
             ? {
@@ -862,8 +874,17 @@ export async function GET(
           destination ||
           null,
 
-        checkIn,
-        checkOut,
+        checkIn:
+          browse
+            ? null
+            : checkIn,
+
+        checkOut:
+          browse
+            ? null
+            : checkOut,
+
+        browse,
 
         guests:
           guests ?? null,

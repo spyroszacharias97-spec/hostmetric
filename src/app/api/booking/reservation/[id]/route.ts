@@ -1,4 +1,6 @@
+import { neon } from "@neondatabase/serverless";
 import {
+  NextRequest,
   NextResponse,
 } from "next/server";
 
@@ -10,6 +12,25 @@ type RouteContext = {
     id: string;
   }>;
 };
+
+type BookingSessionRow = {
+  id: number;
+  reservation_id: string;
+  status: string;
+};
+
+function getSql() {
+  const databaseUrl =
+    process.env.DATABASE_URL;
+
+  if (!databaseUrl) {
+    throw new Error(
+      "DATABASE_URL is missing."
+    );
+  }
+
+  return neon(databaseUrl);
+}
 
 function requireString(
   value: unknown
@@ -27,7 +48,7 @@ function requireString(
 }
 
 export async function GET(
-  _request: Request,
+  request: NextRequest,
   context: RouteContext
 ) {
   if (!features.directBooking) {
@@ -46,17 +67,58 @@ export async function GET(
     const { id } =
       await context.params;
 
-    const reservationId =
+    /*
+     * [id] is now the HostMetric booking-session
+     * token, not a Guesty reservation ID.
+     *
+     * This prevents a public visitor from
+     * requesting arbitrary Guesty reservations.
+     */
+    const bookingSessionToken =
       requireString(id);
 
-    if (!reservationId) {
+    if (!bookingSessionToken) {
       return NextResponse.json(
         {
           error:
-            "Reservation ID is required.",
+            "Booking session token is required.",
         },
         {
           status: 400,
+        }
+      );
+    }
+
+    const sql = getSql();
+
+    const sessionRows =
+      (await sql`
+        SELECT
+          id,
+          reservation_id,
+          status
+        FROM booking_sessions
+        WHERE
+          public_token::text = ${bookingSessionToken}
+          AND reservation_id IS NOT NULL
+          AND status IN (
+            'payment_verified',
+            'confirmed'
+          )
+        LIMIT 1;
+      `) as unknown as BookingSessionRow[];
+
+    const bookingSession =
+      sessionRows[0];
+
+    if (!bookingSession) {
+      return NextResponse.json(
+        {
+          error:
+            "Reservation confirmation not found.",
+        },
+        {
+          status: 404,
         }
       );
     }
@@ -65,15 +127,45 @@ export async function GET(
      * Guesty remains the source of truth
      * for the final reservation state.
      *
-     * We fetch the reservation directly
-     * from Guesty instead of trusting
-     * reservation information supplied
-     * by the browser.
+     * The Guesty reservation ID comes only
+     * from our server-side booking session.
      */
     const reservation =
       await getGuestyReservationDetails(
-        reservationId
+        bookingSession.reservation_id
       );
+
+    const guestyStatus =
+      typeof reservation.status ===
+      "string"
+        ? reservation.status
+            .trim()
+            .toLowerCase()
+        : "";
+
+    /*
+     * Once Guesty confirms the reservation,
+     * persist that state locally as well.
+     */
+    if (
+      guestyStatus ===
+        "confirmed" &&
+      bookingSession.status !==
+        "confirmed"
+    ) {
+      await sql`
+        UPDATE booking_sessions
+        SET
+          status = 'confirmed',
+          confirmed_at = COALESCE(
+            confirmed_at,
+            NOW()
+          ),
+          updated_at = NOW()
+        WHERE
+          id = ${bookingSession.id};
+      `;
+    }
 
     /*
      * Return only the fields needed by
@@ -83,11 +175,13 @@ export async function GET(
      * reservation object publicly.
      */
     return NextResponse.json({
+      bookingSessionToken,
+
       reservation: {
         id:
           reservation._id ??
           reservation.id ??
-          reservationId,
+          bookingSession.reservation_id,
 
         status:
           reservation.status ??

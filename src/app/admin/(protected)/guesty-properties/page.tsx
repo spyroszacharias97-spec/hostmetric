@@ -361,8 +361,14 @@ export default async function GuestyPropertiesPage() {
       }
     ).adminGuestyProperties;
 
-  const properties =
-    await getGuestyProperties();
+  const [
+    properties,
+    guestyConfigured,
+  ] =
+    await Promise.all([
+      getGuestyProperties(),
+      isGuestyConfigured(),
+    ]);
 
   const totalProperties =
     properties.length;
@@ -474,14 +480,14 @@ export default async function GuestyPropertiesPage() {
               font-bold
 
               ${
-                isGuestyConfigured
+                guestyConfigured
                   ? "bg-emerald-50 text-emerald-700"
                   : "bg-amber-50 text-amber-700"
               }
             `}
           >
             {
-              isGuestyConfigured
+              guestyConfigured
                 ? (
                   <CircleCheck
                     size={17}
@@ -495,7 +501,7 @@ export default async function GuestyPropertiesPage() {
             }
 
             {
-              isGuestyConfigured
+              guestyConfigured
                 ? dictionary.apiConfigured
                 : dictionary.apiNotConfigured
             }
@@ -675,7 +681,7 @@ export default async function GuestyPropertiesPage() {
 
       <AdminGuestyPropertiesControls
         guestyConfigured={
-          isGuestyConfigured
+          guestyConfigured
         }
         dictionary={
           dictionary

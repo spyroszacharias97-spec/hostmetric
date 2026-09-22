@@ -16,7 +16,6 @@ import {
   Minus,
   Plus,
   Search,
-  SlidersHorizontal,
   Users,
 } from "lucide-react";
 
@@ -78,6 +77,78 @@ type BookingSearchResponse = {
   error?: string;
 };
 
+export type BookingSearchDictionary = {
+  fields: {
+    where: string;
+    destinationPlaceholder: string;
+    destinations: string;
+    checkIn: string;
+    checkOut: string;
+    guests: string;
+    guest: string;
+    guestsPlural: string;
+    adults: string;
+    adultsDescription: string;
+    children: string;
+    childrenDescription: string;
+    infants: string;
+    infant: string;
+    infantsDescription: string;
+  };
+  actions: {
+    search: string;
+    searching: string;
+    viewStay: string;
+  };
+  destinations: {
+    searchHint: string;
+  };
+  results: {
+    exploreTitle: string;
+    availableTitle: string;
+    propertiesSingular: string;
+    propertiesPlural: string;
+    staySingular: string;
+    stayPlural: string;
+    availableSuffix: string;
+    loadingProperties: string;
+    intro: string;
+    guestyConnected: string;
+    noBookableTitle: string;
+    noBookableDescription: string;
+    noResultsTitle: string;
+    noResultsDescription: string;
+    noPhoto: string;
+    selectDatesPricing: string;
+  };
+  property: {
+    bedroomSingular: string;
+    bedroomPlural: string;
+    bathroomSingular: string;
+    bathroomPlural: string;
+    bedroomsShort: string;
+    bathroomsShort: string;
+    upToGuests: string;
+    total: string;
+    totalStay: string;
+    defaultTitle: string;
+  };
+  map: {
+    ariaLabel: string;
+    viewPropertyAria: string;
+    noLocationsTitle: string;
+    noLocationsDescription: string;
+  };
+  errors: {
+    datesRequired: string;
+    checkoutAfterCheckin: string;
+    adultRequired: string;
+    loadProperties: string;
+    searchProperties: string;
+    directBookingUnavailable: string;
+  };
+};
+
 function getLocalDateString(
   date: Date
 ) {
@@ -126,12 +197,13 @@ function addDays(
 }
 
 function getListingName(
-  listing: BookingSearchResult
+  listing: BookingSearchResult,
+  defaultTitle: string
 ) {
   return (
     listing.title ||
     listing.nickname ||
-    "HostMetric Stay"
+    defaultTitle
   );
 }
 
@@ -226,7 +298,11 @@ function getListingPrice(
   );
 }
 
-export default function BookSearch() {
+export default function BookSearch({
+  dictionary,
+}: {
+  dictionary: BookingSearchDictionary;
+}) {
   const today =
     useMemo(
       () =>
@@ -295,14 +371,14 @@ export default function BookSearch() {
   const guestSummary =
     `${guests} ${
       guests === 1
-        ? "guest"
-        : "guests"
+        ? dictionary.fields.guest
+        : dictionary.fields.guestsPlural
     }${
       infants > 0
         ? `, ${infants} ${
             infants === 1
-              ? "infant"
-              : "infants"
+              ? dictionary.fields.infant
+              : dictionary.fields.infants
           }`
         : ""
     }`;
@@ -318,6 +394,11 @@ export default function BookSearch() {
     loading,
     setLoading,
   ] = useState(false);
+
+  const [
+    initialLoading,
+    setInitialLoading,
+  ] = useState(true);
 
   const [
     hasSearched,
@@ -337,6 +418,80 @@ export default function BookSearch() {
   ] = useState<
     number | null
   >(null);
+
+  useEffect(() => {
+    const controller =
+      new AbortController();
+
+    async function loadBookableProperties() {
+      try {
+        setInitialLoading(true);
+        setError(null);
+
+        const response =
+          await fetch(
+            "/api/booking/search?browse=true",
+            {
+              method: "GET",
+              cache: "no-store",
+              signal:
+                controller.signal,
+            }
+          );
+
+        const data =
+          (await response.json()) as BookingSearchResponse;
+
+        if (!response.ok) {
+          throw new Error(
+            data.error ||
+              dictionary.errors.loadProperties
+          );
+        }
+
+        if (data.enabled === false) {
+          setResults([]);
+          setDestinations([]);
+          return;
+        }
+
+        setResults(
+          Array.isArray(data.results)
+            ? data.results
+            : []
+        );
+
+        setDestinations(
+          Array.isArray(data.destinations)
+            ? data.destinations
+            : []
+        );
+      } catch (loadError) {
+        if (
+          loadError instanceof DOMException &&
+          loadError.name === "AbortError"
+        ) {
+          return;
+        }
+
+        setError(
+          loadError instanceof Error
+            ? loadError.message
+            : dictionary.errors.loadProperties
+        );
+      } finally {
+        if (!controller.signal.aborted) {
+          setInitialLoading(false);
+        }
+      }
+    }
+
+    void loadBookableProperties();
+
+    return () => {
+      controller.abort();
+    };
+  }, []);
 
   useEffect(() => {
     function handlePointerDown(
@@ -492,7 +647,7 @@ export default function BookSearch() {
       !checkOut
     ) {
       setError(
-        "Please select your check-in and check-out dates."
+        dictionary.errors.datesRequired
       );
 
       return;
@@ -502,7 +657,7 @@ export default function BookSearch() {
       checkOut <= checkIn
     ) {
       setError(
-        "Check-out must be after check-in."
+        dictionary.errors.checkoutAfterCheckin
       );
 
       return;
@@ -517,7 +672,7 @@ export default function BookSearch() {
       infants < 0
     ) {
       setError(
-        "Please select at least one adult."
+        dictionary.errors.adultRequired
       );
 
       return;
@@ -561,7 +716,7 @@ export default function BookSearch() {
       if (!response.ok) {
         throw new Error(
           data.error ||
-            "Unable to search properties."
+            dictionary.errors.searchProperties
         );
       }
 
@@ -572,7 +727,7 @@ export default function BookSearch() {
         setHasSearched(true);
 
         setError(
-          "Direct booking is currently unavailable."
+          dictionary.errors.directBookingUnavailable
         );
 
         return;
@@ -602,7 +757,7 @@ export default function BookSearch() {
       setError(
         searchError instanceof Error
           ? searchError.message
-          : "Unable to search properties."
+          : dictionary.errors.searchProperties
       );
     } finally {
       setLoading(false);
@@ -628,7 +783,7 @@ export default function BookSearch() {
 
                 <span className="min-w-0 flex-1">
                   <span className="block text-xs font-semibold text-slate-950">
-                    Where
+                    {dictionary.fields.where}
                   </span>
 
                   <input
@@ -647,7 +802,7 @@ export default function BookSearch() {
                         true
                       );
                     }}
-                    placeholder="Search destinations"
+                    placeholder={dictionary.fields.destinationPlaceholder}
                     autoComplete="off"
                     className="mt-1 w-full bg-transparent text-sm text-slate-700 outline-none placeholder:text-slate-400"
                   />
@@ -658,7 +813,7 @@ export default function BookSearch() {
                 <div className="absolute left-0 top-[82px] z-50 w-full min-w-[320px] overflow-hidden rounded-[24px] border border-sky-100 bg-white p-2 shadow-[0_24px_70px_-24px_rgba(15,23,42,0.28)] sm:w-[390px]">
                   <div className="px-3 pb-2 pt-2">
                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
-                      Destinations
+                      {dictionary.fields.destinations}
                     </p>
                   </div>
 
@@ -701,9 +856,7 @@ export default function BookSearch() {
                     </div>
                   ) : (
                     <div className="px-4 py-5 text-sm text-slate-500">
-                      Search to see destinations
-                      from available HostMetric
-                      stays.
+                      {dictionary.destinations.searchHint}
                     </div>
                   )}
                 </div>
@@ -715,7 +868,7 @@ export default function BookSearch() {
 
               <span className="min-w-0 flex-1">
                 <span className="block text-xs font-semibold text-slate-950">
-                  Check in
+                  {dictionary.fields.checkIn}
                 </span>
 
                 <input
@@ -758,7 +911,7 @@ export default function BookSearch() {
 
               <span className="min-w-0 flex-1">
                 <span className="block text-xs font-semibold text-slate-950">
-                  Check out
+                  {dictionary.fields.checkOut}
                 </span>
 
                 <input
@@ -805,7 +958,7 @@ export default function BookSearch() {
 
                 <span className="min-w-0 flex-1">
                   <span className="block text-xs font-semibold text-slate-950">
-                    Guests
+                    {dictionary.fields.guests}
                   </span>
 
                   <span className="mt-1 block truncate text-sm text-slate-600">
@@ -826,7 +979,7 @@ export default function BookSearch() {
                 <div className="absolute right-0 top-[82px] z-50 w-[330px] rounded-[24px] border border-sky-100 bg-white p-5 shadow-[0_24px_70px_-24px_rgba(15,23,42,0.28)]">
                   {[
                     {
-                      label: "Adults",
+                      label: dictionary.fields.adults,
                       description:
                         "Ages 13 or above",
                       value: adults,
@@ -836,7 +989,7 @@ export default function BookSearch() {
                       icon: Users,
                     },
                     {
-                      label: "Children",
+                      label: dictionary.fields.children,
                       description:
                         "Ages 2–12",
                       value: children,
@@ -846,7 +999,7 @@ export default function BookSearch() {
                       icon: Baby,
                     },
                     {
-                      label: "Infants",
+                      label: dictionary.fields.infants,
                       description:
                         "Under 2",
                       value: infants,
@@ -940,8 +1093,8 @@ export default function BookSearch() {
                 <Search className="h-4 w-4" />
 
                 {loading
-                  ? "Searching..."
-                  : "Search"}
+                  ? dictionary.actions.searching
+                  : dictionary.actions.search}
               </button>
             </div>
           </div>
@@ -954,279 +1107,283 @@ export default function BookSearch() {
         </div>
       ) : null}
 
-      {!hasSearched ? (
-        <section className="relative isolate overflow-hidden rounded-[32px] border border-sky-100 bg-gradient-to-br from-sky-100 via-cyan-50 to-emerald-50 shadow-[0_28px_80px_-38px_rgba(14,116,144,0.42)]">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 overflow-hidden"
-          >
-            <div className="absolute -left-20 -top-24 h-72 w-72 rounded-full bg-sky-300/35 blur-3xl" />
-            <div className="absolute -bottom-32 right-[-4rem] h-80 w-80 rounded-full bg-emerald-200/45 blur-3xl" />
-            <div className="absolute left-[38%] top-[-8rem] h-72 w-72 rounded-full bg-cyan-200/35 blur-3xl" />
+      <section>
+        <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm font-medium text-slate-500">
+              {initialLoading
+                ? dictionary.results.loadingProperties
+                : hasSearched
+                  ? `${results.length} ${
+                    results.length === 1
+                      ? dictionary.results.staySingular
+                      : dictionary.results.stayPlural
+                  } ${dictionary.results.availableSuffix}`
+                  : `${results.length} ${
+                    results.length === 1
+                      ? dictionary.results.propertiesSingular
+                      : dictionary.results.propertiesPlural
+                  }`}
+            </p>
 
-            <svg
-              className="absolute bottom-0 left-0 h-40 w-full text-sky-300/50"
-              viewBox="0 0 1440 220"
-              preserveAspectRatio="none"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0 126C176 75 310 176 493 127C679 77 786 49 950 88C1115 127 1241 172 1440 105"
-                stroke="currentColor"
-                strokeWidth="3"
-              />
-              <path
-                d="M0 151C176 100 310 201 493 152C679 102 786 74 950 113C1115 152 1241 197 1440 130"
-                stroke="currentColor"
-                strokeWidth="2"
-                opacity="0.7"
-              />
-              <path
-                d="M0 176C176 125 310 226 493 177C679 127 786 99 950 138C1115 177 1241 222 1440 155"
-                stroke="currentColor"
-                strokeWidth="2"
-                opacity="0.45"
-              />
-            </svg>
+            <h2 className="mt-1 text-2xl font-semibold tracking-tight text-slate-950">
+              {hasSearched
+                ? dictionary.results.availableTitle
+                : dictionary.results.exploreTitle}
+            </h2>
+
+            {!hasSearched ? (
+              <p className="mt-1 text-sm text-slate-500">
+                {dictionary.results.intro}
+              </p>
+            ) : null}
           </div>
 
-          <div className="relative grid min-h-[360px] place-items-center px-6 py-16 text-center">
-            <div className="max-w-xl rounded-[28px] border border-white/80 bg-white/65 px-8 py-9 shadow-[0_20px_60px_-35px_rgba(15,23,42,0.35)] backdrop-blur-md sm:px-12">
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-600 to-cyan-500 text-white shadow-lg shadow-sky-600/20">
-                <Search className="h-6 w-6" />
-              </div>
-
-              <h2 className="mt-5 text-2xl font-semibold tracking-tight text-slate-950">
-                Find your perfect stay
-              </h2>
-
-              <p className="mt-3 text-sm leading-6 text-slate-600">
-                Search by destination,
-                travel dates and guests.
-                Availability is checked
-                directly through Guesty.
-              </p>
-
-              <div className="mt-6 flex flex-wrap justify-center gap-2 text-xs font-semibold text-slate-600">
-                <span className="rounded-full border border-white bg-white/75 px-3 py-1.5 shadow-sm">
-                  Real-time availability
-                </span>
-                <span className="rounded-full border border-white bg-white/75 px-3 py-1.5 shadow-sm">
-                  Secure booking
-                </span>
-                <span className="rounded-full border border-white bg-white/75 px-3 py-1.5 shadow-sm">
-                  Direct rates
-                </span>
-              </div>
-            </div>
+          <div className="inline-flex items-center gap-2 self-start rounded-full border border-sky-100 bg-white px-3 py-2 text-xs font-semibold text-slate-600 shadow-sm sm:self-auto">
+            <span className="h-2 w-2 rounded-full bg-emerald-500" />
+            {dictionary.results.guestyConnected}
           </div>
-        </section>
-      ) : results.length ===
-        0 ? (
-        <section className="rounded-[32px] border border-sky-100 bg-gradient-to-br from-white via-sky-50 to-cyan-50 px-6 py-16 text-center shadow-[0_24px_70px_-38px_rgba(14,116,144,0.35)]">
-          <h2 className="text-2xl font-semibold tracking-tight text-slate-950">
-            No stays found
-          </h2>
+        </div>
 
-          <p className="mx-auto mt-3 max-w-lg text-sm leading-6 text-slate-600">
-            Try different dates,
-            destination or number of
-            guests.
-          </p>
-        </section>
-      ) : (
-        <section>
-          <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-sm font-medium text-slate-500">
-                {results.length}{" "}
-                {results.length ===
-                1
-                  ? "stay"
-                  : "stays"}{" "}
-                available
-              </p>
-
-              <h2 className="mt-1 text-2xl font-semibold tracking-tight text-slate-950">
-                Places to stay
-              </h2>
+        {initialLoading ? (
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(440px,1.08fr)]">
+            <div className="space-y-4">
+              {[0, 1, 2].map((item) => (
+                <div
+                  key={item}
+                  className="h-[210px] animate-pulse rounded-[26px] border border-sky-100 bg-white"
+                />
+              ))}
             </div>
 
-            <button
-              type="button"
-              className="inline-flex h-11 items-center justify-center gap-2 self-start rounded-xl border border-sky-200 bg-white px-4 text-sm font-semibold text-sky-800 shadow-sm transition hover:bg-sky-50 sm:self-auto"
-            >
-              <SlidersHorizontal className="h-4 w-4" />
-              Filters
-            </button>
+            <div className="min-h-[420px] animate-pulse rounded-[28px] border border-sky-100 bg-sky-50 lg:h-[420px]" />
           </div>
+        ) : results.length === 0 ? (
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(440px,1.08fr)]">
+            <div className="flex min-h-[420px] items-center justify-center rounded-[28px] border border-sky-100 bg-white px-8 text-center shadow-sm">
+              <div className="max-w-md">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-50 text-sky-700">
+                  <Search className="h-5 w-5" />
+                </div>
 
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.82fr)]">
-            <div className="grid gap-6 sm:grid-cols-2">
-              {results.map(
-                (listing) => {
-                  const image =
-                    getMainPicture(
-                      listing
-                    );
+                <h3 className="mt-4 text-xl font-semibold text-slate-950">
+                  {hasSearched
+                    ? dictionary.results.noResultsTitle
+                    : dictionary.results.noBookableTitle}
+                </h3>
 
-                  const location =
-                    getListingLocation(
-                      listing
-                    );
+                <p className="mt-2 text-sm leading-6 text-slate-500">
+                  {hasSearched
+                    ? dictionary.results.noResultsDescription
+                    : dictionary.results.noBookableDescription}
+                </p>
+              </div>
+            </div>
 
-                  const price =
-                    getListingPrice(
-                      listing
-                    );
+            <aside className="min-h-[420px] overflow-hidden rounded-[28px] border border-sky-100 bg-sky-50 shadow-[0_18px_55px_-34px_rgba(14,116,144,0.38)] lg:sticky lg:top-24 lg:h-[420px]">
+              <BookingMap
+                properties={[]}
+                dictionary={dictionary}
+                activePropertyId={null}
+              />
+            </aside>
+          </div>
+        ) : (
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(440px,1.08fr)]">
+            <div className="space-y-4">
+              {results.map((listing) => {
+                const image =
+                  getMainPicture(listing);
 
-                  const isActive =
-                    activePropertyId ===
-                    listing.id;
+                const location =
+                  getListingLocation(listing);
 
-                  return (
-                    <article
-                      id={`booking-property-${listing.id}`}
-                      key={
+                const price =
+                  getListingPrice(listing);
+
+                const isActive =
+                  activePropertyId ===
+                  listing.id;
+
+                return (
+                  <article
+                    id={`booking-property-${listing.id}`}
+                    key={listing.id}
+                    onMouseEnter={() =>
+                      setActivePropertyId(
                         listing.id
-                      }
-                      onMouseEnter={() =>
-                        setActivePropertyId(
-                          listing.id
-                        )
-                      }
-                      onMouseLeave={() =>
-                        setActivePropertyId(
-                          null
-                        )
-                      }
-                      onClick={() =>
-                        setActivePropertyId(
-                          listing.id
-                        )
-                      }
-                      className={`group overflow-hidden rounded-[26px] border bg-white shadow-[0_14px_45px_-28px_rgba(15,23,42,0.35)] transition hover:-translate-y-1 hover:shadow-[0_24px_55px_-28px_rgba(14,116,144,0.45)] ${
-                        isActive
-                          ? "border-sky-600 ring-2 ring-sky-500/15"
-                          : "border-sky-100"
-                      }`}
-                    >
-                      <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                      )
+                    }
+                    onMouseLeave={() =>
+                      setActivePropertyId(null)
+                    }
+                    onClick={() =>
+                      setActivePropertyId(
+                        listing.id
+                      )
+                    }
+                    className={`group overflow-hidden rounded-[26px] border bg-white shadow-[0_14px_45px_-28px_rgba(15,23,42,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_55px_-28px_rgba(14,116,144,0.45)] ${
+                      isActive
+                        ? "border-sky-600 ring-2 ring-sky-500/15"
+                        : "border-sky-100"
+                    }`}
+                  >
+                    <div className="grid sm:grid-cols-[210px_minmax(0,1fr)]">
+                      <div className="relative min-h-[190px] overflow-hidden bg-slate-100 sm:min-h-[220px]">
                         {image ? (
                           <img
-                            src={
-                              image
-                            }
+                            src={image}
                             alt={
-                              listing
-                                .pictures[0]
+                              listing.pictures[0]
                                 ?.caption ||
                               getListingName(
-                                listing
+                                listing,
+                                dictionary.property.defaultTitle
                               )
                             }
-                            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                            className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
                           />
                         ) : (
-                          <div className="flex h-full items-center justify-center px-6 text-center text-sm text-slate-400">
-                            No property
-                            photo available
+                          <div className="flex h-full min-h-[190px] items-center justify-center px-6 text-center text-sm text-slate-400 sm:min-h-[220px]">
+                            {dictionary.results.noPhoto}
                           </div>
                         )}
                       </div>
 
-                      <div className="p-5">
+                      <div className="flex min-w-0 flex-col p-5">
                         <div className="flex items-start justify-between gap-3">
                           <div className="min-w-0">
                             <h3 className="truncate text-lg font-semibold text-slate-950">
                               {getListingName(
-                                listing
+                                listing,
+                                dictionary.property.defaultTitle
                               )}
                             </h3>
 
                             {location ? (
-                              <p className="mt-1 truncate text-sm text-slate-500">
-                                {
-                                  location
-                                }
+                              <p className="mt-1 flex items-center gap-1.5 truncate text-sm text-slate-500">
+                                <MapPin className="h-3.5 w-3.5 shrink-0 text-sky-700" />
+                                <span className="truncate">
+                                  {location}
+                                </span>
                               </p>
                             ) : null}
                           </div>
 
                           {listing.type ? (
-                            <span className="shrink-0 rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
-                              {
-                                listing.type
-                              }
+                            <span className="shrink-0 rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-600">
+                              {listing.type}
                             </span>
                           ) : null}
                         </div>
 
-                        <div className="mt-4 flex flex-wrap gap-x-3 gap-y-2 text-sm text-slate-600">
-                          {listing.bedrooms !==
-                          null ? (
-                            <span>
-                              {
-                                listing.bedrooms
-                              }{" "}
-                              bd
+                        <div className="mt-4 flex flex-wrap gap-2 text-xs font-medium text-slate-600">
+                          {listing.bedrooms !== null ? (
+                            <span className="rounded-full bg-slate-50 px-2.5 py-1.5">
+                              {listing.bedrooms} {listing.bedrooms === 1
+                                ? dictionary.property.bedroomSingular
+                                : dictionary.property.bedroomPlural}
                             </span>
                           ) : null}
 
-                          {listing.bathrooms !==
-                          null ? (
-                            <span>
-                              {
-                                listing.bathrooms
-                              }{" "}
-                              ba
+                          {listing.bathrooms !== null ? (
+                            <span className="rounded-full bg-slate-50 px-2.5 py-1.5">
+                              {listing.bathrooms} {listing.bathrooms === 1
+                                ? dictionary.property.bathroomSingular
+                                : dictionary.property.bathroomPlural}
                             </span>
                           ) : null}
 
-                          {listing.accommodates !==
-                          null ? (
-                            <span>
-                              Up to{" "}
-                              {
-                                listing.accommodates
-                              }
+                          {listing.accommodates !== null ? (
+                            <span className="rounded-full bg-slate-50 px-2.5 py-1.5">
+                              {dictionary.property.upToGuests.replace(
+                                "{count}",
+                                String(listing.accommodates)
+                              )}
                             </span>
                           ) : null}
                         </div>
 
-                        {price ? (
-                          <div className="mt-5 border-t border-slate-100 pt-4">
-                            <div className="flex items-end justify-between gap-3">
+                        <div className="mt-auto pt-5">
+                          {hasSearched && price ? (
+                            <div className="mb-3 flex items-end justify-between gap-3 border-t border-slate-100 pt-4">
                               <span className="text-xs font-medium text-slate-500">
-                                Total stay
+                                {dictionary.property.totalStay}
                               </span>
 
                               <span className="text-lg font-semibold tracking-tight text-slate-950">
                                 {price}
                               </span>
                             </div>
-                          </div>
-                        ) : null}
+                          ) : !hasSearched ? (
+                            <p className="mb-3 border-t border-slate-100 pt-4 text-xs leading-5 text-slate-500">
+                              {dictionary.results.selectDatesPricing}
+                            </p>
+                          ) : null}
 
-                        <button
-                          type="button"
-                          className="mt-5 h-11 w-full rounded-xl bg-gradient-to-r from-sky-700 to-cyan-600 px-5 text-sm font-semibold text-white shadow-sm transition hover:from-sky-800 hover:to-cyan-700"
-                        >
-                          View stay
-                        </button>
+                          <button
+                            type="button"
+                            onClick={(event) => {
+                              event.stopPropagation();
+
+                              const params =
+                                new URLSearchParams();
+
+                              if (checkIn) {
+                                params.set(
+                                  "checkIn",
+                                  checkIn
+                                );
+                              }
+
+                              if (checkOut) {
+                                params.set(
+                                  "checkOut",
+                                  checkOut
+                                );
+                              }
+
+                              params.set(
+                                "adults",
+                                String(adults)
+                              );
+
+                              params.set(
+                                "children",
+                                String(children)
+                              );
+
+                              params.set(
+                                "infants",
+                                String(infants)
+                              );
+
+                              const query =
+                                params.toString();
+
+                              window.location.href =
+                                `/book/${listing.id}${
+                                  query
+                                    ? `?${query}`
+                                    : ""
+                                }`;
+                            }}
+                            className="h-10 w-full rounded-xl bg-gradient-to-r from-sky-700 to-cyan-600 px-4 text-sm font-semibold text-white shadow-sm transition hover:from-sky-800 hover:to-cyan-700"
+                          >
+                            {dictionary.actions.viewStay}
+                          </button>
+                        </div>
                       </div>
-                    </article>
-                  );
-                }
-              )}
+                    </div>
+                  </article>
+                );
+              })}
             </div>
 
-            <aside className="min-h-[520px] overflow-hidden rounded-[28px] border border-sky-100 bg-sky-50 shadow-[0_18px_55px_-34px_rgba(14,116,144,0.38)] lg:sticky lg:top-24 lg:h-[calc(100vh-8rem)]">
+            <aside className="min-h-[420px] overflow-hidden rounded-[28px] border border-sky-100 bg-sky-50 shadow-[0_18px_55px_-34px_rgba(14,116,144,0.38)] lg:sticky lg:top-24 lg:h-[420px]">
               <BookingMap
-                properties={
-                  results
-                }
+                properties={results}
+                dictionary={dictionary}
                 activePropertyId={
                   activePropertyId
                 }
@@ -1242,17 +1399,15 @@ export default function BookSearch() {
                       `booking-property-${propertyId}`
                     )
                     ?.scrollIntoView({
-                      behavior:
-                        "smooth",
-                      block:
-                        "center",
+                      behavior: "smooth",
+                      block: "center",
                     });
                 }}
               />
             </aside>
           </div>
-        </section>
-      )}
+        )}
+      </section>
     </div>
   );
 }

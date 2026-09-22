@@ -3015,6 +3015,82 @@
       "required": "Υποχρεωτικό",
       "optional": "Προαιρετικό",
       "optionalBeforeSync": "Προαιρετικό πριν τον συγχρονισμό"
+    },
+    "connection": {
+      "connect": "Σύνδεση Guesty",
+      "title": "Σύνδεση Guesty",
+      "description": "Εισαγάγετε το Client ID και το Client Secret του Guesty Booking Engine API για να συνδέσετε το Guesty και να συγχρονίσετε αυτόματα τα ακίνητα.",
+      "clientId": "Client ID",
+      "clientIdPlaceholder": "Εισαγάγετε το Guesty Client ID",
+      "clientSecret": "Client Secret",
+      "clientSecretPlaceholder": "Εισαγάγετε το Guesty Client Secret",
+      "showSecret": "Εμφάνιση Client Secret",
+      "hideSecret": "Απόκρυψη Client Secret",
+      "cancel": "Ακύρωση",
+      "saveAndConnect": "Αποθήκευση και Σύνδεση",
+      "connecting": "Γίνεται σύνδεση...",
+      "required": "Συμπληρώστε το Client ID και το Client Secret.",
+      "connectionError": "Η σύνδεση με το Guesty απέτυχε.",
+      "connectedAndSynced": "Το Guesty συνδέθηκε και τα ακίνητα συγχρονίστηκαν."
+    }
+  },
+  "bookingSearch": {
+    "fields": {
+      "where": "Πού",
+      "destinationPlaceholder": "Αναζήτηση προορισμών",
+      "checkIn": "Άφιξη",
+      "checkOut": "Αναχώρηση",
+      "guests": "Επισκέπτες",
+      "guest": "επισκέπτης",
+      "guestsPlural": "επισκέπτες",
+      "adults": "Ενήλικες",
+      "adultsDescription": "Ηλικίες 13 ετών και άνω",
+      "children": "Παιδιά",
+      "childrenDescription": "Ηλικίες 0–12 ετών"
+    },
+    "actions": {
+      "search": "Αναζήτηση",
+      "searching": "Αναζήτηση...",
+      "viewStay": "Δείτε το κατάλυμα"
+    },
+    "destinations": {
+      "searchHint": "Κάντε αναζήτηση για να δείτε προορισμούς από τα διαθέσιμα καταλύματα της HostMetric."
+    },
+    "results": {
+      "exploreTitle": "Εξερευνήστε τα καταλύματά μας",
+      "availableTitle": "Διαθέσιμα καταλύματα",
+      "propertiesSingular": "ακίνητο",
+      "propertiesPlural": "ακίνητα",
+      "staySingular": "κατάλυμα",
+      "stayPlural": "καταλύματα",
+      "availableSuffix": "διαθέσιμα",
+      "loadingProperties": "Φόρτωση καταλυμάτων από το Guesty...",
+      "intro": "Εμφανίζονται τα ακίνητα της HostMetric με ενεργοποιημένη την Απευθείας Κράτηση. Επιλέξτε ημερομηνίες για ζωντανό έλεγχο διαθεσιμότητας και τιμών μέσω Guesty.",
+      "guestyConnected": "Guesty συνδεδεμένο",
+      "noBookableTitle": "Δεν υπάρχουν ακόμη διαθέσιμα ακίνητα για απευθείας κράτηση",
+      "noBookableDescription": "Τα ακίνητα θα εμφανιστούν εδώ αυτόματα μετά τον συγχρονισμό με το Guesty και την ενεργοποίηση της Απευθείας Κράτησης για αυτά στη HostMetric.",
+      "noResultsTitle": "Δεν βρέθηκαν διαθέσιμα καταλύματα",
+      "noResultsDescription": "Δοκιμάστε διαφορετικές ημερομηνίες, προορισμό ή αριθμό επισκεπτών.",
+      "noPhoto": "Δεν υπάρχει διαθέσιμη φωτογραφία του ακινήτου",
+      "selectDatesPricing": "Επιλέξτε ημερομηνίες παραπάνω για ζωντανό έλεγχο διαθεσιμότητας και τιμών μέσω Guesty."
+    },
+    "property": {
+      "bedroomsShort": "υπν.",
+      "bathroomsShort": "μπάνια",
+      "upToGuests": "Έως {count} επισκέπτες",
+      "total": "σύνολο",
+      "perNight": "ανά διανυκτέρευση"
+    },
+    "map": {
+      "ariaLabel": "Χάρτης διαθέσιμων καταλυμάτων",
+      "noLocationsTitle": "Δεν υπάρχουν διαθέσιμες τοποθεσίες στον χάρτη για αυτά τα καταλύματα",
+      "noLocationsDescription": "Οι συντεταγμένες των ακινήτων θα εμφανιστούν εδώ όταν παρέχονται από το Guesty."
+    },
+    "errors": {
+      "datesRequired": "Απαιτούνται έγκυρες ημερομηνίες άφιξης και αναχώρησης.",
+      "loadProperties": "Δεν ήταν δυνατή η φόρτωση των ακινήτων.",
+      "searchProperties": "Δεν ήταν δυνατή η αναζήτηση ακινήτων.",
+      "directBookingUnavailable": "Η απευθείας κράτηση δεν είναι διαθέσιμη αυτή τη στιγμή."
     }
   }
 }

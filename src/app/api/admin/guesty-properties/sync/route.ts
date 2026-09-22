@@ -191,7 +191,7 @@ export async function POST() {
 
 
   if (
-    !isGuestyConfigured
+    !(await isGuestyConfigured())
   ) {
     return NextResponse.json(
       {

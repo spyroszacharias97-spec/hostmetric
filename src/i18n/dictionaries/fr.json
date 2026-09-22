@@ -10,7 +10,8 @@
     "selectLanguage": "Choisir la langue",
     "homeAriaLabel": "Page d’accueil HostMetric",
     "logoAlt": "Gestion immobilière HostMetric",
-    "blog": "Blog"
+    "blog": "Blog",
+    "bookStay": "Réserver"
   },
   "hero": {
     "eyebrow": "Performance des locations courte durée",
@@ -593,7 +594,8 @@
     "platformIntro": {
       "eyebrow": "VISIBILITÉ INTERNATIONALE",
       "title": "Connectés aux principales plateformes de réservation mondiales",
-      "description": "HostMetric connecte et gère votre propriété sur Airbnb, Booking.com et d’autres grandes plateformes de réservation internationales, en combinant distribution stratégique, tarification intelligente et gestion professionnelle afin d’accroître sa visibilité, de générer davantage de réservations et d’améliorer ses performances globales."
+      "description": "HostMetric connecte et gère votre propriété sur Airbnb, Booking.com et d’autres grandes plateformes de réservation internationales, en combinant distribution stratégique, tarification intelligente et gestion professionnelle afin d’accroître sa visibilité, de générer davantage de réservations et d’améliorer ses performances globales.",
+      "imageAlt": "Réseau mondial de plateformes de réservation HostMetric"
     },
     "propertySection": {
       "eyebrow": "VOTRE BIEN",
@@ -1985,7 +1987,17 @@
       "Google Drive upload failed with status {{status}}.": "Le téléversement vers Google Drive a échoué avec le statut {{status}}.",
       "The onboarding submission could not be completed.": "L’envoi du formulaire d’intégration n’a pas pu être finalisé.",
       "Something went wrong while submitting the onboarding form. Please try again.": "Une erreur s’est produite lors de l’envoi du formulaire d’intégration. Veuillez réessayer.",
-      "Your onboarding information has been saved securely and sent to the HostMetric team for review. We will contact you if we need any clarification or additional material.": "Vos informations d’intégration ont été enregistrées en toute sécurité et envoyées à l’équipe HostMetric pour examen. Nous vous contacterons si nous avons besoin de précisions ou de documents supplémentaires."
+      "Your onboarding information has been saved securely and sent to the HostMetric team for review. We will contact you if we need any clarification or additional material.": "Vos informations d’intégration ont été enregistrées en toute sécurité et envoyées à l’équipe HostMetric pour examen. Nous vous contacterons si nous avons besoin de précisions ou de documents supplémentaires.",
+      "of 6": "of 6",
+      "Admin completion mode": "Admin completion mode",
+      "Complete this Get Started form using the information provided by the client. This submission will remain linked to the existing client record.": "Complete this Get Started form using the information provided by the client. This submission will remain linked to the existing client record.",
+      "Admin Get Started Complete": "Admin Get Started Complete",
+      "The property was added successfully": "The property was added successfully",
+      "The property information and uploaded files were saved successfully. The property is now pending review and can be activated when everything is ready.": "The property information and uploaded files were saved successfully. The property is now pending review and can be activated when everything is ready.",
+      "What happens next?": "What happens next?",
+      "Review the saved property details and activate the property when the setup is complete.": "Review the saved property details and activate the property when the setup is complete.",
+      "The Get Started API returned an HTML page instead of JSON. Make sure the API file is located at src/app/api/onboarding/route.ts.": "The Get Started API returned an HTML page instead of JSON. Make sure the API file is located at src/app/api/onboarding/route.ts.",
+      "The Get Started API returned an invalid response.": "The Get Started API returned an invalid response."
     },
     "countries": {
       "Afghanistan": "Afghanistan",
@@ -2780,14 +2792,12 @@
         "greek": "Greek",
         "english": "English",
         "draft": "Draft",
-        "review": "In Review",
         "published": "Published",
         "notGenerated": "Not Generated"
       },
       "actions": {
         "saveDraft": "Save Draft",
         "preview": "Preview",
-        "sendToReview": "Send to Review",
         "generateTranslations": "Generate Translations",
         "publish": "Publish",
         "addSection": "Add Content Section",
@@ -2826,8 +2836,6 @@
         "draftUpdated": "Draft updated successfully.",
         "saveFailed": "The draft could not be saved. Please try again.",
         "validationFailed": "Please complete the required article and SEO fields before saving.",
-        "sentToReview": "The article was sent to review.",
-        "reviewFailed": "The article could not be sent to review.",
         "previewRequiresSave": "Save the article first to open the preview.",
         "imageUploadFailed": "The image could not be uploaded.",
         "translationsRequireSave": "Save the article before generating translations.",
@@ -2842,7 +2850,6 @@
         "filters": {
           "all": "All",
           "drafts": "Drafts",
-          "review": "In Review",
           "published": "Published",
           "needsTranslation": "Needs Translation"
         },
@@ -2865,7 +2872,8 @@
         "completeTranslations": "Translations complete",
         "open": "Open",
         "emptyTitle": "There are no articles in this category.",
-        "emptyDescription": "Create a new article or change the filter to view other guides."
+        "emptyDescription": "Create a new article or change the filter to view other guides.",
+        "publish": "Publish"
       }
     }
   },
@@ -2881,6 +2889,221 @@
     "empty": "Aucun article publié pour le moment.",
     "backToAll": "Tous les articles",
     "relatedArticles": "Articles associés"
+  },
+  "bookingPage": {
+    "eyebrow": "RÉSERVATION DIRECTE AVEC HOSTMETRIC",
+    "title": "Réservez votre séjour",
+    "description": "Choisissez vos dates de voyage et le nombre de voyageurs pour découvrir les hébergements HostMetric disponibles."
+  },
+  "adminGuestyProperties": {
+    "integration": "Guesty Integration",
+    "title": "Guesty Properties",
+    "description": "Properties retrieved from the Guesty Booking Engine API and available for HostMetric direct booking management.",
+    "apiConfigured": "Guesty API configured",
+    "apiNotConfigured": "Guesty API not configured",
+    "global": {
+      "title": "Global Direct Booking",
+      "description": "Controls whether the HostMetric direct booking experience is enabled globally.",
+      "propertyRequirement": "Individual properties must also have Direct Booking enabled.",
+      "credentialsWarning": "Guesty API credentials are not configured yet. The controls are ready, but live Guesty sync and calendar requests require valid credentials.",
+      "statusLabel": "STATUS",
+      "on": "Book Now is ON",
+      "off": "Book Now is OFF",
+      "turnOn": "Turn Book Now ON",
+      "turnOff": "Turn Book Now OFF",
+      "sync": "Sync Guesty",
+      "syncing": "Syncing...",
+      "addProperty": "Add Guesty Property"
+    },
+    "stats": {
+      "properties": "Guesty Properties",
+      "bookable": "Direct Booking Enabled",
+      "syncErrors": "Sync Errors"
+    },
+    "sections": {
+      "bookable": "Direct Booking Properties",
+      "notBookable": "Properties Without Direct Booking",
+      "synced": "Synced Properties",
+      "unsynced": "Unsynced Properties"
+    },
+    "property": {
+      "listingId": "Guesty Listing ID",
+      "lastSynced": "Last synced",
+      "never": "Never",
+      "locationUnavailable": "Location unavailable",
+      "directBookingOn": "Direct Booking ON",
+      "directBookingOff": "Direct Booking OFF",
+      "enable": "Enable",
+      "disable": "Disable",
+      "sync": "Sync",
+      "calendar": "Calendar",
+      "delete": "Remove",
+      "synced": "Synced",
+      "syncing": "Syncing",
+      "error": "Error",
+      "pending": "Pending"
+    },
+    "empty": {
+      "title": "No Guesty properties yet",
+      "description": "No mock properties are used. Real Guesty listings will appear here after the Guesty account is configured and a successful sync has been completed."
+    },
+    "addModal": {
+      "title": "Add Guesty Property",
+      "description": "Add a real Guesty listing to HostMetric using its Guesty Listing ID.",
+      "listingId": "Guesty Listing ID",
+      "placeholder": "Enter the Guesty Listing ID",
+      "cancel": "Cancel",
+      "add": "Add Property",
+      "adding": "Adding..."
+    },
+    "calendarModal": {
+      "title": "Guesty Calendar",
+      "from": "From",
+      "to": "To",
+      "load": "Load Calendar",
+      "loading": "Loading...",
+      "close": "Close",
+      "available": "Available",
+      "unavailable": "Unavailable",
+      "reserved": "Reserved",
+      "booked": "Booked",
+      "minimumNights": "Minimum nights"
+    },
+    "confirm": {
+      "delete": "Are you sure you want to remove this Guesty property from HostMetric?"
+    },
+    "messages": {
+      "genericError": "Something went wrong. Please try again.",
+      "listingIdRequired": "Guesty Listing ID is required.",
+      "calendarDatesRequired": "Choose both a start date and an end date.",
+      "loadGlobalError": "Could not load the global direct booking setting.",
+      "updateGlobalError": "Could not update the global direct booking setting.",
+      "addError": "Could not add the Guesty property.",
+      "syncAllError": "Could not synchronize Guesty properties.",
+      "syncPropertyError": "Could not synchronize the Guesty property.",
+      "updatePropertyError": "Could not update direct booking.",
+      "removeError": "Could not remove the Guesty property.",
+      "calendarError": "Could not load the Guesty calendar.",
+      "fromToRequired": "From and to dates are required.",
+      "invalidDateRange": "From date cannot be after the to date."
+    },
+    "tooltips": {
+      "syncAll": "Import and update all listings from Guesty",
+      "credentialsRequired": "Guesty API credentials are required",
+      "syncProperty": "Synchronize this property with Guesty",
+      "calendar": "Open live Guesty availability"
+    },
+    "groups": {
+      "synced": "Synced",
+      "syncedDescription": "Properties successfully synchronized with Guesty.",
+      "syncedEmpty": "No synchronized Guesty properties yet.",
+      "attention": "Unsynced / Needs Attention",
+      "attentionDescription": "Newly connected properties and properties whose latest sync needs attention.",
+      "attentionEmpty": "No properties need attention."
+    },
+    "form": {
+      "title": "Title",
+      "nickname": "Nickname",
+      "listingType": "Listing Type",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms",
+      "accommodates": "Guest Capacity",
+      "city": "City",
+      "state": "State / Region",
+      "country": "Country",
+      "currency": "Currency",
+      "required": "Required",
+      "optional": "Optional",
+      "optionalBeforeSync": "Optional before sync"
+    },
+    "connection": {
+      "connect": "Connect Guesty",
+      "title": "Connect Guesty",
+      "description": "Enter the Client ID and Client Secret for the Guesty Booking Engine API to connect Guesty and automatically sync the properties.",
+      "clientId": "Client ID",
+      "clientIdPlaceholder": "Enter the Guesty Client ID",
+      "clientSecret": "Client Secret",
+      "clientSecretPlaceholder": "Enter the Guesty Client Secret",
+      "showSecret": "Show Client Secret",
+      "hideSecret": "Hide Client Secret",
+      "cancel": "Cancel",
+      "saveAndConnect": "Save and Connect",
+      "connecting": "Connecting...",
+      "required": "Enter the Client ID and Client Secret.",
+      "connectionError": "Could not connect to Guesty.",
+      "connectedAndSynced": "Guesty connected and properties synced."
+    }
+  },
+  "bookingSearch": {
+    "fields": {
+      "where": "Où",
+      "destinationPlaceholder": "Rechercher une destination",
+      "destinations": "Destinations",
+      "checkIn": "Arrivée",
+      "checkOut": "Départ",
+      "guests": "Voyageurs",
+      "guest": "voyageur",
+      "guestsPlural": "voyageurs",
+      "adults": "Adultes",
+      "adultsDescription": "13 ans ou plus",
+      "children": "Enfants",
+      "childrenDescription": "2–12 ans",
+      "infants": "Bébés",
+      "infant": "bébé",
+      "infantsDescription": "Moins de 2 ans"
+    },
+    "actions": {
+      "search": "Rechercher",
+      "searching": "Recherche...",
+      "viewStay": "Voir l’hébergement"
+    },
+    "destinations": {
+      "searchHint": "Recherchez pour afficher les destinations des hébergements HostMetric disponibles."
+    },
+    "results": {
+      "exploreTitle": "Découvrez nos hébergements",
+      "availableTitle": "Hébergements disponibles",
+      "propertiesSingular": "hébergement",
+      "propertiesPlural": "hébergements",
+      "staySingular": "hébergement",
+      "stayPlural": "hébergements",
+      "availableSuffix": "disponibles",
+      "loadingProperties": "Chargement des hébergements depuis Guesty...",
+      "intro": "Affichage des hébergements HostMetric pour lesquels la réservation directe est activée. Sélectionnez des dates pour vérifier les disponibilités et les tarifs en temps réel via Guesty.",
+      "guestyConnected": "Guesty connecté",
+      "noBookableTitle": "Aucun hébergement n’est encore disponible à la réservation directe",
+      "noBookableDescription": "Les hébergements apparaîtront ici automatiquement lorsqu’ils seront synchronisés avec Guesty et activés pour la réservation directe dans HostMetric.",
+      "noResultsTitle": "Aucun hébergement trouvé",
+      "noResultsDescription": "Essayez d’autres dates, une autre destination ou un nombre de voyageurs différent.",
+      "noPhoto": "Aucune photo de l’hébergement disponible",
+      "selectDatesPricing": "Sélectionnez les dates ci-dessus pour vérifier les disponibilités et les tarifs en temps réel via Guesty."
+    },
+    "property": {
+      "bedroomsSingular": "chambre",
+      "bedroomsPlural": "chambres",
+      "bathroomsSingular": "salle de bain",
+      "bathroomsPlural": "salles de bain",
+      "bedroomsShort": "Ch.",
+      "bathroomsShort": "Sdb",
+      "upToGuests": "Jusqu’à {count} voyageurs",
+      "total": "total",
+      "perNight": "par nuit",
+      "totalStay": "Total du séjour",
+      "defaultTitle": "Hébergement HostMetric"
+    },
+    "map": {
+      "ariaLabel": "Carte des hébergements disponibles",
+      "viewPropertyAria": "Voir {property}",
+      "noLocationsTitle": "Aucune localisation sur la carte n’est disponible pour ces hébergements",
+      "noLocationsDescription": "Les coordonnées des hébergements apparaîtront ici lorsque Guesty les fournira."
+    },
+    "errors": {
+      "datesRequired": "Sélectionnez les dates d’arrivée et de départ.",
+      "checkoutAfterCheckin": "La date de départ doit être postérieure à la date d’arrivée.",
+      "adultRequired": "Sélectionnez au moins un adulte.",
+      "loadProperties": "Impossible de charger les hébergements.",
+      "searchProperties": "Impossible d’effectuer la recherche d’hébergements.",
+      "directBookingUnavailable": "La réservation directe est actuellement indisponible."
+    }
   }
 }
-

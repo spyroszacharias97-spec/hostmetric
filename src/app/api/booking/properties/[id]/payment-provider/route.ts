@@ -60,6 +60,21 @@ function parseBooleanSetting(
   return false;
 }
 
+function optionalString(
+  value: unknown
+) {
+  if (
+    typeof value !== "string"
+  ) {
+    return null;
+  }
+
+  const trimmed =
+    value.trim();
+
+  return trimmed || null;
+}
+
 export async function GET(
   _request: Request,
   context: RouteContext
@@ -130,8 +145,8 @@ export async function GET(
     }
 
     /*
-     * Resolve the real Guesty listing ID
-     * exclusively on the server.
+     * Resolve the Guesty listing exclusively
+     * on the server.
      */
     const propertyRows =
       (await sql`
@@ -167,31 +182,72 @@ export async function GET(
       );
 
     /*
-     * Do not expose the complete Guesty
-     * provider response publicly.
+     * Guesty documents paymentProcessorId as
+     * the payment processing account ID to use
+     * as paymentProviderId for tokenization.
      *
-     * The checkout backend can use the full
-     * provider object later when tokenization
-     * is implemented.
+     * Do not fall back to _id/providerAccountId:
+     * they identify different Guesty/provider
+     * resources and are not interchangeable.
      */
-    return NextResponse.json({
-      propertyId:
-        property.id,
+    const paymentProviderId =
+      optionalString(
+        provider.paymentProcessorId
+      );
 
-      paymentAvailable:
-        provider.active !== false,
+    const providerStatus =
+      optionalString(
+        provider.status
+      );
 
-      provider: {
-        name:
-          provider.name ??
-          null,
+    const paymentAvailable =
+      providerStatus
+        ?.toUpperCase() ===
+        "ACTIVE" &&
+      Boolean(
+        paymentProviderId
+      );
 
-        type:
-          provider.type ??
-          provider.provider ??
-          null,
+    /*
+     * Expose only the small public configuration
+     * required by the GuestyPay checkout.
+     */
+    return NextResponse.json(
+      {
+        propertyId:
+          property.id,
+
+        paymentAvailable,
+
+        paymentProviderId,
+
+        provider: {
+          type:
+            optionalString(
+              provider.providerType
+            ),
+
+          name:
+            optionalString(
+              provider.paymentProcessorName
+            ),
+
+          accountName:
+            optionalString(
+              provider.accountName
+            ),
+
+          status:
+            providerStatus,
+        },
       },
-    });
+      {
+        headers: {
+          "Cache-Control":
+            "no-store, max-age=0",
+        },
+      }
+    );
   } catch (error) {
     console.error(
       "Failed to load Guesty payment provider.",

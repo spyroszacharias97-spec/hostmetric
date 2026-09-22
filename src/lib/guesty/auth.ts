@@ -1,4 +1,7 @@
-import { guestyConfig, isGuestyConfigured } from "@/lib/guesty/config";
+import {
+  getGuestyCredentials,
+  guestyConfig,
+} from "@/lib/guesty/config";
 
 type GuestyTokenResponse = {
   access_token: string;
@@ -10,48 +13,97 @@ type GuestyTokenResponse = {
 type CachedGuestyToken = {
   accessToken: string;
   expiresAt: number;
+  credentialsKey: string;
 };
 
-let cachedToken: CachedGuestyToken | null = null;
+let cachedToken:
+  CachedGuestyToken | null =
+  null;
 
-const TOKEN_EXPIRY_BUFFER_MS = 5 * 60 * 1000;
+const TOKEN_EXPIRY_BUFFER_MS =
+  5 * 60 * 1000;
 
-export async function getGuestyAccessToken(): Promise<string> {
-  if (!isGuestyConfigured) {
+function getCredentialsKey(
+  clientId: string,
+  clientSecret: string
+) {
+  return `${clientId}:${clientSecret}`;
+}
+
+export async function getGuestyAccessToken():
+  Promise<string> {
+  const credentials =
+    await getGuestyCredentials();
+
+  if (!credentials) {
     throw new Error(
-      "Guesty is not configured. Add GUESTY_CLIENT_ID and GUESTY_CLIENT_SECRET."
+      "Guesty is not configured."
     );
   }
 
-  const now = Date.now();
+  const now =
+    Date.now();
+
+  const credentialsKey =
+    getCredentialsKey(
+      credentials.clientId,
+      credentials.clientSecret
+    );
 
   if (
     cachedToken &&
-    cachedToken.expiresAt - TOKEN_EXPIRY_BUFFER_MS > now
+    cachedToken.credentialsKey ===
+      credentialsKey &&
+    cachedToken.expiresAt -
+      TOKEN_EXPIRY_BUFFER_MS >
+      now
   ) {
     return cachedToken.accessToken;
   }
 
-  const body = new URLSearchParams({
-    grant_type: "client_credentials",
-    scope: "booking_engine:api",
-    client_id: guestyConfig.clientId,
-    client_secret: guestyConfig.clientSecret,
-  });
+  const body =
+    new URLSearchParams({
+      grant_type:
+        "client_credentials",
 
-  const response = await fetch(guestyConfig.authUrl, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Cache-Control": "no-cache",
-    },
-    body,
-    cache: "no-store",
-  });
+      scope:
+        "booking_engine:api",
+
+      client_id:
+        credentials.clientId,
+
+      client_secret:
+        credentials.clientSecret,
+    });
+
+  const response =
+    await fetch(
+      guestyConfig.authUrl,
+      {
+        method:
+          "POST",
+
+        headers: {
+          Accept:
+            "application/json",
+
+          "Content-Type":
+            "application/x-www-form-urlencoded",
+
+          "Cache-Control":
+            "no-cache",
+        },
+
+        body,
+
+        cache:
+          "no-store",
+      }
+    );
 
   if (!response.ok) {
-    const responseText = await response.text();
+    const responseText =
+      await response.text();
 
     console.error(
       "Guesty authentication failed:",
@@ -64,7 +116,9 @@ export async function getGuestyAccessToken(): Promise<string> {
     );
   }
 
-  const data = (await response.json()) as GuestyTokenResponse;
+  const data =
+    (await response.json()) as
+      GuestyTokenResponse;
 
   if (
     !data.access_token ||
@@ -76,14 +130,21 @@ export async function getGuestyAccessToken(): Promise<string> {
   }
 
   cachedToken = {
-    accessToken: data.access_token,
+    accessToken:
+      data.access_token,
+
     expiresAt:
-      now + data.expires_in * 1000,
+      now +
+      data.expires_in *
+        1000,
+
+    credentialsKey,
   };
 
   return cachedToken.accessToken;
 }
 
 export function clearGuestyAccessTokenCache() {
-  cachedToken = null;
+  cachedToken =
+    null;
 }

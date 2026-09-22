@@ -1,3 +1,4 @@
+import { neon } from "@neondatabase/serverless";
 import {
   NextRequest,
   NextResponse,
@@ -7,11 +8,30 @@ import { features } from "@/config/features";
 import { verifyGuestyPayment } from "@/lib/guesty/reservations";
 
 type VerifyPaymentRequestBody = {
-  reservationId?: unknown;
-  paymentId?: unknown;
-
+  bookingSessionToken?: unknown;
   threeDSResult?: unknown;
 };
+
+type BookingSessionRow = {
+  id: number;
+  reservation_id: string;
+  payment_id: string;
+  status: string;
+  expires_at: string | Date;
+};
+
+function getSql() {
+  const databaseUrl =
+    process.env.DATABASE_URL;
+
+  if (!databaseUrl) {
+    throw new Error(
+      "DATABASE_URL is missing."
+    );
+  }
+
+  return neon(databaseUrl);
+}
 
 function requireString(
   value: unknown
@@ -60,33 +80,16 @@ export async function POST(
     const body =
       (await request.json()) as VerifyPaymentRequestBody;
 
-    const reservationId =
+    const bookingSessionToken =
       requireString(
-        body.reservationId
+        body.bookingSessionToken
       );
 
-    const paymentId =
-      requireString(
-        body.paymentId
-      );
-
-    if (!reservationId) {
+    if (!bookingSessionToken) {
       return NextResponse.json(
         {
           error:
-            "Reservation ID is required.",
-        },
-        {
-          status: 400,
-        }
-      );
-    }
-
-    if (!paymentId) {
-      return NextResponse.json(
-        {
-          error:
-            "Payment ID is required.",
+            "Booking session token is required.",
         },
         {
           status: 400,
@@ -112,31 +115,134 @@ export async function POST(
       );
     }
 
+    const sql = getSql();
+
     /*
-     * Guesty performs the actual payment
-     * verification.
+     * Reservation/payment IDs are resolved only
+     * from the HostMetric booking session.
      *
-     * HostMetric never receives or stores
-     * raw card details.
+     * The public browser is never allowed to
+     * choose an arbitrary Guesty reservationId
+     * or paymentId.
      */
-    const verification =
-      await verifyGuestyPayment({
-        reservationId,
-        paymentId,
+    const sessionRows =
+      (await sql`
+        SELECT
+          id,
+          reservation_id,
+          payment_id,
+          status,
+          expires_at
+        FROM booking_sessions
+        WHERE
+          public_token::text = ${bookingSessionToken}
+          AND status = 'payment_authentication_required'
+          AND reservation_id IS NOT NULL
+          AND payment_id IS NOT NULL
+          AND expires_at > NOW()
+        LIMIT 1;
+      `) as unknown as BookingSessionRow[];
 
-        ...(body.threeDSResult
-          ? {
-              threeDSResult:
-                body.threeDSResult,
-            }
-          : {}),
+    const bookingSession =
+      sessionRows[0];
+
+    if (!bookingSession) {
+      return NextResponse.json(
+        {
+          error:
+            "Payment verification session is invalid, expired or already completed.",
+        },
+        {
+          status: 409,
+        }
+      );
+    }
+
+    /*
+     * Claim the verification atomically so the
+     * same browser session cannot trigger two
+     * concurrent Guesty verification requests.
+     */
+    const claimedRows =
+      (await sql`
+        UPDATE booking_sessions
+        SET
+          status = 'payment_pending',
+          updated_at = NOW()
+        WHERE
+          id = ${bookingSession.id}
+          AND status = 'payment_authentication_required'
+          AND expires_at > NOW()
+        RETURNING id;
+      `) as unknown as Array<{
+        id: number;
+      }>;
+
+    if (!claimedRows[0]) {
+      return NextResponse.json(
+        {
+          error:
+            "Payment verification is already being processed.",
+        },
+        {
+          status: 409,
+        }
+      );
+    }
+
+    try {
+      /*
+       * Guesty requires this call immediately
+       * after instant-charge when its payment
+       * status is PENDING_AUTH.
+       */
+      const verification =
+        await verifyGuestyPayment({
+          reservationId:
+            bookingSession.reservation_id,
+
+          paymentId:
+            bookingSession.payment_id,
+
+          ...(body.threeDSResult
+            ? {
+                threeDSResult:
+                  body.threeDSResult,
+              }
+            : {}),
+        });
+
+      await sql`
+        UPDATE booking_sessions
+        SET
+          status = 'payment_verified',
+          payment_verified_at = NOW(),
+          updated_at = NOW()
+        WHERE
+          id = ${bookingSession.id};
+      `;
+
+      return NextResponse.json({
+        bookingSessionToken,
+        verification,
       });
+    } catch (error) {
+      /*
+       * Guesty documents that a failed 3DS
+       * verification closes the reservation.
+       * Do not leave this session reusable.
+       */
+      await sql`
+        UPDATE booking_sessions
+        SET
+          status = 'failed',
+          updated_at = NOW()
+        WHERE
+          id = ${bookingSession.id};
+      `;
 
-    return NextResponse.json({
-      reservationId,
-      paymentId,
-      verification,
-    });
+      throw error;
+    }
   } catch (error) {
     console.error(
       "Failed to verify Guesty payment.",

@@ -25,10 +25,7 @@ type GuestyPropertyRow = {
 
   currency: string | null;
 
-  sync_status: string;
   last_synced_at: string | null;
-
-  guesty_data: unknown;
 };
 
 function getSql() {
@@ -73,12 +70,6 @@ function parseBooleanSetting(
 }
 
 export async function GET() {
-  /*
-   * Deployment-level safety gate.
-   *
-   * At the moment direct booking is enabled
-   * only outside production.
-   */
   if (!features.directBooking) {
     return NextResponse.json(
       {
@@ -127,12 +118,12 @@ export async function GET() {
     }
 
     /*
-     * Only properties that are:
+     * Only the safe public property fields are
+     * selected here.
      *
-     * 1. explicitly enabled for direct booking
-     * 2. successfully synced with Guesty
-     *
-     * may be exposed to the public booking flow.
+     * Raw Guesty payloads stay server-side in
+     * guesty_properties.guesty_data and are not
+     * exposed by this public endpoint.
      */
     const properties =
       (await sql`
@@ -149,9 +140,7 @@ export async function GET() {
           state,
           country,
           currency,
-          sync_status,
-          last_synced_at,
-          guesty_data
+          last_synced_at
         FROM guesty_properties
         WHERE
           direct_booking_enabled = TRUE
@@ -226,9 +215,6 @@ export async function GET() {
 
             lastSyncedAt:
               property.last_synced_at,
-
-            guestyData:
-              property.guesty_data,
           })
         ),
     });
