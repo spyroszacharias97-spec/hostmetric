@@ -1,724 +1,203 @@
 # HostMetric
 
-HostMetric is the largest full-stack web application I have built to date.
+**HostMetric is the largest full-stack project I have built so far.**
 
-I originally started the project as a website for a property management business. As development progressed, I kept moving functionality that would normally require separate tools, manual processes or direct database work into the application itself.
+It started as a property-management website and gradually grew into a complete platform combining a multilingual public website, detailed property onboarding, administration tools, property and client management, a custom SEO/content system, and a Guesty-powered direct-booking experience.
 
-The result is much more than a public-facing website.
+I designed and developed the project end-to-end with one main goal: **the person operating the platform should be able to manage everyday work without touching the code or database.**
 
-HostMetric combines a multilingual marketing website, a six-step property onboarding system, contact and client management, property administration, image management, a custom blog and SEO publishing system, and a direct-booking experience designed to integrate with Guesty.
-
-I designed and developed the application end-to-end, from the public interface and custom animations to the database structure, server-side workflows, administration tools and third-party integrations.
-
-One of the main goals throughout the project was simple: the person operating the website should not need to be a developer.
-
-Property information can be managed through the administration area, enquiries and clients can be handled from the same system, property photographs can be uploaded and organized visually, SEO-ready articles can be created without editing source code, and the Guesty-powered direct-booking experience can be controlled from the admin interface.
+🌐 **Live Application:** https://hostmetric.gr
 
 ---
 
-## What the Project Includes
+## What I Built
 
-HostMetric brings together several systems that would normally exist as separate applications:
+### Website & User Experience
 
-- Public multilingual property-management website
-- Custom administration system
-- Six-step property onboarding workflow
-- Contact and enquiry management
-- Client management
-- Property and unit management
-- Image upload and organization
-- Guesty integration
-- Direct-booking interface
-- Availability and pricing search through Guesty
-- Interactive property map
-- Booking checkout and reservation flow
-- Payment tokenization and payment flow through the Guesty booking integration
-- Custom Content Studio
-- Blog publishing
-- SEO management
-- Multilingual article management
-- Responsive layouts
-- Custom UI animations
-- Structured database storage
+- **Full-Stack Application** — Built from scratch with Next.js, React, TypeScript, PostgreSQL and server-side functionality.
+- **Public Website** — Complete property-management website with dedicated marketing, service, FAQ, About, Contact, Get Started, Blog and Direct Booking experiences.
+- **Responsive Design** — Public pages, forms, booking interfaces and administration tools adapt across desktop, tablet and mobile.
+- **12 Languages** — Custom localization architecture supporting English, Greek, German, French, Italian, Spanish, Portuguese, Bulgarian, Polish, Serbian, Turkish and Russian.
+- **Localized Routing** — Language selection is preserved across navigation with localized public routes and centralized translation dictionaries.
+- **Custom UI & Animations** — Hand-built animated waves, moving graphical elements, circular icon animations, interactive sections, cards and transitions.
+- **Reusable Components** — Shared React components and layouts keep the interface consistent instead of duplicating pages.
 
-The application was built as a complete full-stack system rather than a collection of static pages.
+### Contact & Client Management
 
----
+- **Structured Contact Form** — Visitors can submit contact details, property country/type/location, messages, consent information and multiple property photographs.
+- **Email Notifications** — New enquiries can generate email notifications while the complete structured request remains stored in the platform.
+- **Contact Request Admin** — Administrators can review requests, messages, property details, dates, contact information and submitted photographs.
+- **Answered / Unanswered Workflow** — Contact requests can be tracked and managed according to their response status.
+- **Client Management** — Administrators can search clients by details and view their onboarding progress and associated properties.
+- **Client Records** — Enquiries, Get Started information and properties can be connected to the appropriate client.
+- **Manual Client Creation** — New client records can also be created directly from the administration system.
 
-# Public Website
+### Property Onboarding
 
-The public side of HostMetric was built from scratch with Next.js, React, TypeScript and Tailwind CSS.
+- **Multi-Step Get Started Workflow** — A detailed property onboarding process replaces spreadsheets, scattered messages and manual data collection.
+- **Owner & Business Details** — Collects individual/company information, contact details, residence, address and ownership information.
+- **Property Details** — Stores property name, type, country, region, city, address, postal code, description and other property information.
+- **Multiple Units** — Supports detailed properties containing one or multiple accommodation units.
+- **Unit Characteristics** — Accommodation information and capacity-related details can be stored individually for each unit.
+- **Platform Information** — Collects relevant Airbnb, Booking.com and existing property-system/listing information.
+- **Conditional Information** — Onboarding fields can adapt according to the property's existing platforms and submitted information.
+- **Operations** — Collects check-in/out information, reception details, guest access, cleaning arrangements and operational notes.
+- **Policies & Rules** — Property rules and accommodation policies are stored as structured information.
+- **Amenities & Accessibility** — Detailed amenities and accessibility information can be selected instead of being stored in one generic text field.
+- **Pricing & Performance Information** — Owners can provide existing pricing and performance-related information during onboarding.
+- **Listing Content** — Existing titles, descriptions, platform content and listing information can be collected.
+- **Goals & Preferences** — Owner objectives and management preferences become part of the property profile.
+- **Ownership & Authorizations** — Confirmation, ownership and authorization information is included in the onboarding workflow.
+- **Admin Editing** — Submitted onboarding/property information can later be reviewed and edited through the administration interface.
 
-It includes the main marketing pages and explains the company's property-management services, processes and approach in a structured, responsive interface.
+### Property & Image Management
 
-The public experience includes:
+- **Property Management** — Administrators can search, open and manage properties together with their clients, types, locations, units and statuses.
+- **Property Statuses** — Properties can be organized by operational status and activated or managed directly through the admin.
+- **Property Deletion** — Property records can be removed through the administration workflow when required.
+- **Detailed Property Records** — The admin exposes the larger structured dataset collected during onboarding instead of only basic property information.
+- **Photo Uploads** — Property photographs can be uploaded during enquiry/onboarding workflows and managed later.
+- **Photo Categories** — Images can be organized according to property areas and room/category types.
+- **Photo Management** — Administrators can view, upload, add and delete property photographs.
+- **Photo Reorganization** — Administrators can change an image's category and move photographs between different property/room categories.
 
-- Homepage
-- How It Works
-- FAQ
-- About
-- Contact
-- Get Started
-- Blog
-- Direct Booking
-- Individual blog/article pages
-- Multilingual navigation
-- Responsive desktop, tablet and mobile layouts
+### Administration System
 
-The interface uses reusable React components rather than separate duplicated layouts for every page.
+- **Custom Admin Area** — A dedicated management interface was built specifically for HostMetric rather than relying on direct database access.
+- **Admin Dashboard** — Provides quick counts and status information for contacts, clients, Get Started submissions and properties.
+- **Contact Requests** — Dedicated management area for incoming enquiries and their photographs/details.
+- **Clients** — Dedicated client search, onboarding-status and property-management interface.
+- **Get Started Submissions** — Completed and pending onboarding records can be reviewed and managed from the admin.
+- **Properties** — Dedicated property administration with detailed records, units, status controls and client relationships.
+- **Guesty Properties** — Separate administration interface for Guesty connection, synchronization and Direct Booking controls.
+- **Content Studio** — Custom administration area for creating and managing website/blog content.
+- **Protected Internal Workflows** — Administrative functionality is separated from the public-facing application.
 
----
+### Content Studio & Blog
 
-## Custom Frontend and Animations
+- **Custom CMS** — Blog content can be created and published without manually creating React pages or editing source files.
+- **Structured Article Editor** — Articles support titles, slugs, categories, excerpts, headings, sections and structured content.
+- **Featured Images** — Article imagery can be managed directly through the Content Studio.
+- **Content Images** — Visual content can be incorporated into articles without manually adding it to page components.
+- **Internal Links** — Articles can connect naturally to other HostMetric content.
+- **External Links** — Relevant external resources can be managed as part of article content.
+- **Related Articles** — Content can be connected with related guides/articles.
+- **Calls to Action** — Structured article content can include relevant CTA sections.
+- **Multilingual Articles** — Article translations can be managed across the website's supported languages.
+- **Translation Workflow** — Content can be translated and managed without manually creating separate page components for every locale.
 
-A significant amount of the frontend was designed specifically for this project rather than assembled from a pre-built website template.
+### SEO System
 
-The interface includes custom visual and interactive elements such as:
+- **Built-In SEO Editor** — SEO information is managed from the Content Studio instead of requiring source-code changes.
+- **SEO Titles & Meta Descriptions** — Search-result metadata can be configured for published content.
+- **Focus & Secondary Keywords** — Keyword strategy can be stored directly with each article.
+- **Search Intent** — Content strategy can include the intended search purpose of an article.
+- **Open Graph** — Social-sharing title, description and image information can be configured.
+- **Canonical URLs** — Canonical handling is part of the website's SEO architecture.
+- **Hreflang** — Localized pages can expose language relationships for multilingual search engines.
+- **Localized Routes** — Public content is available through language-aware URL structures.
+- **Sitemap Support** — Published content can become part of the site's sitemap architecture.
+- **Robots Configuration** — Search-engine crawling/indexing behavior is supported through the site's robots configuration.
+- **Structured Data** — Article and breadcrumb schema form part of the site's structured SEO implementation.
+- **SEO Publishing Workflow** — Content, images, links, metadata, translations and publication can be managed through one workflow.
 
-- Animated wave backgrounds
-- Moving graphical elements
-- Circular icon animations
-- Animated content sections
-- Interactive cards
-- Responsive navigation
-- Dynamic language selection
-- Custom forms
-- Responsive grids and layouts
-- Loading and state-based UI
-- Interactive booking components
-- Interactive map elements
+### Guesty Integration
 
-The same design system is maintained across the public website, onboarding experience, booking flow and administration interface.
+- **Guesty Booking Engine API** — HostMetric contains a dedicated integration layer for Guesty's booking infrastructure.
+- **Guesty as Source of Truth** — Real booking inventory, availability and pricing come from Guesty rather than duplicated/mock HostMetric data.
+- **Credential-Based Connection** — The administrator connects Guesty through the required integration credentials.
+- **Automatic Property Sync** — Real Guesty listings can be synchronized into HostMetric instead of being recreated manually.
+- **Synchronization Status** — The administration interface exposes connection/sync state and synchronization issues.
+- **No Demo Booking Properties** — The booking architecture is designed around actual synchronized Guesty listings.
+- **Per-Property Bookable Control** — Direct Booking can be enabled or disabled independently for synchronized properties.
+- **Global Book Now Control** — The complete public booking experience can be enabled or disabled from the administration interface.
 
----
+### Direct Booking
 
-# Multilingual Architecture
+- **Public Booking Experience** — Visitors can search and book enabled Guesty properties directly through HostMetric.
+- **Destination Search** — Guests can search according to their destination.
+- **Check-In / Check-Out** — Date selection forms part of the Guesty availability search.
+- **Guest Selection** — Booking search supports adults, children and infants.
+- **Real Availability** — Search results are based on Guesty availability rather than hardcoded property data.
+- **Guesty Pricing** — Pricing information comes through the Guesty booking flow.
+- **Quotes & Rate Plans** — Guesty quote and rate-plan information is handled by the booking architecture.
+- **Property Information & Photos** — Search/booking results can use synchronized property content and imagery.
+- **Interactive Map** — Bookable properties can be displayed through MapLibre/OpenFreeMap.
+- **Real Coordinates** — Map markers use Guesty property coordinates when available.
+- **Booking Checkout** — HostMetric includes the customer-facing checkout and guest-details workflow.
+- **Booking Sessions** — Booking state can be maintained through dedicated booking-session architecture.
+- **Reservation Creation** — Reservations are created through the Guesty integration.
+- **Reservation Verification** — The application contains server-side verification for the reservation/payment flow.
+- **Reservation Details** — Reservation information can be retrieved for the customer-facing booking experience.
+- **Booking Confirmation** — Successful bookings have a dedicated confirmation flow.
 
-HostMetric includes a custom internationalization system supporting **12 languages**.
+### Payments
 
-Supported languages include:
+- **Guesty Payment Architecture** — Booking payments are handled through the Guesty booking/payment integration.
+- **Secure Tokenization** — Card details use Guesty-compatible tokenization rather than HostMetric storing raw card information.
+- **3D Secure** — The booking architecture includes support for the required 3DS authentication flow.
+- **Payment Provider Handling** — Provider-related payment logic is kept within the server-side booking architecture.
+- **No Raw Card Storage** — HostMetric does not use its database as storage for customers' raw payment-card details.
 
-- English
-- Greek
-- German
-- French
-- Italian
-- Spanish
-- Portuguese
-- Bulgarian
-- Serbian
-- Turkish
-- Russian
-- Polish
+### Backend & Data
 
-Public interface text is managed through centralized JSON dictionaries rather than being duplicated directly inside individual pages.
+- **Neon PostgreSQL** — Structured relational storage is used for HostMetric's internal application data.
+- **Relational Architecture** — Contacts, clients, properties, units, onboarding information, images and other records are connected logically.
+- **Guesty Integration Data** — Connection information, synchronized properties, booking configuration and booking sessions are represented separately.
+- **Server-Side Processing** — Sensitive application operations run server-side rather than exposing integration logic in the browser.
+- **API Routes** — Dedicated routes handle forms, administration operations, content, Guesty communication and booking workflows.
+- **Validation** — Submitted information is processed and validated before being used by the application.
+- **File & Image Workflows** — Uploads and image-related operations are integrated into the backend workflow.
+- **Authentication** — Internal administration functionality is protected rather than being exposed as part of the public application.
+- **Modular Architecture** — Public UI, admin, database logic, API routes, internationalization, SEO, Guesty and booking functionality are separated into dedicated areas.
 
-The selected locale is preserved while users navigate through the application, and public routes can render the appropriate translated content dynamically.
+### Performance Content
 
-This architecture is used across major areas of the website, including navigation, marketing pages, FAQ content, contact forms, onboarding and booking-related interfaces.
+- **Performance Education** — HostMetric explains important short-term-rental concepts such as ADR, Occupancy and RevPAN.
+- **Clear Responsibility** — These metrics are educational content inside HostMetric; live operational analytics and performance calculations remain handled by Guesty.
 
-The administration interface remains intentionally manageable as an internal system while the public experience is localized for visitors.
+### Development & Deployment
 
----
-
-# Contact and Enquiry System
-
-The Contact page is connected to the application's backend rather than functioning as a simple email link.
-
-Visitors can submit structured information including:
-
-- Name
-- Property country
-- Property type
-- Email
-- Telephone number
-- Property city or area
-- Message
-- Property photographs
-- Consent information
-
-Multiple property photographs can be attached directly to an enquiry.
-
-The submitted information becomes part of the management workflow and can be reviewed from the administration interface.
-
-The contact workflow also supports email notification, allowing a new enquiry to generate an email while keeping the structured request available inside the application.
-
----
-
-## Contact Request Management
-
-Administrators can view incoming contact requests through a dedicated management interface.
-
-The system provides:
-
-- Total request counts
-- Answered requests
-- Unanswered requests
-- Request details
-- Contact information
-- Property information
-- Attached photographs
-- Message content
-- Request dates
-- Client association
-- Answered/unanswered state management
-
-Requests can therefore be handled as structured records rather than disappearing into an email inbox.
-
----
-
-# Client Management
-
-HostMetric includes a dedicated client-management area.
-
-Administrators can search and manage clients and see their relationship with the onboarding process and properties.
-
-The interface separates clients according to their progress, including clients who have completed the Get Started process and clients who have not yet completed it.
-
-Client records can be connected with their properties and submitted information, creating a structured relationship between enquiries, clients, properties and onboarding data.
+- **Git & GitHub** — The complete project is version-controlled and maintained through Git.
+- **Vercel Deployment** — The production application is deployed through Vercel.
+- **Production Website** — The application is publicly available at **hostmetric.gr**.
 
 ---
 
-# Six-Step Property Onboarding System
+## Tech Stack
 
-One of the largest parts of the project is the **Get Started** workflow.
+**Frontend**  
+Next.js · React · TypeScript · Tailwind CSS · Lucide React · MapLibre GL
 
-Instead of asking a property owner to send information manually through messages, spreadsheets or multiple emails, HostMetric provides a structured onboarding process spanning **six steps/pages**.
+**Backend & Data**  
+Next.js Server-Side Functionality · API Routes · Neon PostgreSQL · Relational Data · File & Image Handling
 
-The form adapts to the type of property and collects detailed operational information required for short-term-rental management.
+**Integrations**  
+Guesty Booking Engine API · Guesty Tokenization · Email Notifications · MapLibre / OpenFreeMap
 
-The onboarding process includes information such as:
-
-### Owner and Business Information
-
-- Account country
-- Owner type
-- Individual or company details
-- Name
-- Email
-- Telephone / WhatsApp
-- Country of residence
-- Date of birth
-- Residential address
-
-### Property Information
-
-- Property name
-- Property type
-- Country
-- Region
-- City
-- Street address
-- Postal code
-- Property description
-- Number of units
-
-### Units and Property Characteristics
-
-The system supports properties containing one or multiple units.
-
-Detailed information can be stored for each unit, including accommodation characteristics and capacity-related information.
-
-### Platforms and Existing Systems
-
-The onboarding process can collect information about existing short-term-rental platforms and systems used by the property.
-
-This includes listing/platform information relevant to services such as Airbnb and Booking.com.
-
-### Property Operations
-
-Operational information can also be collected, including:
-
-- Check-in information
-- Check-out information
-- Reception details
-- Guest access
-- Cleaning arrangements
-- Property rules
-- Operational notes
-
-### Policies
-
-The system stores relevant accommodation policies and operational rules required for managing the property.
-
-### Amenities and Accessibility
-
-Property amenities can be selected and stored through structured fields.
-
-The system supports a broad list of amenities and accessibility-related information instead of relying on a single free-text field.
-
-### Pricing and Performance Information
-
-Owners can provide existing pricing and performance-related information during onboarding.
-
-This information is collected as part of the property's operational profile.
-
-Performance concepts displayed elsewhere on the HostMetric website are informational; live property analytics and performance calculations are handled by the connected property-management platform rather than being presented as calculations performed by HostMetric itself.
-
-### Listing Content
-
-Existing listing information can be collected, including:
-
-- Property descriptions
-- Existing titles
-- Listing content
-- Notes
-- Existing platform information
-
-### Goals and Preferences
-
-The onboarding process can also collect the owner's objectives and preferences so that the property-management team has more context than basic property specifications alone.
-
-### Ownership and Authorization
-
-The workflow includes ownership, confirmation and authorization information required during onboarding.
+**Development & Deployment**  
+Git · GitHub · npm · ESLint · Vercel
 
 ---
 
-# Property Image Management
+## Why I Built It This Way
 
-Image handling is integrated directly into the property workflow.
+The part I value most about HostMetric is that these features are not isolated demos.
 
-Owners can upload photographs during onboarding, and administrators can later manage those photographs through the administration system.
+A visitor can send an enquiry, a property owner can complete onboarding and upload photographs, the information can become part of the client/property workflow, an administrator can edit the data and reorganize the photographs, content can be published and optimized without touching the source code, and synchronized Guesty properties can become part of a complete direct-booking flow.
 
-Images can be organized by property area or category.
-
-The administration interface allows photographs to be:
-
-- Uploaded
-- Viewed
-- Added
-- Deleted
-- Reorganized
-- Moved between categories
-
-This makes the image collection useful as structured property data rather than simply storing an unordered group of uploaded files.
+Building HostMetric gave me hands-on experience across **UI/UX, frontend development, backend logic, relational databases, authentication, file handling, internationalization, SEO, CMS development, third-party APIs, booking systems, payment flows and production deployment**.
 
 ---
 
-# Property Management
+## Developer
 
-HostMetric includes a dedicated administration area for properties.
+### Spyros Zacharias
 
-Administrators can:
+Designed and developed independently as a full-stack portfolio project.
 
-- Search properties
-- View property information
-- Open individual properties
-- Review associated clients
-- Review property type and location
-- View unit counts
-- Manage property status
-- Activate properties
-- Delete properties
-- Work with the information collected during onboarding
+**Live:** https://hostmetric.gr
 
-Individual property records expose the much larger dataset collected through the Get Started workflow.
 
-This creates a complete flow from public onboarding to structured administration.
-
----
-
-# Administration System
-
-The `/admin` area acts as the operational interface for the application.
-
-It includes dedicated sections for:
-
-- Dashboard
-- Contact Requests
-- Clients
-- Get Started submissions
-- Properties
-- Guesty Properties
-- Content Studio
-
-The dashboard provides a quick overview of important application records and statuses.
-
-Instead of requiring direct database access for normal content and property-management tasks, the application exposes these operations through visual management interfaces.
-
----
-
-# Content Studio
-
-One of the most substantial custom features in HostMetric is the built-in **Content Studio**.
-
-It was designed so that an administrator can create a structured, SEO-ready article without needing to edit React components, HTML files or application source code.
-
-An article can be created and managed directly from the administration interface.
-
----
-
-## Structured Article Editing
-
-The editor supports structured article content rather than only one large text field.
-
-Article information can include:
-
-- Article title
-- Slug
-- Category
-- Excerpt
-- Featured image
-- Structured sections
-- Section headings
-- Paragraph content
-- Internal links
-- External links
-- Calls to action
-- Related articles
-
-Sections can be organized independently, allowing long-form content to maintain a predictable structure.
-
----
-
-## Featured Image Management
-
-The Content Studio includes image handling for article content.
-
-An administrator can select or upload the visual content required for an article without manually adding assets to the application's source code.
-
----
-
-# Built-In SEO Management
-
-SEO configuration is integrated directly into the article editor.
-
-Instead of requiring a developer to modify metadata whenever an article is published, the administrator can manage the relevant information through the UI.
-
-The SEO system includes fields and controls for information such as:
-
-- SEO title
-- Meta description
-- Focus keyword
-- Secondary keywords
-- Search intent
-- Snippet-related content
-- Open Graph title
-- Open Graph image
-- Open Graph description
-- Canonical information
-- Indexing-related configuration
-
-This allows the content workflow and SEO workflow to happen in the same place.
-
----
-
-## Structured SEO and Search Engine Integration
-
-The wider website architecture also includes search-engine-oriented functionality such as:
-
-- Metadata management
-- Canonical URL handling
-- Hreflang/localized-page handling
-- Sitemap support
-- robots configuration
-- Article structured data
-- Breadcrumb structured data
-- Internal linking
-- Related article relationships
-- Localized routes
-
-The goal is for content published through the system to become part of the website's actual SEO architecture rather than simply appearing visually on a page.
-
----
-
-# Multilingual Blog Publishing
-
-The Content Studio also supports multilingual article workflows.
-
-Article translations can be managed from the administration interface across the languages supported by the website.
-
-This means the publishing workflow combines:
-
-**content creation → structure → images → SEO → translations → publication**
-
-inside the same application.
-
-The administrator does not need to manually create a separate page component for every translated article.
-
-This was one of the main reasons for building the Content Studio: publishing new content should be possible without being a programmer.
-
----
-
-# Guesty Integration
-
-HostMetric includes an integration layer for the Guesty Booking Engine API.
-
-The objective is to keep Guesty as the source of truth for booking-related property information while HostMetric provides the public booking experience and management controls around it.
-
-The connection uses Guesty credentials and allows synchronized Guesty properties to be represented inside HostMetric.
-
-The Guesty administration area includes:
-
-- Guesty connection state
-- Property synchronization
-- Synced-property status
-- Direct Booking status
-- Synchronization error information
-- Per-property Direct Booking controls
-- Global Book Now control
-
-No fake/demo properties are required by the application architecture. Booking properties are intended to come from the Guesty integration.
-
----
-
-# Direct Booking
-
-HostMetric contains a dedicated public booking experience.
-
-When Direct Booking is enabled, visitors can search the properties that have been synchronized from Guesty and enabled for direct booking.
-
-The booking interface includes:
-
-- Destination search
-- Check-in date
-- Check-out date
-- Guest selection
-- Adult/child/infant selection
-- Available-property results
-- Property information
-- Property photographs
-- Live Guesty availability
-- Guesty pricing information
-- Interactive map
-- Property map markers
-- Checkout flow
-- Reservation flow
-- Booking confirmation
-
-The map uses real property coordinates when they are available from Guesty.
-
-HostMetric therefore provides the customer-facing booking interface while Guesty remains the booking/property-management source for synchronized inventory, availability and pricing.
-
----
-
-# Booking and Payment Architecture
-
-The booking flow is implemented across both frontend and server-side routes.
-
-The application contains functionality for:
-
-- Guesty authentication
-- Access-token handling
-- Guesty API communication
-- Property synchronization
-- Availability/calendar requests
-- Quotes
-- Rate plans
-- Reservation creation
-- Reservation verification
-- Reservation details
-- Checkout
-- Payment-provider handling
-- Payment tokenization
-- 3D Secure handling
-- Booking confirmation
-
-Payment details are handled through the Guesty booking/payment integration and tokenization flow rather than HostMetric storing raw card information itself.
-
-The booking architecture was intentionally separated into dedicated modules and API routes so that the public interface does not contain the integration logic directly.
-
----
-
-# Guesty Controls for Administrators
-
-The booking feature can be controlled without editing code.
-
-The administration interface provides a global Direct Booking / Book Now state as well as property-level controls.
-
-This allows an administrator to determine which synchronized Guesty properties should be available through HostMetric's public booking experience.
-
-The interface also exposes connection and synchronization state so that booking functionality is not treated as an invisible backend process.
-
----
-
-# Database and Data Architecture
-
-HostMetric uses structured database storage for the application's internal data.
-
-The database supports relationships between areas such as:
-
-- Contact requests
-- Clients
-- Properties
-- Property units
-- Onboarding information
-- Images
-- Content/blog information
-- Guesty connection information
-- Synchronized Guesty properties
-- Booking configuration
-- Booking sessions
-
-The application was designed around structured records rather than storing important operational information only in emails or disconnected documents.
-
----
-
-# Server-Side Functionality
-
-HostMetric uses Next.js server-side functionality and API routes for operations that should not run entirely in the browser.
-
-Server-side responsibilities include areas such as:
-
-- Database access
-- Form processing
-- Data validation
-- File/image workflows
-- Contact processing
-- Administration operations
-- Content operations
-- Guesty API communication
-- Booking operations
-- Reservation workflows
-
-Sensitive integration logic and credentials are kept away from the public client-side interface.
-
----
-
-# Architecture
-
-The project follows a modular structure separating concerns such as:
-
-- Public pages
-- Administration pages
-- Reusable React components
-- API routes
-- Database operations
-- Guesty integration
-- Booking logic
-- Internationalization
-- Content management
-- SEO functionality
-- Static assets
-- Configuration
-- Authentication and server-side logic
-
-This became increasingly important as the project grew from a website into a much larger application.
-
-Keeping these areas separated made it possible to continue adding functionality without placing the entire system inside a few oversized pages or components.
-
----
-
-# Technology Stack
-
-## Frontend
-
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-- Lucide React
-- MapLibre GL
-
-## Backend and Data
-
-- Next.js server-side functionality
-- Next.js API routes
-- Neon PostgreSQL
-- Relational database architecture
-- Server-side validation and processing
-- File and image handling
-
-## Integrations
-
-- Guesty Booking Engine API
-- Guesty payment/tokenization tooling
-- Email delivery/notification integration
-- MapLibre / OpenFreeMap-based mapping
-
-## Development and Deployment
-
-- Git
-- GitHub
-- npm
-- ESLint
-- Vercel
-
----
-
-# Performance Metrics and Educational Content
-
-HostMetric also contains educational content explaining important short-term-rental performance concepts.
-
-Examples include:
-
-`ADR = Rental Revenue / Occupied Nights`
-
-`Occupancy Rate = Booked Nights / Available Nights × 100`
-
-`RevPAN = Rental Revenue / Available Nights`
-
-These sections explain how common property-management metrics work.
-
-They should not be confused with the Guesty integration: live operational analytics and property-performance calculations are handled by Guesty, while HostMetric provides information about these concepts as part of its public content.
-
----
-
-# Responsive Design
-
-The application was designed for different screen sizes rather than only desktop use.
-
-Layouts adapt across:
-
-- Desktop
-- Tablet
-- Mobile
-
-This applies to both the public website and major interactive workflows such as forms and booking.
-
----
-
-# What I Learned Building HostMetric
-
-HostMetric started much smaller than the application it eventually became.
-
-Building it required me to work across frontend development, backend architecture, relational data, API integrations, file handling, internationalization, SEO, administration tooling and booking workflows within the same project.
-
-One of the most valuable parts of the project was learning how quickly architecture matters once a website stops being just a collection of pages.
-
-Adding features such as multilingual content, six-step onboarding, image management, Guesty synchronization and direct booking meant thinking about how data moves through the entire application:
-
-**user interface → validation → server → database/external API → administration → public output**
-
-It also pushed me to build tools for non-technical users rather than solving every task through source-code changes.
-
-The Content Studio is a good example. Instead of manually creating and optimizing every blog article in code, I built an interface where content, images, SEO configuration and translations can be managed as data.
-
-The same principle applies to property onboarding and Guesty Direct Booking: functionality that initially could have been handled manually became part of the application itself.
-
----
-
-# Project Status
-
-HostMetric is an actively developed personal software project and portfolio piece.
-
-Some external functionality depends on third-party services and production credentials. In particular, live Guesty synchronization, availability, reservations and payment functionality require an appropriately configured Guesty environment.
-
-The repository demonstrates the application architecture and implementation developed around those integrations.
-
----
-
-# Live Application
-
-https://hostmetric.gr
-
----
-
-# About the Developer
-
-**Spyros Zacharias**
-
-I independently designed and developed HostMetric as a full-stack project, working across the frontend, backend, database, administration system, multilingual architecture, SEO tooling and third-party integrations.
-
-The project represents my approach to building software around real workflows rather than isolated demo features.
-
----
-
-## Repository
-
-This repository contains the source code for the HostMetric web application.
-
----
 
 © 2026 Spyros Zacharias. All rights reserved.
