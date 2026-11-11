@@ -14,7 +14,7 @@ import { getLocalizedPath } from "@/i18n/routing";
 import { getGuideBySlug } from "@/lib/guides/db";
 import { serializeJsonLd } from "@/seo/schema";
 
-const siteUrl = "https://hostmetric.gr";
+const siteUrl = "https://www.hostmetric.gr";
 
 type GuideArticlePageProps = {
   params: Promise<{
