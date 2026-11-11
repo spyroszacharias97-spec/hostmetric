@@ -17,7 +17,7 @@ import {
 ========================================== */
 
 export const siteUrl =
-  "https://hostmetric.gr";
+  "https://www.hostmetric.gr";
 
 
 /* ==========================================
