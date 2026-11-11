@@ -12,7 +12,7 @@ import {
 import { getLocalizedPath } from "@/i18n/routing";
 import { listGuides } from "@/lib/guides/db";
 
-const siteUrl = "https://hostmetric.gr";
+const siteUrl = "https://www.hostmetric.gr";
 
 type BlogPageCopy = {
   seo: {
