@@ -61,7 +61,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase:
     new URL(
-      "https://hostmetric.gr"
+      "https://www.hostmetric.gr"
     ),
 
   title:
