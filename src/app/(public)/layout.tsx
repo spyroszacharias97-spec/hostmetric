@@ -1,7 +1,7 @@
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
-const siteUrl = "https://hostmetric.gr";
+const siteUrl = "https://www.hostmetric.gr";
 const logoUrl =
   "https://www.hostmetric.gr/hostmetric-email-logo.png";
 
