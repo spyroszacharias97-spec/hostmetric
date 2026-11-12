@@ -6,7 +6,7 @@ It started as a property-management website and gradually grew into a complete p
 
 I designed and developed the project end-to-end with one main goal: **the person operating the platform should be able to manage everyday work without touching the code or database.**
 
-🌐 **Live Application:** https://hostmetric.gr
+🌐 **Live Application:** https://www.hostmetric.gr
 
 ---
 
@@ -196,7 +196,7 @@ Building HostMetric gave me hands-on experience across **UI/UX, frontend develop
 
 Designed and developed independently as a full-stack portfolio project.
 
-**Live:** https://hostmetric.gr
+**Live:** https://www.hostmetric.gr
 
 
 
