@@ -7,7 +7,7 @@ import { getLocalizedPath } from "@/i18n/routing";
 ========================================================= */
 
 export const siteUrl =
-  "https://hostmetric.gr";
+  "https://www.hostmetric.gr";
 
 export const organizationSchemaId =
   `${siteUrl}/#organization`;
